@@ -399,3 +399,29 @@ body > div[data-stx-scope] { display: contents; }
  * itself is what lets the menu's links stay server-rendered. */
 .mobile-menu { display: none; }
 header:has(button[aria-expanded='true']) .mobile-menu { display: block; }
+
+/*
+ * Skip link. Off-screen until focused, then it drops into the top-left. The
+ * nav repeats on every page, so this is the difference between reaching the
+ * content in one key press and in seven.
+ */
+.skip-link {
+  position: absolute;
+  left: 0.5rem;
+  top: -4rem;
+  z-index: 60;
+  padding: 0.7rem 1.1rem;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  transition: top 0.15s ease;
+}
+
+.skip-link:focus { top: 0.5rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  .skip-link { transition: none; }
+}

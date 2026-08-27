@@ -9,7 +9,7 @@ const canonicalPath = '/contact'
 /* Routed rather than pooled: an entry question and a partnership question want
    different answers, and saying where each goes saves a round trip. */
 const routes = [
-  { title: 'the event', detail: 'The format, the rules, base camp, gear, anything about race day itself.', action: race.email, href: `mailto:${race.email}?subject=Last Soul Ultra` },
+  { title: 'the event', detail: 'The format, the rules, base camp, gear, anything about race day itself.', action: race.email, href: `mailto:${race.email}?subject=${encodeURIComponent('Last Soul Ultra')}` },
   { title: 'entering', detail: 'Entry is by lottery only. The steps and the current status are on the entry page.', action: 'how to enter', href: '/lottery', internal: true },
   { title: 'partnership', detail: 'Brands interested in the event, the livestream or the documentary.', action: 'sponsorship', href: '/sponsorship', internal: true },
 ]

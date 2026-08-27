@@ -17,6 +17,11 @@ function toggle(): void {
 
 <template>
   <header class="sticky top-0 z-40 page-bg border-b rule">
+    {{-- First focusable thing on the page. Every page repeats this nav, so
+      without it a keyboard or screen-reader user tabs the same six links
+      before reaching the content on every single navigation. --}}
+    <a class="skip-link" href="#main">skip to content</a>
+
     {{-- A live race is the single most important thing this site can say, so
       it sits above the navigation rather than inside it. Derived from the
       date, so it appears and disappears on its own. --}}
