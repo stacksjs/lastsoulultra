@@ -14,7 +14,7 @@ const state = raceState()
     <SiteNav current="/404" />
     <main id="main" class="max-w-[1100px] mx-auto px-5 lg:px-8 py-20 lg:py-32">
       <p class="label faint">404</p>
-      <h1 class="display text-5xl sm:text-7xl ink mt-4 max-w-[14ch]">you missed the cut-off.</h1>
+      <h1 class="display h-page ink mt-4 max-w-[14ch]">you missed the cut-off.</h1>
       <p class="mt-6 text-base muted max-w-[46ch] leading-relaxed">That page is not here. The race, thankfully, still is.</p>
       <div class="flex flex-wrap gap-3 mt-9">
         <a class="btn btn-accent" href="/">back to the start</a>

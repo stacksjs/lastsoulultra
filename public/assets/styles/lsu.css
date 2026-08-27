@@ -62,6 +62,17 @@ body {
 .faint { color: var(--ink-faint); }
 .accent { color: var(--accent); }
 .accent-bg { background: var(--accent); color: var(--accent-ink); }
+
+/*
+ * Body copy on the accent panel. This was inline opacity: 0.8, which
+ * composites the near-black ink down onto the orange to an effective 4.29:1 -
+ * under AA for 16px text. A real colour at a 90% mix looks like softened ink
+ * but holds 4.85:1, and unlike opacity a contrast audit can actually see it.
+ */
+.ink-on-accent-soft {
+  color: #231209;
+  color: color-mix(in srgb, var(--accent-ink) 90%, var(--accent));
+}
 .rule { border-color: var(--line); }
 .rule-strong { border-color: var(--line-strong); }
 
@@ -80,6 +91,35 @@ body {
   line-height: 0.92;
 }
 
+/*
+ * Crosswind's sheet loads after this file, and every `text-4xl`-style utility
+ * ships its own line-height. At equal specificity the utility won, so all 48
+ * display headings were rendering at the utility's loose leading (40px on a
+ * 36px heading) instead of the 0.92 the display face is drawn for. Doubling
+ * the class outranks the single-class utility without touching every heading.
+ */
+.display.display {
+  line-height: 0.92;
+  letter-spacing: -0.015em;
+  text-wrap: pretty;
+}
+
+/*
+ * Four heading steps, fluid. The utilities had drifted: the same role carried
+ * text-4xl sm:text-5xl on one page and text-3xl sm:text-4xl on the next, and
+ * the feature-split heads ran at three different sizes across three pages.
+ * Naming the steps makes the role the thing you pick, so it cannot drift again.
+ * Each interpolates 375px -> 1200px and then holds.
+ */
+.h-page { font-size: clamp(3rem, 1.64rem + 5.82vw, 6rem); }
+.h-lead { font-size: clamp(2.25rem, 1.57rem + 2.91vw, 3.75rem); }
+.h-sect { font-size: clamp(1.875rem, 1.36rem + 2.18vw, 3rem); }
+.h-item { font-size: clamp(1.25rem, 1.14rem + 0.49vw, 1.5rem); }
+/* Stat values sit in a narrow band column, so they take a step of their own
+ * rather than the section step - at the section size they wrap a line further
+ * and the four columns stop sharing a baseline. */
+.h-stat { font-size: clamp(1.875rem, 1.70rem + 0.73vw, 2.25rem); }
+
 .mono { font-family: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, monospace; }
 
 /* The small uppercase label used for section eyebrows and table headers. */
@@ -88,6 +128,19 @@ body {
   font-size: 0.6875rem;
   text-transform: uppercase;
   letter-spacing: 0.16em;
+}
+
+/*
+ * Navigation. The site sets everything else in uppercase - the wordmark, the
+ * display faces, every label - so lowercase sans nav sitting directly beside
+ * the wordmark read as an oversight rather than as contrast. Same mono as the
+ * labels, a step up in size so it stays a comfortable target.
+ */
+.nav-link {
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
 }
 
 :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {

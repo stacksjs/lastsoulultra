@@ -32,7 +32,7 @@ const conditions = [
       <div class="max-w-[1500px] mx-auto px-5 lg:px-8">
         <header class="pt-12 lg:pt-16 pb-10 border-b rule">
           <p class="label accent">entry</p>
-          <h1 class="display text-5xl sm:text-7xl lg:text-8xl ink mt-4 max-w-[13ch]">a place is drawn, then earned.</h1>
+          <h1 class="display h-page ink mt-4 max-w-[13ch]">a place is drawn, then earned.</h1>
           <p class="mt-6 text-base sm:text-lg muted max-w-[58ch] leading-relaxed">
             Anyone may apply. {{ race.fieldSize }} are chosen. Being drawn gets you the right to pay for a number, not the number itself.
           </p>
@@ -60,11 +60,11 @@ const conditions = [
 
       <section class="border-b rule" data-reveal>
         <div class="max-w-[1500px] mx-auto px-5 lg:px-8 py-14 lg:py-20">
-          <h2 class="display text-4xl sm:text-5xl ink mb-10 reveal-item">how it works.</h2>
+          <h2 class="display h-sect ink mb-10 reveal-item">how it works.</h2>
           <ol class="divide-y rule border-t rule">
             @foreach(entrySteps as step)
               <li class="grid sm:grid-cols-12 gap-4 sm:gap-8 py-8 reveal-item">
-                <h3 class="sm:col-span-4 display text-xl lg:text-2xl ink">{{ step.title }}</h3>
+                <h3 class="sm:col-span-4 display h-item ink">{{ step.title }}</h3>
                 <p class="sm:col-span-5 text-sm muted leading-relaxed">{{ step.detail }}</p>
                 <p class="sm:col-span-3 label accent sm:text-right">{{ step.deadline ?? '' }}</p>
               </li>
@@ -76,7 +76,7 @@ const conditions = [
       <section class="border-b rule" data-reveal>
         <div class="max-w-[1500px] mx-auto px-5 lg:px-8 py-14 lg:py-20 grid lg:grid-cols-12 gap-x-14 gap-y-10">
           <div class="lg:col-span-5 reveal-item">
-            <h2 class="display text-3xl sm:text-4xl ink">the conditions.</h2>
+            <h2 class="display h-sect ink">the conditions.</h2>
             <p class="mt-4 text-sm muted leading-relaxed max-w-[42ch]">
               Short, and worth reading before you enter rather than after you are selected.
             </p>
@@ -94,7 +94,7 @@ const conditions = [
 
       <section data-reveal>
         <div class="max-w-[1500px] mx-auto px-5 lg:px-8 py-14 lg:py-20 reveal-item">
-          <h2 class="display text-3xl sm:text-4xl ink">still have questions?</h2>
+          <h2 class="display h-sect ink">still have questions?</h2>
           <p class="mt-4 text-base muted max-w-[52ch] leading-relaxed">
             Write to <a class="ink underlink" href="mailto:{{ race.email }}">{{ race.email }}</a>. Replies can take up to {{ race.replyWithinHours }} hours.
           </p>

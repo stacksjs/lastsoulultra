@@ -18,7 +18,7 @@ const noindex = !page
     <main id="main" class="max-w-[1100px] mx-auto px-5 lg:px-8 py-12 lg:py-16">
       @if(!page)
         <p class="label faint">404</p>
-        <h1 class="display text-5xl sm:text-6xl ink mt-4">no such page.</h1>
+        <h1 class="display h-lead ink mt-4">no such page.</h1>
         <ul class="flex flex-wrap gap-2 mt-8">
           @foreach(legalPages as other)
             <li><a class="btn btn-outline" href="/legal/{{ other.slug }}">{{ other.title }}</a></li>
@@ -42,7 +42,7 @@ const noindex = !page
           </nav>
 
           <div class="lg:col-span-9">
-            <h1 class="display text-4xl sm:text-5xl ink">{{ page.title }}</h1>
+            <h1 class="display h-lead ink">{{ page.title }}</h1>
             <p class="mt-4 text-sm muted max-w-[52ch]">{{ page.blurb }}</p>
 
             {{-- lang is set on the body, not the page: the binding wording is
@@ -51,7 +51,7 @@ const noindex = !page
             <div class="mt-10 prose" lang="{{ page.lang }}">
               @foreach(page.blocks as block)
                 @if(block.kind === 'heading')
-                  <h2 class="display text-xl sm:text-2xl ink">{{ block.value }}</h2>
+                  <h2 class="display h-item ink">{{ block.value }}</h2>
                 @else
                   <p class="text-sm muted" style="white-space: pre-line">{{ block.value }}</p>
                 @endif

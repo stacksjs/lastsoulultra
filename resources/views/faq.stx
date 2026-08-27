@@ -26,7 +26,7 @@ const jsonLd = JSON.stringify({
       <div class="max-w-[1500px] mx-auto px-5 lg:px-8">
         <header class="pt-12 lg:pt-16 pb-10 border-b rule">
           <p class="label accent">{{ questionCount() }} questions</p>
-          <h1 class="display text-5xl sm:text-7xl lg:text-8xl ink mt-4 max-w-[12ch]">the answers.</h1>
+          <h1 class="display h-page ink mt-4 max-w-[12ch]">the answers.</h1>
           <p class="mt-6 text-base sm:text-lg muted max-w-[58ch] leading-relaxed">
             Grouped by who is asking. If you are entering, the first section is yours; if you are crewing or watching, skip to the one that is.
           </p>
@@ -45,7 +45,7 @@ const jsonLd = JSON.stringify({
         <section class="border-b rule" id="{{ group.slug }}" data-reveal>
           <div class="max-w-[1500px] mx-auto px-5 lg:px-8 py-14 lg:py-20 grid lg:grid-cols-12 gap-x-14 gap-y-8">
             <div class="lg:col-span-4 reveal-item">
-              <h2 class="display text-3xl sm:text-4xl ink">{{ group.title }}</h2>
+              <h2 class="display h-sect ink">{{ group.title }}</h2>
               <p class="mt-4 text-sm muted leading-relaxed max-w-[34ch]">{{ group.blurb }}</p>
             </div>
 
@@ -56,7 +56,7 @@ const jsonLd = JSON.stringify({
               @foreach(group.questions as item)
                 <details class="border-b rule">
                   <summary class="flex items-start justify-between gap-6 py-5 cursor-pointer list-none">
-                    <span class="text-base sm:text-lg ink leading-snug">{{ item.q }}</span>
+                    <span class="text-base sm:text-lg ink leading-snug text-pretty">{{ item.q }}</span>
                     <i class="i-hugeicons-plus-sign w-5 h-5 shrink-0 mt-1 accent acc-closed" aria-hidden="true"></i>
                     <i class="i-hugeicons-minus-sign w-5 h-5 shrink-0 mt-1 accent acc-open" aria-hidden="true"></i>
                   </summary>
@@ -74,7 +74,7 @@ const jsonLd = JSON.stringify({
 
       <section data-reveal>
         <div class="max-w-[1500px] mx-auto px-5 lg:px-8 py-14 lg:py-20 reveal-item">
-          <h2 class="display text-3xl sm:text-4xl ink">not answered here?</h2>
+          <h2 class="display h-sect ink">not answered here?</h2>
           <p class="mt-4 text-base muted max-w-[52ch] leading-relaxed">
             Write to <a class="ink underlink" href="mailto:{{ race.email }}">{{ race.email }}</a>. It can take up to {{ race.replyWithinHours }} hours to get through everything.
           </p>
