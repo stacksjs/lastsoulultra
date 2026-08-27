@@ -337,16 +337,30 @@ body > div[data-stx-scope] { display: contents; }
   border: 0;
 }
 
-#filter-in:checked ~ * .standings tbody tr[data-status='out'] { display: none; }
+/* fieldset ships a border, padding and a min-width floor that break the row. */
+.filter-chips {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
 
-#filter-all:checked ~ * .filter-chips label[for='filter-all'],
-#filter-in:checked ~ * .filter-chips label[for='filter-in'] {
+/*
+ * :has() rather than a sibling combinator, so the inputs can live with their
+ * labels inside the fieldset instead of having to precede everything they
+ * govern. The rule no longer breaks if the section is reordered.
+ */
+.standings-block:has(#filter-in:checked) .standings tbody tr[data-status='out'] { display: none; }
+
+.filter-chips:has(#filter-all:checked) label[for='filter-all'],
+.filter-chips:has(#filter-in:checked) label[for='filter-in'] {
   color: var(--accent-ink);
   background: var(--accent);
   border-color: var(--accent);
 }
 
-.filter-input:focus-visible ~ * .filter-chips label { outline: 2px solid var(--accent); outline-offset: 2px; }
+/* Only the focused control's own chip, since each input precedes its label. */
+.filter-input:focus-visible + label { outline: 2px solid var(--accent); outline-offset: 2px; }
 
 .standings tbody tr { border-color: var(--line); }
 

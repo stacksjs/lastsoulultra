@@ -1,0 +1,8 @@
+# Every page here is public and meant to be indexed.
+User-agent: *
+Allow: /
+
+# The live-board mirror is a JSON endpoint, not a page.
+Disallow: /api/
+
+Sitemap: https://lastsoulultra.hq.training/sitemap.xml

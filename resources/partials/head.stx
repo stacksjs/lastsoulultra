@@ -1,5 +1,16 @@
+<script server>
+// Imported here rather than relied on from the including page's scope. A
+// partial DOES inherit that scope, which is how this worked on the two pages
+// that happened to import siteOrigin and socialImage for their own use - and
+// on the other nine it silently rendered empty, so canonical and og:url were
+// bare paths and og:image was an empty string. Sharing any of those pages gave
+// a card with no image. Importing here makes the partial self-sufficient.
+import { siteOrigin, socialImage, socialImageAlt } from '../data/site'
+</script>
+
 {{-- Shared <head>. A page declares pageTitle, pageDescription and
-  canonicalPath; anything optional is guarded. --}}
+  canonicalPath; anything optional is guarded. Everything else this file needs
+  it imports itself. --}}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{{ pageTitle }}</title>
@@ -16,6 +27,13 @@
   was shot after dark, so there is no light mode to offer. --}}
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#0c0c0c">
+
+{{-- The site declared no icon at all, so every tab and bookmark fell back to
+  the browser's blank page glyph. One SVG covers every modern browser at every
+  size; the .ico line is the fallback for the handful that ignore SVG. --}}
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
 <meta property="og:type" content="{{ typeof ogType !== 'undefined' ? ogType : 'website' }}">
 <meta property="og:site_name" content="Last Soul Ultra">

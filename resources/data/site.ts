@@ -1,4 +1,5 @@
 import { env } from '@stacksjs/env'
+import { legalPages } from './legal'
 import { at, shots } from './media'
 import { race } from './race'
 
@@ -42,6 +43,27 @@ export interface NavItem {
   /** Sends the visitor off-site. */
   external?: boolean
 }
+
+/**
+ * Every indexable URL on the site, in one place.
+ *
+ * The sitemap and robots.txt are generated from this (scripts/seo.ts) rather
+ * than hand-maintained, and tests/seo.test.ts fails if a view exists on disk
+ * that is not listed here - a page nobody can find is the kind of thing that
+ * stays broken for months because nothing errors.
+ *
+ * /404 is deliberately absent: it is noindex.
+ */
+export const indexablePaths: string[] = [
+  '/',
+  '/format',
+  '/lottery',
+  '/results',
+  '/faq',
+  '/sponsorship',
+  '/contact',
+  ...legalPages.map(page => `/legal/${page.slug}`),
+]
 
 export const nav: NavItem[] = [
   { label: 'the format', href: '/format' },
