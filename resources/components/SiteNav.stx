@@ -1,0 +1,70 @@
+<script server>
+import { race, raceState } from '../data/race'
+import { nav } from '../data/site'
+
+const path = typeof current !== 'undefined' ? String(current) : '/'
+const state = raceState()
+</script>
+
+<script client>
+const open = state(false)
+
+function toggle(): void {
+  open.update(v => !v)
+}
+</script>
+
+<template>
+  <header class="sticky top-0 z-40 page-bg border-b rule">
+    {{-- A live race is the single most important thing this site can say, so
+      it sits above the navigation rather than inside it. Derived from the
+      date, so it appears and disappears on its own. --}}
+    @if(state === 'running')
+      <a class="block accent-bg" href="/results">
+        <div class="max-w-[1500px] mx-auto px-5 lg:px-8 py-2 flex items-center justify-center gap-3 text-center">
+          <span class="w-1.5 h-1.5 rounded-full" style="background: currentColor" aria-hidden="true"></span>
+          <span class="label" style="letter-spacing: 0.18em">the race is running &middot; follow it live</span>
+        </div>
+      </a>
+    @endif
+
+    <div class="max-w-[1500px] mx-auto px-5 lg:px-8 h-16 flex items-center justify-between gap-6">
+      <a class="display text-xl sm:text-2xl ink shrink-0" href="/" aria-label="Last Soul Ultra, home">
+        last soul<span class="accent">.</span>
+      </a>
+
+      <nav class="hidden lg:flex items-center gap-1" aria-label="primary">
+        @foreach(nav as item)
+          <a
+            class="px-3 py-2 text-sm ink hover:opacity-60 transition-opacity"
+            href="{{ item.href }}"
+            @if(path === item.href) aria-current="page" @endif
+          >{{ item.label }}</a>
+        @endforeach
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <a class="hidden sm:inline-flex btn btn-accent" style="padding: 0.7rem 1.4rem" href="{{ race.liveResults }}" target="_blank" rel="noopener">live results</a>
+
+        <button
+          type="button"
+          class="lg:hidden p-2.5 ink"
+          :aria-expanded="open() ? 'true' : 'false'"
+          aria-label="menu"
+          @click="toggle()"
+        >
+          <i class="block w-5 h-5" :class="open() ? 'i-hugeicons-cancel-01' : 'i-hugeicons-menu-02'" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+
+    <div :if="open()" class="lg:hidden border-t rule" x-cloak>
+      @foreach(nav as item)
+        <a class="block px-5 py-4 border-b rule text-sm ink" href="{{ item.href }}">{{ item.label }}</a>
+      @endforeach
+      <div class="p-5">
+        <a class="btn btn-accent w-full" href="{{ race.liveResults }}" target="_blank" rel="noopener">live results</a>
+      </div>
+    </div>
+  </header>
+</template>

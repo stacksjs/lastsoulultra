@@ -1,0 +1,54 @@
+<script server>
+import { race } from '../data/race'
+import { elsewhere, footerLinks, longDate } from '../data/site'
+
+const year = 2026
+</script>
+
+<template>
+  <footer class="border-t rule surface">
+    <div class="max-w-[1500px] mx-auto px-5 lg:px-8 py-14 lg:py-20">
+      <div class="grid gap-10 md:grid-cols-12 md:gap-8">
+        <div class="md:col-span-5">
+          <p class="display text-3xl sm:text-4xl ink">last soul<span class="accent">.</span></p>
+          <p class="mt-4 text-sm muted max-w-[38ch] leading-relaxed">
+            {{ race.fieldSize }} souls, one 6.7 km loop, every hour, until one is left. Presented by {{ race.presentedBy }}
+          </p>
+          <p class="mt-5 label faint">{{ longDate(race.startsOn) }}</p>
+        </div>
+
+        <nav class="md:col-span-3 md:col-start-7" aria-label="the race">
+          <p class="label faint mb-4">the race</p>
+          <ul class="space-y-2.5 text-sm">
+            <li><a class="muted hover:ink transition-colors" href="/format">the format</a></li>
+            <li><a class="muted hover:ink transition-colors" href="/lottery">how to enter</a></li>
+            <li><a class="muted hover:ink transition-colors" href="/results">results</a></li>
+            <li><a class="muted hover:ink transition-colors" href="/faq">faq</a></li>
+            <li><a class="muted hover:ink transition-colors" href="/sponsorship">sponsorship</a></li>
+          </ul>
+        </nav>
+
+        <div class="md:col-span-3">
+          <p class="label faint mb-4">elsewhere</p>
+          <ul class="space-y-2.5 text-sm">
+            @foreach(elsewhere as item)
+              <li><a class="muted hover:ink transition-colors" href="{{ item.href }}" target="_blank" rel="noopener">{{ item.label }}</a></li>
+            @endforeach
+            <li><a class="muted hover:ink transition-colors" href="mailto:{{ race.email }}">{{ race.email }}</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mt-14 pt-8 border-t rule">
+        <p class="label faint">{{ race.organiser }} &middot; {{ year }}</p>
+        <ul class="flex flex-wrap gap-x-6 gap-y-2">
+          @foreach(footerLinks as link)
+            <li><a class="text-xs muted hover:ink transition-colors" href="{{ link.href }}">{{ link.label }}</a></li>
+          @endforeach
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  @include('reveal-script')
+</template>

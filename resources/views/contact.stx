@@ -1,0 +1,70 @@
+<script server>
+import { race } from '../data/race'
+import { elsewhere } from '../data/site'
+
+const pageTitle = 'contact - Last Soul Ultra'
+const pageDescription = 'Reach the Last Soul Ultra organisers about the event, the format, entry or partnership.'
+const canonicalPath = '/contact'
+
+/* Routed rather than pooled: an entry question and a partnership question want
+   different answers, and saying where each goes saves a round trip. */
+const routes = [
+  { title: 'the event', detail: 'The format, the rules, base camp, gear, anything about race day itself.', action: race.email, href: `mailto:${race.email}?subject=Last Soul Ultra` },
+  { title: 'entering', detail: 'Entry is by lottery only. The steps and the current status are on the entry page.', action: 'how to enter', href: '/lottery', internal: true },
+  { title: 'partnership', detail: 'Brands interested in the event, the livestream or the documentary.', action: 'sponsorship', href: '/sponsorship', internal: true },
+]
+</script>
+<!DOCTYPE html>
+<html lang="en">
+  <head>@include('head')</head>
+  <body>
+    <SiteNav current="/contact" />
+
+    <main id="main" class="max-w-[1100px] mx-auto px-5 lg:px-8 py-12 lg:py-16">
+      <p class="label accent">contact</p>
+      <h1 class="display text-5xl sm:text-6xl ink mt-4 max-w-[16ch]">got questions?</h1>
+      <p class="mt-6 text-base sm:text-lg muted max-w-[56ch] leading-relaxed">
+        Pick the closest match and it reaches the right person. Replies can take up to {{ race.replyWithinHours }} hours.
+      </p>
+
+      <div class="grid sm:grid-cols-3 gap-8 mt-12 border-t rule pt-10">
+        @foreach(routes as route)
+          <section>
+            <h2 class="display text-xl ink">{{ route.title }}</h2>
+            <p class="mt-3 text-sm muted leading-relaxed">{{ route.detail }}</p>
+            @if(route.internal)
+              <a class="inline-block mt-4 text-sm ink underlink" href="{{ route.href }}">{{ route.action }}</a>
+            @else
+              <a class="inline-block mt-4 text-sm ink underlink mono" href="{{ route.href }}">{{ route.action }}</a>
+            @endif
+          </section>
+        @endforeach
+      </div>
+
+      <div class="grid sm:grid-cols-2 gap-10 mt-14 pt-10 border-t rule">
+        <section>
+          <h2 class="display text-xl ink">the organiser</h2>
+          <address class="mt-4 text-sm muted not-italic leading-relaxed">
+            {{ race.organiser }}<br>
+            Ehrenfeldstr. 14<br>
+            44789 Bochum<br>
+            Germany
+          </address>
+          <p class="mt-3 text-sm muted">Represented by {{ race.managingDirector }}.</p>
+          <a class="inline-block mt-3 text-sm ink underlink" href="/legal/imprint">full imprint</a>
+        </section>
+
+        <section>
+          <h2 class="display text-xl ink">elsewhere</h2>
+          <ul class="mt-4 space-y-2.5">
+            @foreach(elsewhere as item)
+              <li><a class="text-sm ink underlink" href="{{ item.href }}" target="_blank" rel="noopener">{{ item.label }}</a></li>
+            @endforeach
+          </ul>
+        </section>
+      </div>
+    </main>
+
+    <SiteFooter />
+  </body>
+</html>

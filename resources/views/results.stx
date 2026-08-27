@@ -1,0 +1,102 @@
+<script server>
+import { at, shots } from '../data/media'
+import { daysUntilStart, race, raceState } from '../data/race'
+import { longDate } from '../data/site'
+
+const pageTitle = 'results - Last Soul Ultra'
+const pageDescription = 'Live standings, lap count and who is still in the race, straight from the official Last Soul Ultra scoreboard.'
+const canonicalPath = '/results'
+
+const state = raceState()
+const countdown = daysUntilStart()
+</script>
+<!DOCTYPE html>
+<html lang="en">
+  <head>@include('head')</head>
+  <body>
+    <SiteNav current="/results" />
+
+    <main id="main">
+      <div class="max-w-[1500px] mx-auto px-5 lg:px-8">
+        <header class="pt-12 lg:pt-16 pb-10 border-b rule">
+          @if(state === 'running')
+            <p class="flex items-center gap-2.5 label accent">
+              <span class="w-2 h-2 accent-bg" aria-hidden="true"></span>
+              running now
+            </p>
+          @else
+            <p class="label faint">results</p>
+          @endif
+
+          <h1 class="display text-5xl sm:text-7xl lg:text-8xl ink mt-4 max-w-[14ch]">who is still standing.</h1>
+
+          {{-- Deliberately no numbers on this page.
+            A backyard ultra's standings change every hour, and a lap count
+            typed into a template is wrong within sixty minutes. The scoreboard
+            is the authority; this page's job is to hand you to it. --}}
+          @if(state === 'running')
+            <p class="mt-6 text-base sm:text-lg muted max-w-[58ch] leading-relaxed">
+              The race has been going since {{ longDate(race.startsOn) }} and it is not over until one runner is left. Lap count, who is out and who is still in are all live on the official board.
+            </p>
+          @elseif(countdown)
+            <p class="mt-6 text-base sm:text-lg muted max-w-[58ch] leading-relaxed">
+              Nothing to show yet. The board goes live when the gun does, {{ countdown }} days from now on {{ longDate(race.startsOn) }}.
+            </p>
+          @endif
+
+          <div class="flex flex-wrap gap-3 mt-9">
+            <a class="btn btn-accent" href="{{ race.liveResults }}" target="_blank" rel="noopener">open the live board</a>
+            <a class="btn btn-outline" href="{{ race.livestreams }}" target="_blank" rel="noopener">watch the stream</a>
+          </div>
+        </header>
+      </div>
+
+      {{-- What the board shows, so somebody deciding whether to click knows. --}}
+      <section class="border-b rule" data-reveal>
+        <div class="max-w-[1500px] mx-auto px-5 lg:px-8 py-14 lg:py-20">
+          <h2 class="display text-3xl sm:text-4xl ink mb-10 reveal-item">what the board shows.</h2>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10">
+            <div class="reveal-item border-t rule-strong pt-5">
+              <h3 class="display text-lg ink">the lap</h3>
+              <p class="mt-3 text-sm muted leading-relaxed">Which hour the race is on, and the countdown to the next start.</p>
+            </div>
+            <div class="reveal-item border-t rule-strong pt-5">
+              <h3 class="display text-lg ink">still in</h3>
+              <p class="mt-3 text-sm muted leading-relaxed">Everyone who has made every loop so far, and everyone who has not.</p>
+            </div>
+            <div class="reveal-item border-t rule-strong pt-5">
+              <h3 class="display text-lg ink">the totals</h3>
+              <p class="mt-3 text-sm muted leading-relaxed">Kilometres covered and elevation climbed, adding up one 6.7 km loop at a time.</p>
+            </div>
+            <div class="reveal-item border-t rule-strong pt-5">
+              <h3 class="display text-lg ink">the stream</h3>
+              <p class="mt-3 text-sm muted leading-relaxed">A 24/7 broadcast from the gun to the final solo loop.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="relative" data-reveal>
+        <div class="relative aspect-[4/5] sm:aspect-[16/9] lg:aspect-[21/9] overflow-hidden surface">
+          <img
+            class="absolute inset-0 w-full h-full object-cover"
+            src="{{ at(shots.board, 1500) }}"
+            alt="{{ shots.board.alt }}"
+            width="1500"
+            height="643"
+            loading="lazy"
+            decoding="async"
+          >
+          <div class="absolute inset-0" style="background: linear-gradient(to top, rgb(12 12 12 / 0.9) 0%, rgb(12 12 12 / 0.35) 60%, rgb(12 12 12 / 0) 100%)"></div>
+          <div class="absolute inset-x-0 bottom-0 px-5 lg:px-8 pb-8 lg:pb-12">
+            <p class="max-w-[1500px] mx-auto text-lg sm:text-2xl ink max-w-[40ch] reveal-item">
+              The board at the corral counts the same three things, in letters, by hand.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <SiteFooter />
+  </body>
+</html>

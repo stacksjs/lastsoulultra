@@ -1,0 +1,67 @@
+<script server>
+import { legalBySlug, legalPages } from '../../data/legal'
+
+const slug = String(params?.slug ?? '')
+const page = legalBySlug(slug)
+
+const pageTitle = page ? `${page.title} - Last Soul Ultra` : 'not found - Last Soul Ultra'
+const pageDescription = page ? page.blurb : 'That page is not here.'
+const canonicalPath = `/legal/${slug}`
+const noindex = !page
+</script>
+<!DOCTYPE html>
+<html lang="en">
+  <head>@include('head')</head>
+  <body>
+    <SiteNav current="/legal/{{ slug }}" />
+
+    <main id="main" class="max-w-[1100px] mx-auto px-5 lg:px-8 py-12 lg:py-16">
+      @if(!page)
+        <p class="label faint">404</p>
+        <h1 class="display text-5xl sm:text-6xl ink mt-4">no such page.</h1>
+        <ul class="flex flex-wrap gap-2 mt-8">
+          @foreach(legalPages as other)
+            <li><a class="btn btn-outline" href="/legal/{{ other.slug }}">{{ other.title }}</a></li>
+          @endforeach
+        </ul>
+      @else
+        <div class="grid lg:grid-cols-12 gap-10 lg:gap-16">
+          <nav class="lg:col-span-3 lg:sticky lg:top-24 lg:self-start" aria-label="legal pages">
+            <p class="label faint mb-4">legal</p>
+            <ul class="space-y-2.5">
+              @foreach(legalPages as other)
+                <li>
+                  <a
+                    class="text-sm {{ other.slug === slug ? 'ink' : 'muted' }} hover:ink transition-colors"
+                    href="/legal/{{ other.slug }}"
+                    @if(other.slug === slug) aria-current="page" @endif
+                  >{{ other.title }}</a>
+                </li>
+              @endforeach
+            </ul>
+          </nav>
+
+          <div class="lg:col-span-9">
+            <h1 class="display text-4xl sm:text-5xl ink">{{ page.title }}</h1>
+            <p class="mt-4 text-sm muted max-w-[52ch]">{{ page.blurb }}</p>
+
+            {{-- lang is set on the body, not the page: the binding wording is
+              German and a screen reader should switch voice for it rather than
+              read German with an English one. --}}
+            <div class="mt-10 prose" lang="{{ page.lang }}">
+              @foreach(page.blocks as block)
+                @if(block.kind === 'heading')
+                  <h2 class="display text-xl sm:text-2xl ink">{{ block.value }}</h2>
+                @else
+                  <p class="text-sm muted" style="white-space: pre-line">{{ block.value }}</p>
+                @endif
+              @endforeach
+            </div>
+          </div>
+        </div>
+      @endif
+    </main>
+
+    <SiteFooter />
+  </body>
+</html>

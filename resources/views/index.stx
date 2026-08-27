@@ -1,0 +1,236 @@
+<script server>
+import { faq, questionCount } from '../data/faq'
+import { at, recap, shots, srcset } from '../data/media'
+import { daysUntilStart, entrySteps, field, race, raceState, rules } from '../data/race'
+import { absolute, longDate, siteOrigin, socialImage, socialImageAlt } from '../data/site'
+
+const pageTitle = 'Last Soul Ultra'
+const pageDescription = `${race.fieldSize} souls, one 6.7 km loop, every hour, until one is left. The backyard ultra presented by ${race.presentedBy}`
+const canonicalPath = '/'
+
+const state = raceState()
+const countdown = daysUntilStart()
+
+const jsonLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'SportsEvent',
+  'name': race.name,
+  'startDate': race.startsOn,
+  'sport': 'Ultrarunning',
+  'description': pageDescription,
+  'image': socialImage,
+  'organizer': { '@type': 'Organization', 'name': race.organiser, 'email': race.email },
+  'maximumAttendeeCapacity': race.fieldSize,
+  'eventAttendanceMode': 'https://schema.org/OfflineEventAttendanceMode',
+})
+</script>
+<!DOCTYPE html>
+<html lang="en">
+  <head>@include('head')</head>
+  <body>
+    <SiteNav current="/" />
+
+    <main id="main">
+      {{-- 1. Hero, as a split rather than a full-bleed overlay.
+        Every frame the race publishes is portrait, and a portrait image in a
+        16/7 band gets object-cover'd down to a letterbox slice - which for the
+        lap board meant cropping away the only words on it. Sitting the board
+        beside the copy at its own ratio keeps it legible and needs no scrim
+        fighting the text. --}}
+      <section class="border-b rule">
+        <div class="max-w-[1500px] mx-auto grid lg:grid-cols-12 items-stretch">
+          <div class="lg:col-span-7 px-5 lg:px-8 py-14 lg:py-24 flex flex-col justify-center">
+            @if(state === 'running')
+              <p class="flex items-center gap-2.5 label accent mb-6">
+                <span class="w-2 h-2 accent-bg" aria-hidden="true"></span>
+                running now &middot; since {{ longDate(race.startsOn) }}
+              </p>
+            @elseif(countdown)
+              <p class="label accent mb-6">{{ countdown }} days to the gun &middot; {{ longDate(race.startsOn) }}</p>
+            @endif
+
+            <h1 class="display text-[3rem] sm:text-7xl lg:text-8xl ink max-w-[11ch]">until one is left.</h1>
+
+            <p class="mt-7 text-base sm:text-lg muted max-w-[46ch] leading-relaxed">
+              {{ race.fieldSize }} souls. One 6.7 km loop. Every hour, on the hour, for as long as anybody can stand it. There is no distance and no finish line.
+            </p>
+
+            <div class="flex flex-wrap gap-3 mt-9">
+              @if(state === 'running')
+                <a class="btn btn-accent" href="{{ race.liveResults }}" target="_blank" rel="noopener">watch it live</a>
+              @else
+                <a class="btn btn-accent" href="/lottery">how to enter</a>
+              @endif
+              <a class="btn btn-outline" href="/format">the format</a>
+            </div>
+          </div>
+
+          <div class="lg:col-span-5 border-t lg:border-t-0 lg:border-l rule">
+            <div class="relative h-full min-h-[24rem] aspect-[4/5] lg:aspect-auto overflow-hidden surface">
+              <img
+                class="absolute inset-0 w-full h-full object-cover"
+                src="{{ at(shots.board, 1000) }}"
+                srcset="{{ srcset(shots.board, 750) }}"
+                sizes="(min-width: 1024px) 42vw, 100vw"
+                alt="{{ shots.board.alt }}"
+                width="1000"
+                height="1250"
+                fetchpriority="high"
+                decoding="async"
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {{-- 2. The four rules, as a numeric band. This is the whole event, and
+        on the live site it is a bulleted list. --}}
+      <section class="border-b rule" data-reveal>
+        <div class="max-w-[1500px] mx-auto px-5 lg:px-8 py-14 lg:py-20">
+          <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10">
+            @foreach(rules as rule)
+              <div class="reveal-item">
+                <p class="label faint">{{ rule.label }}</p>
+                <p class="display text-3xl lg:text-4xl accent mt-2">{{ rule.value }}</p>
+                <p class="mt-3 text-sm muted leading-relaxed max-w-[34ch]">{{ rule.detail }}</p>
+              </div>
+            @endforeach
+          </div>
+        </div>
+      </section>
+
+      {{-- 3. What a backyard ultra is, against a night frame. --}}
+      <section class="border-b rule" data-reveal>
+        <div class="max-w-[1500px] mx-auto grid lg:grid-cols-12 items-stretch">
+          <div class="lg:col-span-6 order-2 lg:order-1 px-5 lg:px-8 py-14 lg:py-20 flex flex-col justify-center reveal-item">
+            <h2 class="display text-4xl sm:text-5xl lg:text-6xl ink max-w-[16ch]">the format is the difficulty.</h2>
+            <p class="mt-6 text-base muted leading-relaxed max-w-[52ch]">
+              A marathon asks you to cover a distance. A backyard ultra asks you to do the same modest loop again, one hour later, and then again, for as long as somebody else is still willing to.
+            </p>
+            <p class="mt-4 text-base muted leading-relaxed max-w-[52ch]">
+              Finish the loop in forty minutes and you have twenty minutes to eat, change and lie down. Finish in fifty-eight and you have two. Nobody is racing the clock; everybody is racing the last person who has not quit.
+            </p>
+            <a class="btn btn-outline mt-9 self-start" href="/format">read the rules in full</a>
+          </div>
+
+          <a class="lg:col-span-6 order-1 lg:order-2 tile block border-l-0 lg:border-l rule reveal-item" href="/format">
+            <div class="tile-media relative h-full min-h-[260px] aspect-[16/10] lg:aspect-auto">
+              <img
+                class="absolute inset-0 w-full h-full object-cover"
+                src="{{ at(shots.night, 1200) }}"
+                alt="{{ shots.night.alt }}"
+                width="1200"
+                height="750"
+                loading="lazy"
+                decoding="async"
+              >
+            </div>
+          </a>
+        </div>
+      </section>
+
+      {{-- 4. Entry, as a numbered path. --}}
+      <section class="border-b rule" data-reveal>
+        <div class="max-w-[1500px] mx-auto px-5 lg:px-8 py-14 lg:py-20">
+          <div class="flex flex-wrap items-end justify-between gap-6 mb-10 reveal-item">
+            <h2 class="display text-4xl sm:text-5xl ink">getting a number.</h2>
+            <a class="text-sm ink underlink pb-1" href="/lottery">the lottery in full</a>
+          </div>
+
+          <ol class="grid sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10">
+            @foreach(entrySteps as step)
+              <li class="reveal-item border-t rule-strong pt-5">
+                <h3 class="display text-xl ink">{{ step.title }}</h3>
+                <p class="mt-3 text-sm muted leading-relaxed max-w-[34ch]">{{ step.detail }}</p>
+                @if(step.deadline)
+                  <p class="mt-3 label accent">{{ step.deadline }}</p>
+                @endif
+              </li>
+            @endforeach
+          </ol>
+        </div>
+      </section>
+
+      {{-- 5. The field, over the base-camp frame. --}}
+      <section class="relative border-b rule" data-reveal>
+        <div class="relative aspect-[4/5] sm:aspect-[16/9] lg:aspect-[21/9] overflow-hidden surface">
+          <img
+            class="absolute inset-0 w-full h-full object-cover"
+            src="{{ at(shots.refuel, 1600) }}"
+            alt="{{ shots.refuel.alt }}"
+            width="1600"
+            height="686"
+            loading="lazy"
+            decoding="async"
+          >
+          <div class="absolute inset-0" style="background: linear-gradient(to top, rgb(12 12 12 / 0.9) 0%, rgb(12 12 12 / 0.5) 45%, rgb(12 12 12 / 0.15) 100%)"></div>
+          <div class="absolute inset-x-0 bottom-0 px-5 lg:px-8 pb-8 lg:pb-14">
+            <div class="max-w-[1500px] mx-auto reveal-item">
+              <p class="label accent">the field</p>
+              <p class="mt-3 text-lg sm:text-2xl ink max-w-[46ch] leading-snug">{{ field }}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {{-- 6. Race photography, as a scroll rail. --}}
+      <section class="py-14 lg:py-20 border-b rule" data-reveal>
+        <div class="max-w-[1500px] mx-auto px-5 lg:px-8 mb-8 reveal-item">
+          <h2 class="display text-4xl sm:text-5xl ink">what it looks like at hour thirty.</h2>
+        </div>
+        <div class="flex gap-4 sm:gap-6 overflow-x-auto px-5 lg:px-8 pb-2 reveal-item" style="scrollbar-width: none">
+          @foreach(recap as shot)
+            <div class="w-[76vw] sm:w-[44vw] lg:w-[30vw] shrink-0 tile">
+              <div class="tile-media relative aspect-[4/3]">
+                <img
+                  class="absolute inset-0 w-full h-full object-cover"
+                  src="{{ at(shot, 900) }}"
+                  alt="{{ shot.alt }}"
+                  width="900"
+                  height="675"
+                  loading="lazy"
+                  decoding="async"
+                >
+              </div>
+            </div>
+          @endforeach
+        </div>
+      </section>
+
+      {{-- 7. The questions people actually ask, three of them, with the rest
+        one click away. --}}
+      <section class="py-14 lg:py-20 border-b rule" data-reveal>
+        <div class="max-w-[1500px] mx-auto px-5 lg:px-8">
+          <div class="flex flex-wrap items-end justify-between gap-6 mb-10 reveal-item">
+            <h2 class="display text-4xl sm:text-5xl ink">the short answers.</h2>
+            <a class="text-sm ink underlink pb-1" href="/faq">all {{ questionCount() }} questions</a>
+          </div>
+          <div class="grid md:grid-cols-3 gap-x-8 gap-y-10">
+            @foreach(faq as group)
+              <div class="reveal-item border-t rule-strong pt-5">
+                <p class="label accent">{{ group.title }}</p>
+                <h3 class="mt-3 text-lg ink leading-snug">{{ group.questions[0].q }}</h3>
+                <p class="mt-3 text-sm muted leading-relaxed">{{ group.questions[0].a[0] }}</p>
+              </div>
+            @endforeach
+          </div>
+        </div>
+      </section>
+
+      {{-- 8. Sponsorship, kept last and kept short. --}}
+      <section class="accent-bg" data-reveal>
+        <div class="max-w-[1500px] mx-auto px-5 lg:px-8 py-14 lg:py-20 flex flex-col lg:flex-row lg:items-end justify-between gap-8 reveal-item">
+          <div>
+            <h2 class="display text-4xl sm:text-5xl lg:text-6xl max-w-[18ch]">partner with the race.</h2>
+            <p class="mt-4 text-base max-w-[52ch] leading-relaxed" style="opacity: 0.8">
+              A small number of partners, integrated into a format that runs long after race day. On-site presence, the livestream, and the documentary that follows.
+            </p>
+          </div>
+          <a class="btn shrink-0" style="background: var(--page); color: var(--ink); border-color: var(--page)" href="/sponsorship">talk to us</a>
+        </div>
+      </section>
+    </main>
+
+    <SiteFooter />
+  </body>
+</html>

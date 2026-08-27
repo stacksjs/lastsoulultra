@@ -1,0 +1,51 @@
+{{-- One observer for the page. Sections opt in with [data-reveal]; children
+  carry .reveal-item. The hidden state lives behind html.js-reveal, added only
+  once the observer exists, and a timer drops the whole effect if a section is
+  sitting in view unrevealed - so content can never get stuck invisible. --}}
+<script>
+  ;(function () {
+    if (window.__lsuReveal) return
+    window.__lsuReveal = true
+
+    var reduce = false
+    try { reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches }
+    catch {}
+
+    if (reduce || !('IntersectionObserver' in window)) return
+    if (!document.querySelector('[data-reveal]')) return
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return
+        entry.target.classList.add('is-revealed')
+        observer.unobserve(entry.target)
+      })
+    }, { rootMargin: '0px 0px -12% 0px', threshold: 0.05 })
+
+    function scan() {
+      document.querySelectorAll('[data-reveal]:not([data-reveal-bound])').forEach(function (el) {
+        el.setAttribute('data-reveal-bound', '')
+        el.querySelectorAll('.reveal-item').forEach(function (child, i) {
+          child.style.setProperty('--i', String(Math.min(i, 8)))
+        })
+        observer.observe(el)
+      })
+    }
+
+    document.documentElement.classList.add('js-reveal')
+    scan()
+
+    var main = document.querySelector('main')
+    if (main) new MutationObserver(scan).observe(main, { childList: true })
+
+    setTimeout(function () {
+      var stuck = document.querySelector('[data-reveal]:not(.is-revealed)')
+      if (!stuck) return
+      var box = stuck.getBoundingClientRect()
+      if (box.top < window.innerHeight && box.bottom > 0) {
+        observer.disconnect()
+        document.documentElement.classList.remove('js-reveal')
+      }
+    }, 2000)
+  })()
+</script>

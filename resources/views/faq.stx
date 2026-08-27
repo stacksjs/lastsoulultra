@@ -1,0 +1,88 @@
+<script server>
+import { faq, questionCount } from '../data/faq'
+import { race } from '../data/race'
+
+const pageTitle = 'faq - Last Soul Ultra'
+const pageDescription = 'Everything asked about the Last Soul Ultra: the format, base camp, mandatory gear, what a crew may do, and how to follow the race.'
+const canonicalPath = '/faq'
+
+const jsonLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  'mainEntity': faq.flatMap(group => group.questions.map(item => ({
+    '@type': 'Question',
+    'name': item.q,
+    'acceptedAnswer': { '@type': 'Answer', 'text': item.a.join(' ') },
+  }))),
+})
+</script>
+<!DOCTYPE html>
+<html lang="en">
+  <head>@include('head')</head>
+  <body>
+    <SiteNav current="/faq" />
+
+    <main id="main">
+      <div class="max-w-[1500px] mx-auto px-5 lg:px-8">
+        <header class="pt-12 lg:pt-16 pb-10 border-b rule">
+          <p class="label accent">{{ questionCount() }} questions</p>
+          <h1 class="display text-5xl sm:text-7xl lg:text-8xl ink mt-4 max-w-[12ch]">the answers.</h1>
+          <p class="mt-6 text-base sm:text-lg muted max-w-[58ch] leading-relaxed">
+            Grouped by who is asking. If you are entering, the first section is yours; if you are crewing or watching, skip to the one that is.
+          </p>
+
+          {{-- Jump links, because three groups of answers on one page is a lot
+            to scroll past to reach the one you came for. --}}
+          <nav class="flex flex-wrap gap-2 mt-8" aria-label="sections">
+            @foreach(faq as group)
+              <a class="btn btn-outline" style="padding: 0.6rem 1.2rem" href="#{{ group.slug }}">{{ group.title }}</a>
+            @endforeach
+          </nav>
+        </header>
+      </div>
+
+      @foreach(faq as group)
+        <section class="border-b rule" id="{{ group.slug }}" data-reveal>
+          <div class="max-w-[1500px] mx-auto px-5 lg:px-8 py-14 lg:py-20 grid lg:grid-cols-12 gap-x-14 gap-y-8">
+            <div class="lg:col-span-4 reveal-item">
+              <h2 class="display text-3xl sm:text-4xl ink">{{ group.title }}</h2>
+              <p class="mt-4 text-sm muted leading-relaxed max-w-[34ch]">{{ group.blurb }}</p>
+            </div>
+
+            {{-- <details> rather than hand-rolled toggles: it opens without
+              JavaScript, it is findable by the browser's own in-page search,
+              and it prints. --}}
+            <div class="lg:col-span-8 border-t rule reveal-item">
+              @foreach(group.questions as item)
+                <details class="border-b rule">
+                  <summary class="flex items-start justify-between gap-6 py-5 cursor-pointer list-none">
+                    <span class="text-base sm:text-lg ink leading-snug">{{ item.q }}</span>
+                    <i class="i-hugeicons-plus-sign w-5 h-5 shrink-0 mt-1 accent acc-closed" aria-hidden="true"></i>
+                    <i class="i-hugeicons-minus-sign w-5 h-5 shrink-0 mt-1 accent acc-open" aria-hidden="true"></i>
+                  </summary>
+                  <div class="pb-6 prose">
+                    @foreach(item.a as paragraph)
+                      <p class="text-sm muted">{{ paragraph }}</p>
+                    @endforeach
+                  </div>
+                </details>
+              @endforeach
+            </div>
+          </div>
+        </section>
+      @endforeach
+
+      <section data-reveal>
+        <div class="max-w-[1500px] mx-auto px-5 lg:px-8 py-14 lg:py-20 reveal-item">
+          <h2 class="display text-3xl sm:text-4xl ink">not answered here?</h2>
+          <p class="mt-4 text-base muted max-w-[52ch] leading-relaxed">
+            Write to <a class="ink underlink" href="mailto:{{ race.email }}">{{ race.email }}</a>. It can take up to {{ race.replyWithinHours }} hours to get through everything.
+          </p>
+          <a class="btn btn-accent mt-8" href="/contact">contact the organisers</a>
+        </div>
+      </section>
+    </main>
+
+    <SiteFooter />
+  </body>
+</html>
