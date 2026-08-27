@@ -1,6 +1,7 @@
 import { config } from '@stacksjs/config'
 import { mail, template } from '@stacksjs/email'
 import { url } from '@stacksjs/router'
+import { race } from '../../resources/data/race'
 
 export interface SubscriptionOptInOptions {
   to: string
@@ -24,7 +25,7 @@ export interface SubscriptionOptInOptions {
 export async function sendSubscriptionOptIn(options: SubscriptionOptInOptions): Promise<void> {
   const { to, subscriberUuid } = options
 
-  const appName = config.app.name || 'Last Soul Ultra'
+  const appName = race.name
   const confirmUrl = url('email.confirm', { token: subscriberUuid })
   const unsubscribeUrl = url('email.unsubscribe', { token: subscriberUuid })
 
@@ -45,7 +46,7 @@ export async function sendSubscriptionOptIn(options: SubscriptionOptInOptions): 
     to: [to],
     from: {
       name: config.email.from?.name || appName,
-      address: config.email.from?.address || 'no-reply@lastsoulultra.com',
+      address: config.email.from?.address || `no-reply@${race.emailDomain}`,
     },
     subject: `Confirm your ${appName} updates`,
     html,

@@ -34,6 +34,8 @@ export const race = {
   campSizeMetres: 3,
   minimumAge: 18,
   email: 'mail@lastsoulultra.com',
+  /** Bare domain, for building a no-reply sender when none is configured. */
+  emailDomain: 'lastsoulultra.com',
   replyWithinHours: 24,
   instagram: 'https://www.instagram.com/lastsoulultra/',
   livestreams: 'https://linktr.ee/lastsoulultra',
