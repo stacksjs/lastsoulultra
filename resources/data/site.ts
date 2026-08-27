@@ -61,7 +61,6 @@ export const footerLinks: NavItem[] = [
 export const elsewhere: NavItem[] = [
   { label: 'instagram', href: race.instagram, external: true },
   { label: 'livestreams', href: race.livestreams, external: true },
-  { label: 'live results', href: race.liveResults, external: true },
 ]
 
 /** "14 august 2026", lowercase like the rest of the site's voice. */

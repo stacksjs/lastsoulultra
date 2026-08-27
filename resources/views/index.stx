@@ -1,14 +1,16 @@
 <script server>
 import { faq, questionCount } from '../data/faq'
 import { at, recap, shots, srcset } from '../data/media'
-import { daysUntilStart, entrySteps, field, race, raceState, rules } from '../data/race'
+import { liveSnapshot, livePayload } from '../data/live'
+import { daysUntilStart, entrySteps, field, race, resolveRaceState, rules } from '../data/race'
 import { absolute, longDate, siteOrigin, socialImage, socialImageAlt } from '../data/site'
 
 const pageTitle = 'Last Soul Ultra'
 const pageDescription = `${race.fieldSize} souls, one 6.7 km loop, every hour, until one is left. The backyard ultra presented by ${race.presentedBy}`
 const canonicalPath = '/'
 
-const state = raceState()
+const live = livePayload(await liveSnapshot(), race.loopMetres)
+const state = resolveRaceState(live.ok ? { raceOver: live.raceOver } : null)
 const countdown = daysUntilStart()
 
 const jsonLd = JSON.stringify({
@@ -45,19 +47,29 @@ const jsonLd = JSON.stringify({
                 <span class="w-2 h-2 accent-bg" aria-hidden="true"></span>
                 running now &middot; since {{ longDate(race.startsOn) }}
               </p>
+            @elseif(state === 'finished' && live.winner)
+              <p class="label accent mb-6">{{ race.edition }} &middot; won by {{ live.winner.name }} on lap {{ live.finalLap }}</p>
             @elseif(countdown)
               <p class="label accent mb-6">{{ countdown }} days to the gun &middot; {{ longDate(race.startsOn) }}</p>
             @endif
 
             <h1 class="display text-[3rem] sm:text-7xl lg:text-8xl ink max-w-[11ch]">until one <span class="whitespace-nowrap">is left.</span></h1>
 
-            <p class="mt-7 text-base sm:text-lg muted max-w-[46ch] leading-relaxed">
-              {{ race.fieldSize }} souls. One 6.7 km loop. Every hour, on the hour, for as long as anybody can stand it. There is no distance and no finish line.
-            </p>
+            @if(state === 'finished' && live.winner)
+              <p class="mt-7 text-base sm:text-lg muted max-w-[46ch] leading-relaxed">
+                {{ live.starters }} started. One 6.7 km loop, every hour, on the hour. {{ live.finalLap }} laps later, one was left.
+              </p>
+            @else
+              <p class="mt-7 text-base sm:text-lg muted max-w-[46ch] leading-relaxed">
+                {{ race.fieldSize }} souls. One 6.7 km loop. Every hour, on the hour, for as long as anybody can stand it. There is no distance and no finish line.
+              </p>
+            @endif
 
             <div class="flex flex-wrap gap-3 mt-9">
               @if(state === 'running')
-                <a class="btn btn-accent" href="{{ race.liveResults }}" target="_blank" rel="noopener">watch it live</a>
+                <a class="btn btn-accent" href="/results">the standings</a>
+              @elseif(state === 'finished')
+                <a class="btn btn-accent" href="/results">the result</a>
               @else
                 <a class="btn btn-accent" href="/lottery">how to enter</a>
               @endif

@@ -20,6 +20,18 @@
   --ink-muted: #b0b0ab;
   --ink-faint: #8a8a85;
   --line: #262625;
+
+  /*
+   * Crosswind's preflight gives every uncoloured border a light default
+   * (#e5e7eb), which is right for a light theme and wrong for this one. It
+   * matters for `divide-*`: those borders live on the CHILDREN, so a `.rule`
+   * class on the parent colours the parent and never reaches them - the
+   * format page's four-rule list rendered three bright near-white dividers
+   * under one correct dark one. Setting the documented escape hatch once
+   * makes every uncoloured border follow the theme; the explicit .rule /
+   * .rule-strong classes still win where they are used.
+   */
+  --border-color: var(--line);
   --line-strong: #f4f4f2;
   --accent: #f04800;
   /*
@@ -296,3 +308,80 @@ body > div[data-stx-scope] { display: contents; }
 .prose p { max-width: 70ch; line-height: 1.75; }
 .prose p + p { margin-top: 1.15rem; }
 .prose h2 { margin-top: 2.5rem; margin-bottom: 0.75rem; }
+
+/* ---------------------------------------------------------------------- */
+/* Standings                                                               */
+/* ---------------------------------------------------------------------- */
+
+/*
+ * The filter is one signal setting one attribute; the hiding is CSS. Doing it
+ * this way keeps all 169 rows in the server-rendered HTML - complete without
+ * JavaScript, readable by a crawler - and avoids serialising every runner's
+ * name into a client-side expression just to filter on status.
+ */
+/*
+ * The two radios sit before everything they govern, so a general sibling
+ * combinator reaches both the chips and the table. Visually hidden but still
+ * focusable, so the control is keyboard operable and announced as a radio
+ * group; the labels are the visible chips.
+ */
+.filter-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+#filter-in:checked ~ * .standings tbody tr[data-status='out'] { display: none; }
+
+#filter-all:checked ~ * .filter-chips label[for='filter-all'],
+#filter-in:checked ~ * .filter-chips label[for='filter-in'] {
+  color: var(--accent-ink);
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.filter-input:focus-visible ~ * .filter-chips label { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.standings tbody tr { border-color: var(--line); }
+
+/* A 169-row table is a scanning exercise, so give the eye a resting line. */
+.standings tbody tr:hover { background: var(--surface, rgb(255 255 255 / 0.03)); }
+
+/* Not sticky: the site header is itself sticky and 98px tall (64px without
+ * the race banner, which comes and goes with the race state), so a sticky
+ * thead sat hidden behind it. A header you cannot see is worse than one that
+ * scrolls away, and there is no honest fixed offset to key it to. */
+
+.chip {
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  padding: 0.5rem 0.85rem;
+  border: 1px solid var(--line);
+  color: var(--ink-muted);
+  background: transparent;
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.chip:hover { color: var(--ink); border-color: var(--line-strong); }
+
+/* Defined after .chip so it wins at equal specificity within this sheet. */
+.chip-on {
+  color: var(--accent-ink);
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+/* Mobile menu: closed by default, opened off the toggle button's own
+ * aria-expanded. Keying off the button rather than a binding on the menu
+ * itself is what lets the menu's links stay server-rendered. */
+.mobile-menu { display: none; }
+header:has(button[aria-expanded='true']) .mobile-menu { display: block; }

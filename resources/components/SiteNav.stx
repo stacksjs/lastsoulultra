@@ -1,9 +1,10 @@
 <script server>
-import { race, raceState } from '../data/race'
+import { liveRaceState } from '../data/live'
+import { race } from '../data/race'
 import { nav } from '../data/site'
 
 const path = typeof current !== 'undefined' ? String(current) : '/'
-const state = raceState()
+const state = await liveRaceState()
 </script>
 
 <script client>
@@ -26,6 +27,12 @@ function toggle(): void {
           <span class="label">the race is running &middot; follow it live</span>
         </div>
       </a>
+    @elseif(state === 'finished')
+      <a class="block accent-bg" href="/results">
+        <div class="max-w-[1500px] mx-auto px-5 lg:px-8 py-2 flex items-center justify-center gap-3 text-center">
+          <span class="label">{{ race.edition }} is done &middot; see the final standings</span>
+        </div>
+      </a>
     @endif
 
     <div class="max-w-[1500px] mx-auto px-5 lg:px-8 h-16 flex items-center justify-between gap-6">
@@ -44,7 +51,7 @@ function toggle(): void {
       </nav>
 
       <div class="flex items-center gap-3">
-        <a class="hidden sm:inline-flex btn btn-accent" style="padding: 0.7rem 1.4rem" href="{{ race.liveResults }}" target="_blank" rel="noopener">live results</a>
+        <a class="hidden sm:inline-flex btn btn-accent" style="padding: 0.7rem 1.4rem" href="/results">{{ state === 'finished' ? 'the result' : 'live results' }}</a>
 
         <button
           type="button"
@@ -58,12 +65,19 @@ function toggle(): void {
       </div>
     </div>
 
-    <div :if="open()" class="lg:hidden border-t rule" x-cloak>
+    {{-- No binding on this element on purpose. Any stx binding hands the
+      subtree to the client runtime, which does not run server directives:
+      with `:if` the @foreach below never executed and the menu shipped a
+      single literal "{{ item.label }}" link on every page, and with a
+      :data-open attribute it failed with "nav is not iterable". The button's
+      own aria-expanded is already bound and correct, so the CSS keys off that
+      instead and this subtree stays server-rendered. --}}
+    <div class="lg:hidden border-t rule mobile-menu">
       @foreach(nav as item)
         <a class="block px-5 py-4 border-b rule nav-link ink" href="{{ item.href }}">{{ item.label }}</a>
       @endforeach
       <div class="p-5">
-        <a class="btn btn-accent w-full" href="{{ race.liveResults }}" target="_blank" rel="noopener">live results</a>
+        <a class="btn btn-accent w-full" href="/results">{{ state === 'finished' ? 'the result' : 'live results' }}</a>
       </div>
     </div>
   </header>

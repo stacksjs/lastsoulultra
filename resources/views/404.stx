@@ -1,11 +1,12 @@
 <script server>
-import { race, raceState } from '../data/race'
+import { liveRaceState } from '../data/live'
+import { race } from '../data/race'
 
 const pageTitle = 'not found - Last Soul Ultra'
 const pageDescription = 'That page is not here.'
 const canonicalPath = '/404'
 const noindex = true
-const state = raceState()
+const state = await liveRaceState()
 </script>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,8 +19,8 @@ const state = raceState()
       <p class="mt-6 text-base muted max-w-[46ch] leading-relaxed">That page is not here. The race, thankfully, still is.</p>
       <div class="flex flex-wrap gap-3 mt-9">
         <a class="btn btn-accent" href="/">back to the start</a>
-        @if(state === 'running')
-          <a class="btn btn-outline" href="{{ race.liveResults }}" target="_blank" rel="noopener">live results</a>
+        @if(state !== 'upcoming')
+          <a class="btn btn-outline" href="/results">{{ state === 'finished' ? 'the result' : 'live results' }}</a>
         @else
           <a class="btn btn-outline" href="/format">the format</a>
         @endif

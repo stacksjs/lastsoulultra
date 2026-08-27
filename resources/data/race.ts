@@ -13,6 +13,12 @@ export const race = {
   /** Friday, as the FAQ states it. */
   startsOn: '2026-08-14',
   startsOnLabel: 'friday 14 august 2026',
+  /** The gun, exactly. Taken from the live board's own `raceStartUtc`, which
+   *  is the only published source for the time of day; 12:00 UTC is 14:00
+   *  local. Everything that counts laps has to use this, not midnight - the
+   *  lap number is elapsed whole hours, so a twelve-hour error in the start
+   *  is a twelve-lap error in the standings. */
+  startsAtUtc: '2026-08-14T12:00:00Z',
   /** The field size the organiser selects. */
   fieldSize: 150,
   /** Metres in one loop. 6.7 km, run every full hour. */
@@ -31,7 +37,9 @@ export const race = {
   replyWithinHours: 24,
   instagram: 'https://www.instagram.com/lastsoulultra/',
   livestreams: 'https://linktr.ee/lastsoulultra',
-  liveResults: 'https://lsu-live.bspmedia.workers.dev/',
+  /** The board itself, kept for attribution. The standings are rendered on
+   *  this site now (see resources/data/live.ts); this is the upstream. */
+  liveSource: 'https://lsu-live.bspmedia.workers.dev/',
   organiser: 'LAST SOUL GmbH',
   managingDirector: 'Kim Gottwald',
   presentedBy: 'Kim Gottwald and rappid.',
@@ -120,28 +128,44 @@ export const field = 'International ultrarunners, athletes, well-known sports pe
  * runner is left, which may be a day after the start or two weeks after it, so
  * nothing here may assume a duration.
  */
-export type RaceState = 'upcoming' | 'running' | 'unknown'
+export type RaceState = 'upcoming' | 'running' | 'finished'
 
+/** Epoch millis of the gun. */
+export const raceStartMs: number = new Date(race.startsAtUtc).getTime()
+
+/**
+ * State derived from the clock alone.
+ *
+ * This is the fallback for pages that have not loaded the board. It cannot
+ * ever return 'finished', because nothing about the calendar tells you a
+ * backyard ultra has ended - only the board does. Prefer `resolveRaceState`
+ * wherever live data is available.
+ */
 export function raceState(now: Date = new Date()): RaceState {
-  const start = new Date(`${race.startsOn}T00:00:00Z`).getTime()
-  const elapsed = now.getTime() - start
-  if (elapsed < 0) return 'upcoming'
-  // No end date is knowable in advance, so once the start has passed the only
-  // honest answers are "running" and "we cannot tell from here". The live
-  // scoreboard is the authority either way, and every state links to it.
-  return 'running'
+  return now.getTime() < raceStartMs ? 'upcoming' : 'running'
+}
+
+/**
+ * State, preferring what the board reports over what the clock implies.
+ *
+ * The board is the only thing that knows the race is over, and it was: while
+ * this site said "running now", the scoreboard had already recorded lap 94 and
+ * one runner left. Pass the live state in and the whole site follows it.
+ */
+export function resolveRaceState(live: { raceOver: boolean } | null, now: Date = new Date()): RaceState {
+  if (live?.raceOver)
+    return 'finished'
+  return raceState(now)
 }
 
 /** Whole days until the start, or null once it has begun. */
 export function daysUntilStart(now: Date = new Date()): number | null {
-  const start = new Date(`${race.startsOn}T00:00:00Z`).getTime()
-  const days = Math.ceil((start - now.getTime()) / 86400000)
+  const days = Math.ceil((raceStartMs - now.getTime()) / 86400000)
   return days > 0 ? days : null
 }
 
 /** Whole hours since the gun, which in this format is also the lap number. */
 export function hoursSinceStart(now: Date = new Date()): number | null {
-  const start = new Date(`${race.startsOn}T00:00:00Z`).getTime()
-  const hours = Math.floor((now.getTime() - start) / 3600000)
+  const hours = Math.floor((now.getTime() - raceStartMs) / 3600000)
   return hours >= 0 ? hours : null
 }

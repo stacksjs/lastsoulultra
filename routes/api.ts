@@ -1,4 +1,6 @@
 import { response, route } from '@stacksjs/router'
+import { liveSnapshot, livePayload } from '../resources/data/live'
+import { race } from '../resources/data/race'
 
 /**
  * This file is the entry point for your application's API routes.
@@ -31,3 +33,28 @@ route.get('/hello', () => response.text('hello world'))
 // Launch the site with `./buddy launch`. Maintenance mode (503 page,
 // distinct cookie + state file) is the separate `./buddy down` /
 // `./buddy up` pair.
+
+
+/**
+ * The live scoreboard, mirrored onto this origin.
+ *
+ * The race's own board (see resources/data/live.ts) publishes no JSON, so the
+ * standings used to sit behind an outbound link. This endpoint serves the same
+ * state the page was server-rendered with, which is what lets the results page
+ * refresh itself without a round trip to a third party - and it means the
+ * browser never talks to the worker directly.
+ *
+ * Upstream is cached for a minute, so polling this costs nothing extra. A
+ * failed upstream returns 503 with `ok: false` rather than a 200 full of
+ * zeroes, so a client cannot mistake an outage for an empty field.
+ */
+route.get('/live', async () => {
+  const payload = livePayload(await liveSnapshot(), race.loopMetres)
+
+  return response.json(payload, {
+    status: payload.ok ? 200 : 503,
+    headers: {
+      'cache-control': 'public, max-age=30, stale-while-revalidate=120',
+    },
+  })
+})

@@ -1,15 +1,51 @@
 <script server>
+import { liveSnapshot, livePayload } from '../data/live'
 import { at, shots } from '../data/media'
-import { daysUntilStart, race, raceState } from '../data/race'
+import { daysUntilStart, race, resolveRaceState } from '../data/race'
 import { longDate } from '../data/site'
 
+const snapshot = await liveSnapshot()
+const live = livePayload(snapshot, race.loopMetres)
+
+const state = resolveRaceState(live.ok ? { raceOver: live.raceOver } : null)
+const countdown = daysUntilStart()
+
 const pageTitle = 'results - Last Soul Ultra'
-const pageDescription = 'Live standings, lap count and who is still in the race, straight from the official Last Soul Ultra scoreboard.'
+const pageDescription = live.ok && live.raceOver && live.winner
+  ? `${live.winner.name} took the ${race.edition} title on lap ${live.finalLap}. Full final standings for all ${live.starters} starters.`
+  : 'Live standings, lap count and who is still in the race at the Last Soul Ultra.'
 const canonicalPath = '/results'
 
-const state = raceState()
-const countdown = daysUntilStart()
+const nf = new Intl.NumberFormat('en-GB')
+function num(value) {
+  return nf.format(value)
+}
+function km(value) {
+  return `${nf.format(Math.round(value))} km`
+}
+const df = new Intl.NumberFormat('en-GB', { minimumFractionDigits: 1, maximumFractionDigits: 1 })
+function dist(value) {
+  return df.format(value)
+}
+
+const readAt = live.fetchedAt
+  ? new Date(live.fetchedAt).toISOString().slice(11, 16) + ' UTC'
+  : 'unknown'
+
+// A backyard ultra's leaderboard is only meaningful as laps: everyone on the
+// same lap has run exactly the same distance, so the km column is a
+// convenience, never the ranking.
+const rows = live.runners
+const stillIn = rows.filter(r => r.status === 'active')
+
+// The winning margin, in laps. Worth its own line because in this format it is
+// almost always one: the race ends the moment the second-last runner declines
+// to start, so the winner finishes exactly one lap ahead of whoever quit.
+const runnerUp = rows[1] ?? null
+const margin = runnerUp ? rows[0].laps - runnerUp.laps : null
+const marginLabel = margin === 1 ? '1 lap' : `${margin} laps`
 </script>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>@include('head')</head>
@@ -19,62 +55,213 @@ const countdown = daysUntilStart()
     <main id="main">
       <div class="max-w-[1500px] mx-auto px-5 lg:px-8">
         <header class="pt-12 lg:pt-16 pb-10 border-b rule">
-          @if(state === 'running')
+          @if(state === 'running' && live.ok)
             <p class="flex items-center gap-2.5 label accent">
               <span class="w-2 h-2 accent-bg" aria-hidden="true"></span>
-              running now
+              running now &middot; lap {{ live.currentLap }}
             </p>
+          @elseif(state === 'finished')
+            <p class="label accent">final &middot; {{ longDate(race.startsOn) }}</p>
           @else
             <p class="label faint">results</p>
           @endif
 
-          <h1 class="display h-page ink mt-4 max-w-[14ch]">who is still standing.</h1>
-
-          {{-- Deliberately no numbers on this page.
-            A backyard ultra's standings change every hour, and a lap count
-            typed into a template is wrong within sixty minutes. The scoreboard
-            is the authority; this page's job is to hand you to it. --}}
-          @if(state === 'running')
+          @if(state === 'finished' && live.winner)
+            <h1 class="display h-page ink mt-4 max-w-[12ch]">the last <span class="whitespace-nowrap">soul.</span></h1>
             <p class="mt-6 text-base sm:text-lg muted max-w-[58ch] leading-relaxed">
-              The race has been going since {{ longDate(race.startsOn) }} and it is not over until one runner is left. Lap count, who is out and who is still in are all live on the official board.
+              {{ live.starters }} runners started. After {{ live.finalLap }} laps, one was left. Every lap below is 6.7 km, run on the hour, until nobody else would start another.
             </p>
-          @elseif(countdown)
+          @elseif(state === 'running' && live.ok)
+            <h1 class="display h-page ink mt-4 max-w-[14ch]">who is still standing.</h1>
             <p class="mt-6 text-base sm:text-lg muted max-w-[58ch] leading-relaxed">
-              Nothing to show yet. The board goes live when the gun does, {{ countdown }} days from now on {{ longDate(race.startsOn) }}.
+              {{ live.remaining }} still in from {{ live.starters }} starters, on lap {{ live.currentLap }}. It is not over until one runner is left, and that runner runs one more loop alone.
+            </p>
+          @elseif(!live.ok)
+            <h1 class="display h-page ink mt-4 max-w-[14ch]">who is still standing.</h1>
+            <p class="mt-6 text-base sm:text-lg muted max-w-[58ch] leading-relaxed">
+              The standings come from the race's own timing board, and it is not answering right now. Rather than show you a number that might be wrong, this page shows none until it is back.
+            </p>
+          @else
+            <h1 class="display h-page ink mt-4 max-w-[14ch]">the board opens with the gun.</h1>
+            <p class="mt-6 text-base sm:text-lg muted max-w-[58ch] leading-relaxed">
+              Nothing to show yet. Standings appear here the moment the race starts, {{ countdown }} days from now on {{ longDate(race.startsOn) }}.
             </p>
           @endif
-
-          <div class="flex flex-wrap gap-3 mt-9">
-            <a class="btn btn-accent" href="{{ race.liveResults }}" target="_blank" rel="noopener">open the live board</a>
-            <a class="btn btn-outline" href="{{ race.livestreams }}" target="_blank" rel="noopener">watch the stream</a>
-          </div>
         </header>
       </div>
 
-      {{-- What the board shows, so somebody deciding whether to click knows. --}}
-      <section class="border-b rule" data-reveal>
-        <div class="max-w-[1500px] mx-auto px-5 lg:px-8 py-14 lg:py-20">
-          <h2 class="display h-sect ink mb-10 reveal-item">what the board shows.</h2>
-          <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10">
-            <div class="reveal-item border-t rule-strong pt-5">
-              <h3 class="display h-item ink">the lap</h3>
-              <p class="mt-3 text-sm muted leading-relaxed">Which hour the race is on, and the countdown to the next start.</p>
+      {{-- The winner, given the room the result deserves. Only ever rendered
+        when the board itself says the race is over: before that the leader is
+        just the leader, and calling them the winner is wrong by a lap. --}}
+      @if(state === 'finished' && live.winner)
+        <section class="accent-bg" data-reveal>
+          <div class="max-w-[1500px] mx-auto px-5 lg:px-8 py-12 lg:py-16 flex flex-col lg:flex-row lg:items-end justify-between gap-8 reveal-item">
+            <div>
+              <p class="label">last runner standing</p>
+              <p class="display h-lead mt-3">{{ live.winner.name }}</p>
             </div>
-            <div class="reveal-item border-t rule-strong pt-5">
-              <h3 class="display h-item ink">still in</h3>
-              <p class="mt-3 text-sm muted leading-relaxed">Everyone who has made every loop so far, and everyone who has not.</p>
-            </div>
-            <div class="reveal-item border-t rule-strong pt-5">
-              <h3 class="display h-item ink">the totals</h3>
-              <p class="mt-3 text-sm muted leading-relaxed">Kilometres covered and elevation climbed, adding up one 6.7 km loop at a time.</p>
-            </div>
-            <div class="reveal-item border-t rule-strong pt-5">
-              <h3 class="display h-item ink">the stream</h3>
-              <p class="mt-3 text-sm muted leading-relaxed">A 24/7 broadcast from the gun to the final solo loop.</p>
+            <dl class="flex gap-10 lg:gap-14 shrink-0">
+              <div>
+                <dt class="label ink-on-accent-soft">laps</dt>
+                <dd class="display h-stat mt-2">{{ live.winner.laps }}</dd>
+              </div>
+              <div>
+                <dt class="label ink-on-accent-soft">distance</dt>
+                <dd class="display h-stat mt-2">{{ km(live.winner.km) }}</dd>
+              </div>
+            </dl>
+          </div>
+        </section>
+      @endif
+
+      {{-- The numbers the board tracks, now tracked here. --}}
+      @if(live.ok)
+        <section class="border-b rule" data-reveal>
+          <div class="max-w-[1500px] mx-auto px-5 lg:px-8 py-12 lg:py-16">
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10">
+              <div class="reveal-item">
+                <p class="label faint">{{ live.raceOver ? 'final lap' : 'current lap' }}</p>
+                <p class="display h-stat accent mt-2">{{ live.raceOver ? live.finalLap : live.currentLap }}</p>
+                <p class="mt-3 text-sm muted leading-relaxed">One loop starts every full hour from the gun.</p>
+              </div>
+              <div class="reveal-item">
+                <p class="label faint">{{ live.raceOver ? 'starters' : 'still in' }}</p>
+                <p class="display h-stat accent mt-2">{{ live.raceOver ? live.starters : live.remaining }}</p>
+                <p class="mt-3 text-sm muted leading-relaxed">
+                  @if(live.raceOver)
+                    Everyone who lined up at the corral for lap one.
+                  @else
+                    Of {{ live.starters }} who started. There is no partial credit.
+                  @endif
+                </p>
+              </div>
+              <div class="reveal-item">
+                <p class="label faint">covered by the field</p>
+                <p class="display h-stat accent mt-2">{{ km(live.totalKm) }}</p>
+                <p class="mt-3 text-sm muted leading-relaxed">{{ num(live.totalLaps) }} laps, added up 6.7 km at a time.</p>
+              </div>
+              <div class="reveal-item">
+                @if(live.raceOver && runnerUp)
+                  <p class="label faint">the margin</p>
+                  <p class="display h-stat accent mt-2">{{ marginLabel }}</p>
+                  <p class="mt-3 text-sm muted leading-relaxed">{{ runnerUp.name }} ran {{ runnerUp.laps }} and stopped. That is the whole difference.</p>
+                @else
+                  <p class="label faint">longest so far</p>
+                  <p class="display h-stat accent mt-2">{{ live.runners[0].laps }} laps</p>
+                  <p class="mt-3 text-sm muted leading-relaxed">{{ live.runners[0].name }}, {{ km(live.runners[0].km) }}.</p>
+                @endif
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+
+        {{-- Full standings. Every starter is rendered server-side, so the
+          table is complete without JavaScript and readable by a crawler, and
+          the filter below is CSS rather than script (see the note on it). --}}
+        <section class="border-b rule" data-reveal>
+          <div class="max-w-[1500px] mx-auto px-5 lg:px-8 py-12 lg:py-16">
+            {{-- Filtering is a radio pair plus CSS rather than a signal. A
+              <script client> block compiles inside a component but not inside
+              a full-page view, so signal-driven chips here were inert. This
+              works with JavaScript switched off, keeps every row in the
+              server-rendered HTML, and stays keyboard operable. --}}
+            <input type="radio" name="standings-filter" id="filter-all" class="filter-input" checked>
+            <input type="radio" name="standings-filter" id="filter-in" class="filter-input">
+
+            <div class="flex flex-wrap items-end justify-between gap-6 mb-8 reveal-item">
+              <h2 class="display h-sect ink">{{ live.raceOver ? 'final standings.' : 'the standings.' }}</h2>
+              <div class="flex items-center gap-2 filter-chips">
+                <label class="chip" for="filter-all">all {{ live.starters }}</label>
+                <label class="chip" for="filter-in">{{ live.raceOver ? 'finished' : 'still in' }} {{ stillIn.length }}</label>
+              </div>
+            </div>
+
+            <div class="overflow-x-auto -mx-5 px-5 lg:mx-0 lg:px-0">
+              <table class="w-full min-w-[36rem] text-left border-collapse standings">
+                <caption class="sr-only">
+                  {{ live.raceOver ? 'Final standings' : 'Live standings' }}, ranked by laps completed.
+                </caption>
+                <thead>
+                  <tr class="border-b rule-strong">
+                    <th scope="col" class="label faint py-3 pr-4 w-12">#</th>
+                    <th scope="col" class="label faint py-3 pr-4 w-16">bib</th>
+                    <th scope="col" class="label faint py-3 pr-4">runner</th>
+                    <th scope="col" class="label faint py-3 pr-4 text-right w-20">laps</th>
+                    <th scope="col" class="label faint py-3 pr-4 text-right w-28">distance</th>
+                    <th scope="col" class="label faint py-3 text-right w-24">status</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y">
+                  @foreach(rows as runner)
+                    <tr data-status="{{ runner.status }}">
+                      <td class="py-3 pr-4 mono text-sm faint tabular-nums">{{ runner.rank }}</td>
+                      <td class="py-3 pr-4 mono text-sm faint tabular-nums">{{ runner.bib }}</td>
+                      <td class="py-3 pr-4 text-sm ink">{{ runner.name }}</td>
+                      <td class="py-3 pr-4 text-sm ink text-right tabular-nums">{{ runner.laps }}</td>
+                      <td class="py-3 pr-4 text-sm muted text-right tabular-nums">{{ dist(runner.km) }}</td>
+                      <td class="py-3 text-right">
+                        @if(runner.status === 'active')
+                          <span class="label accent">{{ live.raceOver ? 'winner' : 'in' }}</span>
+                        @else
+                          <span class="label faint">out</span>
+                        @endif
+                      </td>
+                    </tr>
+                  @endforeach
+                </tbody>
+              </table>
+            </div>
+
+            <div class="mt-8 flex flex-wrap items-center justify-between gap-4">
+              <p class="text-sm faint max-w-[60ch]">
+                Ranked by laps completed. Runners on the same lap have covered exactly the same distance and share a position.
+              </p>
+              @if(!live.raceOver)
+                <a class="btn btn-outline shrink-0" href="/results">refresh the board</a>
+              @endif
+            </div>
+          </div>
+        </section>
+      @else
+        {{-- The board is the only source for any of this. If it cannot be
+          reached, say so plainly rather than rendering a table of zeroes. --}}
+        <section class="border-b rule">
+          <div class="max-w-[1500px] mx-auto px-5 lg:px-8 py-14 lg:py-20">
+            <h2 class="display h-sect ink max-w-[18ch]">the board is not answering.</h2>
+            <p class="mt-6 text-base muted max-w-[52ch] leading-relaxed">
+              Standings come straight from the race's own timing board, and it could not be reached just now. Nothing here is out of date, because nothing here is guessed - try again in a minute, or go to the board directly.
+            </p>
+            <a class="btn btn-outline mt-9" href="{{ race.liveSource }}" target="_blank" rel="noopener">open the board</a>
+          </div>
+        </section>
+      @endif
+
+      {{-- Provenance. Somebody reading a lap count deserves to know how old it
+        is and where it came from. --}}
+      @if(live.ok)
+        <section class="border-b rule">
+          <div class="max-w-[1500px] mx-auto px-5 lg:px-8 py-8 flex flex-wrap items-center justify-between gap-4">
+            <p class="label faint">
+              from the official timing board
+              @if(live.provisional)
+                &middot; provisional
+              @endif
+              @if(!live.sourcesOk)
+                &middot; a feed is degraded
+              @endif
+              @if(live.weatherCelsius !== null)
+                &middot; {{ live.weatherCelsius }}&deg;C at the course
+              @endif
+            </p>
+            <p class="label faint">
+              read at {{ readAt }}
+              @if(live.stale)
+                &middot; cached
+              @endif
+            </p>
+          </div>
+        </section>
+      @endif
 
       <section class="relative" data-reveal>
         <div class="relative aspect-[4/5] sm:aspect-[16/9] lg:aspect-[21/9] overflow-hidden surface">
