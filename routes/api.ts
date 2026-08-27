@@ -58,3 +58,16 @@ route.get('/live', async () => {
     },
   })
 })
+
+
+/**
+ * The confirmation link from the double opt-in email.
+ *
+ * `POST /api/email/subscribe` and `GET /api/email/unsubscribe` already exist,
+ * registered by the framework's dashboard routes; this is the missing middle
+ * step. Named `email.confirm` because app/Mail/SubscriptionOptIn.ts builds the
+ * link with `url('email.confirm', { token })` rather than hard-coding a path.
+ *
+ * skipCsrf because it is a GET arriving from a mail client with no session.
+ */
+route.get('/email/confirm', 'Actions/ConfirmSubscriptionAction').name('email.confirm').skipCsrf()

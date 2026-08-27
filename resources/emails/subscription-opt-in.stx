@@ -1,0 +1,80 @@
+<script server>
+const email = props.email || ''
+const confirmUrl = props.confirmUrl || '#'
+const unsubscribeUrl = props.unsubscribeUrl || '#'
+const appName = props.appName || 'Last Soul Ultra'
+const year = new Date().getFullYear()
+</script>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Confirm your {{ appName }} updates</title>
+</head>
+{{-- Tables and inline styles, because mail clients are not browsers. The
+  palette is the site's: near-black page, orange accent, near-black on orange
+  for the button so it clears AA the same way the site's buttons do. --}}
+<body style="margin:0;padding:0;background-color:#0c0c0c;color:#a5a5a1;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;line-height:1.6;">
+  <table role="presentation" cellpadding="0" cellspacing="0" style="width:100%;border-collapse:collapse;">
+    <tr>
+      <td style="padding:40px 20px;">
+        <table role="presentation" cellpadding="0" cellspacing="0" style="max-width:560px;margin:0 auto;">
+
+          <tr>
+            <td style="padding-bottom:36px;">
+              <span style="color:#f4f4f2;font-size:20px;font-weight:800;letter-spacing:-0.01em;text-transform:uppercase;">last soul<span style="color:#f04800;">.</span></span>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <h1 style="margin:0;color:#f4f4f2;font-size:30px;font-weight:800;line-height:1.05;letter-spacing:-0.015em;text-transform:uppercase;">
+                One click and you are on the list.
+              </h1>
+              <p style="margin:22px 0 0;font-size:15px;color:#a5a5a1;">
+                Somebody entered <strong style="color:#f4f4f2;font-weight:600;">{{ email }}</strong> for {{ appName }} updates. We do not add an address until it has been confirmed, so nothing happens until you press the button below.
+              </p>
+              <p style="margin:16px 0 0;font-size:15px;color:#a5a5a1;">
+                If that was not you, ignore this email. Without the click the address is never used, and it is removed on its own.
+              </p>
+            </td>
+          </tr>
+
+          <tr>
+            <td style="padding:32px 0 0;">
+              <a href="{{ confirmUrl }}" style="display:inline-block;background:#f04800;color:#0c0c0c;font-size:13px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;padding:16px 32px;">
+                Confirm the subscription
+              </a>
+            </td>
+          </tr>
+
+          <tr>
+            <td style="padding:28px 0 0;">
+              <p style="margin:0;font-size:13px;color:#6f6f6b;">
+                If the button does not work, paste this into your browser:<br>
+                <a href="{{ confirmUrl }}" style="color:#f04800;word-break:break-all;">{{ confirmUrl }}</a>
+              </p>
+            </td>
+          </tr>
+
+          <tr>
+            <td style="padding:36px 0 0;border-top:1px solid #262625;margin-top:36px;">
+              <p style="margin:24px 0 0;font-size:12px;color:#6f6f6b;">
+                What you get: a note when entries open, and a note when the race starts. Nothing else, and you can leave from any of them.
+              </p>
+              <p style="margin:12px 0 0;font-size:12px;color:#6f6f6b;">
+                <a href="{{ unsubscribeUrl }}" style="color:#6f6f6b;">Unsubscribe</a>
+                &nbsp;&middot;&nbsp;
+                {{ appName }} &middot; {{ year }}
+              </p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

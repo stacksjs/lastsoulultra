@@ -5,6 +5,47 @@ import { elsewhere, footerLinks, longDate } from '../data/site'
 const year = 2026
 </script>
 
+<script client>
+// Progressive enhancement only. Without this the form still posts and the
+// action answers a readable page, because it carries format=html; with it the
+// visitor stays on the page. A component can run a client script - a full-page
+// view cannot - which is why this lives in the footer rather than in a view.
+const status = state('')
+const ok = state(false)
+const busy = state(false)
+
+async function subscribe(event) {
+  event.preventDefault()
+  if (busy()) return
+
+  const form = event.target
+  const data = new FormData(form)
+  data.delete('format') // the JSON path, not the fallback page
+
+  busy.set(true)
+  status.set('')
+
+  try {
+    const res = await fetch(form.action, {
+      method: 'POST',
+      headers: { accept: 'application/json' },
+      body: data,
+    })
+    const json = await res.json()
+    ok.set(json.success === true)
+    status.set(json.message || (json.success ? 'Check your inbox to confirm.' : 'That did not work. Try again.'))
+    if (json.success) form.reset()
+  }
+  catch {
+    ok.set(false)
+    status.set('That did not reach us. Check your connection and try again.')
+  }
+  finally {
+    busy.set(false)
+  }
+}
+</script>
+
 <template>
   <footer class="border-t rule surface">
     <div class="max-w-[1500px] mx-auto px-5 lg:px-8 py-14 lg:py-20">
@@ -15,6 +56,43 @@ const year = 2026
             {{ race.fieldSize }} souls, one 6.7 km loop, every hour, until one is left. Presented by {{ race.presentedBy }}
           </p>
           <p class="mt-5 label faint">{{ longDate(race.startsOn) }}</p>
+
+          {{-- Two mails a year, and the address is not used until the link in
+            the confirmation is clicked. Both of those are promises the
+            privacy policy makes, so both are stated here too. --}}
+          <form class="mt-8 max-w-[27rem]" action="/api/email/subscribe" method="post" @submit="subscribe(event)">
+            <input type="hidden" name="format" value="html">
+            <input type="hidden" name="source" value="footer">
+
+            <label class="label faint block mb-3" for="footer-email">get the two emails</label>
+
+            <div class="flex flex-col sm:flex-row gap-3">
+              <input
+                id="footer-email"
+                class="field flex-1"
+                type="email"
+                name="email"
+                placeholder="you@example.com"
+                autocomplete="email"
+                required
+              >
+              <button class="btn btn-accent shrink-0" type="submit" :disabled="busy()">
+                {{ busy() ? 'sending' : 'sign up' }}
+              </button>
+            </div>
+
+            <p class="mt-3 text-xs faint leading-relaxed">
+              One when entries open, one when the race starts. We send a confirmation link first and use the address for nothing until you click it. <a class="underlink ink" href="/legal/privacy">privacy</a>.
+            </p>
+
+            <p
+              :if="status()"
+              class="mt-3 text-sm"
+              :class="ok() ? 'accent' : 'ink'"
+              role="status"
+              aria-live="polite"
+            >{{ status() }}</p>
+          </form>
         </div>
 
         <nav class="md:col-span-3 md:col-start-7" aria-label="the race">

@@ -221,6 +221,7 @@ export type ActionPath =
   | 'Actions/Commerce/WaitlistRestaurantUpdateAction'
   | 'Actions/Commerce/commerce-action'
   | 'Actions/Commerce/commerce-action.test'
+  | 'Actions/ConfirmSubscriptionAction'
   | 'Actions/ContactAction'
   | 'Actions/Dashboard/Actions/GetActions'
   | 'Actions/Dashboard/Analytics/BlogAnalyticsAction'
@@ -565,8 +566,11 @@ export type ActionPath =
   | 'Actions/Dashboard/Operations/SchedulerIndexAction'
   | 'Actions/Dashboard/Operations/SchedulerRunAction'
   | 'Actions/Dashboard/Operations/SchedulerToggleAction'
+  | 'Actions/Dashboard/Operations/cached-computation'
+  | 'Actions/Dashboard/Operations/cached-computation.test'
   | 'Actions/Dashboard/Operations/control-plane'
   | 'Actions/Dashboard/Operations/migration-operations'
+  | 'Actions/Dashboard/Operations/migration-operations.test'
   | 'Actions/Dashboard/Operations/operations-runtime'
   | 'Actions/Dashboard/Operations/recovery-input'
   | 'Actions/Dashboard/Operations/recovery-input.test'
@@ -750,6 +754,7 @@ export type MiddlewareAlias =
  */
 export type NamedRoutes = {
   'contact.send': '/api/contact'
+  'email.confirm': '/api/email/confirm'
   'email.subscribe': '/api/email/subscribe'
   'email.unsubscribe': '/api/email/unsubscribe'
   'email.unsubscribe.oneclick': '/api/email/unsubscribe'

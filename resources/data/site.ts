@@ -34,7 +34,10 @@ export function absolute(path: string): string {
  * per route: this is an eight-page event site, and the photograph of a corral
  * under floodlights says more about it than any composed card would.
  */
-export const socialImage = at(shots.board, 1200)
+/* Absolute, because og:image and twitter:image are read by machines that have
+ * no page to resolve a path against. `at()` returns an origin-relative path
+ * now that the photographs are served from here rather than a CDN. */
+export const socialImage = absolute(at(shots.board, 1080))
 export const socialImageAlt = shots.board.alt
 
 export interface NavItem {

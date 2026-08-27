@@ -80,6 +80,7 @@ export const envKeys = [
   'DEBUG',
   'DOCS_PREFIX',
   'DOTENV_PRIVATE_KEY',
+  'DOTENV_PUBLIC_KEY',
   'FILESYSTEM_DISK',
   'FRONTEND_APP_ENV',
   'FRONTEND_APP_URL',

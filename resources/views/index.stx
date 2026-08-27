@@ -194,9 +194,16 @@ const jsonLd = JSON.stringify({
           @foreach(recap as shot)
             <div class="w-[76vw] sm:w-[44vw] lg:w-[30vw] shrink-0 tile">
               <div class="tile-media relative aspect-[4/3]">
+                {{-- The card is about 430px at desktop and 285px on a phone,
+                  so 540 is the 1x file and 1080 the retina one. It asked for
+                  900 when the CDN would invent any width; now that the widths
+                  are real files, asking for one that does not exist just
+                  rounds up to the largest. --}}
                 <img
                   class="absolute inset-0 w-full h-full object-cover"
-                  src="{{ at(shot, 900) }}"
+                  src="{{ at(shot, 540) }}"
+                  srcset="{{ srcset(shot, 540) }}"
+                  sizes="(min-width: 1024px) 30vw, (min-width: 640px) 44vw, 76vw"
                   alt="{{ shot.alt }}"
                   width="900"
                   height="675"

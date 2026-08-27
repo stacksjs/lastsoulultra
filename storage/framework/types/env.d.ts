@@ -98,10 +98,11 @@ declare module 'bun' {
     const DB_READ_HOSTS: string
     const DB_SCHEMA: string
     const DB_USERNAME: string
-    const DB_VITESS_SHARDED: string
+    const DB_VITESS_SHARDED: boolean
     const DEBUG: boolean
     const DOCS_PREFIX: string
     const DOTENV_PRIVATE_KEY: string
+    const DOTENV_PUBLIC_KEY: string
     const FILESYSTEM_DISK: string
     const FRONTEND_APP_ENV: 'development' | 'staging' | 'production'
     const FRONTEND_APP_URL: string
@@ -122,6 +123,7 @@ declare module 'bun' {
     const MAIL_USERNAME: string
     const MEILISEARCH_HOST: string
     const MEILISEARCH_KEY: string
+    const MY_CUSTOM_THING: string
     const PHONE_FORWARD_NUMBER: string
     const PHONE_NOTIFY_EMAIL: string
     const PORT: number

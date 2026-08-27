@@ -51,11 +51,16 @@ import { siteOrigin, socialImage, socialImageAlt } from '../data/site'
 
 {{-- Archivo stands in for the site's licensed Apex: the closest free
   grotesque with the same squared terminals. Geist Mono carries the numbers,
-  which on this site are hours and laps and have to line up. --}}
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500&display=swap">
-<link rel="preconnect" href="https://images.squarespace-cdn.com" crossorigin>
+  which on this site are hours and laps and have to line up.
+
+  Both are served from this origin now. Loading them from Google put a
+  third-party request carrying every visitor's IP on the critical path of
+  every page, which the privacy policy did not disclose. The @font-face
+  blocks live at the top of lsu.css; these two preloads cover the subset
+  every page actually paints, so the swap happens on the first frame rather
+  than after the stylesheet has been parsed. --}}
+<link rel="preload" href="/assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/geist-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
 
 <link rel="stylesheet" href="/assets/styles/lsu.css">
 

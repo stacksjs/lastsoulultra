@@ -7,18 +7,30 @@
  * is worse than none: it tells a screen-reader user something confidently
  * wrong, and nobody sighted ever notices.
  *
- * Served from the organiser's CDN with an explicit width, so a hero does not
- * ship a 2500px original into a 1200px slot.
+ * Served from this origin. They used to be hotlinked from the organiser's
+ * Squarespace CDN, which sent every visitor's IP to a third party the privacy
+ * policy did not name, and made every photograph on the site depend on a host
+ * we do not control and cannot cache.
+ *
+ * The four originals are 1080x1350, so the ladder stops at 1080 - Squarespace
+ * happily answered a request for 1600w with the same 1080px file, which is how
+ * the site came to believe it had widths it never had. Regenerate with
+ * `bun run scripts/photos.ts` (macOS only, uses sips).
  */
 
 export interface Shot {
+  /** Slug on disk, not a URL: `<DIR>/<src>-<width>.jpg`. */
   src: string
   alt: string
   /** Roughly how the frame is composed, so a slot can pick one that fits. */
   orientation: 'portrait' | 'landscape'
 }
 
-const CDN = 'https://images.squarespace-cdn.com/content/v1/696e325cc176a32c77c0f287'
+/** Widths on disk. Nothing above 1080 exists, because nothing above 1080 was
+ *  ever shot. */
+export const WIDTHS = [540, 810, 1080] as const
+
+const DIR = '/assets/images/race'
 
 export const shots = {
   /**
@@ -26,38 +38,44 @@ export const shots = {
    * format in the brand's own red without a word of explanation.
    */
   board: {
-    src: `${CDN}/1e89640e-ec19-4977-a9ed-592e00f3fc75/Last-Soul-Rappid-20.jpg`,
+    src: 'board',
     alt: 'The race board lit red at dusk, reading 90 souls remaining, 7 laps, 46.9 total km',
     orientation: 'portrait',
   },
   /** A runner caught by the flash against fog, out on the loop after dark. */
   night: {
-    src: `${CDN}/38de8f46-e113-4aa1-97e7-62821f2f7380/Last-Soul-Rappid-66.jpg`,
+    src: 'night',
     alt: 'A runner in a pale jacket and rappid. cap lit by a flash against fog and darkness, carrying a soft flask',
     orientation: 'portrait',
   },
   /** The gap between hours, which is the whole tactical problem of the format. */
   refuel: {
-    src: `${CDN}/06d9b0a6-9a45-405d-adea-0f7f1035d926/Last-Soul-Rappid-59.jpg`,
+    src: 'refuel',
     alt: 'A runner in a rappid. cap eating instant noodles from a cup, resting between laps',
     orientation: 'portrait',
   },
   /** Daylight on the loop, wet road, somewhere in the middle of the race. */
   loop: {
-    src: `${CDN}/2033786b-e332-481e-96dc-5d7da804d354/Last-Soul-Rappid-64.jpg`,
+    src: 'loop',
     alt: 'A runner in a black jacket and rappid. cap running back down a wet country road at dawn',
     orientation: 'portrait',
   },
 } satisfies Record<string, Shot>
 
-/** The frame at the width a slot actually paints. */
+/**
+ * The frame at the width a slot actually paints, snapped UP to a width that
+ * exists on disk. Asking for something we do not have used to yield a working
+ * URL from the CDN; now it would 404, so the snap is what keeps a template
+ * free to name the width it wants.
+ */
 export function at(shot: Shot, width: number): string {
-  return `${shot.src}?format=${width}w`
+  const w = WIDTHS.find(candidate => candidate >= width) ?? WIDTHS[WIDTHS.length - 1]
+  return `${DIR}/${shot.src}-${w}.jpg`
 }
 
 /** 1x and 2x, so a retina screen gets the sharp file and a phone does not. */
 export function srcset(shot: Shot, width: number): string {
-  return `${at(shot, width)} 1x, ${at(shot, Math.min(width * 2, 2500))} 2x`
+  return `${at(shot, width)} 1x, ${at(shot, width * 2)} 2x`
 }
 
 /** The strip on the home page, ordered the way a race night runs. */
