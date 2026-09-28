@@ -1,6 +1,6 @@
 ---
 name: stacks-payments
-description: Use when implementing payment processing in Stacks — Stripe charges, subscriptions, checkout sessions, customer management, payment methods, invoices, coupons, promo codes, products, prices, webhooks, or the Payment facade. Covers @stacksjs/payments and config/payment.ts.
+description: Use when implementing payment processing in Stacks - Stripe charges, subscriptions, checkout sessions, customer management, payment methods, invoices, coupons, promo codes, products, prices, webhooks, or the Payment facade. Covers @stacksjs/payments and config/payment.ts.
 license: MIT
 compatibility: Bun >= 1.3.0, TypeScript
 allowed-tools: Read Edit Write Bash Grep Glob
@@ -25,6 +25,7 @@ Full Stripe integration via the Payment facade. Uses Stripe API version `2026-01
 - All billable modules (`manageCharge`, `manageCustomer`, `manageSubscription`, etc.)
 - `stripe` -- raw Stripe SDK instance
 - `Stripe` -- re-exported Stripe types namespace
+- `stacksIdempotencyKey`, `freshIdempotencyKey` -- see Idempotency below
 
 ## Payment Facade
 
@@ -347,6 +348,39 @@ authenticated user. Subscription and payment-method reads are provider-backed
 and may be unavailable when the application User override is not billable.
 Render that as an explicit unavailable state, not sample plans or fake cards.
 
+## Idempotency
+
+Stripe calls that **create or attach** a resource are not idempotent by default.
+The classic failure: `createStripeCustomer(user)` succeeds at Stripe, the
+follow-up `user.update({ stripe_id })` fails, the next request sees no
+`stripe_id` and creates a second Stripe customer with no link to the local user.
+
+Pass an idempotency key on every create, attach or update call. Stripe caches
+the response under that key for 24 hours, so a retry returns the original object
+instead of making a new one.
+
+```typescript
+import { stacksIdempotencyKey } from '@stacksjs/payments'
+
+await stripe.customers.create(params, {
+  idempotencyKey: stacksIdempotencyKey('customer.create', user.id),
+})
+```
+
+Keys are built as `stacks:<scope>:<parts...>:v1`, hashed when they would exceed
+Stripe's 255-character limit, and deterministic: the same inputs always produce
+the same key, which is the whole point.
+
+- **`stacksIdempotencyKey(scope, ...parts)`** is the one to reach for. `scope` is
+  a stable operation name and never user input; `parts` scope it within the
+  user's lifetime.
+- **`freshIdempotencyKey(scope, ...parts)`** appends randomness, so it does *not*
+  deduplicate. Use it only when a repeat call is genuinely a new operation (a
+  second, deliberate charge of the same amount), never as a way to get past a
+  cached response.
+- Bump the `v1` suffix in `idempotency.ts` when an operation's parameters change
+  in a way that should not collide with a cached response.
+
 ## config/payment.ts
 
 ```typescript
@@ -395,9 +429,11 @@ Plans use `productName`, `description`, `metadata`, and a `pricing` array where 
 ## User Model Requirements
 The `UserModel` must have:
 - `id`, `name`, `email`, `stripe_id` fields
-- `hasStripeId()` method -- returns boolean
 - `update(data)` method -- for persisting `stripe_id`
-- `activeSubscription()` method -- for subscription updates
+- `activeSubscription()` method -- for subscription updates (bound by the `billable` trait)
+
+There is no `user.hasStripeId()` instance method. Use
+`manageCustomer.hasStripeId(user)`, which reads `stripe_id`.
 
 The framework default `storage/framework/defaults/app/Models/User.ts` sets
 `billable: false` intentionally because not every application uses payments.
@@ -405,7 +441,30 @@ Run `buddy publish:model User`, keep the override at `app/Models/User.ts`, and
 enable its `billable` trait before calling instance helpers such as
 `activeSubscription()`, `paymentMethods()`, or `createSetupIntent()`. A payment
 Action must report the missing trait clearly instead of calling an undefined
-method.
+method. `isBillable(user)` from `@stacksjs/orm` is that check, and narrows the
+user to `BillableMethods` (the instance surface, derived from
+`createBillableMethods`) so no cast is needed:
+
+```ts
+import { isBillable } from '@stacksjs/orm'
+import { BILLING_NOT_ENABLED } from '@stacksjs/payments'
+
+const user = await request.user()
+if (!user)
+  return response.unauthorized('Authentication required')
+if (!isBillable(user))
+  return response.error(BILLING_NOT_ENABLED, 503)
+
+const customer = await user.retrieveStripeUser()
+```
+
+The instance methods are exactly the keys of `createBillableMethods` in
+`core/orm/src/traits/billable.ts`. Among them: `retrieveStripeUser()`,
+`createPayment(amount, options)`, `setDefaultPaymentMethod(id)` (a number is the
+local row, a string is Stripe's `pm_...` id), `deletePaymentMethod(id)`,
+`syncStripeCustomerDetails(options)`, `storeTransaction(productId, options)`,
+`newSubscription(type, lookupKey, options)`. Anything else is not a function at
+runtime.
 
 ## Gotchas
 - Stripe API keys MUST be in `.env` as `STRIPE_SECRET_KEY` and `STRIPE_PUBLISHABLE_KEY` -- never hardcode them in config files

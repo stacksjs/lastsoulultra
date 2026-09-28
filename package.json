@@ -19,7 +19,7 @@
     "url": "https://github.com/stacksjs/stacks/issues"
   },
   "scripts": {
-    "build:reset": "rm -rf node_modules && pantry install && ./buddy generate:types && ./buddy lint:fix && cd storage/framework && bun run build && cd ../../",
+    "build:reset": "rm -rf node_modules pantry.lock && bun install && ./buddy generate:types && ./buddy lint:fix",
     "buddy": "./buddy",
     "stacks": "./buddy",
     "setup": "./bootstrap",
@@ -53,11 +53,11 @@
     "release:major": "./buddy release --bump major",
     "changelog": "./buddy changelog",
     "generate": "./buddy generate",
-    "typecheck": "bun run typecheck:app && bun run typecheck:framework",
+    "typecheck": "bun x --bun tsc --noEmit -p tsconfig.json --pretty false",
     "typecheck:framework": "bun x --bun tsc --noEmit -p storage/framework/tsconfig.framework.json --pretty false && bun x --bun tsc --noEmit -p storage/framework/tsconfig.defaults.json --pretty false",
     "typecheck:app": "bun x --bun tsc --noEmit -p tsconfig.json --pretty false",
     "typecheck:clean": "bunx --bun rimraf storage/framework/.cache/typescript",
-    "types:check": "bun run typecheck",
+    "types:check": "bun x --bun tsc --noEmit -p tsconfig.json --pretty false",
     "types:fix": "./buddy types:fix",
     "bench:routing": "bun bench/routing/run.ts",
     "test": "./buddy test",
