@@ -47,6 +47,11 @@ dist*
 **/database/*.sqlite-wal
 **/database/*.sqlite-shm
 
+# Migrations are committed, whatever a global gitignore says about *.sql: CI and
+# the deploy build their database from these files, so one that stays local is
+# a table production never gets.
+!database/migrations/*.sql
+
 # OS files
 .DS_Store
 .DS_STORE
