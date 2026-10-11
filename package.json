@@ -75,8 +75,8 @@
     "stx": "./buddy"
   },
   "dependencies": {
-    "pickier": "^0.1.65",
-    "stacks": "^0.75.17"
+    "pickier": "^0.1.71",
+    "stacks": "^0.75.133"
   },
   "workspaces": [
     "storage/framework",
@@ -92,6 +92,6 @@
     "commit-msg": "bun x gitlint --edit \"$1\""
   },
   "devDependencies": {
-    "better-dx": "^0.2.24"
+    "better-dx": "^0.2.37"
   }
 }
