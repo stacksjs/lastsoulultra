@@ -741,6 +741,22 @@
       "bytes": 7408,
       "contentType": "font/woff2",
       "sha256": "73b87eb7b02dfec4cb1ddfabad6e625d9c77b3c81015064420de88d8dd04816c"
+    },
+    {
+      "original": "/assets/yard87-1920.mp4",
+      "local": "/assets/lsu/video/yard87-1920.mp4",
+      "status": 200,
+      "bytes": 1292816,
+      "contentType": "video/mp4",
+      "sha256": "5f2b59fdbe5204eb0b47efecea1be6bc199ca697075fb600897660e7a0f8edb0"
+    },
+    {
+      "original": "/assets/yard87-2732.mp4",
+      "local": "/assets/lsu/video/yard87-2732.mp4",
+      "status": 200,
+      "bytes": 2857073,
+      "contentType": "video/mp4",
+      "sha256": "1bdd29556566bc9b3af86539b31ed981a0e093091ba6a98e12f1122ebef6802e"
     }
   ],
   "omitted": [

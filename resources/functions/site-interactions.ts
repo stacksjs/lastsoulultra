@@ -14,3 +14,20 @@ export function nextLoop(now = Date.now()): string {
   const seconds = 3600 - (Math.floor(now / 1000) % 3600)
   return `${String(Math.floor(seconds / 60)).padStart(2, '0')}:${String(seconds % 60).padStart(2, '0')}`
 }
+
+/** Seek the authored race footage from the section's scroll progress. */
+export function seekRaceVideo(video: HTMLVideoElement | null): void {
+  const section = video?.closest('section')
+  if (!video || !section || !Number.isFinite(video.duration) || video.duration <= 0) return
+  const travel = Math.max(1, section.clientHeight - video.clientHeight, video.clientHeight / 2)
+  const progress = Math.max(0, Math.min(1, -section.getBoundingClientRect().top / travel))
+  const time = Math.min(video.duration - 0.05, progress * video.duration)
+  if (Math.abs(video.currentTime - time) > 0.05) video.currentTime = time
+}
+
+export function storyProgress(section: HTMLElement | null): number {
+  if (!section) return 0
+  const height = section.ownerDocument.defaultView?.innerHeight || section.clientHeight
+  const travel = Math.max(1, section.clientHeight - height, height / 2)
+  return Math.max(0, Math.min(1, -section.getBoundingClientRect().top / travel))
+}

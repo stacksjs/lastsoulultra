@@ -6,7 +6,25 @@ const currentPage = productionPages["/"]
 const canonicalPath = "/"
 </script>
 <script client>
-import { moveGallery, galleryPosition } from '../functions/site-interactions'
+import { moveGallery, galleryPosition, seekRaceVideo, storyProgress } from '../functions/site-interactions'
+import raceStory from '../data/race-story.json'
+import { useScroll, useMediaQuery } from '@stacksjs/composables'
+const lsuYardVideo = useRef('lsuYardVideo')
+const lsuScroll = useScroll(undefined, { throttle: 32 })
+const lsuReducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)')
+const lsuBoardSection = useRef('lsuBoardSection')
+const lsuDuelSection = useRef('lsuDuelSection')
+const lsuLap = state(94)
+const lsuDuel = state(94)
+const lsuFirstYards = derived(() => Math.min(raceStory['2025'].maxYards, lsuDuel()))
+const lsuSouls = derived(() => raceStory['2026'].startersByYard[Math.max(0, lsuLap() - 1)] || 1)
+function lsuSeekVideo() {
+  if (lsuReducedMotion.value) return
+  seekRaceVideo(lsuYardVideo.current)
+  lsuLap.set(Math.max(1, Math.round(storyProgress(lsuBoardSection.current) * raceStory['2026'].maxYards)))
+  lsuDuel.set(Math.max(1, Math.round(storyProgress(lsuDuelSection.current) * raceStory['2026'].maxYards)))
+}
+watch(() => lsuScroll.y.value, lsuSeekVideo)
 const lsuGallery = useRef('lsuGallery')
 const lsuGalleryCount = state(1)
 const lsuGalleryPrevious = state(false)
@@ -18,7 +36,7 @@ function lsuGalleryChanged() {
   lsuGalleryNext.set(position.next)
 }
 function lsuGalleryMove(direction) { moveGallery(lsuGallery.current, direction) }
-onMount(lsuGalleryChanged)
+onMount(() => { lsuGalleryChanged(); lsuSeekVideo() })
 </script>
 
 <script client>
@@ -112,7 +130,9 @@ onDestroy(() => lsuLoopClock.pause())
 <div class="lsu-scope-home y87-bg" data-y87bg>
 <div class="lsu-scope-home y87-poster">
 </div>
-<video class="lsu-scope-home y87-vid" data-y87vid data-src="/assets/yard87-2732.mp4" data-src-sm="/assets/yard87-1920.mp4" poster="/assets/lsu/images/yard87-poster.jpg" muted playsinline preload="none" aria-hidden="true">
+<video class="lsu-scope-home y87-vid" x-ref="lsuYardVideo" @loadedmetadata="lsuSeekVideo()" poster="/assets/lsu/images/yard87-poster.jpg" muted playsinline preload="metadata" aria-hidden="true">
+<source src="/assets/lsu/video/yard87-2732.mp4" media="(min-width: 1921px)" type="video/mp4">
+<source src="/assets/lsu/video/yard87-1920.mp4" type="video/mp4">
 </video>
 </div>
 <div class="lsu-scope-home y87-top">
@@ -142,7 +162,7 @@ onDestroy(() => lsuLoopClock.pause())
 </div>
 </div>
 </section>
-<section id="format" class="lapscroll lsu-scope-home">
+<section id="format" x-ref="lsuBoardSection" class="lapscroll lsu-scope-home">
 <div class="lap-inner lsu-scope-home">
 <div class="lap-photo lsu-scope-home">
 </div>
@@ -157,13 +177,13 @@ onDestroy(() => lsuLoopClock.pause())
 <div class="lsu-scope-home seg-label seg-label-red">lap</div>
 <div class="lsu-scope-home seg">
 <div class="lsu-scope-home seg-ghost seg-ghost-red seg-lap" aria-hidden="true">88</div>
-<div class="lsu-scope-home seg-lap seg-live seg-live-red" data-lapnum>94</div>
+<div class="lsu-scope-home seg-lap seg-live seg-live-red" data-lapnum :text="lsuLap">94</div>
 </div>
 <div class="lap-elapsed lsu-scope-home">
 <span class="lsu-scope-home seg-label seg-label-red">elapsed</span>
 <span class="lsu-scope-home seg">
 <span class="lsu-scope-home seg-clock seg-ghost seg-ghost-red" aria-hidden="true">88:88:88</span>
-<span class="lsu-scope-home seg-clock seg-live seg-live-red" data-lapclock>94:00:00</span>
+<span class="lsu-scope-home seg-clock seg-live seg-live-red" data-lapclock :text="String(lsuLap).padStart(2, '0') + ':00:00'">94:00:00</span>
 </span>
 </div>
 </div>
@@ -172,19 +192,19 @@ onDestroy(() => lsuLoopClock.pause())
 <div class="lsu-scope-home seg-label">souls still in</div>
 <div class="lsu-scope-home seg">
 <div class="lsu-scope-home seg-ghost seg-souls" aria-hidden="true">888</div>
-<div class="lsu-scope-home seg-live seg-souls" data-lapsouls>1</div>
+<div class="lsu-scope-home seg-live seg-souls" data-lapsouls :text="lsuSouls">1</div>
 </div>
 </div>
 <div class="lsu-scope-home">
 <div class="lsu-scope-home seg-label">distance</div>
 <div class="lsu-scope-home seg">
 <div class="lsu-scope-home seg-ghost seg-km" aria-hidden="true">888.8</div>
-<div class="lsu-scope-home seg-km seg-live" data-lapkm>630.4 <span class="lsu-scope-home seg-unit">KM</span>
+<div class="lsu-scope-home seg-km seg-live" data-lapkm><span :text="(lsuLap * raceStory['2026'].loopMetres / 1000).toFixed(1)">630.4</span> <span class="lsu-scope-home seg-unit">KM</span>
 </div>
 </div>
 </div>
 <div class="lap-meta lsu-scope-home">
-<span data-laptime class="lap-meta-live lsu-scope-home">hour 94</span>
+<span data-laptime class="lap-meta-live lsu-scope-home" :text="'hour ' + lsuLap">hour 94</span>
 <span class="lsu-scope-home">6.7 km loop</span>
 </div>
 </div>
@@ -287,7 +307,7 @@ Miss the next start or fail to finish a loop within the hour, and your race is o
 </div>
 </div>
 </section>
-<section class="duelscroll lsu-scope-home" data-duelscroll>
+<section class="duelscroll lsu-scope-home" data-duelscroll x-ref="lsuDuelSection">
 <div class="duel-sticky lsu-scope-home">
 <div class="duel-bg lsu-scope-home" data-duelbg>
 </div>
@@ -302,16 +322,16 @@ Miss the next start or fail to finish a loop within the hour, and your race is o
 <span class="duel-id lsu-scope-home">
 <span class="duel-ed lsu-scope-home">Season 1 · 2025</span>
 <span class="duel-km lsu-scope-home">
-<span data-duelkm1 class="lsu-scope-home">449.3</span>
+<span data-duelkm1 class="lsu-scope-home" :text="(lsuFirstYards * raceStory['2025'].loopMetres / 1000).toFixed(1)">449.3</span>
 <span class="duel-unit lsu-scope-home"> km</span>
 </span>
 </span>
 <span class="duel-note lsu-scope-home" data-duelnote1>Kim Gottwald · won at 67 yards</span>
 </div>
 <div class="duel-track lsu-scope-home">
-<div class="duel-fill duel-fill-1 lsu-scope-home" data-duelbar1>
+<div class="duel-fill duel-fill-1 lsu-scope-home" data-duelbar1 :style="'animation:none;transform:none;width:' + (lsuFirstYards / 94 * 100) + '%'">
 </div>
-<div class="duel-yard duel-yard-1 lsu-scope-home" data-duelyard1>67</div>
+<div class="duel-yard duel-yard-1 lsu-scope-home" data-duelyard1 :text="lsuFirstYards">67</div>
 </div>
 </div>
 <div class="lsu-scope-home">
@@ -319,16 +339,16 @@ Miss the next start or fail to finish a loop within the hour, and your race is o
 <span class="duel-id lsu-scope-home">
 <span class="duel-ed duel-ed-2 lsu-scope-home">Season 2 · 2026</span>
 <span class="duel-km duel-km-2 lsu-scope-home">
-<span data-duelkm2 class="lsu-scope-home">630.4</span>
+<span data-duelkm2 class="lsu-scope-home" :text="(lsuDuel * raceStory['2026'].loopMetres / 1000).toFixed(1)">630.4</span>
 <span class="duel-unit lsu-scope-home"> km</span>
 </span>
 </span>
 <span class="duel-note lsu-scope-home" data-duelnote2>Mark Dowdle · won at 94 yards</span>
 </div>
 <div class="duel-track lsu-scope-home">
-<div class="duel-fill duel-fill-2 lsu-scope-home" data-duelbar2>
+<div class="duel-fill duel-fill-2 lsu-scope-home" data-duelbar2 :style="'animation:none;transform:none;width:' + (lsuDuel / 94 * 100) + '%'">
 </div>
-<div class="duel-yard duel-yard-2 lsu-scope-home" data-duelyard2>94</div>
+<div class="duel-yard duel-yard-2 lsu-scope-home" data-duelyard2 :text="lsuDuel">94</div>
 </div>
 </div>
 <div class="duel-mark lsu-scope-home">
