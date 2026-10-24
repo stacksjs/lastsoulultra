@@ -1,0 +1,142 @@
+<script client>
+import { raceAccount, formValues } from '../functions/race-api'
+const rp = raceAccount()
+const rpUser = rp.user
+const rpApplications = rp.applications
+const rpEvents = rp.events
+const rpSigned = rp.signedIn
+const rpBusy = rp.busy
+const rpError = rp.error
+const rpMessage = rp.message
+const rpMode = rp.mode
+const rpFirst = state('')
+const rpLast = state('')
+const rpEmail = state('')
+const rpPassword = state('')
+const rpCode = state('')
+const rpEventSlug = state('')
+const rpEvent = derived(() => rpEvents().find(item => item.slug === rpEventSlug()) || null)
+const rpEntry = derived(() => rpApplications().find(item => item.event.slug === rpEventSlug()) || null)
+const rpStage = state(1)
+const rpReason = state('')
+const rpNoPb = state(true)
+const rpPbYards = state('')
+const rpPbEvent = state('')
+const rpPbDate = state('')
+const rpPbProof = state('')
+const rpSocial = state('')
+const rpAccurate = state(false)
+const rpRules = state(false)
+const rpSaved = state('')
+const rpWriting = sharedRequest()
+const rpRequestPath = () => '/events/' + encodeURIComponent(rpEventSlug()) + '/application'
+function rpAuth() { return rp.authenticate({ first_name: rpFirst(), last_name: rpLast(), email: rpEmail(), password: rpPassword(), code: rpCode() }) }
+function rpChoose() {
+  rpStage.set(1)
+  const application = rpEntry()?.application
+  rpReason.set(application?.reason || '')
+  rpNoPb.set(application?.no_backyard_pb !== false)
+  rpPbYards.set(String(application?.pb_yards || ''))
+  rpPbEvent.set(application?.pb_event || '')
+  rpPbDate.set(application?.pb_date || '')
+  rpPbProof.set(application?.pb_proof_url || '')
+  rpSocial.set(application?.social?.other || '')
+}
+async function rpSaveProfile(event) {
+  rpBusy.set(true)
+  rpError.set('')
+  try {
+    const values = formValues(event)
+    const body = Object.fromEntries(Object.entries(values).map(([key, value]) => [key, String(value).trim() || null]))
+    rpUser.set(await rp.request('/me', 'PATCH', body))
+    rpStage.set(2)
+  }
+  catch (error) { rpError.set(error.message || 'Could not save your details') }
+  finally { rpBusy.set(false) }
+}
+function rpDraft() {
+  return { reason: rpReason(), no_backyard_pb: rpNoPb(), pb_yards: rpNoPb() ? null : Number(rpPbYards()), pb_event: rpNoPb() ? null : rpPbEvent(), pb_date: rpNoPb() ? null : rpPbDate() || null, pb_proof_url: rpNoPb() ? null : rpPbProof() || null, social: { other: rpSocial() } }
+}
+async function rpSaveDraft(advance = false) {
+  if (!rpEvent() || rpEvent().phase !== 'open' || !rpSigned()) return
+  rpError.set('')
+  try {
+    const slug = rpEventSlug()
+    const snapshot = rpDraft()
+    const path = rpRequestPath()
+    await rpWriting.fresh(slug, () => rp.request(path, 'PUT', rpEventSlug() === slug ? rpDraft() : snapshot))
+    rpSaved.set('Draft saved')
+    if (advance) rpStage.set(3)
+  }
+  catch (error) { rpError.set(error.message || 'Your draft could not be saved') }
+}
+const rpAutosave = useTimeout(() => rpSaveDraft(), 900)
+rpAutosave.stop()
+watch(() => JSON.stringify(rpDraft()), () => { if (rpStage() === 2) { rpSaved.set('Saving…'); rpAutosave.start() } })
+async function rpSubmit() {
+  if (!rpAccurate() || !rpRules() || rpBusy()) return
+  rpBusy.set(true)
+  rpError.set('')
+  try {
+    rpAutosave.stop()
+    await rpWriting.fresh(rpEventSlug(), () => rp.request(rpRequestPath(), 'PUT', { ...rpDraft(), accuracy_attested: rpAccurate(), rules_accepted: rpRules() }))
+    await rp.request(rpRequestPath() + '/submit', 'POST', {})
+    await rp.load()
+    rpStage.set(4)
+    rpMessage.set('Your race entry request has been submitted.')
+  }
+  catch (error) { rpError.set(error.message || 'Your request could not be submitted') }
+  finally { rpBusy.set(false) }
+}
+async function rpWithdraw(slug) {
+  rpBusy.set(true)
+  try {
+    await rp.request('/events/' + encodeURIComponent(slug) + '/application/withdraw', 'POST', {})
+    await rp.load()
+    rpMessage.set('Your application has been withdrawn.')
+  }
+  catch (error) { rpError.set(error.message || 'Could not withdraw') }
+  finally { rpBusy.set(false) }
+}
+onMount(async () => {
+  await rp.load()
+  const query = useRoute().query || {}
+  if (['create', 'login', 'forgot', 'verify', 'reset'].includes(query.auth)) rpMode.set(query.auth === 'create' ? 'register' : query.auth)
+  rpEventSlug.set(String(query.event || rpEvents().find(item => item.phase === 'open')?.slug || ''))
+  rpChoose()
+})
+onDestroy(() => rpAutosave.stop())
+</script>
+<div class="race-portal">
+  <p :if="rpError" :text="rpError" role="alert"></p><p :if="rpMessage" :text="rpMessage" role="status"></p>
+  <template :if="!rpSigned">
+    <h2 :text="rpMode === 'register' ? 'Create account' : rpMode === 'login' ? 'Sign in' : rpMode === 'forgot' ? 'Reset your password' : 'Check your email'"></h2>
+    <p>Use the same account as the Last Soul app.</p>
+    <div class="race-tabs"><button type="button" @click="rpMode.set('login')" :aria-selected="rpMode === 'login'">Sign in</button><button type="button" @click="rpMode.set('register')" :aria-selected="rpMode === 'register'">Create account</button><button type="button" @click="rpMode.set('forgot')">Forgot password?</button></div>
+    <form @submit.prevent="rpAuth()">
+      <div :if="rpMode === 'register'" class="field-row"><label>First name<input x-model="rpFirst" autocomplete="given-name" required></label><label>Last name<input x-model="rpLast" autocomplete="family-name" required></label></div>
+      <label>Email<input type="email" x-model="rpEmail" autocomplete="email" required></label>
+      <label :if="rpMode === 'verify' || rpMode === 'reset'">Verification code<input x-model="rpCode" pattern="[0-9]{6}" inputmode="numeric" autocomplete="one-time-code" required></label>
+      <label :if="rpMode === 'login' || rpMode === 'register' || rpMode === 'reset'">Password<input type="password" x-model="rpPassword" minlength="8" :autocomplete="rpMode === 'login' ? 'current-password' : 'new-password'" required></label>
+      <p :if="rpMode === 'register'">By creating an account you agree to the <a href="/terms">terms</a>. Read our <a href="/privacy">privacy policy</a>.</p>
+      <button type="submit" class="btn" :disabled="rpBusy" :text="rpBusy ? 'Please wait…' : rpMode === 'register' ? 'Create account' : rpMode === 'forgot' ? 'Send reset code' : rpMode === 'login' ? 'Sign in' : 'Continue'"></button>
+    </form>
+  </template>
+  <template :if="rpSigned && rpUser">
+    <h2 :text="'Hello, ' + rpUser.first_name"></h2><button type="button" class="btn btn-outline" @click="rp.logout()">Sign out</button>
+    <section><h3>Your entries</h3><p :if="!rpApplications.length">You have not requested a race entry yet.</p><article :for="item in rpApplications"><h4 :text="item.event.name"></h4><p :text="item.application.display_status || item.application.status"></p><p :if="item.entry?.deadline_at" :text="'Confirmation deadline: ' + item.entry.deadline_at"></p><details :if="item.event.phase === 'open' && item.application.status !== 'withdrawn'"><summary>Withdraw this application</summary><p>This removes your application from this event.</p><button type="button" class="btn btn-outline" :disabled="rpBusy" @click="rpWithdraw(item.event.slug)">Withdraw my application</button></details></article></section>
+    <label>Event<select x-model="rpEventSlug" @change="rpChoose()"><option value="">Choose a race</option><option :for="event in rpEvents" :value="event.slug" :text="event.name"></option></select></label>
+    <p :if="rpEvent && rpEvent.phase !== 'open'">This event is not accepting direct entry requests. <a href="/world-series#qualify">View the entry and qualification rules.</a></p>
+    <template :if="rpEvent && rpEvent.phase === 'open'">
+      <p :text="'Stage ' + Math.min(rpStage, 3) + ' of 3'"></p>
+      <form :if="rpStage === 1" @submit.prevent="rpSaveProfile($event)">
+        <h3>Personal details</h3><div class="field-row"><label>First name<input name="first_name" :value="rpUser.first_name" autocomplete="given-name" required></label><label>Last name<input name="last_name" :value="rpUser.last_name" autocomplete="family-name" required></label></div>
+        <label>Date of birth<input name="date_of_birth" type="date" :value="rpUser.date_of_birth" required></label><label>Gender<select name="gender" :value="rpUser.gender" required><option value="female">Female</option><option value="male">Male</option><option value="non_binary">Non-binary</option></select></label><label>Country of residence, three-letter code<input name="country_of_residence" :value="rpUser.country_of_residence" minlength="3" maxlength="3" placeholder="DEU" required></label><label>Nationality, three-letter code<input name="nationality" :value="rpUser.nationality" minlength="3" maxlength="3" placeholder="DEU" required></label><label>Town or city<input name="town" :value="rpUser.town"></label><label>Instagram<input name="instagram" :value="rpUser.instagram"></label><label>Strava<input name="strava" :value="rpUser.strava"></label>
+        <button type="submit" class="btn" :disabled="rpBusy">Save and continue</button>
+      </form>
+      <form :if="rpStage === 2" @submit.prevent="rpSaveDraft(true)"><h3>Your request</h3><label>Why do you want to take part?<textarea x-model="rpReason" rows="5" required maxlength="4000"></textarea></label><label><input type="checkbox" x-model="rpNoPb">I have not run a backyard ultra before</label><div :if="!rpNoPb"><label>Personal best, yards<input type="number" min="1" x-model="rpPbYards" required></label><label>Event<input x-model="rpPbEvent" required></label><label>Date<input type="date" x-model="rpPbDate"></label><label>Proof link<input type="url" x-model="rpPbProof"></label></div><label>Other social links<input x-model="rpSocial"></label><p :text="rpSaved" role="status"></p><button type="button" class="btn btn-outline" @click="rpStage.set(1)">Back</button><button type="submit" class="btn" :disabled="rpBusy">Review request</button></form>
+      <form :if="rpStage === 3" @submit.prevent="rpSubmit()"><h3>Review your request</h3><p :text="rpReason"></p><label><input type="checkbox" x-model="rpAccurate" required>I confirm that the information I provided is accurate.</label><label><input type="checkbox" x-model="rpRules" required>I accept the <a href="/format">race rules</a> and <a href="/terms">terms</a>.</label><button type="button" class="btn btn-outline" @click="rpStage.set(2)">Back</button><button type="submit" class="btn" :disabled="rpBusy || !rpAccurate || !rpRules">Submit race entry request</button></form>
+    </template>
+    <p>Looking for your training subscription? <a href="/coaching#training">Open LSU coaching, powered by HQ.</a></p>
+  </template>
+</div>

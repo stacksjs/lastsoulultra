@@ -1,0 +1,2160 @@
+@extends('layouts/LSU')
+@section('content')
+<script server>
+import { productionPages } from '~/resources/data/production-pages'
+const currentPage = productionPages["/results/last-soul-ultra-2025"]
+const canonicalPath = "/results/last-soul-ultra-2025"
+</script>
+<script client>
+import rrSource from '../../data/results-2025.json'
+const rrQuery = state('')
+const rrCategory = state('all')
+const rrSort = state('rank')
+const rrYard = state(1)
+const rrNames = rrSource.results.map(row => row.name.toLowerCase()).sort((a, b) => a.localeCompare(b))
+function rrMatch(name, bib, category) { return (rrCategory() === 'all' || rrCategory() === category) && (!rrQuery().trim() || (name + ' ' + bib).toLowerCase().includes(rrQuery().trim().toLowerCase())) }
+function rrOrder(name, bib, rank) { return rrSort() === 'name' ? rrNames.indexOf(name) : rrSort() === 'bib' ? Number(bib) : Number(rank) }
+const rrCount = derived(() => rrSource.results.filter(row => rrMatch(row.name, row.bib, row.category)).length)
+const rrYardCount = derived(() => rrSource.results.filter(row => Number(row.yards) >= rrYard()).length)
+</script>
+
+<a class="ls-skip" href="#ledger">Skip to the classification</a>
+<header class="ls-mast phero">
+<div class="phero-copy">
+<div class="kicker ls-rail" data-block="rail">
+<span>Last Soul Ultra</span>
+<span>Official classification</span>
+<span>Season 1 · 3 October 2025 · 93 starters</span>
+<span>Bornheim, Germany</span>
+</div>
+<h1>Last Soul Ultra<span class="ls-yr">
+<span data-tpl="heroH1.1">Season 1</span> · 2025</span>
+</h1>
+<p class="ls-lead" data-tpl="heroLead">The first edition of the Last Soul backyard ultra. Kim Gottwald and Ello Elosrouti ran through two nights together before Elosrouti withdrew, leaving the race founder as the last soul standing at 67 yards. <a href="/results/last-soul-ultra-2026">The edition after it went to 94</a>.</p>
+<dl class="ls-cert" data-block="cert">
+<div>
+<dt>Last soul standing</dt>
+<dd>Kim Gottwald<small>Bib 1 · DE · 49.7 h on feet</small>
+</dd>
+</div>
+<div>
+<dt>Yards completed</dt>
+<dd>
+<span class="ls-seg">67</span>
+<small>449.3 km · 3 days</small>
+</dd>
+</div>
+<div>
+<dt>Assist</dt>
+<dd>Ello Elosrouti<small>67 yards · 0 behind</small>
+</dd>
+</div>
+</dl>
+</div>
+</header>
+<section class="ls-sheet" aria-labelledby="h-summary">
+<header class="ls-sh">
+<span class="ls-sh-n" aria-hidden="true">01</span>
+<h2 class="ls-sh-t" id="h-summary">Summary</h2>
+<span class="ls-sh-m">as published</span>
+</header>
+<div class="ls-figs" data-block="stats">
+<div class="ls-fig">
+<div class="ls-fig-v">
+<span class="ls-seg">67</span>
+<span class="ls-fig-u">yd</span>
+</div>
+<div class="ls-fig-l">winning yards</div>
+</div>
+<div class="ls-fig">
+<div class="ls-fig-v">
+<span class="ls-seg">449.3</span>
+<span class="ls-fig-u">km</span>
+</div>
+<div class="ls-fig-l">kilometres covered</div>
+</div>
+<div class="ls-fig">
+<div class="ls-fig-v">
+<span class="ls-seg">93</span>
+</div>
+<div class="ls-fig-l">athletes on the start line</div>
+</div>
+<div class="ls-fig">
+<div class="ls-fig-v">
+<span class="ls-seg">3</span>
+<span class="ls-fig-u">d</span>
+</div>
+<div class="ls-fig-l">days of racing</div>
+</div>
+<div class="ls-fig">
+<div class="ls-fig-v">
+<span class="ls-seg">6.706</span>
+<span class="ls-fig-u">km</span>
+</div>
+<div class="ls-fig-l">km per hourly loop</div>
+</div>
+</div>
+</section>
+<section class="ls-sheet" aria-labelledby="h-top">
+<header class="ls-sh">
+<span class="ls-sh-n" aria-hidden="true">02</span>
+<h2 class="ls-sh-t" id="h-top">Top three</h2>
+<span class="ls-sh-m" data-tpl="led.secTopNote">of 93</span>
+</header>
+<div data-block="podium">
+<div class="ls-p3 ls-p3-win">
+<div class="ls-p3-rk">1</div>
+<div>
+<div class="ls-p3-kick">Winner · last soul</div>
+<div class="ls-p3-name">Kim Gottwald</div>
+<p class="ls-p3-note">Bib 1. The race founder, winner of his own first edition.</p>
+<div class="ls-p3-meta">Bib 1 · DE · Average 47:21 · Time on feet 49.7 h</div>
+</div>
+<div class="ls-p3-num">
+<span class="ls-seg">67</span>
+<span class="ls-p3-u">yards</span>
+<div class="ls-p3-km">449.3 km</div>
+</div>
+</div>
+<div class="ls-p3">
+<div class="ls-p3-rk">2</div>
+<div>
+<div class="ls-p3-kick">Assist · second</div>
+<div class="ls-p3-name">Ello Elosrouti</div>
+<p class="ls-p3-note">Matched Gottwald lap for lap, then withdrew with an inflamed Achilles tendon. Came back in 2026 and ran 93.</p>
+<div class="ls-p3-meta">Bib 93 · DE · Average 44:50 · Time on feet 47.8 h</div>
+</div>
+<div class="ls-p3-num">
+<span class="ls-seg">67</span>
+<span class="ls-p3-u">yards</span>
+<div class="ls-p3-km">449.3 km</div>
+</div>
+</div>
+<div class="ls-p3">
+<div class="ls-p3-rk">3</div>
+<div>
+<div class="ls-p3-kick">Third</div>
+<div class="ls-p3-name">Pierre Biege</div>
+<p class="ls-p3-note">Twenty-seven laps behind the final pair.</p>
+<div class="ls-p3-meta">Bib 94 · CH · Average 51:15 · Time on feet 32.5 h</div>
+</div>
+<div class="ls-p3-num">
+<span class="ls-seg">40</span>
+<span class="ls-p3-u">yards</span>
+<div class="ls-p3-km">268.2 km</div>
+</div>
+</div>
+</div>
+</section>
+<section class="ls-sheet" aria-labelledby="h-field">
+<header class="ls-sh">
+<span class="ls-sh-n" aria-hidden="true">03</span>
+<h2 class="ls-sh-t" id="h-field">The field, hour by hour</h2>
+<span class="ls-sh-m">runners still starting</span>
+</header>
+<div class="ls-at" data-block="field">
+<div class="ls-at-read" id="ls-at-read" aria-live="polite" :text="'Yard ' + rrYard + ' · ' + rrYardCount + ' runners still starting'">
+</div>
+<div class="ls-at-plot">
+<div class="ls-at-y" aria-hidden="true">
+<span>93</span>
+<span>47</span>
+<span>0</span>
+</div>
+<svg class="ls-at-svg" viewbox="0 0 1000 260" preserveaspectratio="none" aria-hidden="true">
+<rect x="134.49" y="0" width="14.94" height="260" class="ls-at-night">
+</rect>
+<rect x="149.43" y="0" width="14.94" height="260" class="ls-at-night">
+</rect>
+<rect x="164.38" y="0" width="14.94" height="260" class="ls-at-night">
+</rect>
+<rect x="179.32" y="0" width="14.94" height="260" class="ls-at-night">
+</rect>
+<rect x="194.26" y="0" width="14.94" height="260" class="ls-at-night">
+</rect>
+<rect x="209.21" y="0" width="14.94" height="260" class="ls-at-night">
+</rect>
+<rect x="224.15" y="0" width="14.94" height="260" class="ls-at-night">
+</rect>
+<rect x="239.09" y="0" width="14.94" height="260" class="ls-at-night">
+</rect>
+<rect x="493.13" y="0" width="14.94" height="260" class="ls-at-night">
+</rect>
+<rect x="508.07" y="0" width="14.94" height="260" class="ls-at-night">
+</rect>
+<rect x="523.01" y="0" width="14.94" height="260" class="ls-at-night">
+</rect>
+<rect x="537.96" y="0" width="14.94" height="260" class="ls-at-night">
+</rect>
+<rect x="552.90" y="0" width="14.94" height="260" class="ls-at-night">
+</rect>
+<rect x="567.84" y="0" width="14.94" height="260" class="ls-at-night">
+</rect>
+<rect x="582.79" y="0" width="14.94" height="260" class="ls-at-night">
+</rect>
+<rect x="597.73" y="0" width="14.94" height="260" class="ls-at-night">
+</rect>
+<rect x="851.77" y="0" width="14.94" height="260" class="ls-at-night">
+</rect>
+<rect x="866.71" y="0" width="14.94" height="260" class="ls-at-night">
+</rect>
+<rect x="881.65" y="0" width="14.94" height="260" class="ls-at-night">
+</rect>
+<rect x="896.60" y="0" width="14.94" height="260" class="ls-at-night">
+</rect>
+<rect x="911.54" y="0" width="14.94" height="260" class="ls-at-night">
+</rect>
+<rect x="926.48" y="0" width="14.94" height="260" class="ls-at-night">
+</rect>
+<rect x="941.43" y="0" width="14.94" height="260" class="ls-at-night">
+</rect>
+<rect x="956.37" y="0" width="14.94" height="260" class="ls-at-night">
+</rect>
+<rect class="ls-at-bar" x="0.00" y="0.00" width="13.74" height="260.00">
+</rect>
+<rect class="ls-at-bar" x="14.94" y="0.00" width="13.74" height="260.00">
+</rect>
+<rect class="ls-at-bar" x="29.89" y="0.00" width="13.74" height="260.00">
+</rect>
+<rect class="ls-at-bar" x="44.83" y="0.00" width="13.74" height="260.00">
+</rect>
+<rect class="ls-at-bar" x="59.77" y="2.80" width="13.74" height="257.20">
+</rect>
+<rect class="ls-at-bar" x="74.72" y="2.80" width="13.74" height="257.20">
+</rect>
+<rect class="ls-at-bar" x="89.66" y="5.59" width="13.74" height="254.41">
+</rect>
+<rect class="ls-at-bar" x="104.60" y="8.39" width="13.74" height="251.61">
+</rect>
+<rect class="ls-at-bar" x="119.55" y="16.77" width="13.74" height="243.23">
+</rect>
+<rect class="ls-at-bar" x="134.49" y="27.96" width="13.74" height="232.04">
+</rect>
+<rect class="ls-at-bar" x="149.43" y="41.94" width="13.74" height="218.06">
+</rect>
+<rect class="ls-at-bar" x="164.38" y="47.53" width="13.74" height="212.47">
+</rect>
+<rect class="ls-at-bar" x="179.32" y="69.89" width="13.74" height="190.11">
+</rect>
+<rect class="ls-at-bar" x="194.26" y="83.87" width="13.74" height="176.13">
+</rect>
+<rect class="ls-at-bar" x="209.21" y="83.87" width="13.74" height="176.13">
+</rect>
+<rect class="ls-at-bar" x="224.15" y="131.40" width="13.74" height="128.60">
+</rect>
+<rect class="ls-at-bar" x="239.09" y="142.58" width="13.74" height="117.42">
+</rect>
+<rect class="ls-at-bar" x="254.04" y="164.95" width="13.74" height="95.05">
+</rect>
+<rect class="ls-at-bar" x="268.98" y="190.11" width="13.74" height="69.89">
+</rect>
+<rect class="ls-at-bar" x="283.92" y="192.90" width="13.74" height="67.10">
+</rect>
+<rect class="ls-at-bar" x="298.87" y="209.68" width="13.74" height="50.32">
+</rect>
+<rect class="ls-at-bar" x="313.81" y="220.86" width="13.74" height="39.14">
+</rect>
+<rect class="ls-at-bar" x="328.75" y="229.25" width="13.74" height="30.75">
+</rect>
+<rect class="ls-at-bar" x="343.70" y="229.25" width="13.74" height="30.75">
+</rect>
+<rect class="ls-at-bar" x="358.64" y="229.25" width="13.74" height="30.75">
+</rect>
+<rect class="ls-at-bar" x="373.58" y="229.25" width="13.74" height="30.75">
+</rect>
+<rect class="ls-at-bar" x="388.53" y="229.25" width="13.74" height="30.75">
+</rect>
+<rect class="ls-at-bar" x="403.47" y="232.04" width="13.74" height="27.96">
+</rect>
+<rect class="ls-at-bar" x="418.41" y="237.63" width="13.74" height="22.37">
+</rect>
+<rect class="ls-at-bar" x="433.36" y="240.43" width="13.74" height="19.57">
+</rect>
+<rect class="ls-at-bar" x="448.30" y="243.23" width="13.74" height="16.77">
+</rect>
+<rect class="ls-at-bar" x="463.24" y="246.02" width="13.74" height="13.98">
+</rect>
+<rect class="ls-at-bar" x="478.19" y="246.02" width="13.74" height="13.98">
+</rect>
+<rect class="ls-at-bar" x="493.13" y="246.02" width="13.74" height="13.98">
+</rect>
+<rect class="ls-at-bar" x="508.07" y="246.02" width="13.74" height="13.98">
+</rect>
+<rect class="ls-at-bar" x="523.01" y="248.82" width="13.74" height="11.18">
+</rect>
+<rect class="ls-at-bar" x="537.96" y="248.82" width="13.74" height="11.18">
+</rect>
+<rect class="ls-at-bar" x="552.90" y="251.61" width="13.74" height="8.39">
+</rect>
+<rect class="ls-at-bar" x="567.84" y="251.61" width="13.74" height="8.39">
+</rect>
+<rect class="ls-at-bar" x="582.79" y="251.61" width="13.74" height="8.39">
+</rect>
+<rect class="ls-at-bar" x="597.73" y="254.41" width="13.74" height="5.59">
+</rect>
+<rect class="ls-at-bar" x="612.67" y="254.41" width="13.74" height="5.59">
+</rect>
+<rect class="ls-at-bar" x="627.62" y="254.41" width="13.74" height="5.59">
+</rect>
+<rect class="ls-at-bar" x="642.56" y="254.41" width="13.74" height="5.59">
+</rect>
+<rect class="ls-at-bar" x="657.50" y="254.41" width="13.74" height="5.59">
+</rect>
+<rect class="ls-at-bar" x="672.45" y="254.41" width="13.74" height="5.59">
+</rect>
+<rect class="ls-at-bar" x="687.39" y="254.41" width="13.74" height="5.59">
+</rect>
+<rect class="ls-at-bar" x="702.33" y="254.41" width="13.74" height="5.59">
+</rect>
+<rect class="ls-at-bar" x="717.28" y="254.41" width="13.74" height="5.59">
+</rect>
+<rect class="ls-at-bar" x="732.22" y="254.41" width="13.74" height="5.59">
+</rect>
+<rect class="ls-at-bar" x="747.16" y="254.41" width="13.74" height="5.59">
+</rect>
+<rect class="ls-at-bar" x="762.11" y="254.41" width="13.74" height="5.59">
+</rect>
+<rect class="ls-at-bar" x="777.05" y="254.41" width="13.74" height="5.59">
+</rect>
+<rect class="ls-at-bar" x="791.99" y="254.41" width="13.74" height="5.59">
+</rect>
+<rect class="ls-at-bar" x="806.94" y="254.41" width="13.74" height="5.59">
+</rect>
+<rect class="ls-at-bar" x="821.88" y="254.41" width="13.74" height="5.59">
+</rect>
+<rect class="ls-at-bar" x="836.82" y="254.41" width="13.74" height="5.59">
+</rect>
+<rect class="ls-at-bar" x="851.77" y="254.41" width="13.74" height="5.59">
+</rect>
+<rect class="ls-at-bar" x="866.71" y="254.41" width="13.74" height="5.59">
+</rect>
+<rect class="ls-at-bar" x="881.65" y="254.41" width="13.74" height="5.59">
+</rect>
+<rect class="ls-at-bar" x="896.60" y="254.41" width="13.74" height="5.59">
+</rect>
+<rect class="ls-at-bar" x="911.54" y="254.41" width="13.74" height="5.59">
+</rect>
+<rect class="ls-at-bar" x="926.48" y="254.41" width="13.74" height="5.59">
+</rect>
+<rect class="ls-at-bar" x="941.43" y="254.41" width="13.74" height="5.59">
+</rect>
+<rect class="ls-at-bar" x="956.37" y="254.41" width="13.74" height="5.59">
+</rect>
+<rect class="ls-at-bar" x="971.31" y="254.41" width="13.74" height="5.59">
+</rect>
+<rect class="ls-at-bar ls-at-last" x="986.26" y="254.41" width="13.74" height="5.59">
+</rect>
+<rect class="ls-at-cur" x="0" y="0" width="13.74" height="260" hidden>
+</rect>
+</svg>
+<input class="ls-at-range" id="ls-at-range" x-model.number="rrYard" type="range" min="1" max="67" value="1" step="1" aria-label="Scrub the race by yard to read how many runners were still in it">
+</div>
+<div class="ls-at-axis" aria-hidden="true">
+<span>1</span>
+<span>17</span>
+<span>34</span>
+<span>50</span>
+<span>67</span>
+</div>
+<div class="ls-at-key">
+<span>
+<b class="ls-k-in">
+</b>still starting</span>
+<span>
+<b class="ls-k-night">
+</b>night yards, 21:00 to 05:00</span>
+<span>
+<b class="ls-k-final">
+</b>the final yard, run alone</span>
+</div>
+<p class="ls-note">Half the field was gone by yard 16. The median runner stopped at 15. Drag, or arrow through the hours.</p>
+</div>
+</section>
+<section class="ls-sheet" aria-labelledby="h-women">
+<header class="ls-sh">
+<span class="ls-sh-n" aria-hidden="true">04</span>
+<h2 class="ls-sh-t" id="h-women">Women — last woman standing</h2>
+<span class="ls-sh-m" data-tpl="led.secWomenNote">20 of 93 starters</span>
+</header>
+<div data-block="women">
+<div class="ls-w">
+<span class="ls-w-rk">1</span>
+<span class="ls-w-nm">Kathrin Reichelt</span>
+<span class="ls-w-note">first woman</span>
+<span class="ls-w-yd">
+<span class="ls-seg">20</span>
+</span>
+<span class="ls-w-km">134.1 km</span>
+</div>
+<div class="ls-w">
+<span class="ls-w-rk">2</span>
+<span class="ls-w-nm">Mia Walsoe Lehn</span>
+<span class="ls-w-note">second</span>
+<span class="ls-w-yd">
+<span class="ls-seg">18</span>
+</span>
+<span class="ls-w-km">120.7 km</span>
+</div>
+<div class="ls-w">
+<span class="ls-w-rk">3</span>
+<span class="ls-w-nm">Paulina Zäck</span>
+<span class="ls-w-note">third</span>
+<span class="ls-w-yd">
+<span class="ls-seg">18</span>
+</span>
+<span class="ls-w-km">120.7 km</span>
+</div>
+</div>
+</section>
+<section class="ls-sheet" aria-labelledby="h-event">
+<header class="ls-sh">
+<span class="ls-sh-n" aria-hidden="true">05</span>
+<h2 class="ls-sh-t" id="h-event">Event details</h2>
+<span class="ls-sh-m">what the figures mean</span>
+</header>
+<dl class="ls-meta" data-block="event-details">
+<div>
+<dt>Location</dt>
+<dd>Bornheim, Germany</dd>
+</div>
+<div>
+<dt>Hourly loop</dt>
+<dd>6.706 km</dd>
+</div>
+<div>
+<dt>Format</dt>
+<dd>Every runner starts together, on the full hour. The loop is 6700 metres and must be completed within the hour; whoever is not standing on the start line when the next hour begins is out. There is no finish line and no distance to cover, only the next loop. The race ends when one runner completes a loop that nobody else does. That runner is the last soul.</dd>
+</div>
+</dl>
+</section>
+<section class="ls-sheet" id="ledger" tabindex="-1" aria-labelledby="h-ledger">
+<header class="ls-sh">
+<span class="ls-sh-n" aria-hidden="true">06</span>
+<h2 class="ls-sh-t" id="h-ledger">Full results</h2>
+<span class="ls-sh-m" data-tpl="led.secLedgerNote">93 rows · every yard</span>
+</header>
+<div class="ls-tools">
+<div class="ls-tools-in">
+<input class="ls-srch" id="ls-srch" x-model="rrQuery" type="search" placeholder="Filter by name or bib" aria-label="Filter the classification by name or bib" aria-controls="ls-rows">
+<div class="ls-segs" role="group" aria-label="Category">
+<button type="button" data-cat="all" @click="rrCategory.set('all')" :aria-pressed="rrCategory === 'all'">All</button>
+<button type="button" data-cat="f" @click="rrCategory.set('f')" :aria-pressed="rrCategory === 'f'">Women</button>
+<button type="button" data-cat="m" @click="rrCategory.set('m')" :aria-pressed="rrCategory === 'm'">Men</button>
+</div>
+<select class="ls-sel" id="ls-sort" x-model="rrSort" aria-label="Sort the classification">
+<option value="rank">Sort: rank</option>
+<option value="name">Sort: name</option>
+<option value="bib">Sort: bib</option>
+</select>
+<span class="ls-count" id="ls-count" :text="rrCount + ' / 93 shown'" aria-live="polite">93 / 93 shown</span>
+</div>
+<div class="ls-chead" aria-hidden="true">
+<span>Rank</span>
+<span>Runner</span>
+<span>Yd</span>
+<span>Km</span>
+<span>Nat</span>
+<span>
+</span>
+</div>
+</div>
+<div class="ls-ledger" id="ls-rows" style="display:flex;flex-direction:column" data-block="full-results" data-max="67" data-start="2025-10-03T12:00:00+02:00" data-tz="Europe/Berlin">
+<details class="ls-e ls-win" data-y="67" data-r="1" data-c="m" data-n="kim gottwald" data-b="1" data-s="2437,12,3324,61,2841,887,765,1163,12,276,61,178977,47410" data-l="2875,2857,2864,2847,2904,2775,2690,2491,2454,2509,2498,2437,2502,2634,2656,2770,2809,2690,2805,2678,2483,2737,2856,2847,2796,2797,2937,2863,2872,2849,2906,3007,2924,2807,2796,2952,2990,2972,2919,2900,3045,2867,2828,2795,2861,2825,2846,2858,2915,2859,2875,2899,2934,2914,2911,2912,3136,3071,2973,2869,3324,3318,3187" :show="rrMatch(&quot;kim gottwald&quot;, &quot;1&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;kim gottwald&quot;, &quot;1&quot;, &quot;1&quot;)">
+<summary class="ls-row" style="--w:100.00%" aria-label="Rank 1, Kim Gottwald, 67 yards, 449.3 kilometres, DE, Last soul">
+<span class="ls-rk">
+<i>00</i>1</span>
+<span class="ls-nm">Kim Gottwald<b class="ls-tag ls-tag-win">Last soul</b>
+</span>
+<span class="ls-yd">67</span>
+<span class="ls-km">449.3</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 1 · DE · Men · 1st · final yard at Mon 06:00</p>
+<p class="ls-pnl-note">Bib 1. The race founder, winner of his own first edition.</p>
+<p class="ls-pnl-said">67 yards inside a 14:47 spread.</p>
+</div>
+</div>
+</details>
+<details class="ls-e ls-win" data-y="67" data-r="2" data-c="m" data-n="ello elosrouti" data-b="93" data-s="2400,45,3104,64,2690,704,917,1200,45,596,1,172128,57776" data-l="3004,2843,2900,2686,2934,2786,2916,2500,2766,2836,2821,2570,2595,2842,2484,2686,2636,2678,2641,2510,2685,2622,2534,2462,2520,2679,2702,2697,2817,2765,2563,2689,2751,2818,2672,2667,2429,2626,2634,2760,2737,2636,2750,2589,2400,2491,2506,2480,2561,2667,2707,2742,2792,2691,2633,2662,2744,2876,2842,2943,2574,2440,2835,3104" :show="rrMatch(&quot;ello elosrouti&quot;, &quot;93&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;ello elosrouti&quot;, &quot;93&quot;, &quot;2&quot;)">
+<summary class="ls-row" style="--w:100.00%" aria-label="Rank 2, Ello Elosrouti, 67 yards, 449.3 kilometres, DE, Last soul">
+<span class="ls-rk">
+<i>00</i>2</span>
+<span class="ls-nm">Ello Elosrouti<b class="ls-tag ls-tag-win">Last soul</b>
+</span>
+<span class="ls-yd">67</span>
+<span class="ls-km">449.3</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 93 · DE · Men · DNF · final yard at Mon 06:00</p>
+<p class="ls-pnl-note">Matched Gottwald lap for lap, then withdrew with an inflamed Achilles tendon. Came back in 2026 and ran 93.</p>
+<p class="ls-pnl-said">67 yards inside a 11:44 spread.</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="40" data-r="3" data-c="m" data-n="pierre biege" data-b="94" data-s="2613,4,3765,38,3075,1152,551,987,4,0,20,116856,20374" data-l="2881,2915,3489,2613,2857,2980,2891,2883,2757,2723,2828,2820,2764,2981,2907,2952,2968,3468,3495,3651,2817,3454,2734,2989,2814,3498,3671,3711,3495,2843,2808,2874,3632,2772,2681,3159,3316,3765" :show="rrMatch(&quot;pierre biege&quot;, &quot;94&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;pierre biege&quot;, &quot;94&quot;, &quot;3&quot;)">
+<summary class="ls-row" style="--w:59.70%" aria-label="Rank 3, Pierre Biege, 40 yards, 268.2 kilometres, CH">
+<span class="ls-rk">
+<i>00</i>3</span>
+<span class="ls-nm">Pierre Biege</span>
+<span class="ls-yd">40</span>
+<span class="ls-km">268.2</span>
+<span class="ls-nat">CH</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 94 · CH · Men · DNF · out at Sun 04:00</p>
+<p class="ls-pnl-note">Twenty-seven laps behind the final pair.</p>
+<p class="ls-pnl-said">Lost 12:38 between yard 32 and yard 33.</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="37" data-r="4" data-c="m" data-n="pawel dregan" data-b="6" data-s="2531,20,3539,36,2854,1008,765,1069,20,63,33,102749,26790" data-l="2797,2771,2699,2771,2782,2797,2661,2533,2751,2679,2600,2544,2735,2726,2715,2796,2672,2667,2646,2531,2744,2635,2797,2732,2748,2895,2899,3047,3214,3137,3313,3372,3537,2741,3526,3539" :show="rrMatch(&quot;pawel dregan&quot;, &quot;6&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;pawel dregan&quot;, &quot;6&quot;, &quot;4&quot;)">
+<summary class="ls-row" style="--w:55.22%" aria-label="Rank 4, Pawel Dregan, 37 yards, 248.1 kilometres, DE">
+<span class="ls-rk">
+<i>00</i>4</span>
+<span class="ls-nm">Pawel Dregan</span>
+<span class="ls-yd">37</span>
+<span class="ls-km">248.1</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 6 · DE · Men · DNF · out at Sun 01:00</p>
+<p class="ls-pnl-said">Lost 13:05 between yard 34 and yard 35.</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="35" data-r="5" data-c="m" data-n="alessandro cervo" data-b="103" data-s="2481,4,3359,34,2751,878,868,1119,4,523,30,93517,28642" data-l="2888,2616,2555,2481,2548,2593,2610,2601,2559,2621,2679,2721,2871,2699,2547,2598,2646,2779,2873,2620,2701,2811,2886,2811,2735,2704,2723,2808,2926,3077,3056,2978,2837,3359" :show="rrMatch(&quot;alessandro cervo&quot;, &quot;103&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;alessandro cervo&quot;, &quot;103&quot;, &quot;5&quot;)">
+<summary class="ls-row" style="--w:52.24%" aria-label="Rank 5, Alessandro Cervo, 35 yards, 234.7 kilometres, DE">
+<span class="ls-rk">
+<i>00</i>5</span>
+<span class="ls-nm">Alessandro Cervo</span>
+<span class="ls-yd">35</span>
+<span class="ls-km">234.7</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 103 · DE · Men · DNF · out at Sat 23:00</p>
+<p class="ls-pnl-said">Lost 8:42 between yard 33 and yard 34.</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="31" data-r="6" data-c="m" data-n="mauritz ehmann" data-b="55" data-s="2496,8,3293,18,2926,797,685,1104,8,307,18,87773,19851" data-l="2999,2845,2913,2944,2929,2947,2915,2496,2950,2993,2987,3059,2851,2958,2573,3009,3225,3293,2659,2637,2836,2702,2594,2750,2863,3031,3172,3210,3209,3224" :show="rrMatch(&quot;mauritz ehmann&quot;, &quot;55&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;mauritz ehmann&quot;, &quot;55&quot;, &quot;6&quot;)">
+<summary class="ls-row" style="--w:46.27%" aria-label="Rank 6, Mauritz Ehmann, 31 yards, 207.9 kilometres, DE">
+<span class="ls-rk">
+<i>00</i>6</span>
+<span class="ls-nm">Mauritz Ehmann</span>
+<span class="ls-yd">31</span>
+<span class="ls-km">207.9</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 55 · DE · Men · DNF · out at Sat 19:00</p>
+<p class="ls-pnl-said">Lost 7:34 between yard 8 and yard 9.</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="30" data-r="7" data-c="m" data-n="jozef kapicak" data-b="86" data-s="2428,5,2958,22,2627,530,989,1172,5,690,19,57784,20774" data-l="2771,2552,2566,2448,2428,2508,2509,2540,2515,2572,2581,2542,2600,2605,2657,2750,2762,2755,2910,2633,2622,2958" :show="rrMatch(&quot;jozef kapicak&quot;, &quot;86&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;jozef kapicak&quot;, &quot;86&quot;, &quot;7&quot;)">
+<summary class="ls-row" style="--w:44.78%" aria-label="Rank 7, Jozef Kapicak, 30 yards, 201.2 kilometres, DE">
+<span class="ls-rk">
+<i>00</i>7</span>
+<span class="ls-nm">Jozef Kapicak</span>
+<span class="ls-yd">30</span>
+<span class="ls-km">201.2</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 86 · DE · Men · DNF · out at Sat 18:00</p>
+<p class="ls-pnl-said">Lost 5:36 between yard 21 and yard 22.</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="29" data-r="8" data-c="m" data-n="bob scholtes" data-b="89" data-s=",,,,,,,,,,,," data-l="" :show="rrMatch(&quot;bob scholtes&quot;, &quot;89&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;bob scholtes&quot;, &quot;89&quot;, &quot;8&quot;)">
+<summary class="ls-row" style="--w:43.28%" aria-label="Rank 8, Bob Scholtes, 29 yards, 194.5 kilometres, LU">
+<span class="ls-rk">
+<i>00</i>8</span>
+<span class="ls-nm">Bob Scholtes</span>
+<span class="ls-yd">29</span>
+<span class="ls-km">194.5</span>
+<span class="ls-nat">LU</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 89 · LU · Men · DNF · out at Sat 17:00</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="28" data-r="9" data-c="m" data-n="benjamin nsiah" data-b="33" data-s="2616,8,3764,1,2918,1148,705,984,8,0,1,78777,18331" data-l="3764,2897,2800,2639,2777,2794,2964,2616,2803,2692,2811,2779,2771,2774,2993,3249,2784,2894,2801,2757,2804,2886,2961,3047,3143,3233,3344" :show="rrMatch(&quot;benjamin nsiah&quot;, &quot;33&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;benjamin nsiah&quot;, &quot;33&quot;, &quot;9&quot;)">
+<summary class="ls-row" style="--w:41.79%" aria-label="Rank 9, Benjamin Nsiah, 28 yards, 187.8 kilometres, DE">
+<span class="ls-rk">
+<i>00</i>9</span>
+<span class="ls-nm">Benjamin Nsiah</span>
+<span class="ls-yd">28</span>
+<span class="ls-km">187.8</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 33 · DE · Men · DNF · out at Sat 16:00</p>
+<p class="ls-pnl-said">28 yards inside a 19:08 spread.</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="28" data-r="10" data-c="m" data-n="nico rauchenwald" data-b="92" data-s=",,,,,,,,,,,," data-l="" :show="rrMatch(&quot;nico rauchenwald&quot;, &quot;92&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;nico rauchenwald&quot;, &quot;92&quot;, &quot;10&quot;)">
+<summary class="ls-row" style="--w:41.79%" aria-label="Rank 10, Nico Rauchenwald, 28 yards, 187.8 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>10</span>
+<span class="ls-nm">Nico Rauchenwald</span>
+<span class="ls-yd">28</span>
+<span class="ls-km">187.8</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 92 · DE · Men · DNF · out at Sat 16:00</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="27" data-r="11" data-c="m" data-n="moritz loidl" data-b="83" data-s="2162,14,3234,25,2718,1072,903,1438,14,546,24,67960,21674" data-l="2854,2808,2678,2642,2705,2640,2668,2598,2623,2651,2684,2719,2606,2162,2737,2799,2810,3003,2604,2545,2690,2750,2696,3054,3234" :show="rrMatch(&quot;moritz loidl&quot;, &quot;83&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;moritz loidl&quot;, &quot;83&quot;, &quot;11&quot;)">
+<summary class="ls-row" style="--w:40.30%" aria-label="Rank 11, Moritz Loidl, 27 yards, 181.1 kilometres, AT">
+<span class="ls-rk">
+<i>0</i>11</span>
+<span class="ls-nm">Moritz Loidl</span>
+<span class="ls-yd">27</span>
+<span class="ls-km">181.1</span>
+<span class="ls-nat">AT</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 83 · AT · Men · DNF · out at Sat 15:00</p>
+<p class="ls-pnl-said">Lost 9:35 between yard 14 and yard 15.</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="22" data-r="12" data-c="m" data-n="tillmann walter" data-b="74" data-s=",,,,,,,,,,,," data-l="" :show="rrMatch(&quot;tillmann walter&quot;, &quot;74&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;tillmann walter&quot;, &quot;74&quot;, &quot;12&quot;)">
+<summary class="ls-row" style="--w:32.84%" aria-label="Rank 12, Tillmann Walter, 22 yards, 147.5 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>12</span>
+<span class="ls-nm">Tillmann Walter</span>
+<span class="ls-yd">22</span>
+<span class="ls-km">147.5</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 74 · DE · Men · DNF · out at Sat 10:00</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="22" data-r="13" data-c="m" data-n="leon isbanner" data-b="88" data-s="2215,5,3199,16,2765,984,827,1385,5,401,16,55302,15708" data-l="2850,2908,2964,2900,2215,2935,2881,2861,2949,2306,2927,2800,3053,2247,3147,3199,2216,2726,2608,2610" :show="rrMatch(&quot;leon isbanner&quot;, &quot;88&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;leon isbanner&quot;, &quot;88&quot;, &quot;13&quot;)">
+<summary class="ls-row" style="--w:32.84%" aria-label="Rank 13, Leon Isbanner, 22 yards, 147.5 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>13</span>
+<span class="ls-nm">Leon Isbanner</span>
+<span class="ls-yd">22</span>
+<span class="ls-km">147.5</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 88 · DE · Men · DNF · out at Sat 10:00</p>
+<p class="ls-pnl-said">Lost 15:00 between yard 14 and yard 15.</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="22" data-r="14" data-c="m" data-n="johannes behrens" data-b="85" data-s="2690,22,3072,12,2861,382,737,910,22,528,12,74386,18415" data-l="2781,2912,2868,2913,2886,2925,2974,2994,2935,2950,3013,3072,2951,2930,2834,2847,2793,2796,2783,2729,2721,2690,2747,2739,2802,2801" :show="rrMatch(&quot;johannes behrens&quot;, &quot;85&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;johannes behrens&quot;, &quot;85&quot;, &quot;14&quot;)">
+<summary class="ls-row" style="--w:32.84%" aria-label="Rank 14, Johannes Behrens, 22 yards, 147.5 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>14</span>
+<span class="ls-nm">Johannes Behrens</span>
+<span class="ls-yd">22</span>
+<span class="ls-km">147.5</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 85 · DE · Men · DNF · out at Sat 10:00</p>
+<p class="ls-pnl-said">22 yards inside a 6:22 spread.</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="21" data-r="15" data-c="m" data-n="florian geiger" data-b="90" data-s=",,,,,,,,,,,," data-l="" :show="rrMatch(&quot;florian geiger&quot;, &quot;90&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;florian geiger&quot;, &quot;90&quot;, &quot;15&quot;)">
+<summary class="ls-row" style="--w:31.34%" aria-label="Rank 15, Florian Geiger, 21 yards, 140.8 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>15</span>
+<span class="ls-nm">Florian Geiger</span>
+<span class="ls-yd">21</span>
+<span class="ls-km">140.8</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 90 · DE · Men · DNF · out at Sat 09:00</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="21" data-r="16" data-c="m" data-n="andreas gölz" data-b="108" data-s=",,,,,,,,,,,," data-l="" :show="rrMatch(&quot;andreas g\u00f6lz&quot;, &quot;108&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;andreas g\u00f6lz&quot;, &quot;108&quot;, &quot;16&quot;)">
+<summary class="ls-row" style="--w:31.34%" aria-label="Rank 16, Andreas Gölz, 21 yards, 140.8 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>16</span>
+<span class="ls-nm">Andreas Gölz</span>
+<span class="ls-yd">21</span>
+<span class="ls-km">140.8</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 108 · DE · Men · DNF · out at Sat 09:00</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="21" data-r="17" data-c="m" data-n="friedrich ludwig" data-b="40" data-s="2364,8,3187,20,2675,823,952,1236,8,559,18,53499,18088" data-l="2645,2609,2536,2387,2613,2616,2769,2364,2465,2475,2574,2624,2549,2466,2894,2835,2823,3041,3027,3187" :show="rrMatch(&quot;friedrich ludwig&quot;, &quot;40&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;friedrich ludwig&quot;, &quot;40&quot;, &quot;17&quot;)">
+<summary class="ls-row" style="--w:31.34%" aria-label="Rank 17, Friedrich Ludwig, 21 yards, 140.8 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>17</span>
+<span class="ls-nm">Friedrich Ludwig</span>
+<span class="ls-yd">21</span>
+<span class="ls-km">140.8</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 40 · DE · Men · DNF · out at Sat 09:00</p>
+<p class="ls-pnl-said">Lost 7:08 between yard 14 and yard 15.</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="21" data-r="18" data-c="m" data-n="jonah çetin" data-b="35" data-s="2667,6,3355,21,2995,688,623,933,6,394,13,62903,12452" data-l="2858,2962,2917,2901,2922,2667,3029,2958,2975,2952,2961,2702,3206,3176,3128,2993,2894,3017,3129,3201,3355" :show="rrMatch(&quot;jonah \u00e7etin&quot;, &quot;35&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;jonah \u00e7etin&quot;, &quot;35&quot;, &quot;18&quot;)">
+<summary class="ls-row" style="--w:31.34%" aria-label="Rank 18, Jonah Çetin, 21 yards, 140.8 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>18</span>
+<span class="ls-nm">Jonah Çetin</span>
+<span class="ls-yd">21</span>
+<span class="ls-km">140.8</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 35 · DE · Men · DNF · out at Sat 09:00</p>
+<p class="ls-pnl-said">Lost 8:24 between yard 12 and yard 13.</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="20" data-r="19" data-c="f" data-n="kathrin reichelt" data-b="48" data-s=",,,,,,,,,,,," data-l="" :show="rrMatch(&quot;kathrin reichelt&quot;, &quot;48&quot;, &quot;f&quot;)" :style="'order:' + rrOrder(&quot;kathrin reichelt&quot;, &quot;48&quot;, &quot;19&quot;)">
+<summary class="ls-row" style="--w:29.85%" aria-label="Rank 19, Kathrin Reichelt, 20 yards, 134.1 kilometres, DE, Last woman standing">
+<span class="ls-rk">
+<i>0</i>19</span>
+<span class="ls-nm">Kathrin Reichelt<b class="ls-tag">Last woman standing</b>
+</span>
+<span class="ls-yd">20</span>
+<span class="ls-km">134.1</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 48 · DE · Women · DNF · out at Sat 08:00</p>
+<p class="ls-pnl-note">First woman</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="20" data-r="20" data-c="m" data-n="manuel zänglein" data-b="62" data-s="2249,13,3582,4,2841,1333,756,1351,13,18,4,56815,14365" data-l="2990,3061,3003,3582,2761,2908,2937,2929,2963,2783,2580,2489,2249,2960,2744,2929,2649,2763,2755,2780" :show="rrMatch(&quot;manuel z\u00e4nglein&quot;, &quot;62&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;manuel z\u00e4nglein&quot;, &quot;62&quot;, &quot;20&quot;)">
+<summary class="ls-row" style="--w:29.85%" aria-label="Rank 20, Manuel Zänglein, 20 yards, 134.1 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>20</span>
+<span class="ls-nm">Manuel Zänglein</span>
+<span class="ls-yd">20</span>
+<span class="ls-km">134.1</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 62 · DE · Men · DNF · out at Sat 08:00</p>
+<p class="ls-pnl-said">Lost 11:51 between yard 13 and yard 14.</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="20" data-r="21" data-c="m" data-n="alex kukla" data-b="10" data-s=",,,,,,,,,,,," data-l="" :show="rrMatch(&quot;alex kukla&quot;, &quot;10&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;alex kukla&quot;, &quot;10&quot;, &quot;21&quot;)">
+<summary class="ls-row" style="--w:29.85%" aria-label="Rank 21, Alex Kukla, 20 yards, 134.1 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>21</span>
+<span class="ls-nm">Alex Kukla</span>
+<span class="ls-yd">20</span>
+<span class="ls-km">134.1</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 10 · DE · Men · DNF · out at Sat 08:00</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="20" data-r="22" data-c="m" data-n="tithey schulz" data-b="20" data-s=",,,,,,,,,,,," data-l="" :show="rrMatch(&quot;tithey schulz&quot;, &quot;20&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;tithey schulz&quot;, &quot;20&quot;, &quot;22&quot;)">
+<summary class="ls-row" style="--w:29.85%" aria-label="Rank 22, Tithey Schulz, 20 yards, 134.1 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>22</span>
+<span class="ls-nm">Tithey Schulz</span>
+<span class="ls-yd">20</span>
+<span class="ls-km">134.1</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 20 · DE · Men · DNF · out at Sat 08:00</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="20" data-r="23" data-c="m" data-n="falk von göler" data-b="28" data-s=",,,,,,,,,,,," data-l="" :show="rrMatch(&quot;falk von g\u00f6ler&quot;, &quot;28&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;falk von g\u00f6ler&quot;, &quot;28&quot;, &quot;23&quot;)">
+<summary class="ls-row" style="--w:29.85%" aria-label="Rank 23, Falk Von Göler, 20 yards, 134.1 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>23</span>
+<span class="ls-nm">Falk Von Göler</span>
+<span class="ls-yd">20</span>
+<span class="ls-km">134.1</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 28 · DE · Men · DNF · out at Sat 08:00</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="20" data-r="24" data-c="m" data-n="lenny scheidhauer" data-b="109" data-s=",,,,,,,,,,,," data-l="" :show="rrMatch(&quot;lenny scheidhauer&quot;, &quot;109&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;lenny scheidhauer&quot;, &quot;109&quot;, &quot;24&quot;)">
+<summary class="ls-row" style="--w:29.85%" aria-label="Rank 24, Lenny Scheidhauer, 20 yards, 134.1 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>24</span>
+<span class="ls-nm">Lenny Scheidhauer</span>
+<span class="ls-yd">20</span>
+<span class="ls-km">134.1</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 109 · DE · Men · DNF · out at Sat 08:00</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="19" data-r="25" data-c="m" data-n="manuel richwien" data-b="67" data-s=",,,,,,,,,,,," data-l="" :show="rrMatch(&quot;manuel richwien&quot;, &quot;67&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;manuel richwien&quot;, &quot;67&quot;, &quot;25&quot;)">
+<summary class="ls-row" style="--w:28.36%" aria-label="Rank 25, Manuel Richwien, 19 yards, 127.4 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>25</span>
+<span class="ls-nm">Manuel Richwien</span>
+<span class="ls-yd">19</span>
+<span class="ls-km">127.4</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 67 · DE · Men · DNF · out at Sat 07:00</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="18" data-r="26" data-c="m" data-n="ludwig canty" data-b="61" data-s=",,,,,,,,,,,," data-l="" :show="rrMatch(&quot;ludwig canty&quot;, &quot;61&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;ludwig canty&quot;, &quot;61&quot;, &quot;26&quot;)">
+<summary class="ls-row" style="--w:26.87%" aria-label="Rank 26, Ludwig Canty, 18 yards, 120.7 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>26</span>
+<span class="ls-nm">Ludwig Canty</span>
+<span class="ls-yd">18</span>
+<span class="ls-km">120.7</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 61 · DE · Men · DNF · out at Sat 06:00</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="18" data-r="27" data-c="m" data-n="milan naessens" data-b="56" data-s=",,,,,,,,,,,," data-l="" :show="rrMatch(&quot;milan naessens&quot;, &quot;56&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;milan naessens&quot;, &quot;56&quot;, &quot;27&quot;)">
+<summary class="ls-row" style="--w:26.87%" aria-label="Rank 27, Milan Naessens, 18 yards, 120.7 kilometres, BE">
+<span class="ls-rk">
+<i>0</i>27</span>
+<span class="ls-nm">Milan Naessens</span>
+<span class="ls-yd">18</span>
+<span class="ls-km">120.7</span>
+<span class="ls-nat">BE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 56 · BE · Men · DNF · out at Sat 06:00</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="18" data-r="28" data-c="m" data-n="leon dahlhausen" data-b="106" data-s="2796,6,2910,2,2866,114,720,749,5,690,2,17197,3599" data-l="2893,2910,2855,2892,2851,2796" :show="rrMatch(&quot;leon dahlhausen&quot;, &quot;106&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;leon dahlhausen&quot;, &quot;106&quot;, &quot;28&quot;)">
+<summary class="ls-row" style="--w:26.87%" aria-label="Rank 28, Leon Dahlhausen, 18 yards, 120.7 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>28</span>
+<span class="ls-nm">Leon Dahlhausen</span>
+<span class="ls-yd">18</span>
+<span class="ls-km">120.7</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 106 · DE · Men · DNF · out at Sat 06:00</p>
+<p class="ls-pnl-said">18 yards inside a 1:54 spread.</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="18" data-r="29" data-c="m" data-n="tim heimann" data-b="8" data-s="2649,4,3100,16,2883,451,731,951,4,541,14,46128,10972" data-l="2776,2852,2919,2649,2917,2662,2691,2978,2829,2809,2851,3000,3038,3059,2998,3100" :show="rrMatch(&quot;tim heimann&quot;, &quot;8&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;tim heimann&quot;, &quot;8&quot;, &quot;29&quot;)">
+<summary class="ls-row" style="--w:26.87%" aria-label="Rank 29, Tim Heimann, 18 yards, 120.7 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>29</span>
+<span class="ls-nm">Tim Heimann</span>
+<span class="ls-yd">18</span>
+<span class="ls-km">120.7</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 8 · DE · Men · DNF · out at Sat 06:00</p>
+<p class="ls-pnl-said">18 yards inside a 7:31 spread.</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="18" data-r="30" data-c="m" data-n="lenny cool" data-b="101" data-s="2884,3,3265,15,3027,381,584,716,3,335,15,51466,9347" data-l="3092,2978,2884,2941,2929,2969,3034,3055,2924,3078,3044,3093,2965,3028,3265,2974,3213" :show="rrMatch(&quot;lenny cool&quot;, &quot;101&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;lenny cool&quot;, &quot;101&quot;, &quot;30&quot;)">
+<summary class="ls-row" style="--w:26.87%" aria-label="Rank 30, Lenny Cool, 18 yards, 120.7 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>30</span>
+<span class="ls-nm">Lenny Cool</span>
+<span class="ls-yd">18</span>
+<span class="ls-km">120.7</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 101 · DE · Men · DNF · out at Sat 06:00</p>
+<p class="ls-pnl-said">18 yards inside a 6:21 spread.</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="18" data-r="31" data-c="m" data-n="gerrit knein" data-b="3" data-s="2907,14,3098,1,2991,191,611,693,14,502,1,47853,9163" data-l="3098,3014,2979,2948,2941,2930,2927,2986,2963,3058,2947,3075,3020,2907,3044,3016" :show="rrMatch(&quot;gerrit knein&quot;, &quot;3&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;gerrit knein&quot;, &quot;3&quot;, &quot;31&quot;)">
+<summary class="ls-row" style="--w:26.87%" aria-label="Rank 31, Gerrit Knein, 18 yards, 120.7 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>31</span>
+<span class="ls-nm">Gerrit Knein</span>
+<span class="ls-yd">18</span>
+<span class="ls-km">120.7</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 3 · DE · Men · DNF · out at Sat 06:00</p>
+<p class="ls-pnl-said">18 yards inside a 3:11 spread.</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="18" data-r="32" data-c="m" data-n="alexander wendt" data-b="19" data-s="2366,10,3286,18,2678,920,958,1234,10,740,3,48204,16282" data-l="2652,2828,2860,2792,2783,2760,2649,2735,2740,2366,2441,2488,2493,2588,2409,2615,2719,3286" :show="rrMatch(&quot;alexander wendt&quot;, &quot;19&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;alexander wendt&quot;, &quot;19&quot;, &quot;32&quot;)">
+<summary class="ls-row" style="--w:26.87%" aria-label="Rank 32, Alexander Wendt, 18 yards, 120.7 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>32</span>
+<span class="ls-nm">Alexander Wendt</span>
+<span class="ls-yd">18</span>
+<span class="ls-km">120.7</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 19 · DE · Men · DNF · out at Sat 06:00</p>
+<p class="ls-pnl-said">Lost 9:27 between yard 17 and yard 18.</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="18" data-r="33" data-c="f" data-n="mia walsoe lehn" data-b="2" data-s="2695,8,3940,19,2981,1245,672,905,8,184,18,56648,12092" data-l="2822,2901,2840,2890,2718,2848,2787,2695,2827,2885,2758,2874,2927,3028,3099,3066,3327,3416,3940" :show="rrMatch(&quot;mia walsoe lehn&quot;, &quot;2&quot;, &quot;f&quot;)" :style="'order:' + rrOrder(&quot;mia walsoe lehn&quot;, &quot;2&quot;, &quot;33&quot;)">
+<summary class="ls-row" style="--w:26.87%" aria-label="Rank 33, Mia Walsoe Lehn, 18 yards, 120.7 kilometres, DK">
+<span class="ls-rk">
+<i>0</i>33</span>
+<span class="ls-nm">Mia Walsoe Lehn</span>
+<span class="ls-yd">18</span>
+<span class="ls-km">120.7</span>
+<span class="ls-nat">DK</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 2 · DK · Women · DNF · out at Sat 06:00</p>
+<p class="ls-pnl-note">Second woman</p>
+<p class="ls-pnl-said">Lost 8:44 between yard 18 and yard 19.</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="18" data-r="34" data-c="f" data-n="paulina zäck" data-b="66" data-s=",,,,,,,,,,,," data-l="" :show="rrMatch(&quot;paulina z\u00e4ck&quot;, &quot;66&quot;, &quot;f&quot;)" :style="'order:' + rrOrder(&quot;paulina z\u00e4ck&quot;, &quot;66&quot;, &quot;34&quot;)">
+<summary class="ls-row" style="--w:26.87%" aria-label="Rank 34, Paulina Zäck, 18 yards, 120.7 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>34</span>
+<span class="ls-nm">Paulina Zäck</span>
+<span class="ls-yd">18</span>
+<span class="ls-km">120.7</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 66 · DE · Women · DNF · out at Sat 06:00</p>
+<p class="ls-pnl-note">Third woman</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="17" data-r="35" data-c="m" data-n="linus nibbenhagen" data-b="49" data-s=",,,,,,,,,,,," data-l="" :show="rrMatch(&quot;linus nibbenhagen&quot;, &quot;49&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;linus nibbenhagen&quot;, &quot;49&quot;, &quot;35&quot;)">
+<summary class="ls-row" style="--w:25.37%" aria-label="Rank 35, Linus Nibbenhagen, 17 yards, 114.0 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>35</span>
+<span class="ls-nm">Linus Nibbenhagen</span>
+<span class="ls-yd">17</span>
+<span class="ls-km">114.0</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 49 · DE · Men · DNF · out at Sat 05:00</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="17" data-r="36" data-c="m" data-n="tobi oebel" data-b="9" data-s="2452,3,3076,16,2674,624,953,1148,3,636,15,42780,14296" data-l="2762,2499,2452,2516,2517,2548,2593,2522,2617,2676,2741,2728,2813,2756,2964,3076" :show="rrMatch(&quot;tobi oebel&quot;, &quot;9&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;tobi oebel&quot;, &quot;9&quot;, &quot;36&quot;)">
+<summary class="ls-row" style="--w:25.37%" aria-label="Rank 36, Tobi Oebel, 17 yards, 114.0 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>36</span>
+<span class="ls-nm">Tobi Oebel</span>
+<span class="ls-yd">17</span>
+<span class="ls-km">114.0</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 9 · DE · Men · DNF · out at Sat 05:00</p>
+<p class="ls-pnl-said">Slowed from 42:29 a yard to 47:47.</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="17" data-r="37" data-c="m" data-n="lasse balthasar schwieren" data-b="23" data-s=",,,,,,,,,,,," data-l="" :show="rrMatch(&quot;lasse balthasar schwieren&quot;, &quot;23&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;lasse balthasar schwieren&quot;, &quot;23&quot;, &quot;37&quot;)">
+<summary class="ls-row" style="--w:25.37%" aria-label="Rank 37, Lasse Balthasar Schwieren, 17 yards, 114.0 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>37</span>
+<span class="ls-nm">Lasse Balthasar Schwieren</span>
+<span class="ls-yd">17</span>
+<span class="ls-km">114.0</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 23 · DE · Men · DNF · out at Sat 05:00</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="17" data-r="38" data-c="m" data-n="paul der ganove" data-b="12" data-s="2839,2,3645,4,3076,806,531,761,2,0,4,46147,7437" data-l="3086,2839,2893,3645,2933,3596,2913,2972,2963,3089,3131,3097,2855,2996,3139" :show="rrMatch(&quot;paul der ganove&quot;, &quot;12&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;paul der ganove&quot;, &quot;12&quot;, &quot;38&quot;)">
+<summary class="ls-row" style="--w:25.37%" aria-label="Rank 38, Paul der Ganove, 17 yards, 114.0 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>38</span>
+<span class="ls-nm">Paul der Ganove</span>
+<span class="ls-yd">17</span>
+<span class="ls-km">114.0</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 12 · DE · Men · DNF · out at Sat 05:00</p>
+<p class="ls-pnl-said">Lost 12:32 between yard 3 and yard 4.</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="17" data-r="39" data-c="m" data-n="peter knein" data-b="5" data-s=",,,,,,,,,,,," data-l="" :show="rrMatch(&quot;peter knein&quot;, &quot;5&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;peter knein&quot;, &quot;5&quot;, &quot;39&quot;)">
+<summary class="ls-row" style="--w:25.37%" aria-label="Rank 39, Peter Knein, 17 yards, 114.0 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>39</span>
+<span class="ls-nm">Peter Knein</span>
+<span class="ls-yd">17</span>
+<span class="ls-km">114.0</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 5 · DE · Men · DNF · out at Sat 05:00</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="17" data-r="40" data-c="m" data-n="jannis liebscher" data-b="80" data-s="2219,6,3411,17,2776,1192,864,1381,6,565,13,47184,13827" data-l="2604,2683,2600,2687,2579,2219,3013,2943,2807,2734,2661,2752,3035,2948,2955,2553,3411" :show="rrMatch(&quot;jannis liebscher&quot;, &quot;80&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;jannis liebscher&quot;, &quot;80&quot;, &quot;40&quot;)">
+<summary class="ls-row" style="--w:25.37%" aria-label="Rank 40, Jannis Liebscher, 17 yards, 114.0 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>40</span>
+<span class="ls-nm">Jannis Liebscher</span>
+<span class="ls-yd">17</span>
+<span class="ls-km">114.0</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 80 · DE · Men · DNF · out at Sat 05:00</p>
+<p class="ls-pnl-said">Lost 14:18 between yard 16 and yard 17.</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="17" data-r="41" data-c="m" data-n="daniel sarcevic" data-b="37" data-s=",,,,,,,,,,,," data-l="" :show="rrMatch(&quot;daniel sarcevic&quot;, &quot;37&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;daniel sarcevic&quot;, &quot;37&quot;, &quot;41&quot;)">
+<summary class="ls-row" style="--w:25.37%" aria-label="Rank 41, Daniel Sarcevic, 17 yards, 114.0 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>41</span>
+<span class="ls-nm">Daniel Sarcevic</span>
+<span class="ls-yd">17</span>
+<span class="ls-km">114.0</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 37 · DE · Men · DNF · out at Sat 05:00</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="17" data-r="42" data-c="m" data-n="jari niklas" data-b="107" data-s=",,,,,,,,,,,," data-l="" :show="rrMatch(&quot;jari niklas&quot;, &quot;107&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;jari niklas&quot;, &quot;107&quot;, &quot;42&quot;)">
+<summary class="ls-row" style="--w:25.37%" aria-label="Rank 42, Jari Niklas, 17 yards, 114.0 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>42</span>
+<span class="ls-nm">Jari Niklas</span>
+<span class="ls-yd">17</span>
+<span class="ls-km">114.0</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 107 · DE · Men · DNF · out at Sat 05:00</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="16" data-r="43" data-c="m" data-n="robin zirngibl" data-b="68" data-s=",,,,,,,,,,,," data-l="" :show="rrMatch(&quot;robin zirngibl&quot;, &quot;68&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;robin zirngibl&quot;, &quot;68&quot;, &quot;43&quot;)">
+<summary class="ls-row" style="--w:23.88%" aria-label="Rank 43, Robin Zirngibl, 16 yards, 107.3 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>43</span>
+<span class="ls-nm">Robin Zirngibl</span>
+<span class="ls-yd">16</span>
+<span class="ls-km">107.3</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 68 · DE · Men · DNF · out at Sat 04:00</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="16" data-r="44" data-c="f" data-n="phelia müller" data-b="91" data-s=",,,,,,,,,,,," data-l="" :show="rrMatch(&quot;phelia m\u00fcller&quot;, &quot;91&quot;, &quot;f&quot;)" :style="'order:' + rrOrder(&quot;phelia m\u00fcller&quot;, &quot;91&quot;, &quot;44&quot;)">
+<summary class="ls-row" style="--w:23.88%" aria-label="Rank 44, Phelia Müller, 16 yards, 107.3 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>44</span>
+<span class="ls-nm">Phelia Müller</span>
+<span class="ls-yd">16</span>
+<span class="ls-km">107.3</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 91 · DE · Women · DNF · out at Sat 04:00</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="16" data-r="45" data-c="m" data-n="bosse jordt" data-b="75" data-s="2654,5,3716,14,2881,1062,741,946,5,0,14,43217,10369" data-l="2885,2681,2666,2813,2654,2672,2739,2761,2750,2783,3591,2725,2711,3716,3070" :show="rrMatch(&quot;bosse jordt&quot;, &quot;75&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;bosse jordt&quot;, &quot;75&quot;, &quot;45&quot;)">
+<summary class="ls-row" style="--w:23.88%" aria-label="Rank 45, Bosse Jordt, 16 yards, 107.3 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>45</span>
+<span class="ls-nm">Bosse Jordt</span>
+<span class="ls-yd">16</span>
+<span class="ls-km">107.3</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 75 · DE · Men · DNF · out at Sat 04:00</p>
+<p class="ls-pnl-said">Lost 16:45 between yard 13 and yard 14.</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="16" data-r="46" data-c="m" data-n="timo kraft" data-b="73" data-s="2688,7,3140,15,2885,452,733,912,7,536,14,43279,10261" data-l="2746,2823,2897,2860,2909,2824,2688,2757,2845,2789,2960,2962,3015,3064,3140" :show="rrMatch(&quot;timo kraft&quot;, &quot;73&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;timo kraft&quot;, &quot;73&quot;, &quot;46&quot;)">
+<summary class="ls-row" style="--w:23.88%" aria-label="Rank 46, Timo Kraft, 16 yards, 107.3 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>46</span>
+<span class="ls-nm">Timo Kraft</span>
+<span class="ls-yd">16</span>
+<span class="ls-km">107.3</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 73 · DE · Men · DNF · out at Sat 04:00</p>
+<p class="ls-pnl-said">16 yards inside a 7:32 spread.</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="15" data-r="47" data-c="m" data-n="julien brown" data-b="104" data-s="2684,10,2956,6,2831,272,768,916,10,644,6,36807,9214" data-l="2702,2777,2798,2893,2768,2956,2894,2931,2786,2684,2920,2877,2821" :show="rrMatch(&quot;julien brown&quot;, &quot;104&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;julien brown&quot;, &quot;104&quot;, &quot;47&quot;)">
+<summary class="ls-row" style="--w:22.39%" aria-label="Rank 47, Julien Brown, 15 yards, 100.6 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>47</span>
+<span class="ls-nm">Julien Brown</span>
+<span class="ls-yd">15</span>
+<span class="ls-km">100.6</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 104 · DE · Men · DNF · out at Sat 03:00</p>
+<p class="ls-pnl-said">15 yards inside a 4:32 spread.</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="15" data-r="48" data-c="m" data-n="andre rochell" data-b="11" data-s=",,,,,,,,,,,," data-l="" :show="rrMatch(&quot;andre rochell&quot;, &quot;11&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;andre rochell&quot;, &quot;11&quot;, &quot;48&quot;)">
+<summary class="ls-row" style="--w:22.39%" aria-label="Rank 48, Andre Rochell, 15 yards, 100.6 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>48</span>
+<span class="ls-nm">Andre Rochell</span>
+<span class="ls-yd">15</span>
+<span class="ls-km">100.6</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 11 · DE · Men · DNF · out at Sat 03:00</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="15" data-r="49" data-c="f" data-n="sophie lesser" data-b="71" data-s=",,,,,,,,,,,," data-l="" :show="rrMatch(&quot;sophie lesser&quot;, &quot;71&quot;, &quot;f&quot;)" :style="'order:' + rrOrder(&quot;sophie lesser&quot;, &quot;71&quot;, &quot;49&quot;)">
+<summary class="ls-row" style="--w:22.39%" aria-label="Rank 49, Sophie Lesser, 15 yards, 100.6 kilometres, FR">
+<span class="ls-rk">
+<i>0</i>49</span>
+<span class="ls-nm">Sophie Lesser</span>
+<span class="ls-yd">15</span>
+<span class="ls-km">100.6</span>
+<span class="ls-nat">FR</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 71 · FR · Women · DNF · out at Sat 03:00</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="15" data-r="50" data-c="m" data-n="noel hoitz" data-b="31" data-s="2580,7,3095,15,2837,515,782,1020,7,585,12,42551,10944" data-l="2789,2731,2712,2897,2719,2954,2580,2657,2777,2810,2886,3015,2918,3011,3095" :show="rrMatch(&quot;noel hoitz&quot;, &quot;31&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;noel hoitz&quot;, &quot;31&quot;, &quot;50&quot;)">
+<summary class="ls-row" style="--w:22.39%" aria-label="Rank 50, Noel Hoitz, 15 yards, 100.6 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>50</span>
+<span class="ls-nm">Noel Hoitz</span>
+<span class="ls-yd">15</span>
+<span class="ls-km">100.6</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 31 · DE · Men · DNF · out at Sat 03:00</p>
+<p class="ls-pnl-said">15 yards inside a 8:35 spread.</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="15" data-r="51" data-c="f" data-n="laura edenharder" data-b="51" data-s=",,,,,,,,,,,," data-l="" :show="rrMatch(&quot;laura edenharder&quot;, &quot;51&quot;, &quot;f&quot;)" :style="'order:' + rrOrder(&quot;laura edenharder&quot;, &quot;51&quot;, &quot;51&quot;)">
+<summary class="ls-row" style="--w:22.39%" aria-label="Rank 51, Laura Edenharder, 15 yards, 100.6 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>51</span>
+<span class="ls-nm">Laura Edenharder</span>
+<span class="ls-yd">15</span>
+<span class="ls-km">100.6</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 51 · DE · Women · DNF · out at Sat 03:00</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="15" data-r="52" data-c="m" data-n="daniel hein" data-b="38" data-s=",,,,,,,,,,,," data-l="" :show="rrMatch(&quot;daniel hein&quot;, &quot;38&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;daniel hein&quot;, &quot;38&quot;, &quot;52&quot;)">
+<summary class="ls-row" style="--w:22.39%" aria-label="Rank 52, Daniel Hein, 15 yards, 100.6 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>52</span>
+<span class="ls-nm">Daniel Hein</span>
+<span class="ls-yd">15</span>
+<span class="ls-km">100.6</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 38 · DE · Men · DNF · out at Sat 03:00</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="15" data-r="53" data-c="m" data-n="dominik martinovic" data-b="63" data-s="2628,11,3074,12,2811,446,803,972,11,526,12,36540,9634" data-l="2680,2645,2708,2699,2775,2748,2794,2828,2914,3073,2628,3074,2974" :show="rrMatch(&quot;dominik martinovic&quot;, &quot;63&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;dominik martinovic&quot;, &quot;63&quot;, &quot;53&quot;)">
+<summary class="ls-row" style="--w:22.39%" aria-label="Rank 53, Dominik Martinovic, 15 yards, 100.6 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>53</span>
+<span class="ls-nm">Dominik Martinovic</span>
+<span class="ls-yd">15</span>
+<span class="ls-km">100.6</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 63 · DE · Men · DNF · out at Sat 03:00</p>
+<p class="ls-pnl-said">Lost 7:26 between yard 11 and yard 12.</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="15" data-r="54" data-c="f" data-n="laura dahmen" data-b="50" data-s=",,,,,,,,,,,," data-l="" :show="rrMatch(&quot;laura dahmen&quot;, &quot;50&quot;, &quot;f&quot;)" :style="'order:' + rrOrder(&quot;laura dahmen&quot;, &quot;50&quot;, &quot;54&quot;)">
+<summary class="ls-row" style="--w:22.39%" aria-label="Rank 54, Laura Dahmen, 15 yards, 100.6 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>54</span>
+<span class="ls-nm">Laura Dahmen</span>
+<span class="ls-yd">15</span>
+<span class="ls-km">100.6</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 50 · DE · Women · DNF · out at Sat 03:00</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="15" data-r="55" data-c="m" data-n="sascha waleczek" data-b="58" data-s=",,,,,,,,,,,," data-l="" :show="rrMatch(&quot;sascha waleczek&quot;, &quot;58&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;sascha waleczek&quot;, &quot;58&quot;, &quot;55&quot;)">
+<summary class="ls-row" style="--w:22.39%" aria-label="Rank 55, Sascha Waleczek, 15 yards, 100.6 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>55</span>
+<span class="ls-nm">Sascha Waleczek</span>
+<span class="ls-yd">15</span>
+<span class="ls-km">100.6</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 58 · DE · Men · DNF · out at Sat 03:00</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="15" data-r="56" data-c="f" data-n="imke salander" data-b="79" data-s=",,,,,,,,,,,," data-l="" :show="rrMatch(&quot;imke salander&quot;, &quot;79&quot;, &quot;f&quot;)" :style="'order:' + rrOrder(&quot;imke salander&quot;, &quot;79&quot;, &quot;56&quot;)">
+<summary class="ls-row" style="--w:22.39%" aria-label="Rank 56, Imke Salander, 15 yards, 100.6 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>56</span>
+<span class="ls-nm">Imke Salander</span>
+<span class="ls-yd">15</span>
+<span class="ls-km">100.6</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 79 · DE · Women · DNF · out at Sat 03:00</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="15" data-r="57" data-c="f" data-n="maren schiller" data-b="14" data-s=",,,,,,,,,,,," data-l="" :show="rrMatch(&quot;maren schiller&quot;, &quot;14&quot;, &quot;f&quot;)" :style="'order:' + rrOrder(&quot;maren schiller&quot;, &quot;14&quot;, &quot;57&quot;)">
+<summary class="ls-row" style="--w:22.39%" aria-label="Rank 57, Maren Schiller, 15 yards, 100.6 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>57</span>
+<span class="ls-nm">Maren Schiller</span>
+<span class="ls-yd">15</span>
+<span class="ls-km">100.6</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 14 · DE · Women · DNF · out at Sat 03:00</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="15" data-r="58" data-c="m" data-n="tim spielmann" data-b="72" data-s=",,,,,,,,,,,," data-l="" :show="rrMatch(&quot;tim spielmann&quot;, &quot;72&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;tim spielmann&quot;, &quot;72&quot;, &quot;58&quot;)">
+<summary class="ls-row" style="--w:22.39%" aria-label="Rank 58, Tim Spielmann, 15 yards, 100.6 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>58</span>
+<span class="ls-nm">Tim Spielmann</span>
+<span class="ls-yd">15</span>
+<span class="ls-km">100.6</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 72 · DE · Men · DNF · out at Sat 03:00</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="15" data-r="59" data-c="f" data-n="sophie krenhardt" data-b="95" data-s=",,,,,,,,,,,," data-l="" :show="rrMatch(&quot;sophie krenhardt&quot;, &quot;95&quot;, &quot;f&quot;)" :style="'order:' + rrOrder(&quot;sophie krenhardt&quot;, &quot;95&quot;, &quot;59&quot;)">
+<summary class="ls-row" style="--w:22.39%" aria-label="Rank 59, Sophie Krenhardt, 15 yards, 100.6 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>59</span>
+<span class="ls-nm">Sophie Krenhardt</span>
+<span class="ls-yd">15</span>
+<span class="ls-km">100.6</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 95 · DE · Women · DNF · out at Sat 03:00</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="15" data-r="60" data-c="m" data-n="leon bamberg" data-b="98" data-s=",,,,,,,,,,,," data-l="" :show="rrMatch(&quot;leon bamberg&quot;, &quot;98&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;leon bamberg&quot;, &quot;98&quot;, &quot;60&quot;)">
+<summary class="ls-row" style="--w:22.39%" aria-label="Rank 60, Leon Bamberg, 15 yards, 100.6 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>60</span>
+<span class="ls-nm">Leon Bamberg</span>
+<span class="ls-yd">15</span>
+<span class="ls-km">100.6</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 98 · DE · Men · DNF · out at Sat 03:00</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="15" data-r="61" data-c="f" data-n="jana galander" data-b="43" data-s="2745,13,3329,15,2869,584,764,855,13,564,14,43035,10694" data-l="2761,2913,2815,2814,2818,2824,2769,2801,2868,2887,2877,2778,2745,3036,3329" :show="rrMatch(&quot;jana galander&quot;, &quot;43&quot;, &quot;f&quot;)" :style="'order:' + rrOrder(&quot;jana galander&quot;, &quot;43&quot;, &quot;61&quot;)">
+<summary class="ls-row" style="--w:22.39%" aria-label="Rank 61, Jana Galander, 15 yards, 100.6 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>61</span>
+<span class="ls-nm">Jana Galander</span>
+<span class="ls-yd">15</span>
+<span class="ls-km">100.6</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 43 · DE · Women · DNF · out at Sat 03:00</p>
+<p class="ls-pnl-said">15 yards inside a 9:44 spread.</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="15" data-r="62" data-c="m" data-n="daniel malkusch" data-b="78" data-s=",,,,,,,,,,,," data-l="" :show="rrMatch(&quot;daniel malkusch&quot;, &quot;78&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;daniel malkusch&quot;, &quot;78&quot;, &quot;62&quot;)">
+<summary class="ls-row" style="--w:22.39%" aria-label="Rank 62, Daniel Malkusch, 15 yards, 100.6 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>62</span>
+<span class="ls-nm">Daniel Malkusch</span>
+<span class="ls-yd">15</span>
+<span class="ls-km">100.6</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 78 · DE · Men · DNF · out at Sat 03:00</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="15" data-r="63" data-c="m" data-n="sven bertram" data-b="81" data-s=",,,,,,,,,,,," data-l="" :show="rrMatch(&quot;sven bertram&quot;, &quot;81&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;sven bertram&quot;, &quot;81&quot;, &quot;63&quot;)">
+<summary class="ls-row" style="--w:22.39%" aria-label="Rank 63, Sven Bertram, 15 yards, 100.6 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>63</span>
+<span class="ls-nm">Sven Bertram</span>
+<span class="ls-yd">15</span>
+<span class="ls-km">100.6</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 81 · DE · Men · DNF · out at Sat 03:00</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="13" data-r="64" data-c="f" data-n="sofie kock" data-b="59" data-s="2690,4,3060,13,2783,370,840,910,4,706,12,36178,10082" data-l="2739,2742,2719,2690,2756,2800,2807,2793,2695,2745,2738,2894,3060" :show="rrMatch(&quot;sofie kock&quot;, &quot;59&quot;, &quot;f&quot;)" :style="'order:' + rrOrder(&quot;sofie kock&quot;, &quot;59&quot;, &quot;64&quot;)">
+<summary class="ls-row" style="--w:19.40%" aria-label="Rank 64, Sofie Kock, 13 yards, 87.2 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>64</span>
+<span class="ls-nm">Sofie Kock</span>
+<span class="ls-yd">13</span>
+<span class="ls-km">87.2</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 59 · DE · Women · DNF · out at Sat 01:00</p>
+<p class="ls-pnl-said">13 yards inside a 6:10 spread.</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="13" data-r="65" data-c="m" data-n="valentin herrera" data-b="21" data-s=",,,,,,,,,,,," data-l="" :show="rrMatch(&quot;valentin herrera&quot;, &quot;21&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;valentin herrera&quot;, &quot;21&quot;, &quot;65&quot;)">
+<summary class="ls-row" style="--w:19.40%" aria-label="Rank 65, Valentin Herrera, 13 yards, 87.2 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>65</span>
+<span class="ls-nm">Valentin Herrera</span>
+<span class="ls-yd">13</span>
+<span class="ls-km">87.2</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 21 · DE · Men · DNF · out at Sat 01:00</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="13" data-r="66" data-c="m" data-n="tristan poetzsch" data-b="57" data-s=",,,,,,,,,,,," data-l="" :show="rrMatch(&quot;tristan poetzsch&quot;, &quot;57&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;tristan poetzsch&quot;, &quot;57&quot;, &quot;66&quot;)">
+<summary class="ls-row" style="--w:19.40%" aria-label="Rank 66, Tristan Poetzsch, 13 yards, 87.2 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>66</span>
+<span class="ls-nm">Tristan Poetzsch</span>
+<span class="ls-yd">13</span>
+<span class="ls-km">87.2</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 57 · DE · Men · DNF · out at Sat 01:00</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="13" data-r="67" data-c="f" data-n="bente clausen" data-b="34" data-s=",,,,,,,,,,,," data-l="" :show="rrMatch(&quot;bente clausen&quot;, &quot;34&quot;, &quot;f&quot;)" :style="'order:' + rrOrder(&quot;bente clausen&quot;, &quot;34&quot;, &quot;67&quot;)">
+<summary class="ls-row" style="--w:19.40%" aria-label="Rank 67, Bente Clausen, 13 yards, 87.2 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>67</span>
+<span class="ls-nm">Bente Clausen</span>
+<span class="ls-yd">13</span>
+<span class="ls-km">87.2</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 34 · DE · Women · DNF · out at Sat 01:00</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="13" data-r="68" data-c="m" data-n="jeroen ponjé" data-b="45" data-s=",,,,,,,,,,,," data-l="" :show="rrMatch(&quot;jeroen ponj\u00e9&quot;, &quot;45&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;jeroen ponj\u00e9&quot;, &quot;45&quot;, &quot;68&quot;)">
+<summary class="ls-row" style="--w:19.40%" aria-label="Rank 68, Jeroen Ponjé, 13 yards, 87.2 kilometres, NL">
+<span class="ls-rk">
+<i>0</i>68</span>
+<span class="ls-nm">Jeroen Ponjé</span>
+<span class="ls-yd">13</span>
+<span class="ls-km">87.2</span>
+<span class="ls-nat">NL</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 45 · NL · Men · DNF · out at Sat 01:00</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="12" data-r="69" data-c="m" data-n="andré schürrle" data-b="100" data-s=",,,,,,,,,,,," data-l="" :show="rrMatch(&quot;andr\u00e9 sch\u00fcrrle&quot;, &quot;100&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;andr\u00e9 sch\u00fcrrle&quot;, &quot;100&quot;, &quot;69&quot;)">
+<summary class="ls-row" style="--w:17.91%" aria-label="Rank 69, André Schürrle, 12 yards, 80.5 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>69</span>
+<span class="ls-nm">André Schürrle</span>
+<span class="ls-yd">12</span>
+<span class="ls-km">80.5</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 100 · DE · Men · DNF · out at Sat 00:00</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="12" data-r="70" data-c="m" data-n="marvin kolleck" data-b="15" data-s=",,,,,,,,,,,," data-l="" :show="rrMatch(&quot;marvin kolleck&quot;, &quot;15&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;marvin kolleck&quot;, &quot;15&quot;, &quot;70&quot;)">
+<summary class="ls-row" style="--w:17.91%" aria-label="Rank 70, Marvin Kolleck, 12 yards, 80.5 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>70</span>
+<span class="ls-nm">Marvin Kolleck</span>
+<span class="ls-yd">12</span>
+<span class="ls-km">80.5</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 15 · DE · Men · DNF · out at Sat 00:00</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="12" data-r="71" data-c="m" data-n="nico römer" data-b="32" data-s=",,,,,,,,,,,," data-l="" :show="rrMatch(&quot;nico r\u00f6mer&quot;, &quot;32&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;nico r\u00f6mer&quot;, &quot;32&quot;, &quot;71&quot;)">
+<summary class="ls-row" style="--w:17.91%" aria-label="Rank 71, Nico Römer, 12 yards, 80.5 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>71</span>
+<span class="ls-nm">Nico Römer</span>
+<span class="ls-yd">12</span>
+<span class="ls-km">80.5</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 32 · DE · Men · DNF · out at Sat 00:00</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="12" data-r="72" data-c="m" data-n="sebastian trimborn" data-b="29" data-s="2573,6,3213,10,2894,640,714,1027,6,387,10,34729,7851" data-l="2920,2969,2928,2867,2884,2573,2813,2993,2895,3213,2694,2980" :show="rrMatch(&quot;sebastian trimborn&quot;, &quot;29&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;sebastian trimborn&quot;, &quot;29&quot;, &quot;72&quot;)">
+<summary class="ls-row" style="--w:17.91%" aria-label="Rank 72, Sebastian Trimborn, 12 yards, 80.5 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>72</span>
+<span class="ls-nm">Sebastian Trimborn</span>
+<span class="ls-yd">12</span>
+<span class="ls-km">80.5</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 29 · DE · Men · DNF · out at Sat 00:00</p>
+<p class="ls-pnl-said">Lost 5:18 between yard 9 and yard 10.</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="12" data-r="73" data-c="m" data-n="jascha hoffmann" data-b="44" data-s="2620,1,4225,13,2892,1605,819,980,1,523,12,37602,9823" data-l="2620,2657,2681,2743,2718,2749,2784,2795,2814,2765,2974,3077,4225" :show="rrMatch(&quot;jascha hoffmann&quot;, &quot;44&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;jascha hoffmann&quot;, &quot;44&quot;, &quot;73&quot;)">
+<summary class="ls-row" style="--w:17.91%" aria-label="Rank 73, Jascha Hoffmann, 12 yards, 80.5 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>73</span>
+<span class="ls-nm">Jascha Hoffmann</span>
+<span class="ls-yd">12</span>
+<span class="ls-km">80.5</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 44 · DE · Men · DNF · out at Sat 00:00</p>
+<p class="ls-pnl-said">Lost 19:08 between yard 12 and yard 13.</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="12" data-r="74" data-c="m" data-n="marco grotz" data-b="105" data-s=",,,,,,,,,,,," data-l="" :show="rrMatch(&quot;marco grotz&quot;, &quot;105&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;marco grotz&quot;, &quot;105&quot;, &quot;74&quot;)">
+<summary class="ls-row" style="--w:17.91%" aria-label="Rank 74, Marco Grotz, 12 yards, 80.5 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>74</span>
+<span class="ls-nm">Marco Grotz</span>
+<span class="ls-yd">12</span>
+<span class="ls-km">80.5</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 105 · DE · Men · DNF · out at Sat 00:00</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="12" data-r="75" data-c="m" data-n="aleksander piotr lingauer" data-b="24" data-s="2196,8,3178,12,2812,982,822,1404,8,480,10,33740,9038" data-l="2789,2872,2858,2865,2443,2905,2775,2196,2674,3120,3065,3178" :show="rrMatch(&quot;aleksander piotr lingauer&quot;, &quot;24&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;aleksander piotr lingauer&quot;, &quot;24&quot;, &quot;75&quot;)">
+<summary class="ls-row" style="--w:17.91%" aria-label="Rank 75, Aleksander Piotr Lingauer, 12 yards, 80.5 kilometres, PL">
+<span class="ls-rk">
+<i>0</i>75</span>
+<span class="ls-nm">Aleksander Piotr Lingauer</span>
+<span class="ls-yd">12</span>
+<span class="ls-km">80.5</span>
+<span class="ls-nat">PL</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 24 · PL · Men · DNF · out at Sat 00:00</p>
+<p class="ls-pnl-said">Lost 7:58 between yard 8 and yard 9.</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="12" data-r="76" data-c="m" data-n="mazen tadli" data-b="22" data-s=",,,,,,,,,,,," data-l="" :show="rrMatch(&quot;mazen tadli&quot;, &quot;22&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;mazen tadli&quot;, &quot;22&quot;, &quot;76&quot;)">
+<summary class="ls-row" style="--w:17.91%" aria-label="Rank 76, Mazen Tadli, 12 yards, 80.5 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>76</span>
+<span class="ls-nm">Mazen Tadli</span>
+<span class="ls-yd">12</span>
+<span class="ls-km">80.5</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 22 · DE · Men · DNF · out at Sat 00:00</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="11" data-r="77" data-c="m" data-n="joey dohle" data-b="46" data-s="2690,9,3075,11,2829,385,796,910,9,735,2,31115,7960" data-l="2775,2865,2862,2858,2834,2829,2761,2707,2690,2859,3075" :show="rrMatch(&quot;joey dohle&quot;, &quot;46&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;joey dohle&quot;, &quot;46&quot;, &quot;77&quot;)">
+<summary class="ls-row" style="--w:16.42%" aria-label="Rank 77, Joey Dohle, 11 yards, 73.8 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>77</span>
+<span class="ls-nm">Joey Dohle</span>
+<span class="ls-yd">11</span>
+<span class="ls-km">73.8</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 46 · DE · Men · DNF · out at Fri 23:00</p>
+<p class="ls-pnl-said">11 yards inside a 6:25 spread.</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="11" data-r="78" data-c="m" data-n="oliver ehmann" data-b="96" data-s=",,,,,,,,,,,," data-l="" :show="rrMatch(&quot;oliver ehmann&quot;, &quot;96&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;oliver ehmann&quot;, &quot;96&quot;, &quot;78&quot;)">
+<summary class="ls-row" style="--w:16.42%" aria-label="Rank 78, Oliver Ehmann, 11 yards, 73.8 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>78</span>
+<span class="ls-nm">Oliver Ehmann</span>
+<span class="ls-yd">11</span>
+<span class="ls-km">73.8</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 96 · DE · Men · DNF · out at Fri 23:00</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="10" data-r="79" data-c="m" data-n="fritz ferner" data-b="110" data-s=",,,,,,,,,,,," data-l="" :show="rrMatch(&quot;fritz ferner&quot;, &quot;110&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;fritz ferner&quot;, &quot;110&quot;, &quot;79&quot;)">
+<summary class="ls-row" style="--w:14.93%" aria-label="Rank 79, Fritz Ferner, 10 yards, 67.1 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>79</span>
+<span class="ls-nm">Fritz Ferner</span>
+<span class="ls-yd">10</span>
+<span class="ls-km">67.1</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 110 · DE · Men · DNF · out at Fri 22:00</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="10" data-r="80" data-c="m" data-n="joshua gottwald" data-b="41" data-s=",,,,,,,,,,,," data-l="" :show="rrMatch(&quot;joshua gottwald&quot;, &quot;41&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;joshua gottwald&quot;, &quot;41&quot;, &quot;80&quot;)">
+<summary class="ls-row" style="--w:14.93%" aria-label="Rank 80, Joshua Gottwald, 10 yards, 67.1 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>80</span>
+<span class="ls-nm">Joshua Gottwald</span>
+<span class="ls-yd">10</span>
+<span class="ls-km">67.1</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 41 · DE · Men · DNF · out at Fri 22:00</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="10" data-r="81" data-c="f" data-n="calista thiele" data-b="77" data-s=",,,,,,,,,,,," data-l="" :show="rrMatch(&quot;calista thiele&quot;, &quot;77&quot;, &quot;f&quot;)" :style="'order:' + rrOrder(&quot;calista thiele&quot;, &quot;77&quot;, &quot;81&quot;)">
+<summary class="ls-row" style="--w:14.93%" aria-label="Rank 81, Calista Thiele, 10 yards, 67.1 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>81</span>
+<span class="ls-nm">Calista Thiele</span>
+<span class="ls-yd">10</span>
+<span class="ls-km">67.1</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 77 · DE · Women · DNF · out at Fri 22:00</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="10" data-r="82" data-c="m" data-n="bak islam" data-b="84" data-s=",,,,,,,,,,,," data-l="" :show="rrMatch(&quot;bak islam&quot;, &quot;84&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;bak islam&quot;, &quot;84&quot;, &quot;82&quot;)">
+<summary class="ls-row" style="--w:14.93%" aria-label="Rank 82, Bak Islam, 10 yards, 67.1 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>82</span>
+<span class="ls-nm">Bak Islam</span>
+<span class="ls-yd">10</span>
+<span class="ls-km">67.1</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 84 · DE · Men · DNF · out at Fri 22:00</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="10" data-r="83" data-c="f" data-n="maren raab" data-b="54" data-s=",,,,,,,,,,,," data-l="" :show="rrMatch(&quot;maren raab&quot;, &quot;54&quot;, &quot;f&quot;)" :style="'order:' + rrOrder(&quot;maren raab&quot;, &quot;54&quot;, &quot;83&quot;)">
+<summary class="ls-row" style="--w:14.93%" aria-label="Rank 83, Maren Raab, 10 yards, 67.1 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>83</span>
+<span class="ls-nm">Maren Raab</span>
+<span class="ls-yd">10</span>
+<span class="ls-km">67.1</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 54 · DE · Women · DNF · out at Fri 22:00</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="9" data-r="84" data-c="m" data-n="julian bergmann" data-b="60" data-s=",,,,,,,,,,,," data-l="" :show="rrMatch(&quot;julian bergmann&quot;, &quot;60&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;julian bergmann&quot;, &quot;60&quot;, &quot;84&quot;)">
+<summary class="ls-row" style="--w:13.43%" aria-label="Rank 84, Julian Bergmann, 9 yards, 60.4 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>84</span>
+<span class="ls-nm">Julian Bergmann</span>
+<span class="ls-yd">9</span>
+<span class="ls-km">60.4</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 60 · DE · Men · DNF · out at Fri 21:00</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="9" data-r="85" data-c="m" data-n="carl hoffmann" data-b="30" data-s=",,,,,,,,,,,," data-l="" :show="rrMatch(&quot;carl hoffmann&quot;, &quot;30&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;carl hoffmann&quot;, &quot;30&quot;, &quot;85&quot;)">
+<summary class="ls-row" style="--w:13.43%" aria-label="Rank 85, Carl Hoffmann, 9 yards, 60.4 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>85</span>
+<span class="ls-nm">Carl Hoffmann</span>
+<span class="ls-yd">9</span>
+<span class="ls-km">60.4</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 30 · DE · Men · DNF · out at Fri 21:00</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="9" data-r="86" data-c="f" data-n="nina-marlen marx" data-b="65" data-s=",,,,,,,,,,,," data-l="" :show="rrMatch(&quot;nina-marlen marx&quot;, &quot;65&quot;, &quot;f&quot;)" :style="'order:' + rrOrder(&quot;nina-marlen marx&quot;, &quot;65&quot;, &quot;86&quot;)">
+<summary class="ls-row" style="--w:13.43%" aria-label="Rank 86, Nina-Marlen Marx, 9 yards, 60.4 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>86</span>
+<span class="ls-nm">Nina-Marlen Marx</span>
+<span class="ls-yd">9</span>
+<span class="ls-km">60.4</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 65 · DE · Women · DNF · out at Fri 21:00</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="9" data-r="87" data-c="f" data-n="jana miksch" data-b="64" data-s="2429,6,2531,5,2482,102,1123,1171,6,1069,5,17377,6740" data-l="2504,2430,2450,2516,2531,2429,2517" :show="rrMatch(&quot;jana miksch&quot;, &quot;64&quot;, &quot;f&quot;)" :style="'order:' + rrOrder(&quot;jana miksch&quot;, &quot;64&quot;, &quot;87&quot;)">
+<summary class="ls-row" style="--w:13.43%" aria-label="Rank 87, Jana Miksch, 9 yards, 60.4 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>87</span>
+<span class="ls-nm">Jana Miksch</span>
+<span class="ls-yd">9</span>
+<span class="ls-km">60.4</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 64 · DE · Women · DNF · out at Fri 21:00</p>
+<p class="ls-pnl-said">9 yards inside a 1:42 spread.</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="8" data-r="88" data-c="m" data-n="léo dahdah" data-b="36" data-s=",,,,,,,,,,,," data-l="" :show="rrMatch(&quot;l\u00e9o dahdah&quot;, &quot;36&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;l\u00e9o dahdah&quot;, &quot;36&quot;, &quot;88&quot;)">
+<summary class="ls-row" style="--w:11.94%" aria-label="Rank 88, Léo Dahdah, 8 yards, 53.6 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>88</span>
+<span class="ls-nm">Léo Dahdah</span>
+<span class="ls-yd">8</span>
+<span class="ls-km">53.6</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 36 · DE · Men · DNF · out at Fri 20:00</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="8" data-r="89" data-c="f" data-n="barbara anna bösch" data-b="52" data-s=",,,,,,,,,,,," data-l="" :show="rrMatch(&quot;barbara anna b\u00f6sch&quot;, &quot;52&quot;, &quot;f&quot;)" :style="'order:' + rrOrder(&quot;barbara anna b\u00f6sch&quot;, &quot;52&quot;, &quot;89&quot;)">
+<summary class="ls-row" style="--w:11.94%" aria-label="Rank 89, Barbara Anna Bösch, 8 yards, 53.6 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>89</span>
+<span class="ls-nm">Barbara Anna Bösch</span>
+<span class="ls-yd">8</span>
+<span class="ls-km">53.6</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 52 · DE · Women · DNF · out at Fri 20:00</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="8" data-r="90" data-c="m" data-n="lukas stapper" data-b="4" data-s=",,,,,,,,,,,," data-l="" :show="rrMatch(&quot;lukas stapper&quot;, &quot;4&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;lukas stapper&quot;, &quot;4&quot;, &quot;90&quot;)">
+<summary class="ls-row" style="--w:11.94%" aria-label="Rank 90, Lukas Stapper, 8 yards, 53.6 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>90</span>
+<span class="ls-nm">Lukas Stapper</span>
+<span class="ls-yd">8</span>
+<span class="ls-km">53.6</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 4 · DE · Men · DNF · out at Fri 20:00</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="7" data-r="91" data-c="m" data-n="stephan pütz" data-b="102" data-s=",,,,,,,,,,,," data-l="" :show="rrMatch(&quot;stephan p\u00fctz&quot;, &quot;102&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;stephan p\u00fctz&quot;, &quot;102&quot;, &quot;91&quot;)">
+<summary class="ls-row" style="--w:10.45%" aria-label="Rank 91, Stephan Pütz, 7 yards, 46.9 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>91</span>
+<span class="ls-nm">Stephan Pütz</span>
+<span class="ls-yd">7</span>
+<span class="ls-km">46.9</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 102 · DE · Men · DNF · out at Fri 19:00</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="6" data-r="92" data-c="f" data-n="vivien michella" data-b="99" data-s=",,,,,,,,,,,," data-l="" :show="rrMatch(&quot;vivien michella&quot;, &quot;99&quot;, &quot;f&quot;)" :style="'order:' + rrOrder(&quot;vivien michella&quot;, &quot;99&quot;, &quot;92&quot;)">
+<summary class="ls-row" style="--w:8.96%" aria-label="Rank 92, Vivien Michella, 6 yards, 40.2 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>92</span>
+<span class="ls-nm">Vivien Michella</span>
+<span class="ls-yd">6</span>
+<span class="ls-km">40.2</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 99 · DE · Women · DNF · out at Fri 18:00</p>
+</div>
+</div>
+</details>
+<details class="ls-e" data-y="4" data-r="93" data-c="f" data-n="leonie beck" data-b="82" data-s=",,,,,,,,,,,," data-l="" :show="rrMatch(&quot;leonie beck&quot;, &quot;82&quot;, &quot;f&quot;)" :style="'order:' + rrOrder(&quot;leonie beck&quot;, &quot;82&quot;, &quot;93&quot;)">
+<summary class="ls-row" style="--w:5.97%" aria-label="Rank 93, Leonie Beck, 4 yards, 26.8 kilometres, DE">
+<span class="ls-rk">
+<i>0</i>93</span>
+<span class="ls-nm">Leonie Beck</span>
+<span class="ls-yd">4</span>
+<span class="ls-km">26.8</span>
+<span class="ls-nat">DE</span>
+<span class="ls-chev" aria-hidden="true">
+</span>
+</summary>
+<div class="ls-pnl">
+<div class="ls-pnl-in">
+<p class="ls-pnl-line">Bib 82 · DE · Women · DNF · out at Fri 16:00</p>
+</div>
+</div>
+</details>
+</div>
+<p class="ls-empty" id="ls-empty" hidden>No runner matches that.</p>
+<p class="ls-note" data-tpl="led.ledgerNote">Each row is its own bar: the shaded band is that runner&#39;s yards against the winner&#39;s 67. Open a row for the full split record and every yard drawn as an hour.</p>
+</section>
+<section class="ls-sheet" aria-labelledby="h-log">
+<header class="ls-sh">
+<span class="ls-sh-n" aria-hidden="true">07</span>
+<h2 class="ls-sh-t" id="h-log">The race, hour by hour</h2>
+<span class="ls-sh-m" data-tpl="led.secLogNote">67 hours</span>
+</header>
+<div data-block="log">
+<div class="ls-lg">
+<div class="ls-lg-y">
+<span class="ls-seg">01</span>
+<span class="ls-lg-c">Fri 12:00</span>
+</div>
+<div>
+<h3 class="ls-lg-t">93 souls start</h3>
+<p class="ls-lg-b">Friday 3 October 2025, 12:00. The debut edition sets off on a 6.7 km loop in Bornheim.</p>
+</div>
+</div>
+<div class="ls-lg">
+<div class="ls-lg-y">
+<span class="ls-seg">18</span>
+<span class="ls-lg-c">Sat 05:00</span>
+</div>
+<div>
+<h3 class="ls-lg-t">Women&#39;s podium settled</h3>
+<p class="ls-lg-b">Mia Walsoe Lehn and Paulina Zäck both finish 18 laps, 120.7 km.</p>
+</div>
+</div>
+<div class="ls-lg">
+<div class="ls-lg-y">
+<span class="ls-seg">20</span>
+<span class="ls-lg-c">Sat 07:00</span>
+</div>
+<div>
+<h3 class="ls-lg-t">Last woman standing</h3>
+<p class="ls-lg-b">Kathrin Reichelt stops at 20 laps and 134.1 km, first among the women.</p>
+</div>
+</div>
+<div class="ls-lg">
+<div class="ls-lg-y">
+<span class="ls-seg">28</span>
+<span class="ls-lg-c">Sat 15:00</span>
+</div>
+<div>
+<h3 class="ls-lg-t">Ten past 28</h3>
+<p class="ls-lg-b">Ten runners pass 28 laps — more than 187 km of continuous hourly running.</p>
+</div>
+</div>
+<div class="ls-lg">
+<div class="ls-lg-y">
+<span class="ls-seg">40</span>
+<span class="ls-lg-c">Sun 03:00</span>
+</div>
+<div>
+<h3 class="ls-lg-t">Third place decided</h3>
+<p class="ls-lg-b">Pierre Biege is out at 40 laps, leaving Gottwald and Elosrouti alone in the race.</p>
+</div>
+</div>
+<div class="ls-lg">
+<div class="ls-lg-y">
+<span class="ls-seg">67</span>
+<span class="ls-lg-c">Mon 06:00</span>
+</div>
+<div>
+<h3 class="ls-lg-t">One soul left</h3>
+<p class="ls-lg-b">Gottwald finishes lap 67 in 66:52 and is ready to start lap 68. Elosrouti withdraws with an inflamed Achilles and the first Last Soul Ultra has its winner.</p>
+</div>
+</div>
+</div>
+</section>
+@endsection

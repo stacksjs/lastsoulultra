@@ -72,7 +72,7 @@ export default {
    *
    * `buddy dev` prints the effective rules at boot.
    */
-  redirects: {},
+  redirects: { '/legal/imprint': '/imprint', '/legal/privacy': '/privacy', '/legal/terms': '/terms' },
 
   /**
    * **Security headers**

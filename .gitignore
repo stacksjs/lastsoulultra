@@ -159,3 +159,18 @@ storage/framework/core/defaults/*
 !storage/framework/core/defaults/tests/
 !storage/framework/core/defaults/tests/**
 /storage/framework/stacks/storage/framework/stx/bundle-tmp
+
+# Public reference captures used during the STX migration.
+/storage/reference/
+
+# Buddy's new-app scaffolds and editor extension sources are not application code.
+/storage/framework/defaults/scaffold/
+/storage/framework/defaults/ide/vscode/src/
+/storage/framework/defaults/ide/vscode/tests/
+/storage/framework/defaults/ide/vscode/scripts/
+/storage/framework/defaults/ide/vscode/build.ts
+/storage/framework/defaults/ide/vscode/tsconfig.json
+/storage/framework/defaults/.gitkeep
+
+# Disposable diagnostics and generated image variants.
+/storage/runtime/

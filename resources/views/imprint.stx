@@ -1,0 +1,72 @@
+@extends('layouts/LSU')
+@section('content')
+<script server>
+import { productionPages } from '~/resources/data/production-pages'
+const currentPage = productionPages["/imprint"]
+const canonicalPath = "/imprint"
+</script>
+<section class="phero">
+<div class="phero-copy">
+<div class="kicker">Legal</div>
+<h1>Imprint</h1>
+<p>Information required under §5 of the German Digital Services Act (DDG) and §18 (2) of the Interstate Media Treaty (MStV).</p>
+</div>
+</section>
+<section class="legal">
+<div class="legal-shell">
+<dl class="legal-list">
+<div class="legal-row">
+<dt>Company</dt>
+<dd>Last Soul IP GmbH</dd>
+</div>
+<div class="legal-row">
+<dt>Address</dt>
+<dd>Ehrenfeldstr. 14, 44789 Bochum, Germany</dd>
+</div>
+<div class="legal-row">
+<dt>Represented by</dt>
+<dd>Kim Gottwald, Managing Director; Alexander Krenzek, Managing Director</dd>
+</div>
+<div class="legal-row">
+<dt>Email</dt>
+<dd>
+<a href="mailto:mail@lastsoulultra.com">mail@lastsoulultra.com</a>
+</dd>
+</div>
+<div class="legal-row">
+<dt>Telephone</dt>
+<dd>
+<a href="tel:+4917631229027">+49 176 3122 9027</a>
+</dd>
+</div>
+<div class="legal-row">
+<dt>Register court</dt>
+<dd>Amtsgericht Bochum</dd>
+</div>
+<div class="legal-row">
+<dt>Commercial register number</dt>
+<dd>HRB 23525</dd>
+</div>
+<div class="legal-row">
+<dt>EUID</dt>
+<dd>DER2201.HRB23525</dd>
+</div>
+<div class="legal-row">
+<dt>Responsible for content (§18 Abs. 2 MStV)</dt>
+<dd>Kim Gottwald and Alexander Krenzek, Ehrenfeldstr. 14, 44789 Bochum, Germany</dd>
+</div>
+<div class="legal-row">
+<dt>Photography and content rights</dt>
+<dd>Last Soul IP GmbH; rappid. UG (haftungsbeschränkt)</dd>
+</div>
+</dl>
+<h2 class="legal-h2">Dispute resolution</h2>
+<p>We are neither obliged nor willing to take part in dispute resolution proceedings before a consumer arbitration board.</p>
+<h2 class="legal-h2">Liability for content and links</h2>
+<p>As a service provider we are responsible for our own content on these pages under general law. We are not obliged to monitor transmitted or stored third-party information, or to investigate circumstances that indicate unlawful activity.</p>
+<p>This site links to external websites over whose content we have no control. Those sites were checked for legal violations at the time of linking and none were apparent. Responsibility for their content rests with their respective operators.</p>
+<h2 class="legal-h2">Copyright</h2>
+<p>Race photography on this site is produced by Last Soul IP GmbH and rappid. UG (haftungsbeschränkt) and is not licensed for reuse. All other content is the property of Last Soul IP GmbH, which owns and operates this site and is the controller for the personal data it collects. For press and media enquiries, write to <a href="mailto:mail@lastsoulultra.com">mail@lastsoulultra.com</a>.</p>
+</div>
+</section>
+@endsection

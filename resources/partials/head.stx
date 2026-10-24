@@ -1,69 +1,30 @@
 <script server>
-// Imported here rather than relied on from the including page's scope. A
-// partial DOES inherit that scope, which is how this worked on the two pages
-// that happened to import siteOrigin and socialImage for their own use - and
-// on the other nine it silently rendered empty, so canonical and og:url were
-// bare paths and og:image was an empty string. Sharing any of those pages gave
-// a card with no image. Importing here makes the partial self-sufficient.
-import { siteOrigin, socialImage, socialImageAlt } from '../data/site'
+import { absolute } from '../data/site'
+const metaPage = typeof currentPage !== 'undefined' && currentPage ? currentPage : { title: 'Last Soul Ultra', description: 'The backyard ultra World Series. There is no finish line.', styles: ['/assets/styles/production/base.css'] }
+const pagePath = typeof canonicalPath !== 'undefined' ? canonicalPath : '/'
 </script>
-
-{{-- Shared <head>. A page declares pageTitle, pageDescription and
-  canonicalPath; anything optional is guarded. Everything else this file needs
-  it imports itself. --}}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{{ pageTitle }}</title>
-<meta name="description" content="{{ pageDescription }}">
-<link rel="canonical" href="{{ siteOrigin }}{{ canonicalPath }}">
-
-@if (typeof noindex !== 'undefined' && noindex)
-  <meta name="robots" content="noindex, follow">
-@else
-  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<title>{{ metaPage.title }}</title>
+<meta name="description" content="{{ metaPage.description }}">
+@if(metaPage.noindex)
+<meta name="robots" content="noindex,nofollow">
 @endif
-
-{{-- One theme, stated. This is a night race and every photograph on the site
-  was shot after dark, so there is no light mode to offer. --}}
-<meta name="color-scheme" content="dark">
-<meta name="theme-color" content="#0c0c0c">
-
-{{-- The site declared no icon at all, so every tab and bookmark fell back to
-  the browser's blank page glyph. One SVG covers every modern browser at every
-  size; the .ico line is the fallback for the handful that ignore SVG. --}}
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-
-<meta property="og:type" content="{{ typeof ogType !== 'undefined' ? ogType : 'website' }}">
+<meta name="theme-color" content="#000000">
+<link rel="canonical" href="{{ absolute(pagePath) }}">
+<meta property="og:type" content="website">
 <meta property="og:site_name" content="Last Soul Ultra">
-<meta property="og:locale" content="en_GB">
-<meta property="og:url" content="{{ siteOrigin }}{{ canonicalPath }}">
-<meta property="og:title" content="{{ pageTitle }}">
-<meta property="og:description" content="{{ pageDescription }}">
-<meta property="og:image" content="{{ socialImage }}">
-<meta property="og:image:alt" content="{{ socialImageAlt }}">
+<meta property="og:title" content="{{ metaPage.title }}">
+<meta property="og:description" content="{{ metaPage.description }}">
+<meta property="og:url" content="{{ absolute(pagePath) }}">
+<meta property="og:image" content="{{ absolute('/assets/lsu/images/hero-1080.webp') }}">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="{{ pageTitle }}">
-<meta name="twitter:description" content="{{ pageDescription }}">
-<meta name="twitter:image" content="{{ socialImage }}">
-<meta name="twitter:image:alt" content="{{ socialImageAlt }}">
-
-{{-- Archivo stands in for the site's licensed Apex: the closest free
-  grotesque with the same squared terminals. Geist Mono carries the numbers,
-  which on this site are hours and laps and have to line up.
-
-  Both are served from this origin now. Loading them from Google put a
-  third-party request carrying every visitor's IP on the critical path of
-  every page, which the privacy policy did not disclose. The @font-face
-  blocks live at the top of lsu.css; these two preloads cover the subset
-  every page actually paints, so the swap happens on the first frame rather
-  than after the stylesheet has been parsed. --}}
-<link rel="preload" href="/assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/assets/fonts/geist-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
-
-<link rel="stylesheet" href="/assets/styles/lsu.css">
-
-@if (typeof jsonLd !== 'undefined' && jsonLd)
-  <script type="application/ld+json">{!! jsonLd !!}</script>
-@endif
+<link rel="icon" href="/assets/lsu/images/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/lsu/images/apple-touch-icon.png">
+<link rel="preload" href="/assets/lsu/fonts/anton-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/lsu/fonts/barlow-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+@foreach(metaPage.styles as sheet)
+<link rel="stylesheet" href="{{ sheet }}">
+@endforeach
+<link rel="stylesheet" href="/assets/styles/ts-maps.css">
+<link rel="stylesheet" href="/assets/styles/stx-site.css">

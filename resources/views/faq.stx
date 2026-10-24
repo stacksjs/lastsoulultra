@@ -1,88 +1,238 @@
+@extends('layouts/LSU')
+@section('content')
 <script server>
-import { faq, questionCount } from '../data/faq'
-import { race } from '../data/race'
-
-const pageTitle = 'faq - Last Soul Ultra'
-const pageDescription = 'Everything asked about the Last Soul Ultra: the format, base camp, mandatory gear, what a crew may do, and how to follow the race.'
-const canonicalPath = '/faq'
-
-const jsonLd = JSON.stringify({
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  'mainEntity': faq.flatMap(group => group.questions.map(item => ({
-    '@type': 'Question',
-    'name': item.q,
-    'acceptedAnswer': { '@type': 'Answer', 'text': item.a.join(' ') },
-  }))),
-})
+import { productionPages } from '~/resources/data/production-pages'
+const currentPage = productionPages["/contact"]
+const canonicalPath = "/contact"
 </script>
-<!DOCTYPE html>
-<html lang="en">
-  <head>@include('head')</head>
-  <body>
-    <SiteNav current="/faq" />
-
-    <main id="main">
-      <div class="max-w-[1500px] mx-auto px-5 lg:px-8">
-        <header class="pt-12 lg:pt-16 pb-10 border-b rule">
-          <p class="label accent">{{ questionCount() }} questions</p>
-          <h1 class="display h-page ink mt-4 max-w-[12ch]">the answers.</h1>
-          <p class="mt-6 text-base sm:text-lg muted max-w-[58ch] leading-relaxed">
-            Grouped by who is asking. If you are entering, the first section is yours; if you are crewing or watching, skip to the one that is.
-          </p>
-
-          {{-- Jump links, because three groups of answers on one page is a lot
-            to scroll past to reach the one you came for. --}}
-          <nav class="flex flex-wrap gap-2 mt-8" aria-label="sections">
-            @foreach(faq as group)
-              <a class="btn btn-outline" style="padding: 0.6rem 1.2rem" href="#{{ group.slug }}">{{ group.title }}</a>
-            @endforeach
-          </nav>
-        </header>
-      </div>
-
-      @foreach(faq as group)
-        <section class="border-b rule" id="{{ group.slug }}" data-reveal>
-          <div class="max-w-[1500px] mx-auto px-5 lg:px-8 py-14 lg:py-20 grid lg:grid-cols-12 gap-x-14 gap-y-8">
-            <div class="lg:col-span-4 reveal-item">
-              <h2 class="display h-sect ink">{{ group.title }}</h2>
-              <p class="mt-4 text-sm muted leading-relaxed max-w-[34ch]">{{ group.blurb }}</p>
-            </div>
-
-            {{-- <details> rather than hand-rolled toggles: it opens without
-              JavaScript, it is findable by the browser's own in-page search,
-              and it prints. --}}
-            <div class="lg:col-span-8 border-t rule reveal-item">
-              @foreach(group.questions as item)
-                <details class="border-b rule">
-                  <summary class="flex items-start justify-between gap-6 py-5 cursor-pointer list-none">
-                    <span class="text-base sm:text-lg ink leading-snug text-pretty">{{ item.q }}</span>
-                    <i class="i-hugeicons-plus-sign w-5 h-5 shrink-0 mt-1 accent acc-closed" aria-hidden="true"></i>
-                    <i class="i-hugeicons-minus-sign w-5 h-5 shrink-0 mt-1 accent acc-open" aria-hidden="true"></i>
-                  </summary>
-                  <div class="pb-6 prose">
-                    @foreach(item.a as paragraph)
-                      <p class="text-sm muted">{{ paragraph }}</p>
-                    @endforeach
-                  </div>
-                </details>
-              @endforeach
-            </div>
-          </div>
-        </section>
-      @endforeach
-
-      <section data-reveal>
-        <div class="max-w-[1500px] mx-auto px-5 lg:px-8 py-14 lg:py-20 reveal-item">
-          <h2 class="display h-sect ink">not answered here?</h2>
-          <p class="mt-4 text-base muted max-w-[52ch] leading-relaxed">
-            Write to <a class="ink underlink" href="mailto:{{ race.email }}">{{ race.email }}</a>. It can take up to {{ race.replyWithinHours }} hours to get through everything.
-          </p>
-          <a class="btn btn-accent mt-8" href="/contact">contact the organisers</a>
-        </div>
-      </section>
-    </main>
-
-    <SiteFooter />
-  </body>
-</html>
+<section class="lsu-scope-contact phero">
+<div class="lsu-scope-contact phero-copy">
+<div class="kicker lsu-scope-contact">We reply within 24 hours</div>
+<h1 class="lsu-scope-contact">Contact &amp; FAQ</h1>
+</div>
+</section>
+<section class="contact-section lsu-scope-contact section">
+<div class="contact lsu-scope-contact shell">
+<div class="lsu-scope-contact mail">
+<div class="kicker-sm lsu-scope-contact">Email</div>
+<a href="mailto:mail@lastsoulultra.com" class="lsu-scope-contact mail-link"> mail@lastsoulultra.com </a>
+<p class="lsu-scope-contact mail-body">Entries, media and general questions. Up to 24 hours for a reply.</p>
+<button type="button" class="btn btn-outline lsu-scope-contact mail-copy" data-copy="mail@lastsoulultra.com" data-copied="Copied" aria-live="polite" hidden> Copy address </button>
+</div>
+<div class="follow lsu-scope-contact">
+<div class="kicker-sm lsu-scope-contact">Follow the race</div>
+<ul class="lsu-scope-contact">
+<li class="lsu-scope-contact">
+<a href="https://www.instagram.com/lastsoulultra" class="follow-row lsu-scope-contact">
+<span class="follow-text lsu-scope-contact">
+<span class="follow-name lsu-scope-contact"> Instagram · @lastsoulultra </span>
+<span class="follow-body lsu-scope-contact">Updates, stories and behind the scenes during the race.</span>
+</span>
+<span class="follow-arrow lsu-scope-contact" aria-hidden="true">
+↗
+</span>
+</a>
+</li>
+<li class="lsu-scope-contact">
+<a href="https://www.instagram.com/lastsoulultra" class="follow-row lsu-scope-contact">
+<span class="follow-text lsu-scope-contact">
+<span class="follow-name lsu-scope-contact"> Live coverage · Coming soon · @lastsoulultra </span>
+<span class="follow-body lsu-scope-contact">Live coverage is coming soon. Follow @lastsoulultra for updates.</span>
+</span>
+<span class="follow-arrow lsu-scope-contact" aria-hidden="true">
+↗
+</span>
+</a>
+</li>
+<li class="lsu-scope-contact">
+<a href="https://linktr.ee/lastsoulultra" class="follow-row lsu-scope-contact">
+<span class="follow-text lsu-scope-contact">
+<span class="follow-name lsu-scope-contact"> Everything else · linktr.ee </span>
+<span class="follow-body lsu-scope-contact">Streams, results service and partner channels.</span>
+</span>
+<span class="follow-arrow lsu-scope-contact" aria-hidden="true">
+↗
+</span>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="faq" class="faq-section lsu-scope-contact">
+<div class="faq lsu-scope-contact shell">
+<nav class="faq-rail lsu-scope-contact" aria-label="Questions by topic">
+<ul class="lsu-scope-contact">
+<li class="lsu-scope-contact">
+<a href="#faq-1" data-rail="1" class="lsu-scope-contact">
+<span class="lsu-scope-contact">Athletes</span>
+<small class="lsu-scope-contact">8</small>
+</a>
+</li>
+<li class="lsu-scope-contact">
+<a href="#faq-2" data-rail="2" class="lsu-scope-contact">
+<span class="lsu-scope-contact">Athlete crew</span>
+<small class="lsu-scope-contact">3</small>
+</a>
+</li>
+<li class="lsu-scope-contact">
+<a href="#faq-3" data-rail="3" class="lsu-scope-contact">
+<span class="lsu-scope-contact">Spectators</span>
+<small class="lsu-scope-contact">4</small>
+</a>
+</li>
+</ul>
+</nav>
+<div class="faq-main lsu-scope-contact">
+<div id="faq-1" class="faq-group lsu-scope-contact" data-group="1">
+<div class="faq-head lsu-scope-contact">
+<h2 class="h2-sm lsu-scope-contact">Athletes</h2>
+<span class="faq-count lsu-scope-contact"> 8 questions </span>
+</div>
+<details class="faq-item lsu-scope-contact" name="lsu-faq">
+<summary class="lsu-scope-contact">
+<span class="faq-q lsu-scope-contact">How does the Last Soul Ultra work?</span>
+<span class="faq-mark lsu-scope-contact" aria-hidden="true">
+</span>
+</summary>
+<div class="faq-a lsu-scope-contact">It follows the backyard ultra format. Every hour, all runners start together on a 6.706 km loop. Anyone who does not finish the loop and return to the corral before the next hour is eliminated. The winner must complete one more loop than every other runner, within the hour. If no runner can do that, there is no winner. All other runners are recorded as DNF.</div>
+</details>
+<details class="faq-item lsu-scope-contact" name="lsu-faq">
+<summary class="lsu-scope-contact">
+<span class="faq-q lsu-scope-contact">When does the race start?</span>
+<span class="faq-mark lsu-scope-contact" aria-hidden="true">
+</span>
+</summary>
+<div class="faq-a lsu-scope-contact">Each race date and location is published on the World Series page once confirmed.</div>
+</details>
+<details class="faq-item lsu-scope-contact" name="lsu-faq">
+<summary class="lsu-scope-contact">
+<span class="faq-q lsu-scope-contact">Is there electricity, water or food?</span>
+<span class="faq-mark lsu-scope-contact" aria-hidden="true">
+</span>
+</summary>
+<div class="faq-a lsu-scope-contact">There is no electrical hookup. Water is provided in containers for each athlete. No organiser-provided race support is planned. This may change, but do not plan on it. Bring your own food, equipment and supplies. Your nutrition, recovery and race setup are your responsibility.</div>
+</details>
+<details class="faq-item lsu-scope-contact" name="lsu-faq">
+<summary class="lsu-scope-contact">
+<span class="faq-q lsu-scope-contact">What are the participation requirements?</span>
+<span class="faq-mark lsu-scope-contact" aria-hidden="true">
+</span>
+</summary>
+<div class="faq-a lsu-scope-contact">Before the start, every athlete signs a waiver. The document, including all terms and conditions, is made available ahead of time.</div>
+</details>
+<details class="faq-item lsu-scope-contact" name="lsu-faq">
+<summary class="lsu-scope-contact">
+<span class="faq-q lsu-scope-contact">Is there a time limit or maximum race duration?</span>
+<span class="faq-mark lsu-scope-contact" aria-hidden="true">
+</span>
+</summary>
+<div class="faq-a lsu-scope-contact">There is no overall time limit or fixed finish distance, but every loop has a strict one-hour limit. Miss a start or fail to finish within the hour, and your race is over. The race goes on until only one person is able to complete a loop.</div>
+</details>
+<details class="faq-item lsu-scope-contact" name="lsu-faq">
+<summary class="lsu-scope-contact">
+<span class="faq-q lsu-scope-contact">How is base camp organised?</span>
+<span class="faq-mark lsu-scope-contact" aria-hidden="true">
+</span>
+</summary>
+<div class="faq-a lsu-scope-contact">Each participant is allocated a 3 × 3 metre space, marked in advance and assigned first come, first served. As runners drop out, remaining camps may be moved closer to the start line.</div>
+</details>
+<details class="faq-item lsu-scope-contact" name="lsu-faq">
+<summary class="lsu-scope-contact">
+<span class="faq-q lsu-scope-contact">What mandatory gear is required?</span>
+<span class="faq-mark lsu-scope-contact" aria-hidden="true">
+</span>
+</summary>
+<div class="faq-a lsu-scope-contact">A working headlamp must be worn when running in twilight or darkness. Participation without this mandatory gear is not allowed.</div>
+</details>
+<details class="faq-item lsu-scope-contact" name="lsu-faq">
+<summary class="lsu-scope-contact">
+<span class="faq-q lsu-scope-contact">Who is participating?</span>
+<span class="faq-mark lsu-scope-contact" aria-hidden="true">
+</span>
+</summary>
+<div class="faq-a lsu-scope-contact">The field is made up of international ultrarunners, athletes, well-known sports personalities, content creators and athletes selected through entry requests.</div>
+</details>
+</div>
+<div id="faq-2" class="faq-group lsu-scope-contact" data-group="2">
+<div class="faq-head lsu-scope-contact">
+<h2 class="h2-sm lsu-scope-contact">Athlete crew</h2>
+<span class="faq-count lsu-scope-contact"> 3 questions </span>
+</div>
+<details class="faq-item lsu-scope-contact" name="lsu-faq">
+<summary class="lsu-scope-contact">
+<span class="faq-q lsu-scope-contact">How much support can an athlete receive?</span>
+<span class="faq-mark lsu-scope-contact" aria-hidden="true">
+</span>
+</summary>
+<div class="faq-a lsu-scope-contact">In base camp, crew can fully assist their athlete with setup, nutrition and preparation for the next loop. Once the athlete is on the course, any kind of support is prohibited. Handing over food or gear during a loop results in immediate disqualification.</div>
+</details>
+<details class="faq-item lsu-scope-contact" name="lsu-faq">
+<summary class="lsu-scope-contact">
+<span class="faq-q lsu-scope-contact">Can crew members enter the track?</span>
+<span class="faq-mark lsu-scope-contact" aria-hidden="true">
+</span>
+</summary>
+<div class="faq-a lsu-scope-contact">No. Crew are not allowed on the track. If the rule is broken, the athlete is automatically disqualified.</div>
+</details>
+<details class="faq-item lsu-scope-contact" name="lsu-faq">
+<summary class="lsu-scope-contact">
+<span class="faq-q lsu-scope-contact">How many crew members are allowed?</span>
+<span class="faq-mark lsu-scope-contact" aria-hidden="true">
+</span>
+</summary>
+<div class="faq-a lsu-scope-contact">You may register four crew members in total. Up to three may be on site at the same time; the fourth may rotate in. Having a crew is optional.</div>
+</details>
+</div>
+<div id="faq-3" class="faq-group lsu-scope-contact" data-group="3">
+<div class="faq-head lsu-scope-contact">
+<h2 class="h2-sm lsu-scope-contact">Spectators</h2>
+<span class="faq-count lsu-scope-contact"> 4 questions </span>
+</div>
+<details class="faq-item lsu-scope-contact" name="lsu-faq">
+<summary class="lsu-scope-contact">
+<span class="faq-q lsu-scope-contact">Can people watch the event in person?</span>
+<span class="faq-mark lsu-scope-contact" aria-hidden="true">
+</span>
+</summary>
+<div class="faq-a lsu-scope-contact">No. On-site spectators are not allowed, which keeps the race safe and the operation smooth.</div>
+</details>
+<details class="faq-item lsu-scope-contact" name="lsu-faq">
+<summary class="lsu-scope-contact">
+<span class="faq-q lsu-scope-contact">Where can I follow the race?</span>
+<span class="faq-mark lsu-scope-contact" aria-hidden="true">
+</span>
+</summary>
+<div class="faq-a lsu-scope-contact">Highlights, updates and information go out on @lastsoulultra, as well as the channels of Kim Gottwald and rappid. Live coverage is coming soon — follow @lastsoulultra for updates.</div>
+</details>
+<details class="faq-item lsu-scope-contact" name="lsu-faq">
+<summary class="lsu-scope-contact">
+<span class="faq-q lsu-scope-contact">Will the race be streamed live?</span>
+<span class="faq-mark lsu-scope-contact" aria-hidden="true">
+</span>
+</summary>
+<div class="faq-a lsu-scope-contact">Live coverage is coming soon. Follow @lastsoulultra for updates.</div>
+</details>
+<details class="faq-item lsu-scope-contact" name="lsu-faq">
+<summary class="lsu-scope-contact">
+<span class="faq-q lsu-scope-contact">Why is the location kept secret?</span>
+<span class="faq-mark lsu-scope-contact" aria-hidden="true">
+</span>
+</summary>
+<div class="faq-a lsu-scope-contact">The venue is withheld to guarantee the safety and smooth running of the event.</div>
+</details>
+</div>
+</div>
+</div>
+</section>
+<section class="cta lsu-scope-contact">
+<div class="cta-bg lsu-scope-contact" style="background-image:url(&#x27;/assets/lsu/images/rappid-47.webp&#x27;);background-position:center 35%" data-px="0.36">
+</div>
+<div class="cta-scrim lsu-scope-contact">
+</div>
+<div class="cta-copy lsu-scope-contact" data-px="-0.06">
+<h2 class="h2 lsu-scope-contact">Still have<br class="lsu-scope-contact">questions?</h2>
+<a href="mailto:mail@lastsoulultra.com" class="btn btn-lg lsu-scope-contact">Email the team</a>
+</div>
+</section>
+@endsection

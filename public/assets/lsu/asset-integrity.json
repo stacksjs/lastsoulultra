@@ -1,0 +1,756 @@
+{
+  "sourceOrigin": "https://www.lastsoulultra.com",
+  "capturedOn": "2026-10-23",
+  "assets": [
+    {
+      "original": "/apple-touch-icon.png",
+      "local": "/assets/lsu/images/apple-touch-icon.png",
+      "status": 200,
+      "bytes": 1922,
+      "contentType": "image/png",
+      "sha256": "5bc3e9f3419b34f8cf4162b0af6408a7a780fac2bfd6f7b5572ec6bf904c9733"
+    },
+    {
+      "original": "/assets/event-hero-red.jpg",
+      "error": "HTTP Error 404: Not Found"
+    },
+    {
+      "original": "/assets/hero-1080.webp",
+      "local": "/assets/lsu/images/hero-1080.webp",
+      "status": 200,
+      "bytes": 528006,
+      "contentType": "image/webp",
+      "sha256": "1667497d7ed94699ffcf21ad0b68c2aec4d4017b3562c94d2ad05fbfbfba5bdc"
+    },
+    {
+      "original": "/assets/hero-desktop.webp",
+      "local": "/assets/lsu/images/hero-desktop.webp",
+      "status": 200,
+      "bytes": 88140,
+      "contentType": "image/webp",
+      "sha256": "f04c67ff8da06c965a9a5c0bc57fd927bb1c1286f4b0f45c5ac2cd9ea0120693"
+    },
+    {
+      "original": "/assets/hero-mobile.webp",
+      "local": "/assets/lsu/images/hero-mobile.webp",
+      "status": 200,
+      "bytes": 140712,
+      "contentType": "image/webp",
+      "sha256": "d6316509195fec260387456e661e5a5afa7f0a3acd291673297006c96e7a6e5d"
+    },
+    {
+      "original": "/assets/lsu-logo.svg",
+      "local": "/assets/lsu/images/lsu-logo.svg",
+      "status": 200,
+      "bytes": 723,
+      "contentType": "image/svg+xml",
+      "sha256": "9e9a0e12f5cfae88aafe433dbb539f04b907e278cfd894f4f88e8bbe0f9f2b72"
+    },
+    {
+      "original": "/assets/og-2025.jpg",
+      "local": "/assets/lsu/images/og-2025.jpg",
+      "status": 200,
+      "bytes": 62732,
+      "contentType": "image/jpeg",
+      "sha256": "dc6656d31f3f1fea2902e47db0e15d0ecff5dd4fe9d96b6c9486dead52b22ae5"
+    },
+    {
+      "original": "/assets/og-2026.jpg",
+      "local": "/assets/lsu/images/og-2026.jpg",
+      "status": 200,
+      "bytes": 48948,
+      "contentType": "image/jpeg",
+      "sha256": "71ca5964ff7ce8beb064378db38e4d6c5198559d91a84546b70bf501eb0488e4"
+    },
+    {
+      "original": "/assets/og-contact.jpg",
+      "local": "/assets/lsu/images/og-contact.jpg",
+      "status": 200,
+      "bytes": 50569,
+      "contentType": "image/jpeg",
+      "sha256": "4edc568f8c95306b2b83001fad9961c68712c6fb2a994f367ee3c8d141d17fb3"
+    },
+    {
+      "original": "/assets/og-default.jpg",
+      "local": "/assets/lsu/images/og-default.jpg",
+      "status": 200,
+      "bytes": 133343,
+      "contentType": "image/jpeg",
+      "sha256": "cbb5744f654a63a5dc70d4dccb53e528ecef8bd85ed39192cdfbd3901204cc85"
+    },
+    {
+      "original": "/assets/og-format.jpg",
+      "local": "/assets/lsu/images/og-format.jpg",
+      "status": 200,
+      "bytes": 84103,
+      "contentType": "image/jpeg",
+      "sha256": "a4a1dcda16bc41ccc68975856e2505e5a06959cf368c0ed166149545a557eae1"
+    },
+    {
+      "original": "/assets/og-lottery.jpg",
+      "local": "/assets/lsu/images/og-lottery.jpg",
+      "status": 200,
+      "bytes": 51748,
+      "contentType": "image/jpeg",
+      "sha256": "07a7a818e01bc8268f3279867b02152e1555474ee23b797c2385c9d6890dcab1"
+    },
+    {
+      "original": "/assets/og-results.jpg",
+      "local": "/assets/lsu/images/og-results.jpg",
+      "status": 200,
+      "bytes": 127260,
+      "contentType": "image/jpeg",
+      "sha256": "4750f9266c36fb3abf2c954ff4c16a3e799f5cf07943aab55a07bf27c07b4af1"
+    },
+    {
+      "original": "/assets/og-soul-races.jpg",
+      "local": "/assets/lsu/images/og-soul-races.jpg",
+      "status": 200,
+      "bytes": 93207,
+      "contentType": "image/jpeg",
+      "sha256": "cc1ade95d659e66d9a5897303992457c85448086bc6e93ebf0e7cd378ed81ac1"
+    },
+    {
+      "original": "/assets/og-sponsorship.jpg",
+      "local": "/assets/lsu/images/og-sponsorship.jpg",
+      "status": 200,
+      "bytes": 66736,
+      "contentType": "image/jpeg",
+      "sha256": "7aef669f32c3901cd71bf6c27ca44b9993e541be4dc8994da8ae0a2536a66adf"
+    },
+    {
+      "original": "/assets/rappid-13-1080.webp",
+      "local": "/assets/lsu/images/rappid-13-1080.webp",
+      "status": 200,
+      "bytes": 182226,
+      "contentType": "image/webp",
+      "sha256": "cee2dbe0956b75617ed0857a494abee394fab4641ae64019d97aab72f272de4f"
+    },
+    {
+      "original": "/assets/rappid-20.webp",
+      "local": "/assets/lsu/images/rappid-20.webp",
+      "status": 200,
+      "bytes": 122458,
+      "contentType": "image/webp",
+      "sha256": "baa703c3ed3b14473ebe082df3761c7b76fcba999b9da4518d0d29cee1fdc860"
+    },
+    {
+      "original": "/assets/rappid-31.webp",
+      "local": "/assets/lsu/images/rappid-31.webp",
+      "status": 200,
+      "bytes": 178822,
+      "contentType": "image/webp",
+      "sha256": "6744d2162b2d1f3bdb6bd46207e947622c8dcaa672702d0c059365a3f9888f3e"
+    },
+    {
+      "original": "/assets/rappid-46.webp",
+      "local": "/assets/lsu/images/rappid-46.webp",
+      "status": 200,
+      "bytes": 177504,
+      "contentType": "image/webp",
+      "sha256": "02b9ecbc1cb7142fb2f26f115a5c90d3c24ac08afb9dc278350b71f46c1f7a45"
+    },
+    {
+      "original": "/assets/rappid-47.webp",
+      "local": "/assets/lsu/images/rappid-47.webp",
+      "status": 200,
+      "bytes": 160014,
+      "contentType": "image/webp",
+      "sha256": "864b103d47ac9387f04f2eadd5ad7690785195e79757a53ef6b040fbf33d0e15"
+    },
+    {
+      "original": "/assets/rappid-65.webp",
+      "local": "/assets/lsu/images/rappid-65.webp",
+      "status": 200,
+      "bytes": 124364,
+      "contentType": "image/webp",
+      "sha256": "b3c44e8527720d23a73f01aa2edbbac67df2fadbc3c48b9d03b9bf5f325fed30"
+    },
+    {
+      "original": "/assets/rappid-94.webp",
+      "local": "/assets/lsu/images/rappid-94.webp",
+      "status": 200,
+      "bytes": 232360,
+      "contentType": "image/webp",
+      "sha256": "386a5dd0f2341ef90b050611a1a6e1a3aee4fbd97218d25aca2422707f341b05"
+    },
+    {
+      "original": "/assets/recap-01-1080.webp",
+      "local": "/assets/lsu/images/recap-01-1080.webp",
+      "status": 200,
+      "bytes": 150578,
+      "contentType": "image/webp",
+      "sha256": "d3079214838aa0a6661e6999b8007b9666b66c67d979c333cfb9c8e27f764ffe"
+    },
+    {
+      "original": "/assets/recap-01-540.webp",
+      "local": "/assets/lsu/images/recap-01-540.webp",
+      "status": 200,
+      "bytes": 26682,
+      "contentType": "image/webp",
+      "sha256": "60fe71a49b6c7633bf18ba6af14df3200627611947d415b4445dbdd1a8699c56"
+    },
+    {
+      "original": "/assets/recap-01-810.webp",
+      "local": "/assets/lsu/images/recap-01-810.webp",
+      "status": 200,
+      "bytes": 55334,
+      "contentType": "image/webp",
+      "sha256": "3989b972321c3526354ec3c734783e3e59d1d47fb260d6385de132b8acde1f87"
+    },
+    {
+      "original": "/assets/recap-02-1080.webp",
+      "local": "/assets/lsu/images/recap-02-1080.webp",
+      "status": 200,
+      "bytes": 131560,
+      "contentType": "image/webp",
+      "sha256": "ea691064e1fafd24f749de758a9599364e4d62cd10e1a7440e5659f37133ec17"
+    },
+    {
+      "original": "/assets/recap-02-540.webp",
+      "local": "/assets/lsu/images/recap-02-540.webp",
+      "status": 200,
+      "bytes": 28966,
+      "contentType": "image/webp",
+      "sha256": "97fe7e90d5658fe326aca6b78e338340e6be7ac83ba214497ed6afb3599ab253"
+    },
+    {
+      "original": "/assets/recap-02-810.webp",
+      "local": "/assets/lsu/images/recap-02-810.webp",
+      "status": 200,
+      "bytes": 62062,
+      "contentType": "image/webp",
+      "sha256": "27777b62fbb53868741c3af2ff1b062089679ceb5528e65644d67fadb493e06c"
+    },
+    {
+      "original": "/assets/recap-03-1080.webp",
+      "local": "/assets/lsu/images/recap-03-1080.webp",
+      "status": 200,
+      "bytes": 130958,
+      "contentType": "image/webp",
+      "sha256": "669855d409a67a503302657c0a40f26cc9d7967b870e8665774dddf4ddf0b4b6"
+    },
+    {
+      "original": "/assets/recap-03-540.webp",
+      "local": "/assets/lsu/images/recap-03-540.webp",
+      "status": 200,
+      "bytes": 39452,
+      "contentType": "image/webp",
+      "sha256": "ff60f274a539293cdbeff02f34642ee6d52a0a7575465ac7b2231d5861a69fc7"
+    },
+    {
+      "original": "/assets/recap-03-810.webp",
+      "local": "/assets/lsu/images/recap-03-810.webp",
+      "status": 200,
+      "bytes": 69936,
+      "contentType": "image/webp",
+      "sha256": "a8b38c5405c7a3aee4e094afcfacdc499a8b062c7572bef6d867c194d8f94fe9"
+    },
+    {
+      "original": "/assets/recap-04-1080.webp",
+      "local": "/assets/lsu/images/recap-04-1080.webp",
+      "status": 200,
+      "bytes": 87050,
+      "contentType": "image/webp",
+      "sha256": "3184bb103cd668219349b131bb580114e9b84d63914338f6870dfc9da0c04f71"
+    },
+    {
+      "original": "/assets/recap-04-540.webp",
+      "local": "/assets/lsu/images/recap-04-540.webp",
+      "status": 200,
+      "bytes": 28028,
+      "contentType": "image/webp",
+      "sha256": "2bfa269c3bf6ee0e9e5948069059b2e64a2b5cb3049d825b99d62e608087c49b"
+    },
+    {
+      "original": "/assets/recap-04-810.webp",
+      "local": "/assets/lsu/images/recap-04-810.webp",
+      "status": 200,
+      "bytes": 48846,
+      "contentType": "image/webp",
+      "sha256": "f9d8eb7ebf1949694f4d68039ea988aeaa893c442c813bdc4105e95f0aeb2434"
+    },
+    {
+      "original": "/assets/recap-05-1080.webp",
+      "local": "/assets/lsu/images/recap-05-1080.webp",
+      "status": 200,
+      "bytes": 265020,
+      "contentType": "image/webp",
+      "sha256": "8dd0aa5a0164f5041ecf99057d2f33d426b9b56663a36e1997b86dc911c2f1ce"
+    },
+    {
+      "original": "/assets/recap-05-540.webp",
+      "local": "/assets/lsu/images/recap-05-540.webp",
+      "status": 200,
+      "bytes": 71376,
+      "contentType": "image/webp",
+      "sha256": "99629459066760a14b57e991b35d2252aae81ef04bf15c88349ba0d198183139"
+    },
+    {
+      "original": "/assets/recap-05-810.webp",
+      "local": "/assets/lsu/images/recap-05-810.webp",
+      "status": 200,
+      "bytes": 133282,
+      "contentType": "image/webp",
+      "sha256": "4372bef33fb8386dceaa5f544ed4381e544fddf16fa52f7bc47122f660890922"
+    },
+    {
+      "original": "/assets/recap-06-1080.webp",
+      "local": "/assets/lsu/images/recap-06-1080.webp",
+      "status": 200,
+      "bytes": 109950,
+      "contentType": "image/webp",
+      "sha256": "2c6c865a1e2946043bb64d4563f5733fa0d6e3c1845a18020f65b96f1bfbdad1"
+    },
+    {
+      "original": "/assets/recap-06-540.webp",
+      "local": "/assets/lsu/images/recap-06-540.webp",
+      "status": 200,
+      "bytes": 24792,
+      "contentType": "image/webp",
+      "sha256": "1d3d14420d3cdd9bfa757e5d5660a17139081892b876b80788425a98a1bdfa4e"
+    },
+    {
+      "original": "/assets/recap-06-810.webp",
+      "local": "/assets/lsu/images/recap-06-810.webp",
+      "status": 200,
+      "bytes": 42762,
+      "contentType": "image/webp",
+      "sha256": "4319749061b8f78c318f70737876f6dbf632ff863d60da0d25d795de23694e62"
+    },
+    {
+      "original": "/assets/recap-07-1080.webp",
+      "local": "/assets/lsu/images/recap-07-1080.webp",
+      "status": 200,
+      "bytes": 267796,
+      "contentType": "image/webp",
+      "sha256": "f79d206856ce6467bafd0af3f290db8ae46d261899dbc86ac6d7dafdc409a396"
+    },
+    {
+      "original": "/assets/recap-07-540.webp",
+      "local": "/assets/lsu/images/recap-07-540.webp",
+      "status": 200,
+      "bytes": 38184,
+      "contentType": "image/webp",
+      "sha256": "46bc53736cd8afdf07b5ebf888d5d7ab9fd2760c6eee9b555b7b0faa8a39949d"
+    },
+    {
+      "original": "/assets/recap-07-810.webp",
+      "local": "/assets/lsu/images/recap-07-810.webp",
+      "status": 200,
+      "bytes": 84340,
+      "contentType": "image/webp",
+      "sha256": "e1876da17b08af5679a31faa284b8bacf0ca9a2ad146702eaefe16ea041f2123"
+    },
+    {
+      "original": "/assets/recap-08-1080.webp",
+      "local": "/assets/lsu/images/recap-08-1080.webp",
+      "status": 200,
+      "bytes": 95324,
+      "contentType": "image/webp",
+      "sha256": "ca87182c73c520fa210d78d4c37a3f6ed778df609ee791f674ea224443304178"
+    },
+    {
+      "original": "/assets/recap-08-540.webp",
+      "local": "/assets/lsu/images/recap-08-540.webp",
+      "status": 200,
+      "bytes": 28616,
+      "contentType": "image/webp",
+      "sha256": "ece42a98c23748311610a705a1c06a7a3dee9e34af544f12d9b6a481123a5604"
+    },
+    {
+      "original": "/assets/recap-08-810.webp",
+      "local": "/assets/lsu/images/recap-08-810.webp",
+      "status": 200,
+      "bytes": 49680,
+      "contentType": "image/webp",
+      "sha256": "7c8f53638d282faf7e47ed128a857655ba93bca56ae8885602416264de75ea06"
+    },
+    {
+      "original": "/assets/recap-09-1080.webp",
+      "local": "/assets/lsu/images/recap-09-1080.webp",
+      "status": 200,
+      "bytes": 101902,
+      "contentType": "image/webp",
+      "sha256": "8da942b8992fb36d90939d4c365d35e711346b90da9c161d8325f83896dc7e49"
+    },
+    {
+      "original": "/assets/recap-09-540.webp",
+      "local": "/assets/lsu/images/recap-09-540.webp",
+      "status": 200,
+      "bytes": 19140,
+      "contentType": "image/webp",
+      "sha256": "e6f517335ba642ef2292fbd6c984bcc020d05314ebc09ea152dce6bf2470c47e"
+    },
+    {
+      "original": "/assets/recap-09-810.webp",
+      "local": "/assets/lsu/images/recap-09-810.webp",
+      "status": 200,
+      "bytes": 38702,
+      "contentType": "image/webp",
+      "sha256": "9ae11b53b5dd3f7ab23b52539f4005187752bf7b757d8cdaae47ca91b69c9c71"
+    },
+    {
+      "original": "/assets/recap-10-1080.webp",
+      "local": "/assets/lsu/images/recap-10-1080.webp",
+      "status": 200,
+      "bytes": 128906,
+      "contentType": "image/webp",
+      "sha256": "390f350fb89a3bdb442efb7f7ce238d4e670cf4b244352b3b7b9fef889200091"
+    },
+    {
+      "original": "/assets/recap-10-540.webp",
+      "local": "/assets/lsu/images/recap-10-540.webp",
+      "status": 200,
+      "bytes": 24718,
+      "contentType": "image/webp",
+      "sha256": "f526a6a3c9ab32c20c01c154b5f7bf24dcfa957165a51fab1905a99dc2d575f2"
+    },
+    {
+      "original": "/assets/recap-10-810.webp",
+      "local": "/assets/lsu/images/recap-10-810.webp",
+      "status": 200,
+      "bytes": 49880,
+      "contentType": "image/webp",
+      "sha256": "b0d8021ff1d9653cf90fd2433a0992924f0dfc7cbc2a493dd81623867f0e1570"
+    },
+    {
+      "original": "/assets/recap-11-1080.webp",
+      "local": "/assets/lsu/images/recap-11-1080.webp",
+      "status": 200,
+      "bytes": 77460,
+      "contentType": "image/webp",
+      "sha256": "86398d37569e1eb5348808f4b664f29005f6616ec10586cc1bbbfe2914a573b1"
+    },
+    {
+      "original": "/assets/recap-11-540.webp",
+      "local": "/assets/lsu/images/recap-11-540.webp",
+      "status": 200,
+      "bytes": 15090,
+      "contentType": "image/webp",
+      "sha256": "6efb2eebf43f169ea284f3520df640fdc47d4e0d1ab47bff9d716fb8395d5348"
+    },
+    {
+      "original": "/assets/recap-11-810.webp",
+      "local": "/assets/lsu/images/recap-11-810.webp",
+      "status": 200,
+      "bytes": 29368,
+      "contentType": "image/webp",
+      "sha256": "6bf1abb239d916156b92d328e9357110c10ecc75654c9328f19649a1bcd52ce0"
+    },
+    {
+      "original": "/assets/recap-12-1080.webp",
+      "local": "/assets/lsu/images/recap-12-1080.webp",
+      "status": 200,
+      "bytes": 333330,
+      "contentType": "image/webp",
+      "sha256": "9d2e4cc22781e76eb10584c6c1650666606da5f9f2bd3624a822d7b6aed625d1"
+    },
+    {
+      "original": "/assets/recap-12-540.webp",
+      "local": "/assets/lsu/images/recap-12-540.webp",
+      "status": 200,
+      "bytes": 54290,
+      "contentType": "image/webp",
+      "sha256": "355fa41ab636c6bf455ec3dbac2fe4d32da5457b789d9205a74f979b6a14d8e4"
+    },
+    {
+      "original": "/assets/recap-12-810.webp",
+      "local": "/assets/lsu/images/recap-12-810.webp",
+      "status": 200,
+      "bytes": 121114,
+      "contentType": "image/webp",
+      "sha256": "526837e6c06c978acd3d17021db226e9b58eba77fbfd7a101c8298307d8e7c69"
+    },
+    {
+      "original": "/assets/recap-13-1080.webp",
+      "local": "/assets/lsu/images/recap-13-1080.webp",
+      "status": 200,
+      "bytes": 363504,
+      "contentType": "image/webp",
+      "sha256": "4f0aab7c2a4fb03433fe8a2d43a864370705007e5c0454460d11ff2cfc3db00a"
+    },
+    {
+      "original": "/assets/recap-13-540.webp",
+      "local": "/assets/lsu/images/recap-13-540.webp",
+      "status": 200,
+      "bytes": 123324,
+      "contentType": "image/webp",
+      "sha256": "6de2ae1fed09aed1f3939782c810ea2bc7d70bc9b8a150929d0ffbe829574fe5"
+    },
+    {
+      "original": "/assets/recap-13-810.webp",
+      "local": "/assets/lsu/images/recap-13-810.webp",
+      "status": 200,
+      "bytes": 215246,
+      "contentType": "image/webp",
+      "sha256": "b524ef7c17bce5104da7c25c0f0875db0ce026c801e2ec9b9d2643b40ddc936b"
+    },
+    {
+      "original": "/assets/sponsor-field-community.webp",
+      "local": "/assets/lsu/images/sponsor-field-community.webp",
+      "status": 200,
+      "bytes": 67622,
+      "contentType": "image/webp",
+      "sha256": "d43efeed37265e2644b6a2ac3eacad9b3ba47357bac58433e5f55c67bc514d58"
+    },
+    {
+      "original": "/assets/sponsor-field-fitness.webp",
+      "local": "/assets/lsu/images/sponsor-field-fitness.webp",
+      "status": 200,
+      "bytes": 66740,
+      "contentType": "image/webp",
+      "sha256": "327f12e0c16cbd70fa0f6ed8d674ac9924111adef0e8859d2e50cb0ed504e157"
+    },
+    {
+      "original": "/assets/sponsor-field-pros.webp",
+      "local": "/assets/lsu/images/sponsor-field-pros.webp",
+      "status": 200,
+      "bytes": 20206,
+      "contentType": "image/webp",
+      "sha256": "08b746883e8b1c9710553a6bcc596a7b6aec990913e6749310731273eac38540"
+    },
+    {
+      "original": "/assets/sponsor-reach-1.webp",
+      "local": "/assets/lsu/images/sponsor-reach-1.webp",
+      "status": 200,
+      "bytes": 53174,
+      "contentType": "image/webp",
+      "sha256": "1841fd09ab3c515bfd48a4eda6d53932dba0efe8bf654ed14de1eed5f684d33b"
+    },
+    {
+      "original": "/assets/sponsor-reach-2.webp",
+      "local": "/assets/lsu/images/sponsor-reach-2.webp",
+      "status": 200,
+      "bytes": 22044,
+      "contentType": "image/webp",
+      "sha256": "98fe92925f52cf5e88bf7a08c51bbe9aa535cc6ca1b56e7661de603744c5a7ee"
+    },
+    {
+      "original": "/assets/sponsor-reach-3.webp",
+      "local": "/assets/lsu/images/sponsor-reach-3.webp",
+      "status": 200,
+      "bytes": 20960,
+      "contentType": "image/webp",
+      "sha256": "a7c6563c4cc989beb049872dba73545eab5c713eb7d251028f6911c5709ec44f"
+    },
+    {
+      "original": "/assets/sponsor-story-1.webp",
+      "local": "/assets/lsu/images/sponsor-story-1.webp",
+      "status": 200,
+      "bytes": 93402,
+      "contentType": "image/webp",
+      "sha256": "62bd9ba7edf3aa5affa6d28b2e5d62f13b81f76c7e80531c3aeb6bc552f3b5f9"
+    },
+    {
+      "original": "/assets/sponsor-story-2.webp",
+      "local": "/assets/lsu/images/sponsor-story-2.webp",
+      "status": 200,
+      "bytes": 12288,
+      "contentType": "image/webp",
+      "sha256": "967907d59d428835af4391eabd5d19d777a250fc995754c8bbd95114d6c2ca70"
+    },
+    {
+      "original": "/assets/sponsor-story-3.webp",
+      "local": "/assets/lsu/images/sponsor-story-3.webp",
+      "status": 200,
+      "bytes": 20404,
+      "contentType": "image/webp",
+      "sha256": "05b53779933041e4b249e7530f3ec8a882e0343ee089873438ca4c78de80e9e3"
+    },
+    {
+      "original": "/assets/sponsor-story-4.webp",
+      "local": "/assets/lsu/images/sponsor-story-4.webp",
+      "status": 200,
+      "bytes": 13784,
+      "contentType": "image/webp",
+      "sha256": "a220936b3ea79336bbbb5ab6995ff90954e78dba409ef47386dc300a08601caf"
+    },
+    {
+      "original": "/assets/sponsor-story-5.webp",
+      "local": "/assets/lsu/images/sponsor-story-5.webp",
+      "status": 200,
+      "bytes": 18498,
+      "contentType": "image/webp",
+      "sha256": "a96268e7fed8364e72d5f42721211d2508376ddce151522c5fd68e4bd62fb245"
+    },
+    {
+      "original": "/assets/statement-1080.webp",
+      "local": "/assets/lsu/images/statement-1080.webp",
+      "status": 200,
+      "bytes": 201374,
+      "contentType": "image/webp",
+      "sha256": "7f60d81742eabe2cdf7e2f5a9610d2603836c62f08ace0e18b3313b0592111be"
+    },
+    {
+      "original": "/assets/statement-720.webp",
+      "local": "/assets/lsu/images/statement-720.webp",
+      "status": 200,
+      "bytes": 75516,
+      "contentType": "image/webp",
+      "sha256": "c99d4baaaa8fd39413a7c21d6a5ca6412582a2ce971cdf16c3af76da84e4efe1"
+    },
+    {
+      "original": "/assets/world-series-map-reference.png",
+      "local": "/assets/lsu/images/world-series-map-reference.png",
+      "status": 200,
+      "bytes": 45589,
+      "contentType": "image/png",
+      "sha256": "2d1ead5ab88ffcb636997e84ff123dcd82454fed18056f8fdb2c56cb30adf81d"
+    },
+    {
+      "original": "/assets/yard87-poster.jpg",
+      "local": "/assets/lsu/images/yard87-poster.jpg",
+      "status": 200,
+      "bytes": 26776,
+      "contentType": "image/jpeg",
+      "sha256": "e9bb42a539a5f9bc007a0b13bf9436613e5948e8775eba1962a820117e9889f5"
+    },
+    {
+      "original": "/favicon.png",
+      "local": "/assets/lsu/images/favicon.png",
+      "status": 200,
+      "bytes": 721,
+      "contentType": "image/png",
+      "sha256": "044d21b3302490303112a26824cb48fd7a6421d6b0003841fa0ad2ae6bcf693c"
+    },
+    {
+      "original": "/fonts/DSEG7Classic-Bold.woff2",
+      "local": "/assets/lsu/fonts/DSEG7Classic-Bold.woff2",
+      "status": 200,
+      "bytes": 5132,
+      "contentType": "font/woff2",
+      "sha256": "ec2e7499bc8ac8f8225e1fb6a5d45ff6083c6e2b0efbaf99d37fa7b42a5767ff"
+    },
+    {
+      "original": "/fonts/anton-400-latin-ext.woff2",
+      "local": "/assets/lsu/fonts/anton-400-latin-ext.woff2",
+      "status": 200,
+      "bytes": 21296,
+      "contentType": "font/woff2",
+      "sha256": "ae1a8ac1c2899a66eed47a851201bb78a56664bf8da6d34a9ee226582d15ac19"
+    },
+    {
+      "original": "/fonts/anton-400-latin.woff2",
+      "local": "/assets/lsu/fonts/anton-400-latin.woff2",
+      "status": 200,
+      "bytes": 12004,
+      "contentType": "font/woff2",
+      "sha256": "23aab0b2692a0c89eb7997d3c7cf5bda41276d6cd4ab6cc0edc3edfcece32b09"
+    },
+    {
+      "original": "/fonts/barlow-300-latin-ext.woff2",
+      "local": "/assets/lsu/fonts/barlow-300-latin-ext.woff2",
+      "status": 200,
+      "bytes": 9620,
+      "contentType": "font/woff2",
+      "sha256": "d9a34b35abd6d3f5f30bc2cd0b48acdba78e07d30f33b850a6b70d14a79d4640"
+    },
+    {
+      "original": "/fonts/barlow-300-latin.woff2",
+      "local": "/assets/lsu/fonts/barlow-300-latin.woff2",
+      "status": 200,
+      "bytes": 15568,
+      "contentType": "font/woff2",
+      "sha256": "13717d5594b6e729cff8be73b468d332afa6015dbd9ce79464bbca245eb26a9a"
+    },
+    {
+      "original": "/fonts/barlow-400-latin-ext.woff2",
+      "local": "/assets/lsu/fonts/barlow-400-latin-ext.woff2",
+      "status": 200,
+      "bytes": 9632,
+      "contentType": "font/woff2",
+      "sha256": "bac411df68fa3d93ee4b12309c4df075c791d0390b536ca8d803890f889b76b4"
+    },
+    {
+      "original": "/fonts/barlow-400-latin.woff2",
+      "local": "/assets/lsu/fonts/barlow-400-latin.woff2",
+      "status": 200,
+      "bytes": 15656,
+      "contentType": "font/woff2",
+      "sha256": "7a686e76312866b7d506c103e51a829d4c96a0b4576835128d3b7b53801c095a"
+    },
+    {
+      "original": "/fonts/barlow-400i-latin-ext.woff2",
+      "local": "/assets/lsu/fonts/barlow-400i-latin-ext.woff2",
+      "status": 200,
+      "bytes": 10480,
+      "contentType": "font/woff2",
+      "sha256": "e9d58895aa2459699d9949128a5fb9b905653883bf21d2caee191e9b26389ddd"
+    },
+    {
+      "original": "/fonts/barlow-400i-latin.woff2",
+      "local": "/assets/lsu/fonts/barlow-400i-latin.woff2",
+      "status": 200,
+      "bytes": 17588,
+      "contentType": "font/woff2",
+      "sha256": "b0c1a6bb98553690544603bb344728e6efee02c5bd04b352e12440591be3e137"
+    },
+    {
+      "original": "/fonts/barlow-500-latin-ext.woff2",
+      "local": "/assets/lsu/fonts/barlow-500-latin-ext.woff2",
+      "status": 200,
+      "bytes": 9712,
+      "contentType": "font/woff2",
+      "sha256": "7985f1abf1d07b81181090dffaa1f7c3dde03eaa524d41e5bebd39ea5d3090de"
+    },
+    {
+      "original": "/fonts/barlow-500-latin.woff2",
+      "local": "/assets/lsu/fonts/barlow-500-latin.woff2",
+      "status": 200,
+      "bytes": 15640,
+      "contentType": "font/woff2",
+      "sha256": "80e7dc5605dd451bb9b092d7f46704f08bf39d2866cb981aa8caddc016716aed"
+    },
+    {
+      "original": "/fonts/barlow-600-latin-ext.woff2",
+      "local": "/assets/lsu/fonts/barlow-600-latin-ext.woff2",
+      "status": 200,
+      "bytes": 9888,
+      "contentType": "font/woff2",
+      "sha256": "67dfa555a72fdd7506b4e9a97e2b0307b6b15e3d689ef4c372ef47a0597d94db"
+    },
+    {
+      "original": "/fonts/barlow-600-latin.woff2",
+      "local": "/assets/lsu/fonts/barlow-600-latin.woff2",
+      "status": 200,
+      "bytes": 15832,
+      "contentType": "font/woff2",
+      "sha256": "488b58098126c00b8fa77f4d58b0a4bc982e81e4c83323c1a73d9f1a67c15971"
+    },
+    {
+      "original": "/fonts/barlow-700-latin-ext.woff2",
+      "local": "/assets/lsu/fonts/barlow-700-latin-ext.woff2",
+      "status": 200,
+      "bytes": 14836,
+      "contentType": "font/woff2",
+      "sha256": "88c786d5fa8700a201615bc7b8ede09d209ec5d08cc3dd0a30ea1c4baff3476f"
+    },
+    {
+      "original": "/fonts/barlow-700-latin.woff2",
+      "local": "/assets/lsu/fonts/barlow-700-latin.woff2",
+      "status": 200,
+      "bytes": 22788,
+      "contentType": "font/woff2",
+      "sha256": "2d797dd8b35dcb3413e1af9d7052b3f4f8c341a147cdcb01f4f06af80db53289"
+    },
+    {
+      "original": "/fonts/share-tech-mono-400-latin.woff2",
+      "local": "/assets/lsu/fonts/share-tech-mono-400-latin.woff2",
+      "status": 200,
+      "bytes": 7408,
+      "contentType": "font/woff2",
+      "sha256": "73b87eb7b02dfec4cb1ddfabad6e625d9c77b3c81015064420de88d8dd04816c"
+    }
+  ],
+  "omitted": [
+    {
+      "original": "/assets/yard87-1920.mp4",
+      "reason": "Below-fold yard explanation video; poster retained as requested."
+    },
+    {
+      "original": "/assets/yard87-2732.mp4",
+      "reason": "Below-fold yard explanation video; poster retained as requested."
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "version": 8,
+  "sources": {
+    "land": {
+      "type": "geojson",
+      "data": "/assets/lsu/data/world-land-points.geojson"
+    }
+  },
+  "layers": [
+    {
+      "id": "land",
+      "type": "circle",
+      "source": "land",
+      "paint": {
+        "circle-radius": 1.4,
+        "circle-color": "#b8b5af",
+        "circle-opacity": 0.7
+      }
+    }
+  ]
+}

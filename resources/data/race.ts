@@ -22,7 +22,7 @@ export const race = {
   /** The field size the organiser selects. */
   fieldSize: 150,
   /** Metres in one loop. 6.7 km, run every full hour. */
-  loopMetres: 6700,
+  loopMetres: 6706,
   /** 6.7 km in miles, to two places. The site prints "417 miles", a slipped
    *  decimal point; the correct conversion is used here. */
   loopMiles: '4.17',
@@ -42,7 +42,7 @@ export const race = {
   /** The board itself, kept for attribution. The standings are rendered on
    *  this site now (see resources/data/live.ts); this is the upstream. */
   liveSource: 'https://lsu-live.bspmedia.workers.dev/',
-  organiser: 'LAST SOUL GmbH',
+  organiser: 'Last Soul IP GmbH',
   managingDirector: 'Kim Gottwald',
   presentedBy: 'Kim Gottwald and rappid.',
 } as const

@@ -9,11 +9,11 @@ import { env } from '@stacksjs/env'
  * you have any questions, feel free to reach out via Discord or GitHub Discussions.
  */
 export default {
-  name: env.APP_NAME ?? 'Stacks',
-  description: 'Stacks is a full-stack framework for building modern web applications.',
+  name: env.APP_NAME ?? 'Last Soul Ultra',
+  description: 'The backyard ultra World Series. There is no finish line.',
   env: env.APP_ENV ?? 'local',
-  url: env.APP_URL ?? 'stacks.localhost',
-  redirectUrls: ['stacksjs.com'],
+  url: env.APP_URL ?? 'https://www.lastsoulultra.com',
+  redirectUrls: ['lastsoulultra.com', 'www.lastsoulultra.com', 'hq.training'],
   debug: env.DEBUG ?? false,
   key: env.APP_KEY,
 
@@ -27,4 +27,5 @@ export default {
   locale: 'en',
   fallbackLocale: 'en',
   cipher: 'aes-256-cbc',
+  seo: { robots: { disallow: ['/profile$', '/api/'] }, handwritten: 'replace' },
 } satisfies AppConfig

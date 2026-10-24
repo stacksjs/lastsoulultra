@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en-GB" class="lsu-scope-site">
+<head>@include('head')</head>
+<body class="lsu-scope-site">
+  <a class="lsu-skip" href="#main">Skip to content</a>
+  <div class="lsu-scope-site page">
+    <SiteNav />
+    <main id="main" tabindex="-1">@slot('content')</main>
+    <SiteFooter />
+  </div>
+</body>
+</html>

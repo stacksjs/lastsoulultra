@@ -1,153 +1,245 @@
+@extends('layouts/LSU')
+@section('content')
 <script server>
-import { groupBySlug } from '../data/faq'
-import { at, shots } from '../data/media'
-import { field, race, rules } from '../data/race'
-import { socialImage, socialImageAlt, siteOrigin } from '../data/site'
-
-const pageTitle = 'the format - Last Soul Ultra'
-const pageDescription = 'A 6.7 km loop, every hour, on the hour, until one runner is left. The backyard ultra format explained, plus the gear and camp rules.'
-const canonicalPath = '/format'
-
-const raceGroup = groupBySlug('the-race')
-const crewGroup = groupBySlug('crew')
-
-/* The rules that end a race, pulled out of the FAQ because they are the two
-   things most likely to catch a first-time entrant. */
-const disqualifiers = [
-  { title: 'support on the course', detail: 'Any assistance once the athlete has entered the loop, down to handing over a gel, is an immediate disqualification.' },
-  { title: 'crew on the track', detail: 'Crew members are not allowed on the course at all. If it happens, the athlete they are crewing is out.' },
-  { title: 'no headlamp after dark', detail: 'A working headlamp is mandatory in twilight and darkness. Without one you do not start the loop.' },
-]
+import { productionPages } from '~/resources/data/production-pages'
+const currentPage = productionPages["/format"]
+const canonicalPath = "/format"
 </script>
-<!DOCTYPE html>
-<html lang="en">
-  <head>@include('head')</head>
-  <body>
-    <SiteNav current="/format" />
+<script client>
+import { nextLoop } from '../functions/site-interactions'
+const loopSeconds = state(2295)
+const restLabel = derived(() => { const seconds = 3600 - Number(loopSeconds()); return Math.floor(seconds / 60) + ':' + String(seconds % 60).padStart(2, '0') })
+const loopStyle = derived(() => 'stroke-dasharray:' + (Number(loopSeconds()) / 3600 * 1131) + ' 1131')
+const lsuNextLoop = state(nextLoop())
+const lsuLoopClock = useInterval(() => lsuNextLoop.set(nextLoop()), 1000)
+onDestroy(() => lsuLoopClock.pause())
+</script>
 
-    <main id="main">
-      <div class="max-w-[1500px] mx-auto px-5 lg:px-8">
-        <header class="pt-12 lg:pt-16 pb-10 border-b rule">
-          <p class="label accent">the format</p>
-          <h1 class="display h-page ink mt-4 max-w-[14ch]">one loop. every hour. forever.</h1>
-          <p class="mt-6 text-base sm:text-lg muted max-w-[58ch] leading-relaxed">
-            A backyard ultra has no distance and no cut-off, which makes it sound easier than a marathon and is why it is not. The rules fit on a postcard; surviving them does not.
-          </p>
-        </header>
-      </div>
-
-      {{-- The four constants, given the space they deserve. --}}
-      <section class="border-b rule" data-reveal>
-        <div class="max-w-[1500px] mx-auto px-5 lg:px-8 divide-y rule">
-          @foreach(rules as rule)
-            <div class="grid sm:grid-cols-12 gap-4 sm:gap-8 py-8 lg:py-10 reveal-item">
-              <p class="sm:col-span-3 label faint pt-2">{{ rule.label }}</p>
-              <p class="sm:col-span-4 display h-stat accent">{{ rule.value }}</p>
-              <p class="sm:col-span-5 text-sm muted leading-relaxed">{{ rule.detail }}</p>
-            </div>
-          @endforeach
-        </div>
-      </section>
-
-      {{-- The arithmetic that makes it hard, against the night frame. --}}
-      <section class="border-b rule" data-reveal>
-        <div class="max-w-[1500px] mx-auto grid lg:grid-cols-12 items-stretch">
-          <div class="lg:col-span-6 order-2 lg:order-1 px-5 lg:px-8 py-14 lg:py-20 flex flex-col justify-center reveal-item">
-            <h2 class="display h-lead ink max-w-[16ch]">the rest is the race.</h2>
-            <p class="mt-6 text-base muted leading-relaxed max-w-[52ch]">
-              The loop is the easy part. What decides a backyard ultra is the gap between finishing one and starting the next, because that gap is whatever you have left of the hour.
-            </p>
-            <dl class="grid grid-cols-3 gap-6 mt-10 pt-8 border-t rule max-w-lg">
-              <div>
-                <dt class="label faint">a 40 min loop</dt>
-                <dd class="display text-3xl accent mt-2">20<span class="text-base ml-1">min</span></dd>
-              </div>
-              <div>
-                <dt class="label faint">a 50 min loop</dt>
-                <dd class="display text-3xl accent mt-2">10<span class="text-base ml-1">min</span></dd>
-              </div>
-              <div>
-                <dt class="label faint">a 58 min loop</dt>
-                <dd class="display text-3xl accent mt-2">2<span class="text-base ml-1">min</span></dd>
-              </div>
-            </dl>
-            <p class="mt-5 text-sm faint max-w-[46ch]">Time left to eat, change, treat your feet and sleep, before the next start.</p>
-          </div>
-
-          <div class="lg:col-span-6 order-1 lg:order-2 border-l-0 lg:border-l rule reveal-item">
-            <div class="relative h-full min-h-[280px] aspect-[4/3] lg:aspect-auto overflow-hidden surface">
-              <img
-                class="absolute inset-0 w-full h-full object-cover"
-                src="{{ at(shots.refuel, 1200) }}"
-                alt="{{ shots.refuel.alt }}"
-                width="1200"
-                height="1500"
-                loading="lazy"
-                decoding="async"
-              >
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {{-- What ends a race, stated plainly rather than buried in an FAQ. --}}
-      <section class="border-b rule" data-reveal>
-        <div class="max-w-[1500px] mx-auto px-5 lg:px-8 py-14 lg:py-20">
-          <h2 class="display h-sect ink mb-10 reveal-item">three ways to <span class="whitespace-nowrap">be out.</span></h2>
-          <div class="grid sm:grid-cols-3 gap-x-8 gap-y-10">
-            @foreach(disqualifiers as item)
-              <div class="reveal-item border-t rule-strong pt-5">
-                <h3 class="display h-item ink">{{ item.title }}</h3>
-                <p class="mt-3 text-sm muted leading-relaxed">{{ item.detail }}</p>
-              </div>
-            @endforeach
-          </div>
-          <p class="mt-10 text-sm faint max-w-[60ch] reveal-item">
-            Alongside the obvious one: not completing the loop inside the hour, or not starting the next.
-          </p>
-        </div>
-      </section>
-
-      {{-- Camp and provisions: the practical half. --}}
-      <section class="border-b rule" data-reveal>
-        <div class="max-w-[1500px] mx-auto px-5 lg:px-8 py-14 lg:py-20 grid lg:grid-cols-2 gap-x-14 gap-y-10">
-          <div class="reveal-item">
-            <p class="label accent">base camp</p>
-            <h2 class="display h-sect ink mt-3">{{ race.campSizeMetres }} x {{ race.campSizeMetres }} metres, yours.</h2>
-            <p class="mt-5 text-sm muted leading-relaxed max-w-[46ch]">
-              Marked in advance and assigned first come, first served. As runners drop out, the remaining camps may be moved closer to the starting line.
-            </p>
-            <p class="mt-4 text-sm muted leading-relaxed max-w-[46ch]">
-              Up to {{ race.crewMax }} crew members may work on you here, and having a crew is optional rather than expected.
-            </p>
-          </div>
-          <div class="reveal-item">
-            <p class="label accent">what is provided</p>
-            <h2 class="display h-sect ink mt-3">water. that is <span class="whitespace-nowrap">close to it.</span></h2>
-            <p class="mt-5 text-sm muted leading-relaxed max-w-[46ch]">
-              Water is provided in containers for each athlete. There is no electrical hookup, and full catering is not provided: every participant manages their own nutrition.
-            </p>
-            <p class="mt-4 text-sm muted leading-relaxed max-w-[46ch]">
-              An aid station at base camp is stocked throughout, but it supplements self-sufficiency rather than replacing it.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section class="accent-bg" data-reveal>
-        <div class="max-w-[1500px] mx-auto px-5 lg:px-8 py-14 lg:py-20 flex flex-col lg:flex-row lg:items-end justify-between gap-8 reveal-item">
-          <div>
-            <h2 class="display h-lead max-w-[16ch]">still want a number?</h2>
-            <p class="mt-4 text-base max-w-[48ch] leading-relaxed ink-on-accent-soft">{{ field }}</p>
-          </div>
-          <div class="flex flex-wrap gap-3 shrink-0">
-            <a class="btn" style="background: var(--page); color: var(--ink); border-color: var(--page)" href="/lottery">how to enter</a>
-            <a class="btn" style="border-color: currentColor" href="/faq">read the faq</a>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <SiteFooter />
-  </body>
-</html>
+<section class="lsu-scope-format phero">
+<div class="lsu-scope-format phero-copy">
+<h1 class="lsu-scope-format">
+<span class="kicker lsu-scope-format">What a backyard ultra is</span>One loop.<br class="lsu-scope-format">Every hour.<br class="lsu-scope-format">
+<span class="accent lsu-scope-format">One last soul.</span>
+</h1>
+<p class="lsu-scope-format">The simplest format in ultrarunning and the hardest to survive. There is no distance to reach and no overall time limit — only the next bell, and then the one after that. Places are allocated through a combination of LSU team selection and a random draw: <a href="/world-series">request a race entry</a> for an open event.</p>
+</div>
+</section>
+<section class="lsu-scope-format pad-top">
+<div class="lsu-scope-format shell statgrid">
+<div class="lsu-scope-format">
+<div class="lsu-scope-format stat-v">6.706</div>
+<div class="lsu-scope-format stat-l">km per loop</div>
+</div>
+<div class="lsu-scope-format">
+<div class="lsu-scope-format stat-v">60</div>
+<div class="lsu-scope-format stat-l">minutes per loop</div>
+</div>
+<div class="lsu-scope-format">
+<div class="lsu-scope-format stat-v">None</div>
+<div class="lsu-scope-format stat-l">overall time limit</div>
+</div>
+<div class="lsu-scope-format">
+<div class="accent lsu-scope-format stat-v">+1</div>
+<div class="lsu-scope-format stat-l">loop more than the rest wins</div>
+</div>
+</div>
+</section>
+<section class="lsu-scope-format section">
+<div class="lsu-scope-format narrow">
+<h2 class="block-title h2 lsu-scope-format">Four rules.<br class="lsu-scope-format">
+<span class="accent lsu-scope-format">That is all.</span>
+</h2>
+<p class="lsu-scope-format sub">Everything else is a detail.</p>
+<div class="lsu-scope-format tiles">
+<div class="lsu-scope-format tile">
+<div class="lsu-scope-format tile-ic">
+<svg width="40" height="40" viewbox="0 0 52 52" fill="none" aria-hidden="true" class="lsu-scope-format">
+<circle cx="26" cy="26" r="24" stroke="#DD0F15" stroke-width="2">
+</circle>
+<path d="M26 6v20l12 8" stroke="#fff" stroke-width="3">
+</path>
+</svg>
+<div class="lsu-scope-format tile-n">01</div>
+</div>
+<div class="lsu-scope-format">
+<h3 class="lsu-scope-format">Everyone starts together</h3>
+<p class="lsu-scope-format">On the hour, the whole field leaves the same corral.</p>
+<details class="lsu-scope-format">
+<summary class="lsu-scope-format">More</summary>
+<p class="lsu-scope-format">No staggered starts, no seeding. A first-timer sets off next to a national record holder.</p>
+</details>
+</div>
+</div>
+<div class="lsu-scope-format tile">
+<div class="lsu-scope-format tile-ic">
+<svg width="40" height="40" viewbox="0 0 52 52" fill="none" aria-hidden="true" class="lsu-scope-format">
+<ellipse cx="26" cy="26" rx="22" ry="14" stroke="#fff" stroke-width="2.5">
+</ellipse>
+<circle cx="26" cy="12" r="5" fill="#DD0F15">
+</circle>
+</svg>
+<div class="lsu-scope-format tile-n">02</div>
+</div>
+<div class="lsu-scope-format">
+<h3 class="lsu-scope-format">6.706 km, sixty minutes</h3>
+<p class="lsu-scope-format">One loop is a yard. Be back before the next bell.</p>
+<details class="lsu-scope-format">
+<summary class="lsu-scope-format">More</summary>
+<p class="lsu-scope-format">You have until the hour turns to finish the loop and stand in the corral, ready to go again.</p>
+</details>
+</div>
+</div>
+<div class="lsu-scope-format tile">
+<div class="lsu-scope-format tile-ic">
+<svg width="40" height="40" viewbox="0 0 52 52" fill="none" aria-hidden="true" class="lsu-scope-format">
+<path d="M13 36c5-4 4-8 4-14a9 9 0 0 1 18 0c0 6-1 10 4 14H13Z" stroke="#DD0F15" stroke-width="2.5">
+</path>
+<path d="M22 42a4 4 0 0 0 8 0" stroke="#fff" stroke-width="2.5">
+</path>
+</svg>
+<div class="lsu-scope-format tile-n">03</div>
+</div>
+<div class="lsu-scope-format">
+<h3 class="lsu-scope-format">Miss the bell, you are out</h3>
+<p class="lsu-scope-format">No grace period, no appeal — at yard 3 and at yard 93.</p>
+<details class="lsu-scope-format">
+<summary class="lsu-scope-format">More</summary>
+<p class="lsu-scope-format">Not in the corral when the hour turns, race over. However far you had come.</p>
+</details>
+</div>
+</div>
+<div class="lsu-scope-format tile">
+<div class="lsu-scope-format tile-ic">
+<svg width="40" height="40" viewbox="0 0 52 52" fill="none" aria-hidden="true" class="lsu-scope-format">
+<path d="M26 6l6 13 14 2-10 10 2 14-12-7-12 7 2-14L6 21l14-2 6-13Z" stroke="#DD0F15" stroke-width="2.5">
+</path>
+</svg>
+<div class="lsu-scope-format tile-n">04</div>
+</div>
+<div class="lsu-scope-format">
+<h3 class="lsu-scope-format">One loop more than the rest</h3>
+<p class="lsu-scope-format">Nobody knows if this is one night or four.</p>
+<details class="lsu-scope-format">
+<summary class="lsu-scope-format">More</summary>
+<p class="lsu-scope-format">The winner finishes one yard nobody else can. If no one manages it, there is no winner and everyone is a DNF.</p>
+</details>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="hour-section lsu-scope-format">
+<div class="lsu-scope-format narrow">
+<h2 class="h2-sm lsu-scope-format">Your rest is<br class="lsu-scope-format">
+<span class="accent lsu-scope-format">what you saved.</span>
+</h2>
+<p class="lsu-scope-format sub">Eating, sleeping and kit all come out of the hour you just ran in.</p>
+<div class="hour-dial lsu-scope-format" data-format-dial>
+<div class="dialbox lsu-scope-format">
+<svg viewBox="0 0 420 420" class="rest-ring" role="img" :aria-label="restLabel + ' left to rest'"><circle cx="210" cy="210" r="180" fill="none" stroke="#303034" stroke-width="30"/><circle cx="210" cy="210" r="180" fill="none" stroke="#dd0f15" stroke-width="30" :style="loopStyle"/></svg>
+<div class="lsu-scope-format readout">
+<div class="big lsu-scope-format" data-rest :text="restLabel">21:45</div>
+<div class="lab lsu-scope-format">left to rest</div>
+</div>
+</div>
+<div class="lsu-scope-format">
+<div class="lsu-scope-format slider">
+<input type="range" min="2295" max="3480" step="15" x-model="loopSeconds" aria-label="Loop time" class="lsu-scope-format">
+<div class="lsu-scope-format marks">
+<span class="lsu-scope-format">38 min loop</span>
+<span class="lsu-scope-format">59 min loop</span>
+</div>
+</div>
+<div class="legend lsu-scope-format">
+<span class="lsu-scope-format">
+<i class="i-run lsu-scope-format">
+</i>Running</span>
+<span class="lsu-scope-format">
+<i class="i-rest lsu-scope-format">
+</i>Rest</span>
+</div>
+<div class="lsu-scope-format presets">
+<button type="button" @click="loopSeconds.set(2295)" :class="{ on: Number(loopSeconds) === 2295 }" class="lsu-scope-format">Fastest yard · 38:15</button>
+<button type="button" @click="loopSeconds.set(3105)" :class="{ on: Number(loopSeconds) === 3105 }" class="lsu-scope-format">Average · 51:42</button>
+<button type="button" @click="loopSeconds.set(3480)" :class="{ on: Number(loopSeconds) === 3480 }" class="lsu-scope-format">Late night · 58:00</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="lsu-scope-format section">
+<div class="lsu-scope-format shell">
+<h2 class="block-title h2 lsu-scope-format">Everything you own<br class="lsu-scope-format">
+<span class="accent lsu-scope-format">fits in 9 m².</span>
+</h2>
+<p class="lsu-scope-format sub">A marked 3 × 3 metre square for a race with no known end.</p>
+<div class="camp lsu-scope-format">
+<dl class="camp-list lsu-scope-format">
+<div class="lsu-scope-format">
+<dt class="lsu-scope-format">Provided</dt>
+<dd class="lsu-scope-format">Water in containers. No power, no race support — plan for yourself.</dd>
+</div>
+<div class="lsu-scope-format">
+<dt class="lsu-scope-format">Crew</dt>
+<dd class="lsu-scope-format">Four registered, three on site. In camp they do everything.</dd>
+</div>
+<div class="lsu-scope-format">
+<dt class="lsu-scope-format">On the loop</dt>
+<dd class="lsu-scope-format">Any help is an instant DQ. Headlamp after dark. No spectators.</dd>
+</div>
+</dl>
+<svg class="lsu-scope-format pitch" viewBox="0 0 460 460" role="img" aria-label="A 3 by 3 metre camp with bed, chair, stove, food, kit and shoes"><defs><pattern id="camp-grid" width="120" height="120" patternUnits="userSpaceOnUse"><path d="M120 0H0V120" fill="none" stroke="#444" stroke-dasharray="3 5"/></pattern></defs><rect x="50" y="50" width="360" height="360" fill="url(#camp-grid)" stroke="#dd0f15" stroke-width="2"/><g fill="none" stroke="#999" stroke-width="2"><rect x="70" y="70" width="105" height="225" rx="8"/><rect x="80" y="80" width="85" height="40" rx="8"/><rect x="265" y="85" width="100" height="85" rx="6"/><rect x="260" y="230" width="90" height="70" rx="8"/><rect x="75" y="340" width="95" height="45" rx="6"/></g><g fill="#bbb" font-family="monospace" font-size="13"><text x="90" y="190">CAMP BED</text><text x="285" y="135">CHAIR</text><text x="278" y="270">STOVE</text><text x="95" y="368">KIT</text><text x="155" y="35">3 × 3 M · 9 M²</text></g></svg>
+</div>
+</div>
+</section>
+<section class="lsu-scope-format rules-hard-section section">
+<div class="lsu-scope-format narrow">
+<div class="hour-head lsu-scope-format">
+<h2 class="h2-sm lsu-scope-format">How a field<br class="lsu-scope-format">
+<span class="accent lsu-scope-format">disappears.</span>
+</h2>
+<a href="/results" class="ed-link lsu-scope-format">Full results →</a>
+</div>
+<p class="lsu-scope-format sub">Season 2, 2026: 160 started, one was still there four days later. Season 1 ended at 67 yards, the world record stands at 119.</p>
+<svg class="attrition-chart lsu-scope-format" viewBox="0 0 1100 220" role="img" aria-label="Season 2: 160 starters, one last soul after 94 yards"><path d="M10 200 H1090" stroke="#444"/><polyline points="10.0,20.0 21.6,20.0 33.2,21.1 44.8,22.2 56.5,27.9 68.1,31.2 79.7,38.0 91.3,42.5 102.9,47.0 114.5,51.5 126.1,59.4 137.7,61.6 149.4,70.6 161.0,77.4 172.6,80.8 184.2,101.0 195.8,112.2 207.4,116.8 219.0,119.0 230.6,122.4 242.3,126.9 253.9,129.1 265.5,134.8 277.1,135.9 288.7,139.2 300.3,143.8 311.9,147.1 323.5,151.6 335.2,153.9 346.8,157.2 358.4,160.6 370.0,162.9 381.6,165.1 393.2,167.4 404.8,169.6 416.5,171.9 428.1,173.0 439.7,175.2 451.3,176.4 462.9,177.5 474.5,178.6 486.1,179.8 497.7,180.9 509.4,182.0 521.0,182.0 532.6,183.1 544.2,184.2 555.8,185.4 567.4,185.4 579.0,186.5 590.6,187.6 602.3,187.6 613.9,188.8 625.5,188.8 637.1,189.9 648.7,189.9 660.3,191.0 671.9,191.0 683.5,191.0 695.2,192.1 706.8,192.1 718.4,192.1 730.0,193.2 741.6,193.2 753.2,193.2 764.8,194.4 776.5,194.4 788.1,194.4 799.7,194.4 811.3,195.5 822.9,195.5 834.5,195.5 846.1,196.6 857.7,196.6 869.4,196.6 881.0,196.6 892.6,196.6 904.2,196.6 915.8,196.6 927.4,196.6 939.0,197.8 950.6,197.8 962.3,197.8 973.9,197.8 985.5,197.8 997.1,197.8 1008.7,197.8 1020.3,197.8 1031.9,197.8 1043.5,197.8 1055.2,197.8 1066.8,197.8 1078.4,197.8 1090.0,198.9" fill="none" stroke="#dd0f15" stroke-width="3"/><text x="10" y="218" fill="#aaa" font-size="12">YARD 1</text><text x="1015" y="218" fill="#aaa" font-size="12">YARD 94</text></svg>
+<div class="lsu-scope-format shell statgrid" style="padding:0;margin-top:14px">
+<div class="lsu-scope-format">
+<div class="lsu-scope-format stat-v">160</div>
+<div class="lsu-scope-format stat-l">on the start line</div>
+</div>
+<div class="lsu-scope-format">
+<div class="lsu-scope-format stat-v">57</div>
+<div class="lsu-scope-format stat-l">still in after 24 hours</div>
+</div>
+<div class="lsu-scope-format">
+<div class="lsu-scope-format stat-v">13</div>
+<div class="lsu-scope-format stat-l">still in after 48 hours</div>
+</div>
+<div class="lsu-scope-format">
+<div class="accent lsu-scope-format stat-v">1</div>
+<div class="lsu-scope-format stat-l">last soul · 94 yards · 630 km</div>
+</div>
+</div>
+</div>
+</section>
+<section id="enter" class="enter lsu-scope-next-loop">
+<div class="enter-bg lsu-scope-next-loop" data-px="0.4">
+</div>
+<div class="enter-scrim lsu-scope-next-loop">
+</div>
+<div class="lsu-scope-next-loop phero-ghost" data-px="-0.2">EVENTS</div>
+<div class="enter-copy lsu-scope-next-loop" data-px="-0.06">
+<div class="kicker lsu-scope-next-loop">The backyard rhythm</div>
+<div class="enter-sub lsu-scope-next-loop">Next hour in</div>
+<div class="enter-count lsu-scope-next-loop">
+<div class="lsu-scope-next-loop seg">
+<div class="lsu-scope-next-loop seg-count seg-ghost" aria-hidden="true">88:88</div>
+<div class="lsu-scope-next-loop seg-count seg-live" :text="lsuNextLoop" data-nextloop>00:00</div>
+</div>
+</div>
+<h2 class="enter-title lsu-scope-next-loop">Ready to prove your soul?</h2>
+<p class="lsu-scope-next-loop">Choose an open event from the <a href="/world-series">2027 World Series schedule</a> and request a race entry with your Last Soul Ultra account.</p>
+<a href="/world-series" class="btn btn-lg lsu-scope-next-loop" data-apply data-view-href="/profile">Request a race entry</a>
+</div>
+</section>
+@endsection

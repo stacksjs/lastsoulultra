@@ -1,4 +1,4 @@
-import type { StxOptions as UiOptions } from '@stacksjs/stx'
+import type { UiConfig } from '@stacksjs/types'
 
 /**
  * STX Configuration for Stacks
@@ -10,6 +10,7 @@ export default {
   // component, layout and partial resolution stable for CLI, dev and build
   // processes instead of asking each process to infer the same root.
   root: 'resources',
+  site: { url: process.env.SITE_ORIGIN || 'https://www.lastsoulultra.com' },
 
   // Where stx keeps everything it generates: the compiled-template cache, the
   // Crosswind CSS cache, client-script bundles, the route manifest and route
@@ -29,7 +30,7 @@ export default {
   // Expose @stacksjs/components' ui library (<Sidebar>, <Button>, ...)
   // to tag resolution everywhere — the dashboard's macOS-style sidebar
   // resolves through this. See the plugin file for the lookup order.
-  plugins: ['./storage/framework/defaults/stx-components-plugin.ts'],
+  plugins: ['@stacksjs/defaults/stx-components-plugin.ts', '@ts-maps/stx/stx-plugin'],
 
   layoutsDir: 'layouts',
 
@@ -45,5 +46,5 @@ export default {
   // array names the subtrees to keep, e.g. `['errors', 'emails']`. Applies to
   // `buddy dev` and `buddy serve` alike, and to the sitemap.
   // defaultViews: true,
-// `plugins` landed in stx after the pinned @stacksjs/stx types — widen until the dep updates.
-} satisfies UiOptions & { plugins?: string[], defaultViews?: boolean | string[] }
+  defaultViews: false,
+} satisfies UiConfig

@@ -1,79 +1,340 @@
+@extends('layouts/LSU')
+@section('content')
 <script server>
-import { at, shots } from '../data/media'
-import { race } from '../data/race'
-
-const pageTitle = 'sponsorship - Last Soul Ultra'
-const pageDescription = 'A small number of partners, integrated into a race format that runs long after race day: on-site presence, the 24/7 livestream and documentary content.'
-const canonicalPath = '/sponsorship'
-
-/* The touchpoints the organiser names, given the structure a brand actually
-   evaluates them with rather than left as one paragraph. */
-const touchpoints = [
-  { title: 'on site', detail: 'Presence at the base camp and the corral, where the field and its crews spend every hour they are not running.' },
-  { title: 'the livestream', detail: 'A 24/7 broadcast from the gun until the final solo loop, running as long as the last runner does.' },
-  { title: 'the documentary', detail: 'Long-form storytelling published after the event, which is where a backyard ultra does most of its reach.' },
-]
+import { productionPages } from '~/resources/data/production-pages'
+const currentPage = productionPages["/sponsorship"]
+const canonicalPath = "/sponsorship"
 </script>
-<!DOCTYPE html>
-<html lang="en">
-  <head>@include('head')</head>
-  <body>
-    <SiteNav current="/sponsorship" />
-
-    <main id="main">
-      <div class="max-w-[1500px] mx-auto px-5 lg:px-8">
-        <header class="pt-12 lg:pt-16 pb-10 border-b rule">
-          <p class="label accent">partners</p>
-          <h1 class="display h-page ink mt-4 max-w-[14ch]">a few brands. not a hoarding.</h1>
-          <p class="mt-6 text-base sm:text-lg muted max-w-[58ch] leading-relaxed">
-            We work with a small number of carefully selected partners who share the vision and values behind the event, and who are integrated in a natural and meaningful way.
-          </p>
-        </header>
-      </div>
-
-      <section class="border-b rule" data-reveal>
-        <div class="max-w-[1500px] mx-auto px-5 lg:px-8 py-14 lg:py-20">
-          <h2 class="display h-sect ink mb-10 reveal-item">where a partner shows up.</h2>
-          <div class="grid sm:grid-cols-3 gap-x-8 gap-y-10">
-            @foreach(touchpoints as point)
-              <div class="reveal-item border-t rule-strong pt-5">
-                <h3 class="display h-item ink">{{ point.title }}</h3>
-                <p class="mt-3 text-sm muted leading-relaxed">{{ point.detail }}</p>
-              </div>
-            @endforeach
-          </div>
-        </div>
-      </section>
-
-      <section class="border-b rule" data-reveal>
-        <div class="max-w-[1500px] mx-auto grid lg:grid-cols-12 items-stretch">
-          <div class="lg:col-span-6 reveal-item">
-            <div class="relative h-full min-h-[280px] aspect-[4/3] lg:aspect-auto overflow-hidden surface">
-              <img
-                class="absolute inset-0 w-full h-full object-cover"
-                src="{{ at(shots.night, 1200) }}"
-                alt="{{ shots.night.alt }}"
-                width="1200"
-                height="1500"
-                loading="lazy"
-                decoding="async"
-              >
-            </div>
-          </div>
-          <div class="lg:col-span-6 px-5 lg:px-8 py-14 lg:py-20 flex flex-col justify-center border-l-0 lg:border-l rule reveal-item">
-            <h2 class="display h-lead ink max-w-[18ch]">the story outlasts the race.</h2>
-            <p class="mt-6 text-base muted leading-relaxed max-w-[50ch]">
-              Last Soul Ultra is built around long-term storytelling that goes far beyond race day. A format with no finish line produces something to watch for as long as somebody is still running, and something to publish long after they stop.
-            </p>
-            <p class="mt-4 text-base muted leading-relaxed max-w-[50ch]">
-              If you think your brand could be the right fit and you share the vision behind the event, get in touch.
-            </p>
-            <a class="btn btn-accent mt-9 self-start" href="mailto:{{ race.email }}?subject=Sponsorship">let&rsquo;s talk</a>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <SiteFooter />
-  </body>
-</html>
+<section class="lsu-scope-sponsorship phero spons-hero">
+<div class="lsu-scope-sponsorship spons-hero-bg">
+</div>
+<div class="lsu-scope-sponsorship phero-copy">
+<div class="kicker lsu-scope-sponsorship">Partner with Last Soul Ultra · Stream · Social · On site</div>
+<h1 class="lsu-scope-sponsorship">Emotion you can’t buy.<br class="lsu-scope-sponsorship">Presence you can.</h1>
+<p class="lsu-scope-sponsorship">A 24/7 livestream over days, millions on social, a camp only partners get into. Nothing staged. Everything felt.</p>
+</div>
+</section>
+<section class="lsu-scope-sponsorship section">
+<div class="lsu-scope-sponsorship shell why">
+<div class="lsu-scope-sponsorship">
+<div class="kicker lsu-scope-sponsorship">Why brands are here</div>
+<h2 class="h2 lsu-scope-sponsorship why-title">Nothing in sport<br class="lsu-scope-sponsorship">holds people like this</h2>
+</div>
+<div class="lsu-scope-sponsorship why-copy">
+<p class="lsu-scope-sponsorship">A football match is 90 minutes. A marathon is a morning. Last Soul Ultra takes days and nights, and nobody knows when it ends — <a href="/format">one 6.7 km loop every hour until one runner is left</a>. Every hour a start, a fight and a cut.</p>
+<p class="lsu-scope-sponsorship why-dim">So people don’t check in. They stay, because they won’t miss the moment it happens. A format like no other. And your brand is there the entire time: in the experience, the emotion, the moments that change an athlete’s life.</p>
+</div>
+</div>
+<div class="lsu-scope-sponsorship shell they">
+<div class="card lsu-scope-sponsorship">
+<div class="card-name lsu-scope-sponsorship">They stay</div>
+<div class="card-body lsu-scope-sponsorship">25:50 minutes average view time on a livestream. 6.6 views per viewer. People came back again and again for 100 hours.</div>
+</div>
+<div class="card lsu-scope-sponsorship">
+<div class="card-name lsu-scope-sponsorship">They feel</div>
+<div class="card-body lsu-scope-sponsorship">979,308 reactions. 263,000 chat messages across YouTube and Twitch. 98.9% positive. No script, no safe ending, real people breaking and holding on.</div>
+</div>
+<div class="card lsu-scope-sponsorship">
+<div class="card-name lsu-scope-sponsorship">They remember</div>
+<div class="card-body lsu-scope-sponsorship">Emotion builds memory. A brand that is there at 3 a.m. on night three isn’t a sponsor. It’s part of the feeling.</div>
+</div>
+</div>
+</section>
+<section class="lsu-scope-sponsorship numbers-section">
+<div class="lsu-scope-sponsorship numbers shell statgrid">
+<div class="lsu-scope-sponsorship">
+<div class="lsu-scope-sponsorship num-v stat-v">3.37M</div>
+<div class="lsu-scope-sponsorship stat-l">hours watched · YouTube + Twitch</div>
+</div>
+<div class="lsu-scope-sponsorship">
+<div class="accent lsu-scope-sponsorship num-v stat-v">135,654</div>
+<div class="lsu-scope-sponsorship stat-l">live viewers at once · YouTube + Twitch</div>
+</div>
+<div class="lsu-scope-sponsorship">
+<div class="lsu-scope-sponsorship num-v stat-v">3.9M</div>
+<div class="lsu-scope-sponsorship stat-l">TV viewers on top</div>
+</div>
+<div class="lsu-scope-sponsorship">
+<div class="lsu-scope-sponsorship num-v stat-v">211K</div>
+<div class="lsu-scope-sponsorship stat-l">followers @lastsoulultra</div>
+</div>
+</div>
+</section>
+<section class="band final-band lsu-scope-sponsorship">
+<div class="band-bg lsu-scope-sponsorship photo-bg" style="background-image:url(&#x27;/assets/lsu/images/rappid-20.webp&#x27;);background-position:center 30%" data-px="0.26">
+</div>
+<div class="band-scrim lsu-scope-sponsorship">
+</div>
+<div class="band-copy hero-band lsu-scope-sponsorship" data-px="-0.1">
+<h2 class="band-title h2 lsu-scope-sponsorship">Every hour<br class="lsu-scope-sponsorship">
+<span class="accent lsu-scope-sponsorship">a final.</span>
+</h2>
+</div>
+</section>
+<section class="lsu-scope-sponsorship section">
+<div class="lsu-scope-sponsorship shell why">
+<div class="lsu-scope-sponsorship">
+<div class="kicker lsu-scope-sponsorship">They don’t watch. They stay.</div>
+<h2 class="h2 lsu-scope-sponsorship why-title">As the field shrinks,<br class="lsu-scope-sponsorship">the audience grows</h2>
+</div>
+<div class="lsu-scope-sponsorship why-copy">
+<p class="lsu-scope-sponsorship">The field shrinks every day. And with every runner who drops, more people tune in to see who’s left. On YouTube and on Twitch, day five had the biggest audience of the whole race.</p>
+</div>
+</div>
+<div class="lsu-scope-sponsorship shell statrows">
+<div class="lsu-scope-sponsorship statrow">
+<div class="lsu-scope-sponsorship statrow-v">8.0M</div>
+<div class="lsu-scope-sponsorship statrow-l">livestream views on YouTube and Twitch in one race week</div>
+</div>
+<div class="lsu-scope-sponsorship statrow">
+<div class="accent lsu-scope-sponsorship statrow-v">1.54M</div>
+<div class="lsu-scope-sponsorship statrow-l">unique viewers who found the stream and came back, 6.6 times on average</div>
+</div>
+<div class="lsu-scope-sponsorship statrow">
+<div class="lsu-scope-sponsorship statrow-v">25:50</div>
+<div class="lsu-scope-sponsorship statrow-l">minutes average view time, on a livestream that ran 100 hours without a gap</div>
+</div>
+</div>
+<div class="growth lsu-scope-sponsorship shell why">
+<div class="lsu-scope-sponsorship">
+<div class="kicker lsu-scope-sponsorship">Season 1 → Season 2</div>
+<h2 class="h2 lsu-scope-sponsorship why-title">Year one built the base.<br class="lsu-scope-sponsorship">Year two redefined the sport</h2>
+</div>
+<div class="lsu-scope-sponsorship why-copy">
+<p class="lsu-scope-sponsorship">The first edition already made national headlines. The second one — <a href="/results">94 yards over four days and nights</a> — tripled the watch time, nearly tripled the peak audience, added Twitch as a second home and put the race on RTL Aktuell and Tagesschau. No other backyard race in the world has been watched like this.</p>
+</div>
+</div>
+</section>
+<section class="lsu-scope-sponsorship section">
+<div class="lsu-scope-sponsorship shell why">
+<div class="lsu-scope-sponsorship">
+<div class="kicker lsu-scope-sponsorship">Reach</div>
+<h2 class="h2 lsu-scope-sponsorship why-title">One race.<br class="lsu-scope-sponsorship">A whole network</h2>
+</div>
+<div class="lsu-scope-sponsorship why-copy">
+<p class="lsu-scope-sponsorship">The stream is only the centre. Around it: the Last Soul Ultra account, Kim Gottwald’s channels, rappid., and the athletes telling the same race from their own tent.</p>
+<p class="lsu-scope-sponsorship">Several million followers across the network, all in endurance, performance and mental strength. Exactly the audience you’re looking for. No wasted impressions.</p>
+</div>
+</div>
+<div class="collage lsu-scope-sponsorship shell">
+<img class="collage-a lsu-scope-sponsorship" src="/assets/lsu/images/sponsor-reach-1.webp" alt="Runners in head torches gathered at the start in the dark, a wheelchair athlete at the front" width="680" height="856" loading="lazy" decoding="async">
+<img src="/assets/lsu/images/sponsor-reach-2.webp" alt="A runner in a rappid. cap in tears, hugging a supporter in a Last Soul T-shirt" width="504" height="419" loading="lazy" decoding="async" class="lsu-scope-sponsorship">
+<img src="/assets/lsu/images/sponsor-reach-3.webp" alt="A runner in a white sun hood reaches for the start bell beneath the Last Soul race clock" width="504" height="420" loading="lazy" decoding="async" class="lsu-scope-sponsorship">
+</div>
+<div class="lsu-scope-sponsorship reach-credit shell">
+<span class="lsu-scope-sponsorship">@lastsoulultra</span>
+<span class="lsu-scope-sponsorship">Kim Gottwald</span>
+<span class="lsu-scope-sponsorship">rappid.</span>
+<span class="lsu-scope-sponsorship">the athletes</span>
+<span class="lsu-scope-sponsorship">their crews</span>
+<span class="lsu-scope-sponsorship">every partner</span>
+</div>
+<div class="field lsu-scope-sponsorship shell why">
+<div class="lsu-scope-sponsorship">
+<div class="kicker lsu-scope-sponsorship">The field</div>
+<h2 class="h2 lsu-scope-sponsorship why-title">The best of the best.<br class="lsu-scope-sponsorship">And people like you</h2>
+</div>
+<div class="lsu-scope-sponsorship why-copy">
+<p class="lsu-scope-sponsorship">Pros, fitness creators and athletes, and runners from the community on one start line, for days. No brand can book this combination anywhere else.</p>
+</div>
+</div>
+<div class="lsu-scope-sponsorship shell they">
+<div class="card fcard lsu-scope-sponsorship">
+<img src="/assets/lsu/images/sponsor-field-pros.webp" alt="A runner in a head torch and bandana running through the night" width="383" height="481" loading="lazy" decoding="async" class="lsu-scope-sponsorship">
+<div class="fcard-text lsu-scope-sponsorship">
+<div class="card-name lsu-scope-sponsorship">Pros</div>
+<div class="card-body lsu-scope-sponsorship">Harvey Lewis, two-time Big’s Backyard world champion. Hendrik Boury, German record holder. Mark Dowdle, the 2026 Last Soul with 630 km. They make it serious. They make it long.</div>
+</div>
+</div>
+<div class="card fcard lsu-scope-sponsorship">
+<img src="/assets/lsu/images/sponsor-field-fitness.webp" alt="Three runners in race bibs walking a forest trail in the sun" width="383" height="481" loading="lazy" decoding="async" class="lsu-scope-sponsorship">
+<div class="fcard-text lsu-scope-sponsorship">
+<div class="card-name lsu-scope-sponsorship">Fitness creators &amp; athletes</div>
+<div class="card-body lsu-scope-sponsorship">Alex Kukla, Lukas Stapper, Maren Schiller and dozens more. Every story, reel and reaction carries the race into communities far beyond running. They make it loud.</div>
+</div>
+</div>
+<div class="card fcard lsu-scope-sponsorship">
+<img src="/assets/lsu/images/sponsor-field-community.webp" alt="Four runners running side by side along a dry, sunlit field path" width="383" height="481" loading="lazy" decoding="async" class="lsu-scope-sponsorship">
+<div class="fcard-text lsu-scope-sponsorship">
+<div class="card-name lsu-scope-sponsorship">Community</div>
+<div class="card-body lsu-scope-sponsorship">Athletes selected through entry requests, and wildcard souls. Real people from the community line up and surprise everyone with what they’re capable of. Everyone watching feels it: that could be me. They make it personal.</div>
+</div>
+</div>
+</div>
+</section>
+<section class="lsu-scope-sponsorship section">
+<div class="lsu-scope-sponsorship shell why">
+<div class="lsu-scope-sponsorship">
+<div class="kicker lsu-scope-sponsorship">Real stories, real use</div>
+<h2 class="h2 lsu-scope-sponsorship why-title">Products aren’t placed.<br class="lsu-scope-sponsorship">They’re used</h2>
+</div>
+<div class="lsu-scope-sponsorship why-copy">
+<p class="lsu-scope-sponsorship">Nobody performs for the camera at hour 70. What the stream shows is what actually happens: the poncho in the storm, the drink at 3 a.m., the recovery in the tent, the shoes on loop 94. That’s the difference between an ad and a memory.</p>
+</div>
+</div>
+<div class="lsu-scope-sponsorship shell statgrid stories-stats">
+<div class="lsu-scope-sponsorship">
+<div class="accent lsu-scope-sponsorship num-v stat-v">94</div>
+<div class="lsu-scope-sponsorship stat-l">loops, 630 km. Mark Dowdle, the 2026 Last Soul.</div>
+</div>
+<div class="lsu-scope-sponsorship">
+<div class="accent lsu-scope-sponsorship num-v stat-v">52</div>
+<div class="lsu-scope-sponsorship stat-l">loops, 349 km. Caroline Bolte, German women’s record.</div>
+</div>
+<div class="lsu-scope-sponsorship">
+<div class="accent lsu-scope-sponsorship num-v stat-v">45</div>
+<div class="lsu-scope-sponsorship stat-l">loops at 68 years old. Hubert Karl, 25 Spartathlon finishes.</div>
+</div>
+<div class="lsu-scope-sponsorship">
+<div class="accent lsu-scope-sponsorship num-v stat-v">30</div>
+<div class="lsu-scope-sponsorship stat-l">loops, 201 km, in a wheelchair. Mike Egan, Marine veteran.</div>
+</div>
+</div>
+<div class="lsu-scope-sponsorship mosaic shell">
+<img class="lsu-scope-sponsorship mosaic-big" src="/assets/lsu/images/sponsor-story-1.webp" alt="Two runners embracing beneath the race clock at loop 94" width="592" height="846" loading="lazy" decoding="async">
+<img class="lsu-scope-sponsorship" src="/assets/lsu/images/sponsor-story-2.webp" alt="A runner in tears, held close in an embrace" width="286" height="419" loading="lazy" decoding="async">
+<img class="lsu-scope-sponsorship" src="/assets/lsu/images/sponsor-story-3.webp" alt="A runner in a rappid. cap weeping on a supporter’s shoulder" width="286" height="419" loading="lazy" decoding="async">
+<img class="lsu-scope-sponsorship" src="/assets/lsu/images/sponsor-story-4.webp" alt="An older runner pours water over their head, one hand over their eyes" width="286" height="419" loading="lazy" decoding="async">
+<img class="lsu-scope-sponsorship" src="/assets/lsu/images/sponsor-story-5.webp" alt="A wheelchair athlete pushes towards the Last Soul start line on loop 27" width="286" height="419" loading="lazy" decoding="async">
+</div>
+<div class="lsu-scope-sponsorship quote-card shell">
+<p class="lsu-scope-sponsorship quote">People don’t think “this brand sponsored it”.<br class="lsu-scope-sponsorship">
+<span class="accent lsu-scope-sponsorship">They think “this brand was there when it mattered”.</span>
+</p>
+</div>
+</section>
+<section class="band begin-band final-band lsu-scope-sponsorship">
+<div class="band-bg lsu-scope-sponsorship photo-bg" style="background-image:url(&#x27;/assets/lsu/images/rappid-94.webp&#x27;);background-position:center 28%" data-px="0.26">
+</div>
+<div class="band-scrim lsu-scope-sponsorship">
+</div>
+<div class="band-copy hero-band lsu-scope-sponsorship" data-px="-0.1">
+<div class="kicker lsu-scope-sponsorship">2027</div>
+<h2 class="band-title h2 lsu-scope-sponsorship">This was<br class="lsu-scope-sponsorship">
+<span class="accent lsu-scope-sponsorship">the beginning.</span>
+</h2>
+</div>
+</section>
+<section class="lsu-scope-sponsorship section">
+<div class="lsu-scope-sponsorship shell why">
+<div class="lsu-scope-sponsorship">
+<div class="kicker lsu-scope-sponsorship">Going international</div>
+<h2 class="h2 lsu-scope-sponsorship why-title">Three continents.<br class="lsu-scope-sponsorship">Four countries</h2>
+</div>
+<div class="lsu-scope-sponsorship why-copy">
+<p class="lsu-scope-sponsorship">2026 already went further than Germany. A winner from the USA. Two American legends on the loop. Souls from nine countries. An English stream alongside the German one. Clips on 3.5 million US screens.</p>
+<p class="lsu-scope-sponsorship">In 2027 the race itself follows.</p>
+</div>
+</div>
+<div class="countries lsu-scope-sponsorship shell">
+<div class="country lsu-scope-sponsorship">
+<div class="country-name lsu-scope-sponsorship">Germany</div>
+<div class="country-note lsu-scope-sponsorship">Europe · where it started</div>
+</div>
+<div class="country lsu-scope-sponsorship">
+<div class="country-name lsu-scope-sponsorship">UK</div>
+<div class="country-note lsu-scope-sponsorship">Europe · new</div>
+</div>
+<div class="country lsu-scope-sponsorship">
+<div class="country-name lsu-scope-sponsorship">USA</div>
+<div class="country-note lsu-scope-sponsorship">North America · new</div>
+</div>
+<div class="country lsu-scope-sponsorship">
+<div class="country-name lsu-scope-sponsorship">Australia</div>
+<div class="country-note lsu-scope-sponsorship">Oceania · new</div>
+</div>
+</div>
+</section>
+<section class="alt lsu-scope-sponsorship section">
+<div class="lsu-scope-sponsorship shell trajectory">
+<div class="kicker-sm lsu-scope-sponsorship">Trajectory · hours watched per season</div>
+<div class="lsu-scope-sponsorship traj-chart">
+<svg viewbox="0 0 100 100" preserveaspectratio="none" aria-hidden="true" class="lsu-scope-sponsorship">
+<line class="lsu-scope-sponsorship traj-base" x1="0" y1="86" x2="100" y2="86">
+</line>
+<line class="lsu-scope-sponsorship traj-solid" x1="17" y1="71.968" x2="50" y2="59.25684210526316">
+</line>
+<line class="lsu-scope-sponsorship traj-dash" x1="50" y1="59.25684210526316" x2="83" y2="20">
+</line>
+</svg>
+<div class="lsu-scope-sponsorship traj-if" style="left:66.5%;top:42.62842105263158%">if the 2026 growth rate holds</div>
+<div class="lsu-scope-sponsorship traj-dot" style="left:17%;top:71.968%">
+</div>
+<div class="lsu-scope-sponsorship traj-v" style="left:17%;top:62.968%">988K</div>
+<div class="lsu-scope-sponsorship traj-y" style="left:17%">Season 1 · 1 race</div>
+<div class="lsu-scope-sponsorship traj-dot" style="left:50%;top:59.25684210526316%">
+</div>
+<div class="lsu-scope-sponsorship traj-v" style="left:50%;top:50.25684210526316%">3.07M</div>
+<div class="lsu-scope-sponsorship traj-y" style="left:50%">Season 2 · 1 race</div>
+<div class="lsu-scope-sponsorship projected traj-dot" style="left:83%;top:20%">
+</div>
+<div class="lsu-scope-sponsorship projected traj-v" style="left:88%;top:20%">9.5M</div>
+<div class="lsu-scope-sponsorship traj-y" style="left:83%">Season 3 · 4 races</div>
+</div>
+<div class="lsu-scope-sponsorship traj-note">Projection, not a forecast: 2025 → 2026 growth (×3.1) applied once more, for one race. Season 3 adds three qualifiers and a final on top.</div>
+</div>
+<div class="lsu-scope-sponsorship shell tiers traj-cards">
+<div class="card lsu-scope-sponsorship">
+<div class="accent card-num lsu-scope-sponsorship">3 + 1</div>
+<div class="lsu-scope-sponsorship stat-l">qualifiers and a final</div>
+<div class="card-body lsu-scope-sponsorship">Three qualifiers. One qualification-only final. Up to 200 athletes per qualifier.</div>
+</div>
+<div class="card lsu-scope-sponsorship">
+<div class="accent card-num lsu-scope-sponsorship">EN + DE</div>
+<div class="lsu-scope-sponsorship stat-l">stream languages</div>
+<div class="card-body lsu-scope-sponsorship">One story told to the biggest running markets in the world, in their own language and time zone.</div>
+</div>
+<div class="card lsu-scope-sponsorship">
+<div class="accent card-num lsu-scope-sponsorship">Worldwide</div>
+<div class="lsu-scope-sponsorship stat-l">impact</div>
+<div class="card-body lsu-scope-sponsorship">Four countries, one story. Your brand travels with the race, from Germany to the UK, the USA and Australia.</div>
+</div>
+</div>
+<div class="closing lsu-scope-sponsorship shell">
+<p class="lsu-scope-sponsorship">Season 1 was the base. Season 2 redefined the sport.<br class="lsu-scope-sponsorship">
+<span class="accent lsu-scope-sponsorship">In Season 3 we aim to go further. Be part of it.</span>
+</p>
+</div>
+</section>
+<section class="lsu-scope-sponsorship section">
+<div class="lsu-scope-sponsorship shell">
+<div class="lsu-scope-sponsorship tiers-head">
+<h2 class="h2 lsu-scope-sponsorship tiers-title">Partnership tiers</h2>
+<div class="lsu-scope-sponsorship tiers-note">Deliverables and pricing on request</div>
+</div>
+<div class="lsu-scope-sponsorship tiers">
+<div class="card lsu-scope-sponsorship tier">
+<div class="kicker-sm lsu-scope-sponsorship">Tier 01</div>
+<div class="lsu-scope-sponsorship tier-name">Title partner</div>
+<div class="lsu-scope-sponsorship tier-body">Naming presence across the broadcast, base camp and the start corral. One partner per edition.</div>
+<div class="lsu-scope-sponsorship tier-slots">1 slot</div>
+</div>
+<div class="card lsu-scope-sponsorship tier">
+<div class="kicker-sm lsu-scope-sponsorship">Tier 02</div>
+<div class="lsu-scope-sponsorship tier-name">Race partner</div>
+<div class="lsu-scope-sponsorship tier-body">Branding in base camp and on the loop, integration into the livestream and post-event content.</div>
+<div class="lsu-scope-sponsorship tier-slots">3 slots</div>
+</div>
+<div class="card lsu-scope-sponsorship tier">
+<div class="kicker-sm lsu-scope-sponsorship">Tier 03</div>
+<div class="lsu-scope-sponsorship tier-name">Product partner</div>
+<div class="lsu-scope-sponsorship tier-body">Product partnership opportunities are agreed individually with LSU. Apparel is not available, it is exclusive to rappid.</div>
+<div class="lsu-scope-sponsorship tier-slots">Open</div>
+</div>
+</div>
+</div>
+</section>
+<section class="cta lsu-scope-sponsorship">
+<div class="cta-bg lsu-scope-sponsorship" style="background-image:url(&#x27;/assets/lsu/images/rappid-46.webp&#x27;);background-position:center 40%" data-px="0.38">
+</div>
+<div class="cta-scrim lsu-scope-sponsorship">
+</div>
+<div class="cta-copy lsu-scope-sponsorship" data-px="-0.06">
+<div class="kicker lsu-scope-sponsorship">Let&#39;s talk</div>
+<h2 class="h2 lsu-scope-sponsorship">Become part<br class="lsu-scope-sponsorship">of the story</h2>
+<p class="lsu-scope-sponsorship">If your brand shares the vision behind Last Soul Ultra, we’d like to hear from you.</p>
+<a href="mailto:mail@lastsoulultra.com" class="btn btn-lg lsu-scope-sponsorship">mail@lastsoulultra.com</a>
+<p class="cta-foot lsu-scope-sponsorship">If people feel something, they remember who was part of it.</p>
+</div>
+</section>
+@endsection

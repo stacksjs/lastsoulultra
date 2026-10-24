@@ -1,5 +1,4 @@
 import { env } from '@stacksjs/env'
-import { legalPages } from './legal'
 import { at, shots } from './media'
 import { race } from './race'
 
@@ -58,14 +57,9 @@ export interface NavItem {
  * /404 is deliberately absent: it is noindex.
  */
 export const indexablePaths: string[] = [
-  '/',
-  '/format',
-  '/lottery',
-  '/results',
-  '/faq',
-  '/sponsorship',
-  '/contact',
-  ...legalPages.map(page => `/legal/${page.slug}`),
+  '/', '/format', '/world-series', '/soul-races', '/sponsorship', '/contact',
+  '/lottery', '/results', '/results/last-soul-ultra-2026', '/results/last-soul-ultra-2025',
+  '/imprint', '/privacy', '/terms', '/coaching', '/faq',
 ]
 
 export const nav: NavItem[] = [

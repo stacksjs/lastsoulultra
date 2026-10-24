@@ -1,0 +1,331 @@
+@extends('layouts/LSU')
+@section('content')
+<script server>
+import { productionPages } from '~/resources/data/production-pages'
+const currentPage = productionPages["/world-series"]
+const canonicalPath = "/world-series"
+</script>
+<section class="lsu-scope-world-series phero">
+<header class="lsu-scope-world-series phero-copy ws-head">
+<h1 class="lsu-scope-world-series">
+<span class="lsu-scope-world-series ws-top">
+<span class="kicker lsu-scope-world-series">The backyard ultra World Series</span>
+<span class="lsu-scope-world-series ws-season">Season 3 / 2027</span>
+</span>Three qualifiers.<br class="lsu-scope-world-series">
+<span class="accent lsu-scope-world-series">One final.</span>
+</h1>
+<p class="lsu-scope-world-series ws-lead">Start in the USA, UK or Australia. Earn your place at the final in Germany.</p>
+<p class="lsu-scope-world-series ws-note">Venues are announced once they are confirmed. Every event runs on <a href="/format">the same backyard ultra format</a>.</p>
+</header>
+</section>
+<div class="lsu-scope-world-series ws-body">
+<div class="lsu-scope-world-series ws-stage">
+<ol class="lsu-scope-world-series ws-events" data-stops aria-label="Event details">
+<li class="lsu-scope-world-series ws-apply ws-event" id="event-usa" data-stop="usa">
+<a href="#event-usa" class="lsu-scope-world-series ws-select">
+<span class="lsu-scope-world-series ws-month">February 2027</span>
+<span class="lsu-scope-world-series ws-country">USA</span>
+<span class="lsu-scope-world-series ws-sub">Qualifier 01</span>
+</a>
+<a class="ws-cta" href="/lottery" data-apply data-view-href="/profile">Request a race entry</a>
+</li>
+<li class="lsu-scope-world-series ws-event ws-soon" id="event-uk" data-stop="uk">
+<a href="#event-uk" class="lsu-scope-world-series ws-select">
+<span class="lsu-scope-world-series ws-month">April 2027</span>
+<span class="lsu-scope-world-series ws-country">United Kingdom</span>
+<span class="lsu-scope-world-series ws-sub">Qualifier 02</span>
+</a>
+<span class="ws-tag">Coming soon</span>
+</li>
+<li class="lsu-scope-world-series ws-event ws-soon" id="event-aus" data-stop="aus">
+<a href="#event-aus" class="lsu-scope-world-series ws-select">
+<span class="lsu-scope-world-series ws-month">June 2027</span>
+<span class="lsu-scope-world-series ws-country">AUSTRALIA x DCG</span>
+<span class="lsu-scope-world-series ws-sub">Qualifier 03</span>
+</a>
+<span class="ws-tag">Coming soon</span>
+</li>
+<li class="lsu-scope-world-series ws-event ws-final" id="event-ger" data-stop="ger">
+<a href="#event-ger" class="lsu-scope-world-series ws-select">
+<span class="lsu-scope-world-series ws-month">August 2027</span>
+<span class="lsu-scope-world-series ws-country">Germany</span>
+<span class="lsu-scope-world-series ws-sub">The Finals</span>
+</a>
+<a class="ws-how" href="#qualify">How to qualify</a>
+</li>
+</ol>
+<section class="lsu-scope-world-series map-wrap" aria-label="2027 Last Soul Ultra World Series globe">
+<div class="lsu-globe-stage">
+  <img class="lsu-globe-fallback" src="/assets/lsu/data/world-globe-static.svg" alt="World Series events in the USA, United Kingdom, Australia and Germany" width="1000" height="800">
+  <Map projection="globe" :center="[30, 10]" :zoom="1.2" theme="dark" styleSpec="/assets/lsu/data/globe-style.json" :zoomControl="false" :attributionControl="false" :cooperativeGestures="true" containerStyle="width:100%;height:100%;background:transparent;">
+    <Marker :lat="35.5" :lng="-86.5" title="USA, February 2027" :html="'<span class=lsu-event-dot></span>'"><Popup><a href="/lottery?event=lsu-2027-tennessee">USA, February 2027</a></Popup></Marker>
+    <Marker :lat="54" :lng="-2" title="United Kingdom, April 2027" :html="'<span class=lsu-event-dot></span>'"><Popup>United Kingdom, April 2027</Popup></Marker>
+    <Marker :lat="-25" :lng="134" title="Australia, June 2027" :html="'<span class=lsu-event-dot></span>'"><Popup>Australia, June 2027</Popup></Marker>
+    <Marker :lat="51" :lng="10" title="Germany Finals, August 2027" :html="'<span class=lsu-event-dot></span>'"><Popup>Germany Finals, August 2027</Popup></Marker>
+  </Map>
+</div>
+</section>
+</div>
+<section class="lsu-scope-world-series ws-qualify ws-ways" id="ways-in" aria-labelledby="ways-title">
+<div class="lsu-scope-world-series ws-meta">
+<span class="lsu-scope-world-series">The qualifiers · USA, UK, Australia</span>
+</div>
+<h2 id="ways-title" class="lsu-scope-world-series">Two ways in</h2>
+<div class="lsu-scope-world-series ws-way-list">
+<article class="lsu-scope-world-series ws-way">
+<h3 class="lsu-scope-world-series">Lottery</h3>
+<p class="lsu-scope-world-series">Throw your name in the hat. You get picked or you don’t.</p>
+</article>
+<article class="lsu-scope-world-series ws-way">
+<h3 class="lsu-scope-world-series">Wildcard</h3>
+<p class="lsu-scope-world-series">Tell us your story. Make a video, post it on Instagram with #LSU27 and tag @lastsoulultra.</p>
+<p class="lsu-scope-world-series">We watch every single one. If it’s a story we want to tell, you’re in.</p>
+</article>
+</div>
+<div class="lsu-scope-world-series ws-race-label">Lottery windows</div>
+<ul class="lsu-scope-world-series ws-races" aria-label="Lottery windows">
+<li class="lsu-scope-world-series ws-race">
+<a class="lsu-scope-world-series ws-window" data-window="lsu-2027-tennessee" href="/lottery?event=lsu-2027-tennessee">
+<span class="lsu-scope-world-series ws-date">Open until</span>
+<h3 class="lsu-scope-world-series">USA</h3>
+<span class="lsu-scope-world-series ws-fine">1 Nov 2026</span>
+<span class="lsu-scope-world-series ws-window-cta">Request a race entry →</span>
+</a>
+</li>
+<li class="lsu-scope-world-series ws-race">
+<a class="lsu-scope-world-series ws-window" data-window="lsu-2027-uk">
+<span class="lsu-scope-world-series ws-date">Opens 1 Nov 2026</span>
+<h3 class="lsu-scope-world-series">United Kingdom</h3>
+<span class="lsu-scope-world-series ws-fine">Closes 1 Jan 2027</span>
+<span class="lsu-scope-world-series ws-window-cta">Request a race entry →</span>
+</a>
+</li>
+<li class="lsu-scope-world-series ws-race">
+<a class="lsu-scope-world-series ws-window" data-window="lsu-2027-aus">
+<span class="lsu-scope-world-series ws-date">Opens 1 Dec 2026</span>
+<h3 class="lsu-scope-world-series">AUSTRALIA x DCG</h3>
+<span class="lsu-scope-world-series ws-fine">Closes 1 Feb 2027</span>
+<span class="lsu-scope-world-series ws-window-cta">Request a race entry →</span>
+</a>
+</li>
+</ul>
+</section>
+<section class="lsu-scope-world-series ws-qualify" id="qualify" aria-labelledby="qualify-title">
+<div class="lsu-scope-world-series ws-meta">
+<span class="lsu-scope-world-series">The Finals · Qualification only</span>
+<span class="lsu-scope-world-series">Germany / August 2027</span>
+</div>
+<h2 id="qualify-title" class="lsu-scope-world-series">How to qualify</h2>
+<p class="lsu-scope-world-series ws-intro">Earn your place on the Finals start line.</p>
+<div class="lsu-scope-world-series ws-places" aria-label="Top 15 overall and top 5 women from each qualifying race">
+<div class="lsu-scope-world-series ws-place">
+<span class="lsu-scope-world-series ws-rank">15</span>
+<span class="lsu-scope-world-series ws-place-label">
+<small class="lsu-scope-world-series">Top</small>
+<strong class="lsu-scope-world-series">Overall</strong>
+</span>
+</div>
+<div class="lsu-scope-world-series ws-plus" aria-hidden="true">+</div>
+<div class="lsu-scope-world-series ws-place">
+<span class="lsu-scope-world-series ws-rank">5</span>
+<span class="lsu-scope-world-series ws-place-label">
+<small class="lsu-scope-world-series">Top</small>
+<strong class="lsu-scope-world-series">Women</strong>
+</span>
+</div>
+</div>
+<p class="lsu-scope-world-series ws-per-race">From each race below. <span class="lsu-scope-world-series">Overlaps count once. Ties can add qualifiers.</span>
+</p>
+<div class="lsu-scope-world-series ws-race-label">The four qualifying races</div>
+<ul class="lsu-scope-world-series ws-races" aria-label="The four qualifying races">
+<li class="lsu-scope-world-series ws-race">
+<span class="lsu-scope-world-series ws-date">2026</span>
+<h3 class="lsu-scope-world-series">Season 2</h3>
+<span class="lsu-scope-world-series ws-fine">Last Soul Ultra</span>
+</li>
+<li class="lsu-scope-world-series ws-race">
+<span class="lsu-scope-world-series ws-date">February 2027</span>
+<h3 class="lsu-scope-world-series">USA</h3>
+</li>
+<li class="lsu-scope-world-series ws-race">
+<span class="lsu-scope-world-series ws-date">April 2027</span>
+<h3 class="lsu-scope-world-series">UK</h3>
+</li>
+<li class="lsu-scope-world-series ws-race">
+<span class="lsu-scope-world-series ws-date">June 2027</span>
+<h3 class="lsu-scope-world-series">Australia<span class="lsu-scope-world-series ws-cobrand">x DCG</span>
+</h3>
+</li>
+</ul>
+<div class="lsu-scope-world-series ws-rules">
+<details class="lsu-scope-world-series">
+<summary class="lsu-scope-world-series">
+<span class="lsu-scope-world-series">
+<strong class="lsu-scope-world-series">Tied on loops?</strong>
+<small class="lsu-scope-world-series">Ties at both qualification cutoffs count.</small>
+</span>
+<span class="lsu-scope-world-series ws-expand" aria-hidden="true">+</span>
+</summary>
+<div class="lsu-scope-world-series ws-rule-copy">
+<p class="lsu-scope-world-series">Everyone with the same completed-loop count as 15th overall qualifies. The same applies to everyone tied with the 5th woman.</p>
+<p class="lsu-scope-world-series">These two cutoffs are applied separately in each qualifying race.</p>
+</div>
+</details>
+<details class="lsu-scope-world-series">
+<summary class="lsu-scope-world-series">
+<span class="lsu-scope-world-series">
+<strong class="lsu-scope-world-series">One athlete. One place.</strong>
+<small class="lsu-scope-world-series">Duplicate qualifications do not roll down.</small>
+</span>
+<span class="lsu-scope-world-series ws-expand" aria-hidden="true">+</span>
+</summary>
+<div class="lsu-scope-world-series ws-rule-copy">
+<p class="lsu-scope-world-series">Qualify through more than one race, or through both the overall and women’s standings, and you receive one Finals place.</p>
+<p class="lsu-scope-world-series">A duplicate place is not passed to the next ranked athlete. The tie rule still applies.</p>
+</div>
+</details>
+</div>
+<p class="lsu-scope-world-series ws-future">Additional qualification opportunities may be announced.</p>
+</section>
+<section class="lsu-scope-world-series series-section">
+<h2 class="lsu-scope-world-series">Event details</h2>
+<div class="lsu-scope-world-series series-list" data-series-list>
+<article class="is-final series-event">
+<div class="series-event-head">
+<div class="series-event-edition">Season 3</div>
+<div class="series-event-final">The final</div>
+</div>
+<h3>Germany</h3>
+<dl>
+<div>
+<dt>Date</dt>
+<dd>August 2027</dd>
+</div>
+<div>
+<dt>Location</dt>
+<dd>Germany</dd>
+</div>
+</dl>
+</article>
+<article class="series-event">
+<div class="series-event-head">
+<div class="series-event-edition">Season 3</div>
+</div>
+<h3>USA</h3>
+<dl>
+<div>
+<dt>Date</dt>
+<dd>February 2027</dd>
+</div>
+<div>
+<dt>Location</dt>
+<dd>United States</dd>
+</div>
+<div>
+<dt>Capacity</dt>
+<dd>200 athletes — 100 selected by LSU, 100 by draw</dd>
+</div>
+</dl>
+<a class="series-event-action" href="/lottery?event=lsu-2027-tennessee">Request a race entry</a>
+</article>
+<article class="series-event">
+<div class="series-event-head">
+<div class="series-event-edition">Season 3</div>
+</div>
+<h3>United Kingdom</h3>
+<dl>
+<div>
+<dt>Date</dt>
+<dd>April 2027</dd>
+</div>
+<div>
+<dt>Location</dt>
+<dd>United Kingdom</dd>
+</div>
+<div>
+<dt>Capacity</dt>
+<dd>200 athletes — 100 selected by LSU, 100 by draw</dd>
+</div>
+</dl>
+</article>
+<article class="series-event">
+<div class="series-event-head">
+<div class="series-event-edition">Season 3</div>
+</div>
+<h3>AUSTRALIA x DCG</h3>
+<dl>
+<div>
+<dt>Date</dt>
+<dd>June 2027</dd>
+</div>
+<div>
+<dt>Location</dt>
+<dd>Australia</dd>
+</div>
+<div>
+<dt>Capacity</dt>
+<dd>200 athletes — 100 selected by LSU, 100 by draw</dd>
+</div>
+</dl>
+</article>
+</div>
+</section>
+<section class="lsu-scope-world-series series-section" data-past-section>
+<h2 class="lsu-scope-world-series">Past seasons</h2>
+<div class="lsu-scope-world-series series-list" data-past-list>
+<article class="is-past series-event">
+<div class="series-event-head">
+<div class="series-event-edition">Season 2</div>
+<div class="series-event-state">Finished</div>
+</div>
+<h3>Last Soul Ultra</h3>
+<dl>
+<div>
+<dt>Date</dt>
+<dd>14 August 2026</dd>
+</div>
+<div>
+<dt>Location</dt>
+<dd>Bornheim</dd>
+</div>
+<div>
+<dt>On the start line</dt>
+<dd>160</dd>
+</div>
+<div>
+<dt>Winner</dt>
+<dd>Mark Dowdle — 94 yards</dd>
+</div>
+</dl>
+<a class="series-event-action" href="/results/last-soul-ultra-2026" aria-label="Results — Season 2">Results</a>
+</article>
+<article class="is-past series-event">
+<div class="series-event-head">
+<div class="series-event-edition">Season 1</div>
+<div class="series-event-state">Finished</div>
+</div>
+<h3>Last Soul Ultra</h3>
+<dl>
+<div>
+<dt>Date</dt>
+<dd>3 October 2025</dd>
+</div>
+<div>
+<dt>Location</dt>
+<dd>Bornheim</dd>
+</div>
+<div>
+<dt>On the start line</dt>
+<dd>93</dd>
+</div>
+<div>
+<dt>Winner</dt>
+<dd>Kim Gottwald — 67 yards</dd>
+</div>
+</dl>
+<a class="series-event-action" href="/results/last-soul-ultra-2025" aria-label="Results — Season 1">Results</a>
+</article>
+</div>
+</section>
+</div>
+@endsection

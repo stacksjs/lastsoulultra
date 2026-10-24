@@ -1,294 +1,2289 @@
+@extends('layouts/LSU')
+@section('content')
 <script server>
-import { liveSnapshot, livePayload } from '../data/live'
-import { at, shots } from '../data/media'
-import { daysUntilStart, race, resolveRaceState } from '../data/race'
-import { longDate } from '../data/site'
-
-const snapshot = await liveSnapshot()
-const live = livePayload(snapshot, race.loopMetres)
-
-const state = resolveRaceState(live.ok ? { raceOver: live.raceOver } : null)
-const countdown = daysUntilStart()
-
-const pageTitle = 'results - Last Soul Ultra'
-const pageDescription = live.ok && live.raceOver && live.winner
-  ? `${live.winner.name} took the ${race.edition} title on lap ${live.finalLap}. Full final standings for all ${live.starters} starters.`
-  : 'Live standings, lap count and who is still in the race at the Last Soul Ultra.'
-const canonicalPath = '/results'
-
-const nf = new Intl.NumberFormat('en-GB')
-function num(value) {
-  return nf.format(value)
-}
-function km(value) {
-  return `${nf.format(Math.round(value))} km`
-}
-const df = new Intl.NumberFormat('en-GB', { minimumFractionDigits: 1, maximumFractionDigits: 1 })
-function dist(value) {
-  return df.format(value)
-}
-
-const readAt = live.fetchedAt
-  ? new Date(live.fetchedAt).toISOString().slice(11, 16) + ' UTC'
-  : 'unknown'
-
-// A backyard ultra's leaderboard is only meaningful as laps: everyone on the
-// same lap has run exactly the same distance, so the km column is a
-// convenience, never the ranking.
-const rows = live.runners
-const stillIn = rows.filter(r => r.status === 'active')
-
-// The winning margin, in laps. Worth its own line because in this format it is
-// almost always one: the race ends the moment the second-last runner declines
-// to start, so the winner finishes exactly one lap ahead of whoever quit.
-const runnerUp = rows[1] ?? null
-const margin = runnerUp ? rows[0].laps - runnerUp.laps : null
-const marginLabel = margin === 1 ? '1 lap' : `${margin} laps`
+import { productionPages } from '~/resources/data/production-pages'
+const currentPage = productionPages["/results"]
+const canonicalPath = "/results"
 </script>
-
-<!DOCTYPE html>
-<html lang="en">
-  <head>@include('head')</head>
-  <body>
-    <SiteNav current="/results" />
-
-    <main id="main">
-      <div class="max-w-[1500px] mx-auto px-5 lg:px-8">
-        <header class="pt-12 lg:pt-16 pb-10 border-b rule">
-          @if(state === 'running' && live.ok)
-            <p class="flex items-center gap-2.5 label accent">
-              <span class="w-2 h-2 accent-bg" aria-hidden="true"></span>
-              running now &middot; lap {{ live.currentLap }}
-            </p>
-          @elseif(state === 'finished')
-            <p class="label accent">final &middot; {{ longDate(race.startsOn) }}</p>
-          @else
-            <p class="label faint">results</p>
-          @endif
-
-          @if(state === 'finished' && live.winner)
-            <h1 class="display h-page ink mt-4 max-w-[12ch]">the last <span class="whitespace-nowrap">soul.</span></h1>
-            <p class="mt-6 text-base sm:text-lg muted max-w-[58ch] leading-relaxed">
-              {{ live.starters }} runners started. After {{ live.finalLap }} laps, one was left. Every lap below is 6.7 km, run on the hour, until nobody else would start another.
-            </p>
-          @elseif(state === 'running' && live.ok)
-            <h1 class="display h-page ink mt-4 max-w-[14ch]">who is still standing.</h1>
-            <p class="mt-6 text-base sm:text-lg muted max-w-[58ch] leading-relaxed">
-              {{ live.remaining }} still in from {{ live.starters }} starters, on lap {{ live.currentLap }}. It is not over until one runner is left, and that runner runs one more loop alone.
-            </p>
-          @elseif(!live.ok)
-            <h1 class="display h-page ink mt-4 max-w-[14ch]">who is still standing.</h1>
-            <p class="mt-6 text-base sm:text-lg muted max-w-[58ch] leading-relaxed">
-              The standings come from the race's own timing board, and it is not answering right now. Rather than show you a number that might be wrong, this page shows none until it is back.
-            </p>
-          @else
-            <h1 class="display h-page ink mt-4 max-w-[14ch]">the board opens with the gun.</h1>
-            <p class="mt-6 text-base sm:text-lg muted max-w-[58ch] leading-relaxed">
-              Nothing to show yet. Standings appear here the moment the race starts, {{ countdown }} days from now on {{ longDate(race.startsOn) }}.
-            </p>
-          @endif
-        </header>
-      </div>
-
-      {{-- The winner, given the room the result deserves. Only ever rendered
-        when the board itself says the race is over: before that the leader is
-        just the leader, and calling them the winner is wrong by a lap. --}}
-      @if(state === 'finished' && live.winner)
-        <section class="accent-bg" data-reveal>
-          <div class="max-w-[1500px] mx-auto px-5 lg:px-8 py-12 lg:py-16 flex flex-col lg:flex-row lg:items-end justify-between gap-8 reveal-item">
-            <div>
-              <p class="label">last runner standing</p>
-              <p class="display h-lead mt-3">{{ live.winner.name }}</p>
-            </div>
-            <dl class="flex gap-10 lg:gap-14 shrink-0">
-              <div>
-                <dt class="label ink-on-accent-soft">laps</dt>
-                <dd class="display h-stat mt-2">{{ live.winner.laps }}</dd>
-              </div>
-              <div>
-                <dt class="label ink-on-accent-soft">distance</dt>
-                <dd class="display h-stat mt-2">{{ km(live.winner.km) }}</dd>
-              </div>
-            </dl>
-          </div>
-        </section>
-      @endif
-
-      {{-- The numbers the board tracks, now tracked here. --}}
-      @if(live.ok)
-        <section class="border-b rule" data-reveal>
-          <div class="max-w-[1500px] mx-auto px-5 lg:px-8 py-12 lg:py-16">
-            <dl class="grid sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10">
-              <div class="reveal-item">
-                <dt class="label faint">{{ live.raceOver ? 'final lap' : 'current lap' }}</dt>
-                <dd class="display h-stat accent mt-2">{{ live.raceOver ? live.finalLap : live.currentLap }}</dd>
-                <p class="mt-3 text-sm muted leading-relaxed">One loop starts every full hour from the gun.</p>
-              </div>
-              <div class="reveal-item">
-                <dt class="label faint">{{ live.raceOver ? 'starters' : 'still in' }}</dt>
-                <dd class="display h-stat accent mt-2">{{ live.raceOver ? live.starters : live.remaining }}</dd>
-                <p class="mt-3 text-sm muted leading-relaxed">
-                  @if(live.raceOver)
-                    Everyone who lined up at the corral for lap one.
-                  @else
-                    Of {{ live.starters }} who started. There is no partial credit.
-                  @endif
-                </p>
-              </div>
-              <div class="reveal-item">
-                <dt class="label faint">covered by the field</dt>
-                <dd class="display h-stat accent mt-2">{{ km(live.totalKm) }}</dd>
-                <p class="mt-3 text-sm muted leading-relaxed">{{ num(live.totalLaps) }} laps, added up 6.7 km at a time.</p>
-              </div>
-              <div class="reveal-item">
-                @if(live.raceOver && runnerUp)
-                  <dt class="label faint">the margin</dt>
-                  <dd class="display h-stat accent mt-2">{{ marginLabel }}</dd>
-                  <p class="mt-3 text-sm muted leading-relaxed">{{ runnerUp.name }} ran {{ runnerUp.laps }} and stopped. That is the whole difference.</p>
-                @else
-                  <dt class="label faint">longest so far</dt>
-                  <dd class="display h-stat accent mt-2">{{ live.runners[0].laps }} laps</dd>
-                  <p class="mt-3 text-sm muted leading-relaxed">{{ live.runners[0].name }}, {{ km(live.runners[0].km) }}.</p>
-                @endif
-              </div>
-            </dl>
-          </div>
-        </section>
-
-        {{-- Full standings. Every starter is rendered server-side, so the
-          table is complete without JavaScript and readable by a crawler, and
-          the filter below is CSS rather than script (see the note on it). --}}
-        <section class="border-b rule" data-reveal>
-          <div class="max-w-[1500px] mx-auto px-5 lg:px-8 py-12 lg:py-16 standings-block">
-            {{-- Filtering is a radio pair plus CSS rather than a signal. A
-              <script client> block compiles inside a component but not inside
-              a full-page view, so signal-driven chips here were inert. This
-              works with JavaScript switched off, keeps every row in the
-              server-rendered HTML, and stays keyboard operable.
-
-              The inputs sit with their labels inside a fieldset so a screen
-              reader announces what the group is for, not just two loose
-              radios. The CSS uses :has() rather than a sibling combinator so
-              it no longer depends on the inputs preceding the table. --}}
-            <div class="flex flex-wrap items-end justify-between gap-6 mb-8 reveal-item">
-              <h2 class="display h-sect ink">{{ live.raceOver ? 'final standings.' : 'the standings.' }}</h2>
-              <fieldset class="filter-chips flex items-center gap-2">
-                <legend class="sr-only">Show which runners</legend>
-                <input type="radio" name="standings-filter" id="filter-all" class="filter-input" checked>
-                <label class="chip" for="filter-all">all {{ live.starters }}</label>
-                <input type="radio" name="standings-filter" id="filter-in" class="filter-input">
-                <label class="chip" for="filter-in">{{ live.raceOver ? 'finished' : 'still in' }} {{ stillIn.length }}</label>
-              </fieldset>
-            </div>
-
-            <div class="overflow-x-auto -mx-5 px-5 lg:mx-0 lg:px-0">
-              <table class="w-full min-w-[36rem] text-left border-collapse standings">
-                <caption class="sr-only">
-                  {{ live.raceOver ? 'Final standings' : 'Live standings' }}, ranked by laps completed.
-                </caption>
-                <thead>
-                  <tr class="border-b rule-strong">
-                    <th scope="col" class="label faint py-3 pr-4 w-12">#</th>
-                    <th scope="col" class="label faint py-3 pr-4 w-16">bib</th>
-                    <th scope="col" class="label faint py-3 pr-4">runner</th>
-                    <th scope="col" class="label faint py-3 pr-4 text-right w-20">laps</th>
-                    <th scope="col" class="label faint py-3 pr-4 text-right w-28">distance</th>
-                    <th scope="col" class="label faint py-3 text-right w-24">status</th>
-                  </tr>
-                </thead>
-                <tbody class="divide-y">
-                  @foreach(rows as runner)
-                    <tr data-status="{{ runner.status }}">
-                      <td class="py-3 pr-4 mono text-sm faint tabular-nums">{{ runner.rank }}</td>
-                      <td class="py-3 pr-4 mono text-sm faint tabular-nums">{{ runner.bib }}</td>
-                      <td class="py-3 pr-4 text-sm ink">{{ runner.name }}</td>
-                      <td class="py-3 pr-4 text-sm ink text-right tabular-nums">{{ runner.laps }}</td>
-                      <td class="py-3 pr-4 text-sm muted text-right tabular-nums">{{ dist(runner.km) }}</td>
-                      <td class="py-3 text-right">
-                        @if(runner.status === 'active')
-                          <span class="label accent">{{ live.raceOver ? 'winner' : 'in' }}</span>
-                        @else
-                          <span class="label faint">out</span>
-                        @endif
-                      </td>
-                    </tr>
-                  @endforeach
-                </tbody>
-              </table>
-            </div>
-
-            <div class="mt-8 flex flex-wrap items-center justify-between gap-4">
-              <p class="text-sm faint max-w-[60ch]">
-                Ranked by laps completed. Runners on the same lap have covered exactly the same distance and share a position.
-              </p>
-              @if(!live.raceOver)
-                <a class="btn btn-outline shrink-0" href="/results">refresh the board</a>
-              @endif
-            </div>
-          </div>
-        </section>
-      @else
-        {{-- The board is the only source for any of this. If it cannot be
-          reached, say so plainly rather than rendering a table of zeroes. --}}
-        <section class="border-b rule">
-          <div class="max-w-[1500px] mx-auto px-5 lg:px-8 py-14 lg:py-20">
-            <h2 class="display h-sect ink max-w-[18ch]">the board is not answering.</h2>
-            <p class="mt-6 text-base muted max-w-[52ch] leading-relaxed">
-              Standings come straight from the race's own timing board, and it could not be reached just now. Nothing here is out of date, because nothing here is guessed - try again in a minute, or go to the board directly.
-            </p>
-            <a class="btn btn-outline mt-9" href="{{ race.liveSource }}" target="_blank" rel="noopener">open the board</a>
-          </div>
-        </section>
-      @endif
-
-      {{-- Provenance. Somebody reading a lap count deserves to know how old it
-        is and where it came from. --}}
-      @if(live.ok)
-        <section class="border-b rule">
-          <div class="max-w-[1500px] mx-auto px-5 lg:px-8 py-8 flex flex-wrap items-center justify-between gap-4">
-            <p class="label faint">
-              from the official timing board
-              @if(live.provisional)
-                &middot; provisional
-              @endif
-              @if(!live.sourcesOk)
-                &middot; a feed is degraded
-              @endif
-              @if(live.weatherCelsius !== null)
-                &middot; {{ live.weatherCelsius }}&deg;C at the course
-              @endif
-            </p>
-            <p class="label faint">
-              read at {{ readAt }}
-              @if(live.stale)
-                &middot; cached
-              @endif
-            </p>
-          </div>
-        </section>
-      @endif
-
-      <section class="relative" data-reveal>
-        <div class="relative aspect-[4/5] sm:aspect-[16/9] lg:aspect-[21/9] overflow-hidden surface">
-          <img
-            class="absolute inset-0 w-full h-full object-cover"
-            src="{{ at(shots.board, 1500) }}"
-            alt="{{ shots.board.alt }}"
-            width="1500"
-            height="643"
-            loading="lazy"
-            decoding="async"
-          >
-          <div class="absolute inset-0" style="background: linear-gradient(to top, rgb(12 12 12 / 0.9) 0%, rgb(12 12 12 / 0.35) 60%, rgb(12 12 12 / 0) 100%)"></div>
-          <div class="absolute inset-x-0 bottom-0 px-5 lg:px-8 pb-8 lg:pb-12">
-            <p class="max-w-[1500px] mx-auto text-lg sm:text-2xl ink max-w-[40ch] reveal-item">
-              The board at the corral counts the same three things, in letters, by hand.
-            </p>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <SiteFooter />
-  </body>
-</html>
+<section class="phero">
+<div class="phero-copy">
+<div class="kicker">Every edition · every yard</div>
+<h1>Results</h1>
+<p>Every edition, every runner, every yard, straight from the race database. Season 3 is 2027: <a href="/world-series">request a race entry</a> for an open event. Places are allocated through a combination of LSU team selection and a random draw.</p>
+</div>
+</section>
+<section id="2026" class="ed-section">
+<div class="shell">
+<div class="ed-head">
+<h2 class="h2">Season 2 · 2026</h2>
+<a href="/results/last-soul-ultra-2026" class="ed-link">14 August 2026 · 160 starters · full 2026 page →</a>
+</div>
+<div class="ed-stats statgrid">
+<div>
+<div class="stat-v">94</div>
+<div class="stat-l">winning yards</div>
+</div>
+<div>
+<div class="stat-v">630.4</div>
+<div class="stat-l">kilometres covered</div>
+</div>
+<div>
+<div class="stat-v">160</div>
+<div class="stat-l">athletes on the start line</div>
+</div>
+<div>
+<div class="stat-v">4</div>
+<div class="stat-l">days of racing</div>
+</div>
+<div>
+<div class="stat-v">6.706</div>
+<div class="stat-l">km per hourly loop</div>
+</div>
+</div>
+<div class="podium">
+<div class="card card-win">
+<div class="kicker-sm">Winner · last soul</div>
+<div class="card-name">Mark Dowdle</div>
+<div class="card-num">94<span> yards</span>
+</div>
+<div class="card-body">Ran the final yard alone on Tuesday morning, four days after the start. Surpassed his own backyard best by nearly 90 miles.</div>
+</div>
+<div class="card">
+<div class="card-kicker">Assist · second</div>
+<div class="card-name">Ayyoub El Osrouti</div>
+<div class="card-num">93<span> yards</span>
+</div>
+<div class="card-body">≈623.7 km</div>
+</div>
+<div class="card">
+<div class="card-kicker">Third</div>
+<div class="card-name">Norman Mascher-Aspensjö</div>
+<div class="card-num">80<span> yards</span>
+</div>
+<div class="card-body">The last man in the race besides the final two. Out on the fourth day.</div>
+</div>
+</div>
+<div class="event-details">
+<h3 class="h3 table-title">Event details</h3>
+<dl class="event-meta">
+<div>
+<dt>Location</dt>
+<dd>Bornheim, Germany</dd>
+</div>
+<div>
+<dt>Hourly loop</dt>
+<dd>6.706 km</dd>
+</div>
+<div>
+<dt>Format</dt>
+<dd>Every runner starts together, on the full hour. The loop is 6706 metres and must be completed within the hour; whoever is not standing on the start line when the next hour begins is out. There is no finish line and no distance to cover, only the next loop. The race ends when one runner completes a loop that nobody else does. That runner is the last soul.</dd>
+</div>
+</dl>
+</div>
+<div class="tables">
+<div>
+<h3 class="h3 table-title">Top ten</h3>
+<div class="rows">
+<div class="row">
+<div class="row-n">
+<span>1</span>94<small>yards</small>
+</div>
+<div>
+<div class="row-name">Mark Dowdle</div>
+<div class="row-note">Ran the final yard alone on Tuesday morning, four days after the start. Surpassed his own backyard best by nearly 90 miles.</div>
+<dl class="runner-facts">
+<div>
+<dt>Bib</dt>
+<dd>5</dd>
+</div>
+<div>
+<dt>Nation</dt>
+<dd>US</dd>
+</div>
+<div>
+<dt>Category</dt>
+<dd>m</dd>
+</div>
+<div>
+<dt>Result</dt>
+<dd>1st</dd>
+</div>
+</dl>
+<details class="runner-detail">
+<summary>Full runner stats</summary>
+<dl class="runner-stats">
+<div>
+<dt>Fastest</dt>
+<dd>38:16 · L87</dd>
+</div>
+<div>
+<dt>Slowest</dt>
+<dd>58:03 · L15</dd>
+</div>
+<div>
+<dt>Average</dt>
+<dd>51:42</dd>
+</div>
+<div>
+<dt>Avg rest</dt>
+<dd>8:18</dd>
+</div>
+<div>
+<dt>Longest rest</dt>
+<dd>21:44 · L87</dd>
+</div>
+<div>
+<dt>Spread</dt>
+<dd>19:47</dd>
+</div>
+<div>
+<dt>First yard</dt>
+<dd>48:30</dd>
+</div>
+<div>
+<dt>Final yard</dt>
+<dd>46:05</dd>
+</div>
+<div>
+<dt>Time on feet</dt>
+<dd>81.0 h</dd>
+</div>
+<div>
+<dt>Time resting</dt>
+<dd>12.9 h</dd>
+</div>
+<div>
+<dt>Status</dt>
+<dd>Finisher</dd>
+</div>
+<div>
+<dt>Off the win</dt>
+<dd>Winner</dd>
+</div>
+</dl>
+</details>
+</div>
+<div class="row-km">630.4 km</div>
+</div>
+<div class="row">
+<div class="row-n">
+<span>2</span>93<small>yards</small>
+</div>
+<div>
+<div class="row-name">Ayyoub El Osrouti</div>
+<dl class="runner-facts">
+<div>
+<dt>Bib</dt>
+<dd>98</dd>
+</div>
+<div>
+<dt>Nation</dt>
+<dd>DE</dd>
+</div>
+<div>
+<dt>Category</dt>
+<dd>m</dd>
+</div>
+<div>
+<dt>Result</dt>
+<dd>DNF</dd>
+</div>
+</dl>
+<details class="runner-detail">
+<summary>Full runner stats</summary>
+<dl class="runner-stats">
+<div>
+<dt>Fastest</dt>
+<dd>42:15 · L87</dd>
+</div>
+<div>
+<dt>Slowest</dt>
+<dd>55:14 · L90</dd>
+</div>
+<div>
+<dt>Average</dt>
+<dd>48:29</dd>
+</div>
+<div>
+<dt>Avg rest</dt>
+<dd>11:31</dd>
+</div>
+<div>
+<dt>Longest rest</dt>
+<dd>17:45 · L87</dd>
+</div>
+<div>
+<dt>Spread</dt>
+<dd>12:59</dd>
+</div>
+<div>
+<dt>First yard</dt>
+<dd>45:26</dd>
+</div>
+<div>
+<dt>Final yard</dt>
+<dd>54:58</dd>
+</div>
+<div>
+<dt>Time on feet</dt>
+<dd>75.2 h</dd>
+</div>
+<div>
+<dt>Time resting</dt>
+<dd>17.7 h</dd>
+</div>
+<div>
+<dt>Status</dt>
+<dd>DNF</dd>
+</div>
+<div>
+<dt>Off the win</dt>
+<dd>-1 yards</dd>
+</div>
+</dl>
+</details>
+</div>
+<div class="row-km">623.7 km</div>
+</div>
+<div class="row">
+<div class="row-n">
+<span>3</span>80<small>yards</small>
+</div>
+<div>
+<div class="row-name">Norman Mascher-Aspensjö</div>
+<div class="row-note">The last man in the race besides the final two. Out on the fourth day.</div>
+<dl class="runner-facts">
+<div>
+<dt>Bib</dt>
+<dd>43</dd>
+</div>
+<div>
+<dt>Nation</dt>
+<dd>DE</dd>
+</div>
+<div>
+<dt>Category</dt>
+<dd>m</dd>
+</div>
+<div>
+<dt>Result</dt>
+<dd>DNF</dd>
+</div>
+</dl>
+<details class="runner-detail">
+<summary>Full runner stats</summary>
+<dl class="runner-stats">
+<div>
+<dt>Fastest</dt>
+<dd>39:13 · L3</dd>
+</div>
+<div>
+<dt>Slowest</dt>
+<dd>58:40 · L80</dd>
+</div>
+<div>
+<dt>Average</dt>
+<dd>47:24</dd>
+</div>
+<div>
+<dt>Avg rest</dt>
+<dd>12:36</dd>
+</div>
+<div>
+<dt>Longest rest</dt>
+<dd>20:47 · L3</dd>
+</div>
+<div>
+<dt>Spread</dt>
+<dd>19:26</dd>
+</div>
+<div>
+<dt>First yard</dt>
+<dd>44:10</dd>
+</div>
+<div>
+<dt>Final yard</dt>
+<dd>58:40</dd>
+</div>
+<div>
+<dt>Time on feet</dt>
+<dd>63.2 h</dd>
+</div>
+<div>
+<dt>Time resting</dt>
+<dd>16.6 h</dd>
+</div>
+<div>
+<dt>Status</dt>
+<dd>DNF</dd>
+</div>
+<div>
+<dt>Off the win</dt>
+<dd>-14 yards</dd>
+</div>
+</dl>
+</details>
+</div>
+<div class="row-km">536.5 km</div>
+</div>
+<div class="row">
+<div class="row-n">
+<span>4</span>68<small>yards</small>
+</div>
+<div>
+<div class="row-name">Hendrik Boury</div>
+<div class="row-note">German national record holder. Out Monday morning.</div>
+<dl class="runner-facts">
+<div>
+<dt>Bib</dt>
+<dd>6</dd>
+</div>
+<div>
+<dt>Nation</dt>
+<dd>DE</dd>
+</div>
+<div>
+<dt>Category</dt>
+<dd>m</dd>
+</div>
+<div>
+<dt>Result</dt>
+<dd>DNF</dd>
+</div>
+</dl>
+<details class="runner-detail">
+<summary>Full runner stats</summary>
+<dl class="runner-stats">
+<div>
+<dt>Fastest</dt>
+<dd>40:34 · L3</dd>
+</div>
+<div>
+<dt>Slowest</dt>
+<dd>55:44 · L64</dd>
+</div>
+<div>
+<dt>Average</dt>
+<dd>47:21</dd>
+</div>
+<div>
+<dt>Avg rest</dt>
+<dd>12:39</dd>
+</div>
+<div>
+<dt>Longest rest</dt>
+<dd>19:26 · L3</dd>
+</div>
+<div>
+<dt>Spread</dt>
+<dd>15:11</dd>
+</div>
+<div>
+<dt>First yard</dt>
+<dd>44:10</dd>
+</div>
+<div>
+<dt>Final yard</dt>
+<dd>40:55</dd>
+</div>
+<div>
+<dt>Time on feet</dt>
+<dd>53.7 h</dd>
+</div>
+<div>
+<dt>Time resting</dt>
+<dd>14.1 h</dd>
+</div>
+<div>
+<dt>Status</dt>
+<dd>DNF</dd>
+</div>
+<div>
+<dt>Off the win</dt>
+<dd>-26 yards</dd>
+</div>
+</dl>
+</details>
+</div>
+<div class="row-km">456.0 km</div>
+</div>
+<div class="row">
+<div class="row-n">
+<span>5</span>66<small>yards</small>
+</div>
+<div>
+<div class="row-name">Martin Stiller</div>
+<dl class="runner-facts">
+<div>
+<dt>Bib</dt>
+<dd>9</dd>
+</div>
+<div>
+<dt>Nation</dt>
+<dd>DE</dd>
+</div>
+<div>
+<dt>Category</dt>
+<dd>m</dd>
+</div>
+<div>
+<dt>Result</dt>
+<dd>DNF</dd>
+</div>
+</dl>
+<details class="runner-detail">
+<summary>Full runner stats</summary>
+<dl class="runner-stats">
+<div>
+<dt>Fastest</dt>
+<dd>32:29 · L18</dd>
+</div>
+<div>
+<dt>Slowest</dt>
+<dd>56:33 · L64</dd>
+</div>
+<div>
+<dt>Average</dt>
+<dd>50:22</dd>
+</div>
+<div>
+<dt>Avg rest</dt>
+<dd>9:38</dd>
+</div>
+<div>
+<dt>Longest rest</dt>
+<dd>27:31 · L18</dd>
+</div>
+<div>
+<dt>Spread</dt>
+<dd>24:04</dd>
+</div>
+<div>
+<dt>First yard</dt>
+<dd>48:14</dd>
+</div>
+<div>
+<dt>Final yard</dt>
+<dd>49:11</dd>
+</div>
+<div>
+<dt>Time on feet</dt>
+<dd>55.4 h</dd>
+</div>
+<div>
+<dt>Time resting</dt>
+<dd>10.4 h</dd>
+</div>
+<div>
+<dt>Status</dt>
+<dd>DNF</dd>
+</div>
+<div>
+<dt>Off the win</dt>
+<dd>-28 yards</dd>
+</div>
+</dl>
+</details>
+</div>
+<div class="row-km">442.6 km</div>
+</div>
+<div class="row">
+<div class="row-n">
+<span>6</span>56<small>yards</small>
+</div>
+<div>
+<div class="row-name">Norman Junker</div>
+<dl class="runner-facts">
+<div>
+<dt>Bib</dt>
+<dd>143</dd>
+</div>
+<div>
+<dt>Nation</dt>
+<dd>DE</dd>
+</div>
+<div>
+<dt>Category</dt>
+<dd>m</dd>
+</div>
+<div>
+<dt>Result</dt>
+<dd>DNF</dd>
+</div>
+</dl>
+<details class="runner-detail">
+<summary>Full runner stats</summary>
+<dl class="runner-stats">
+<div>
+<dt>Fastest</dt>
+<dd>39:36 · L34</dd>
+</div>
+<div>
+<dt>Slowest</dt>
+<dd>54:12 · L56</dd>
+</div>
+<div>
+<dt>Average</dt>
+<dd>45:11</dd>
+</div>
+<div>
+<dt>Avg rest</dt>
+<dd>14:49</dd>
+</div>
+<div>
+<dt>Longest rest</dt>
+<dd>20:24 · L34</dd>
+</div>
+<div>
+<dt>Spread</dt>
+<dd>14:36</dd>
+</div>
+<div>
+<dt>First yard</dt>
+<dd>41:35</dd>
+</div>
+<div>
+<dt>Final yard</dt>
+<dd>54:12</dd>
+</div>
+<div>
+<dt>Time on feet</dt>
+<dd>42.2 h</dd>
+</div>
+<div>
+<dt>Time resting</dt>
+<dd>13.6 h</dd>
+</div>
+<div>
+<dt>Status</dt>
+<dd>DNF</dd>
+</div>
+<div>
+<dt>Off the win</dt>
+<dd>-38 yards</dd>
+</div>
+</dl>
+</details>
+</div>
+<div class="row-km">375.5 km</div>
+</div>
+<div class="row">
+<div class="row-n">
+<span>7</span>54<small>yards</small>
+</div>
+<div>
+<div class="row-name">Dennis Musche</div>
+<dl class="runner-facts">
+<div>
+<dt>Bib</dt>
+<dd>150</dd>
+</div>
+<div>
+<dt>Nation</dt>
+<dd>DE</dd>
+</div>
+<div>
+<dt>Category</dt>
+<dd>m</dd>
+</div>
+<div>
+<dt>Result</dt>
+<dd>DNF</dd>
+</div>
+</dl>
+<details class="runner-detail">
+<summary>Full runner stats</summary>
+<dl class="runner-stats">
+<div>
+<dt>Fastest</dt>
+<dd>46:24 · L15</dd>
+</div>
+<div>
+<dt>Slowest</dt>
+<dd>56:44 · L54</dd>
+</div>
+<div>
+<dt>Average</dt>
+<dd>50:33</dd>
+</div>
+<div>
+<dt>Avg rest</dt>
+<dd>9:27</dd>
+</div>
+<div>
+<dt>Longest rest</dt>
+<dd>13:36 · L15</dd>
+</div>
+<div>
+<dt>Spread</dt>
+<dd>10:21</dd>
+</div>
+<div>
+<dt>First yard</dt>
+<dd>49:36</dd>
+</div>
+<div>
+<dt>Final yard</dt>
+<dd>56:44</dd>
+</div>
+<div>
+<dt>Time on feet</dt>
+<dd>45.5 h</dd>
+</div>
+<div>
+<dt>Time resting</dt>
+<dd>8.4 h</dd>
+</div>
+<div>
+<dt>Status</dt>
+<dd>DNF</dd>
+</div>
+<div>
+<dt>Off the win</dt>
+<dd>-40 yards</dd>
+</div>
+</dl>
+</details>
+</div>
+<div class="row-km">362.1 km</div>
+</div>
+<div class="row">
+<div class="row-n">
+<span>8</span>53<small>yards</small>
+</div>
+<div>
+<div class="row-name">Adrian Gröschner</div>
+<dl class="runner-facts">
+<div>
+<dt>Bib</dt>
+<dd>141</dd>
+</div>
+<div>
+<dt>Nation</dt>
+<dd>DE</dd>
+</div>
+<div>
+<dt>Category</dt>
+<dd>m</dd>
+</div>
+<div>
+<dt>Result</dt>
+<dd>DNF</dd>
+</div>
+</dl>
+<details class="runner-detail">
+<summary>Full runner stats</summary>
+<dl class="runner-stats">
+<div>
+<dt>Fastest</dt>
+<dd>42:00 · L44</dd>
+</div>
+<div>
+<dt>Slowest</dt>
+<dd>59:04 · L53</dd>
+</div>
+<div>
+<dt>Average</dt>
+<dd>47:56</dd>
+</div>
+<div>
+<dt>Avg rest</dt>
+<dd>12:04</dd>
+</div>
+<div>
+<dt>Longest rest</dt>
+<dd>18:00 · L44</dd>
+</div>
+<div>
+<dt>Spread</dt>
+<dd>17:04</dd>
+</div>
+<div>
+<dt>First yard</dt>
+<dd>48:18</dd>
+</div>
+<div>
+<dt>Final yard</dt>
+<dd>59:04</dd>
+</div>
+<div>
+<dt>Time on feet</dt>
+<dd>42.3 h</dd>
+</div>
+<div>
+<dt>Time resting</dt>
+<dd>10.5 h</dd>
+</div>
+<div>
+<dt>Status</dt>
+<dd>DNF</dd>
+</div>
+<div>
+<dt>Off the win</dt>
+<dd>-41 yards</dd>
+</div>
+</dl>
+</details>
+</div>
+<div class="row-km">355.4 km</div>
+</div>
+<div class="row">
+<div class="row-n">
+<span>9</span>52<small>yards</small>
+</div>
+<div>
+<div class="row-name">Caroline Maria Bolte</div>
+<div class="row-note">Last woman standing. German women&#39;s backyard record, in her first backyard ultra.</div>
+<dl class="runner-facts">
+<div>
+<dt>Bib</dt>
+<dd>84</dd>
+</div>
+<div>
+<dt>Nation</dt>
+<dd>DE</dd>
+</div>
+<div>
+<dt>Category</dt>
+<dd>f</dd>
+</div>
+<div>
+<dt>Result</dt>
+<dd>DNF</dd>
+</div>
+</dl>
+<details class="runner-detail">
+<summary>Full runner stats</summary>
+<dl class="runner-stats">
+<div>
+<dt>Fastest</dt>
+<dd>43:13 · L18</dd>
+</div>
+<div>
+<dt>Slowest</dt>
+<dd>50:17 · L35</dd>
+</div>
+<div>
+<dt>Average</dt>
+<dd>47:27</dd>
+</div>
+<div>
+<dt>Avg rest</dt>
+<dd>12:33</dd>
+</div>
+<div>
+<dt>Longest rest</dt>
+<dd>16:47 · L18</dd>
+</div>
+<div>
+<dt>Spread</dt>
+<dd>7:04</dd>
+</div>
+<div>
+<dt>First yard</dt>
+<dd>45:32</dd>
+</div>
+<div>
+<dt>Final yard</dt>
+<dd>45:47</dd>
+</div>
+<div>
+<dt>Time on feet</dt>
+<dd>41.1 h</dd>
+</div>
+<div>
+<dt>Time resting</dt>
+<dd>10.7 h</dd>
+</div>
+<div>
+<dt>Status</dt>
+<dd>DNF</dd>
+</div>
+<div>
+<dt>Off the win</dt>
+<dd>-42 yards</dd>
+</div>
+</dl>
+</details>
+</div>
+<div class="row-km">348.7 km</div>
+</div>
+<div class="row">
+<div class="row-n">
+<span>10</span>50<small>yards</small>
+</div>
+<div>
+<div class="row-name">Tom Kopke</div>
+<dl class="runner-facts">
+<div>
+<dt>Bib</dt>
+<dd>168</dd>
+</div>
+<div>
+<dt>Nation</dt>
+<dd>DE</dd>
+</div>
+<div>
+<dt>Category</dt>
+<dd>m</dd>
+</div>
+<div>
+<dt>Result</dt>
+<dd>DNF</dd>
+</div>
+</dl>
+<details class="runner-detail">
+<summary>Full runner stats</summary>
+<dl class="runner-stats">
+<div>
+<dt>Fastest</dt>
+<dd>46:40 · L5</dd>
+</div>
+<div>
+<dt>Slowest</dt>
+<dd>52:23 · L47</dd>
+</div>
+<div>
+<dt>Average</dt>
+<dd>49:21</dd>
+</div>
+<div>
+<dt>Avg rest</dt>
+<dd>10:39</dd>
+</div>
+<div>
+<dt>Longest rest</dt>
+<dd>13:20 · L5</dd>
+</div>
+<div>
+<dt>Spread</dt>
+<dd>5:43</dd>
+</div>
+<div>
+<dt>First yard</dt>
+<dd>50:55</dd>
+</div>
+<div>
+<dt>Final yard</dt>
+<dd>50:50</dd>
+</div>
+<div>
+<dt>Time on feet</dt>
+<dd>41.1 h</dd>
+</div>
+<div>
+<dt>Time resting</dt>
+<dd>8.7 h</dd>
+</div>
+<div>
+<dt>Status</dt>
+<dd>DNF</dd>
+</div>
+<div>
+<dt>Off the win</dt>
+<dd>-44 yards</dd>
+</div>
+</dl>
+</details>
+</div>
+<div class="row-km">335.3 km</div>
+</div>
+</div>
+<p class="table-note">
+<a href="/results/last-soul-ultra-2026" class="ed-link">All 160 starters, every split, on the 2026 page →</a>
+</p>
+</div>
+<div>
+<h3 class="h3 table-title">Women — last woman standing</h3>
+<div class="rows">
+<div class="row">
+<div class="row-n">
+<span>9</span>52<small>yards</small>
+</div>
+<div>
+<div class="row-name">Caroline Maria Bolte</div>
+<div class="row-note">Last woman standing. German women&#39;s backyard record, in her first backyard ultra.</div>
+<dl class="runner-facts">
+<div>
+<dt>Bib</dt>
+<dd>84</dd>
+</div>
+<div>
+<dt>Nation</dt>
+<dd>DE</dd>
+</div>
+<div>
+<dt>Category</dt>
+<dd>f</dd>
+</div>
+<div>
+<dt>Result</dt>
+<dd>DNF</dd>
+</div>
+</dl>
+<details class="runner-detail">
+<summary>Full runner stats</summary>
+<dl class="runner-stats">
+<div>
+<dt>Fastest</dt>
+<dd>43:13 · L18</dd>
+</div>
+<div>
+<dt>Slowest</dt>
+<dd>50:17 · L35</dd>
+</div>
+<div>
+<dt>Average</dt>
+<dd>47:27</dd>
+</div>
+<div>
+<dt>Avg rest</dt>
+<dd>12:33</dd>
+</div>
+<div>
+<dt>Longest rest</dt>
+<dd>16:47 · L18</dd>
+</div>
+<div>
+<dt>Spread</dt>
+<dd>7:04</dd>
+</div>
+<div>
+<dt>First yard</dt>
+<dd>45:32</dd>
+</div>
+<div>
+<dt>Final yard</dt>
+<dd>45:47</dd>
+</div>
+<div>
+<dt>Time on feet</dt>
+<dd>41.1 h</dd>
+</div>
+<div>
+<dt>Time resting</dt>
+<dd>10.7 h</dd>
+</div>
+<div>
+<dt>Status</dt>
+<dd>DNF</dd>
+</div>
+<div>
+<dt>Off the win</dt>
+<dd>-42 yards</dd>
+</div>
+</dl>
+</details>
+</div>
+<div class="row-km">348.7 km</div>
+</div>
+<div class="row">
+<div class="row-n">
+<span>26</span>33<small>yards</small>
+</div>
+<div>
+<div class="row-name">Nicole Munzert</div>
+<dl class="runner-facts">
+<div>
+<dt>Bib</dt>
+<dd>124</dd>
+</div>
+<div>
+<dt>Nation</dt>
+<dd>DE</dd>
+</div>
+<div>
+<dt>Category</dt>
+<dd>f</dd>
+</div>
+<div>
+<dt>Result</dt>
+<dd>DNF</dd>
+</div>
+</dl>
+<details class="runner-detail">
+<summary>Full runner stats</summary>
+<dl class="runner-stats">
+<div>
+<dt>Fastest</dt>
+<dd>43:12 · L19</dd>
+</div>
+<div>
+<dt>Slowest</dt>
+<dd>53:41 · L33</dd>
+</div>
+<div>
+<dt>Average</dt>
+<dd>46:44</dd>
+</div>
+<div>
+<dt>Avg rest</dt>
+<dd>13:16</dd>
+</div>
+<div>
+<dt>Longest rest</dt>
+<dd>16:48 · L19</dd>
+</div>
+<div>
+<dt>Spread</dt>
+<dd>10:29</dd>
+</div>
+<div>
+<dt>First yard</dt>
+<dd>48:20</dd>
+</div>
+<div>
+<dt>Final yard</dt>
+<dd>53:41</dd>
+</div>
+<div>
+<dt>Time on feet</dt>
+<dd>25.7 h</dd>
+</div>
+<div>
+<dt>Time resting</dt>
+<dd>7.1 h</dd>
+</div>
+<div>
+<dt>Status</dt>
+<dd>DNF</dd>
+</div>
+<div>
+<dt>Off the win</dt>
+<dd>-61 yards</dd>
+</div>
+</dl>
+</details>
+</div>
+<div class="row-km">221.3 km</div>
+</div>
+<div class="row">
+<div class="row-n">
+<span>30</span>32<small>yards</small>
+</div>
+<div>
+<div class="row-name">Emilia Bergerhoff</div>
+<dl class="runner-facts">
+<div>
+<dt>Bib</dt>
+<dd>129</dd>
+</div>
+<div>
+<dt>Nation</dt>
+<dd>DE</dd>
+</div>
+<div>
+<dt>Category</dt>
+<dd>f</dd>
+</div>
+<div>
+<dt>Result</dt>
+<dd>DNF</dd>
+</div>
+</dl>
+<details class="runner-detail">
+<summary>Full runner stats</summary>
+<dl class="runner-stats">
+<div>
+<dt>Fastest</dt>
+<dd>40:51 · L11</dd>
+</div>
+<div>
+<dt>Slowest</dt>
+<dd>53:25 · L32</dd>
+</div>
+<div>
+<dt>Average</dt>
+<dd>49:14</dd>
+</div>
+<div>
+<dt>Avg rest</dt>
+<dd>10:46</dd>
+</div>
+<div>
+<dt>Longest rest</dt>
+<dd>19:09 · L11</dd>
+</div>
+<div>
+<dt>Spread</dt>
+<dd>12:34</dd>
+</div>
+<div>
+<dt>First yard</dt>
+<dd>48:11</dd>
+</div>
+<div>
+<dt>Final yard</dt>
+<dd>53:25</dd>
+</div>
+<div>
+<dt>Time on feet</dt>
+<dd>26.3 h</dd>
+</div>
+<div>
+<dt>Time resting</dt>
+<dd>5.6 h</dd>
+</div>
+<div>
+<dt>Status</dt>
+<dd>DNF</dd>
+</div>
+<div>
+<dt>Off the win</dt>
+<dd>-62 yards</dd>
+</div>
+</dl>
+</details>
+</div>
+<div class="row-km">214.6 km</div>
+</div>
+</div>
+<p class="table-note">Everyone who is not the last soul standing is recorded as a DNF, however far they went. That is <a href="/format">what a backyard ultra asks of a field</a>.</p>
+</div>
+</div>
+<div class="edon">
+<div class="edon-title">Edition on edition</div>
+<div>
+<div class="edon-v">+27</div>
+<div class="edon-l">more yards than 2025</div>
+</div>
+<div>
+<div class="edon-v">+67</div>
+<div class="edon-l">more starters than 2025</div>
+</div>
+</div>
+</div>
+</section>
+<section id="2025" class="ed-section">
+<div class="shell">
+<div class="ed-head">
+<h2 class="h2">Season 1 · 2025</h2>
+<a href="/results/last-soul-ultra-2025" class="ed-link">3 October 2025 · 93 starters · full 2025 page →</a>
+</div>
+<div class="ed-stats statgrid">
+<div>
+<div class="stat-v">67</div>
+<div class="stat-l">winning yards</div>
+</div>
+<div>
+<div class="stat-v">449.3</div>
+<div class="stat-l">kilometres covered</div>
+</div>
+<div>
+<div class="stat-v">93</div>
+<div class="stat-l">athletes on the start line</div>
+</div>
+<div>
+<div class="stat-v">3</div>
+<div class="stat-l">days of racing</div>
+</div>
+<div>
+<div class="stat-v">6.706</div>
+<div class="stat-l">km per hourly loop</div>
+</div>
+</div>
+<div class="podium">
+<div class="card card-win">
+<div class="kicker-sm">Winner · last soul</div>
+<div class="card-name">Kim Gottwald</div>
+<div class="card-num">67<span> yards</span>
+</div>
+<div class="card-body">Bib 1. The race founder, winner of his own first edition.</div>
+</div>
+<div class="card">
+<div class="card-kicker">Assist · second</div>
+<div class="card-name">Ello Elosrouti</div>
+<div class="card-num">67<span> yards</span>
+</div>
+<div class="card-body">Matched Gottwald lap for lap, then withdrew with an inflamed Achilles tendon. Came back in 2026 and ran 93.</div>
+</div>
+<div class="card">
+<div class="card-kicker">Third</div>
+<div class="card-name">Pierre Biege</div>
+<div class="card-num">40<span> yards</span>
+</div>
+<div class="card-body">Twenty-seven laps behind the final pair.</div>
+</div>
+</div>
+<div class="event-details">
+<h3 class="h3 table-title">Event details</h3>
+<dl class="event-meta">
+<div>
+<dt>Location</dt>
+<dd>Bornheim, Germany</dd>
+</div>
+<div>
+<dt>Hourly loop</dt>
+<dd>6.706 km</dd>
+</div>
+<div>
+<dt>Format</dt>
+<dd>Every runner starts together, on the full hour. The loop is 6700 metres and must be completed within the hour; whoever is not standing on the start line when the next hour begins is out. There is no finish line and no distance to cover, only the next loop. The race ends when one runner completes a loop that nobody else does. That runner is the last soul.</dd>
+</div>
+</dl>
+</div>
+<div class="tables">
+<div>
+<h3 class="h3 table-title">Top ten</h3>
+<div class="rows">
+<div class="row">
+<div class="row-n">
+<span>1</span>67<small>yards</small>
+</div>
+<div>
+<div class="row-name">Kim Gottwald</div>
+<div class="row-note">Bib 1. The race founder, winner of his own first edition.</div>
+<dl class="runner-facts">
+<div>
+<dt>Bib</dt>
+<dd>1</dd>
+</div>
+<div>
+<dt>Nation</dt>
+<dd>DE</dd>
+</div>
+<div>
+<dt>Category</dt>
+<dd>m</dd>
+</div>
+<div>
+<dt>Result</dt>
+<dd>1st</dd>
+</div>
+</dl>
+<details class="runner-detail">
+<summary>Full runner stats</summary>
+<dl class="runner-stats">
+<div>
+<dt>Fastest</dt>
+<dd>40:37 · L12</dd>
+</div>
+<div>
+<dt>Slowest</dt>
+<dd>55:24 · L61</dd>
+</div>
+<div>
+<dt>Average</dt>
+<dd>47:21</dd>
+</div>
+<div>
+<dt>Avg rest</dt>
+<dd>12:45</dd>
+</div>
+<div>
+<dt>Longest rest</dt>
+<dd>19:23 · L12</dd>
+</div>
+<div>
+<dt>Spread</dt>
+<dd>14:47</dd>
+</div>
+<div>
+<dt>First yard</dt>
+<dd>47:55</dd>
+</div>
+<div>
+<dt>Final yard</dt>
+<dd>53:07</dd>
+</div>
+<div>
+<dt>Time on feet</dt>
+<dd>49.7 h</dd>
+</div>
+<div>
+<dt>Time resting</dt>
+<dd>13.2 h</dd>
+</div>
+<div>
+<dt>Status</dt>
+<dd>Finisher</dd>
+</div>
+<div>
+<dt>Off the win</dt>
+<dd>Winner</dd>
+</div>
+</dl>
+</details>
+</div>
+<div class="row-km">449.3 km</div>
+</div>
+<div class="row">
+<div class="row-n">
+<span>2</span>67<small>yards</small>
+</div>
+<div>
+<div class="row-name">Ello Elosrouti</div>
+<div class="row-note">Matched Gottwald lap for lap, then withdrew with an inflamed Achilles tendon. Came back in 2026 and ran 93.</div>
+<dl class="runner-facts">
+<div>
+<dt>Bib</dt>
+<dd>93</dd>
+</div>
+<div>
+<dt>Nation</dt>
+<dd>DE</dd>
+</div>
+<div>
+<dt>Category</dt>
+<dd>m</dd>
+</div>
+<div>
+<dt>Result</dt>
+<dd>DNF</dd>
+</div>
+</dl>
+<details class="runner-detail">
+<summary>Full runner stats</summary>
+<dl class="runner-stats">
+<div>
+<dt>Fastest</dt>
+<dd>40:00 · L45</dd>
+</div>
+<div>
+<dt>Slowest</dt>
+<dd>51:44 · L64</dd>
+</div>
+<div>
+<dt>Average</dt>
+<dd>44:50</dd>
+</div>
+<div>
+<dt>Avg rest</dt>
+<dd>15:17</dd>
+</div>
+<div>
+<dt>Longest rest</dt>
+<dd>20:00 · L45</dd>
+</div>
+<div>
+<dt>Spread</dt>
+<dd>11:44</dd>
+</div>
+<div>
+<dt>First yard</dt>
+<dd>50:04</dd>
+</div>
+<div>
+<dt>Final yard</dt>
+<dd>51:44</dd>
+</div>
+<div>
+<dt>Time on feet</dt>
+<dd>47.8 h</dd>
+</div>
+<div>
+<dt>Time resting</dt>
+<dd>16.0 h</dd>
+</div>
+<div>
+<dt>Status</dt>
+<dd>Out after yard 64</dd>
+</div>
+<div>
+<dt>Off the win</dt>
+<dd>0 yards</dd>
+</div>
+</dl>
+</details>
+</div>
+<div class="row-km">449.3 km</div>
+</div>
+<div class="row">
+<div class="row-n">
+<span>3</span>40<small>yards</small>
+</div>
+<div>
+<div class="row-name">Pierre Biege</div>
+<div class="row-note">Twenty-seven laps behind the final pair.</div>
+<dl class="runner-facts">
+<div>
+<dt>Bib</dt>
+<dd>94</dd>
+</div>
+<div>
+<dt>Nation</dt>
+<dd>CH</dd>
+</div>
+<div>
+<dt>Category</dt>
+<dd>m</dd>
+</div>
+<div>
+<dt>Result</dt>
+<dd>DNF</dd>
+</div>
+</dl>
+<details class="runner-detail">
+<summary>Full runner stats</summary>
+<dl class="runner-stats">
+<div>
+<dt>Fastest</dt>
+<dd>43:33 · L4</dd>
+</div>
+<div>
+<dt>Slowest</dt>
+<dd>1:02:45 · L38</dd>
+</div>
+<div>
+<dt>Average</dt>
+<dd>51:15</dd>
+</div>
+<div>
+<dt>Avg rest</dt>
+<dd>9:11</dd>
+</div>
+<div>
+<dt>Longest rest</dt>
+<dd>16:27 · L4</dd>
+</div>
+<div>
+<dt>Spread</dt>
+<dd>19:12</dd>
+</div>
+<div>
+<dt>First yard</dt>
+<dd>48:01</dd>
+</div>
+<div>
+<dt>Final yard</dt>
+<dd>1:02:45</dd>
+</div>
+<div>
+<dt>Time on feet</dt>
+<dd>32.5 h</dd>
+</div>
+<div>
+<dt>Time resting</dt>
+<dd>5.7 h</dd>
+</div>
+<div>
+<dt>Status</dt>
+<dd>Out after yard 38</dd>
+</div>
+<div>
+<dt>Off the win</dt>
+<dd>-27 yards</dd>
+</div>
+</dl>
+</details>
+</div>
+<div class="row-km">268.2 km</div>
+</div>
+<div class="row">
+<div class="row-n">
+<span>4</span>37<small>yards</small>
+</div>
+<div>
+<div class="row-name">Pawel Dregan</div>
+<dl class="runner-facts">
+<div>
+<dt>Bib</dt>
+<dd>6</dd>
+</div>
+<div>
+<dt>Nation</dt>
+<dd>DE</dd>
+</div>
+<div>
+<dt>Category</dt>
+<dd>m</dd>
+</div>
+<div>
+<dt>Result</dt>
+<dd>DNF</dd>
+</div>
+</dl>
+<details class="runner-detail">
+<summary>Full runner stats</summary>
+<dl class="runner-stats">
+<div>
+<dt>Fastest</dt>
+<dd>42:11 · L20</dd>
+</div>
+<div>
+<dt>Slowest</dt>
+<dd>58:59 · L36</dd>
+</div>
+<div>
+<dt>Average</dt>
+<dd>47:34</dd>
+</div>
+<div>
+<dt>Avg rest</dt>
+<dd>12:45</dd>
+</div>
+<div>
+<dt>Longest rest</dt>
+<dd>17:49 · L20</dd>
+</div>
+<div>
+<dt>Spread</dt>
+<dd>16:48</dd>
+</div>
+<div>
+<dt>First yard</dt>
+<dd>46:37</dd>
+</div>
+<div>
+<dt>Final yard</dt>
+<dd>58:59</dd>
+</div>
+<div>
+<dt>Time on feet</dt>
+<dd>28.5 h</dd>
+</div>
+<div>
+<dt>Time resting</dt>
+<dd>7.4 h</dd>
+</div>
+<div>
+<dt>Status</dt>
+<dd>Out after yard 36</dd>
+</div>
+<div>
+<dt>Off the win</dt>
+<dd>-30 yards</dd>
+</div>
+</dl>
+</details>
+</div>
+<div class="row-km">248.1 km</div>
+</div>
+<div class="row">
+<div class="row-n">
+<span>5</span>35<small>yards</small>
+</div>
+<div>
+<div class="row-name">Alessandro Cervo</div>
+<dl class="runner-facts">
+<div>
+<dt>Bib</dt>
+<dd>103</dd>
+</div>
+<div>
+<dt>Nation</dt>
+<dd>DE</dd>
+</div>
+<div>
+<dt>Category</dt>
+<dd>m</dd>
+</div>
+<div>
+<dt>Result</dt>
+<dd>DNF</dd>
+</div>
+</dl>
+<details class="runner-detail">
+<summary>Full runner stats</summary>
+<dl class="runner-stats">
+<div>
+<dt>Fastest</dt>
+<dd>41:21 · L4</dd>
+</div>
+<div>
+<dt>Slowest</dt>
+<dd>55:59 · L34</dd>
+</div>
+<div>
+<dt>Average</dt>
+<dd>45:51</dd>
+</div>
+<div>
+<dt>Avg rest</dt>
+<dd>14:28</dd>
+</div>
+<div>
+<dt>Longest rest</dt>
+<dd>18:39 · L4</dd>
+</div>
+<div>
+<dt>Spread</dt>
+<dd>14:38</dd>
+</div>
+<div>
+<dt>First yard</dt>
+<dd>48:08</dd>
+</div>
+<div>
+<dt>Final yard</dt>
+<dd>55:59</dd>
+</div>
+<div>
+<dt>Time on feet</dt>
+<dd>26.0 h</dd>
+</div>
+<div>
+<dt>Time resting</dt>
+<dd>8.0 h</dd>
+</div>
+<div>
+<dt>Status</dt>
+<dd>Out after yard 34</dd>
+</div>
+<div>
+<dt>Off the win</dt>
+<dd>-32 yards</dd>
+</div>
+</dl>
+</details>
+</div>
+<div class="row-km">234.7 km</div>
+</div>
+<div class="row">
+<div class="row-n">
+<span>6</span>31<small>yards</small>
+</div>
+<div>
+<div class="row-name">Mauritz Ehmann</div>
+<dl class="runner-facts">
+<div>
+<dt>Bib</dt>
+<dd>55</dd>
+</div>
+<div>
+<dt>Nation</dt>
+<dd>DE</dd>
+</div>
+<div>
+<dt>Category</dt>
+<dd>m</dd>
+</div>
+<div>
+<dt>Result</dt>
+<dd>DNF</dd>
+</div>
+</dl>
+<details class="runner-detail">
+<summary>Full runner stats</summary>
+<dl class="runner-stats">
+<div>
+<dt>Fastest</dt>
+<dd>41:36 · L8</dd>
+</div>
+<div>
+<dt>Slowest</dt>
+<dd>54:53 · L18</dd>
+</div>
+<div>
+<dt>Average</dt>
+<dd>48:46</dd>
+</div>
+<div>
+<dt>Avg rest</dt>
+<dd>11:25</dd>
+</div>
+<div>
+<dt>Longest rest</dt>
+<dd>18:24 · L8</dd>
+</div>
+<div>
+<dt>Spread</dt>
+<dd>13:17</dd>
+</div>
+<div>
+<dt>First yard</dt>
+<dd>49:59</dd>
+</div>
+<div>
+<dt>Final yard</dt>
+<dd>53:44</dd>
+</div>
+<div>
+<dt>Time on feet</dt>
+<dd>24.4 h</dd>
+</div>
+<div>
+<dt>Time resting</dt>
+<dd>5.5 h</dd>
+</div>
+<div>
+<dt>Status</dt>
+<dd>Out after yard 30</dd>
+</div>
+<div>
+<dt>Off the win</dt>
+<dd>-36 yards</dd>
+</div>
+</dl>
+</details>
+</div>
+<div class="row-km">207.9 km</div>
+</div>
+<div class="row">
+<div class="row-n">
+<span>7</span>30<small>yards</small>
+</div>
+<div>
+<div class="row-name">Jozef Kapicak</div>
+<dl class="runner-facts">
+<div>
+<dt>Bib</dt>
+<dd>86</dd>
+</div>
+<div>
+<dt>Nation</dt>
+<dd>DE</dd>
+</div>
+<div>
+<dt>Category</dt>
+<dd>m</dd>
+</div>
+<div>
+<dt>Result</dt>
+<dd>DNF</dd>
+</div>
+</dl>
+<details class="runner-detail">
+<summary>Full runner stats</summary>
+<dl class="runner-stats">
+<div>
+<dt>Fastest</dt>
+<dd>40:28 · L5</dd>
+</div>
+<div>
+<dt>Slowest</dt>
+<dd>49:18 · L22</dd>
+</div>
+<div>
+<dt>Average</dt>
+<dd>43:47</dd>
+</div>
+<div>
+<dt>Avg rest</dt>
+<dd>16:29</dd>
+</div>
+<div>
+<dt>Longest rest</dt>
+<dd>19:32 · L5</dd>
+</div>
+<div>
+<dt>Spread</dt>
+<dd>8:50</dd>
+</div>
+<div>
+<dt>First yard</dt>
+<dd>46:11</dd>
+</div>
+<div>
+<dt>Final yard</dt>
+<dd>49:18</dd>
+</div>
+<div>
+<dt>Time on feet</dt>
+<dd>16.1 h</dd>
+</div>
+<div>
+<dt>Time resting</dt>
+<dd>5.8 h</dd>
+</div>
+<div>
+<dt>Status</dt>
+<dd>Out after yard 22</dd>
+</div>
+<div>
+<dt>Off the win</dt>
+<dd>-37 yards</dd>
+</div>
+</dl>
+</details>
+</div>
+<div class="row-km">201.2 km</div>
+</div>
+<div class="row">
+<div class="row-n">
+<span>8</span>29<small>yards</small>
+</div>
+<div>
+<div class="row-name">Bob Scholtes</div>
+<dl class="runner-facts">
+<div>
+<dt>Bib</dt>
+<dd>89</dd>
+</div>
+<div>
+<dt>Nation</dt>
+<dd>LU</dd>
+</div>
+<div>
+<dt>Category</dt>
+<dd>m</dd>
+</div>
+<div>
+<dt>Result</dt>
+<dd>DNF</dd>
+</div>
+</dl>
+<details class="runner-detail">
+<summary>Full runner stats</summary>
+<dl class="runner-stats">
+<div>
+<dt>Fastest</dt>
+<dd>—</dd>
+</div>
+<div>
+<dt>Slowest</dt>
+<dd>—</dd>
+</div>
+<div>
+<dt>Average</dt>
+<dd>—</dd>
+</div>
+<div>
+<dt>Avg rest</dt>
+<dd>—</dd>
+</div>
+<div>
+<dt>Longest rest</dt>
+<dd>—</dd>
+</div>
+<div>
+<dt>Spread</dt>
+<dd>—</dd>
+</div>
+<div>
+<dt>First yard</dt>
+<dd>—</dd>
+</div>
+<div>
+<dt>Final yard</dt>
+<dd>—</dd>
+</div>
+<div>
+<dt>Time on feet</dt>
+<dd>0.0 h</dd>
+</div>
+<div>
+<dt>Time resting</dt>
+<dd>0.0 h</dd>
+</div>
+<div>
+<dt>Status</dt>
+<dd>DNF</dd>
+</div>
+<div>
+<dt>Off the win</dt>
+<dd>-38 yards</dd>
+</div>
+</dl>
+</details>
+</div>
+<div class="row-km">194.5 km</div>
+</div>
+<div class="row">
+<div class="row-n">
+<span>9</span>28<small>yards</small>
+</div>
+<div>
+<div class="row-name">Benjamin Nsiah</div>
+<dl class="runner-facts">
+<div>
+<dt>Bib</dt>
+<dd>33</dd>
+</div>
+<div>
+<dt>Nation</dt>
+<dd>DE</dd>
+</div>
+<div>
+<dt>Category</dt>
+<dd>m</dd>
+</div>
+<div>
+<dt>Result</dt>
+<dd>DNF</dd>
+</div>
+</dl>
+<details class="runner-detail">
+<summary>Full runner stats</summary>
+<dl class="runner-stats">
+<div>
+<dt>Fastest</dt>
+<dd>43:36 · L8</dd>
+</div>
+<div>
+<dt>Slowest</dt>
+<dd>1:02:44 · L1</dd>
+</div>
+<div>
+<dt>Average</dt>
+<dd>48:38</dd>
+</div>
+<div>
+<dt>Avg rest</dt>
+<dd>11:45</dd>
+</div>
+<div>
+<dt>Longest rest</dt>
+<dd>16:24 · L8</dd>
+</div>
+<div>
+<dt>Spread</dt>
+<dd>19:08</dd>
+</div>
+<div>
+<dt>First yard</dt>
+<dd>1:02:44</dd>
+</div>
+<div>
+<dt>Final yard</dt>
+<dd>55:44</dd>
+</div>
+<div>
+<dt>Time on feet</dt>
+<dd>21.9 h</dd>
+</div>
+<div>
+<dt>Time resting</dt>
+<dd>5.1 h</dd>
+</div>
+<div>
+<dt>Status</dt>
+<dd>Out after yard 27</dd>
+</div>
+<div>
+<dt>Off the win</dt>
+<dd>-39 yards</dd>
+</div>
+</dl>
+</details>
+</div>
+<div class="row-km">187.8 km</div>
+</div>
+<div class="row">
+<div class="row-n">
+<span>10</span>28<small>yards</small>
+</div>
+<div>
+<div class="row-name">Nico Rauchenwald</div>
+<dl class="runner-facts">
+<div>
+<dt>Bib</dt>
+<dd>92</dd>
+</div>
+<div>
+<dt>Nation</dt>
+<dd>DE</dd>
+</div>
+<div>
+<dt>Category</dt>
+<dd>m</dd>
+</div>
+<div>
+<dt>Result</dt>
+<dd>DNF</dd>
+</div>
+</dl>
+<details class="runner-detail">
+<summary>Full runner stats</summary>
+<dl class="runner-stats">
+<div>
+<dt>Fastest</dt>
+<dd>—</dd>
+</div>
+<div>
+<dt>Slowest</dt>
+<dd>—</dd>
+</div>
+<div>
+<dt>Average</dt>
+<dd>—</dd>
+</div>
+<div>
+<dt>Avg rest</dt>
+<dd>—</dd>
+</div>
+<div>
+<dt>Longest rest</dt>
+<dd>—</dd>
+</div>
+<div>
+<dt>Spread</dt>
+<dd>—</dd>
+</div>
+<div>
+<dt>First yard</dt>
+<dd>—</dd>
+</div>
+<div>
+<dt>Final yard</dt>
+<dd>—</dd>
+</div>
+<div>
+<dt>Time on feet</dt>
+<dd>0.0 h</dd>
+</div>
+<div>
+<dt>Time resting</dt>
+<dd>0.0 h</dd>
+</div>
+<div>
+<dt>Status</dt>
+<dd>DNF</dd>
+</div>
+<div>
+<dt>Off the win</dt>
+<dd>-39 yards</dd>
+</div>
+</dl>
+</details>
+</div>
+<div class="row-km">187.8 km</div>
+</div>
+</div>
+<p class="table-note">
+<a href="/results/last-soul-ultra-2025" class="ed-link">All 93 starters, every split, on the 2025 page →</a>
+</p>
+</div>
+<div>
+<h3 class="h3 table-title">Women — last woman standing</h3>
+<div class="rows">
+<div class="row">
+<div class="row-n">
+<span>19</span>20<small>yards</small>
+</div>
+<div>
+<div class="row-name">Kathrin Reichelt</div>
+<div class="row-note">First woman</div>
+<dl class="runner-facts">
+<div>
+<dt>Bib</dt>
+<dd>48</dd>
+</div>
+<div>
+<dt>Nation</dt>
+<dd>DE</dd>
+</div>
+<div>
+<dt>Category</dt>
+<dd>f</dd>
+</div>
+<div>
+<dt>Result</dt>
+<dd>DNF</dd>
+</div>
+</dl>
+<details class="runner-detail">
+<summary>Full runner stats</summary>
+<dl class="runner-stats">
+<div>
+<dt>Fastest</dt>
+<dd>—</dd>
+</div>
+<div>
+<dt>Slowest</dt>
+<dd>—</dd>
+</div>
+<div>
+<dt>Average</dt>
+<dd>—</dd>
+</div>
+<div>
+<dt>Avg rest</dt>
+<dd>—</dd>
+</div>
+<div>
+<dt>Longest rest</dt>
+<dd>—</dd>
+</div>
+<div>
+<dt>Spread</dt>
+<dd>—</dd>
+</div>
+<div>
+<dt>First yard</dt>
+<dd>—</dd>
+</div>
+<div>
+<dt>Final yard</dt>
+<dd>—</dd>
+</div>
+<div>
+<dt>Time on feet</dt>
+<dd>0.0 h</dd>
+</div>
+<div>
+<dt>Time resting</dt>
+<dd>0.0 h</dd>
+</div>
+<div>
+<dt>Status</dt>
+<dd>DNF</dd>
+</div>
+<div>
+<dt>Off the win</dt>
+<dd>-47 yards</dd>
+</div>
+</dl>
+</details>
+</div>
+<div class="row-km">134.1 km</div>
+</div>
+<div class="row">
+<div class="row-n">
+<span>33</span>18<small>yards</small>
+</div>
+<div>
+<div class="row-name">Mia Walsoe Lehn</div>
+<div class="row-note">Second woman</div>
+<dl class="runner-facts">
+<div>
+<dt>Bib</dt>
+<dd>2</dd>
+</div>
+<div>
+<dt>Nation</dt>
+<dd>DK</dd>
+</div>
+<div>
+<dt>Category</dt>
+<dd>f</dd>
+</div>
+<div>
+<dt>Result</dt>
+<dd>DNF</dd>
+</div>
+</dl>
+<details class="runner-detail">
+<summary>Full runner stats</summary>
+<dl class="runner-stats">
+<div>
+<dt>Fastest</dt>
+<dd>44:55 · L8</dd>
+</div>
+<div>
+<dt>Slowest</dt>
+<dd>1:05:40 · L19</dd>
+</div>
+<div>
+<dt>Average</dt>
+<dd>49:41</dd>
+</div>
+<div>
+<dt>Avg rest</dt>
+<dd>11:12</dd>
+</div>
+<div>
+<dt>Longest rest</dt>
+<dd>15:05 · L8</dd>
+</div>
+<div>
+<dt>Spread</dt>
+<dd>20:45</dd>
+</div>
+<div>
+<dt>First yard</dt>
+<dd>47:02</dd>
+</div>
+<div>
+<dt>Final yard</dt>
+<dd>1:05:40</dd>
+</div>
+<div>
+<dt>Time on feet</dt>
+<dd>15.7 h</dd>
+</div>
+<div>
+<dt>Time resting</dt>
+<dd>3.4 h</dd>
+</div>
+<div>
+<dt>Status</dt>
+<dd>Out after yard 19</dd>
+</div>
+<div>
+<dt>Off the win</dt>
+<dd>-49 yards</dd>
+</div>
+</dl>
+</details>
+</div>
+<div class="row-km">120.7 km</div>
+</div>
+<div class="row">
+<div class="row-n">
+<span>34</span>18<small>yards</small>
+</div>
+<div>
+<div class="row-name">Paulina Zäck</div>
+<div class="row-note">Third woman</div>
+<dl class="runner-facts">
+<div>
+<dt>Bib</dt>
+<dd>66</dd>
+</div>
+<div>
+<dt>Nation</dt>
+<dd>DE</dd>
+</div>
+<div>
+<dt>Category</dt>
+<dd>f</dd>
+</div>
+<div>
+<dt>Result</dt>
+<dd>DNF</dd>
+</div>
+</dl>
+<details class="runner-detail">
+<summary>Full runner stats</summary>
+<dl class="runner-stats">
+<div>
+<dt>Fastest</dt>
+<dd>—</dd>
+</div>
+<div>
+<dt>Slowest</dt>
+<dd>—</dd>
+</div>
+<div>
+<dt>Average</dt>
+<dd>—</dd>
+</div>
+<div>
+<dt>Avg rest</dt>
+<dd>—</dd>
+</div>
+<div>
+<dt>Longest rest</dt>
+<dd>—</dd>
+</div>
+<div>
+<dt>Spread</dt>
+<dd>—</dd>
+</div>
+<div>
+<dt>First yard</dt>
+<dd>—</dd>
+</div>
+<div>
+<dt>Final yard</dt>
+<dd>—</dd>
+</div>
+<div>
+<dt>Time on feet</dt>
+<dd>0.0 h</dd>
+</div>
+<div>
+<dt>Time resting</dt>
+<dd>0.0 h</dd>
+</div>
+<div>
+<dt>Status</dt>
+<dd>DNF</dd>
+</div>
+<div>
+<dt>Off the win</dt>
+<dd>-49 yards</dd>
+</div>
+</dl>
+</details>
+</div>
+<div class="row-km">120.7 km</div>
+</div>
+</div>
+<p class="table-note">Everyone who is not the last soul standing is recorded as a DNF, however far they went. That is <a href="/format">what a backyard ultra asks of a field</a>.</p>
+</div>
+</div>
+</div>
+</section>
+@endsection

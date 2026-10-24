@@ -1,10 +1,9 @@
 {
-  "name": "stacks",
+  "name": "last-soul-ultra",
   "type": "module",
   "version": "0.70.52",
   "private": true,
-  "description": "Your project description",
-  "author": "your-name <your-email>",
+  "description": "Last Soul Ultra World Series and HQ-powered coaching",
   "contributors": [
     "Chris Breuer <chris@stacksjs.org>"
   ],
@@ -19,7 +18,7 @@
     "url": "https://github.com/stacksjs/stacks/issues"
   },
   "scripts": {
-    "build:reset": "rm -rf node_modules pantry.lock && bun install && ./buddy generate:types && ./buddy lint:fix",
+    "build:reset": "rm -rf node_modules && bun install && ./buddy generate:types && ./buddy lint:fix",
     "buddy": "./buddy",
     "stacks": "./buddy",
     "setup": "./bootstrap",
@@ -28,7 +27,7 @@
     "upgrade": "./buddy upgrade",
     "dev": "./buddy dev",
     "development": "./buddy dev",
-    "build": "./buddy build",
+    "build": "bun run build:assets && ./buddy build",
     "prod": "./buddy build",
     "deploy": "./buddy deploy",
     "lint": "./buddy lint",
@@ -60,7 +59,7 @@
     "types:check": "bun x --bun tsc --noEmit -p tsconfig.json --pretty false",
     "types:fix": "./buddy types:fix",
     "bench:routing": "bun bench/routing/run.ts",
-    "test": "./buddy test",
+    "test": "bun test ./tests",
     "test:ui": "./buddy test:ui",
     "test:coverage": "./buddy test:coverage",
     "test:types": "./buddy test:types",
@@ -72,11 +71,13 @@
     "docs:links:check": "./buddy docs:links:check",
     "deps:lockfile:check": "bun .github/scripts/check-lockfile-version.ts",
     "bud": "./buddy",
-    "stx": "./buddy"
+    "stx": "./buddy",
+    "build:assets": "bun scripts/build-site-assets.ts"
   },
   "dependencies": {
-    "pickier": "^0.1.65",
-    "stacks": "^0.75.17"
+    "@ts-maps/stx": "0.5.6",
+    "stacks": "^0.75.281",
+    "ts-maps": "0.5.6"
   },
   "workspaces": [
     "storage/framework",

@@ -30,16 +30,18 @@ describe('seo artefacts', () => {
 
     const expected = views
       // 404 is noindex on purpose, and index is the root path.
-      .filter(name => name !== '404')
+      .filter(name => !['404', 'profile'].includes(name))
       .map(name => (name === 'index' ? '/' : `/${name}`))
 
     for (const path of expected)
       expect(indexablePaths).toContain(path)
   })
 
-  it('lists every legal page the dynamic route can serve', () => {
+  it('lists the canonical legal pages rather than the legacy redirects', () => {
     for (const page of legalPages)
-      expect(indexablePaths).toContain(`/legal/${page.slug}`)
+      expect(indexablePaths).toContain(`/${page.slug}`)
+    for (const page of legalPages)
+      expect(indexablePaths).not.toContain(`/legal/${page.slug}`)
   })
 
   it('publishes absolute https URLs on a single origin', () => {

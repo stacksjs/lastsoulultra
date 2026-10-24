@@ -1,0 +1,57 @@
+{
+  "files": [
+    {
+      "file": "resources/data/events.json",
+      "source": "https://api.lastsoulultra.com/v1/events",
+      "capturedOn": "2026-10-23",
+      "sha256": "e8fb318f949e942b19a99ba7e758cf13888fe4909e74d50176d4f058ddbb3955",
+      "bytes": 10117
+    },
+    {
+      "file": "resources/data/results-2025.json",
+      "source": "https://api.lastsoulultra.com/v1/events/lsu-2025-bornheim/results",
+      "capturedOn": "2026-10-23",
+      "sha256": "637ab4c627766be9c7733f58fc265a5f49c22ada081ac7aa1ebe3526b035f828",
+      "bytes": 62452
+    },
+    {
+      "file": "resources/data/results-2026.json",
+      "source": "https://api.lastsoulultra.com/v1/events/lsu-2026-bornheim/results",
+      "capturedOn": "2026-10-23",
+      "sha256": "057e38f267eb038a35c77461ac6bb0decacc63f25b79d668f4f945c23c9b4e05",
+      "bytes": 189503
+    },
+    {
+      "file": "public/assets/lsu/data/world-landmask.png",
+      "source": "https://www.lastsoulultra.com/assets/world-series-map-reference.png",
+      "capturedOn": "2026-10-23",
+      "sha256": "2d1ead5ab88ffcb636997e84ff123dcd82454fed18056f8fdb2c56cb30adf81d",
+      "bytes": 45589
+    },
+    {
+      "file": "public/assets/lsu/data/world-land-points.geojson",
+      "derivedFrom": "world-landmask.png",
+      "source": "https://www.lastsoulultra.com/assets/world-series-map-reference.png",
+      "capturedOn": "2026-10-23",
+      "sha256": "54096a4b83c12ece531c761920aede6c9c14b27a09f0005f7315560003ffa41c",
+      "bytes": 233328,
+      "method": "Production JS latitude -56..82; latitude spacing 2.1 degrees; longitude spacing adjusted by cosine; production Mercator image mapping; alpha > 8; coordinates longitude,latitude rounded to six decimals."
+    },
+    {
+      "file": "public/assets/lsu/data/world-globe-static.svg",
+      "derivedFrom": "world-landmask.png",
+      "source": "https://www.lastsoulultra.com/assets/world-series-map-reference.png",
+      "capturedOn": "2026-10-23",
+      "sha256": "ebe764728358c78d967a7011d4cce56fc503f8eb020e3c932b5e9a77174df39a",
+      "bytes": 110269,
+      "method": "Static production-style hemisphere at -20 degrees using first-party ts-maps Projection.Globe.toSphere, production .38-radian tilt and dot color/opacity; no event markers or JavaScript."
+    }
+  ],
+  "geography": {
+    "pointCount": 2473,
+    "landmaskWidth": 1339,
+    "landmaskHeight": 749,
+    "coordinateOrder": "longitude, latitude",
+    "limitations": "Sampled production visual land mask; not authoritative boundaries, a routing network or venue coordinates."
+  }
+}

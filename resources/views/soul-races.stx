@@ -1,0 +1,500 @@
+@extends('layouts/LSU')
+@section('content')
+<script server>
+import { productionPages } from '~/resources/data/production-pages'
+const currentPage = productionPages["/soul-races"]
+const canonicalPath = "/soul-races"
+</script>
+<script client>
+import { formValues } from '../functions/race-api'
+const srHostOpen = state(false)
+const srDone = state(false)
+const srBusy = state(false)
+const srError = state('')
+const srEmail = state('')
+const srRaces = state([])
+const srRegion = state('')
+const srStatus = state('')
+const srQual = state('')
+const srQuery = state('')
+const srFiltered = derived(() => srRaces().filter(race => (!srRegion() || (race.region || race.continent) === srRegion()) && (!srStatus() || race.status === srStatus()) && (!srQual() || srQual() === 'all' || Number(race.qualifier_spots) > 0) && (!srQuery().trim() || [race.name, race.city, race.country_code, race.host].join(' ').toLowerCase().includes(srQuery().trim().toLowerCase()))))
+async function srSubmit(event) {
+  if (srBusy()) return
+  srBusy.set(true)
+  srError.set('')
+  try {
+    const form = formValues(event)
+    const parts = String(form.coordinates || '').split(',').map(value => Number(value.trim()))
+    if (parts.length !== 2 || !parts.every(Number.isFinite) || Math.abs(parts[0]) > 90 || Math.abs(parts[1]) > 180) throw new Error('Paste the latitude and longitude, separated by a comma.')
+    const body = { ...form, lat: parts[0], lng: parts[1], capacity: form.capacity ? Number(form.capacity) : null }
+    delete body.coordinates
+    const result = await fetch('https://api.lastsoulultra.com/v1/soul-races/applications', { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(body) })
+    const data = await result.json()
+    if (result.status !== 201) throw new Error(result.status === 429 ? 'Too many attempts. Wait a minute and try again.' : data?.error?.message || data?.message || 'Your application could not be submitted.')
+    srEmail.set(String(form.contact_email))
+    srDone.set(true)
+  }
+  catch (error) { srError.set(error.message || 'Check your connection and try again.') }
+  finally { srBusy.set(false) }
+}
+onMount(async () => {
+  try {
+    const response = await fetch('https://api.lastsoulultra.com/v1/soul-races')
+    if (!response.ok) throw new Error('Could not load Soul Races')
+    srRaces.set(await response.json())
+  }
+  catch (error) { srError.set(error.message) }
+})
+</script>
+
+<section class="lsu-scope-soul-races phero">
+<header class="lsu-scope-soul-races phero-copy sr-head">
+<h1 class="lsu-scope-soul-races">
+<span class="kicker lsu-scope-soul-races">Affiliate backyard races</span>Soul Races<br class="lsu-scope-soul-races">
+<span class="accent lsu-scope-soul-races">around the world</span>
+</h1>
+<p class="lsu-scope-soul-races sr-lead">Independent backyard ultras that run our format and carry our name. Find one near you, check the date, and enter on the organiser’s own site.</p>
+<p class="lsu-scope-soul-races sr-note">Entries, prices and refunds are handled by each race, not by us.</p>
+<dl class="lsu-scope-soul-races sr-counts">
+<div class="lsu-scope-soul-races">
+<dd :text="srRaces.length" data-count-races class="lsu-scope-soul-races">0</dd>
+<dt class="lsu-scope-soul-races">Races listed</dt>
+</div>
+<div class="lsu-scope-soul-races">
+<dd data-count-countries class="lsu-scope-soul-races">0</dd>
+<dt class="lsu-scope-soul-races">Countries</dt>
+</div>
+<div class="lsu-scope-soul-races">
+<dd data-count-open class="lsu-scope-soul-races">0</dd>
+<dt class="lsu-scope-soul-races">Entries open</dt>
+</div>
+<div class="lsu-scope-soul-races">
+<dd data-count-qual class="lsu-scope-soul-races">0</dd>
+<dt class="lsu-scope-soul-races">With qualifier spots</dt>
+</div>
+</dl>
+</header>
+</section>
+<div class="lsu-scope-soul-races sr-body">
+<div class="lsu-scope-soul-races sr-filters" role="search">
+<label class="lsu-scope-soul-races">Region<select x-model="srRegion" data-filter-region class="lsu-scope-soul-races">
+<option value="" class="lsu-scope-soul-races">All regions</option>
+<option class="lsu-scope-soul-races">Europe</option>
+<option class="lsu-scope-soul-races">North America</option>
+<option class="lsu-scope-soul-races">South America</option>
+<option class="lsu-scope-soul-races">Africa</option>
+<option class="lsu-scope-soul-races">Asia</option>
+<option class="lsu-scope-soul-races">Oceania</option>
+</select>
+</label>
+<label class="lsu-scope-soul-races">Status<select x-model="srStatus" data-filter-status class="lsu-scope-soul-races">
+<option value="" class="lsu-scope-soul-races">Any status</option>
+<option value="open" class="lsu-scope-soul-races">Entry open</option>
+<option value="waitlist" class="lsu-scope-soul-races">Waitlist</option>
+<option value="full" class="lsu-scope-soul-races">Sold out</option>
+<option value="announced" class="lsu-scope-soul-races">Announced</option>
+<option value="past" class="lsu-scope-soul-races">Past editions</option>
+</select>
+</label>
+<label class="lsu-scope-soul-races">Qualification<select x-model="srQual" x-model="srQuery" data-filter-qual class="lsu-scope-soul-races">
+<option value="" class="lsu-scope-soul-races">All races</option>
+<option value="only" class="lsu-scope-soul-races">With qualifier spots</option>
+</select>
+</label>
+<label class="lsu-scope-soul-races">Search<input type="search" x-model="srQuery" data-filter-q placeholder="Race, city, country" autocomplete="off" class="lsu-scope-soul-races">
+</label>
+</div>
+<div class="lsu-scope-soul-races sr-stage">
+<section class="lsu-scope-soul-races sr-map" aria-label="Soul Races on the world map" style="aspect-ratio:1.9043">
+<img class="lsu-scope-soul-races sr-land" src="/assets/lsu/data/world-landmask.png" alt="" aria-hidden="true">
+<svg class="lsu-scope-soul-races sr-overlay" viewbox="0 0 1000 525" preserveaspectratio="xMidYMid meet" role="group" aria-label="Soul Races on the world map">
+<g data-markers class="lsu-scope-soul-races">
+</g>
+</svg>
+<div class="lsu-scope-soul-races sr-tip" data-tip hidden>
+</div>
+<p class="lsu-scope-soul-races sr-hint" aria-hidden="true">Select a pin for the race</p>
+</section>
+<div class="lsu-scope-soul-races sr-side">
+<p class="lsu-scope-soul-races sr-result-count" :text="srFiltered.length + ' races'" data-result-count aria-live="polite">0 races</p>
+<div class="lsu-scope-soul-races sr-list" data-list aria-label="Soul Races">
+<p :if="!srFiltered.length" class="sr-empty">No Soul Races match your search.</p>
+<article :for="race in srFiltered" class="sr-card"><h3 :text="race.name"></h3><p :text="race.city + ', ' + race.country_code"></p><p :text="race.summary"></p><a :href="race.registration_url" rel="noopener">View race and entry details</a></article>
+</div>
+</div>
+</div>
+<section class="lsu-scope-soul-races sr-host">
+<div class="lsu-scope-soul-races">
+<h2 class="lsu-scope-soul-races">Want your race to become a Soul Race?</h2>
+<p class="lsu-scope-soul-races">You keep your race, your entries and your money. You run our format, use the Soul Race name and get listed here — and your best runners can earn a place at the Last Soul Ultra.</p>
+<button type="button" class="btn lsu-scope-soul-races" @click="srHostOpen.set(true)" data-host-open>Apply to host</button>
+</div>
+<div class="lsu-scope-soul-races">
+<h2 class="lsu-scope-soul-races">How entries work</h2>
+<p class="lsu-scope-soul-races">Every Soul Race handles its own entries. We list the race, the date and the link; the button takes you straight to the organiser’s registration. Prices, refunds and race rules are theirs.</p>
+</div>
+</section>
+</div>
+<Dialog className="lsu-host-dialog" :open="srHostOpen" @close="srHostOpen.set(false)" title="Apply to host a Soul Race"><DialogBackdrop /><DialogPanel flush="true" className="lsu-scope-soul-races sr-dialog">
+<div class="lsu-scope-soul-races sr-dialog-bar">
+<div class="lsu-scope-soul-races">
+<span class="kicker lsu-scope-soul-races">Apply to host</span>
+<h2 id="host-title" class="lsu-scope-soul-races">Your race</h2>
+</div>
+<button type="button" class="lsu-scope-soul-races sr-close" @click="srHostOpen.set(false)" data-host-close aria-label="Close">×</button>
+</div>
+<form :if="!srDone" @submit.prevent="srSubmit($event)" data-host-form class="lsu-scope-soul-races">
+<p class="lsu-scope-soul-races sr-intro">Tell us about the race and who runs it. We read every application and reply by email.</p>
+<fieldset class="lsu-scope-soul-races">
+<legend class="lsu-scope-soul-races">The race</legend>
+<label class="field lsu-scope-soul-races" data-field="name">Race name *<input name="name" required maxlength="120" autocomplete="off" class="lsu-scope-soul-races">
+<small class="lsu-scope-soul-races">
+</small>
+</label>
+<label class="field lsu-scope-soul-races" data-field="host">Host or club *<input name="host" required maxlength="120" autocomplete="organization" class="lsu-scope-soul-races">
+<small class="lsu-scope-soul-races">
+</small>
+</label>
+<label class="field lsu-scope-soul-races" data-field="country_code">Country *
+<select name="country_code" required class="lsu-scope-soul-races">
+<option value="" class="lsu-scope-soul-races">Choose a country</option>
+<option value="AF" class="lsu-scope-soul-races">🇦🇫 Afghanistan</option>
+<option value="AX" class="lsu-scope-soul-races">🇦🇽 Åland Islands</option>
+<option value="AL" class="lsu-scope-soul-races">🇦🇱 Albania</option>
+<option value="DZ" class="lsu-scope-soul-races">🇩🇿 Algeria</option>
+<option value="AS" class="lsu-scope-soul-races">🇦🇸 American Samoa</option>
+<option value="AD" class="lsu-scope-soul-races">🇦🇩 Andorra</option>
+<option value="AO" class="lsu-scope-soul-races">🇦🇴 Angola</option>
+<option value="AI" class="lsu-scope-soul-races">🇦🇮 Anguilla</option>
+<option value="AQ" class="lsu-scope-soul-races">🇦🇶 Antarctica</option>
+<option value="AG" class="lsu-scope-soul-races">🇦🇬 Antigua &amp; Barbuda</option>
+<option value="AR" class="lsu-scope-soul-races">🇦🇷 Argentina</option>
+<option value="AM" class="lsu-scope-soul-races">🇦🇲 Armenia</option>
+<option value="AW" class="lsu-scope-soul-races">🇦🇼 Aruba</option>
+<option value="AU" class="lsu-scope-soul-races">🇦🇺 Australia</option>
+<option value="AT" class="lsu-scope-soul-races">🇦🇹 Austria</option>
+<option value="AZ" class="lsu-scope-soul-races">🇦🇿 Azerbaijan</option>
+<option value="BS" class="lsu-scope-soul-races">🇧🇸 Bahamas</option>
+<option value="BH" class="lsu-scope-soul-races">🇧🇭 Bahrain</option>
+<option value="BD" class="lsu-scope-soul-races">🇧🇩 Bangladesh</option>
+<option value="BB" class="lsu-scope-soul-races">🇧🇧 Barbados</option>
+<option value="BY" class="lsu-scope-soul-races">🇧🇾 Belarus</option>
+<option value="BE" class="lsu-scope-soul-races">🇧🇪 Belgium</option>
+<option value="BZ" class="lsu-scope-soul-races">🇧🇿 Belize</option>
+<option value="BJ" class="lsu-scope-soul-races">🇧🇯 Benin</option>
+<option value="BM" class="lsu-scope-soul-races">🇧🇲 Bermuda</option>
+<option value="BT" class="lsu-scope-soul-races">🇧🇹 Bhutan</option>
+<option value="BO" class="lsu-scope-soul-races">🇧🇴 Bolivia</option>
+<option value="BA" class="lsu-scope-soul-races">🇧🇦 Bosnia &amp; Herzegovina</option>
+<option value="BW" class="lsu-scope-soul-races">🇧🇼 Botswana</option>
+<option value="BV" class="lsu-scope-soul-races">🇧🇻 Bouvet Island</option>
+<option value="BR" class="lsu-scope-soul-races">🇧🇷 Brazil</option>
+<option value="IO" class="lsu-scope-soul-races">🇮🇴 British Indian Ocean Territory</option>
+<option value="VG" class="lsu-scope-soul-races">🇻🇬 British Virgin Islands</option>
+<option value="BN" class="lsu-scope-soul-races">🇧🇳 Brunei</option>
+<option value="BG" class="lsu-scope-soul-races">🇧🇬 Bulgaria</option>
+<option value="BF" class="lsu-scope-soul-races">🇧🇫 Burkina Faso</option>
+<option value="BI" class="lsu-scope-soul-races">🇧🇮 Burundi</option>
+<option value="KH" class="lsu-scope-soul-races">🇰🇭 Cambodia</option>
+<option value="CM" class="lsu-scope-soul-races">🇨🇲 Cameroon</option>
+<option value="CA" class="lsu-scope-soul-races">🇨🇦 Canada</option>
+<option value="CV" class="lsu-scope-soul-races">🇨🇻 Cape Verde</option>
+<option value="BQ" class="lsu-scope-soul-races">🇧🇶 Caribbean Netherlands</option>
+<option value="KY" class="lsu-scope-soul-races">🇰🇾 Cayman Islands</option>
+<option value="CF" class="lsu-scope-soul-races">🇨🇫 Central African Republic</option>
+<option value="TD" class="lsu-scope-soul-races">🇹🇩 Chad</option>
+<option value="CL" class="lsu-scope-soul-races">🇨🇱 Chile</option>
+<option value="CN" class="lsu-scope-soul-races">🇨🇳 China</option>
+<option value="CX" class="lsu-scope-soul-races">🇨🇽 Christmas Island</option>
+<option value="CC" class="lsu-scope-soul-races">🇨🇨 Cocos (Keeling) Islands</option>
+<option value="CO" class="lsu-scope-soul-races">🇨🇴 Colombia</option>
+<option value="KM" class="lsu-scope-soul-races">🇰🇲 Comoros</option>
+<option value="CG" class="lsu-scope-soul-races">🇨🇬 Congo - Brazzaville</option>
+<option value="CD" class="lsu-scope-soul-races">🇨🇩 Congo - Kinshasa</option>
+<option value="CK" class="lsu-scope-soul-races">🇨🇰 Cook Islands</option>
+<option value="CR" class="lsu-scope-soul-races">🇨🇷 Costa Rica</option>
+<option value="CI" class="lsu-scope-soul-races">🇨🇮 Côte d’Ivoire</option>
+<option value="HR" class="lsu-scope-soul-races">🇭🇷 Croatia</option>
+<option value="CU" class="lsu-scope-soul-races">🇨🇺 Cuba</option>
+<option value="CW" class="lsu-scope-soul-races">🇨🇼 Curaçao</option>
+<option value="CY" class="lsu-scope-soul-races">🇨🇾 Cyprus</option>
+<option value="CZ" class="lsu-scope-soul-races">🇨🇿 Czechia</option>
+<option value="DK" class="lsu-scope-soul-races">🇩🇰 Denmark</option>
+<option value="DJ" class="lsu-scope-soul-races">🇩🇯 Djibouti</option>
+<option value="DM" class="lsu-scope-soul-races">🇩🇲 Dominica</option>
+<option value="DO" class="lsu-scope-soul-races">🇩🇴 Dominican Republic</option>
+<option value="EC" class="lsu-scope-soul-races">🇪🇨 Ecuador</option>
+<option value="EG" class="lsu-scope-soul-races">🇪🇬 Egypt</option>
+<option value="SV" class="lsu-scope-soul-races">🇸🇻 El Salvador</option>
+<option value="GQ" class="lsu-scope-soul-races">🇬🇶 Equatorial Guinea</option>
+<option value="ER" class="lsu-scope-soul-races">🇪🇷 Eritrea</option>
+<option value="EE" class="lsu-scope-soul-races">🇪🇪 Estonia</option>
+<option value="SZ" class="lsu-scope-soul-races">🇸🇿 Eswatini</option>
+<option value="ET" class="lsu-scope-soul-races">🇪🇹 Ethiopia</option>
+<option value="FK" class="lsu-scope-soul-races">🇫🇰 Falkland Islands</option>
+<option value="FO" class="lsu-scope-soul-races">🇫🇴 Faroe Islands</option>
+<option value="FJ" class="lsu-scope-soul-races">🇫🇯 Fiji</option>
+<option value="FI" class="lsu-scope-soul-races">🇫🇮 Finland</option>
+<option value="FR" class="lsu-scope-soul-races">🇫🇷 France</option>
+<option value="GF" class="lsu-scope-soul-races">🇬🇫 French Guiana</option>
+<option value="PF" class="lsu-scope-soul-races">🇵🇫 French Polynesia</option>
+<option value="TF" class="lsu-scope-soul-races">🇹🇫 French Southern Territories</option>
+<option value="GA" class="lsu-scope-soul-races">🇬🇦 Gabon</option>
+<option value="GM" class="lsu-scope-soul-races">🇬🇲 Gambia</option>
+<option value="GE" class="lsu-scope-soul-races">🇬🇪 Georgia</option>
+<option value="DE" class="lsu-scope-soul-races">🇩🇪 Germany</option>
+<option value="GH" class="lsu-scope-soul-races">🇬🇭 Ghana</option>
+<option value="GI" class="lsu-scope-soul-races">🇬🇮 Gibraltar</option>
+<option value="GR" class="lsu-scope-soul-races">🇬🇷 Greece</option>
+<option value="GL" class="lsu-scope-soul-races">🇬🇱 Greenland</option>
+<option value="GD" class="lsu-scope-soul-races">🇬🇩 Grenada</option>
+<option value="GP" class="lsu-scope-soul-races">🇬🇵 Guadeloupe</option>
+<option value="GU" class="lsu-scope-soul-races">🇬🇺 Guam</option>
+<option value="GT" class="lsu-scope-soul-races">🇬🇹 Guatemala</option>
+<option value="GG" class="lsu-scope-soul-races">🇬🇬 Guernsey</option>
+<option value="GN" class="lsu-scope-soul-races">🇬🇳 Guinea</option>
+<option value="GW" class="lsu-scope-soul-races">🇬🇼 Guinea-Bissau</option>
+<option value="GY" class="lsu-scope-soul-races">🇬🇾 Guyana</option>
+<option value="HT" class="lsu-scope-soul-races">🇭🇹 Haiti</option>
+<option value="HM" class="lsu-scope-soul-races">🇭🇲 Heard &amp; McDonald Islands</option>
+<option value="HN" class="lsu-scope-soul-races">🇭🇳 Honduras</option>
+<option value="HK" class="lsu-scope-soul-races">🇭🇰 Hong Kong SAR China</option>
+<option value="HU" class="lsu-scope-soul-races">🇭🇺 Hungary</option>
+<option value="IS" class="lsu-scope-soul-races">🇮🇸 Iceland</option>
+<option value="IN" class="lsu-scope-soul-races">🇮🇳 India</option>
+<option value="ID" class="lsu-scope-soul-races">🇮🇩 Indonesia</option>
+<option value="IR" class="lsu-scope-soul-races">🇮🇷 Iran</option>
+<option value="IQ" class="lsu-scope-soul-races">🇮🇶 Iraq</option>
+<option value="IE" class="lsu-scope-soul-races">🇮🇪 Ireland</option>
+<option value="IM" class="lsu-scope-soul-races">🇮🇲 Isle of Man</option>
+<option value="IL" class="lsu-scope-soul-races">🇮🇱 Israel</option>
+<option value="IT" class="lsu-scope-soul-races">🇮🇹 Italy</option>
+<option value="JM" class="lsu-scope-soul-races">🇯🇲 Jamaica</option>
+<option value="JP" class="lsu-scope-soul-races">🇯🇵 Japan</option>
+<option value="JE" class="lsu-scope-soul-races">🇯🇪 Jersey</option>
+<option value="JO" class="lsu-scope-soul-races">🇯🇴 Jordan</option>
+<option value="KZ" class="lsu-scope-soul-races">🇰🇿 Kazakhstan</option>
+<option value="KE" class="lsu-scope-soul-races">🇰🇪 Kenya</option>
+<option value="KI" class="lsu-scope-soul-races">🇰🇮 Kiribati</option>
+<option value="XK" class="lsu-scope-soul-races">🇽🇰 Kosovo</option>
+<option value="KW" class="lsu-scope-soul-races">🇰🇼 Kuwait</option>
+<option value="KG" class="lsu-scope-soul-races">🇰🇬 Kyrgyzstan</option>
+<option value="LA" class="lsu-scope-soul-races">🇱🇦 Laos</option>
+<option value="LV" class="lsu-scope-soul-races">🇱🇻 Latvia</option>
+<option value="LB" class="lsu-scope-soul-races">🇱🇧 Lebanon</option>
+<option value="LS" class="lsu-scope-soul-races">🇱🇸 Lesotho</option>
+<option value="LR" class="lsu-scope-soul-races">🇱🇷 Liberia</option>
+<option value="LY" class="lsu-scope-soul-races">🇱🇾 Libya</option>
+<option value="LI" class="lsu-scope-soul-races">🇱🇮 Liechtenstein</option>
+<option value="LT" class="lsu-scope-soul-races">🇱🇹 Lithuania</option>
+<option value="LU" class="lsu-scope-soul-races">🇱🇺 Luxembourg</option>
+<option value="MO" class="lsu-scope-soul-races">🇲🇴 Macao SAR China</option>
+<option value="MG" class="lsu-scope-soul-races">🇲🇬 Madagascar</option>
+<option value="MW" class="lsu-scope-soul-races">🇲🇼 Malawi</option>
+<option value="MY" class="lsu-scope-soul-races">🇲🇾 Malaysia</option>
+<option value="MV" class="lsu-scope-soul-races">🇲🇻 Maldives</option>
+<option value="ML" class="lsu-scope-soul-races">🇲🇱 Mali</option>
+<option value="MT" class="lsu-scope-soul-races">🇲🇹 Malta</option>
+<option value="MH" class="lsu-scope-soul-races">🇲🇭 Marshall Islands</option>
+<option value="MQ" class="lsu-scope-soul-races">🇲🇶 Martinique</option>
+<option value="MR" class="lsu-scope-soul-races">🇲🇷 Mauritania</option>
+<option value="MU" class="lsu-scope-soul-races">🇲🇺 Mauritius</option>
+<option value="YT" class="lsu-scope-soul-races">🇾🇹 Mayotte</option>
+<option value="MX" class="lsu-scope-soul-races">🇲🇽 Mexico</option>
+<option value="FM" class="lsu-scope-soul-races">🇫🇲 Micronesia</option>
+<option value="MD" class="lsu-scope-soul-races">🇲🇩 Moldova</option>
+<option value="MC" class="lsu-scope-soul-races">🇲🇨 Monaco</option>
+<option value="MN" class="lsu-scope-soul-races">🇲🇳 Mongolia</option>
+<option value="ME" class="lsu-scope-soul-races">🇲🇪 Montenegro</option>
+<option value="MS" class="lsu-scope-soul-races">🇲🇸 Montserrat</option>
+<option value="MA" class="lsu-scope-soul-races">🇲🇦 Morocco</option>
+<option value="MZ" class="lsu-scope-soul-races">🇲🇿 Mozambique</option>
+<option value="MM" class="lsu-scope-soul-races">🇲🇲 Myanmar (Burma)</option>
+<option value="NA" class="lsu-scope-soul-races">🇳🇦 Namibia</option>
+<option value="NR" class="lsu-scope-soul-races">🇳🇷 Nauru</option>
+<option value="NP" class="lsu-scope-soul-races">🇳🇵 Nepal</option>
+<option value="NL" class="lsu-scope-soul-races">🇳🇱 Netherlands</option>
+<option value="NC" class="lsu-scope-soul-races">🇳🇨 New Caledonia</option>
+<option value="NZ" class="lsu-scope-soul-races">🇳🇿 New Zealand</option>
+<option value="NI" class="lsu-scope-soul-races">🇳🇮 Nicaragua</option>
+<option value="NE" class="lsu-scope-soul-races">🇳🇪 Niger</option>
+<option value="NG" class="lsu-scope-soul-races">🇳🇬 Nigeria</option>
+<option value="NU" class="lsu-scope-soul-races">🇳🇺 Niue</option>
+<option value="NF" class="lsu-scope-soul-races">🇳🇫 Norfolk Island</option>
+<option value="KP" class="lsu-scope-soul-races">🇰🇵 North Korea</option>
+<option value="MK" class="lsu-scope-soul-races">🇲🇰 North Macedonia</option>
+<option value="MP" class="lsu-scope-soul-races">🇲🇵 Northern Mariana Islands</option>
+<option value="NO" class="lsu-scope-soul-races">🇳🇴 Norway</option>
+<option value="OM" class="lsu-scope-soul-races">🇴🇲 Oman</option>
+<option value="PK" class="lsu-scope-soul-races">🇵🇰 Pakistan</option>
+<option value="PW" class="lsu-scope-soul-races">🇵🇼 Palau</option>
+<option value="PS" class="lsu-scope-soul-races">🇵🇸 Palestinian Territories</option>
+<option value="PA" class="lsu-scope-soul-races">🇵🇦 Panama</option>
+<option value="PG" class="lsu-scope-soul-races">🇵🇬 Papua New Guinea</option>
+<option value="PY" class="lsu-scope-soul-races">🇵🇾 Paraguay</option>
+<option value="PE" class="lsu-scope-soul-races">🇵🇪 Peru</option>
+<option value="PH" class="lsu-scope-soul-races">🇵🇭 Philippines</option>
+<option value="PN" class="lsu-scope-soul-races">🇵🇳 Pitcairn Islands</option>
+<option value="PL" class="lsu-scope-soul-races">🇵🇱 Poland</option>
+<option value="PT" class="lsu-scope-soul-races">🇵🇹 Portugal</option>
+<option value="PR" class="lsu-scope-soul-races">🇵🇷 Puerto Rico</option>
+<option value="QA" class="lsu-scope-soul-races">🇶🇦 Qatar</option>
+<option value="RE" class="lsu-scope-soul-races">🇷🇪 Réunion</option>
+<option value="RO" class="lsu-scope-soul-races">🇷🇴 Romania</option>
+<option value="RU" class="lsu-scope-soul-races">🇷🇺 Russia</option>
+<option value="RW" class="lsu-scope-soul-races">🇷🇼 Rwanda</option>
+<option value="WS" class="lsu-scope-soul-races">🇼🇸 Samoa</option>
+<option value="SM" class="lsu-scope-soul-races">🇸🇲 San Marino</option>
+<option value="ST" class="lsu-scope-soul-races">🇸🇹 São Tomé &amp; Príncipe</option>
+<option value="SA" class="lsu-scope-soul-races">🇸🇦 Saudi Arabia</option>
+<option value="SN" class="lsu-scope-soul-races">🇸🇳 Senegal</option>
+<option value="RS" class="lsu-scope-soul-races">🇷🇸 Serbia</option>
+<option value="SC" class="lsu-scope-soul-races">🇸🇨 Seychelles</option>
+<option value="SL" class="lsu-scope-soul-races">🇸🇱 Sierra Leone</option>
+<option value="SG" class="lsu-scope-soul-races">🇸🇬 Singapore</option>
+<option value="SX" class="lsu-scope-soul-races">🇸🇽 Sint Maarten</option>
+<option value="SK" class="lsu-scope-soul-races">🇸🇰 Slovakia</option>
+<option value="SI" class="lsu-scope-soul-races">🇸🇮 Slovenia</option>
+<option value="SB" class="lsu-scope-soul-races">🇸🇧 Solomon Islands</option>
+<option value="SO" class="lsu-scope-soul-races">🇸🇴 Somalia</option>
+<option value="ZA" class="lsu-scope-soul-races">🇿🇦 South Africa</option>
+<option value="GS" class="lsu-scope-soul-races">🇬🇸 South Georgia &amp; South Sandwich Islands</option>
+<option value="KR" class="lsu-scope-soul-races">🇰🇷 South Korea</option>
+<option value="SS" class="lsu-scope-soul-races">🇸🇸 South Sudan</option>
+<option value="ES" class="lsu-scope-soul-races">🇪🇸 Spain</option>
+<option value="LK" class="lsu-scope-soul-races">🇱🇰 Sri Lanka</option>
+<option value="BL" class="lsu-scope-soul-races">🇧🇱 St. Barthélemy</option>
+<option value="SH" class="lsu-scope-soul-races">🇸🇭 St. Helena</option>
+<option value="KN" class="lsu-scope-soul-races">🇰🇳 St. Kitts &amp; Nevis</option>
+<option value="LC" class="lsu-scope-soul-races">🇱🇨 St. Lucia</option>
+<option value="MF" class="lsu-scope-soul-races">🇲🇫 St. Martin</option>
+<option value="PM" class="lsu-scope-soul-races">🇵🇲 St. Pierre &amp; Miquelon</option>
+<option value="VC" class="lsu-scope-soul-races">🇻🇨 St. Vincent &amp; Grenadines</option>
+<option value="SD" class="lsu-scope-soul-races">🇸🇩 Sudan</option>
+<option value="SR" class="lsu-scope-soul-races">🇸🇷 Suriname</option>
+<option value="SJ" class="lsu-scope-soul-races">🇸🇯 Svalbard &amp; Jan Mayen</option>
+<option value="SE" class="lsu-scope-soul-races">🇸🇪 Sweden</option>
+<option value="CH" class="lsu-scope-soul-races">🇨🇭 Switzerland</option>
+<option value="SY" class="lsu-scope-soul-races">🇸🇾 Syria</option>
+<option value="TW" class="lsu-scope-soul-races">🇹🇼 Taiwan</option>
+<option value="TJ" class="lsu-scope-soul-races">🇹🇯 Tajikistan</option>
+<option value="TZ" class="lsu-scope-soul-races">🇹🇿 Tanzania</option>
+<option value="TH" class="lsu-scope-soul-races">🇹🇭 Thailand</option>
+<option value="TL" class="lsu-scope-soul-races">🇹🇱 Timor-Leste</option>
+<option value="TG" class="lsu-scope-soul-races">🇹🇬 Togo</option>
+<option value="TK" class="lsu-scope-soul-races">🇹🇰 Tokelau</option>
+<option value="TO" class="lsu-scope-soul-races">🇹🇴 Tonga</option>
+<option value="TT" class="lsu-scope-soul-races">🇹🇹 Trinidad &amp; Tobago</option>
+<option value="TN" class="lsu-scope-soul-races">🇹🇳 Tunisia</option>
+<option value="TR" class="lsu-scope-soul-races">🇹🇷 Türkiye</option>
+<option value="TM" class="lsu-scope-soul-races">🇹🇲 Turkmenistan</option>
+<option value="TC" class="lsu-scope-soul-races">🇹🇨 Turks &amp; Caicos Islands</option>
+<option value="TV" class="lsu-scope-soul-races">🇹🇻 Tuvalu</option>
+<option value="UM" class="lsu-scope-soul-races">🇺🇲 U.S. Outlying Islands</option>
+<option value="VI" class="lsu-scope-soul-races">🇻🇮 U.S. Virgin Islands</option>
+<option value="UG" class="lsu-scope-soul-races">🇺🇬 Uganda</option>
+<option value="UA" class="lsu-scope-soul-races">🇺🇦 Ukraine</option>
+<option value="AE" class="lsu-scope-soul-races">🇦🇪 United Arab Emirates</option>
+<option value="GB" class="lsu-scope-soul-races">🇬🇧 United Kingdom</option>
+<option value="US" class="lsu-scope-soul-races">🇺🇸 United States</option>
+<option value="UY" class="lsu-scope-soul-races">🇺🇾 Uruguay</option>
+<option value="UZ" class="lsu-scope-soul-races">🇺🇿 Uzbekistan</option>
+<option value="VU" class="lsu-scope-soul-races">🇻🇺 Vanuatu</option>
+<option value="VA" class="lsu-scope-soul-races">🇻🇦 Vatican City</option>
+<option value="VE" class="lsu-scope-soul-races">🇻🇪 Venezuela</option>
+<option value="VN" class="lsu-scope-soul-races">🇻🇳 Vietnam</option>
+<option value="WF" class="lsu-scope-soul-races">🇼🇫 Wallis &amp; Futuna</option>
+<option value="EH" class="lsu-scope-soul-races">🇪🇭 Western Sahara</option>
+<option value="YE" class="lsu-scope-soul-races">🇾🇪 Yemen</option>
+<option value="ZM" class="lsu-scope-soul-races">🇿🇲 Zambia</option>
+<option value="ZW" class="lsu-scope-soul-races">🇿🇼 Zimbabwe</option>
+</select>
+<small class="lsu-scope-soul-races">
+</small>
+</label>
+<label class="field lsu-scope-soul-races" data-field="city">Town or city *<input name="city" required maxlength="120" autocomplete="address-level2" class="lsu-scope-soul-races">
+<small class="lsu-scope-soul-races">
+</small>
+</label>
+<label class="field field-wide lsu-scope-soul-races" data-field="coordinates">Start line coordinates *<input name="coordinates" required inputmode="decimal" placeholder="51.4818, 7.2162" autocomplete="off" class="lsu-scope-soul-races">
+<span class="hint lsu-scope-soul-races">In Google Maps, right-click the start line and click the numbers at the top to copy them, e.g. 51.4818, 7.2162.</span>
+<small class="lsu-scope-soul-races">
+</small>
+</label>
+<label class="field lsu-scope-soul-races" data-field="date">Race date<input type="date" name="date" class="lsu-scope-soul-races">
+<span class="hint lsu-scope-soul-races">Leave empty if it is not set yet.</span>
+<small class="lsu-scope-soul-races">
+</small>
+</label>
+<label class="field lsu-scope-soul-races" data-field="status">Entries<select name="status" class="lsu-scope-soul-races">
+<option value="announced" class="lsu-scope-soul-races">Announced</option>
+<option value="open" class="lsu-scope-soul-races">Entry open</option>
+<option value="waitlist" class="lsu-scope-soul-races">Waitlist</option>
+<option value="full" class="lsu-scope-soul-races">Sold out</option>
+</select>
+<small class="lsu-scope-soul-races">
+</small>
+</label>
+<label class="field lsu-scope-soul-races" data-field="capacity">Runner cap<input type="number" name="capacity" min="1" max="10000" inputmode="numeric" class="lsu-scope-soul-races">
+<small class="lsu-scope-soul-races">
+</small>
+</label>
+<label class="field lsu-scope-soul-races" data-field="price_from">Entry fee from<input name="price_from" maxlength="40" placeholder="e.g. 45 €" class="lsu-scope-soul-races">
+<small class="lsu-scope-soul-races">
+</small>
+</label>
+<label class="field field-wide lsu-scope-soul-races" data-field="registration_url">Registration page<input type="url" name="registration_url" placeholder="https://" class="lsu-scope-soul-races">
+<small class="lsu-scope-soul-races">
+</small>
+</label>
+<label class="field lsu-scope-soul-races" data-field="website_url">Race website<input type="url" name="website_url" placeholder="https://" class="lsu-scope-soul-races">
+<small class="lsu-scope-soul-races">
+</small>
+</label>
+<label class="field lsu-scope-soul-races" data-field="instagram_url">Instagram<input type="url" name="instagram_url" placeholder="https://instagram.com/…" class="lsu-scope-soul-races">
+<small class="lsu-scope-soul-races">
+</small>
+</label>
+<label class="field field-wide lsu-scope-soul-races" data-field="summary">About the race *<textarea name="summary" required maxlength="600" rows="3" class="lsu-scope-soul-races">
+</textarea>
+<span class="hint lsu-scope-soul-races">One or two sentences for the listing: the loop, the terrain, what makes it yours.</span>
+<small class="lsu-scope-soul-races">
+</small>
+</label>
+</fieldset>
+<fieldset class="lsu-scope-soul-races">
+<legend class="lsu-scope-soul-races">You</legend>
+<label class="field lsu-scope-soul-races" data-field="contact_name">Your name *<input name="contact_name" required maxlength="120" autocomplete="name" class="lsu-scope-soul-races">
+<small class="lsu-scope-soul-races">
+</small>
+</label>
+<label class="field lsu-scope-soul-races" data-field="contact_email">Email *<input type="email" name="contact_email" required autocomplete="email" class="lsu-scope-soul-races">
+<small class="lsu-scope-soul-races">
+</small>
+</label>
+<label class="field lsu-scope-soul-races" data-field="contact_phone">Phone<input type="tel" name="contact_phone" maxlength="40" autocomplete="tel" class="lsu-scope-soul-races">
+<small class="lsu-scope-soul-races">
+</small>
+</label>
+<label class="field field-wide lsu-scope-soul-races" data-field="notes">Anything else we should know<textarea name="notes" maxlength="4000" rows="4" class="lsu-scope-soul-races">
+</textarea>
+<span class="hint lsu-scope-soul-races">Your backyard experience, past editions, questions. Not published.</span>
+<small class="lsu-scope-soul-races">
+</small>
+</label>
+</fieldset>
+<label class="lsu-scope-soul-races sr-trap" aria-hidden="true">Fax<input name="fax" tabindex="-1" autocomplete="off" class="lsu-scope-soul-races">
+</label>
+<p class="lsu-scope-soul-races sr-privacy">We use these details only to review your application and to write to you about it. See our <a href="/privacy">privacy policy</a>.</p>
+<p class="lsu-scope-soul-races sr-form-status" :text="srError" data-form-status role="alert">
+</p>
+<button type="submit" :disabled="srBusy" class="btn lsu-scope-soul-races">Send application</button>
+</form>
+<div class="lsu-scope-soul-races sr-done" :if="srDone" data-host-done>
+<h3 class="lsu-scope-soul-races">Application received</h3>
+<p class="lsu-scope-soul-races">Thank you. We will review your race and reply to <strong :text="srEmail" data-done-email class="lsu-scope-soul-races">
+</strong>.</p>
+<button type="button" class="btn lsu-scope-soul-races" @click="srHostOpen.set(false)" data-host-close>Close</button>
+</div>
+</DialogPanel></Dialog>
+@endsection

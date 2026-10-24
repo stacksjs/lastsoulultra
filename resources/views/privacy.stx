@@ -1,0 +1,40 @@
+@extends('layouts/LSU')
+@section('content')
+<script server>
+import { productionPages } from '~/resources/data/production-pages'
+const currentPage = productionPages["/privacy"]
+const canonicalPath = "/privacy"
+</script>
+<section class="phero">
+<div class="phero-copy">
+<div class="kicker">Legal</div>
+<h1>Privacy</h1>
+<p>Information under Articles 13 and 14 of the General Data Protection Regulation. The short version: this site runs Google Analytics and keeps server logs. It loads no third-party fonts, embeds nothing, and carries no advertising.</p>
+</div>
+</section>
+<section class="legal">
+<div class="legal-shell">
+<h2 class="legal-h2">Who is responsible</h2>
+<p>Last Soul IP GmbH, represented by Kim Gottwald and Alexander Krenzek, is the controller and owns and operates this site. Contact details are on the <a href="/imprint">imprint</a>. Write to <a href="mailto:mail@lastsoulultra.com">mail@lastsoulultra.com</a> with any question about your data.</p>
+<h2 class="legal-h2">Analytics, and what this site still does not do</h2>
+<p>This site uses Google Analytics 4 to count visits and see which pages are read. It does not run until you accept it in the banner shown on your first visit: decline, and nothing is loaded from Google and nothing is sent. If you accept, the tag is loaded with IP anonymisation and Google Consent Mode grants analytics storage only, and your IP address is disclosed to Google LLC, which may process it outside the EU under the EU-US Data Privacy Framework. Your answer is stored in this browser, not in a cookie; clearing site data asks you again. Nothing else is loaded from anyone else: fonts, images and video all come from this domain rather than a content delivery network, there is no tag manager beyond the analytics tag, and there is no advertising pixel.</p>
+<h2 class="legal-h2">Server logs</h2>
+<p>The hosting provider (DigitalOcean, server in London, United Kingdom) records standard access logs: IP address, timestamp, requested URL, referrer and user agent. This is necessary to operate and secure the site, and the legal basis is our legitimate interest under Art. 6(1)(f) GDPR. Logs are retained for To be supplied and are not combined with any other data or used to profile visitors.</p>
+<h2 class="legal-h2">Athlete invitations</h2>
+<p>If we invite you to race by private link, we record when that page is opened and for how long, so we know whether our invitation reached you. We store no IP address or device details with it, and delete it after the 2027 season. The legal basis is our legitimate interest under Art. 6(1)(f) GDPR in following up the invitations we send.</p>
+<h2 class="legal-h2">Your account and your entry request</h2>
+<p>The website and the Last Soul Ultra app share one account. To create it we store your email address and a password, which is kept only as a secure hash, or your Apple ID if you sign in with Apple. Your profile holds the details you give us: name, date of birth, country of residence, nationality, town, and optionally your Instagram and Strava handles.</p>
+<p>When you request a race entry through the <a href="/lottery">entry page</a> or the app, we store your request: your best backyard result with its event, date and a link to proof, the social links you add, your answers and the time you applied. Our team uses it to select the field, partly by hand and partly by random draw, and we email you the result.</p>
+<p>If you are selected, we also store what the race needs from you: your postal address and phone number, clothing sizes, an emergency contact, your signed waiver, and whether your entry fee has been paid. Payment is handled by the payment provider (TK — to be supplied); we never see or store your card details. If you use the app, we store a device token so we can send you notifications you have switched on.</p>
+<p>The legal basis is Art. 6(1)(b) GDPR: we need this data to run your account, your application and your entry. Security logging and fraud prevention rely on our legitimate interest under Art. 6(1)(f).</p>
+<p>The data is stored on our server at DigitalOcean, in London, United Kingdom. The EU recognises the UK as providing adequate data protection. Emails about your account and your entry are sent through our email provider (TK — to be supplied).</p>
+<p>You can delete your account at any time in the app, or by writing to <a href="mailto:mail@lastsoulultra.com">mail@lastsoulultra.com</a>. Your personal data is then erased; what remains of an application is kept without your name, so the draw stays verifiable. Otherwise we keep your data for TK — to be supplied, and records we are legally required to keep, such as payment records, for as long as the law requires.</p>
+<h2 class="legal-h2">Email</h2>
+<p>If you write to us, your message and address are stored so we can reply and, where a business relationship follows, for as long as commercial and tax retention rules require. The legal basis is Art. 6(1)(b) GDPR for entry-related correspondence and Art. 6(1)(f) for everything else.</p>
+<h2 class="legal-h2">Links to other platforms</h2>
+<p>The footer links to Instagram, YouTube, Twitch and Linktree. These are ordinary links, not embeds — nothing loads from those services until you click through, at which point that platform's own privacy policy applies.</p>
+<h2 class="legal-h2">Your rights</h2>
+<p>You may request access to your data, correction, erasure, restriction of processing, and portability, and you may object to processing based on legitimate interest. You also have the right to complain to a supervisory authority — in Germany, the data protection authority of the state in which the company is established.</p>
+</div>
+</section>
+@endsection

@@ -1,33 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://lastsoulultra.hq.training/</loc>
+    <loc>https://www.lastsoulultra.com/</loc>
   </url>
   <url>
-    <loc>https://lastsoulultra.hq.training/format</loc>
+    <loc>https://www.lastsoulultra.com/format</loc>
   </url>
   <url>
-    <loc>https://lastsoulultra.hq.training/lottery</loc>
+    <loc>https://www.lastsoulultra.com/world-series</loc>
   </url>
   <url>
-    <loc>https://lastsoulultra.hq.training/results</loc>
+    <loc>https://www.lastsoulultra.com/soul-races</loc>
   </url>
   <url>
-    <loc>https://lastsoulultra.hq.training/faq</loc>
+    <loc>https://www.lastsoulultra.com/sponsorship</loc>
   </url>
   <url>
-    <loc>https://lastsoulultra.hq.training/sponsorship</loc>
+    <loc>https://www.lastsoulultra.com/contact</loc>
   </url>
   <url>
-    <loc>https://lastsoulultra.hq.training/contact</loc>
+    <loc>https://www.lastsoulultra.com/lottery</loc>
   </url>
   <url>
-    <loc>https://lastsoulultra.hq.training/legal/imprint</loc>
+    <loc>https://www.lastsoulultra.com/results</loc>
   </url>
   <url>
-    <loc>https://lastsoulultra.hq.training/legal/privacy</loc>
+    <loc>https://www.lastsoulultra.com/results/last-soul-ultra-2026</loc>
   </url>
   <url>
-    <loc>https://lastsoulultra.hq.training/legal/terms</loc>
+    <loc>https://www.lastsoulultra.com/results/last-soul-ultra-2025</loc>
+  </url>
+  <url>
+    <loc>https://www.lastsoulultra.com/imprint</loc>
+  </url>
+  <url>
+    <loc>https://www.lastsoulultra.com/privacy</loc>
+  </url>
+  <url>
+    <loc>https://www.lastsoulultra.com/terms</loc>
+  </url>
+  <url>
+    <loc>https://www.lastsoulultra.com/coaching</loc>
+  </url>
+  <url>
+    <loc>https://www.lastsoulultra.com/faq</loc>
   </url>
 </urlset>

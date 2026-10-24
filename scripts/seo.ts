@@ -13,7 +13,7 @@
  *   bun run scripts/seo.ts        # writes the files
  */
 
-import { indexablePaths, siteOrigin } from '../resources/data/site'
+import { indexablePaths } from '../resources/data/site'
 
 /**
  * The origin the published files must name. `siteOrigin` follows APP_URL,
@@ -23,7 +23,7 @@ import { indexablePaths, siteOrigin } from '../resources/data/site'
  * domain move fails the test rather than shipping a stale sitemap.
  */
 export const publishedOrigin: string = process.env.SITE_ORIGIN
-  || (siteOrigin.includes('.localhost') ? 'https://lastsoulultra.hq.training' : siteOrigin)
+  || 'https://www.lastsoulultra.com'
 
 export function robotsTxt(origin: string): string {
   return [
