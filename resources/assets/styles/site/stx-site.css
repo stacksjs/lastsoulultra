@@ -9,3 +9,10 @@
 @media(prefers-reduced-motion:reduce){.duel-fill{animation:none}}
 
 .lsu-host-dialog[data-stx-dialog]{z-index:200}.lsu-host-dialog .sr-dialog{color:var(--lsu-white,#fff);background:#080808;padding:0;border:1px solid #333;border-radius:0}
+
+/* Let the browser defer distant story panels and their background photos.
+   Explicitly sized bands keep their authored height. Story panels remember
+   their measured height after their first visit; one viewport reserves space
+   before they approach the viewport. Unsupported browsers render normally. */
+.lapscroll.lsu-scope-home,.duelscroll.lsu-scope-home{content-visibility:auto;contain-intrinsic-block-size:auto 100svh}
+.attr-band.lsu-scope-home,.enter.lsu-scope-next-loop{content-visibility:auto}

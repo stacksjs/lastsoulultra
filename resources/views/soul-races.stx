@@ -96,7 +96,7 @@ onMount(async () => {
 <option value="past" class="lsu-scope-soul-races">Past editions</option>
 </select>
 </label>
-<label class="lsu-scope-soul-races">Qualification<select x-model="srQual" x-model="srQuery" data-filter-qual class="lsu-scope-soul-races">
+<label class="lsu-scope-soul-races">Qualification<select x-model="srQual" data-filter-qual class="lsu-scope-soul-races">
 <option value="" class="lsu-scope-soul-races">All races</option>
 <option value="only" class="lsu-scope-soul-races">With qualifier spots</option>
 </select>
@@ -118,8 +118,9 @@ onMount(async () => {
 <div class="lsu-scope-soul-races sr-side">
 <p class="lsu-scope-soul-races sr-result-count" :text="srFiltered.length + ' races'" data-result-count aria-live="polite">0 races</p>
 <div class="lsu-scope-soul-races sr-list" data-list aria-label="Soul Races">
-<p :if="!srFiltered.length" class="sr-empty">No Soul Races match your search.</p>
-<article :for="race in srFiltered" class="sr-card"><h3 :text="race.name"></h3><p :text="race.city + ', ' + race.country_code"></p><p :text="race.summary"></p><a :href="race.registration_url" rel="noopener">View race and entry details</a></article>
+<p :if="!srRaces.length" class="lsu-scope-soul-races sr-empty">No Soul Races are listed yet. Be the first.</p>
+<p :if="srRaces.length && !srFiltered.length" class="lsu-scope-soul-races sr-empty">No Soul Races match your search.</p>
+<article :for="race in srFiltered" class="lsu-scope-soul-races sr-card"><h3 :text="race.name" class="lsu-scope-soul-races"></h3><p :text="race.city + ', ' + race.country_code" class="lsu-scope-soul-races"></p><p :text="race.summary" class="lsu-scope-soul-races"></p><a :href="race.registration_url" rel="noopener" class="lsu-scope-soul-races">View race and entry details</a></article>
 </div>
 </div>
 </div>

@@ -174,3 +174,6 @@ storage/framework/core/defaults/*
 
 # Disposable diagnostics and generated image variants.
 /storage/runtime/
+# Generated comparison receipts.
+/storage/production-parity.json
+/storage/browser-parity.json

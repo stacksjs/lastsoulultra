@@ -8,7 +8,8 @@ const canonicalPath = "/"
 <script client>
 import { moveGallery, galleryPosition, seekRaceVideo, storyProgress } from '../functions/site-interactions'
 import raceStory from '../data/race-story.json'
-import { useScroll, useMediaQuery } from '@stacksjs/composables'
+import { useScroll } from '@stacksjs/composables/useScroll'
+import { useMediaQuery } from '@stacksjs/composables/useMediaQuery'
 const lsuYardVideo = useRef('lsuYardVideo')
 const lsuScroll = useScroll(undefined, { throttle: 32 })
 const lsuReducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)')
