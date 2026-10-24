@@ -55,6 +55,18 @@ try {
     assert.ok(!frame.src.includes('private') && !frame.src.includes('token'))
     assert.ok(frame.allow.includes('microphone'))
   }
+  // A hash-only navigation must keep the embedded session and unsent feedback alive.
+  await browser.cdp.send('Page.navigate', { url: 'http://localhost:3942/coaching' })
+  await waitFor(() => browser.cdp.evaluate('Boolean(document.querySelector("hq-coaching")?.shadowRoot?.querySelector("iframe"))'), 20_000)
+  await browser.cdp.evaluate(`globalThis.__coachingAnchorAudit = { host: document.querySelector('hq-coaching'), frame: document.querySelector('hq-coaching').shadowRoot.querySelector('iframe') }; scrollTo(0, 0)`)
+  const target = await browser.cdp.evaluate(`(() => { const rect = document.querySelector('a[href="#training"]').getBoundingClientRect(); return { x: rect.x + rect.width / 2, y: rect.y + rect.height / 2 } })()`)
+  await browser.cdp.send('Input.dispatchMouseEvent', { type: 'mousePressed', ...target, button: 'left', clickCount: 1 })
+  await browser.cdp.send('Input.dispatchMouseEvent', { type: 'mouseReleased', ...target, button: 'left', clickCount: 1 })
+  await waitFor(() => browser.cdp.evaluate('location.hash === "#training"'), 10_000)
+  // Wait through deferred reactive updates, which previously recreated the host.
+  await browser.cdp.evaluate('new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))')
+  const retained = await browser.cdp.evaluate(`(() => { const before = globalThis.__coachingAnchorAudit; return { host: before.host === document.querySelector('hq-coaching'), frame: before.frame === document.querySelector('hq-coaching')?.shadowRoot?.querySelector('iframe') } })()`)
+  assert.deepEqual(retained, { host: true, frame: true }, 'Same-page links must preserve the coaching iframe')
   assert.deepEqual(browser.cdp.errors, [])
   await Bun.write('storage/browser-parity.json', `${JSON.stringify({ checked_at: new Date().toISOString(), results, console_errors: browser.cdp.errors }, null, 2)}\n`)
   console.log(JSON.stringify(results, null, 2))

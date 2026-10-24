@@ -14,7 +14,7 @@ const elementUrl = `${coachingOrigin}/assets/elements/hq-coaching.js`
 <script client>
 import { publicSubscriptionReceipt } from '../functions/coaching-return'
 const coachingSearch = useSearchParams()
-const coachingSubscription = derived(() => publicSubscriptionReceipt(coachingSearch.get('hq_subscription')))
+const coachingSubscription = memo(() => publicSubscriptionReceipt(coachingSearch.get('hq_subscription')))
 </script>
 <script type="module" src="{{ elementUrl }}"></script>
 <hq-coaching brand="{{ coaching.brand }}" api="{{ coachingOrigin }}" label="Last Soul Ultra coaching" section="{{ coachingSection }}" :subscription="coachingSubscription">
