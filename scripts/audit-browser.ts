@@ -45,6 +45,17 @@ try {
     assert.equal(preview.font_size, production.font_size)
     assert.ok(preview.document_bytes + preview.resource_bytes < production.document_bytes + production.resource_bytes, `Preview initial page bytes exceed production at ${width}px`)
   }
+  for (const [receipt, expected] of [['1', '1'], ['12&token=private', '']]) {
+    await browser.cdp.send('Page.navigate', { url: `http://localhost:3942/coaching?hq_subscription=${encodeURIComponent(receipt)}` })
+    await waitFor(() => browser.cdp.evaluate(`Boolean(customElements.get('hq-coaching')) && document.querySelector('hq-coaching')?.getAttribute('subscription') === ${JSON.stringify(expected)}`), 20_000)
+    await waitFor(() => browser.cdp.evaluate(`Boolean(document.querySelector('hq-coaching')?.shadowRoot?.querySelector('iframe')?.src)`), 10_000)
+    const frame = await browser.cdp.evaluate(`(() => { const frame = document.querySelector('hq-coaching').shadowRoot.querySelector('iframe'); return { src: frame.src, allow: frame.allow } })()`)
+    assert.equal(new URL(frame.src).origin, 'http://localhost:3940')
+    assert.equal(new URL(frame.src).searchParams.get('subscription') || '', expected)
+    assert.ok(!frame.src.includes('private') && !frame.src.includes('token'))
+    assert.ok(frame.allow.includes('microphone'))
+  }
+  assert.deepEqual(browser.cdp.errors, [])
   await Bun.write('storage/browser-parity.json', `${JSON.stringify({ checked_at: new Date().toISOString(), results, console_errors: browser.cdp.errors }, null, 2)}\n`)
   console.log(JSON.stringify(results, null, 2))
 }
