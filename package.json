@@ -77,6 +77,7 @@
   "dependencies": {
     "@ts-maps/stx": "0.5.6",
     "stacks": "^0.75.281",
+    "ts-images": "0.2.32",
     "ts-maps": "0.5.6"
   },
   "workspaces": [

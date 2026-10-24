@@ -1,4 +1,4 @@
-import { state } from '@stacksjs/stx'
+import { sharedRequest, state } from '@stacksjs/stx'
 import { useSessionStorage } from '@stacksjs/composables'
 
 /** The established LSU race identity. It is separate from the HQ coaching session. */
@@ -12,16 +12,25 @@ export function raceAccount() {
   const message = state('')
   const mode = state('login')
   const signedIn = state(Boolean(stored.value))
+  const owners = sharedRequest()
+  let currentOwner = owners.latest()
 
   async function request(path: string, method = 'GET', body?: unknown) {
+    const token = stored.value
     const response = await fetch(`https://api.lastsoulultra.com/v1${path}`, {
       method,
-      headers: { Accept: 'application/json', ...(body === undefined ? {} : { 'Content-Type': 'application/json' }), ...(stored.value ? { Authorization: `Bearer ${stored.value}` } : {}) },
+      headers: { Accept: 'application/json', ...(body === undefined ? {} : { 'Content-Type': 'application/json' }), ...(token ? { Authorization: `Bearer ${token}` } : {}) },
       ...(body === undefined ? {} : { body: JSON.stringify(body) }),
     })
     const result = response.status === 204 ? null : await response.json()
     if (!response.ok) {
-      if (response.status === 401) { stored.value = ''; signedIn.set(false); user.set(null) }
+      if (response.status === 401 && stored.value === token) {
+        currentOwner = owners.latest()
+        stored.value = ''
+        signedIn.set(false)
+        user.set(null)
+        applications.set([])
+      }
       const detail = result?.error || result
       throw new Error(detail?.message || `The request could not be completed (${response.status})`)
     }
@@ -29,18 +38,21 @@ export function raceAccount() {
   }
 
   async function load() {
+    const valid = currentOwner
     error.set('')
     try {
       const catalog = await request('/events')
+      if (!valid()) return
       events.set(catalog.upcoming || [])
       if (stored.value) {
         const [profile, entries] = await Promise.all([request('/me'), request('/me/applications')])
+        if (!valid()) return
         user.set(profile)
         applications.set(entries)
         signedIn.set(true)
       }
     }
-    catch (cause) { error.set(cause instanceof Error ? cause.message : 'Please try again') }
+    catch (cause) { if (valid()) error.set(cause instanceof Error ? cause.message : 'Please try again') }
   }
 
   async function authenticate(input: { first_name: string, last_name: string, email: string, password: string, code: string }) {
@@ -54,14 +66,20 @@ export function raceAccount() {
           : mode() === 'forgot' ? { email: input.email }
             : mode() === 'reset' ? { email: input.email, code: input.code, password: input.password }
               : { email: input.email, password: input.password }
-      const result = await request(`/auth/${mode()}`, 'POST', body)
+      const action = mode()
+      const result = await request(`/auth/${action}`, 'POST', body)
       if (result?.token) {
+        currentOwner = owners.latest()
         stored.value = result.token
         signedIn.set(true)
         await load()
       }
+      else if (action === 'reset') {
+        mode.set('login')
+        message.set('Your password has been updated. Sign in to continue.')
+      }
       else {
-        mode.set(mode() === 'forgot' ? 'reset' : 'verify')
+        mode.set(action === 'forgot' ? 'reset' : 'verify')
         message.set('Check your email for the verification code.')
       }
     }
@@ -70,13 +88,14 @@ export function raceAccount() {
   }
 
   async function logout() {
-    try { await request('/auth/logout', 'POST') }
-    finally {
-      stored.value = ''
-      signedIn.set(false)
-      user.set(null)
-      applications.set([])
-    }
+    const pending = request('/auth/logout', 'POST')
+    currentOwner = owners.latest()
+    stored.value = ''
+    signedIn.set(false)
+    user.set(null)
+    applications.set([])
+    try { await pending }
+    catch (cause) { error.set(cause instanceof Error ? cause.message : 'You are signed out on this device.') }
   }
   return { user, applications, events, busy, error, message, mode, signedIn, load, authenticate, logout, request }
 }
