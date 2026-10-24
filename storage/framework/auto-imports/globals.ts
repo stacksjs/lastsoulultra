@@ -10,6 +10,7 @@ Object.assign(globalThis, autoImports)
 
 // TypeScript declarations
 declare global {
+  const publicSubscriptionReceipt: typeof autoImports.publicSubscriptionReceipt
   const increment: typeof autoImports.increment
   const decrement: typeof autoImports.decrement
   const reset: typeof autoImports.reset
