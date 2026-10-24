@@ -17,6 +17,13 @@ declare global {
   const toggleDark: typeof autoImports.toggleDark
   const isDark: typeof autoImports.isDark
   const preferredDark: typeof autoImports.preferredDark
+  const raceAccount: typeof autoImports.raceAccount
+  const formValues: typeof autoImports.formValues
+  const moveGallery: typeof autoImports.moveGallery
+  const galleryPosition: typeof autoImports.galleryPosition
+  const nextLoop: typeof autoImports.nextLoop
+  const seekRaceVideo: typeof autoImports.seekRaceVideo
+  const storyProgress: typeof autoImports.storyProgress
 }
 
 export {}

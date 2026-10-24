@@ -15,7 +15,7 @@ const canonicalPath = '/coaching'
   <div class="coaching-steps">
     <article><span class="kicker">01 / Choose</span><h2>Find your method.</h2><p>Subscribe monthly to a named training method. Your coach provides the knowledge and the plan. You choose the work that fits your goal.</p></article>
     <article><span class="kicker">02 / Train</span><h2>Make it your week.</h2><p>Follow your sessions, keep track of what you complete and build your training around the time you actually have.</p></article>
-    <article><span class="kicker">03 / Reflect</span><h2>Say how it felt.</h2><p>Send your feedback or dictate it. Review what you said, then let your method help adapt the next sessions to your effort and recovery.</p></article>
+    <article><span class="kicker">03 / Reflect</span><h2>Say how it felt.</h2><p>Record, upload or dictate your feedback. Review what you said, then let your method help adapt the next sessions to your effort and recovery.</p></article>
   </div>
   <section id="training" aria-label="Coaching subscriptions"><CoachingPortal /></section>
   <aside class="coaching-note"><h2>Self-coaching. With a method.</h2><p>This is a training subscription, not personal one-to-one coaching. If you want individual coaching, talk to the coach directly. The available methods, plans and monthly prices are shown in the training portal when they are ready.</p></aside>

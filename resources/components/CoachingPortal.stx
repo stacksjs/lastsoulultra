@@ -1,13 +1,19 @@
+<script>
+interface Props { section?: string }
+const { section = '' } = defineProps<Props>()
+</script>
 <script server>
 import coaching from '../../config/coaching'
 const coachingOrigin = new URL(coaching.origin).origin
 if (new URL(coachingOrigin).protocol !== 'https:' && !['localhost', '127.0.0.1'].includes(new URL(coachingOrigin).hostname)) throw new Error('HQ_ORIGIN must use HTTPS')
 if (!/^[a-z0-9][a-z0-9-]{0,139}$/.test(coaching.brand)) throw new Error('HQ_BRAND_SLUG must be an organization slug')
+const coachingSection = ['plans', 'calendar', 'feedback', 'progress', 'library', 'account'].includes(section) ? section : ''
 const portalUrl = `${coachingOrigin}/brands/${coaching.brand}`
+const coachingSubscription = /^\d{1,16}$/.test(String(useRoute().query?.hq_subscription || '')) ? String(useRoute().query.hq_subscription) : ''
 const elementUrl = `${coachingOrigin}/assets/elements/hq-coaching.js`
 </script>
 <script type="module" src="{{ elementUrl }}"></script>
-<hq-coaching brand="{{ coaching.brand }}" api="{{ coachingOrigin }}" label="Last Soul Ultra coaching">
+<hq-coaching brand="{{ coaching.brand }}" api="{{ coachingOrigin }}" label="Last Soul Ultra coaching" section="{{ coachingSection }}" subscription="{{ coachingSubscription }}">
   <p>Training plans, monthly subscriptions and feedback, powered by HQ.</p>
   <a class="btn" href="{{ portalUrl }}">Open your training</a>
 </hq-coaching>
