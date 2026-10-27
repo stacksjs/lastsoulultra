@@ -1,8 +1,11 @@
 @extends('layouts/LSU')
 @section('content')
 <script server>
-import { productionPages } from '../data/production-pages'
-const currentPage = { title: 'Coaching - Last Soul Ultra', description: 'Train for your next start. Coach-authored methods, monthly training plans and feedback, powered by HQ.', styles: productionPages['/'].styles }
+// Every rule in the home, race-entry and next-loop sheets is suffixed with its
+// own page scope, so none of them applied here and the page carried them for
+// nothing. The coaching styles live in the site-wide stx-site.css that the head
+// always loads.
+const currentPage = { title: 'Coaching - Last Soul Ultra', description: 'Train for your next start. Coach-authored methods, monthly training plans and feedback, powered by HQ.', styles: ['/assets/styles/production/base.css'] }
 const canonicalPath = '/coaching'
 </script>
 <section class="coaching-hero">
