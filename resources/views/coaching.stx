@@ -1,26 +1,108 @@
 @extends('layouts/LSU')
 @section('content')
 <script server>
-// Every rule in the home, race-entry and next-loop sheets is suffixed with its
-// own page scope, so none of them applied here and the page carried them for
-// nothing. The coaching styles live in the site-wide stx-site.css that the head
-// always loads.
-const currentPage = { title: 'Coaching - Last Soul Ultra', description: 'Train for your next start. Coach-authored methods, monthly training plans and feedback, powered by HQ.', styles: ['/assets/styles/production/base.css'] }
+// The home, race-entry and next-loop sheets are each suffixed with their own
+// page scope, so none of their rules could ever match here. The coaching styles
+// live in the site-wide stx-site.css that the head always loads.
+const currentPage = { title: 'Coaching - Last Soul Ultra', description: 'Send a voice message after your run and an AI rebuilds next week around what you said, inside a coach\'s method.', styles: ['/assets/styles/production/base.css'] }
 const canonicalPath = '/coaching'
 </script>
+<div class="coaching-page">
+
 <section class="coaching-hero">
-  <span class="kicker">Last Soul Ultra / Coaching</span>
-  <h1>Train for the<br><span class="accent">next start.</span></h1>
-  <p>A method from a coach. A plan that fits your life. Feedback that helps you keep going, one session at a time.</p>
-  <a class="btn" href="#training">Find your method</a>
-</section>
-<div class="coaching-body">
-  <div class="coaching-steps">
-    <article><span class="kicker">01 / Choose</span><h2>Find your method.</h2><p>Subscribe monthly to a named training method. Your coach provides the knowledge and the plan. You choose the work that fits your goal.</p></article>
-    <article><span class="kicker">02 / Train</span><h2>Make it your week.</h2><p>Follow your sessions, keep track of what you complete and build your training around the time you actually have.</p></article>
-    <article><span class="kicker">03 / Reflect</span><h2>Say how it felt.</h2><p>Record, upload or dictate your feedback. Review what you said, then let your method help adapt the next sessions to your effort and recovery.</p></article>
+  <div class="coaching-hero-copy">
+    <span class="kicker">Last Soul Ultra / Coaching</span>
+    <h1>Say how it felt.<br><span class="accent">The plan changes.</span></h1>
+    <p>Send a voice message after your run. An AI rebuilds next week around what you said, inside a coach's method.</p>
+    <a class="btn btn-lg" href="#training">Open the portal</a>
   </div>
-  <section id="training" aria-label="Coaching subscriptions"><CoachingPortal /></section>
-  <aside class="coaching-note"><h2>Self-coaching. With a method.</h2><p>This is a training subscription, not personal one-to-one coaching. If you want individual coaching, talk to the coach directly. The available methods, plans and monthly prices are shown in the training portal when they are ready.</p></aside>
+  <div class="coaching-hero-shot">
+    <img src="/assets/lsu/images/recap-06-810.webp" srcset="/assets/lsu/images/recap-06-540.webp 540w, /assets/lsu/images/recap-06-810.webp 810w, /assets/lsu/images/recap-06-1080.webp 1080w" sizes="(min-width: 900px) 42vw, 100vw" alt="A runner in a white sun hat and neck cover looks down at his watch." width="1080" height="1440" loading="eager" fetchpriority="high" decoding="async">
+  </div>
+</section>
+
+<div class="coaching-body">
+  <section id="how">
+    <div class="coaching-head">
+      <h2 class="h2-sm">A plan you talk to.<br><span class="accent">Not one you print.</span></h2>
+      <p>A finished twelve-week plan is done the day you buy it. This one gets rewritten every week by what you tell it.</p>
+    </div>
+    <div class="coaching-loop">
+      <article>
+        <h3>Train</h3>
+        <p>You get a week of sessions from a coach's method, sized to the days you actually have. Not a generic block for everyone.</p>
+      </article>
+      <article>
+        <h3>Talk</h3>
+        <p>After a session, send a voice message. Legs heavy, work got busy, that hill broke you. Talking says more than a score out of ten.</p>
+      </article>
+      <article>
+        <h3>Adapt</h3>
+        <p>An AI reads your messages and your completed sessions, then changes next week inside the method's rules. No one is waiting on the other end.</p>
+      </article>
+    </div>
+  </section>
+
+  <aside class="coaching-note">
+    <h2>You coach yourself.<br><span class="accent">A coach wrote the method.</span></h2>
+    <p>Nobody in the app listens to your voice messages. There is no one-to-one coaching here. An AI does the adapting, inside rules a coach set.</p>
+    <p>That gets most runners most of the way. For the last stretch, you go straight to a coach and work with them one to one.</p>
+  </aside>
+</div>
+
+<section class="band coaching-band">
+  <div class="band-bg" style="background-image:url('/assets/lsu/images/rappid-65.webp');background-position:center 40%"></div>
+  <div class="band-scrim"></div>
+  <div class="band-copy">
+    <p>Every race so far<br><span class="accent">has run at a loss.</span></p>
+    <p class="coaching-band-note">A brand got built and no money came in. Other races fix that with dearer tickets and unpaid volunteers. This is the other way.</p>
+  </div>
+</section>
+
+<div class="coaching-body">
+  <section id="method">
+    <div class="coaching-head">
+      <h2 class="h2-sm">Not a plan.<br><span class="accent">A way of training.</span></h2>
+      <p>A method is one coach's whole approach, named after them. Your weeks come out of it. Each coach who joins brings their own.</p>
+    </div>
+    <div class="coaching-steps">
+      <article>
+        <h3>Running</h3>
+        <p>The base. Easy miles, the long one, the hard session, and the taper into a start.</p>
+      </article>
+      <article>
+        <h3>Strength</h3>
+        <p>Lifting and the small work that keeps a beginner's knees and hips in one piece over a long block.</p>
+      </article>
+      <article>
+        <h3>Mind</h3>
+        <p>Breathing, meditation and the bit nobody trains: what you do at 3 a.m. when you want to stop.</p>
+      </article>
+    </div>
+    <p class="coaching-tiers">A tier can be running only, or all three together. The portal shows which tiers are open and what they cost.</p>
+  </section>
+
+  <section id="training">
+    <div class="coaching-head">
+      <h2 class="h2-sm">Not open yet.<br><span class="accent">It opens here.</span></h2>
+      <p>No method has been published and no price has been set. When the first tier opens, it appears in this panel.</p>
+    </div>
+    <div class="coaching-portal"><CoachingPortal /></div>
+  </section>
+
+  <section id="coaches" class="coaching-coaches">
+    <div>
+      <span class="kicker">For coaches</span>
+      <h2 class="h2-sm">Bring your method.<br><span class="accent">Share what it earns.</span></h2>
+      <p>If you coach runners, your method can live in here under your name, with a share of what it earns.</p>
+      <p>Runners who want one-to-one come to you, not to us. The app is how they find your work in the first place.</p>
+    </div>
+    <div class="coaching-coaches-panel">
+      <p>Terms are not set. If this interests you, say so and we will work them out with you.</p>
+      <a class="btn-outline" href="mailto:mail@lastsoulultra.com">mail@lastsoulultra.com</a>
+    </div>
+  </section>
+</div>
+
 </div>
 @endsection
