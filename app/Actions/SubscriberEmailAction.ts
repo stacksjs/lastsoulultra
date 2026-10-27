@@ -96,6 +96,8 @@ function reply(html: boolean, success: boolean, title: string, message: string):
 <meta name="robots" content="noindex">
 <title>${title} - Last Soul Ultra</title>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 </head>
 <body style="margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#0c0c0c;color:#f4f4f2;font-family:ui-sans-serif,system-ui,sans-serif;padding:1.5rem">
   <main style="max-width:34rem">
