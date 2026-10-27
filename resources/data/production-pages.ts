@@ -59,7 +59,8 @@ export const productionPages: Record<string, { title: string, description: strin
     "styles": [
       "/assets/styles/production/base.css",
       "/assets/styles/production/race-entry.css",
-      "/assets/styles/production/world-series.css"
+      "/assets/styles/production/world-series.css",
+      "/assets/styles/ts-maps.css"
     ]
   },
   "/terms": {

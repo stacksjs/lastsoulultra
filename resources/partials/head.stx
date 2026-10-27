@@ -26,5 +26,4 @@ const pagePath = typeof canonicalPath !== 'undefined' ? canonicalPath : '/'
 @foreach(metaPage.styles as sheet)
 <link rel="stylesheet" href="{{ sheet }}">
 @endforeach
-<link rel="stylesheet" href="/assets/styles/ts-maps.css">
 <link rel="stylesheet" href="/assets/styles/stx-site.css">
