@@ -48,6 +48,19 @@ jobs:
       - name: Lint
         run: bun buddy lint
 
+      # public/assets/styles and resources/data/race-story.json are generated from
+      # resources/ by build:assets and committed. A deploy serves the committed
+      # copies, so source that has outrun them ships a page missing its styles,
+      # and every local check still passes.
+      - name: Generated assets match their source
+        run: |
+          bun run build:assets
+          if ! git diff --quiet; then
+            echo "build:assets changed committed files. Run 'bun run build:assets' and commit the result."
+            git --no-pager diff --stat
+            exit 1
+          fi
+
   typecheck:
     runs-on: ${{ matrix.os }}
 
