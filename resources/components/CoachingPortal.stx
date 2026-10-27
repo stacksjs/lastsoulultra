@@ -7,7 +7,7 @@ import coaching from '../../config/coaching'
 const coachingOrigin = new URL(coaching.origin).origin
 if (new URL(coachingOrigin).protocol !== 'https:' && !['localhost', '127.0.0.1'].includes(new URL(coachingOrigin).hostname)) throw new Error('HQ_ORIGIN must use HTTPS')
 if (!/^[a-z0-9][a-z0-9-]{0,139}$/.test(coaching.brand)) throw new Error('HQ_BRAND_SLUG must be an organization slug')
-const coachingSection = ['plans', 'calendar', 'feedback', 'progress', 'library', 'account'].includes(section) ? section : ''
+const coachingSection = ['plans', 'calendar', 'feedback', 'progress', 'library', 'health', 'messages', 'account'].includes(section) ? section : ''
 const portalUrl = `${coachingOrigin}/brands/${coaching.brand}`
 const elementUrl = `${coachingOrigin}/assets/elements/hq-coaching.js`
 </script>
