@@ -235,3 +235,31 @@ describe('reaching coaching from the rest of the site', () => {
       expect(await Bun.file(path).text()).toContain('href="/coaching"')
   })
 })
+
+/**
+ * The slug is HQ's; the label is ours.
+ *
+ * `CoachingModule.slug` is the key the brand payload sends and the segment
+ * the URL uses, so renaming it drops the module out of `enabledModules` and
+ * out of the nav. When a panel needs a different name - Chris asked for
+ * Workouts rather than The week on 29 October 2026 - the label changes and
+ * the slug does not. This pins that, because the next rename will look like
+ * a one-word edit too.
+ */
+describe('module names versus module keys', () => {
+  it('calls the calendar panel Workouts without moving it', () => {
+    const workouts = coachingModules.find(module => module.label === 'Workouts')
+
+    expect(workouts?.slug).toBe('calendar')
+    expect(modulePath('calendar')).toBe('/coaching/calendar')
+    expect(enabledModules(['calendar']).map(module => module.label)).toEqual(['Workouts'])
+  })
+
+  it('keeps every slug matchable against a brand payload', () => {
+    // Every slug this site declares has to be a key HQ could send, so a
+    // label edit can never quietly orphan a panel.
+    for (const module of coachingModules)
+      expect(enabledModules([module.slug])).toEqual([module])
+  })
+})
+

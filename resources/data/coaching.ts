@@ -40,9 +40,13 @@ export const coachingModules: CoachingModule[] = [
     scope: 'public',
   },
   {
+    // `calendar` is HQ's key and stays HQ's key; this site calls the panel
+    // Workouts, which is what the runner is actually looking at. Renaming
+    // the slug would mean this module stopped matching the brand payload
+    // and vanished from the nav.
     slug: 'calendar',
-    label: 'The week',
-    title: 'Your week',
+    label: 'Workouts',
+    title: 'Your workouts',
     summary: 'The sessions your method has given you, sized to the days you have. Log the sets, the time and how hard it was.',
     scope: 'athlete',
   },

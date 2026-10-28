@@ -128,7 +128,7 @@ describe('a module route, with nothing published', () => {
   it('still renders the page it was asked for', async () => {
     const calendar = await render('calendar')
 
-    expect(calendar).toContain('<title>Your week - Last Soul Ultra coaching</title>')
+    expect(calendar).toContain('<title>Your workouts - Last Soul Ultra coaching</title>')
     expect(calendar).toContain('Not open yet')
   })
 
