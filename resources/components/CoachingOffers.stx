@@ -1,3 +1,10 @@
+<script>
+interface Props {
+  /** Heading level for a tier name: 2 under a page heading, 3 under a section. */
+  level?: string
+}
+const { level = '3' } = defineProps<Props>()
+</script>
 <script server>
 import { formatPrice, formatTrial } from '../functions/coaching-brand'
 import { loadBrand, portalHost } from '../functions/coaching-source'
@@ -11,13 +18,22 @@ const offerBrand = await loadBrand()
 const offers = offerBrand?.offers ?? []
 const offerLocale = offerBrand?.locale ?? 'en'
 const offerHost = portalHost()
+/* A tier name sits directly under the page heading on /coaching/plans and
+   under a section heading on the hub, so the level is the caller's to say.
+   Getting it wrong is an h1 followed by an h3, which is how a screen-reader
+   user loses the outline of the page. */
+const offerTop = String(level) === '2'
 </script>
 @if(offers.length > 0)
 <ul class="coach-offers">
   @foreach(offers as offer)
   <li class="coach-offer">
     <div>
-      <h3>{{ offer.label }}</h3>
+      @if(offerTop)
+      <h2 class="coach-offer-name">{{ offer.label }}</h2>
+      @else
+      <h3 class="coach-offer-name">{{ offer.label }}</h3>
+      @endif
       <p class="coach-offer-by">{{ offer.coach }}</p>
       <p>{{ offer.method.summary }}</p>
       <p class="coach-offer-note">{{ offer.method.name }}, version {{ offer.method.version }}. Bought and billed at {{ offerHost }}.</p>
@@ -33,7 +49,11 @@ const offerHost = portalHost()
 </ul>
 @else
 <div class="coach-empty">
+  @if(offerTop)
   <h2>Nothing is open yet</h2>
+  @else
+  <h3>Nothing is open yet</h3>
+  @endif
   <p>No coach has published a method here and no price has been set. When the first tier opens it appears here, under the coach's own name and at the coach's own price. This site does not set either.</p>
 </div>
 @endif

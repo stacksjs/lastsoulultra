@@ -49,7 +49,7 @@ const panelHost = portalHost()
     </div>
     @endif
     @if(panelStorefront)
-    <CoachingOffers />
+    <CoachingOffers level="2" />
     @elseif(!panelLive)
     <div class="coach-empty">
       <h2>Not open yet</h2>
