@@ -2,7 +2,7 @@ import { describe, expect, it } from 'bun:test'
 import { readdirSync } from 'node:fs'
 import { join, resolve } from 'node:path'
 import { processDirectives } from '@stacksjs/stx'
-import { assetExists, assetUrls, attributeNames, auditPage, definedClasses, formatFindings, orphanPages, redirectSources, unstyledClasses } from '../scripts/audit-html'
+import { assetExists, assetUrls, attributeNames, auditPage, definedClasses, documentationPaths, formatFindings, orphanPages, redirectSources, unstyledClasses } from '../scripts/audit-html'
 import { indexablePaths } from '../resources/data/site'
 
 /**
@@ -28,7 +28,7 @@ function viewFiles(dir = 'resources/views', prefix = ''): { url: string, file: s
 }
 
 const views = viewFiles()
-const served = new Set([...views.map(view => view.url), ...redirectSources()])
+const served = new Set([...views.map(view => view.url), ...redirectSources(), ...documentationPaths()])
 
 async function render(file: string): Promise<string> {
   const path = resolve(file)

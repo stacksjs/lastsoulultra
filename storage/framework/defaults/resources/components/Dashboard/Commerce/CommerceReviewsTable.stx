@@ -11,7 +11,7 @@ const busyId = useReactiveProp('busyId', '')
 const sortResetKey = useReactiveProp<unknown>('sortResetKey', '')
 /** The parent's search and filters: a change returns to the first page. */
 const pageResetKey = useReactiveProp<unknown>('pageResetKey', '')
-const emit = defineEmits()
+const emit = defineEmits(['approve', 'feature', 'edit', 'delete'])
 
 /** Epoch seconds or milliseconds as well as stored timestamps, as the API sends either. */
 function formatDate(value: string): string {
@@ -64,8 +64,8 @@ const rows = derived(() => reviews().map(review => ({
   productLabel: review.productName || 'Unlinked product',
   titleLabel: review.title || 'Untitled review',
   contentLabel: review.content || 'No review content recorded.',
-  stars: `${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}`,
-  starsLabel: `${review.rating} out of 5 stars`,
+  stars: review.rating === null ? 'No rating' : `${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}`,
+  starsLabel: review.rating === null ? 'No star rating' : `${review.rating} out of 5 stars`,
   helpfulLabel: `${review.helpfulVotes} helpful`,
   unhelpfulLabel: `${review.unhelpfulVotes} not helpful`,
   dateLabel: formatDate(review.createdAt),
@@ -111,7 +111,7 @@ function handleRowAction(payload: { action: string, row: ReviewRecord }): void {
       <div class="max-w-lg min-w-72">
         <p class="font-medium text-gray-900 text-sm dark:text-white" x-text="row.titleLabel"></p>
         <p class="mt-1 line-clamp-2 text-gray-500 text-sm dark:text-neutral-400" x-text="row.contentLabel"></p>
-        <div class="flex flex-wrap gap-x-3 gap-y-1 items-center mt-2 text-gray-400 text-xs dark:text-neutral-500">
+        <div class="flex flex-wrap gap-x-3 gap-y-1 items-center mt-2 text-gray-500 text-xs dark:text-neutral-500">
           <span :aria-label="row.starsLabel" class="text-amber-500 text-sm" x-text="row.stars"></span>
           <span x-text="row.helpfulLabel"></span>
           <span x-text="row.unhelpfulLabel"></span>

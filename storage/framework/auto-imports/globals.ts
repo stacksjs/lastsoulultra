@@ -10,7 +10,20 @@ Object.assign(globalThis, autoImports)
 
 // TypeScript declarations
 declare global {
-  const publicSubscriptionReceipt: typeof autoImports.publicSubscriptionReceipt
+  const parseBrand: typeof autoImports.parseBrand
+  const formatPrice: typeof autoImports.formatPrice
+  const formatTrial: typeof autoImports.formatTrial
+  const publicCheckoutReceipt: typeof autoImports.publicCheckoutReceipt
+  const loadBrand: typeof autoImports.loadBrand
+  const coachingPageMeta: typeof autoImports.coachingPageMeta
+  const coachingOrigin: typeof autoImports.coachingOrigin
+  const coachingBrand: typeof autoImports.coachingBrand
+  const coachingSection: typeof autoImports.coachingSection
+  const brandEndpoint: typeof autoImports.brandEndpoint
+  const portalUrl: typeof autoImports.portalUrl
+  const portalHost: typeof autoImports.portalHost
+  const portalElementUrl: typeof autoImports.portalElementUrl
+  const forgetBrand: typeof autoImports.forgetBrand
   const increment: typeof autoImports.increment
   const decrement: typeof autoImports.decrement
   const reset: typeof autoImports.reset

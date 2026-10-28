@@ -35,7 +35,7 @@ export interface Finding {
 export function builtPages(dir: string = ROOT): string[] {
   return readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
     const path = join(dir, entry.name)
-    if (entry.isDirectory()) return entry.name.startsWith('_') ? [] : builtPages(path)
+    if (entry.isDirectory()) return /^[_.]/.test(entry.name) ? [] : builtPages(path)
     return entry.name.endsWith('.html') ? [path] : []
   })
 }
@@ -64,6 +64,16 @@ function attr(tag: string, name: string): string | null {
 /** Every URL the deployed site answers, which is what a link may point at. */
 export function redirectSources(): string[] {
   return Object.keys(server.redirects ?? {})
+}
+
+/** BunPress owns this mounted subtree; derive its routes from the guide source. */
+export function documentationPaths(dir = 'docs', prefix = '/docs'): string[] {
+  return readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
+    if (entry.isDirectory()) return documentationPaths(join(dir, entry.name), `${prefix}/${entry.name}`)
+    if (!entry.name.endsWith('.md')) return []
+    const slug = entry.name.slice(0, -3)
+    return [slug === 'index' ? prefix : `${prefix}/${slug}`]
+  })
 }
 
 /**
@@ -350,7 +360,7 @@ export function formatFindings(findings: Finding[]): string {
 
 if (import.meta.main) {
   const files = builtPages()
-  const served = new Set([...files.map(urlOf), ...redirectSources()])
+  const served = new Set([...files.map(urlOf), ...redirectSources(), ...documentationPaths()])
   const styles = [...new Bun.Glob('**/*.css').scanSync({ cwd: ROOT, absolute: true })]
   const defined = definedClasses(styles)
   const rendered = new Map(files.map(file => [urlOf(file), readFileSync(file, 'utf8')]))

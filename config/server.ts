@@ -100,7 +100,12 @@ export default {
    *
    * `buddy dev` prints the effective rules at boot.
    */
-  redirects: { '/legal/imprint': '/imprint', '/legal/privacy': '/privacy', '/legal/terms': '/terms' },
+  redirects: {
+    '/legal/imprint': '/imprint',
+    '/legal/privacy': '/privacy',
+    '/legal/terms': '/terms',
+    '/admin': { to: `${hqOrigin}/login?next=%2Fstaff%2Fexperience`, status: 302, preserveQuery: false },
+  },
 
   /**
    * **Security headers**

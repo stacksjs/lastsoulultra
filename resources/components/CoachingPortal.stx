@@ -23,6 +23,6 @@ const coachingSubscription = memo(() => publicCheckoutReceipt(coachingSearch.get
 </script>
 <script type="module" src="{{ portalElement }}"></script>
 <hq-coaching brand="{{ coaching.brand }}" api="{{ portalApi }}" label="Last Soul Ultra coaching" section="{{ portalNamedSection }}" :subscription="coachingSubscription" :order="coachingOrder">
-  <p>Training plans, monthly subscriptions and feedback, powered by HQ.</p>
+  <p>Last Soul Ultra training plans, monthly subscriptions and feedback.</p>
   <a class="btn" href="{{ portalHref }}">Open your training</a>
 </hq-coaching>

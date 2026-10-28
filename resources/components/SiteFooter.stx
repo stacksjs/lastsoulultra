@@ -75,6 +75,7 @@ async function lsuSubscribe(event) {
 <div class="footer-head lsu-sz7xmlte">Info</div>
 <a href="/sponsorship" class="lsu-sz7xmlte" @if(here('/sponsorship')) aria-current="page" @endif>Sponsorship</a>
 <a href="/coaching" class="lsu-sz7xmlte" @if(here('/coaching')) aria-current="page" @endif>Coaching</a>
+<a href="/docs" class="lsu-sz7xmlte">User guide</a>
 <a href="/contact" class="lsu-sz7xmlte" @if(here('/contact')) aria-current="page" @endif>Contact &amp; FAQ</a>
 <a href="/imprint" class="lsu-sz7xmlte" @if(here('/imprint')) aria-current="page" @endif>Imprint</a>
 <a href="/privacy" class="lsu-sz7xmlte" @if(here('/privacy')) aria-current="page" @endif>Privacy</a>

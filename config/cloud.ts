@@ -105,6 +105,18 @@ export const tsCloud: TsCloudConfig = {
   },
 
   sites: {
+    docs: {
+      deploy: 'server',
+      root: 'dist/docs/.bunpress',
+      path: '/docs',
+      domain: APP_DOMAIN,
+      build: './buddy build --docs',
+      pathRewriteStyle: 'directory',
+      ...(env.SITE_AUTH_USER && env.SITE_AUTH_PASSWORD
+        ? { auth: { username: env.SITE_AUTH_USER, password: env.SITE_AUTH_PASSWORD, realm: 'Last Soul Ultra preview' } }
+        : {}),
+    },
+
     /**
      * The race site. Every page renders from the typed modules in
      * `resources/data`, so nothing here needs a database at request time; the

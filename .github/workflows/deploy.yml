@@ -50,7 +50,13 @@ jobs:
         env:
           DOTENV_PRIVATE_KEY_PRODUCTION: ${{ secrets.DOTENV_PRIVATE_KEY_PRODUCTION }}
           DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          SITE_AUTH_USER: ${{ secrets.SITE_AUTH_USER }}
+          SITE_AUTH_PASSWORD: ${{ secrets.SITE_AUTH_PASSWORD }}
         run: |
+          if [ -z "$SITE_AUTH_USER" ] || [ -z "$SITE_AUTH_PASSWORD" ]; then
+            echo '::error::The private LSU preview requires SITE_AUTH_USER and SITE_AUTH_PASSWORD. Refusing to deploy without the access gate.'
+            exit 1
+          fi
           if [ -n "$DOTENV_PRIVATE_KEY_PRODUCTION" ] && [ -n "$DEPLOY_SSH_KEY" ]; then
             echo 'configured=true' >> "$GITHUB_OUTPUT"
           else

@@ -61,6 +61,9 @@ jobs:
             exit 1
           fi
 
+      - name: Build and verify the LSU user guide
+        run: ./buddy build --docs && bun run audit:docs
+
   typecheck:
     runs-on: ${{ matrix.os }}
 

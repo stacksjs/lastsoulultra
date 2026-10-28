@@ -19,6 +19,8 @@
  * Use this for pre-deployment checks, building assets, or notifications.
  */
 export async function beforeDeploy({ environment, region }: { environment: string, region: string }): Promise<void> {
+  if (!process.env.SITE_AUTH_USER || !process.env.SITE_AUTH_PASSWORD)
+    throw new Error('The LSU private preview requires SITE_AUTH_USER and SITE_AUTH_PASSWORD for both the site and documentation.')
   console.log(`  Preparing deployment to ${environment} in ${region}...`)
 }
 
