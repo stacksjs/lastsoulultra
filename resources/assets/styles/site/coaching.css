@@ -1,4 +1,11 @@
 /* The coaching surface: /coaching and the eight module routes under it.
+
+   Contrast: --lsu-dim-3 reaches 3.66:1 on black and the brand red 4.15:1, so
+   neither clears WCAG AA's 4.5 for body text. Both are used that way across
+   the rest of the site, which is the organiser's own design and not this
+   sheet's to change - but nothing here adds to it. Small text is --lsu-dim-2
+   (6.25) or brighter, and the red is kept for type at 22px and up, where the
+   3:1 bar for large text applies.
    Loaded only by those routes, not from stx-site.css, which the whole site
    pays for on every page.
 
@@ -46,7 +53,7 @@
    below 1100px of empty iframe, where nobody finds it. This one says where
    the panel comes from, which the site's voice wants said anyway. */
 .coaching-surface .coach-panel-bar {display:flex;flex-wrap:wrap;gap:12px 24px;align-items:baseline;justify-content:space-between;padding-bottom:14px;border-bottom:var(--coach-rule)}
-.coaching-surface .coach-panel-bar p {margin:0;max-width:52ch;color:var(--lsu-dim-3);font:400 13px/1.5 var(--lsu-body)}
+.coaching-surface .coach-panel-bar p {margin:0;max-width:52ch;color:var(--lsu-dim-2);font:400 13px/1.5 var(--lsu-body)}
 .coaching-surface .coach-panel-bar a {color:var(--lsu-white);font:400 13px/1 var(--lsu-body);letter-spacing:.14em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid var(--lsu-red);padding-bottom:3px}
 .coaching-surface .coach-panel-bar a:hover {color:var(--lsu-red)}
 
@@ -72,13 +79,13 @@
 .coaching-surface .coach-offers {display:grid;margin:0 0 clamp(40px,5vw,72px);padding:0;list-style:none;border-top:var(--coach-rule)}
 .coaching-surface .coach-offer {display:grid;grid-template-columns:minmax(0,1fr) auto;gap:clamp(18px,4vw,56px);align-items:start;padding:clamp(26px,3vw,40px) 0;border-bottom:var(--coach-rule)}
 .coaching-surface .coach-offer-name {margin:0;font:400 clamp(24px,2.8vw,36px)/1.1 var(--lsu-display);text-transform:uppercase}
-.coaching-surface .coach-offer-by {margin:10px 0 0;color:var(--lsu-red);font:400 13px/1 var(--lsu-body);letter-spacing:.14em;text-transform:uppercase}
+.coaching-surface .coach-offer-by {margin:10px 0 0;color:var(--lsu-dim-1);font:400 13px/1 var(--lsu-body);letter-spacing:.14em;text-transform:uppercase}
 .coaching-surface .coach-offer p {margin:16px 0 0;max-width:60ch;color:var(--lsu-dim-1);font:400 16px/1.7 var(--lsu-body)}
 .coaching-surface .coach-offer-price {text-align:right;white-space:nowrap}
-.coaching-surface .coach-offer-price b {display:block;font:400 clamp(22px,2.4vw,30px)/1.1 var(--lsu-display);font-weight:400}
-.coaching-surface .coach-offer-trial {display:block;margin-top:8px;color:var(--lsu-dim-3);font:400 13px/1.4 var(--lsu-body)}
+.coaching-surface .coach-offer-price b {display:block;color:var(--lsu-red);font:400 clamp(24px,2.4vw,30px)/1.1 var(--lsu-display);font-weight:400}
+.coaching-surface .coach-offer-trial {display:block;margin-top:8px;color:var(--lsu-dim-2);font:400 13px/1.4 var(--lsu-body)}
 .coaching-surface .coach-offer-method {color:var(--lsu-dim-2);font-size:15px}
-.coaching-surface .coach-offer-note {margin:14px 0 0;color:var(--lsu-dim-3);font:400 13px/1.5 var(--lsu-body)}
+.coaching-surface .coach-offer-note {margin:14px 0 0;color:var(--lsu-dim-2);font:400 13px/1.5 var(--lsu-body)}
 
 /* The hub's index of modules. A ruled list rather than a card grid: eight
    cards is a wall, and the sentence beside each name is the part that is

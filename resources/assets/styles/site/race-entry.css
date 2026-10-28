@@ -23,7 +23,11 @@
 .open-list.lsu-scope-lottery h3.lsu-scope-lottery{display:flex;flex-direction:column;gap:8px;margin:0;font:400 clamp(20px,2.1vw,27px)/1.05 var(--lsu-display);letter-spacing:.02em;text-transform:uppercase}
 .open-list.lsu-scope-lottery h3.lsu-scope-lottery span.lsu-scope-lottery{color:var(--lsu-dim-2);font:400 12px/1 var(--lsu-body);letter-spacing:.16em}
 .open-status.lsu-scope-lottery{margin:auto 0 0;color:var(--lsu-dim-2);font:400 13px/1.5 var(--lsu-body)}
-.open-status.is-open.lsu-scope-lottery{color:var(--lsu-red);font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.open-status.is-open.lsu-scope-lottery{display:flex;align-items:center;gap:9px;color:var(--lsu-white);font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+/* The red is the marker, not the words: #dd0f15 on black is 4.15:1, which
+   clears the 3:1 a graphical indicator needs and not the 4.5 this 13px label
+   would. */
+.open-status.is-open.lsu-scope-lottery:before{content:"";flex:none;width:9px;height:9px;background:var(--lsu-red);box-shadow:0 0 10px var(--lsu-red-glow)}
 .open-status.lsu-scope-lottery a.lsu-scope-lottery{color:var(--lsu-white);text-decoration:underline;text-underline-offset:4px}
 .open-status.lsu-scope-lottery a.lsu-scope-lottery:hover{color:var(--lsu-red)}
 
