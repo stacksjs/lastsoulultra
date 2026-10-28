@@ -2,7 +2,7 @@ import { describe, expect, it } from 'bun:test'
 import { readdirSync } from 'node:fs'
 import { join, resolve } from 'node:path'
 import { processDirectives } from '@stacksjs/stx'
-import { assetExists, assetUrls, auditPage, formatFindings, redirectSources } from '../scripts/audit-html'
+import { assetExists, assetUrls, auditPage, definedClasses, formatFindings, redirectSources, unstyledClasses } from '../scripts/audit-html'
 
 /**
  * The same rules scripts/audit-html.ts runs over dist, run here over the
@@ -141,5 +141,42 @@ describe('each rule', () => {
   it('catches a page with no language', () => {
     expect(auditPage('/t', '<html><body><h1>x</h1></body></html>', served).map(f => f.rule)).toContain('no-lang')
     expect(rules('')).not.toContain('no-lang')
+  })
+})
+
+describe('classes the markup uses and no stylesheet defines', () => {
+  const sheets = readdirSync('resources/assets/styles/site')
+    .filter(name => name.endsWith('.css'))
+    .map(name => join('resources/assets/styles/site', name))
+  const defined = definedClasses(sheets)
+
+  it('reads the real sheets, not an empty set', () => {
+    expect(defined.size).toBeGreaterThan(300)
+    expect(defined.has('kicker')).toBe(true)
+    expect(defined.has('h3')).toBe(true)
+  })
+
+  it('names a class nothing defines', () => {
+    const findings = unstyledClasses('/t', '<p class="kicker made-up-class">x</p>', defined)
+    expect(findings.map(finding => finding.detail)).toEqual(['made-up-class'])
+  })
+
+  it('names it once however often it appears', () => {
+    const html = '<p class="made-up-class"></p><p class="made-up-class"></p>'
+    expect(unstyledClasses('/t', html, defined)).toHaveLength(1)
+  })
+
+  it('ignores the scope and wrapper names stx writes per render', () => {
+    const html = '<p class="lsu-sz7xmlte stx_race_portal_2_1r3g0n"></p>'
+    expect(unstyledClasses('/t', html, defined)).toEqual([])
+  })
+
+  it('allows the hooks that are on the ratchet, and nothing else', () => {
+    expect(unstyledClasses('/t', '<div class="race-board"></div>', defined)).toEqual([])
+    expect(unstyledClasses('/t', '<div class="race-boardx"></div>', defined)).toHaveLength(1)
+  })
+
+  it('does not look inside a script', () => {
+    expect(unstyledClasses('/t', '<script>el.className = "made-up-class"</script>', defined)).toEqual([])
   })
 })

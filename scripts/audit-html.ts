@@ -204,6 +204,56 @@ export function auditPage(page: string, raw: string, served: Set<string>): Findi
   return findings
 }
 
+/**
+ * Class names the markup uses that no stylesheet defines.
+ *
+ * This is how /lottery's entry steps and open events, /404's whole heading
+ * block and the results tables' .h3 were found: markup written against a
+ * design system that was never shipped renders as unstyled body text, and
+ * nothing errors. Read against the BUILT css, so the generated utilities
+ * count as defined.
+ *
+ * The allowlist is a ratchet, not an exemption. Each entry is markup whose
+ * class carries no styling today; listing them stops the set growing while
+ * leaving what is already there visible.
+ */
+const UNSTYLED_ALLOWED = new Set([
+  // Structural or scripting hooks with nothing to paint.
+  'race-board', 'lap-link', 'carousel', 'seg-count', 'enter-count',
+  'ls-cmp-yr', 'edon-l', 'ws-soon',
+  // Wrappers whose typography comes from the block around them.
+  'sr-lead', 'ws-lead', 'ws-apply', 'tiers-title', 'begin-band',
+  // Utilities inside @stacksjs/components' Dialog, generated from that
+  // package's own source rather than from this app's markup.
+  'bg-black/25', 'dark:bg-black/50',
+])
+
+/** Every class name any shipped stylesheet keys a rule on. */
+export function definedClasses(files: string[]): Set<string> {
+  const names = new Set<string>()
+  for (const file of files) {
+    for (const [, name] of readFileSync(file, 'utf8').matchAll(/\.(-?[_a-zA-Z][\w-]*)/g))
+      names.add(name!)
+  }
+  return names
+}
+
+export function unstyledClasses(page: string, raw: string, defined: Set<string>): Finding[] {
+  const findings: Finding[] = []
+  const body = visible(raw)
+  const seen = new Set<string>()
+  for (const [, value] of body.matchAll(/\sclass="([^"]+)"/g)) {
+    for (const name of value!.split(/\s+/)) {
+      // stx writes a scope class per render and a wrapper id per component.
+      if (!name || name.startsWith('lsu-sz') || name.startsWith('stx_')) continue
+      if (defined.has(name) || UNSTYLED_ALLOWED.has(name) || seen.has(name)) continue
+      seen.add(name)
+      findings.push({ page, rule: 'unstyled-class', detail: name })
+    }
+  }
+  return findings
+}
+
 /** Findings grouped by rule, for a terminal. */
 export function formatFindings(findings: Finding[]): string {
   const byRule = new Map<string, Finding[]>()
@@ -225,7 +275,12 @@ export function formatFindings(findings: Finding[]): string {
 if (import.meta.main) {
   const files = builtPages()
   const served = new Set([...files.map(urlOf), ...redirectSources()])
-  const findings = files.flatMap(file => auditPage(urlOf(file), readFileSync(file, 'utf8'), served))
+  const styles = [...new Bun.Glob('**/*.css').scanSync({ cwd: ROOT, absolute: true })]
+  const defined = definedClasses(styles)
+  const findings = files.flatMap((file) => {
+    const html = readFileSync(file, 'utf8')
+    return [...auditPage(urlOf(file), html, served), ...unstyledClasses(urlOf(file), html, defined)]
+  })
 
   console.log(`audited ${files.length} pages`)
   console.log(findings.length === 0 ? '\nno findings' : `\n${formatFindings(findings)}`)
