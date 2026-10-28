@@ -216,3 +216,36 @@ describe('what a tier says it is', () => {
     expect([...plans.matchAll(/sample price/g)]).toHaveLength(1)
   })
 })
+
+describe('the coaching hub', () => {
+  async function hub(): Promise<string> {
+    const path = resolve('resources/views/coaching.stx')
+    return processDirectives(await Bun.file(path).text(), {}, path, {
+      enabled: true,
+      cache: false,
+      componentsDir: resolve('resources/components'),
+      layoutsDir: resolve('resources/layouts'),
+      partialsDir: resolve('resources/partials'),
+    }, new Set())
+  }
+
+  it('embeds the portal and warms the connection when something is published', async () => {
+    stubHq()
+    const html = await hub()
+
+    expect(html).toContain('<hq-coaching')
+    expect(html).toContain('rel="preconnect"')
+  })
+
+  it('loads no remote script when there is nothing to show', async () => {
+    // No published brand means no subscriptions, so no receipt can arrive
+    // here either, and the element has nothing left to do.
+    stubHq(null)
+    const html = await hub()
+
+    expect(html).not.toContain('<hq-coaching')
+    expect(html).not.toContain('hq-coaching.js')
+    expect(html).not.toContain('rel="preconnect"')
+    expect(html).toContain('Nothing is open yet')
+  })
+})

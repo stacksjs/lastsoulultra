@@ -2,14 +2,21 @@
 @section('content')
 <script server>
 import { coachingHubStyles } from '~/resources/data/coaching'
-import { coachingOrigin } from '~/resources/functions/coaching-source'
+import { coachingOrigin, loadBrand } from '~/resources/functions/coaching-source'
 
 // The home, race-entry and next-loop sheets are each suffixed with their own
 // page scope, so none of their rules could ever match here. This page's own
 // rules are coaching-page.css, loaded by this route alone; the storefront and
 // module index it carries are styled by the surface sheet, which the eight
 // module routes load too.
-const currentPage = { title: 'Coaching - Last Soul Ultra', description: 'Send a voice message after your run and an AI rebuilds next week around what you said, inside a coach\'s method.', styles: coachingHubStyles, preconnect: [coachingOrigin()] }
+/* The embed, and the connection warmed for it, only when the brand has
+   published something. The branded subscription return lands on this page
+   with its receipt hint and the element is what passes that back to HQ - but
+   an unpublished brand has no subscriptions, so there is no receipt to carry
+   and no reason to load a remote script to frame a 404. */
+const hubBrand = await loadBrand()
+const hubLive = (hubBrand?.modules.length ?? 0) > 0
+const currentPage = { title: 'Coaching - Last Soul Ultra', description: 'Send a voice message after your run and an AI rebuilds next week around what you said, inside a coach\'s method.', styles: coachingHubStyles, ...(hubLive ? { preconnect: [coachingOrigin()] } : {}) }
 const canonicalPath = '/coaching'
 </script>
 <div class="coaching-page">
@@ -96,7 +103,9 @@ const canonicalPath = '/coaching'
       <CoachingOffers />
       <CoachingIndex />
     </div>
+    @if(hubLive)
     <div class="coaching-portal"><CoachingPortal /></div>
+    @endif
   </section>
 
   <section id="coaches" class="coaching-coaches">
