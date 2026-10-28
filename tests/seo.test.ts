@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'bun:test'
 import { readFileSync, readdirSync } from 'node:fs'
 import { join } from 'node:path'
+import server from '../config/server'
 import { coachingPage } from '../resources/data/coaching'
-import { legalPages } from '../resources/data/legal'
 import { productionPages } from '../resources/data/production-pages'
 import { indexablePaths } from '../resources/data/site'
 import { publishedOrigin, robotsTxt, sitemapXml } from '../scripts/seo'
@@ -97,11 +97,19 @@ describe('seo artefacts', () => {
     expect(indexablePaths).toContain('/coaching/plans')
   })
 
-  it('lists the canonical legal pages rather than the legacy redirects', () => {
-    for (const page of legalPages)
-      expect(indexablePaths).toContain(`/${page.slug}`)
-    for (const page of legalPages)
-      expect(indexablePaths).not.toContain(`/legal/${page.slug}`)
+  it('lists where a redirect lands, never the URL it leaves', () => {
+    // The redirect table is the list of URLs this site used to publish.
+    // Submitting one of those is submitting a 301, which costs a crawl and
+    // indexes nothing.
+    const rules = Object.entries(server.redirects ?? {})
+
+    expect(rules.length).toBeGreaterThan(0)
+    for (const [from, to] of rules) {
+      const target = typeof to === 'string' ? to : to.to
+      expect(indexablePaths).not.toContain(from)
+      if (target.startsWith('/'))
+        expect(indexablePaths).toContain(target)
+    }
   })
 
   it('publishes absolute https URLs on a single origin', () => {
