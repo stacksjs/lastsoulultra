@@ -99,6 +99,7 @@
     "commit-msg": "bun x gitlint --edit \"$1\""
   },
   "devDependencies": {
-    "better-dx": "^0.2.38"
+    "better-dx": "^0.2.38",
+    "buddy-bot": "0.10.5"
   }
 }

@@ -16,12 +16,13 @@ const portalHref = portalUrl(portalNamedSection)
 const portalElement = portalElementUrl()
 </script>
 <script client>
-import { publicSubscriptionReceipt } from '../functions/coaching-return'
+import { publicCheckoutReceipt } from '../functions/coaching-return'
 const coachingSearch = useSearchParams()
-const coachingSubscription = memo(() => publicSubscriptionReceipt(coachingSearch.get('hq_subscription')))
+const coachingOrder = memo(() => publicCheckoutReceipt(coachingSearch.get('hq_order')))
+const coachingSubscription = memo(() => publicCheckoutReceipt(coachingSearch.get('hq_subscription')))
 </script>
 <script type="module" src="{{ portalElement }}"></script>
-<hq-coaching brand="{{ coaching.brand }}" api="{{ portalApi }}" label="Last Soul Ultra coaching" section="{{ portalNamedSection }}" :subscription="coachingSubscription">
+<hq-coaching brand="{{ coaching.brand }}" api="{{ portalApi }}" label="Last Soul Ultra coaching" section="{{ portalNamedSection }}" :subscription="coachingSubscription" :order="coachingOrder">
   <p>Training plans, monthly subscriptions and feedback, powered by HQ.</p>
   <a class="btn" href="{{ portalHref }}">Open your training</a>
 </hq-coaching>
