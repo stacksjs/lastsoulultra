@@ -50,7 +50,7 @@
     "logo.png"
   ],
   "engines": {
-    "vscode": "^1.109.5"
+    "vscode": "^1.143.1"
   },
   "extensionKind": [
     "workspace"
@@ -433,8 +433,8 @@
     ]
   },
   "devDependencies": {
-    "@stacksjs/stx-vscode": "^0.2.359",
-    "@types/vscode": "~1.109.0",
+    "@stacksjs/stx-vscode": "^0.2.736",
+    "@types/vscode": "~1.140.0",
     "@vscode/vsce": "^4.0.0"
   }
 }
