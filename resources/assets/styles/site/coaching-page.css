@@ -9,6 +9,23 @@
    exists per page in base.css, which is why the old hero's red words
    rendered white. */
 
+/* Unscoped, and kept that way: the scoped rules below build on these - the
+   hero h1 takes its family, case and tracking from here and overrides only
+   the size. They came across from stx-site.css with the rest of the page. */
+.coaching-hero{position:relative;padding:clamp(140px,18vw,240px) clamp(18px,5vw,40px) 100px;background:linear-gradient(90deg,#000e,#0003),url('/assets/lsu/images/hero-desktop.webp') 50% 35%/cover}
+.coaching-hero h1{max-width:13ch;font:400 clamp(48px,8vw,120px)/1.05 var(--lsu-display);text-transform:uppercase;letter-spacing:.02em;margin:24px 0}
+.coaching-hero p{max-width:54ch;color:#ffffffb3;font:400 19px/1.6 var(--lsu-body)}
+.coaching-body{max-width:1360px;margin:auto;padding:clamp(50px,7vw,100px) clamp(18px,5vw,40px)}
+.coaching-steps{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid #ffffff24;border-bottom:1px solid #ffffff24;margin:3rem 0}
+.coaching-steps article{padding:2rem;border-right:1px solid #ffffff24}
+.coaching-steps article:last-child{border:0}
+.coaching-steps h2{font:400 30px/1.2 var(--lsu-display);text-transform:uppercase}
+.coaching-steps p{color:#ffffffa6;line-height:1.7}
+.coaching-note{padding:2rem;border-left:3px solid var(--lsu-red);background:#0d0d0f}
+.coaching-note h2{font:400 36px var(--lsu-display);text-transform:uppercase}
+.coaching-note p{max-width:65ch;color:#ffffffa6;line-height:1.7}
+@media(max-width:700px){.coaching-hero{background-image:linear-gradient(90deg,#000d,#0006),url('/assets/lsu/images/hero-mobile.webp')}.coaching-steps{grid-template-columns:1fr}.coaching-steps article{border-right:0;border-bottom:1px solid #ffffff24}}
+
 .coaching-page .accent{color:var(--lsu-red)}
 .coaching-page .coaching-body>*+*{margin-top:clamp(56px,7vw,104px)}
 .coaching-page .coaching-head{display:flex;flex-direction:column;gap:18px;max-width:65ch}
