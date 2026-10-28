@@ -27,7 +27,7 @@
     "upgrade": "./buddy upgrade",
     "dev": "./buddy dev",
     "development": "./buddy dev",
-    "build": "bun run build:assets && ./buddy build",
+    "build": "bun run build:assets && ./buddy build && bun run build:bundles",
     "prod": "./buddy build",
     "deploy": "./buddy deploy",
     "lint": "./buddy lint",
@@ -73,6 +73,7 @@
     "bud": "./buddy",
     "stx": "./buddy",
     "build:assets": "bun scripts/build-site-assets.ts",
+    "build:bundles": "bun scripts/externalize-page-bundles.ts",
     "audit:html": "bun scripts/audit-html.ts"
   },
   "dependencies": {
