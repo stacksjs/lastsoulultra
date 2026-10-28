@@ -1,6 +1,9 @@
 import { describe, expect, it } from 'bun:test'
 import { readdirSync } from 'node:fs'
+import { join } from 'node:path'
+import { coachingPage } from '../resources/data/coaching'
 import { legalPages } from '../resources/data/legal'
+import { productionPages } from '../resources/data/production-pages'
 import { indexablePaths } from '../resources/data/site'
 import { publishedOrigin, robotsTxt, sitemapXml } from '../scripts/seo'
 
@@ -22,19 +25,46 @@ describe('seo artefacts', () => {
     expect(committed).toBe(robotsTxt(publishedOrigin))
   })
 
+  /** Every view on disk, as the path the site serves it at. */
+  function viewPaths(dir = 'resources/views', prefix = ''): string[] {
+    return readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
+      if (entry.isDirectory())
+        return viewPaths(join(dir, entry.name), `${prefix}/${entry.name}`)
+      if (!entry.name.endsWith('.stx'))
+        return []
+      const name = entry.name.slice(0, -'.stx'.length)
+      return [name === 'index' && prefix === '' ? '/' : `${prefix}/${name}`]
+    })
+  }
+
+  /** A page that declares itself noindex is not expected in the sitemap. */
+  function noindex(path: string): boolean {
+    if (path === '/404')
+      return true
+    if (path.startsWith('/coaching/'))
+      return coachingPage(path.slice('/coaching/'.length)).noindex === true
+    return productionPages[path]?.noindex === true
+  }
+
   it('lists every view that is not dynamic, private or noindex', () => {
     // Views on disk are the ground truth for what the site actually serves.
-    const views = readdirSync('resources/views')
-      .filter(name => name.endsWith('.stx'))
-      .map(name => name.slice(0, -'.stx'.length))
+    // Recursive: /results and /coaching both hold pages a flat read missed.
+    const expected = viewPaths().filter(path => !noindex(path))
 
-    const expected = views
-      // 404 is noindex on purpose, and index is the root path.
-      .filter(name => !['404', 'profile'].includes(name))
-      .map(name => (name === 'index' ? '/' : `/${name}`))
-
+    expect(expected.length).toBeGreaterThan(14)
     for (const path of expected)
       expect(indexablePaths).toContain(path)
+  })
+
+  it('keeps the modules that need an account out of the sitemap', () => {
+    const modules = viewPaths().filter(path => path.startsWith('/coaching/'))
+
+    expect(modules).toHaveLength(8)
+    for (const path of modules) {
+      if (noindex(path))
+        expect(indexablePaths).not.toContain(path)
+    }
+    expect(indexablePaths).toContain('/coaching/plans')
   })
 
   it('lists the canonical legal pages rather than the legacy redirects', () => {

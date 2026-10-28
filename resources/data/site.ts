@@ -1,4 +1,5 @@
 import { env } from '@stacksjs/env'
+import { indexableModulePaths } from './coaching'
 import { race } from './race'
 
 /**
@@ -45,6 +46,9 @@ export const indexablePaths: string[] = [
   '/', '/format', '/world-series', '/soul-races', '/sponsorship', '/contact',
   '/lottery', '/results', '/results/last-soul-ultra-2026', '/results/last-soul-ultra-2025',
   '/imprint', '/privacy', '/terms', '/coaching', '/faq',
+  // The storefront only. The other seven training modules show a sign-in
+  // prompt to anyone without an account, which is not a search result.
+  ...indexableModulePaths(),
 ]
 
 /** "14 august 2026", lowercase like the rest of the site's voice. */
