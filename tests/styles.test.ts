@@ -32,7 +32,11 @@ describe('the sheet every page downloads', () => {
   })
 
   it('stays small enough to be worth sending everywhere', () => {
-    expect(siteWide.length).toBeLessThan(5000)
+    // A backstop, not the real rule - the selector test above is what stops
+    // page rules creeping back in. The cap moved from 5 KB to 7 KB when the
+    // footer gained the email capture, which every page carries and so
+    // genuinely belongs here. It was 11.5 KB before the page rules left.
+    expect(siteWide.length).toBeLessThan(7000)
   })
 
   it('still carries what every page needs', () => {

@@ -10,6 +10,41 @@ function here(href) {
   return current === href || current.startsWith(`${href}/`)
 }
 </script>
+<script client>
+/* Progressive enhancement only. Without this the form still posts: it carries
+   format=html and the action answers a readable page. With it the visitor
+   stays where they are. A component can run a client script where a full-page
+   view cannot, which is why this lives in the footer. */
+const lsuMailStatus = state('')
+const lsuMailOk = state(false)
+const lsuMailBusy = state(false)
+
+async function lsuSubscribe(event) {
+  event.preventDefault()
+  if (lsuMailBusy()) return
+
+  const form = event.target
+  const data = new FormData(form)
+  data.delete('format') // the JSON path, not the fallback page
+
+  lsuMailBusy.set(true)
+  lsuMailStatus.set('')
+  try {
+    const response = await fetch(form.action, { method: 'POST', headers: { accept: 'application/json' }, body: data })
+    const json = await response.json()
+    lsuMailOk.set(json.success === true)
+    lsuMailStatus.set(json.message || (json.success ? 'Check your inbox to confirm.' : 'That did not work. Try again.'))
+    if (json.success) form.reset()
+  }
+  catch {
+    lsuMailOk.set(false)
+    lsuMailStatus.set('That did not reach us. Check your connection and try again.')
+  }
+  finally {
+    lsuMailBusy.set(false)
+  }
+}
+</script>
 <footer class="footer lsu-sz7xmlte">
 <div class="footer-grid lsu-sz7xmlte">
 <div class="footer-brand lsu-sz7xmlte">
@@ -45,6 +80,21 @@ function here(href) {
 <a href="/privacy" class="lsu-sz7xmlte" @if(here('/privacy')) aria-current="page" @endif>Privacy</a>
 <a href="/terms" class="lsu-sz7xmlte" @if(here('/terms')) aria-current="page" @endif>Terms</a>
 </div>
+</div>
+<div class="footer-signup lsu-sz7xmlte">
+<form class="lsu-sz7xmlte signup" action="/api/email/subscribe" method="post" @submit="lsuSubscribe(event)">
+<input type="hidden" name="format" value="html" class="lsu-sz7xmlte">
+<input type="hidden" name="source" value="footer" class="lsu-sz7xmlte">
+<div class="lsu-sz7xmlte signup-copy">
+<label class="lsu-sz7xmlte signup-label" for="footer-email">Two emails a year</label>
+<p class="lsu-sz7xmlte signup-note">One when entries open, one when the race starts. We send a confirmation link first and use the address for nothing until you click it. <a href="/privacy" class="lsu-sz7xmlte">Privacy</a>.</p>
+</div>
+<div class="lsu-sz7xmlte signup-field">
+<input id="footer-email" class="lsu-sz7xmlte" type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
+<button class="btn lsu-sz7xmlte" type="submit" :disabled="lsuMailBusy()" :text="lsuMailBusy() ? 'Sending' : 'Sign up'">Sign up</button>
+</div>
+<p :if="lsuMailStatus()" class="lsu-sz7xmlte signup-status" :class="lsuMailOk() ? 'is-ok' : 'is-bad'" role="status" aria-live="polite" :text="lsuMailStatus()"></p>
+</form>
 </div>
 <div class="footer-base lsu-sz7xmlte">
 <span class="lsu-sz7xmlte">© 2026 Last Soul IP GmbH</span>

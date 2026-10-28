@@ -7,3 +7,37 @@
 .nav-links.lsu-scope-nav a.lsu-scope-nav[aria-current=page]{color:var(--lsu-white);box-shadow:inset 0 -2px 0 0 var(--lsu-red)}
 .drawer-links.lsu-scope-nav a.lsu-scope-nav[aria-current=page]{color:var(--lsu-red)}
 .footer-col.lsu-sz7xmlte a.lsu-sz7xmlte[aria-current=page]{color:var(--lsu-white);text-decoration:underline;text-decoration-color:var(--lsu-red);text-underline-offset:4px}
+
+/* The email capture, in the footer so every page carries one.
+
+   Chris built this in August with a working double opt-in behind it, and the
+   form went when the footer was recreated from the production capture, which
+   has none. The action it posts to never stopped working.
+
+   It is a row of its own above the base line rather than a column in the
+   grid: an address field squeezed into a quarter of the footer reads as an
+   afterthought, and this is the only thing on the page asking for something. */
+.footer-signup.lsu-sz7xmlte{margin-top:clamp(40px,5vw,64px);padding-top:clamp(28px,3.4vw,40px);border-top:1px solid var(--lsu-line)}
+.signup.lsu-sz7xmlte{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,auto);gap:clamp(18px,3vw,48px);align-items:start;max-width:var(--lsu-max)}
+/* A grid item with text in it needs this or a long word pushes the column
+   wider than its track and the field beside it off the row. */
+.signup-copy.lsu-sz7xmlte{min-width:0}
+.signup-label.lsu-sz7xmlte{display:block;font:400 clamp(20px,2.2vw,28px)/1.1 var(--lsu-display);text-transform:uppercase;letter-spacing:.02em;color:var(--lsu-white)}
+.signup-note.lsu-sz7xmlte{margin:10px 0 0;max-width:54ch;color:var(--lsu-dim-2);font:400 13px/1.6 var(--lsu-body)}
+.signup-note.lsu-sz7xmlte a{color:var(--lsu-white);text-decoration:underline;text-underline-offset:3px}
+.signup-note.lsu-sz7xmlte a:hover{color:var(--lsu-red)}
+.signup-field.lsu-sz7xmlte{display:flex;gap:10px;align-items:stretch}
+.signup-field.lsu-sz7xmlte input{box-sizing:border-box;min-width:min(16rem,60vw);min-height:52px;padding:13px 15px;border:1px solid var(--lsu-line);background:#090909;color:var(--lsu-white);font:400 16px var(--lsu-body)}
+.signup-field.lsu-sz7xmlte input::placeholder{color:var(--lsu-dim-3)}
+.signup-field.lsu-sz7xmlte input:hover{border-color:rgba(255,255,255,.38)}
+.signup-field.lsu-sz7xmlte input:focus-visible{outline:none;border-color:var(--lsu-red);box-shadow:0 0 0 1px var(--lsu-red)}
+.signup-field.lsu-sz7xmlte .btn{flex:none}
+.signup-status.lsu-sz7xmlte{grid-column:1 / -1;margin:14px 0 0;font:400 14px/1.5 var(--lsu-body)}
+.signup-status.is-ok.lsu-sz7xmlte{color:var(--lsu-white)}
+.signup-status.is-bad.lsu-sz7xmlte{color:#ff725e}
+
+@media(max-width:820px){
+.signup.lsu-sz7xmlte{grid-template-columns:minmax(0,1fr)}
+.signup-field.lsu-sz7xmlte{flex-wrap:wrap}
+.signup-field.lsu-sz7xmlte input{flex:1 1 14rem}
+}
