@@ -22,6 +22,11 @@
    sold the idea again. The red hairline under it carries the brand instead. */
 .coaching-surface .coach-head {padding:clamp(104px,11vw,136px) 0 clamp(26px,3vw,38px)}
 .coaching-surface .coach-head .kicker {display:block;color:var(--lsu-red)}
+/* The kicker is the way back to the hub. The module nav hides itself when the
+   brand publishes nothing, and without this a module page was then a dead end
+   with no link to the page that explains what coaching here is. */
+.coaching-surface .coach-up {width:fit-content;text-decoration:none;border-bottom:1px solid transparent}
+.coaching-surface .coach-up:hover {border-bottom-color:var(--lsu-red)}
 .coaching-surface .coach-head h1 {max-width:16ch;margin:16px 0 0;font:400 clamp(38px,5.2vw,76px)/1.04 var(--lsu-display);text-transform:uppercase;letter-spacing:.02em}
 .coaching-surface .coach-head p {max-width:58ch;margin:20px 0 0;color:var(--lsu-dim-1);font:400 18px/1.65 var(--lsu-body)}
 

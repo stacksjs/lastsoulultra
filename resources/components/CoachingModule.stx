@@ -30,7 +30,7 @@ const panelHost = portalHost()
 <div class="coaching-surface">
   <header class="coach-head">
     <div class="coach-shell">
-      <span class="kicker">Coaching</span>
+      <a class="coach-up kicker" href="/coaching">Coaching</a>
       <h1>{{ panel.title }}</h1>
       <p>{{ panel.summary }}</p>
     </div>

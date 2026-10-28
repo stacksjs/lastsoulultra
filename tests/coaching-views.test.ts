@@ -152,3 +152,20 @@ describe('a module route, with nothing published', () => {
     expect(plans).toContain('Nothing is open yet')
   })
 })
+
+describe('getting back out of a module', () => {
+  it('links to the hub from every module, published or not', async () => {
+    stubHq(null)
+    for (const module of coachingModules)
+      expect(await render(module.slug)).toMatch(/<a class="[^"]*coach-up[^"]*" href="\/coaching">Coaching<\/a>/)
+  })
+
+  it('leaves the storefront a way back when the nav has hidden itself', async () => {
+    stubHq(null)
+    const plans = await render('plans')
+
+    // The nav only renders with more than one module to move between.
+    expect(plans).not.toContain('coach-nav')
+    expect(plans).toContain('href="/coaching"')
+  })
+})
