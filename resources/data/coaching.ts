@@ -117,10 +117,19 @@ export function indexableModulePaths(): string[] {
   return coachingModules.filter(module => module.scope === 'public').map(module => modulePath(module.slug))
 }
 
-/** Base plus the surface sheet. The marketing page's styles are elsewhere. */
+/** Base plus the surface sheet: the chrome every coaching route wears. */
 export const coachingStyles = [
   '/assets/styles/production/base.css',
   '/assets/styles/production/coaching.css',
+]
+
+/**
+ * The hub also carries the marketing page's own rules. They are a sheet of
+ * their own rather than part of stx-site.css, which every route downloads.
+ */
+export const coachingHubStyles = [
+  ...coachingStyles,
+  '/assets/styles/production/coaching-page.css',
 ]
 
 export interface CoachingPageMeta {

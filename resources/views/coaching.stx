@@ -1,15 +1,15 @@
 @extends('layouts/LSU')
 @section('content')
 <script server>
-import { coachingStyles } from '~/resources/data/coaching'
+import { coachingHubStyles } from '~/resources/data/coaching'
 import { coachingOrigin } from '~/resources/functions/coaching-source'
 
 // The home, race-entry and next-loop sheets are each suffixed with their own
 // page scope, so none of their rules could ever match here. This page's own
-// rules live in the site-wide stx-site.css that the head always loads; the
-// storefront and module index it now carries are styled by the surface sheet,
-// which the eight module routes load too.
-const currentPage = { title: 'Coaching - Last Soul Ultra', description: 'Send a voice message after your run and an AI rebuilds next week around what you said, inside a coach\'s method.', styles: coachingStyles, preconnect: [coachingOrigin()] }
+// rules are coaching-page.css, loaded by this route alone; the storefront and
+// module index it carries are styled by the surface sheet, which the eight
+// module routes load too.
+const currentPage = { title: 'Coaching - Last Soul Ultra', description: 'Send a voice message after your run and an AI rebuilds next week around what you said, inside a coach\'s method.', styles: coachingHubStyles, preconnect: [coachingOrigin()] }
 const canonicalPath = '/coaching'
 </script>
 <div class="coaching-page">
