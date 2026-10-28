@@ -258,7 +258,7 @@ Miss the next start or fail to finish a loop within the hour, and your race is o
 </div>
 </div>
 <div class="carousel lsu-scope-home" data-carousel>
-<div class="carousel-track lsu-scope-home" ref="lsuGallery" @scroll="lsuGalleryChanged()" @keydown.left.prevent="lsuGalleryMove(-1)" @keydown.right.prevent="lsuGalleryMove(1)" tabindex="0" data-track tabindex="0" role="group" aria-roledescription="carousel" aria-label="Season 2 Recap">
+<div class="carousel-track lsu-scope-home" ref="lsuGallery" @scroll="lsuGalleryChanged()" @keydown.left.prevent="lsuGalleryMove(-1)" @keydown.right.prevent="lsuGalleryMove(1)" tabindex="0" data-track role="group" aria-roledescription="carousel" aria-label="Season 2 Recap">
 <div class="carousel-slide lsu-scope-home">
 <img src="/assets/lsu/images/recap-01-810.webp" srcset="/assets/lsu/images/recap-01-540.webp 540w, /assets/lsu/images/recap-01-810.webp 810w, /assets/lsu/images/recap-01-1080.webp 1080w" sizes="(min-width: 1000px) 30vw, (min-width: 640px) 46vw, 100vw" alt="A runner in a dark shirt walks out of the red-lit start gantry at night." width="1080" height="1440" loading="lazy" decoding="async" class="lsu-scope-home">
 </div>

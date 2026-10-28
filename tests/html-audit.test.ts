@@ -2,7 +2,7 @@ import { describe, expect, it } from 'bun:test'
 import { readdirSync } from 'node:fs'
 import { join, resolve } from 'node:path'
 import { processDirectives } from '@stacksjs/stx'
-import { assetExists, assetUrls, auditPage, definedClasses, formatFindings, redirectSources, unstyledClasses } from '../scripts/audit-html'
+import { assetExists, assetUrls, attributeNames, auditPage, definedClasses, formatFindings, redirectSources, unstyledClasses } from '../scripts/audit-html'
 
 /**
  * The same rules scripts/audit-html.ts runs over dist, run here over the
@@ -136,6 +136,21 @@ describe('each rule', () => {
     expect(assetUrls('<img srcset="/a.png 1x, /b.png 2x">')).toEqual(['/a.png', '/b.png'])
     expect(assetUrls('<div style="background-image:url(\'/c.webp\')">')).toEqual(['/c.webp'])
     expect(rules('<div style="background-image:url(/assets/lsu/images/nope.webp)"></div>')).toContain('missing-asset')
+  })
+
+  it('catches the same attribute written twice on one tag', () => {
+    expect(rules('<div tabindex="0" data-track tabindex="0"></div>')).toContain('duplicate-attribute')
+    expect(rules('<div tabindex="0" data-track></div>')).not.toContain('duplicate-attribute')
+  })
+
+  it('does not read an attribute name out of a value', () => {
+    // An stx binding mentions its own state names inside the quoted value.
+    const binding = `<button :text="mode === 'new' ? a : mode === 'old' ? b : c" :disabled="busy"></button>`
+    expect(rules(binding)).not.toContain('duplicate-attribute')
+
+    expect(attributeNames(` :text="mode === 'new'" :disabled="busy" data-x`))
+      .toEqual([':text', ':disabled', 'data-x'])
+    expect(attributeNames(` a=1 b='two words' c`)).toEqual(['a', 'b', 'c'])
   })
 
   it('catches a page with no language', () => {

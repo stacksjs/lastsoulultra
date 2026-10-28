@@ -93,6 +93,40 @@ export function assetUrls(html: string): string[] {
   return [...new Set(urls)]
 }
 
+/**
+ * The attribute names on one tag, in order, skipping quoted values.
+ *
+ * A regex over `name=` finds names inside values too - an stx binding like
+ * `:text="a === 'x' ? b : a === 'y'"` reads as an attribute called `a` twice
+ * - so this walks the string instead.
+ */
+export function attributeNames(attrs: string): string[] {
+  const names: string[] = []
+  let i = 0
+  while (i < attrs.length) {
+    while (i < attrs.length && /\s/.test(attrs[i]!)) i += 1
+    const start = i
+    while (i < attrs.length && !/[\s=/>]/.test(attrs[i]!)) i += 1
+    const name = attrs.slice(start, i)
+    if (!name) { i += 1; continue }
+    names.push(name.toLowerCase())
+    while (i < attrs.length && /\s/.test(attrs[i]!)) i += 1
+    if (attrs[i] !== '=') continue
+    i += 1
+    while (i < attrs.length && /\s/.test(attrs[i]!)) i += 1
+    const quote = attrs[i]
+    if (quote === '"' || quote === '\'') {
+      i += 1
+      while (i < attrs.length && attrs[i] !== quote) i += 1
+      i += 1
+    }
+    else {
+      while (i < attrs.length && !/\s/.test(attrs[i]!)) i += 1
+    }
+  }
+  return names
+}
+
 /** The rules, over one page. */
 export function auditPage(page: string, raw: string, served: Set<string>): Finding[] {
   const findings: Finding[] = []
@@ -193,7 +227,18 @@ export function auditPage(page: string, raw: string, served: Set<string>): Findi
   if (!canonical || !canonical.startsWith('http'))
     findings.push({ page, rule: 'no-canonical', detail: canonical ?? '' })
 
-  // 12. An asset the page names and the deploy does not carry. A stylesheet,
+  // 12. The same attribute written twice on one tag. A parser keeps the
+  //     first and drops the rest, so the second value is silently ignored -
+  //     which is indistinguishable from it having been applied.
+  for (const [, tag, attrs] of body.matchAll(/<([a-z][\w-]*)\b([^>]*)>/gi)) {
+    const names = attributeNames(attrs!)
+    for (const name of new Set(names)) {
+      if (names.filter(other => other === name).length > 1)
+        findings.push({ page, rule: 'duplicate-attribute', detail: `${name} on <${tag!.toLowerCase()}>` })
+    }
+  }
+
+  // 13. An asset the page names and the deploy does not carry. A stylesheet,
   //     a font or a photograph that 404s is silent: the page still renders,
   //     just without it, and nothing in a build log says so.
   for (const url of assetUrls(raw)) {
