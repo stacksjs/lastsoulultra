@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'bun:test'
 import { readFileSync, readdirSync } from 'node:fs'
-import { join } from 'node:path'
+import { join, resolve } from 'node:path'
+import { processDirectives } from '@stacksjs/stx'
 import server from '../config/server'
 import { coachingPage } from '../resources/data/coaching'
 import { productionPages } from '../resources/data/production-pages'
@@ -127,5 +128,34 @@ describe('seo artefacts', () => {
 
   it('does not list the noindex 404 page', () => {
     expect(indexablePaths).not.toContain('/404')
+  })
+
+  it('gives every view the one metadata object the head reads', () => {
+    // 404.stx used to declare pageTitle, pageDescription and noindex as loose
+    // names nothing looked at, so the page served the site's default title and
+    // description and did not carry its noindex.
+    for (const path of viewPaths()) {
+      const file = `resources/views${path === '/' ? '/index' : path}.stx`
+      expect(readFileSync(file, 'utf8')).toContain('const currentPage')
+    }
+  })
+})
+
+describe('the page that is not found', () => {
+  it('says so, and asks not to be indexed', async () => {
+    const path = resolve('resources/views/404.stx')
+    const html = await processDirectives(await Bun.file(path).text(), {}, path, {
+      enabled: true,
+      cache: false,
+      componentsDir: resolve('resources/components'),
+      layoutsDir: resolve('resources/layouts'),
+      partialsDir: resolve('resources/partials'),
+    }, new Set())
+
+    expect(html).toContain('<title>not found - Last Soul Ultra</title>')
+    expect(html).toContain('<meta name="robots" content="noindex,nofollow">')
+    expect(html).toContain('content="That page is not here."')
+    // Nothing crawls it, so it carries no graph.
+    expect(html).not.toContain('application/ld+json')
   })
 })

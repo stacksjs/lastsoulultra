@@ -2,10 +2,16 @@
 import { liveRaceState } from '../data/live'
 import { race } from '../data/race'
 
-const pageTitle = 'not found - Last Soul Ultra'
-const pageDescription = 'That page is not here.'
+/* The head partial reads `currentPage`. This page used to declare pageTitle,
+   pageDescription and noindex as loose names nothing looked at, so a 404
+   served the site's default title and description and invited indexing. */
+const currentPage = {
+  title: 'not found - Last Soul Ultra',
+  description: 'That page is not here.',
+  styles: ['/assets/styles/production/base.css'],
+  noindex: true,
+}
 const canonicalPath = '/404'
-const noindex = true
 const state = await liveRaceState()
 </script>
 <!DOCTYPE html>
