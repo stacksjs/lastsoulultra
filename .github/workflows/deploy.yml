@@ -119,6 +119,14 @@ jobs:
           PORKBUN_API_KEY: ${{ secrets.PORKBUN_API_KEY }}
           PORKBUN_SECRET_KEY: ${{ secrets.PORKBUN_SECRET_KEY }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          # The HTTP Basic gate in front of the preview, declared in
+          # config/cloud.ts. Read from repository secrets rather than
+          # .env.production so the password can be set and rotated from the
+          # GitHub UI, with no dotenvx private key and no commit. Leave both
+          # unset and the site deploys open, which is the right default for
+          # the day it goes public.
+          SITE_AUTH_USER: ${{ secrets.SITE_AUTH_USER }}
+          SITE_AUTH_PASSWORD: ${{ secrets.SITE_AUTH_PASSWORD }}
           # macOS resource forks in a tarball built on a developer machine make
           # the extraction on the server noisy and occasionally fatal.
           COPYFILE_DISABLE: '1'

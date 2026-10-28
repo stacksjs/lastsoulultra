@@ -103,9 +103,16 @@ export const tsCloud: TsCloudConfig = {
        *
        * Credentials come from the environment, never from this file - a
        * password in the repository is a password on every fork and in every
-       * clone. Set SITE_AUTH_USER and SITE_AUTH_PASSWORD in .env.production
-       * (encrypted) and the gate turns itself on; leave them unset and the
-       * site is open, which is the right default for the day it goes public.
+       * clone. Set SITE_AUTH_USER and SITE_AUTH_PASSWORD and the gate turns
+       * itself on; leave them unset and the site is open, which is the right
+       * default for the day it goes public.
+       *
+       * On the deploy they come from GitHub repository secrets of the same
+       * two names, passed through in `.github/workflows/deploy.yml`. That is
+       * deliberate: a password set there can be rotated from the GitHub UI
+       * without the dotenvx private key and without a commit, which matters
+       * for the one value most likely to be shared and then changed.
+       * `.env.production` works too and wins locally.
        */
       ...(env.SITE_AUTH_USER && env.SITE_AUTH_PASSWORD
         ? { auth: { username: env.SITE_AUTH_USER, password: env.SITE_AUTH_PASSWORD, realm: 'Last Soul Ultra preview' } }
