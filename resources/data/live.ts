@@ -227,6 +227,19 @@ export async function liveSnapshot(): Promise<LiveSnapshot> {
   return inFlight
 }
 
+/**
+ * Drop the cached board and any backoff.
+ *
+ * For tests, which need each case to start from nothing, and for a dev
+ * server that should not keep serving a board from before a restart.
+ */
+export function forgetBoard(): void {
+  cache = null
+  inFlight = null
+  failedAt = 0
+  lastError = null
+}
+
 /* ---------------------------------------------------------------------- */
 /* Derived views                                                           */
 /* ---------------------------------------------------------------------- */
