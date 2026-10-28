@@ -1,41 +1,47 @@
 /* eslint-disable no-console */
 /**
- * Audit the built site for the mistakes a template cannot catch itself.
+ * The mistakes a template cannot catch about itself.
  *
  * A page renders perfectly well with a link to a page that was renamed, two
- * elements sharing an id, an h3 under an h1, or an image whose alt was never
- * written. Nothing errors, nothing fails to build, and nobody notices until
- * somebody using a screen reader or a keyboard does.
+ * elements sharing an id, an h3 under an h1, a link whose only content is an
+ * icon, or an image whose alt was never written. Nothing errors and nothing
+ * fails to build; it is noticed by the first person using a keyboard or a
+ * screen reader, which is to say not by us.
  *
- *   bun run build && bun scripts/audit-html.ts
+ * The rules live here and run twice. tests/html-audit.test.ts applies them to
+ * the rendered views, so the suite catches a regression with no build; this
+ * script applies them to dist, so a release can be checked against what was
+ * actually produced rather than what the source implies:
  *
- * Reads dist/, so it checks what is actually deployed rather than what the
- * source says should be. Exits non-zero on any finding.
+ *   bun run build && bun run audit:html
+ *
+ * Exits non-zero on any finding.
  */
 
-import { readdirSync } from 'node:fs'
+import { readFileSync, readdirSync } from 'node:fs'
 import { join, relative } from 'node:path'
 import process from 'node:process'
 import server from '../config/server'
 
 const ROOT = 'dist'
 
-interface Finding {
+export interface Finding {
   page: string
   rule: string
   detail: string
 }
 
-function pages(dir = ROOT): string[] {
+/** Built pages, depth first. `_`-prefixed directories are build internals. */
+export function builtPages(dir: string = ROOT): string[] {
   return readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
     const path = join(dir, entry.name)
-    if (entry.isDirectory()) return entry.name.startsWith('_') ? [] : pages(path)
+    if (entry.isDirectory()) return entry.name.startsWith('_') ? [] : builtPages(path)
     return entry.name.endsWith('.html') ? [path] : []
   })
 }
 
 /** The URL a built file is served at. */
-function urlOf(file: string): string {
+export function urlOf(file: string): string {
   const path = `/${relative(ROOT, file).replace(/\.html$/, '')}`
   return path === '/index' ? '/' : path
 }
@@ -55,19 +61,20 @@ function attr(tag: string, name: string): string | null {
   return new RegExp(`\\s${name}(?=[\\s/>])`, 'i').test(tag) ? '' : null
 }
 
-const built = new Set(pages().map(urlOf))
-const redirected = new Set(Object.keys(server.redirects ?? {}))
-const findings: Finding[] = []
+/** Every URL the deployed site answers, which is what a link may point at. */
+export function redirectSources(): string[] {
+  return Object.keys(server.redirects ?? {})
+}
 
-for (const file of pages()) {
-  const page = urlOf(file)
-  const raw = await Bun.file(file).text()
+/** The rules, over one page. */
+export function auditPage(page: string, raw: string, served: Set<string>): Finding[] {
+  const findings: Finding[] = []
   const body = visible(raw)
 
-  // 1. Internal links point at something this build serves.
+  // 1. Internal links point at something this site serves.
   for (const [, href] of raw.matchAll(/<a\b[^>]*\shref="(\/[^"#?]*)[^"]*"/gi)) {
     const target = href!.length > 1 ? href!.replace(/\/$/, '') : href!
-    if (built.has(target) || redirected.has(target)) continue
+    if (served.has(target)) continue
     // Assets are files on disk rather than pages.
     if (/\.[a-z0-9]{2,5}$/i.test(target) || target.startsWith('/assets/')) continue
     findings.push({ page, rule: 'dead-link', detail: target })
@@ -97,8 +104,7 @@ for (const file of pages()) {
   }
 
   // 5. A link a screen reader can announce.
-  for (const [match, tag, inner] of body.matchAll(/(<a\b[^>]*>)([\s\S]*?)<\/a>/gi)) {
-    void match
+  for (const [, tag, inner] of body.matchAll(/(<a\b[^>]*>)([\s\S]*?)<\/a>/gi)) {
     const text = inner!.replace(/<[^>]+>/g, '').replace(/&[a-z]+;/gi, ' ').trim()
     if (text) continue
     if (attr(tag!, 'aria-label') || attr(tag!, 'title')) continue
@@ -110,19 +116,34 @@ for (const file of pages()) {
   // 6. A document that states its language.
   if (!/<html\b[^>]*\slang="[^"]+"/i.test(raw))
     findings.push({ page, rule: 'no-lang', detail: '' })
+
+  return findings
 }
 
-const byRule = new Map<string, Finding[]>()
-for (const finding of findings) {
-  if (!byRule.has(finding.rule)) byRule.set(finding.rule, [])
-  byRule.get(finding.rule)!.push(finding)
+/** Findings grouped by rule, for a terminal. */
+export function formatFindings(findings: Finding[]): string {
+  const byRule = new Map<string, Finding[]>()
+  for (const finding of findings) {
+    if (!byRule.has(finding.rule)) byRule.set(finding.rule, [])
+    byRule.get(finding.rule)!.push(finding)
+  }
+
+  return [...byRule]
+    .sort((a, b) => b[1].length - a[1].length)
+    .map(([rule, rows]) => [
+      `${rule} (${rows.length})`,
+      ...rows.slice(0, 12).map(row => `  ${row.page}  ${row.detail}`),
+      ...(rows.length > 12 ? [`  ... ${rows.length - 12} more`] : []),
+    ].join('\n'))
+    .join('\n\n')
 }
 
-console.log(`audited ${built.size} pages`)
-for (const [rule, rows] of [...byRule].sort((a, b) => b[1].length - a[1].length)) {
-  console.log(`\n${rule} (${rows.length})`)
-  for (const row of rows.slice(0, 12)) console.log(`  ${row.page}  ${row.detail}`)
-  if (rows.length > 12) console.log(`  ... ${rows.length - 12} more`)
+if (import.meta.main) {
+  const files = builtPages()
+  const served = new Set([...files.map(urlOf), ...redirectSources()])
+  const findings = files.flatMap(file => auditPage(urlOf(file), readFileSync(file, 'utf8'), served))
+
+  console.log(`audited ${files.length} pages`)
+  console.log(findings.length === 0 ? '\nno findings' : `\n${formatFindings(findings)}`)
+  process.exit(findings.length === 0 ? 0 : 1)
 }
-if (findings.length === 0) console.log('\nno findings')
-process.exit(findings.length === 0 ? 0 : 1)
