@@ -1,7 +1,9 @@
 <script server>
+import { CARD_HEIGHT, CARD_WIDTH, shareCard } from '../data/share'
 import { absolute } from '../data/site'
 const metaPage = typeof currentPage !== 'undefined' && currentPage ? currentPage : { title: 'Last Soul Ultra', description: 'The backyard ultra World Series. There is no finish line.', styles: ['/assets/styles/production/base.css'] }
 const pagePath = typeof canonicalPath !== 'undefined' ? canonicalPath : '/'
+const card = shareCard(pagePath)
 </script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,8 +19,14 @@ const pagePath = typeof canonicalPath !== 'undefined' ? canonicalPath : '/'
 <meta property="og:title" content="{{ metaPage.title }}">
 <meta property="og:description" content="{{ metaPage.description }}">
 <meta property="og:url" content="{{ absolute(pagePath) }}">
-<meta property="og:image" content="{{ absolute('/assets/lsu/images/hero-1080.webp') }}">
+<meta property="og:image" content="{{ absolute(card.src) }}">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="{{ CARD_WIDTH }}">
+<meta property="og:image:height" content="{{ CARD_HEIGHT }}">
+<meta property="og:image:alt" content="{{ card.alt }}">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{{ absolute(card.src) }}">
+<meta name="twitter:image:alt" content="{{ card.alt }}">
 <link rel="icon" href="/assets/lsu/images/favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="/assets/lsu/images/apple-touch-icon.png">
 <link rel="preload" href="/assets/lsu/fonts/anton-400-latin.woff2" as="font" type="font/woff2" crossorigin>
