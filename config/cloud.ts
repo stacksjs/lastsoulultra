@@ -10,7 +10,7 @@ import { env } from '@stacksjs/env'
  * project attached to this box, and must never equal `attachTo`.
  */
 const APP_SLUG = 'lastsoulultra'
-const APP_DOMAIN = env.APP_DOMAIN || 'lsu.stacksjs.com'
+const APP_DOMAIN = env.APP_DOMAIN || 'lastsoulultra.hq.training'
 
 /**
  * Ports on the shared box.
@@ -64,22 +64,32 @@ export const tsCloud: TsCloudConfig = {
 
     /**
      * No `dns` block, so the deploy writes no records and needs no registrar
-     * credentials.
+     * credentials. Only one host is ever served at a time - `APP_DOMAIN` is a
+     * single value - and both candidates point at the shared `stacks` box this
+     * project attaches to, 178.105.248.188 / 2a01:4f8:c014:6186::1.
      *
-     * `stacksjs.com` is delegated to Cloudflare nameservers (confirmed against
-     * the .com root and three public resolvers) while a Route53 hosted zone
-     * for the same name also exists and is not the one being asked - so which
-     * credentials would even be the right ones was not a settled question.
-     * `lsu.stacksjs.com` is one host that will not move, so its A and AAAA are
-     * created once by hand, pointing at the shared `stacks` box this project
-     * attaches to:
+     * `lastsoulultra.hq.training` is the one that answers today. A subdomain
+     * of the coaching platform rather than of this race, which is the wrong
+     * home in the long run, but it resolves and it serves.
+     *
+     * `lsu.stacksjs.com` is where this is meant to go, and it is blocked on
+     * access rather than on anything in this repository. `stacksjs.com` is
+     * delegated to Cloudflare (`alex`/`melany.ns.cloudflare.com`, confirmed
+     * against the .com root and three public resolvers). A Route53 hosted
+     * zone for the same name also exists and now holds `lsu` A and AAAA
+     * records, but nothing is delegated to it, so no resolver ever reads
+     * them. Records have to be created in CLOUDFLARE:
      *
      *   lsu  A     178.105.248.188
      *   lsu  AAAA  2a01:4f8:c014:6186::1
      *
-     * The same pair `hq.training` resolves to. Not proxied: rpx terminates TLS
-     * on the box with on-demand certificates, and a proxy in front would
-     * terminate it somewhere else and break the issuance.
+     * DNS-only, never proxied: rpx terminates TLS on the box with on-demand
+     * certificates, and a proxy in front would terminate it somewhere else
+     * and break the issuance.
+     *
+     * Moving then takes two more things, because the box refuses to drop a
+     * domain it is already serving: set `APP_DOMAIN`, and list the old host
+     * in `cloud.retiredDomains` so the deploy may replace the rpx fragment.
      */
   },
 
