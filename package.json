@@ -72,7 +72,8 @@
     "deps:lockfile:check": "bun .github/scripts/check-lockfile-version.ts",
     "bud": "./buddy",
     "stx": "./buddy",
-    "build:assets": "bun scripts/build-site-assets.ts"
+    "build:assets": "bun scripts/build-site-assets.ts",
+    "audit:html": "bun scripts/audit-html.ts"
   },
   "dependencies": {
     "@stacksjs/components": "0.2.687",
