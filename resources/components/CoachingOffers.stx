@@ -23,10 +23,21 @@ const offerHost = portalHost()
    Getting it wrong is an h1 followed by an h3, which is how a screen-reader
    user loses the outline of the page. */
 const offerTop = String(level) === '2'
+
+/* Two different things, and a storefront needs both: what this tier gives you
+   (the coach's product description) and how the coach trains people (their
+   published method summary). HQ sometimes carries the same sentence in both,
+   so the second is dropped when it repeats the first rather than printing a
+   paragraph twice. */
+const offerRows = offers.map((offer) => {
+  const includes = offer.product.description.trim()
+  const approach = offer.method.summary.trim()
+  return { ...offer, includes, approach: approach && approach !== includes ? approach : '' }
+})
 </script>
 @if(offers.length > 0)
 <ul class="coach-offers">
-  @foreach(offers as offer)
+  @foreach(offerRows as offer)
   <li class="coach-offer">
     <div>
       @if(offerTop)
@@ -35,7 +46,12 @@ const offerTop = String(level) === '2'
       <h3 class="coach-offer-name">{{ offer.label }}</h3>
       @endif
       <p class="coach-offer-by">{{ offer.coach }}</p>
-      <p>{{ offer.method.summary }}</p>
+      @if(offer.includes)
+      <p>{{ offer.includes }}</p>
+      @endif
+      @if(offer.approach)
+      <p class="coach-offer-method">{{ offer.approach }}</p>
+      @endif
       <p class="coach-offer-note">{{ offer.method.name }}, version {{ offer.method.version }}. Bought and billed at {{ offerHost }}.</p>
     </div>
     <div class="coach-offer-price">

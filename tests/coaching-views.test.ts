@@ -196,3 +196,23 @@ describe('warming the connection to HQ', () => {
     expect(html.indexOf('rel="preconnect"')).toBeLessThan(html.indexOf('hq-coaching.js'))
   })
 })
+
+describe('what a tier says it is', () => {
+  it('prints what the tier includes and how the coach trains', async () => {
+    stubHq()
+    const plans = await render('plans')
+
+    expect(plans).toContain('€19.99 is a sample price')
+    expect(plans).toContain('Demonstration content, not an approved LSU coach method.')
+  })
+
+  it('prints one paragraph when HQ carries the same sentence in both', async () => {
+    const same = structuredClone(payload)
+    same.offers[0].method.summary = same.offers[0].product.description
+    stubHq(same)
+    const plans = await render('plans')
+
+    expect(plans).not.toContain('coach-offer-method')
+    expect([...plans.matchAll(/sample price/g)]).toHaveLength(1)
+  })
+})

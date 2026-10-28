@@ -77,6 +77,7 @@
 .coaching-surface .coach-offer-price {text-align:right;white-space:nowrap}
 .coaching-surface .coach-offer-price b {display:block;font:400 clamp(22px,2.4vw,30px)/1.1 var(--lsu-display);font-weight:400}
 .coaching-surface .coach-offer-trial {display:block;margin-top:8px;color:var(--lsu-dim-3);font:400 13px/1.4 var(--lsu-body)}
+.coaching-surface .coach-offer-method {color:var(--lsu-dim-2);font-size:15px}
 .coaching-surface .coach-offer-note {margin:14px 0 0;color:var(--lsu-dim-3);font:400 13px/1.5 var(--lsu-body)}
 
 /* The hub's index of modules. A ruled list rather than a card grid: eight
