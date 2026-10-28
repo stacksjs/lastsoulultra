@@ -2,12 +2,45 @@
 @section('content')
 <script server>
 import { productionPages } from '~/resources/data/production-pages'
+import { entryHeading, entryKicker, entryRows, raceEvents } from '~/resources/data/race-events'
 const currentPage = productionPages["/lottery"]
 const canonicalPath = "/lottery"
+
+/* The windows, from the service that owns them. Stating them in markup was
+   true on the day it was typed: the USA window closes on 1 November 2026 and
+   the UK opens on 31 October, so this page would have been wrong about both
+   within a week. The seed below is what a reader sees before the first poll;
+   a static build freezes it, so the client refuses a stale one. */
+const entrySeed = await raceEvents()
+const entrySeedRows = entryRows(entrySeed)
+const entrySeedHeading = entryHeading(entrySeed)
+const entrySeedKicker = entryKicker(entrySeed)
+</script>
+<script client>
+const LSU_ENTRY_SEED_MAX_AGE = 600000
+const lsuEntryFresh = Boolean(entrySeed.ok && entrySeed.fetchedAt && Date.now() - entrySeed.fetchedAt < LSU_ENTRY_SEED_MAX_AGE)
+const lsuEntryRows = state(lsuEntryFresh ? entrySeedRows : [])
+const lsuEntryHeading = state(lsuEntryFresh ? entrySeedHeading : '')
+const lsuEntryKicker = state(lsuEntryFresh ? entrySeedKicker : '')
+
+async function lsuReadEntries() {
+  try {
+    const payload = await (await fetch('/api/events', { headers: { accept: 'application/json' } })).json()
+    // Already shaped by the same code the server render used.
+    if (!payload || !payload.ok || !Array.isArray(payload.rows)) return
+    lsuEntryRows.set(payload.rows)
+    lsuEntryHeading.set(payload.heading || '')
+    lsuEntryKicker.set(payload.kicker || '')
+  }
+  catch {
+    // Leave the seeded windows up rather than blanking the section.
+  }
+}
+onMount(() => { lsuReadEntries() })
 </script>
 <section class="lsu-scope-lottery phero">
 <div class="lsu-scope-lottery phero-copy">
-<div class="kicker lsu-scope-lottery">Season 3 / USA entries open</div>
+<div class="kicker lsu-scope-lottery" :text="lsuEntryKicker()"></div>
 <h1 class="lsu-scope-lottery">Request a race entry</h1>
 <p class="lsu-scope-lottery">Submit an entry request for an open event. Sending a request does not guarantee a place. Places are allocated through a combination of LSU team selection and a random draw. We will email you with the next steps if you are selected. Know <a href="/format">what a backyard ultra asks of you</a> before you do.</p>
 </div>
@@ -17,29 +50,15 @@ const canonicalPath = "/lottery"
 <RacePortal />
 </div>
 </section>
-<section class="lsu-scope-lottery open-now section">
+<section class="lsu-scope-lottery open-now section" :if="lsuEntryRows().length">
 <div class="lsu-scope-lottery shell">
-<h2 class="h2-sm lsu-scope-lottery">Season 3 / 2027 entries</h2>
+<h2 class="h2-sm lsu-scope-lottery" :text="lsuEntryHeading()"></h2>
 <div class="lsu-scope-lottery open-list">
-<article class="lsu-scope-lottery">
-<h3 class="lsu-scope-lottery">USA <span class="lsu-scope-lottery">February 2027</span>
-</h3>
-<p class="is-open lsu-scope-lottery open-status">Entry requests open</p>
-</article>
-<article class="lsu-scope-lottery">
-<h3 class="lsu-scope-lottery">United Kingdom <span class="lsu-scope-lottery">April 2027</span>
-</h3>
-<p class="lsu-scope-lottery open-status">Coming soon</p>
-</article>
-<article class="lsu-scope-lottery">
-<h3 class="lsu-scope-lottery">AUSTRALIA x DCG <span class="lsu-scope-lottery">June 2027</span>
-</h3>
-<p class="lsu-scope-lottery open-status">Coming soon</p>
-</article>
-<article class="lsu-scope-lottery">
-<h3 class="lsu-scope-lottery">Germany <span class="lsu-scope-lottery">August 2027</span>
-</h3>
-<p class="lsu-scope-lottery open-status">Qualification only · <a href="/world-series#qualify" class="lsu-scope-lottery">How to qualify</a>
+<article :for="row in lsuEntryRows()" class="lsu-scope-lottery">
+<h3 class="lsu-scope-lottery"><span :text="row.name"></span> <span class="lsu-scope-lottery" :text="row.when"></span></h3>
+<p class="lsu-scope-lottery open-status" :class="row.open ? 'is-open' : ''">
+<span :text="row.label"></span>
+<a :if="row.isFinal" href="/world-series#qualify" class="lsu-scope-lottery"> · How to qualify</a>
 </p>
 </article>
 </div>

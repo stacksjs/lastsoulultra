@@ -1,5 +1,6 @@
 import { response, route } from '@stacksjs/router'
 import { liveSnapshot, livePayload } from '../resources/data/live'
+import { entryHeading, entryKicker, entryRows, raceEvents } from '../resources/data/race-events'
 import { race } from '../resources/data/race'
 
 /**
@@ -55,6 +56,32 @@ route.get('/live', async () => {
     status: payload.ok ? 200 : 503,
     headers: {
       'cache-control': 'public, max-age=30, stale-while-revalidate=120',
+    },
+  })
+})
+
+
+/**
+ * The season's events, mirrored onto this origin.
+ *
+ * Same reasoning as /live: the entry pages state each event's window, and
+ * reading it from here rather than from the browser means a visitor's
+ * request never leaves this origin, and the upstream is asked once per cache
+ * window rather than once per reader.
+ *
+ * A failed upstream returns 503 with `ok: false` so a client cannot mistake
+ * an outage for a season with no events in it.
+ */
+route.get('/events', async () => {
+  const payload = await raceEvents()
+  // Rows and heading come shaped, so the page does not re-decide what
+  // "Coming soon" means in a second copy of the rules.
+  const body = { ...payload, rows: entryRows(payload), heading: entryHeading(payload), kicker: entryKicker(payload) }
+
+  return response.json(body, {
+    status: payload.ok ? 200 : 503,
+    headers: {
+      'cache-control': 'public, max-age=120, stale-while-revalidate=600',
     },
   })
 })
