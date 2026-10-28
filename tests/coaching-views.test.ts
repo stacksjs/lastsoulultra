@@ -97,6 +97,14 @@ describe('a module route, with a brand published', () => {
     expect(plans).toContain('€19.99 a month')
     expect(await render('calendar')).not.toContain('coach-offers')
   })
+
+  it('frames the panel on every published module', async () => {
+    for (const module of coachingModules) {
+      const html = await render(module.slug)
+      expect(html).toContain(`<hq-coaching brand="last-soul-ultra"`)
+      expect(html).not.toContain('Not open yet')
+    }
+  })
 })
 
 describe('a module route, with nothing published', () => {
@@ -120,6 +128,27 @@ describe('a module route, with nothing published', () => {
     const calendar = await render('calendar')
 
     expect(calendar).toContain('<title>Your week - Last Soul Ultra coaching</title>')
-    expect(calendar).toContain('coach-panel')
+    expect(calendar).toContain('Not open yet')
+  })
+
+  it('frames no panel, and loads no remote script, for a module nobody published', async () => {
+    const calendar = await render('calendar')
+
+    expect(calendar).not.toContain('<hq-coaching')
+    expect(calendar).not.toContain('hq-coaching.js')
+  })
+
+  it('drops the notice that promised an account would open the panel', async () => {
+    // With nothing to sign in to, "needs a training account" is an excuse,
+    // not an explanation.
+    expect(await render('calendar')).not.toContain('Needs a training account')
+    expect(await render('health')).not.toContain('Only you see this')
+  })
+
+  it('leaves the storefront one empty state, not two', async () => {
+    const plans = await render('plans')
+
+    expect([...plans.matchAll(/class="coach-empty"/g)]).toHaveLength(1)
+    expect(plans).toContain('Nothing is open yet')
   })
 })

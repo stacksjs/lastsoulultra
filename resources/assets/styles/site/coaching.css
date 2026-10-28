@@ -88,6 +88,8 @@
 .coaching-surface .coach-empty {margin:0 0 clamp(40px,5vw,72px);padding:clamp(30px,5vw,56px);border:var(--coach-rule);background:var(--lsu-card)}
 .coaching-surface .coach-empty h2 {margin:0;font:400 clamp(24px,3vw,34px)/1.1 var(--lsu-display);text-transform:uppercase}
 .coaching-surface .coach-empty p {margin:16px 0 0;max-width:58ch;color:var(--lsu-dim-1);font:400 16px/1.7 var(--lsu-body)}
+.coaching-surface .coach-empty-back a {color:var(--lsu-white);text-decoration:none;border-bottom:1px solid var(--lsu-red);padding-bottom:2px}
+.coaching-surface .coach-empty-back a:hover {color:var(--lsu-red)}
 
 /* Focus has to clear the black. A red ring on #000 is not reliably visible at
    small sizes, so the ring is white with a red cast behind it. */
