@@ -1,0 +1,38 @@
+<script>
+interface Props { slug: string }
+const { slug } = defineProps<Props>()
+</script>
+<script server>
+import { coachingModule } from '../data/coaching'
+
+/* The registry is the only place a module's words live, so a page cannot
+   disagree with the nav about what it is called. */
+const panel = coachingModule(slug)
+if (!panel) throw new Error(`unknown coaching module: ${slug}`)
+</script>
+<div class="coaching-surface">
+  <header class="coach-head">
+    <div class="coach-shell">
+      <span class="kicker">Coaching</span>
+      <h1>{{ panel.title }}</h1>
+      <p>{{ panel.summary }}</p>
+    </div>
+  </header>
+  <CoachingNav current="{{ panel.slug }}" />
+  <div class="coach-shell">
+    @if(panel.scope === 'private')
+    <div class="coach-scope">
+      <strong>Only you see this</strong>
+      <p>This panel reads your own training account, not anything this site holds. Last Soul Ultra cannot see it, and neither can the coach whose method you are following.</p>
+    </div>
+    @elseif(panel.scope === 'athlete')
+    <div class="coach-scope">
+      <strong>Needs a training account</strong>
+      <p>Sign in happens inside the panel, with the account that holds your subscription. That is a separate account from the one you use to request a race entry.</p>
+    </div>
+    @endif
+    <div class="coach-panel">
+      <CoachingPortal section="{{ panel.slug }}" />
+    </div>
+  </div>
+</div>

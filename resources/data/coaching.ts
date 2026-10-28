@@ -116,3 +116,34 @@ export function enabledModules(published: readonly string[] | undefined): Coachi
 export function indexableModulePaths(): string[] {
   return coachingModules.filter(module => module.scope === 'public').map(module => modulePath(module.slug))
 }
+
+/** Base plus the surface sheet. The marketing page's styles are elsewhere. */
+export const coachingStyles = [
+  '/assets/styles/production/base.css',
+  '/assets/styles/production/coaching.css',
+]
+
+export interface CoachingPageMeta {
+  title: string
+  description: string
+  styles: string[]
+  noindex?: boolean
+}
+
+/**
+ * Head metadata for a module route. A module that needs an account is noindex:
+ * a crawler sees the chrome and a sign-in prompt, which is not a page worth
+ * putting in a search result.
+ */
+export function coachingPage(slug: string): CoachingPageMeta {
+  const module = coachingModule(slug)
+  if (!module)
+    throw new Error(`unknown coaching module: ${slug}`)
+
+  return {
+    title: `${module.title} - Last Soul Ultra coaching`,
+    description: module.summary,
+    styles: coachingStyles,
+    noindex: module.scope !== 'public',
+  }
+}

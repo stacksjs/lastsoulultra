@@ -1,0 +1,78 @@
+/* The coaching surface: /coaching and the eight module routes under it.
+   Loaded only by those routes, not from stx-site.css, which the whole site
+   pays for on every page.
+
+   The palette is the site's own, which is also what the HQ brand preset
+   publishes: black, #0d0d0f surfaces, #dd0f15, Anton over Barlow, square
+   corners. Nothing here reads a colour over the network - a page whose
+   palette arrives with a fetch paints unstyled while that fetch is in flight.
+
+   Prefixed .coach- throughout. The marketing page's .coaching-* rules live in
+   stx-site.css and the two must not reach into one another. */
+
+.coaching-surface {--coach-gutter: clamp(18px, 5vw, 40px); --coach-rule: 1px solid var(--lsu-line)}
+.coaching-surface .coach-shell {max-width:var(--lsu-max);margin:0 auto;padding:0 var(--coach-gutter)}
+/* The shell has no vertical padding, so the first child's top margin would
+   collapse straight through it and sit flush against the nav rule. The band
+   below the nav owns that space instead, and the panel carries none. */
+.coaching-surface .coach-nav+.coach-shell {padding-top:clamp(26px,3vw,40px)}
+
+/* Header. A compact band rather than another full-height hero: the runner who
+   reaches /coaching/calendar came to read this week's sessions, not to be
+   sold the idea again. The red hairline under it carries the brand instead. */
+.coaching-surface .coach-head {padding:clamp(104px,11vw,136px) 0 clamp(26px,3vw,38px)}
+.coaching-surface .coach-head .kicker {display:block;color:var(--lsu-red)}
+.coaching-surface .coach-head h1 {max-width:16ch;margin:16px 0 0;font:400 clamp(38px,5.2vw,76px)/1.04 var(--lsu-display);text-transform:uppercase;letter-spacing:.02em}
+.coaching-surface .coach-head p {max-width:58ch;margin:20px 0 0;color:var(--lsu-dim-1);font:400 18px/1.65 var(--lsu-body)}
+
+/* Module nav. One row of words, the current one underlined in red. It scrolls
+   sideways on a phone rather than wrapping into three ragged lines, and the
+   scrollport keeps its own focus ring so a keyboard can reach the overflow. */
+.coaching-surface .coach-nav {border-block:var(--coach-rule);background:#000}
+.coaching-surface .coach-nav ul {display:flex;gap:clamp(18px,3vw,40px);margin:0;padding:0;list-style:none;overflow-x:auto;scrollbar-width:none;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch}
+.coaching-surface .coach-nav ul::-webkit-scrollbar {display:none}
+.coaching-surface .coach-nav li {scroll-snap-align:start}
+.coaching-surface .coach-nav a {display:block;padding:18px 0;border-bottom:2px solid transparent;color:var(--lsu-dim-2);font:400 13px/1 var(--lsu-body);letter-spacing:.14em;text-transform:uppercase;text-decoration:none;white-space:nowrap}
+.coaching-surface .coach-nav a:hover {color:var(--lsu-white)}
+.coaching-surface .coach-nav a[aria-current="page"] {border-bottom-color:var(--lsu-red);color:var(--lsu-white)}
+
+/* The panel. Space is reserved before the remote element upgrades, so HQ
+   loading cannot shove the footer down the page under the reader. */
+.coaching-surface .coach-panel {min-height:460px;margin:0 0 clamp(60px,8vw,120px)}
+.coaching-surface .coach-panel hq-coaching {display:block}
+.coaching-surface .coach-panel hq-coaching:not(:defined) {display:grid;gap:22px;justify-items:start;padding:clamp(24px,5vw,56px);border:var(--coach-rule);background:var(--lsu-card)}
+.coaching-surface .coach-panel hq-coaching:not(:defined) p {margin:0;max-width:56ch;color:var(--lsu-dim-1);font:400 16px/1.7 var(--lsu-body)}
+
+/* Said before the click, not after it. A module that needs an account says so
+   here; a private one says what this site cannot see, which is the whole
+   point of health and messages reading the athlete's own account. */
+.coaching-surface .coach-scope {display:grid;gap:10px;margin:0 0 clamp(26px,3vw,40px);padding:18px 22px;border-left:3px solid var(--lsu-red);background:var(--lsu-card)}
+.coaching-surface .coach-scope strong {font:400 13px/1 var(--lsu-body);letter-spacing:.14em;text-transform:uppercase;color:var(--lsu-white)}
+.coaching-surface .coach-scope p {margin:0;max-width:62ch;color:var(--lsu-dim-1);font:400 15px/1.65 var(--lsu-body)}
+
+/* The storefront. One ruled row per tier, not a grid of pricing cards: there
+   is one offer today and a three-column grid holding one card looks broken. */
+.coaching-surface .coach-offers {display:grid;margin:0;padding:0;list-style:none;border-top:var(--coach-rule)}
+.coaching-surface .coach-offer {display:grid;grid-template-columns:minmax(0,1fr) auto;gap:clamp(18px,4vw,56px);align-items:start;padding:clamp(26px,3vw,40px) 0;border-bottom:var(--coach-rule)}
+.coaching-surface .coach-offer h3 {margin:0;font:400 clamp(24px,2.8vw,36px)/1.1 var(--lsu-display);text-transform:uppercase}
+.coaching-surface .coach-offer-by {margin:10px 0 0;color:var(--lsu-red);font:400 13px/1 var(--lsu-body);letter-spacing:.14em;text-transform:uppercase}
+.coaching-surface .coach-offer p {margin:16px 0 0;max-width:60ch;color:var(--lsu-dim-1);font:400 16px/1.7 var(--lsu-body)}
+.coaching-surface .coach-offer-price {text-align:right;white-space:nowrap}
+.coaching-surface .coach-offer-price b {display:block;font:400 clamp(22px,2.4vw,30px)/1.1 var(--lsu-display);font-weight:400}
+.coaching-surface .coach-offer-trial {display:block;margin-top:8px;color:var(--lsu-dim-3);font:400 13px/1.4 var(--lsu-body)}
+.coaching-surface .coach-offer-note {margin:14px 0 0;color:var(--lsu-dim-3);font:400 13px/1.5 var(--lsu-body)}
+
+/* Nothing published yet. The honest state, and the one that ships today. */
+.coaching-surface .coach-empty {padding:clamp(30px,5vw,56px);border:var(--coach-rule);background:var(--lsu-card)}
+.coaching-surface .coach-empty h2 {margin:0;font:400 clamp(24px,3vw,34px)/1.1 var(--lsu-display);text-transform:uppercase}
+.coaching-surface .coach-empty p {margin:16px 0 0;max-width:58ch;color:var(--lsu-dim-1);font:400 16px/1.7 var(--lsu-body)}
+
+/* Focus has to clear the black. A red ring on #000 is not reliably visible at
+   small sizes, so the ring is white with a red cast behind it. */
+.coaching-surface a:focus-visible,.coaching-surface button:focus-visible,.coaching-surface [tabindex]:focus-visible {outline:2px solid var(--lsu-white);outline-offset:3px;box-shadow:0 0 0 5px var(--lsu-red-glow)}
+
+@media (max-width:760px) {
+  .coaching-surface .coach-offer {grid-template-columns:minmax(0,1fr);gap:18px}
+  .coaching-surface .coach-offer-price {text-align:left}
+  .coaching-surface .coach-panel {min-height:520px}
+}

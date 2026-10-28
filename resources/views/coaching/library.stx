@@ -1,0 +1,9 @@
+@extends('layouts/LSU')
+@section('content')
+<script server>
+import { coachingPage, modulePath } from '~/resources/data/coaching'
+const currentPage = coachingPage('library')
+const canonicalPath = modulePath('library')
+</script>
+<CoachingModule slug="library" />
+@endsection

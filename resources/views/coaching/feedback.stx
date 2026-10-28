@@ -1,0 +1,9 @@
+@extends('layouts/LSU')
+@section('content')
+<script server>
+import { coachingPage, modulePath } from '~/resources/data/coaching'
+const currentPage = coachingPage('feedback')
+const canonicalPath = modulePath('feedback')
+</script>
+<CoachingModule slug="feedback" />
+@endsection
