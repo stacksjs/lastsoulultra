@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'bun:test'
 import { coachingModule, coachingModules, enabledModules, indexableModulePaths, modulePath } from '../resources/data/coaching'
 import { formatPrice, formatTrial, parseBrand } from '../resources/functions/coaching-brand'
+import { coachingBrand, coachingOrigin, coachingSection, portalElementUrl, portalUrl } from '../resources/functions/coaching-source'
 
 describe('the coaching module registry', () => {
   it('uses each HQ module key once, as its own URL segment', () => {
@@ -156,5 +157,41 @@ describe('printing a coach\'s price', () => {
     expect(formatTrial(base)).toBe('')
     expect(formatTrial({ ...base, trialDays: 1 })).toBe('1 day free first')
     expect(formatTrial({ ...base, trialDays: 14 })).toBe('14 days free first')
+  })
+})
+
+describe('where the portal is', () => {
+  it('insists on HTTPS anywhere but loopback', () => {
+    expect(coachingOrigin('https://hq.training')).toBe('https://hq.training')
+    expect(coachingOrigin('http://localhost:3940')).toBe('http://localhost:3940')
+    expect(coachingOrigin('http://127.0.0.1:3940')).toBe('http://127.0.0.1:3940')
+    expect(() => coachingOrigin('http://hq.training')).toThrow('HQ_ORIGIN must use HTTPS')
+    // A host that merely contains "localhost" is not loopback.
+    expect(() => coachingOrigin('http://localhost.attacker.test')).toThrow()
+  })
+
+  it('refuses a brand slug that is not one', () => {
+    expect(coachingBrand('last-soul-ultra')).toBe('last-soul-ultra')
+    for (const value of ['', '-leading', 'Upper', 'has space', '../org', 'a'.repeat(141)])
+      expect(() => coachingBrand(value)).toThrow('HQ_BRAND_SLUG must be an organization slug')
+  })
+
+  it('passes through only a section this site actually serves', () => {
+    expect(coachingSection('calendar')).toBe('calendar')
+    for (const value of ['', 'whiteboard', 'moderation', 42, null, undefined, ['plans']])
+      expect(coachingSection(value)).toBe('')
+  })
+
+  it('links to the same section the embed is showing', () => {
+    expect(portalUrl('calendar', 'https://hq.training', 'last-soul-ultra'))
+      .toBe('https://hq.training/brands/last-soul-ultra?section=calendar')
+    expect(portalUrl('', 'https://hq.training', 'last-soul-ultra'))
+      .toBe('https://hq.training/brands/last-soul-ultra')
+    expect(portalUrl('nonsense', 'https://hq.training', 'last-soul-ultra'))
+      .toBe('https://hq.training/brands/last-soul-ultra')
+  })
+
+  it('loads the element from the same origin it frames', () => {
+    expect(portalElementUrl('https://hq.training')).toBe('https://hq.training/assets/elements/hq-coaching.js')
   })
 })

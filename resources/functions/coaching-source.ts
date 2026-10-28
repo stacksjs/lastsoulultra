@@ -1,5 +1,6 @@
 import type { CoachingBrand } from './coaching-brand'
 import coaching from '../../config/coaching'
+import { coachingModule } from '../data/coaching'
 import { parseBrand } from './coaching-brand'
 
 /**
@@ -32,9 +33,53 @@ const cache = new Map<string, Entry>()
 /** One in-flight request per brand, so a cold cache does not stampede. */
 const inFlight = new Map<string, Promise<CoachingBrand | null>>()
 
+/**
+ * The configured HQ origin, checked.
+ *
+ * An HQ reached over plain HTTP would carry a runner's training session in
+ * clear, and a misconfigured HQ_ORIGIN is a deployment mistake that should
+ * stop the build rather than quietly ship. Loopback is exempt so the local
+ * preview stack works.
+ */
+export function coachingOrigin(value = coaching.origin): string {
+  const url = new URL(value)
+  if (url.protocol !== 'https:' && !['localhost', '127.0.0.1'].includes(url.hostname))
+    throw new Error('HQ_ORIGIN must use HTTPS')
+  return url.origin
+}
+
+/** The configured brand slug, checked against HQ's own slug shape. */
+export function coachingBrand(value = coaching.brand): string {
+  if (!/^[a-z0-9][a-z0-9-]{0,139}$/.test(value))
+    throw new Error('HQ_BRAND_SLUG must be an organization slug')
+  return value
+}
+
+/**
+ * A section name HQ will accept, or ''. The registry is the list: a section
+ * this site does not serve has no business being passed through to HQ, and
+ * keeping a second copy of the eight names here is how the two drift.
+ */
+export function coachingSection(value: unknown): string {
+  return typeof value === 'string' && coachingModule(value) ? value : ''
+}
+
 /** The endpoint, built from config rather than from anything a visitor sends. */
 export function brandEndpoint(origin = coaching.origin, slug = coaching.brand): string {
   return new URL(`/api/brands/${encodeURIComponent(slug)}`, origin).toString()
+}
+
+/** Where the portal lives, for a link that works when the frame does not. */
+export function portalUrl(section: unknown = '', origin = coaching.origin, slug = coaching.brand): string {
+  const url = new URL(`/brands/${encodeURIComponent(coachingBrand(slug))}`, coachingOrigin(origin))
+  const named = coachingSection(section)
+  if (named) url.searchParams.set('section', named)
+  return url.toString()
+}
+
+/** The custom element HQ generates for embedding its portal. */
+export function portalElementUrl(origin = coaching.origin): string {
+  return `${coachingOrigin(origin)}/assets/elements/hq-coaching.js`
 }
 
 async function request(slug: string, origin: string): Promise<CoachingBrand | null> {
