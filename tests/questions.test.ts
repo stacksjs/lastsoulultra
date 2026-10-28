@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'bun:test'
 import { resolve } from 'node:path'
 import { processDirectives } from '@stacksjs/stx'
+import { absolute } from '../resources/data/site'
 
 /**
  * /contact and /faq are the same page under two published URLs. They used to
@@ -41,7 +42,10 @@ describe('the questions page', () => {
   })
 
   it('canonicalises both to /contact', async () => {
+    // Built from APP_URL rather than written out: CI materialises a .env from
+    // .env.example, where APP_URL is stacks.localhost, so a hard-coded
+    // production origin passes on a laptop and fails on a runner.
     for (const view of ['contact', 'faq'])
-      expect(await render(view)).toContain('rel="canonical" href="https://lastsoulultra.com/contact"')
+      expect(await render(view)).toContain(`rel="canonical" href="${absolute('/contact')}"`)
   })
 })

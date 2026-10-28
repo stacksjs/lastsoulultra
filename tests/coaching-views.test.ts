@@ -2,6 +2,7 @@ import { afterEach, beforeEach, describe, expect, it } from 'bun:test'
 import { resolve } from 'node:path'
 import { processDirectives } from '@stacksjs/stx'
 import { coachingModules } from '../resources/data/coaching'
+import { absolute } from '../resources/data/site'
 import { coachingOrigin, forgetBrand } from '../resources/functions/coaching-source'
 
 /**
@@ -54,7 +55,7 @@ describe('a module route, with a brand published', () => {
 
       expect(html).toContain(`<title>${module.title} - Last Soul Ultra coaching</title>`)
       expect(html).toContain(`content="${module.summary}"`)
-      expect(html).toContain(`rel="canonical" href="https://lastsoulultra.com/coaching/${module.slug}"`)
+      expect(html).toContain(`rel="canonical" href="${absolute(`/coaching/${module.slug}`)}"`)
     }
   })
 
