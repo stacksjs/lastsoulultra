@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'bun:test'
 import { coachingModule, coachingModules, enabledModules, indexableModulePaths, modulePath } from '../resources/data/coaching'
 import { formatPrice, formatTrial, parseBrand } from '../resources/functions/coaching-brand'
+import coaching from '../config/coaching'
+import server from '../config/server'
 import { coachingBrand, coachingOrigin, coachingSection, portalElementUrl, portalUrl } from '../resources/functions/coaching-source'
 
 describe('the coaching module registry', () => {
@@ -193,5 +195,34 @@ describe('where the portal is', () => {
 
   it('loads the element from the same origin it frames', () => {
     expect(portalElementUrl('https://hq.training')).toBe('https://hq.training/assets/elements/hq-coaching.js')
+  })
+})
+
+describe('the microphone the feedback module needs', () => {
+  /** Exactly how @stacksjs/server matches config.server.headers. */
+  function headersFor(pathname: string): Record<string, string> {
+    const matched: Record<string, string> = {}
+    for (const [pattern, headers] of Object.entries(server.headers ?? {})) {
+      const hit = pattern.endsWith('/*') ? pathname.startsWith(pattern.slice(0, -1)) : pathname === pattern
+      if (hit) Object.assign(matched, headers)
+    }
+    return matched
+  }
+
+  it('is delegated on the two routes that frame it', () => {
+    for (const path of ['/coaching', '/coaching/feedback']) {
+      expect(headersFor(path)['Permissions-Policy']).toBe(`microphone=(self "${new URL(coaching.origin).origin}")`)
+    }
+  })
+
+  it('names the origin the panel is actually framed from', () => {
+    // A policy naming a different host than the iframe src grants nothing.
+    const policy = headersFor('/coaching/feedback')['Permissions-Policy'] ?? ''
+    expect(policy).toContain(new URL(portalUrl('feedback')).origin)
+  })
+
+  it('is not handed to a route with no microphone in it', () => {
+    for (const path of ['/', '/format', '/coaching/calendar', '/coaching/account'])
+      expect(headersFor(path)['Permissions-Policy']).toBeUndefined()
   })
 })
