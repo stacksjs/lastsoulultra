@@ -27,7 +27,7 @@ jobs:
 
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Setup Pantry
         uses: pantry-pm/pantry/packages/action@d738d5fd2e543e3b8380e5fbd5d01ba8936c1790 # v0.10.47 + the socket-hang-up retry fix
@@ -71,7 +71,7 @@ jobs:
 
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Setup Pantry
         uses: pantry-pm/pantry/packages/action@d738d5fd2e543e3b8380e5fbd5d01ba8936c1790 # v0.10.47 + the socket-hang-up retry fix
@@ -105,7 +105,7 @@ jobs:
 
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Setup Pantry
         uses: pantry-pm/pantry/packages/action@d738d5fd2e543e3b8380e5fbd5d01ba8936c1790 # v0.10.47 + the socket-hang-up retry fix
