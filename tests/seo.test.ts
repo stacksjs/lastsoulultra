@@ -158,4 +158,21 @@ describe('the page that is not found', () => {
     // Nothing crawls it, so it carries no graph.
     expect(html).not.toContain('application/ld+json')
   })
+
+  it('wears the same chrome as every other page', async () => {
+    const path = resolve('resources/views/404.stx')
+    const html = await processDirectives(await Bun.file(path).text(), {}, path, {
+      enabled: true,
+      cache: false,
+      componentsDir: resolve('resources/components'),
+      layoutsDir: resolve('resources/layouts'),
+      partialsDir: resolve('resources/partials'),
+    }, new Set())
+
+    // It used to write its own html, head and body, and so was the one page
+    // with no skip link, no focusable main and the wrong lang.
+    expect(html).toContain('class="lsu-skip"')
+    expect(html).toContain('<main id="main" tabindex="-1">')
+    expect(html).toContain('lang="en-GB"')
+  })
 })
