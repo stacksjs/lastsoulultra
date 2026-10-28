@@ -77,6 +77,11 @@ export function portalUrl(section: unknown = '', origin = coaching.origin, slug 
   return url.toString()
 }
 
+/** The host the panel is loaded from, for a page that says so out loud. */
+export function portalHost(origin = coaching.origin): string {
+  return new URL(coachingOrigin(origin)).host
+}
+
 /** The custom element HQ generates for embedding its portal. */
 export function portalElementUrl(origin = coaching.origin): string {
   return `${coachingOrigin(origin)}/assets/elements/hq-coaching.js`

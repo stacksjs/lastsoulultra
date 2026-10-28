@@ -36,9 +36,21 @@
 .coaching-surface .coach-nav a:hover {color:var(--lsu-white)}
 .coaching-surface .coach-nav a[aria-current="page"] {border-bottom-color:var(--lsu-red);color:var(--lsu-white)}
 
+/* Above the panel, always. A cross-origin frame can decline to load for
+   reasons this page cannot detect, and the embed's own escape hatch sits
+   below 1100px of empty iframe, where nobody finds it. This one says where
+   the panel comes from, which the site's voice wants said anyway. */
+.coaching-surface .coach-panel-bar {display:flex;flex-wrap:wrap;gap:12px 24px;align-items:baseline;justify-content:space-between;padding-bottom:14px;border-bottom:var(--coach-rule)}
+.coaching-surface .coach-panel-bar p {margin:0;max-width:52ch;color:var(--lsu-dim-3);font:400 13px/1.5 var(--lsu-body)}
+.coaching-surface .coach-panel-bar a {color:var(--lsu-white);font:400 13px/1 var(--lsu-body);letter-spacing:.14em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid var(--lsu-red);padding-bottom:3px}
+.coaching-surface .coach-panel-bar a:hover {color:var(--lsu-red)}
+
+/* Reachable by a screen reader, invisible to everyone else. */
+.coaching-surface .coach-sr {position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+
 /* The panel. Space is reserved before the remote element upgrades, so HQ
    loading cannot shove the footer down the page under the reader. */
-.coaching-surface .coach-panel {min-height:460px;margin:0 0 clamp(60px,8vw,120px)}
+.coaching-surface .coach-panel {min-height:460px;margin:clamp(20px,2vw,28px) 0 clamp(60px,8vw,120px)}
 .coaching-surface .coach-panel hq-coaching {display:block}
 .coaching-surface .coach-panel hq-coaching:not(:defined) {display:grid;gap:22px;justify-items:start;padding:clamp(24px,5vw,56px);border:var(--coach-rule);background:var(--lsu-card)}
 .coaching-surface .coach-panel hq-coaching:not(:defined) p {margin:0;max-width:56ch;color:var(--lsu-dim-1);font:400 16px/1.7 var(--lsu-body)}
@@ -52,7 +64,7 @@
 
 /* The storefront. One ruled row per tier, not a grid of pricing cards: there
    is one offer today and a three-column grid holding one card looks broken. */
-.coaching-surface .coach-offers {display:grid;margin:0;padding:0;list-style:none;border-top:var(--coach-rule)}
+.coaching-surface .coach-offers {display:grid;margin:0 0 clamp(40px,5vw,72px);padding:0;list-style:none;border-top:var(--coach-rule)}
 .coaching-surface .coach-offer {display:grid;grid-template-columns:minmax(0,1fr) auto;gap:clamp(18px,4vw,56px);align-items:start;padding:clamp(26px,3vw,40px) 0;border-bottom:var(--coach-rule)}
 .coaching-surface .coach-offer h3 {margin:0;font:400 clamp(24px,2.8vw,36px)/1.1 var(--lsu-display);text-transform:uppercase}
 .coaching-surface .coach-offer-by {margin:10px 0 0;color:var(--lsu-red);font:400 13px/1 var(--lsu-body);letter-spacing:.14em;text-transform:uppercase}
@@ -63,7 +75,7 @@
 .coaching-surface .coach-offer-note {margin:14px 0 0;color:var(--lsu-dim-3);font:400 13px/1.5 var(--lsu-body)}
 
 /* Nothing published yet. The honest state, and the one that ships today. */
-.coaching-surface .coach-empty {padding:clamp(30px,5vw,56px);border:var(--coach-rule);background:var(--lsu-card)}
+.coaching-surface .coach-empty {margin:0 0 clamp(40px,5vw,72px);padding:clamp(30px,5vw,56px);border:var(--coach-rule);background:var(--lsu-card)}
 .coaching-surface .coach-empty h2 {margin:0;font:400 clamp(24px,3vw,34px)/1.1 var(--lsu-display);text-transform:uppercase}
 .coaching-surface .coach-empty p {margin:16px 0 0;max-width:58ch;color:var(--lsu-dim-1);font:400 16px/1.7 var(--lsu-body)}
 
