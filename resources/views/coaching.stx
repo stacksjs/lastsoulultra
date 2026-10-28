@@ -26,7 +26,11 @@ const canonicalPath = '/coaching'
     <span class="kicker">Last Soul Ultra / Coaching</span>
     <h1>Say how it felt.<br><span class="accent">The plan changes.</span></h1>
     <p>Send a voice message after your run. An AI rebuilds next week around what you said, inside a coach's method.</p>
+    @if(hubLive)
     <a class="btn btn-lg" href="#training">Open the portal</a>
+    @else
+    <a class="btn btn-lg" href="#training">See what is coming</a>
+    @endif
   </div>
   <div class="coaching-hero-shot">
     <img src="/assets/lsu/images/recap-06-810.webp" srcset="/assets/lsu/images/recap-06-540.webp 540w, /assets/lsu/images/recap-06-810.webp 810w, /assets/lsu/images/recap-06-1080.webp 1080w" sizes="(min-width: 900px) 42vw, 100vw" alt="A runner in a white sun hat and neck cover looks down at his watch." width="1080" height="1440" loading="eager" fetchpriority="high" decoding="async">
@@ -96,8 +100,13 @@ const canonicalPath = '/coaching'
 
   <section id="training">
     <div class="coaching-head">
+      @if(hubLive)
       <h2 class="h2-sm">What is open.<br><span class="accent">And where it runs.</span></h2>
       <p>The tiers a coach has published, then the eight panels your training lives in once you are in one.</p>
+      @else
+      <h2 class="h2-sm">Not open yet.<br><span class="accent">It opens here.</span></h2>
+      <p>No coach has published a method and no price has been set. The first tier appears on this page, under the coach's own name.</p>
+      @endif
     </div>
     <div class="coaching-surface">
       <CoachingOffers />

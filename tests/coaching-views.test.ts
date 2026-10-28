@@ -249,3 +249,31 @@ describe('the coaching hub', () => {
     expect(html).toContain('Nothing is open yet')
   })
 })
+
+describe('what the hub promises', () => {
+  async function hubHtml(): Promise<string> {
+    const path = resolve('resources/views/coaching.stx')
+    return processDirectives(await Bun.file(path).text(), {}, path, {
+      enabled: true,
+      cache: false,
+      componentsDir: resolve('resources/components'),
+      layoutsDir: resolve('resources/layouts'),
+      partialsDir: resolve('resources/partials'),
+    }, new Set())
+  }
+
+  it('offers the portal only when there is one', async () => {
+    stubHq()
+    expect(await hubHtml()).toContain('Open the portal')
+  })
+
+  it('promises neither a portal nor eight panels it is not showing', async () => {
+    stubHq(null)
+    const html = await hubHtml()
+
+    expect(html).not.toContain('Open the portal')
+    expect(html).not.toContain('the eight panels your training lives in')
+    expect(html).toContain('See what is coming')
+    expect(html).toContain('Not open yet')
+  })
+})
