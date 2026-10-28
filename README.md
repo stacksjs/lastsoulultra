@@ -43,6 +43,30 @@ HQ's **Brand experience** editor controls colors, fonts, corners, density, modul
 
 HQ's repository documents provisioning, API endpoints, native app builds and launch decisions in `docs/developers/branded-coaching.md`. The new HQ database migrations and application deployment must be released before enabling the live LSU embed. This repository change does not deploy either site.
 
+## Built, with nothing on the site reaching it
+
+Two working features have no entry point in the current pages. Both were
+added and then lost when the site was rebuilt from the production capture, so
+they are listed here rather than left to be found again by accident.
+
+**The live scoreboard.** `resources/data/live.ts` mirrors the race's own board
+- which publishes no JSON, so it lifts the state out of the page the worker
+serves - and `routes/api.ts` serves it at `GET /api/live`, cached for a minute
+and answering 503 with `ok: false` rather than a page of zeroes when upstream
+is down. Nothing fetches it. The only consumer left is the 404 page, which
+asks it whether the race is running to decide what to link to. Restoring the
+standings means rendering `livePayload` on `/results` and polling that
+endpoint; the shape is the same server-side and in the browser so the table
+cannot drift between them.
+
+**The newsletter.** `app/Actions/SubscriberEmailAction.ts`,
+`ConfirmSubscriptionAction.ts`, both `app/Mail/Subscription*` classes and the
+three templates in `resources/emails/` implement a real double opt-in, and
+`/api/email/confirm` is the middle step the framework does not provide. No
+page has a signup form, so nobody can start the flow. Adding one also needs
+privacy copy: the current `/privacy` documents analytics, server logs,
+accounts and entries, and says nothing about a mailing list.
+
 ## Existing race service
 
 `resources/functions/race-api.ts` talks to the existing `https://api.lastsoulultra.com/v1` service for public events, sign-in, profile updates and entry requests. Its established bearer session remains under `lsu.runner.session`. Coaching has its own HQ account session; credentials are never silently transferred or linked by unverified email. Form submissions reach the real race service, so use an approved test account/service for write testing.
