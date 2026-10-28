@@ -1,6 +1,6 @@
 import type { EventsPayload, RaceEvent } from '../resources/data/race-events'
 import { afterEach, beforeEach, describe, expect, it } from 'bun:test'
-import { entryHeading, entryKicker, entryRows, entryStatus, eventWhen, forgetEvents, parseEvent, raceEvents } from '../resources/data/race-events'
+import { entryHeading, entryKicker, entryRows, entryRowsByStop, entryStatus, eventWhen, forgetEvents, parseEvent, raceEvents } from '../resources/data/race-events'
 
 /**
  * The entry windows.
@@ -160,5 +160,32 @@ describe('when the service is unreachable', () => {
 
     await Promise.all([raceEvents(), raceEvents(), raceEvents()])
     expect(hits).toBe(1)
+  })
+})
+
+describe('keying the four World Series stops', () => {
+  it('maps each country onto the stop the globe pins use', () => {
+    const stops = entryRowsByStop(payload([
+      event({ name: 'USA', country: 'USA', phase: 'open' }),
+      event({ name: 'United Kingdom', country: 'GBR' }),
+      event({ name: 'AUSTRALIA x DCG', country: 'AUS' }),
+      event({ name: 'Germany', country: 'GER', isFinal: true, phase: 'closed' }),
+    ]), NOW)
+
+    expect(Object.keys(stops).sort()).toEqual(['aus', 'ger', 'uk', 'usa'])
+    expect(stops.usa!.open).toBe(true)
+    expect(stops.ger!.isFinal).toBe(true)
+    expect(stops.uk!.label).toBe('Entries open 31 October')
+  })
+
+  it('leaves out a country the page has no stop for', () => {
+    // A fifth qualifier would need markup and a pin before it can be keyed.
+    const stops = entryRowsByStop(payload([event({ name: 'Japan', country: 'JPN' })]), NOW)
+    expect(stops).toEqual({})
+  })
+
+  it('is empty when the service is unreachable, so the page says nothing', () => {
+    const down = { ok: false, error: 'timeout', fetchedAt: null, stale: false, upcoming: [], past: [] }
+    expect(entryRowsByStop(down, NOW)).toEqual({})
   })
 })

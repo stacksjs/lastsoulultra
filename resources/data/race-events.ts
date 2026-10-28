@@ -229,6 +229,8 @@ export function entryStatus(event: RaceEvent, now: number = Date.now()): EntrySt
 export interface EntryRow {
   slug: string
   name: string
+  /** USA, GBR, AUS, GER. How the World Series list keys its four stops. */
+  country: string
   /** "February 2027", or the year alone when the month is not set. */
   when: string
   label: string
@@ -247,6 +249,7 @@ export function entryRows(payload: EventsPayload, now: number = Date.now()): Ent
   return payload.upcoming.map(event => ({
     slug: event.slug,
     name: event.name,
+    country: event.country,
     when: eventWhen(event),
     isFinal: event.isFinal,
     ...entryStatus(event, now),
@@ -287,4 +290,20 @@ export function entryKicker(payload: EventsPayload, now: number = Date.now()): s
   }
 
   return prefix
+}
+
+/**
+ * The World Series page keys its four stops on short names of its own, set
+ * on each list item as `data-stop` and tied to the globe's pins. Mapping
+ * them here keeps that coupling in one place rather than in the template.
+ */
+const STOPS: Record<string, string> = { USA: 'usa', GBR: 'uk', AUS: 'aus', GER: 'ger' }
+
+export function entryRowsByStop(payload: EventsPayload, now: number = Date.now()): Record<string, EntryRow> {
+  const byStop: Record<string, EntryRow> = {}
+  for (const row of entryRows(payload, now)) {
+    const stop = STOPS[row.country]
+    if (stop) byStop[stop] = row
+  }
+  return byStop
 }

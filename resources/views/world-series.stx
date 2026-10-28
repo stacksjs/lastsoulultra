@@ -2,8 +2,43 @@
 @section('content')
 <script server>
 import { productionPages } from '~/resources/data/production-pages'
+import { entryRowsByStop, raceEvents } from '~/resources/data/race-events'
 const currentPage = productionPages["/world-series"]
 const canonicalPath = "/world-series"
+
+/* The four stops' windows, from the service that owns them. They were
+   written into the markup, which is true the day it is typed: the USA
+   window closes on 1 November 2026 and the UK opens on 31 October. The
+   list items keep their ids and data-stop so the globe's pins still find
+   them; only what each one says about entering is read from the service. */
+const wsSeed = await raceEvents()
+const wsSeedStops = entryRowsByStop(wsSeed)
+</script>
+<script client>
+const LSU_WS_SEED_MAX_AGE = 600000
+const wsFresh = Boolean(wsSeed.ok && wsSeed.fetchedAt && Date.now() - wsSeed.fetchedAt < LSU_WS_SEED_MAX_AGE)
+const wsStops = state(wsFresh ? wsSeedStops : {})
+
+const wsRow = stop => wsStops()[stop] || null
+const wsOpen = stop => Boolean(wsRow(stop)?.open)
+const wsFinal = stop => Boolean(wsRow(stop)?.isFinal)
+/* No row means the service is unreachable: the item keeps its name and its
+   pin and simply says nothing about entering, rather than guessing. */
+const wsLabel = stop => wsRow(stop)?.label || ''
+const wsWhen = stop => wsRow(stop)?.when || ''
+const wsClass = stop => wsOpen(stop) ? 'ws-apply' : wsFinal(stop) ? 'ws-final' : 'ws-soon'
+
+async function wsReadEvents() {
+  try {
+    const payload = await (await fetch('/api/events', { headers: { accept: 'application/json' } })).json()
+    if (!payload || !payload.ok || !payload.stops) return
+    wsStops.set(payload.stops)
+  }
+  catch {
+    // Keep the seeded windows rather than emptying the list.
+  }
+}
+onMount(() => { wsReadEvents() })
 </script>
 <section class="lsu-scope-world-series phero">
 <header class="lsu-scope-world-series phero-copy ws-head">
@@ -21,37 +56,45 @@ const canonicalPath = "/world-series"
 <div class="lsu-scope-world-series ws-body">
 <div class="lsu-scope-world-series ws-stage">
 <ol class="lsu-scope-world-series ws-events" data-stops aria-label="Event details">
-<li class="lsu-scope-world-series ws-apply ws-event" id="event-usa" data-stop="usa">
+<li class="lsu-scope-world-series ws-event" :class="wsClass('usa')" id="event-usa" data-stop="usa">
 <a href="#event-usa" class="lsu-scope-world-series ws-select">
-<span class="lsu-scope-world-series ws-month">February 2027</span>
+<span class="lsu-scope-world-series ws-month" :text="wsWhen('usa')"></span>
 <span class="lsu-scope-world-series ws-country">USA</span>
 <span class="lsu-scope-world-series ws-sub">Qualifier 01</span>
 </a>
-<a class="ws-cta" href="/lottery" data-apply data-view-href="/profile">Request a race entry</a>
+<a :if="wsOpen('usa')" class="ws-cta" href="/lottery" data-apply data-view-href="/profile">Request a race entry</a>
+<a :if="wsFinal('usa')" class="ws-how" href="#qualify">How to qualify</a>
+<span :if="!wsOpen('usa') && !wsFinal('usa') && wsLabel('usa')" class="ws-tag" :text="wsLabel('usa')"></span>
 </li>
-<li class="lsu-scope-world-series ws-event ws-soon" id="event-uk" data-stop="uk">
+<li class="lsu-scope-world-series ws-event" :class="wsClass('uk')" id="event-uk" data-stop="uk">
 <a href="#event-uk" class="lsu-scope-world-series ws-select">
-<span class="lsu-scope-world-series ws-month">April 2027</span>
+<span class="lsu-scope-world-series ws-month" :text="wsWhen('uk')"></span>
 <span class="lsu-scope-world-series ws-country">United Kingdom</span>
 <span class="lsu-scope-world-series ws-sub">Qualifier 02</span>
 </a>
-<span class="ws-tag">Coming soon</span>
+<a :if="wsOpen('uk')" class="ws-cta" href="/lottery" data-apply data-view-href="/profile">Request a race entry</a>
+<a :if="wsFinal('uk')" class="ws-how" href="#qualify">How to qualify</a>
+<span :if="!wsOpen('uk') && !wsFinal('uk') && wsLabel('uk')" class="ws-tag" :text="wsLabel('uk')"></span>
 </li>
-<li class="lsu-scope-world-series ws-event ws-soon" id="event-aus" data-stop="aus">
+<li class="lsu-scope-world-series ws-event" :class="wsClass('aus')" id="event-aus" data-stop="aus">
 <a href="#event-aus" class="lsu-scope-world-series ws-select">
-<span class="lsu-scope-world-series ws-month">June 2027</span>
+<span class="lsu-scope-world-series ws-month" :text="wsWhen('aus')"></span>
 <span class="lsu-scope-world-series ws-country">AUSTRALIA x DCG</span>
 <span class="lsu-scope-world-series ws-sub">Qualifier 03</span>
 </a>
-<span class="ws-tag">Coming soon</span>
+<a :if="wsOpen('aus')" class="ws-cta" href="/lottery" data-apply data-view-href="/profile">Request a race entry</a>
+<a :if="wsFinal('aus')" class="ws-how" href="#qualify">How to qualify</a>
+<span :if="!wsOpen('aus') && !wsFinal('aus') && wsLabel('aus')" class="ws-tag" :text="wsLabel('aus')"></span>
 </li>
-<li class="lsu-scope-world-series ws-event ws-final" id="event-ger" data-stop="ger">
+<li class="lsu-scope-world-series ws-event" :class="wsClass('ger')" id="event-ger" data-stop="ger">
 <a href="#event-ger" class="lsu-scope-world-series ws-select">
-<span class="lsu-scope-world-series ws-month">August 2027</span>
+<span class="lsu-scope-world-series ws-month" :text="wsWhen('ger')"></span>
 <span class="lsu-scope-world-series ws-country">Germany</span>
 <span class="lsu-scope-world-series ws-sub">The Finals</span>
 </a>
-<a class="ws-how" href="#qualify">How to qualify</a>
+<a :if="wsOpen('ger')" class="ws-cta" href="/lottery" data-apply data-view-href="/profile">Request a race entry</a>
+<a :if="wsFinal('ger')" class="ws-how" href="#qualify">How to qualify</a>
+<span :if="!wsOpen('ger') && !wsFinal('ger') && wsLabel('ger')" class="ws-tag" :text="wsLabel('ger')"></span>
 </li>
 </ol>
 <section class="lsu-scope-world-series map-wrap" aria-label="2027 Last Soul Ultra World Series globe">

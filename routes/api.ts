@@ -1,6 +1,6 @@
 import { response, route } from '@stacksjs/router'
 import { liveSnapshot, livePayload } from '../resources/data/live'
-import { entryHeading, entryKicker, entryRows, raceEvents } from '../resources/data/race-events'
+import { entryHeading, entryKicker, entryRows, entryRowsByStop, raceEvents } from '../resources/data/race-events'
 import { race } from '../resources/data/race'
 
 /**
@@ -76,7 +76,7 @@ route.get('/events', async () => {
   const payload = await raceEvents()
   // Rows and heading come shaped, so the page does not re-decide what
   // "Coming soon" means in a second copy of the rules.
-  const body = { ...payload, rows: entryRows(payload), heading: entryHeading(payload), kicker: entryKicker(payload) }
+  const body = { ...payload, rows: entryRows(payload), stops: entryRowsByStop(payload), heading: entryHeading(payload), kicker: entryKicker(payload) }
 
   return response.json(body, {
     status: payload.ok ? 200 : 503,
