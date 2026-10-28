@@ -1,8 +1,9 @@
 @extends('layouts/LSU')
 @section('content')
 <script server>
-import { coachingPage, modulePath } from '~/resources/data/coaching'
-const currentPage = coachingPage('calendar')
+import { modulePath } from '~/resources/data/coaching'
+import { coachingPageMeta } from '~/resources/functions/coaching-source'
+const currentPage = await coachingPageMeta('calendar')
 const canonicalPath = modulePath('calendar')
 </script>
 <CoachingModule slug="calendar" />

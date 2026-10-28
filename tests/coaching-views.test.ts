@@ -2,7 +2,7 @@ import { afterEach, beforeEach, describe, expect, it } from 'bun:test'
 import { resolve } from 'node:path'
 import { processDirectives } from '@stacksjs/stx'
 import { coachingModules } from '../resources/data/coaching'
-import { forgetBrand } from '../resources/functions/coaching-source'
+import { coachingOrigin, forgetBrand } from '../resources/functions/coaching-source'
 
 /**
  * The eight module routes, rendered the way the site renders them.
@@ -167,5 +167,32 @@ describe('getting back out of a module', () => {
     // The nav only renders with more than one module to move between.
     expect(plans).not.toContain('coach-nav')
     expect(plans).toContain('href="/coaching"')
+  })
+})
+
+describe('warming the connection to HQ', () => {
+  it('promises it on a module the brand publishes', async () => {
+    stubHq()
+    const html = await render('calendar')
+
+    expect(html).toContain(`<link rel="preconnect" href="${coachingOrigin()}" crossorigin>`)
+    expect(html).toContain(`<link rel="dns-prefetch" href="${coachingOrigin()}">`)
+  })
+
+  it('promises nothing on a page that will not call HQ', async () => {
+    // With nothing published the module frames nothing, so a held-open
+    // socket would be a connection made for no request.
+    stubHq(null)
+    const html = await render('calendar')
+
+    expect(html).not.toContain('rel="preconnect"')
+    expect(html).not.toContain('rel="dns-prefetch"')
+  })
+
+  it('warms it before the element that needs it', async () => {
+    stubHq()
+    const html = await render('calendar')
+
+    expect(html.indexOf('rel="preconnect"')).toBeLessThan(html.indexOf('hq-coaching.js'))
   })
 })

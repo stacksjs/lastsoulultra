@@ -1,6 +1,7 @@
 import type { CoachingBrand } from './coaching-brand'
 import coaching from '../../config/coaching'
-import { coachingModule } from '../data/coaching'
+import type { CoachingPageMeta } from '../data/coaching'
+import { coachingModule, coachingPage } from '../data/coaching'
 import { parseBrand } from './coaching-brand'
 
 /**
@@ -130,4 +131,22 @@ export async function loadBrand(slug = coaching.brand, origin = coaching.origin)
 export function forgetBrand(): void {
   cache.clear()
   inFlight.clear()
+}
+
+/**
+ * Head metadata for a module route, with a preconnect when the page is going
+ * to load HQ's element.
+ *
+ * The browser opens DNS, TCP and TLS to hq.training before the parser reaches
+ * the module script in the body, which is the one request this page's content
+ * waits on. It is only promised when the brand publishes this module: a
+ * preconnect to an origin the page never calls is a socket held open for
+ * nothing, and with no brand published these pages frame nothing at all.
+ */
+export async function coachingPageMeta(slug: string): Promise<CoachingPageMeta> {
+  const page = coachingPage(slug)
+  const brand = await loadBrand()
+  if (!brand?.modules.includes(slug))
+    return page
+  return { ...page, preconnect: [coachingOrigin()] }
 }

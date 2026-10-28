@@ -128,6 +128,8 @@ export interface CoachingPageMeta {
   description: string
   styles: string[]
   noindex?: boolean
+  /** Origins this page will open a connection to. Read by the head partial. */
+  preconnect?: string[]
 }
 
 /**
