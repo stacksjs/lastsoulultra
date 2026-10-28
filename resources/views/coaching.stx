@@ -105,7 +105,7 @@ const canonicalPath = '/coaching'
       <p>The tiers a coach has published, then the eight panels your training lives in once you are in one.</p>
       @else
       <h2 class="h2-sm">Not open yet.<br><span class="accent">It opens here.</span></h2>
-      <p>No coach has published a method and no price has been set. The first tier appears on this page, under the coach's own name.</p>
+      <p>When a coach publishes a method, its tiers appear on this page, and the panels your training runs in open below them.</p>
       @endif
     </div>
     <div class="coaching-surface">
