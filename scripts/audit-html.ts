@@ -213,16 +213,26 @@ export function auditPage(page: string, raw: string, served: Set<string>): Findi
  * nothing errors. Read against the BUILT css, so the generated utilities
  * count as defined.
  *
- * The allowlist is a ratchet, not an exemption. Each entry is markup whose
- * class carries no styling today; listing them stops the set growing while
- * leaving what is already there visible.
+ * The allowlist is a ratchet, not an exemption: it stops the set growing
+ * while leaving what is already there visible. Every entry was opened in a
+ * browser and checked to render correctly, with the note saying what carries
+ * the styling instead - an unverified allowlist is how the next one of these
+ * gets waved through.
  */
 const UNSTYLED_ALLOWED = new Set([
-  // Structural or scripting hooks with nothing to paint.
-  'race-board', 'lap-link', 'carousel', 'seg-count', 'enter-count',
-  'ls-cmp-yr', 'edon-l', 'ws-soon',
-  // Wrappers whose typography comes from the block around them.
-  'sr-lead', 'ws-lead', 'ws-apply', 'tiers-title', 'begin-band',
+  // Hooks with nothing of their own to paint: a sibling class or a child
+  // carries the look. .seg-count and .enter-count wrap a .seg segment
+  // display, .lap-link also carries .btn, .ls-cmp-yr is painted by a rule on
+  // .ls-cmp-row, and .race-board and .carousel are scripting targets.
+  'race-board', 'lap-link', 'carousel', 'seg-count', 'enter-count', 'ls-cmp-yr',
+  // State modifiers the design does not act on: on /world-series the open
+  // event is told apart by its red entry button against the others' "coming
+  // soon" pill, not by the list item around it.
+  'ws-soon', 'ws-apply',
+  // Blocks whose typography comes from what is around them: the three leads
+  // from .phero, .tiers-title from .h2 beside it, .begin-band from .band,
+  // and .edon-l is a caption under a stat rather than a label.
+  'sr-lead', 'ws-lead', 'tiers-title', 'begin-band', 'edon-l',
   // Utilities inside @stacksjs/components' Dialog, generated from that
   // package's own source rather than from this app's markup.
   'bg-black/25', 'dark:bg-black/50',
