@@ -52,3 +52,83 @@ describe('every page the site serves', () => {
     expect(views.map(view => view.url)).toContain('/coaching/feedback')
   })
 })
+
+/**
+ * A rule whose pattern stopped matching reports nothing, which looks exactly
+ * like a clean site. Each one is given a page it must complain about and a
+ * page it must not.
+ */
+describe('each rule', () => {
+  const served = new Set(['/', '/format'])
+
+  function rules(html: string): string[] {
+    const page = `<!DOCTYPE html><html lang="en"><head><title>t</title><meta name="description" content="A description long enough to count as one."><link rel="canonical" href="https://example.test/"></head><body><h1>One</h1>${html}</body></html>`
+    return auditPage('/t', page, served).map(finding => finding.rule)
+  }
+
+  it('catches a link to a page that is not served', () => {
+    expect(rules('<a href="/gone">gone</a>')).toContain('dead-link')
+    expect(rules('<a href="/format">here</a>')).not.toContain('dead-link')
+    expect(rules('<a href="/assets/x.css">asset</a>')).not.toContain('dead-link')
+  })
+
+  it('catches an image with no alt', () => {
+    expect(rules('<img src="/a.png">')).toContain('img-no-alt')
+    expect(rules('<img src="/a.png" alt="">')).not.toContain('img-no-alt')
+  })
+
+  it('catches two elements sharing an id', () => {
+    expect(rules('<p id="x"></p><p id="x"></p>')).toContain('duplicate-id')
+    expect(rules('<p id="x"></p><p id="y"></p>')).not.toContain('duplicate-id')
+  })
+
+  it('catches a skipped heading level and a second h1', () => {
+    expect(rules('<h3>skip</h3>')).toContain('heading-skip')
+    expect(rules('<h2>fine</h2><h3>fine</h3>')).not.toContain('heading-skip')
+    expect(rules('<h1>two</h1>')).toContain('h1-count')
+  })
+
+  it('catches a link with nothing to announce', () => {
+    expect(rules('<a href="/format"><span class="icon"></span></a>')).toContain('link-no-name')
+    expect(rules('<a href="/format" aria-label="Home"><span></span></a>')).not.toContain('link-no-name')
+    expect(rules('<a href="/format"><img src="/a.png" alt="Home"></a>')).not.toContain('link-no-name')
+  })
+
+  it('catches a new tab the opener can be steered from', () => {
+    expect(rules('<a href="/format" target="_blank">x</a>')).toContain('blank-no-noopener')
+    expect(rules('<a href="/format" target="_blank" rel="noopener">x</a>')).not.toContain('blank-no-noopener')
+  })
+
+  it('catches an outbound link over plain HTTP, but not the local preview', () => {
+    expect(rules('<a href="http://hq.training/x">x</a>')).toContain('insecure-link')
+    expect(rules('<a href="http://localhost:3940/x">x</a>')).not.toContain('insecure-link')
+    expect(rules('<a href="https://hq.training/x">x</a>')).not.toContain('insecure-link')
+  })
+
+  it('catches a control with no label, in any of the four ways of giving it one', () => {
+    expect(rules('<input name="email">')).toContain('control-no-label')
+    expect(rules('<label>Email<input name="email"></label>')).not.toContain('control-no-label')
+    expect(rules('<label for="e">Email</label><input id="e" name="email">')).not.toContain('control-no-label')
+    expect(rules('<input name="email" aria-label="Email">')).not.toContain('control-no-label')
+    expect(rules('<input type="hidden" name="token">')).not.toContain('control-no-label')
+  })
+
+  it('catches a button with no name, and allows one whose text is bound', () => {
+    expect(rules('<button type="submit"></button>')).toContain('button-no-name')
+    expect(rules('<button :text="label"></button>')).not.toContain('button-no-name')
+    expect(rules('<button aria-label="Close">×</button>')).not.toContain('button-no-name')
+  })
+
+  it('catches a page that does not say what it is', () => {
+    const bare = auditPage('/t', '<!DOCTYPE html><html lang="en"><body><h1>x</h1></body></html>', served).map(f => f.rule)
+    expect(bare).toContain('no-description')
+    expect(bare).toContain('no-canonical')
+    expect(rules('')).not.toContain('no-description')
+    expect(rules('')).not.toContain('no-canonical')
+  })
+
+  it('catches a page with no language', () => {
+    expect(auditPage('/t', '<html><body><h1>x</h1></body></html>', served).map(f => f.rule)).toContain('no-lang')
+    expect(rules('')).not.toContain('no-lang')
+  })
+})

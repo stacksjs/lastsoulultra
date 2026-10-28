@@ -117,6 +117,55 @@ export function auditPage(page: string, raw: string, served: Set<string>): Findi
   if (!/<html\b[^>]*\slang="[^"]+"/i.test(raw))
     findings.push({ page, rule: 'no-lang', detail: '' })
 
+  // 7. A new tab the opener cannot be steered from. Without rel=noopener the
+  //    opened page gets window.opener and can navigate this one elsewhere.
+  for (const [tag] of body.matchAll(/<a\b[^>]*>/gi)) {
+    if (attr(tag, 'target') !== '_blank') continue
+    if ((attr(tag, 'rel') ?? '').split(/\s+/).includes('noopener')) continue
+    findings.push({ page, rule: 'blank-no-noopener', detail: attr(tag, 'href') ?? '' })
+  }
+
+  // 8. An outbound link over plain HTTP, which a network between the reader
+  //    and the host can read and rewrite. Loopback is the local preview.
+  for (const [, href] of body.matchAll(/<a\b[^>]*\shref="(http:\/\/[^"]+)"/gi)) {
+    const host = new URL(href!).hostname
+    if (host === 'localhost' || host === '127.0.0.1') continue
+    findings.push({ page, rule: 'insecure-link', detail: href! })
+  }
+
+  // 9. A control a screen reader can announce: an explicit label, an ARIA
+  //    name, or the <label> it sits inside.
+  for (const match of body.matchAll(/<(input|select|textarea)\b[^>]*>/gi)) {
+    const tag = match[0]
+    const type = attr(tag, 'type') ?? ''
+    if (['hidden', 'submit', 'button', 'reset', 'image'].includes(type)) continue
+    if (attr(tag, 'aria-label') || attr(tag, 'aria-labelledby') || attr(tag, 'title')) continue
+    const id = attr(tag, 'id')
+    if (id && new RegExp(`<label\\b[^>]*\\sfor="${id}"`, 'i').test(body)) continue
+    // Wrapped in a label: the nearest <label> before it is still open.
+    const before = body.slice(0, match.index)
+    const opened = before.lastIndexOf('<label')
+    if (opened !== -1 && !before.slice(opened).includes('</label>')) continue
+    findings.push({ page, rule: 'control-no-label', detail: `${match[1]} ${attr(tag, 'name') ?? type}` })
+  }
+
+  // 10. A button with a name. Text bound at runtime counts: the markup is
+  //     empty on purpose and the binding fills it.
+  for (const [, tag, inner] of body.matchAll(/(<button\b[^>]*>)([\s\S]*?)<\/button>/gi)) {
+    if (inner!.replace(/<[^>]+>/g, '').replace(/&[a-z]+;/gi, ' ').trim()) continue
+    if (attr(tag!, 'aria-label') || attr(tag!, 'title')) continue
+    if (/\s(?::text|x-text)=/i.test(tag!)) continue
+    if (/<img\b[^>]*\salt="[^"]+"/i.test(inner!)) continue
+    findings.push({ page, rule: 'button-no-name', detail: tag!.slice(0, 60) })
+  }
+
+  // 11. What the page says it is, for a search engine and a share sheet.
+  if (!/<meta name="description" content="[^"]{20,}"/i.test(raw))
+    findings.push({ page, rule: 'no-description', detail: '' })
+  const canonical = /<link rel="canonical" href="([^"]+)"/i.exec(raw)?.[1]
+  if (!canonical || !canonical.startsWith('http'))
+    findings.push({ page, rule: 'no-canonical', detail: canonical ?? '' })
+
   return findings
 }
 
