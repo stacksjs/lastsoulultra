@@ -63,18 +63,24 @@ export const tsCloud: TsCloudConfig = {
     },
 
     /**
-     * `lsu.stacksjs.com` sits in the `stacksjs.com` zone, which is on
-     * Cloudflare nameservers - hq.training is the Porkbun one, and this
-     * config used to name that zone and that provider. ts-cloud detects the
-     * provider from the zone's nameservers (the same way HQ's config does),
-     * so the provider is left unset and CLOUDFLARE_API_TOKEN is what the
-     * address pass needs; the deploy workflow already passes it.
+     * No `dns` block, so the deploy writes no records and needs no registrar
+     * credentials.
      *
-     * It derives one A and one AAAA per site domain and upserts them, never
-     * deleting anything else in a zone this project does not own. `domain`
-     * names the ZONE, not the site.
+     * `stacksjs.com` is delegated to Cloudflare nameservers (confirmed against
+     * the .com root and three public resolvers) while a Route53 hosted zone
+     * for the same name also exists and is not the one being asked - so which
+     * credentials would even be the right ones was not a settled question.
+     * `lsu.stacksjs.com` is one host that will not move, so its A and AAAA are
+     * created once by hand, pointing at the shared `stacks` box this project
+     * attaches to:
+     *
+     *   lsu  A     178.105.248.188
+     *   lsu  AAAA  2a01:4f8:c014:6186::1
+     *
+     * The same pair `hq.training` resolves to. Not proxied: rpx terminates TLS
+     * on the box with on-demand certificates, and a proxy in front would
+     * terminate it somewhere else and break the issuance.
      */
-    dns: { domain: 'stacksjs.com' },
   },
 
   sites: {

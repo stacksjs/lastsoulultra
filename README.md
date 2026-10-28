@@ -37,13 +37,25 @@ provider from the zone rather than being told, the same as HQ's config.
 ### What has to be in place
 
 `DEPLOY_SSH_KEY` and `DOTENV_PRIVATE_KEY_PRODUCTION` are already set as repository
-secrets; the workflow skips the whole deploy when either is missing. The zone is
-on Cloudflare, so one more is needed:
+secrets; the workflow skips the whole deploy when either is missing. Nothing else is needed: with no `dns` block the deploy asks no registrar for
+anything.
 
-```sh
-gh secret set CLOUDFLARE_API_TOKEN --repo stacksjs/lastsoulultra
-# paste the token, then Ctrl-D. A token with Zone:DNS:Edit on stacksjs.com.
-```
+The DNS record is made by hand, once. `config/cloud.ts` carries no `dns`
+block, so the deploy writes no records and needs no registrar credentials -
+`stacksjs.com` is delegated to Cloudflare while a Route53 hosted zone for the
+same name also exists and is not the one being asked, so there was no settled
+answer to which credentials were the right ones. In whichever zone is actually
+answering (`dig NS stacksjs.com`), create:
+
+| Name | Type | Value |
+|---|---|---|
+| `lsu` | A | `178.105.248.188` |
+| `lsu` | AAAA | `2a01:4f8:c014:6186::1` |
+
+The same pair `hq.training` resolves to, which is the shared `stacks` box this
+project attaches to. Not proxied: rpx terminates TLS on the box with on-demand
+certificates, and a proxy in front would terminate it elsewhere and break
+issuance.
 
 `.env.production` is committed with every value encrypted (dotenvx; the private
 key lives in the gitignored `.env.keys`). `APP_DOMAIN` is set there and wins over
