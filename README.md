@@ -1,6 +1,6 @@
 # Last Soul Ultra on Stacks
 
-The existing LSU checkout is upgraded to Stacks 0.75.281 and recreates the public production site captured on 23 October 2026. Home, format, World Series, Soul Races, sponsorship, contact and FAQ, profiles, entry requests, results and legal pages use STX, shared navigation and local brand assets. `/coaching` embeds HQ's branded subscription and training portal.
+The existing LSU checkout is upgraded to Stacks 0.75.281 and recreates the public production site captured on 23 October 2026. Home, format, World Series, Soul Races, sponsorship, contact and FAQ, profiles, entry requests, results and legal pages use STX, shared navigation and local brand assets. `/coaching` carries this site's own coaching surface over HQ's branded subscription and training portal.
 
 ## Develop and verify
 
@@ -13,6 +13,8 @@ bun scripts/build-site-assets.ts
 ./buddy typecheck
 ./buddy test
 ```
+
+`bun run audit:html` reads `dist/` after a build and reports dead internal links, duplicate ids, skipped heading levels, images with no alt and links with no accessible name. The same rules run over the rendered views in `bun test`, so a build is only needed to check a release against what was actually produced.
 
 `pantry.json` pins Bun 1.4.4; `./buddy --version` should match. `bun run build` builds local styles before the framework build. `bun scripts/seo.ts` regenerates the sitemap and robots file; `SITE_ORIGIN` overrides the production canonical origin for deployment.
 
@@ -29,7 +31,13 @@ HQ_ORIGIN=https://hq.training
 HQ_BRAND_SLUG=last-soul-ultra
 ```
 
-`config/coaching.ts` validates the host through `CoachingPortal.stx`. The component loads `/assets/elements/hq-coaching.js` from HQ and embeds `/brands/<slug>`, with a full-page fallback. Before it is available, HQ's organization owner must publish the experience with real coach methods and active monthly products and permit the LSU origin. An unpublished HQ brand correctly returns 404; LSU does not manufacture offers or charge a placeholder price.
+`config/coaching.ts` names the tenant; `resources/functions/coaching-source.ts` validates the origin and slug, builds the portal URLs and reads the one public endpoint, `GET /api/brands/<slug>`, with a 2.5 second bound, a short cache and a null answer for every failure.
+
+The surface is this site's, not an embed of HQ's. `resources/data/coaching.ts` registers the eight training modules in LSU's own words, each with a scope: the storefront is public and indexed, the rest need an HQ account and are noindex, and `health` and `messages` are additionally account-private - they read the athlete's own HQ endpoints, which no brand ever sees, and the page says so. Each module has a route under `/coaching/<module>` with LSU's chrome around HQ's panel, and `/coaching/plans` plus the hub render the published tiers, coaches and prices directly from the public brand rather than only inside the frame. Nothing about a tier originates here. With no brand published, the modules say so and frame nothing.
+
+`CoachingPortal.stx` loads `/assets/elements/hq-coaching.js` from HQ and embeds `/brands/<slug>`, with a full-page fallback. Every module page also carries a visible link to the same section, because a cross-origin frame can decline to load for reasons this page cannot see and the element's own fallback sits below a tall empty iframe.
+
+`config/server.ts` delegates `Permissions-Policy: microphone` on `/coaching` and `/coaching/feedback`, naming the configured HQ origin. Without it the browser blocks recording inside HQ's frame and the feedback module fails silently. Before it is available, HQ's organization owner must publish the experience with real coach methods and active monthly products and permit the LSU origin. An unpublished HQ brand correctly returns 404; LSU does not manufacture offers or charge a placeholder price.
 
 HQ's **Brand experience** editor controls colors, fonts, corners, density, modules, navigation, offers, legal links and embedding origins. The LSU preset matches the site. Coaches author their methods in HQ's **Training methods** workspace, supply plan-backed monthly products in **Store**, and use their configured AI budget for feedback. Personal coaching remains a direct coach referral.
 
