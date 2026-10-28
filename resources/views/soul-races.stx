@@ -117,11 +117,11 @@ onMount(async () => {
 </section>
 <div class="lsu-scope-soul-races sr-side">
 <p class="lsu-scope-soul-races sr-result-count" :text="srFiltered.length + ' races'" data-result-count aria-live="polite">0 races</p>
-<div class="lsu-scope-soul-races sr-list" data-list aria-label="Soul Races">
+<section class="lsu-scope-soul-races sr-list" data-list aria-label="Soul Races">
 <p :if="!srRaces.length" class="lsu-scope-soul-races sr-empty">No Soul Races are listed yet. Be the first.</p>
 <p :if="srRaces.length && !srFiltered.length" class="lsu-scope-soul-races sr-empty">No Soul Races match your search.</p>
-<article :for="race in srFiltered" class="lsu-scope-soul-races sr-card"><h3 :text="race.name" class="lsu-scope-soul-races"></h3><p :text="race.city + ', ' + race.country_code" class="lsu-scope-soul-races"></p><p :text="race.summary" class="lsu-scope-soul-races"></p><a :href="race.registration_url" rel="noopener" class="lsu-scope-soul-races">View race and entry details</a></article>
-</div>
+<article :for="race in srFiltered" class="lsu-scope-soul-races sr-card"><h2 :text="race.name" class="lsu-scope-soul-races"></h2><p :text="race.city + ', ' + race.country_code" class="lsu-scope-soul-races"></p><p :text="race.summary" class="lsu-scope-soul-races"></p><a :href="race.registration_url" rel="noopener" class="lsu-scope-soul-races">View race and entry details</a></article>
+</section>
 </div>
 </div>
 <section class="lsu-scope-soul-races sr-host">
