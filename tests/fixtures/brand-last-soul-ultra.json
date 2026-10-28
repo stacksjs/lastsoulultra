@@ -1,0 +1,98 @@
+{
+  "slug": "last-soul-ultra",
+  "settings": {
+    "name": "Last Soul Ultra Preview",
+    "locale": "en",
+    "headline": "Train for the next start.",
+    "description": "Test mode. Sample plans and €19.99 monthly test price. No live charges. LSU methods and pricing are not approved.",
+    "logo_url": "http://localhost:3942/assets/lsu/images/lsu-logo.svg",
+    "home_url": "http://localhost:3942/coaching",
+    "support_url": "https://www.lastsoulultra.com/contact",
+    "privacy_url": "https://www.lastsoulultra.com/privacy",
+    "terms_url": "https://www.lastsoulultra.com/terms",
+    "embed_origins": [
+      "http://localhost:3942"
+    ],
+    "theme": {
+      "background": "#000000",
+      "surface": "#0d0d0f",
+      "text": "#ffffff",
+      "muted": "#b6b6bd",
+      "accent": "#dd0f15",
+      "accent_text": "#ffffff",
+      "border": "#333338",
+      "font": "barlow",
+      "heading_font": "anton",
+      "radius": 0,
+      "density": "comfortable"
+    },
+    "modules": [
+      "plans",
+      "calendar",
+      "feedback",
+      "progress",
+      "library",
+      "health",
+      "messages",
+      "account"
+    ],
+    "navigation": [
+      {
+        "module": "plans",
+        "label": "Store",
+        "symbol": "bag"
+      },
+      {
+        "module": "calendar",
+        "label": "Workouts",
+        "symbol": "figure.run"
+      },
+      {
+        "module": "health",
+        "label": "Health"
+      },
+      {
+        "module": "messages",
+        "label": "Messages"
+      },
+      {
+        "module": "account",
+        "label": "Me"
+      }
+    ],
+    "offers": [
+      {
+        "product_id": 1,
+        "method_id": 1,
+        "label": "Preview running"
+      }
+    ],
+    "show_powered_by": false
+  },
+  "app_scheme": "lsupreview",
+  "offers": [
+    {
+      "label": "Preview running",
+      "method": {
+        "id": 1,
+        "name": "LSU preview method",
+        "summary": "Demonstration content, not an approved LSU coach method.",
+        "version": 1,
+        "contact_url": "https://www.lastsoulultra.com/contact"
+      },
+      "coach": {
+        "name": "LSU Preview Coach"
+      },
+      "product": {
+        "id": 1,
+        "slug": "lsu-preview-running",
+        "name": "Preview running subscription",
+        "description": "Stripe TEST MODE. €19.99 is a sample price, not LSU’s approved pricing.",
+        "price_cents": 1999,
+        "currency": "EUR",
+        "billing_interval": "month",
+        "trial_days": 0
+      }
+    }
+  ]
+}
