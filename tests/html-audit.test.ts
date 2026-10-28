@@ -2,7 +2,7 @@ import { describe, expect, it } from 'bun:test'
 import { readdirSync } from 'node:fs'
 import { join, resolve } from 'node:path'
 import { processDirectives } from '@stacksjs/stx'
-import { auditPage, formatFindings, redirectSources } from '../scripts/audit-html'
+import { assetExists, assetUrls, auditPage, formatFindings, redirectSources } from '../scripts/audit-html'
 
 /**
  * The same rules scripts/audit-html.ts runs over dist, run here over the
@@ -125,6 +125,17 @@ describe('each rule', () => {
     expect(bare).toContain('no-canonical')
     expect(rules('')).not.toContain('no-description')
     expect(rules('')).not.toContain('no-canonical')
+  })
+
+  it('catches an asset the deploy does not carry', () => {
+    expect(rules('<img src="/assets/lsu/images/nope.png" alt="x">')).toContain('missing-asset')
+    expect(rules('<img src="/assets/lsu/images/lsu-logo.svg" alt="x">')).not.toContain('missing-asset')
+  })
+
+  it('reads a srcset candidate and a CSS url, not only src', () => {
+    expect(assetUrls('<img srcset="/a.png 1x, /b.png 2x">')).toEqual(['/a.png', '/b.png'])
+    expect(assetUrls('<div style="background-image:url(\'/c.webp\')">')).toEqual(['/c.webp'])
+    expect(rules('<div style="background-image:url(/assets/lsu/images/nope.webp)"></div>')).toContain('missing-asset')
   })
 
   it('catches a page with no language', () => {

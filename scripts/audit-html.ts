@@ -18,7 +18,7 @@
  * Exits non-zero on any finding.
  */
 
-import { readFileSync, readdirSync } from 'node:fs'
+import { existsSync, readFileSync, readdirSync } from 'node:fs'
 import { join, relative } from 'node:path'
 import process from 'node:process'
 import server from '../config/server'
@@ -64,6 +64,33 @@ function attr(tag: string, name: string): string | null {
 /** Every URL the deployed site answers, which is what a link may point at. */
 export function redirectSources(): string[] {
   return Object.keys(server.redirects ?? {})
+}
+
+/**
+ * Whether a referenced asset is on disk. `public/` is the source of truth and
+ * `dist/` holds what a build also generated, so both count.
+ */
+const assetSeen = new Map<string, boolean>()
+export function assetExists(url: string): boolean {
+  const path = url.split(/[?#]/)[0]!.replace(/^\/+/, '')
+  if (!assetSeen.has(path))
+    assetSeen.set(path, existsSync(join('public', path)) || existsSync(join(ROOT, path)))
+  return assetSeen.get(path)!
+}
+
+/** Every site-absolute asset URL a page names, srcset entries included. */
+export function assetUrls(html: string): string[] {
+  const urls = [
+    ...[...html.matchAll(/(?:src|href)="(\/assets\/[^"]+)"/gi)].map(match => match[1]!),
+    ...[...html.matchAll(/url\((['"]?)(\/[^)'"]+)\1\)/gi)].map(match => match[2]!),
+  ]
+  for (const [, set] of html.matchAll(/srcset="([^"]+)"/gi)) {
+    for (const candidate of set!.split(',')) {
+      const url = candidate.trim().split(/\s+/)[0]
+      if (url?.startsWith('/')) urls.push(url)
+    }
+  }
+  return [...new Set(urls)]
 }
 
 /** The rules, over one page. */
@@ -165,6 +192,14 @@ export function auditPage(page: string, raw: string, served: Set<string>): Findi
   const canonical = /<link rel="canonical" href="([^"]+)"/i.exec(raw)?.[1]
   if (!canonical || !canonical.startsWith('http'))
     findings.push({ page, rule: 'no-canonical', detail: canonical ?? '' })
+
+  // 12. An asset the page names and the deploy does not carry. A stylesheet,
+  //     a font or a photograph that 404s is silent: the page still renders,
+  //     just without it, and nothing in a build log says so.
+  for (const url of assetUrls(raw)) {
+    if (!assetExists(url))
+      findings.push({ page, rule: 'missing-asset', detail: url })
+  }
 
   return findings
 }

@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'bun:test'
 import { readdirSync } from 'node:fs'
+import { assetExists, assetUrls } from '../scripts/audit-html'
 
 /**
  * stx-site.css is the one sheet every route downloads. It drifted into being
@@ -39,5 +40,30 @@ describe('the sheet every page downloads', () => {
     expect(siteWide).toContain('.lsu-skip')
     expect(siteWide).toContain('.race-portal')
     expect(siteWide).toContain('prefers-reduced-motion')
+  })
+})
+
+describe('what the stylesheets reference', () => {
+  it('names only files the deploy carries', async () => {
+    const missing: string[] = []
+    for (const name of readdirSync('resources/assets/styles/site')) {
+      if (!name.endsWith('.css')) continue
+      const css = await Bun.file(`resources/assets/styles/site/${name}`).text()
+      for (const url of assetUrls(css)) {
+        if (!assetExists(url))
+          missing.push(`${name}: ${url}`)
+      }
+    }
+    expect(missing).toEqual([])
+  })
+
+  it('checks a real number of them, not zero', async () => {
+    // A regex that stopped matching would pass the test above silently.
+    let found = 0
+    for (const name of readdirSync('resources/assets/styles/site')) {
+      if (!name.endsWith('.css')) continue
+      found += assetUrls(await Bun.file(`resources/assets/styles/site/${name}`).text()).length
+    }
+    expect(found).toBeGreaterThan(20)
   })
 })
