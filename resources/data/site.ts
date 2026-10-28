@@ -1,11 +1,14 @@
 import { env } from '@stacksjs/env'
-import { at, shots } from './media'
 import { race } from './race'
 
 /**
- * Site-level constants: origin, navigation, footer.
+ * Site-level constants: the origin, and the list of what the site publishes.
  *
- * Anything a page prints twice lives here so the two copies cannot drift.
+ * Anything a page prints twice lives here so the two copies cannot drift. The
+ * navigation used to live here as well, in a second copy that no template read
+ * and that still pointed at `/legal/*` routes this site does not serve;
+ * SiteNav and SiteFooter are the only copy now. Share cards moved to
+ * `share.ts`, which maps each page to one of the cards on disk.
  */
 
 /**
@@ -29,24 +32,6 @@ export function absolute(path: string): string {
 }
 
 /**
- * The share image. One frame for the whole site rather than a generated card
- * per route: this is an eight-page event site, and the photograph of a corral
- * under floodlights says more about it than any composed card would.
- */
-/* Absolute, because og:image and twitter:image are read by machines that have
- * no page to resolve a path against. `at()` returns an origin-relative path
- * now that the photographs are served from here rather than a CDN. */
-export const socialImage = absolute(at(shots.board, 1080))
-export const socialImageAlt = shots.board.alt
-
-export interface NavItem {
-  label: string
-  href: string
-  /** Sends the visitor off-site. */
-  external?: boolean
-}
-
-/**
  * Every indexable URL on the site, in one place.
  *
  * The sitemap and robots.txt are generated from this (scripts/seo.ts) rather
@@ -60,26 +45,6 @@ export const indexablePaths: string[] = [
   '/', '/format', '/world-series', '/soul-races', '/sponsorship', '/contact',
   '/lottery', '/results', '/results/last-soul-ultra-2026', '/results/last-soul-ultra-2025',
   '/imprint', '/privacy', '/terms', '/coaching', '/faq',
-]
-
-export const nav: NavItem[] = [
-  { label: 'the format', href: '/format' },
-  { label: 'enter', href: '/lottery' },
-  { label: 'results', href: '/results' },
-  { label: 'faq', href: '/faq' },
-  { label: 'sponsorship', href: '/sponsorship' },
-]
-
-export const footerLinks: NavItem[] = [
-  { label: 'contact', href: '/contact' },
-  { label: 'imprint', href: '/legal/imprint' },
-  { label: 'privacy', href: '/legal/privacy' },
-  { label: 'terms', href: '/legal/terms' },
-]
-
-export const elsewhere: NavItem[] = [
-  { label: 'instagram', href: race.instagram, external: true },
-  { label: 'livestreams', href: race.livestreams, external: true },
 ]
 
 /** "14 august 2026", lowercase like the rest of the site's voice. */
