@@ -1,3 +1,13 @@
+<script>
+interface Props {
+  /**
+   * Seasons the page already carries a written archive section for, as years:
+   * `archived="2025,2026"`.
+   */
+  archived?: string
+}
+const { archived = '' } = defineProps<Props>()
+</script>
 <script server>
 import { liveSnapshot, livePayload } from '../data/live'
 import { race } from '../data/race'
@@ -9,7 +19,23 @@ import { race } from '../data/race'
  * client below refuses a stale seed rather than painting standings that are
  * several laps behind. Same LivePayload shape either way, which is the point:
  * the table cannot drift between the server copy and the polled one. */
-const boardSeed = livePayload(await liveSnapshot(), race.loopMetres)
+const boardSnapshot = await liveSnapshot()
+const boardSeed = livePayload(boardSnapshot, race.loopMetres)
+
+/**
+ * Whether a finished race is already written up further down the page.
+ *
+ * A finished board shows the headline numbers and the winner, and nothing
+ * else - the standings list is gated on the race running. An archive section
+ * for the same season says all of that and more, so rendering both puts a
+ * thinner copy of the 2026 result directly above the 2026 result.
+ *
+ * It still renders in the window between a race ending and somebody writing
+ * that section, which is the one time the board is the only place the result
+ * appears at all.
+ */
+const boardSeason = boardSnapshot.state ? String(new Date(boardSnapshot.state.raceStartUtc).getUTCFullYear()) : ''
+const boardArchived = boardSeason !== '' && archived.split(',').map(y => y.trim()).includes(boardSeason)
 </script>
 <script client>
 /* Older than this and the seed is a build artefact, not the board. */
@@ -23,6 +49,8 @@ const lsuTick = state(Date.now())
 
 const lsuShown = derived(() => lsuLive())
 const lsuRunning = derived(() => Boolean(lsuShown() && !lsuShown().raceOver))
+/* A race in progress always; a finished one only until it is archived. */
+const lsuWorthShowing = derived(() => Boolean(lsuShown() && (lsuRunning() || !boardArchived)))
 const lsuStillIn = derived(() => (lsuShown()?.runners || []).filter(row => row.status === 'active'))
 const lsuOut = derived(() => (lsuShown()?.runners || []).length - lsuStillIn().length)
 
@@ -56,7 +84,7 @@ onMount(() => { lsuReadBoard() })
 useInterval(() => { lsuTick.set(Date.now()) }, 1000)
 useInterval(() => { if (lsuRunning() || !lsuShown()) lsuReadBoard() }, LSU_POLL_MS)
 </script>
-<section class="live" :if="lsuShown()" x-cloak>
+<section class="live" :if="lsuWorthShowing()" x-cloak>
   <div class="shell">
     <div class="live-head">
       <div class="kicker">

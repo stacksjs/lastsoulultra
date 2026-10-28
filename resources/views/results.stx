@@ -12,7 +12,7 @@ const canonicalPath = "/results"
 <p>Every edition, every runner, every yard, straight from the race database. Season 3 is 2027: <a href="/world-series">request a race entry</a> for an open event. Places are allocated through a combination of LSU team selection and a random draw.</p>
 </div>
 </section>
-<LiveBoard />
+<LiveBoard archived="2025,2026" />
 <section id="2026" class="ed-section">
 <div class="shell">
 <div class="ed-head">

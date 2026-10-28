@@ -2,7 +2,7 @@ import type { LiveSnapshot, LiveState } from '../resources/data/live'
 import { afterEach, describe, expect, it } from 'bun:test'
 import { resolve } from 'node:path'
 import { processDirectives } from '@stacksjs/stx'
-import { currentLap, forgetBoard, livePayload, secondsToNextLap, standings, stillIn, totalLaps, winner } from '../resources/data/live'
+import { currentLap, forgetBoard, livePayload, liveSnapshot, secondsToNextLap, standings, stillIn, totalLaps, winner } from '../resources/data/live'
 
 /**
  * The live board, and the shaping behind it.
@@ -188,6 +188,139 @@ describe('the board on the results page', () => {
     const html = await results()
 
     // The section is gated on the payload, so an outage renders no box.
-    expect(html).toMatch(/<section class="live"[^>]*:if="lsuShown\(\)"/)
+    expect(html).toMatch(/<section class="live"[^>]*:if="lsuWorthShowing\(\)"/)
+  })
+
+  /**
+   * The `archived` prop is the only thing stopping the board from repeating a
+   * season the page writes out in full below it, and it is a string a human
+   * keeps in step with the markup. So the test keeps it in step instead.
+   */
+  it('tells the board about every season the page archives', async () => {
+    const view = await Bun.file(resolve('resources/views/results.stx')).text()
+    const sections = [...view.matchAll(/<section id="(\d{4})" class="ed-section">/g)].map(m => m[1])
+    const declared = view.match(/<LiveBoard archived="([^"]*)"/)?.[1].split(',').map(y => y.trim()) ?? []
+
+    expect(sections.length).toBeGreaterThan(0)
+    expect(declared.sort()).toEqual(sections.sort())
+  })
+
+  it('stands down on a season the page already carries', async () => {
+    stub(boardPage({
+      raceStartUtc: GUN,
+      generatedAt: GUN,
+      raceOver: true,
+      finalLap: 94,
+      runners: [runner('Ada', 94, { status: 'out' })],
+    }))
+    const html = await results()
+
+    // GUN is 2026, which results.stx archives, so the finished board is a
+    // thinner copy of the section below it and hides itself.
+    expect(/boardArchived = true/.test(html)).toBe(true)
+  })
+
+  it('keeps showing a finished race nobody has written up yet', async () => {
+    stub(boardPage({
+      raceStartUtc: Date.UTC(2031, 7, 14, 12, 0, 0),
+      generatedAt: GUN,
+      raceOver: true,
+      finalLap: 60,
+      runners: [runner('Ada', 60, { status: 'out' })],
+    }))
+    const html = await results()
+
+    expect(/boardArchived = false/.test(html)).toBe(true)
+  })
+})
+
+/**
+ * The shapes the worker actually serves, pinned to a real capture.
+ *
+ * It renamed its global and renested its payload with no warning and no
+ * version marker - `window.__LSU__ = { state }` became
+ * `window.__LSU_SUMMARY__ = { summary }`, `lapsCompleted` became `laps`,
+ * `finalLap` became `lastLap`, and `active` became `finisher` - and the board
+ * simply went quiet, because reading someone's page instead of their API
+ * means their refactor is your outage. `tests/fixtures/live-summary.json` is
+ * a trimmed copy of what it served on 28 October 2026, so the next rename
+ * fails here instead of in production.
+ */
+describe('the feed shapes the worker serves', () => {
+  const realFetch = globalThis.fetch
+
+  afterEach(() => { globalThis.fetch = realFetch; forgetBoard() })
+
+  function serve(body: string): void {
+    globalThis.fetch = (async () => new Response(body, { headers: { 'content-type': 'text/html' } })) as typeof fetch
+  }
+
+  async function parsed(assignment: string, payload: unknown): Promise<LiveState> {
+    forgetBoard()
+    serve(`<!doctype html><html><body><script>${assignment}=${JSON.stringify(payload)};</script></body></html>`)
+    const snap = await liveSnapshot()
+    if (!snap.state)
+      throw new Error(snap.error ?? 'the board parsed to nothing')
+    return snap.state
+  }
+
+  async function capture(): Promise<unknown> {
+    return Bun.file(resolve('tests/fixtures/live-summary.json')).json()
+  }
+
+  it('reads the summary feed it serves today', async () => {
+    const state = await parsed('window.__LSU_SUMMARY__', await capture())
+
+    expect(state.raceOver).toBe(true)
+    expect(state.finalLap).toBe(94)
+    expect(state.runners).toHaveLength(4)
+    expect(totalLaps(state)).toBe(94 + 93 + 80 + 2)
+    expect(winner(state)?.name).toBe('Mark Dowdle')
+  })
+
+  it('counts the finisher as the one left standing', async () => {
+    const state = await parsed('window.__LSU_SUMMARY__', await capture())
+
+    // `finisher` on this feed is `active` on the old one: never knocked out.
+    expect(stillIn(state).map(r => r.name)).toEqual(['Mark Dowdle'])
+    expect(state.remaining).toBe(1)
+  })
+
+  it('still reads the older state feed, in case the worker rolls back', async () => {
+    const state = await parsed('window.__LSU__', {
+      state: { raceStartUtc: GUN, generatedAt: GUN, raceOver: true, finalLap: 7, runners: [runner('Ada', 7)] },
+    })
+
+    expect(state.finalLap).toBe(7)
+    expect(winner(state)?.name).toBe('Ada')
+  })
+
+  it('treats a status it does not recognise as out', async () => {
+    const state = await parsed('window.__LSU_SUMMARY__', {
+      summary: {
+        raceStartUtc: GUN,
+        generatedAt: GUN,
+        raceOver: true,
+        lastLap: 3,
+        runners: [
+          { bib: '1', name: 'Ada', laps: 3, status: 'finisher' },
+          { bib: '2', name: 'Bo', laps: 3, status: 'withdrawn-appeal-pending' },
+        ],
+      },
+    })
+
+    // Wrong in this direction shows one runner too few, rather than inventing
+    // somebody still out on the course.
+    expect(stillIn(state).map(r => r.name)).toEqual(['Ada'])
+  })
+
+  it('names the markers it looked for when the page carries neither', async () => {
+    forgetBoard()
+    serve('<!doctype html><html><body>no scoreboard here</body></html>')
+    const snap = await liveSnapshot()
+
+    expect(snap.ok).toBe(false)
+    expect(snap.error).toContain('window.__LSU_SUMMARY__')
+    expect(snap.error).toContain('window.__LSU__')
   })
 })

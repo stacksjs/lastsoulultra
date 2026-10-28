@@ -1,0 +1,284 @@
+{
+  "summary": {
+    "version": 1,
+    "generatedAt": 1793202121042,
+    "raceStartUtc": 1786708800000,
+    "lapKm": 6.706,
+    "lastLap": 94,
+    "starters": 160,
+    "entered": 169,
+    "didNotStart": 9,
+    "finishers": 1,
+    "raceOver": true,
+    "provisional": false,
+    "lapTimeGaps": 0,
+    "totals": {
+      "laps": 3511,
+      "km": 23544.8,
+      "runningSeconds": 10376614.02300001,
+      "restSeconds": 2263002.2340000016
+    },
+    "laps": [
+      {
+        "lap": 1,
+        "startedAtUtc": 1786708800000,
+        "attempted": 160,
+        "finished": 160,
+        "eliminated": 0,
+        "medianSeconds": 2899.6295,
+        "fastestSeconds": 1667.694,
+        "slowestSeconds": 3258.951,
+        "medianRestSeconds": 700.3705
+      },
+      {
+        "lap": 2,
+        "startedAtUtc": 1786712400000,
+        "attempted": 160,
+        "finished": 160,
+        "eliminated": 0,
+        "medianSeconds": 2950.279,
+        "fastestSeconds": 1847.134,
+        "slowestSeconds": 3468.135,
+        "medianRestSeconds": 649.721
+      }
+    ],
+    "deadliestLap": {
+      "lap": 16,
+      "eliminated": 18
+    },
+    "records": {
+      "minLaps": 10,
+      "fastestLap": {
+        "bib": "54",
+        "name": "Alex Kukla",
+        "lap": 1,
+        "value": 1667.694,
+        "laps": 12
+      },
+      "slowestLap": {
+        "bib": "88",
+        "name": "Salome Kalinski",
+        "lap": 25,
+        "value": 3616.257,
+        "laps": 25
+      },
+      "bestAvgPace": {
+        "bib": "54",
+        "name": "Alex Kukla",
+        "lap": null,
+        "value": 297.09112486330645,
+        "laps": 12
+      },
+      "mostRest": {
+        "bib": "98",
+        "name": "Ayyoub El Osrouti",
+        "lap": null,
+        "value": 64239.862,
+        "laps": 93
+      },
+      "leastRest": {
+        "bib": "133",
+        "name": "Simon Strasser",
+        "lap": null,
+        "value": 3830.7700000000004,
+        "laps": 10
+      },
+      "longestRest": {
+        "bib": "54",
+        "name": "Alex Kukla",
+        "lap": 1,
+        "value": 1932.306,
+        "laps": 12
+      },
+      "shortestRest": {
+        "bib": "88",
+        "name": "Salome Kalinski",
+        "lap": 25,
+        "value": 0,
+        "laps": 25
+      },
+      "steadiest": {
+        "bib": "107",
+        "name": "Fynn Saier",
+        "lap": null,
+        "value": 183.35200000000032,
+        "laps": 10
+      }
+    },
+    "runners": [
+      {
+        "bib": "5",
+        "name": "Mark Dowdle",
+        "nation": null,
+        "rank": 1,
+        "status": "finisher",
+        "laps": 94,
+        "km": 630.4,
+        "timedLaps": 94,
+        "outAfterLap": null,
+        "outInLap": null,
+        "outAtUtc": null,
+        "runningSeconds": 291623.834,
+        "restSeconds": 46776.16600000002,
+        "restAvgSeconds": 497.61878723404277,
+        "shortestRest": {
+          "lap": 15,
+          "seconds": 116.9989999999998
+        },
+        "longestRest": {
+          "lap": 87,
+          "seconds": 1304.3380000000002
+        },
+        "fastestLap": {
+          "lap": 87,
+          "seconds": 2295.662
+        },
+        "slowestLap": {
+          "lap": 15,
+          "seconds": 3483.001
+        },
+        "avgLapSeconds": 3102.381212765957,
+        "fastestPace": 342.32955562183116,
+        "avgPace": 462.62767861108813,
+        "lapSpreadSeconds": 1187.3390000000004,
+        "lapSeconds": [
+          2910.452,
+          3060.397,
+          3214.567,
+          3146.764,
+          3011.932
+        ]
+      },
+      {
+        "bib": "98",
+        "name": "Ayyoub El Osrouti",
+        "nation": null,
+        "rank": 2,
+        "status": "out",
+        "laps": 93,
+        "km": 623.7,
+        "timedLaps": 93,
+        "outAfterLap": 93,
+        "outInLap": 94,
+        "outAtUtc": 1787043600000,
+        "runningSeconds": 270560.1379999999,
+        "restSeconds": 64239.862,
+        "restAvgSeconds": 690.7512043010753,
+        "shortestRest": {
+          "lap": 90,
+          "seconds": 286.15700000000015
+        },
+        "longestRest": {
+          "lap": 87,
+          "seconds": 1065.062
+        },
+        "fastestLap": {
+          "lap": 87,
+          "seconds": 2534.938
+        },
+        "slowestLap": {
+          "lap": 90,
+          "seconds": 3313.843
+        },
+        "avgLapSeconds": 2909.248795698924,
+        "fastestPace": 378.01043841336116,
+        "avgPace": 433.8277357141252,
+        "lapSpreadSeconds": 778.9049999999997,
+        "lapSeconds": [
+          2726.405,
+          2932.931,
+          2935.753,
+          2801.765,
+          2680.313
+        ]
+      },
+      {
+        "bib": "43",
+        "name": "Norman Mascher-Aspensjö",
+        "nation": null,
+        "rank": 3,
+        "status": "out",
+        "laps": 80,
+        "km": 536.5,
+        "timedLaps": 80,
+        "outAfterLap": 80,
+        "outInLap": 81,
+        "outAtUtc": 1786996800000,
+        "runningSeconds": 227503.70100000003,
+        "restSeconds": 60496.299,
+        "restAvgSeconds": 756.2037375,
+        "shortestRest": {
+          "lap": 80,
+          "seconds": 80.4989999999998
+        },
+        "longestRest": {
+          "lap": 3,
+          "seconds": 1246.571
+        },
+        "fastestLap": {
+          "lap": 3,
+          "seconds": 2353.429
+        },
+        "slowestLap": {
+          "lap": 80,
+          "seconds": 3519.501
+        },
+        "avgLapSeconds": 2843.7962625000005,
+        "fastestPace": 350.94378168804053,
+        "avgPace": 424.06744147032515,
+        "lapSpreadSeconds": 1166.0720000000001,
+        "lapSeconds": [
+          2650.449,
+          2683.102,
+          2353.429,
+          2577.092,
+          2658.165
+        ]
+      },
+      {
+        "bib": "93",
+        "name": "Mariam Suhk",
+        "nation": null,
+        "rank": 160,
+        "status": "out",
+        "laps": 2,
+        "km": 13.4,
+        "timedLaps": 2,
+        "outAfterLap": 2,
+        "outInLap": 3,
+        "outAtUtc": 1786716000000,
+        "runningSeconds": 6406.812,
+        "restSeconds": 793.1880000000001,
+        "restAvgSeconds": 396.59400000000005,
+        "shortestRest": {
+          "lap": 2,
+          "seconds": 170.00300000000016
+        },
+        "longestRest": {
+          "lap": 1,
+          "seconds": 623.185
+        },
+        "fastestLap": {
+          "lap": 1,
+          "seconds": 2976.815
+        },
+        "slowestLap": {
+          "lap": 2,
+          "seconds": 3429.997
+        },
+        "avgLapSeconds": 3203.406,
+        "fastestPace": 443.90322099612285,
+        "avgPace": 477.6925141664181,
+        "lapSpreadSeconds": 453.1819999999998,
+        "lapSeconds": [
+          2976.815,
+          3429.997,
+          null,
+          null,
+          null
+        ]
+      }
+    ]
+  },
+  "serverNow": 1793202130559
+}

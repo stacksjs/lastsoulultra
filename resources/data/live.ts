@@ -5,7 +5,7 @@
  * (lsu-live.bspmedia.workers.dev, canonically live.lastsoulultra.com). That
  * worker has no JSON endpoint - probing /state, /api/state, /state.json and
  * friends all return 404 - but it server-renders its entire state into a
- * `window.__LSU__` assignment in the HTML it serves. So that is the source:
+ * `window.__LSU_*` assignment in the HTML it serves. So that is the source:
  * fetch the page, lift the JSON back out, validate it, and cache it.
  *
  * This is the fragile part of the site, and it is fragile on purpose rather
@@ -72,21 +72,33 @@ let failedAt = 0
 let lastError: string | null = null
 
 /**
- * Lift the `window.__LSU__ = {...}` object out of the worker's HTML.
+ * The assignments this worker is known to serve, newest first.
+ *
+ * It renamed the global and renested the payload at some point before 28
+ * October 2026 - `window.__LSU__ = { state: ... }` became
+ * `window.__LSU_SUMMARY__ = { summary: ... }` - with no version marker and no
+ * warning, which is the standing cost of reading someone's page instead of
+ * their API. Both are accepted, so a rollback upstream cannot take the board
+ * down a second time, and so can both payload roots below.
+ */
+const MARKERS = ['window.__LSU_SUMMARY__', 'window.__LSU__'] as const
+
+/**
+ * Lift the `window.__LSU_*` object out of the worker's HTML.
  *
  * A non-greedy match up to `</script>` would break the moment the payload
  * contains that string inside a runner's name, so this walks braces instead
  * and tracks string literals and escapes while it does.
  */
 function extractStateObject(html: string): unknown {
-  const marker = 'window.__LSU__'
-  const markerAt = html.indexOf(marker)
-  if (markerAt === -1)
-    throw new Error('no window.__LSU__ in the source page')
+  const marker = MARKERS.find(m => html.includes(m))
+  if (!marker)
+    throw new Error(`none of ${MARKERS.join(', ')} in the source page`)
 
+  const markerAt = html.indexOf(marker)
   const start = html.indexOf('{', markerAt)
   if (start === -1)
-    throw new Error('no object literal after window.__LSU__')
+    throw new Error(`no object literal after ${marker}`)
 
   let depth = 0
   let inString = false
@@ -106,12 +118,24 @@ function extractStateObject(html: string): unknown {
         return JSON.parse(html.slice(start, i + 1))
     }
   }
-  throw new Error('unterminated object literal after window.__LSU__')
+  throw new Error(`unterminated object literal after ${marker}`)
 }
 
 function asNumber(value: unknown): number | null {
   return typeof value === 'number' && Number.isFinite(value) ? value : null
 }
+
+/**
+ * Statuses that mean "had not been knocked out".
+ *
+ * The live feed said `active` for a runner still going; the summary feed says
+ * `finisher` for the last one standing. Everything downstream - `stillIn`,
+ * `winner`, the board's own count - is asking that one question, so both map
+ * to `active`. Anything unrecognised counts as out, which is the safe way to
+ * be wrong: a status this does not know about shows one runner too few rather
+ * than inventing someone still on the course.
+ */
+const STILL_IN = new Set(['active', 'finisher'])
 
 /**
  * Narrow the raw payload to the fields this site actually renders, dropping
@@ -120,9 +144,10 @@ function asNumber(value: unknown): number | null {
  */
 function normalise(raw: unknown): LiveState {
   const root = raw as Record<string, any>
-  const s = root?.state as Record<string, any> | undefined
+  // `summary` is the current root, `state` the one before it. See MARKERS.
+  const s = (root?.summary ?? root?.state) as Record<string, any> | undefined
   if (!s || typeof s !== 'object')
-    throw new Error('payload has no state object')
+    throw new Error('payload has no summary or state object')
 
   const raceStartUtc = asNumber(s.raceStartUtc)
   if (raceStartUtc === null)
@@ -131,7 +156,8 @@ function normalise(raw: unknown): LiveState {
   const rawRunners = Array.isArray(s.runners) ? s.runners : []
   const runners: LiveRunner[] = []
   for (const r of rawRunners) {
-    const laps = asNumber(r?.lapsCompleted)
+    // `lapsCompleted` on the live feed, `laps` on the summary feed.
+    const laps = asNumber(r?.lapsCompleted) ?? asNumber(r?.laps)
     const bib = typeof r?.bib === 'string' ? r.bib : asNumber(r?.bib)?.toString() ?? null
     const name = typeof r?.name === 'string' ? r.name.trim() : ''
     if (bib === null || !name || laps === null)
@@ -139,8 +165,10 @@ function normalise(raw: unknown): LiveState {
     runners.push({
       bib,
       name,
-      status: r.status === 'active' ? 'active' : 'out',
+      status: STILL_IN.has(r?.status) ? 'active' : 'out',
       lapsCompleted: laps,
+      // Per-loop tracking is a live-race concern and the summary feed drops
+      // it, so a finished race has no progress and nothing can be stale.
       progress: asNumber(r?.progress),
       lastFixAt: asNumber(r?.lastFixAt),
       progressStale: r?.progressStale === true,
@@ -161,7 +189,8 @@ function normalise(raw: unknown): LiveState {
     remaining: asNumber(s.remaining) ?? runners.filter(r => r.status === 'active').length,
     provisional: s.provisional === true,
     raceOver: s.raceOver === true,
-    finalLap: asNumber(s.finalLap),
+    // `finalLap` on the live feed, `lastLap` on the summary feed.
+    finalLap: asNumber(s.finalLap) ?? asNumber(s.lastLap),
     runners,
     weatherCelsius: asNumber(s.weather?.celsius),
     sourcesOk,
