@@ -22,6 +22,61 @@ bun scripts/build-site-assets.ts
 
 The image pipeline uses the published WebP decoder fix for odd-height photography, preserving the final rows without flattening transparency. The World Series globe uses published first-party `@ts-maps/stx` 0.5.7, including its upstream projection fix. Its local land geometry derives from the production land mask; the static globe remains a progressive fallback. Home uses the original race footage with scroll seeking and a poster fallback for reduced motion. Its historical counters and season comparison follow scroll progress using a small summary generated from the official results. The format rest calculator, menu, gallery, results filters and race forms use STX signals and composables.
 
+## Deploy
+
+The site deploys to `lsu.stacksjs.com`, a password-gated preview on the shared
+`stacks` box (`cloud.attachTo`), not to the public lastsoulultra.com. Pushing to
+`main` runs CI; Deploy fires on CI succeeding (`workflow_run`), so an untested
+commit never ships.
+
+`config/cloud.ts` holds the shape: Hetzner, attach mode, rpx with on-demand TLS,
+one `main` site on the domain and a loopback-only `api`. DNS is the
+`stacksjs.com` zone, which is on Cloudflare nameservers - ts-cloud detects the
+provider from the zone rather than being told, the same as HQ's config.
+
+### What has to be in place
+
+`DEPLOY_SSH_KEY` and `DOTENV_PRIVATE_KEY_PRODUCTION` are already set as repository
+secrets; the workflow skips the whole deploy when either is missing. The zone is
+on Cloudflare, so one more is needed:
+
+```sh
+gh secret set CLOUDFLARE_API_TOKEN --repo stacksjs/lastsoulultra
+# paste the token, then Ctrl-D. A token with Zone:DNS:Edit on stacksjs.com.
+```
+
+`.env.production` is committed with every value encrypted (dotenvx; the private
+key lives in the gitignored `.env.keys`). `APP_DOMAIN` is set there and wins over
+the default in `config/cloud.ts`, so it has to name the new host:
+
+```sh
+./buddy env:set APP_DOMAIN lsu.stacksjs.com --file .env.production
+```
+
+### The password gate
+
+`SITE_AUTH_USER` and `SITE_AUTH_PASSWORD` turn on rpx's HTTP Basic challenge for
+the site - the same gate the nginx driver applies as an htpasswd file - so the
+preview is neither readable by the public nor indexable. Both unset leaves the
+site open, which is what you want the day it goes public.
+
+```sh
+./buddy env:set SITE_AUTH_USER lsu --file .env.production
+./buddy env:set SITE_AUTH_PASSWORD --stdin --file .env.production   # keeps it out of shell history
+```
+
+Commit the re-encrypted `.env.production` afterwards: the deploy reads it from
+the repository, not from your machine.
+
+### Deploying
+
+Push to `main` and let CI gate it, or run it by hand:
+
+```sh
+gh workflow run Deploy --repo stacksjs/lastsoulultra -f environment=production
+./buddy deploy --prod            # from a machine that has .env.keys
+```
+
 ## Connect HQ coaching
 
 Set in the deployment environment:
