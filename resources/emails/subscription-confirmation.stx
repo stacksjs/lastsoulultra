@@ -3,7 +3,7 @@ const email = props.email || ''
 const unsubscribeUrl = props.unsubscribeUrl || '#'
 const appName = props.appName || 'Stacks'
 const appUrl = props.appUrl || 'https://stacksjs.com'
-const primaryColor = props.primaryColor || '#c14a15'
+const primaryColor = props.primaryColor || '#dd0f15'
 const year = props.year || new Date().getFullYear()
 </script>
 
@@ -15,7 +15,7 @@ const year = props.year || new Date().getFullYear()
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Welcome to {{ appName }}</title>
 </head>
-<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #0e0e0e; line-height: 1.6; color: #d4d4d4;">
+<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #000000; line-height: 1.6; color: #ffffff;">
   <table role="presentation" cellpadding="0" cellspacing="0" style="width: 100%; border-collapse: collapse;">
     <tr>
       <td style="padding: 40px 20px;">
@@ -30,15 +30,15 @@ const year = props.year || new Date().getFullYear()
 
           <!-- Main Content -->
           <tr>
-            <td style="background-color: #1a1a1a; border-radius: 12px; padding: 40px;">
+            <td style="background-color: #0d0d0f; border-radius: 12px; padding: 40px;">
 
               <h2 style="color: #ececec; font-size: 22px; font-weight: 600; margin: 0 0 16px;">Thanks for subscribing!</h2>
 
-              <p style="color: #a0a0a0; font-size: 16px; line-height: 1.6; margin: 0 0 16px;">
+              <p style="color: #a6a6a6; font-size: 16px; line-height: 1.6; margin: 0 0 16px;">
                 You're now on the list. We'll keep you in the loop on new releases, features, and framework updates.
               </p>
 
-              <p style="color: #a0a0a0; font-size: 16px; line-height: 1.6; margin: 0 0 24px;">
+              <p style="color: #a6a6a6; font-size: 16px; line-height: 1.6; margin: 0 0 24px;">
                 {{ appName }} is a rapid application development framework that helps you build type-safe web apps, APIs, and cloud infrastructure with ease.
               </p>
 
@@ -56,7 +56,7 @@ const year = props.year || new Date().getFullYear()
               <!-- Divider -->
               <table role="presentation" cellpadding="0" cellspacing="0" style="width: 100%; margin: 8px 0 24px;">
                 <tr>
-                  <td style="border-top: 1px solid #2a2a2a;"></td>
+                  <td style="border-top: 1px solid #242424;"></td>
                 </tr>
               </table>
 

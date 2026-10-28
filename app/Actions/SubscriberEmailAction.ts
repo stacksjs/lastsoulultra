@@ -87,7 +87,10 @@ function reply(html: boolean, success: boolean, title: string, message: string):
   if (!html)
     return { success, message }
 
-  const accent = '#f04800'
+  // The site's red. This page is the only thing a subscriber sees when
+  // they post the form without JavaScript, so it is not a place to be off
+  // brand - it said #f04800 from the design this site used to have.
+  const accent = '#dd0f15'
   const body = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -99,12 +102,12 @@ function reply(html: boolean, success: boolean, title: string, message: string):
 <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 </head>
-<body style="margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#0c0c0c;color:#f4f4f2;font-family:ui-sans-serif,system-ui,sans-serif;padding:1.5rem">
+<body style="margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#000000;color:#ffffff;font-family:ui-sans-serif,system-ui,sans-serif;padding:1.5rem">
   <main style="max-width:34rem">
     <p style="margin:0 0 1.25rem;font-family:ui-monospace,monospace;font-size:.6875rem;letter-spacing:.16em;text-transform:uppercase;color:${success ? accent : '#8a8a86'}">newsletter</p>
     <h1 style="margin:0;font-size:clamp(2rem,1.4rem+2.6vw,3rem);font-weight:800;line-height:.95;letter-spacing:-.015em;text-transform:uppercase">${title}.</h1>
-    <p style="margin:1.5rem 0 0;font-size:1rem;line-height:1.65;color:#a5a5a1">${message}</p>
-    <a href="/" style="display:inline-block;margin-top:2.25rem;padding:1rem 2rem;background:${accent};color:#0c0c0c;font-weight:700;font-size:.8125rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none">back to the race</a>
+    <p style="margin:1.5rem 0 0;font-size:1rem;line-height:1.65;color:#a6a6a6">${message}</p>
+    <a href="/" style="display:inline-block;margin-top:2.25rem;padding:1rem 2rem;background:${accent};color:#ffffff;font-weight:700;font-size:.8125rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none">back to the race</a>
   </main>
 </body>
 </html>`
