@@ -2,7 +2,8 @@ import { describe, expect, it } from 'bun:test'
 import { readdirSync } from 'node:fs'
 import { join, resolve } from 'node:path'
 import { processDirectives } from '@stacksjs/stx'
-import { assetExists, assetUrls, attributeNames, auditPage, definedClasses, formatFindings, redirectSources, unstyledClasses } from '../scripts/audit-html'
+import { assetExists, assetUrls, attributeNames, auditPage, definedClasses, formatFindings, orphanPages, redirectSources, unstyledClasses } from '../scripts/audit-html'
+import { indexablePaths } from '../resources/data/site'
 
 /**
  * The same rules scripts/audit-html.ts runs over dist, run here over the
@@ -194,4 +195,32 @@ describe('classes the markup uses and no stylesheet defines', () => {
   it('does not look inside a script', () => {
     expect(unstyledClasses('/t', '<script>el.className = "made-up-class"</script>', defined)).toEqual([])
   })
+})
+
+describe('indexed pages nothing links to', () => {
+  it('finds a URL with no inbound link, and not one that has one', () => {
+    const rendered = new Map([
+      ['/', '<a href="/format">f</a>'],
+      ['/format', '<a href="/">home</a>'],
+    ])
+
+    expect(orphanPages(rendered, ['/', '/format']).map(f => f.page)).toEqual([])
+    expect(orphanPages(rendered, ['/', '/format', '/lonely']).map(f => f.page)).toEqual(['/lonely'])
+  })
+
+  it('does not count a page linking to itself', () => {
+    const rendered = new Map([['/a', '<a href="/a">me</a>'], ['/b', '']])
+    expect(orphanPages(rendered, ['/a']).map(f => f.page)).toEqual(['/a'])
+  })
+
+  it('counts a link carrying a fragment or a query', () => {
+    const rendered = new Map([['/a', '<a href="/b#x">x</a>'], ['/b', '']])
+    expect(orphanPages(rendered, ['/b'])).toEqual([])
+  })
+
+  it('leaves no indexed page of this site unlinked', async () => {
+    const pairs = await Promise.all(views.map(async view => [view.url, await render(view.file)] as const))
+
+    expect(orphanPages(new Map(pairs), indexablePaths).map(f => f.page)).toEqual([])
+  }, 120_000)
 })

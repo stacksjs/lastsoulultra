@@ -309,6 +309,27 @@ export function unstyledClasses(page: string, raw: string, defined: Set<string>)
   return findings
 }
 
+/**
+ * An indexed page nothing links to.
+ *
+ * A URL in the sitemap with no inbound link is one a reader can only reach
+ * from a search result. It is also the shape of a page that was added and
+ * then forgotten: /coaching/plans was listed for a week with nothing on the
+ * site pointing at it, because the component that linked it hid itself.
+ */
+export function orphanPages(rendered: Map<string, string>, indexed: string[]): Finding[] {
+  return indexed
+    .filter((target) => {
+      for (const [page, html] of rendered) {
+        if (page === target) continue
+        if (new RegExp(`href="${target.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?:["#?])`).test(html))
+          return false
+      }
+      return true
+    })
+    .map(target => ({ page: target, rule: 'orphan-page', detail: 'in the sitemap, linked from nowhere' }))
+}
+
 /** Findings grouped by rule, for a terminal. */
 export function formatFindings(findings: Finding[]): string {
   const byRule = new Map<string, Finding[]>()
@@ -332,10 +353,13 @@ if (import.meta.main) {
   const served = new Set([...files.map(urlOf), ...redirectSources()])
   const styles = [...new Bun.Glob('**/*.css').scanSync({ cwd: ROOT, absolute: true })]
   const defined = definedClasses(styles)
-  const findings = files.flatMap((file) => {
-    const html = readFileSync(file, 'utf8')
-    return [...auditPage(urlOf(file), html, served), ...unstyledClasses(urlOf(file), html, defined)]
-  })
+  const rendered = new Map(files.map(file => [urlOf(file), readFileSync(file, 'utf8')]))
+  const findings = [...rendered].flatMap(([page, html]) =>
+    [...auditPage(page, html, served), ...unstyledClasses(page, html, defined)])
+
+  const sitemap = readFileSync('public/sitemap.xml', 'utf8')
+  const indexed = [...sitemap.matchAll(/<loc>https?:\/\/[^/]+([^<]*)<\/loc>/g)].map(match => match[1]!)
+  findings.push(...orphanPages(rendered, indexed))
 
   console.log(`audited ${files.length} pages`)
   console.log(findings.length === 0 ? '\nno findings' : `\n${formatFindings(findings)}`)
