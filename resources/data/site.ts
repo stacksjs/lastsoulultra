@@ -45,7 +45,12 @@ export function absolute(path: string): string {
 export const indexablePaths: string[] = [
   '/', '/format', '/world-series', '/soul-races', '/sponsorship', '/contact',
   '/lottery', '/results', '/results/last-soul-ultra-2026', '/results/last-soul-ultra-2025',
-  '/imprint', '/privacy', '/terms', '/coaching', '/faq',
+  '/imprint', '/privacy', '/terms', '/coaching',
+  // /faq is served, and stays served: it is a URL the previous site published
+  // and other people's links still point at. It is not listed, because it
+  // renders the contact page and canonicalises to /contact - advertising a
+  // URL that tells a crawler it is not the canonical one asks for the page to
+  // be ignored and spends the site's crawl budget doing it.
   // The storefront only. The other seven training modules show a sign-in
   // prompt to anyone without an account, which is not a search result.
   ...indexableModulePaths(),

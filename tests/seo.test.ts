@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'bun:test'
-import { readdirSync } from 'node:fs'
+import { readFileSync, readdirSync } from 'node:fs'
 import { join } from 'node:path'
 import { coachingPage } from '../resources/data/coaching'
 import { legalPages } from '../resources/data/legal'
@@ -37,6 +37,22 @@ describe('seo artefacts', () => {
     })
   }
 
+  /**
+   * The canonical a view declares, read from its source. Views write it as a
+   * literal, and the coaching modules build it from their slug.
+   */
+  function canonicalOf(path: string): string {
+    const file = `resources/views${path === '/' ? '/index' : path}.stx`
+    const source = readFileSync(file, 'utf8')
+    const literal = /const canonicalPath = ['"]([^'"]+)['"]/.exec(source)
+    if (literal)
+      return literal[1]!
+    const built = /const canonicalPath = modulePath\(['"]([^'"]+)['"]\)/.exec(source)
+    if (built)
+      return `/coaching/${built[1]}`
+    throw new Error(`${file} declares no canonicalPath`)
+  }
+
   /** A page that declares itself noindex is not expected in the sitemap. */
   function noindex(path: string): boolean {
     if (path === '/404')
@@ -49,11 +65,25 @@ describe('seo artefacts', () => {
   it('lists every view that is not dynamic, private or noindex', () => {
     // Views on disk are the ground truth for what the site actually serves.
     // Recursive: /results and /coaching both hold pages a flat read missed.
-    const expected = viewPaths().filter(path => !noindex(path))
+    const expected = viewPaths().filter(path => !noindex(path) && canonicalOf(path) === path)
 
-    expect(expected.length).toBeGreaterThan(14)
+    expect(expected.length).toBeGreaterThan(13)
     for (const path of expected)
       expect(indexablePaths).toContain(path)
+  })
+
+  it('does not list a page that points its canonical somewhere else', () => {
+    // /faq renders the contact page and canonicalises to /contact. Listing a
+    // URL that tells a crawler it is not the canonical one asks for the page
+    // to be ignored, and spends crawl budget doing it.
+    const aliases = viewPaths().filter(path => !noindex(path) && canonicalOf(path) !== path)
+
+    expect(aliases).toContain('/faq')
+    for (const path of aliases) {
+      expect(indexablePaths).not.toContain(path)
+      // An alias must still point at a page the sitemap does list.
+      expect(indexablePaths).toContain(canonicalOf(path))
+    }
   })
 
   it('keeps the modules that need an account out of the sitemap', () => {
