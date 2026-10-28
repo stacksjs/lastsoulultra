@@ -16,6 +16,21 @@ import { schema } from '@stacksjs/validation'
  * deploy secrets is typed exactly like one in your local `.env`.
  */
 const envSchema = defineEnv({
+  /**
+   * Gate the deployed site behind HTTP Basic auth (see config/cloud.ts).
+   * Both must be set for rpx to challenge; unset means the site is open,
+   * which is the right default for the day it goes public.
+   */
+  SITE_AUTH_USER: {
+    validation: schema.string(),
+    default: '',
+  },
+
+  SITE_AUTH_PASSWORD: {
+    validation: schema.string(),
+    default: '',
+  },
+
   APP_NAME: {
     validation: schema.string(),
     default: 'Stacks',

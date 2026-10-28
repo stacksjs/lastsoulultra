@@ -10,7 +10,7 @@ import { env } from '@stacksjs/env'
  * project attached to this box, and must never equal `attachTo`.
  */
 const APP_SLUG = 'lastsoulultra'
-const APP_DOMAIN = env.APP_DOMAIN || 'lastsoulultra.hq.training'
+const APP_DOMAIN = env.APP_DOMAIN || 'lsu.stacksjs.com'
 
 /**
  * Ports on the shared box.
@@ -63,12 +63,18 @@ export const tsCloud: TsCloudConfig = {
     },
 
     /**
-     * `lastsoulultra.hq.training` sits in the `hq.training` zone at Porkbun.
-     * The address pass is opt-in on `provider` being set: it derives one A and
-     * one AAAA per site domain and upserts them, never deleting anything else
-     * in a zone this project does not own. `domain` names the ZONE.
+     * `lsu.stacksjs.com` sits in the `stacksjs.com` zone, which is on
+     * Cloudflare nameservers - hq.training is the Porkbun one, and this
+     * config used to name that zone and that provider. ts-cloud detects the
+     * provider from the zone's nameservers (the same way HQ's config does),
+     * so the provider is left unset and CLOUDFLARE_API_TOKEN is what the
+     * address pass needs; the deploy workflow already passes it.
+     *
+     * It derives one A and one AAAA per site domain and upserts them, never
+     * deleting anything else in a zone this project does not own. `domain`
+     * names the ZONE, not the site.
      */
-    dns: { provider: 'porkbun', domain: 'hq.training' },
+    dns: { domain: 'stacksjs.com' },
   },
 
   sites: {
@@ -82,6 +88,22 @@ export const tsCloud: TsCloudConfig = {
       root: '.',
       path: '/',
       domain: APP_DOMAIN,
+      /**
+       * Behind HTTP Basic auth: this is a preview of a site that is already
+       * live elsewhere, so it must not be read by the public or indexed by a
+       * crawler. rpx challenges every request to the route until the
+       * credentials are given, the same way the nginx driver applies an
+       * htpasswd file.
+       *
+       * Credentials come from the environment, never from this file - a
+       * password in the repository is a password on every fork and in every
+       * clone. Set SITE_AUTH_USER and SITE_AUTH_PASSWORD in .env.production
+       * (encrypted) and the gate turns itself on; leave them unset and the
+       * site is open, which is the right default for the day it goes public.
+       */
+      ...(env.SITE_AUTH_USER && env.SITE_AUTH_PASSWORD
+        ? { auth: { username: env.SITE_AUTH_USER, password: env.SITE_AUTH_PASSWORD, realm: 'Last Soul Ultra preview' } }
+        : {}),
       start: 'bun node_modules/@stacksjs/buddy/dist/serve-entry.js',
       port: PORT_MAIN,
       // Build-time-only source art would go here if there were any; the race
