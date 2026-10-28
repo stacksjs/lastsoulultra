@@ -14,9 +14,7 @@ const canonicalPath = "/lottery"
 </section>
 <section id="form" class="entry lsu-scope-lottery">
 <div class="entry-shell lsu-scope-lottery">
-<div class="form lsu-scope-lottery portal" data-lottery-portal data-lang="en" aria-live="polite">
-<div class="lsu-scope-lottery portal-message">Loading account access…</div>
-</div>
+<RacePortal />
 </div>
 </section>
 <section class="lsu-scope-lottery open-now section">
@@ -106,5 +104,4 @@ const canonicalPath = "/lottery"
 <br class="lsu-scope-lottery">Selection is by LSU team and a random draw. </p>
 </div>
 </section>
-<section class="section"><div class="shell"><RacePortal /></div></section>
 @endsection

@@ -1,0 +1,237 @@
+import { describe, expect, it } from 'bun:test'
+import { coachingModule, coachingModules, enabledModules, indexableModulePaths, modulePath } from '../resources/data/coaching'
+import { formatPrice, formatTrial, parseBrand } from '../resources/functions/coaching-brand'
+import coaching from '../config/coaching'
+import server from '../config/server'
+import { coachingBrand, coachingOrigin, coachingSection, portalElementUrl, portalUrl } from '../resources/functions/coaching-source'
+
+describe('the coaching module registry', () => {
+  it('uses each HQ module key once, as its own URL segment', () => {
+    const slugs = coachingModules.map(module => module.slug)
+    expect(new Set(slugs).size).toBe(slugs.length)
+    for (const slug of slugs) {
+      expect(slug).toMatch(/^[a-z]+$/)
+      expect(modulePath(slug)).toBe(`/coaching/${slug}`)
+    }
+  })
+
+  it('covers the eight modules HQ publishes, and nothing invented', () => {
+    expect(coachingModules.map(module => module.slug).sort()).toEqual(
+      ['account', 'calendar', 'feedback', 'health', 'library', 'messages', 'plans', 'progress'],
+    )
+  })
+
+  it('shows only the storefront when no brand is published', () => {
+    // An unreachable or draft brand must not advertise panels that cannot load.
+    expect(enabledModules(undefined).map(module => module.slug)).toEqual(['plans'])
+    expect(enabledModules([]).map(module => module.slug)).toEqual(['plans'])
+  })
+
+  it('keeps this site\'s order rather than the order the brand happens to list', () => {
+    expect(enabledModules(['account', 'plans', 'calendar']).map(module => module.slug))
+      .toEqual(['plans', 'calendar', 'account'])
+  })
+
+  it('ignores a module the brand names that this site does not serve', () => {
+    expect(enabledModules(['plans', 'whiteboard']).map(module => module.slug)).toEqual(['plans'])
+  })
+
+  it('indexes only what a visitor without an account can actually read', () => {
+    expect(indexableModulePaths()).toEqual(['/coaching/plans'])
+    for (const module of coachingModules) {
+      if (module.scope !== 'public')
+        expect(indexableModulePaths()).not.toContain(modulePath(module.slug))
+    }
+  })
+
+  it('marks health and messages as account-private, because a brand never sees them', () => {
+    expect(coachingModule('health')?.scope).toBe('private')
+    expect(coachingModule('messages')?.scope).toBe('private')
+  })
+
+  it('says what each panel does in a full sentence', () => {
+    for (const module of coachingModules) {
+      expect(module.summary.length).toBeGreaterThan(40)
+      expect(module.summary.endsWith('.')).toBe(true)
+      // The site's one hard typographic rule.
+      expect(module.summary).not.toContain('—')
+      expect(module.title).not.toContain('—')
+    }
+  })
+
+  it('does not know about a module that is not registered', () => {
+    expect(coachingModule('nope')).toBeUndefined()
+  })
+})
+
+/**
+ * The fixture is a verbatim capture of `GET /api/brands/last-soul-ultra` from
+ * the HQ preview stack, preview wording and sample price included. It is here
+ * to pin the shape of the contract, not to describe LSU's real offer.
+ */
+const payload = await Bun.file('tests/fixtures/brand-last-soul-ultra.json').json()
+
+/** A deep copy, so a test that breaks one field cannot leak into the next. */
+function sample(): any {
+  return structuredClone(payload)
+}
+
+describe('reading the published brand', () => {
+  it('reads the real HQ payload', () => {
+    const brand = parseBrand(sample(), 'last-soul-ultra')
+
+    expect(brand?.name).toBe('Last Soul Ultra Preview')
+    expect(brand?.headline).toBe('Train for the next start.')
+    expect(brand?.modules).toContain('calendar')
+    expect(brand?.offers).toHaveLength(1)
+    expect(brand?.offers[0].coach).toBe('LSU Preview Coach')
+    expect(brand?.offers[0].method.version).toBe(1)
+    expect(brand?.offers[0].product.priceCents).toBe(1999)
+  })
+
+  it('refuses a payload published for a different brand', () => {
+    expect(parseBrand(sample(), 'another-race')).toBeNull()
+  })
+
+  it('treats an unpublished brand, a broken payload and an outage alike', () => {
+    for (const raw of [null, undefined, 'nope', 42, {}, { settings: {} }, { slug: 'last-soul-ultra' }])
+      expect(parseBrand(raw, 'last-soul-ultra')).toBeNull()
+  })
+
+  it('drops one malformed offer rather than the whole storefront', () => {
+    const raw = sample()
+    raw.offers.push({ label: 'Broken', method: { name: 'x' } })
+    const brand = parseBrand(raw, 'last-soul-ultra')
+
+    expect(brand?.offers.map((offer: { label: string }) => offer.label)).toEqual(['Preview running'])
+  })
+
+  it('refuses an offer with no price rather than printing a free one', () => {
+    const raw = sample()
+    delete raw.offers[0].product.price_cents
+    expect(parseBrand(raw, 'last-soul-ultra')?.offers).toEqual([])
+  })
+
+  it('keeps a javascript: or relative URL out of an href', () => {
+    const raw = sample()
+    raw.settings.support_url = 'javascript:alert(1)'
+    raw.settings.privacy_url = '/privacy'
+    raw.offers[0].method.contact_url = 'data:text/html,<script>'
+    const brand = parseBrand(raw, 'last-soul-ultra')
+
+    expect(brand?.supportUrl).toBeNull()
+    expect(brand?.privacyUrl).toBeNull()
+    expect(brand?.offers[0].method.contactUrl).toBeNull()
+    expect(brand?.termsUrl).toBe('https://www.lastsoulultra.com/terms')
+  })
+
+  it('ignores a module key that is not a plain lower-case word', () => {
+    const raw = sample()
+    raw.settings.modules = ['plans', '../admin', 42, 'calendar']
+    expect(parseBrand(raw, 'last-soul-ultra')?.modules).toEqual(['plans', 'calendar'])
+  })
+
+  it('falls back to English for a locale HQ does not publish', () => {
+    const raw = sample()
+    raw.settings.locale = 'fr'
+    expect(parseBrand(raw, 'last-soul-ultra')?.locale).toBe('en')
+  })
+})
+
+describe('printing a coach\'s price', () => {
+  const base = { id: 1, name: 'Running', description: '', priceCents: 1999, currency: 'EUR', interval: 'month', trialDays: 0 }
+
+  it('prints the coach\'s own amount and interval', () => {
+    expect(formatPrice(base)).toBe('€19.99 a month')
+    expect(formatPrice({ ...base, priceCents: 12000, interval: 'year' })).toBe('€120 a year')
+    expect(formatPrice({ ...base, currency: 'GBP', priceCents: 2500 })).toBe('£25 a month')
+  })
+
+  it('prints a German brand\'s price the German way', () => {
+    expect(formatPrice(base, 'de')).toContain('19,99')
+  })
+
+  it('names an interval it does not have a phrase for', () => {
+    expect(formatPrice({ ...base, interval: 'week' })).toBe('€19.99 per week')
+  })
+
+  it('says nothing about a trial the coach did not set', () => {
+    expect(formatTrial(base)).toBe('')
+    expect(formatTrial({ ...base, trialDays: 1 })).toBe('1 day free first')
+    expect(formatTrial({ ...base, trialDays: 14 })).toBe('14 days free first')
+  })
+})
+
+describe('where the portal is', () => {
+  it('insists on HTTPS anywhere but loopback', () => {
+    expect(coachingOrigin('https://hq.training')).toBe('https://hq.training')
+    expect(coachingOrigin('http://localhost:3940')).toBe('http://localhost:3940')
+    expect(coachingOrigin('http://127.0.0.1:3940')).toBe('http://127.0.0.1:3940')
+    expect(() => coachingOrigin('http://hq.training')).toThrow('HQ_ORIGIN must use HTTPS')
+    // A host that merely contains "localhost" is not loopback.
+    expect(() => coachingOrigin('http://localhost.attacker.test')).toThrow()
+  })
+
+  it('refuses a brand slug that is not one', () => {
+    expect(coachingBrand('last-soul-ultra')).toBe('last-soul-ultra')
+    for (const value of ['', '-leading', 'Upper', 'has space', '../org', 'a'.repeat(141)])
+      expect(() => coachingBrand(value)).toThrow('HQ_BRAND_SLUG must be an organization slug')
+  })
+
+  it('passes through only a section this site actually serves', () => {
+    expect(coachingSection('calendar')).toBe('calendar')
+    for (const value of ['', 'whiteboard', 'moderation', 42, null, undefined, ['plans']])
+      expect(coachingSection(value)).toBe('')
+  })
+
+  it('links to the same section the embed is showing', () => {
+    expect(portalUrl('calendar', 'https://hq.training', 'last-soul-ultra'))
+      .toBe('https://hq.training/brands/last-soul-ultra?section=calendar')
+    expect(portalUrl('', 'https://hq.training', 'last-soul-ultra'))
+      .toBe('https://hq.training/brands/last-soul-ultra')
+    expect(portalUrl('nonsense', 'https://hq.training', 'last-soul-ultra'))
+      .toBe('https://hq.training/brands/last-soul-ultra')
+  })
+
+  it('loads the element from the same origin it frames', () => {
+    expect(portalElementUrl('https://hq.training')).toBe('https://hq.training/assets/elements/hq-coaching.js')
+  })
+})
+
+describe('the microphone the feedback module needs', () => {
+  /** Exactly how @stacksjs/server matches config.server.headers. */
+  function headersFor(pathname: string): Record<string, string> {
+    const matched: Record<string, string> = {}
+    for (const [pattern, headers] of Object.entries(server.headers ?? {})) {
+      const hit = pattern.endsWith('/*') ? pathname.startsWith(pattern.slice(0, -1)) : pathname === pattern
+      if (hit) Object.assign(matched, headers)
+    }
+    return matched
+  }
+
+  it('is delegated on the two routes that frame it', () => {
+    for (const path of ['/coaching', '/coaching/feedback']) {
+      expect(headersFor(path)['Permissions-Policy']).toBe(`microphone=(self "${new URL(coaching.origin).origin}")`)
+    }
+  })
+
+  it('names the origin the panel is actually framed from', () => {
+    // A policy naming a different host than the iframe src grants nothing.
+    const policy = headersFor('/coaching/feedback')['Permissions-Policy'] ?? ''
+    expect(policy).toContain(new URL(portalUrl('feedback')).origin)
+  })
+
+  it('is not handed to a route with no microphone in it', () => {
+    for (const path of ['/', '/format', '/coaching/calendar', '/coaching/account'])
+      expect(headersFor(path)['Permissions-Policy']).toBeUndefined()
+  })
+})
+
+describe('reaching coaching from the rest of the site', () => {
+  const chrome = ['resources/components/SiteNav.stx', 'resources/components/SiteFooter.stx']
+
+  it('is linked from the navigation and the footer', async () => {
+    for (const path of chrome)
+      expect(await Bun.file(path).text()).toContain('href="/coaching"')
+  })
+})

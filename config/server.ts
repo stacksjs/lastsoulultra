@@ -1,4 +1,11 @@
 import type { ServerConfig } from '@stacksjs/types'
+import coaching from './coaching'
+
+/**
+ * The HQ origin the coaching panel is framed from. Permissions-Policy needs
+ * the exact origin, quoted, and it must agree with what CoachingPortal frames.
+ */
+const hqOrigin = new URL(coaching.origin).origin
 
 /**
  * **Server Configuration**
@@ -10,6 +17,27 @@ import type { ServerConfig } from '@stacksjs/types'
  * Discord or GitHub Discussions.
  */
 export default {
+  /**
+   * **Response headers**
+   *
+   * `path` or `path/*` to the headers that path answers with.
+   *
+   * Recording a voice message is the whole point of the coaching feedback
+   * module, and a cross-origin frame can only reach the microphone if the
+   * page embedding it delegates that permission. Without this the browser
+   * blocks `getUserMedia` inside HQ's frame and the feature fails quietly,
+   * which is the worst way for it to fail: nothing errors, the button simply
+   * never does anything.
+   *
+   * Only the two routes that need it. The hub embeds every section, including
+   * feedback; the seven other module routes pin one section each and have no
+   * use for a microphone.
+   */
+  headers: {
+    '/coaching': { 'Permissions-Policy': `microphone=(self "${hqOrigin}")` },
+    '/coaching/feedback': { 'Permissions-Policy': `microphone=(self "${hqOrigin}")` },
+  },
+
   /**
    * **API Proxy**
    *

@@ -1,0 +1,26 @@
+<script>
+interface Props { current?: string }
+const { current = '' } = defineProps<Props>()
+</script>
+<script server>
+import { enabledModules, modulePath } from '../data/coaching'
+import { loadBrand } from '../functions/coaching-source'
+
+/* The brand decides which modules exist; this site decides their order and
+   their names. An unreachable or draft brand leaves the storefront alone,
+   so the nav never offers a panel that cannot load. */
+const navBrand = await loadBrand()
+const navModules = enabledModules(navBrand?.modules)
+const navCurrent = current
+</script>
+@if(navModules.length > 1)
+<nav class="coach-nav" aria-label="Coaching">
+  <div class="coach-shell">
+    <ul>
+      @foreach(navModules as item)
+      <li><a href="{{ modulePath(item.slug) }}" @if(item.slug === navCurrent) aria-current="page" @endif>{{ item.label }}</a></li>
+      @endforeach
+    </ul>
+  </div>
+</nav>
+@endif

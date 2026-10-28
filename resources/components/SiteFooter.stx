@@ -1,3 +1,15 @@
+<script>
+interface Props { current?: string }
+const { current = '' } = defineProps<Props>()
+</script>
+<script server>
+/** Same rule as the nav: a section marks its own subtree. */
+function here(href) {
+  if (!current) return false
+  if (href === '/') return current === '/'
+  return current === href || current.startsWith(`${href}/`)
+}
+</script>
 <footer class="footer lsu-sz7xmlte">
 <div class="footer-grid lsu-sz7xmlte">
 <div class="footer-brand lsu-sz7xmlte">
@@ -8,13 +20,13 @@
 </div>
 <div class="footer-col lsu-sz7xmlte">
 <div class="footer-head lsu-sz7xmlte">Race</div>
-<a href="/" class="lsu-sz7xmlte">Home</a>
-<a href="/format" class="lsu-sz7xmlte">The format</a>
-<a href="/world-series" class="lsu-sz7xmlte">World Series</a>
-<a href="/soul-races" class="lsu-sz7xmlte">Soul Races</a>
-<a href="/results" class="lsu-sz7xmlte">Results overview</a>
-<a href="/results/last-soul-ultra-2026" class="lsu-sz7xmlte">Season 2 results</a>
-<a href="/results/last-soul-ultra-2025" class="lsu-sz7xmlte">Season 1 results</a>
+<a href="/" class="lsu-sz7xmlte" @if(here('/')) aria-current="page" @endif>Home</a>
+<a href="/format" class="lsu-sz7xmlte" @if(here('/format')) aria-current="page" @endif>The format</a>
+<a href="/world-series" class="lsu-sz7xmlte" @if(here('/world-series')) aria-current="page" @endif>World Series</a>
+<a href="/soul-races" class="lsu-sz7xmlte" @if(here('/soul-races')) aria-current="page" @endif>Soul Races</a>
+<a href="/results" class="lsu-sz7xmlte" @if(here('/results')) aria-current="page" @endif>Results overview</a>
+<a href="/results/last-soul-ultra-2026" class="lsu-sz7xmlte" @if(here('/results/last-soul-ultra-2026')) aria-current="page" @endif>Season 2 results</a>
+<a href="/results/last-soul-ultra-2025" class="lsu-sz7xmlte" @if(here('/results/last-soul-ultra-2025')) aria-current="page" @endif>Season 1 results</a>
 <a href="/world-series" data-apply data-view-href="/profile" class="lsu-sz7xmlte">Request a race entry</a>
 </div>
 <div class="footer-col lsu-sz7xmlte">
@@ -26,11 +38,12 @@
 </div>
 <div class="footer-col lsu-sz7xmlte">
 <div class="footer-head lsu-sz7xmlte">Info</div>
-<a href="/sponsorship" class="lsu-sz7xmlte">Sponsorship</a>
-<a href="/contact" class="lsu-sz7xmlte">Contact &amp; FAQ</a>
-<a href="/imprint" class="lsu-sz7xmlte">Imprint</a>
-<a href="/privacy" class="lsu-sz7xmlte">Privacy</a>
-<a href="/terms" class="lsu-sz7xmlte">Terms</a>
+<a href="/sponsorship" class="lsu-sz7xmlte" @if(here('/sponsorship')) aria-current="page" @endif>Sponsorship</a>
+<a href="/coaching" class="lsu-sz7xmlte" @if(here('/coaching')) aria-current="page" @endif>Coaching</a>
+<a href="/contact" class="lsu-sz7xmlte" @if(here('/contact')) aria-current="page" @endif>Contact &amp; FAQ</a>
+<a href="/imprint" class="lsu-sz7xmlte" @if(here('/imprint')) aria-current="page" @endif>Imprint</a>
+<a href="/privacy" class="lsu-sz7xmlte" @if(here('/privacy')) aria-current="page" @endif>Privacy</a>
+<a href="/terms" class="lsu-sz7xmlte" @if(here('/terms')) aria-current="page" @endif>Terms</a>
 </div>
 </div>
 <div class="footer-base lsu-sz7xmlte">

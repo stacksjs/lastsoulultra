@@ -1,0 +1,14 @@
+/* /404.
+
+   The page used to be written in six class names that exist in no stylesheet
+   on this site - h-page, display, ink, faint, muted and btn-accent - left
+   over from an earlier design system, so its heading, eyebrow, body copy and
+   primary button all rendered unstyled. It is written in the site's own
+   vocabulary now: the same .phero block the legal pages use, and the .btn and
+   .btn-outline pair from base.css.
+
+   All this sheet adds is the row the two buttons sit in, and the bottom
+   padding .phero does not carry. */
+
+.not-found-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:10px}
+.phero:last-child{padding-bottom:clamp(90px,12vw,160px)}

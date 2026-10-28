@@ -1,0 +1,10 @@
+@extends('layouts/LSU')
+@section('content')
+<script server>
+import { modulePath } from '~/resources/data/coaching'
+import { coachingPageMeta } from '~/resources/functions/coaching-source'
+const currentPage = await coachingPageMeta('progress')
+const canonicalPath = modulePath('progress')
+</script>
+<CoachingModule slug="progress" />
+@endsection

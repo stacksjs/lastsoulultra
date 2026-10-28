@@ -10,6 +10,15 @@
 if (!Bun.env.STRIPE_SECRET_KEY)
   Bun.env.STRIPE_SECRET_KEY = 'sk_test_fake_key_for_testing'
 
+// config/coaching defaults HQ_ORIGIN to the real hq.training, and the coaching
+// components read the published brand while rendering. Left alone, a suite run
+// would make live requests to another service - slow, flaky, and answered
+// differently depending on who is running it. Loopback port 1 refuses at once,
+// so the default is a deterministic "nothing published"; a test that wants a
+// brand stubs fetch itself.
+if (!Bun.env.HQ_ORIGIN)
+  Bun.env.HQ_ORIGIN = 'http://127.0.0.1:1'
+
 import { applyRuntimeDirectoryEnv } from '@stacksjs/path'
 import { setupTestEnvironment } from '@stacksjs/testing'
 

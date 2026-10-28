@@ -1,0 +1,28 @@
+<script server>
+import { enabledModules, modulePath } from '../data/coaching'
+import { loadBrand } from '../functions/coaching-source'
+
+/* The hub's version of the nav: the same modules, but with the sentence that
+   says what each one is for. A row of eight words is navigation; this is the
+   page that has to explain itself.
+
+   Rendered whenever there is anything to list, including the one-row draft
+   state. CoachingNav hides itself below two modules because a tab strip of
+   one is not navigation, but this list is the only inbound link /coaching
+   /plans has: hiding it put an indexed page in the sitemap that nothing on
+   the site linked to. */
+const indexBrand = await loadBrand()
+const indexModules = enabledModules(indexBrand?.modules)
+</script>
+@if(indexModules.length > 0)
+<ul class="coach-index">
+  @foreach(indexModules as item)
+  <li>
+    <a href="{{ modulePath(item.slug) }}">
+      <span class="coach-index-label">{{ item.label }}</span>
+      <span class="coach-index-summary">{{ item.summary }}</span>
+    </a>
+  </li>
+  @endforeach
+</ul>
+@endif

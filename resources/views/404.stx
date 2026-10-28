@@ -1,31 +1,33 @@
+@extends('layouts/LSU')
+@section('content')
 <script server>
-import { liveRaceState } from '../data/live'
-import { race } from '../data/race'
+import { liveRaceState } from '~/resources/data/live'
 
-const pageTitle = 'not found - Last Soul Ultra'
-const pageDescription = 'That page is not here.'
+/* The head partial reads `currentPage`. This page used to declare pageTitle,
+   pageDescription and noindex as loose names nothing looked at, so a 404
+   served the site's default title and description and invited indexing. */
+const currentPage = {
+  title: 'not found - Last Soul Ultra',
+  description: 'That page is not here.',
+  styles: ['/assets/styles/production/base.css', '/assets/styles/production/not-found.css'],
+  noindex: true,
+}
 const canonicalPath = '/404'
-const noindex = true
 const state = await liveRaceState()
 </script>
-<!DOCTYPE html>
-<html lang="en">
-  <head>@include('head')</head>
-  <body>
-    <SiteNav current="/404" />
-    <main id="main" class="mx-auto px-5 py-20 lg:px-8 lg:py-32 max-w-[1100px]">
-      <p class="faint label">404</p>
-      <h1 class="mt-4 h-page max-w-[14ch] display ink">you missed the cut-off.</h1>
-      <p class="mt-6 max-w-[46ch] leading-relaxed text-base muted">That page is not here. The race, thankfully, still is.</p>
-      <div class="flex flex-wrap gap-3 mt-9">
-        <a class="btn btn-accent" href="/">back to the start</a>
-        @if(state !== 'upcoming')
-          <a class="btn btn-outline" href="/results">{{ state === 'finished' ? 'the result' : 'live results' }}</a>
-        @else
-          <a class="btn btn-outline" href="/format">the format</a>
-        @endif
-      </div>
-    </main>
-    <SiteFooter />
-  </body>
-</html>
+<section class="phero">
+  <div class="phero-copy">
+    <div class="kicker">404</div>
+    <h1>You missed the cut-off.</h1>
+    <p>That page is not here. The race, thankfully, still is.</p>
+    <div class="not-found-actions">
+      <a class="btn" href="/">Back to the start</a>
+      @if(state !== 'upcoming')
+        <a class="btn-outline" href="/results">{{ state === 'finished' ? 'The result' : 'Live results' }}</a>
+      @else
+        <a class="btn-outline" href="/format">The format</a>
+      @endif
+    </div>
+  </div>
+</section>
+@endsection

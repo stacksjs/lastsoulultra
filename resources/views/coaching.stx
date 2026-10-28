@@ -1,10 +1,22 @@
 @extends('layouts/LSU')
 @section('content')
 <script server>
+import { coachingHubStyles } from '~/resources/data/coaching'
+import { coachingOrigin, loadBrand } from '~/resources/functions/coaching-source'
+
 // The home, race-entry and next-loop sheets are each suffixed with their own
-// page scope, so none of their rules could ever match here. The coaching styles
-// live in the site-wide stx-site.css that the head always loads.
-const currentPage = { title: 'Coaching - Last Soul Ultra', description: 'Send a voice message after your run and an AI rebuilds next week around what you said, inside a coach\'s method.', styles: ['/assets/styles/production/base.css'] }
+// page scope, so none of their rules could ever match here. This page's own
+// rules are coaching-page.css, loaded by this route alone; the storefront and
+// module index it carries are styled by the surface sheet, which the eight
+// module routes load too.
+/* The embed, and the connection warmed for it, only when the brand has
+   published something. The branded subscription return lands on this page
+   with its receipt hint and the element is what passes that back to HQ - but
+   an unpublished brand has no subscriptions, so there is no receipt to carry
+   and no reason to load a remote script to frame a 404. */
+const hubBrand = await loadBrand()
+const hubLive = (hubBrand?.modules.length ?? 0) > 0
+const currentPage = { title: 'Coaching - Last Soul Ultra', description: 'Send a voice message after your run and an AI rebuilds next week around what you said, inside a coach\'s method.', styles: coachingHubStyles, ...(hubLive ? { preconnect: [coachingOrigin()] } : {}) }
 const canonicalPath = '/coaching'
 </script>
 <div class="coaching-page">
@@ -14,7 +26,11 @@ const canonicalPath = '/coaching'
     <span class="kicker">Last Soul Ultra / Coaching</span>
     <h1>Say how it felt.<br><span class="accent">The plan changes.</span></h1>
     <p>Send a voice message after your run. An AI rebuilds next week around what you said, inside a coach's method.</p>
+    @if(hubLive)
     <a class="btn btn-lg" href="#training">Open the portal</a>
+    @else
+    <a class="btn btn-lg" href="#training">See what is coming</a>
+    @endif
   </div>
   <div class="coaching-hero-shot">
     <img src="/assets/lsu/images/recap-06-810.webp" srcset="/assets/lsu/images/recap-06-540.webp 540w, /assets/lsu/images/recap-06-810.webp 810w, /assets/lsu/images/recap-06-1080.webp 1080w" sizes="(min-width: 900px) 42vw, 100vw" alt="A runner in a white sun hat and neck cover looks down at his watch." width="1080" height="1440" loading="eager" fetchpriority="high" decoding="async">
@@ -84,10 +100,21 @@ const canonicalPath = '/coaching'
 
   <section id="training">
     <div class="coaching-head">
+      @if(hubLive)
+      <h2 class="h2-sm">What is open.<br><span class="accent">And where it runs.</span></h2>
+      <p>The tiers a coach has published, then the eight panels your training lives in once you are in one.</p>
+      @else
       <h2 class="h2-sm">Not open yet.<br><span class="accent">It opens here.</span></h2>
-      <p>No method has been published and no price has been set. When the first tier opens, it appears in this panel.</p>
+      <p>When a coach publishes a method, its tiers appear on this page, and the panels your training runs in open below them.</p>
+      @endif
     </div>
+    <div class="coaching-surface">
+      <CoachingOffers />
+      <CoachingIndex />
+    </div>
+    @if(hubLive)
     <div class="coaching-portal"><CoachingPortal /></div>
+    @endif
   </section>
 
   <section id="coaches" class="coaching-coaches">

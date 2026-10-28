@@ -1,3 +1,23 @@
+<script>
+interface Props {
+  /** The canonical path of the page this nav is rendering on. */
+  current?: string
+}
+const { current = '' } = defineProps<Props>()
+</script>
+<script server>
+/**
+ * Which link is the page you are on.
+ *
+ * A section marks its own subtree, so /coaching/calendar lights Coaching,
+ * and /faq canonicalises to /contact so Contact & FAQ is already right.
+ */
+function here(href) {
+  if (!current) return false
+  if (href === '/') return current === '/'
+  return current === href || current.startsWith(`${href}/`)
+}
+</script>
 <script client>
 const lsuMenu = state(false)
 function lsuToggleMenu() { lsuMenu.update(value => !value) }
@@ -8,16 +28,16 @@ function lsuCloseMenu() { lsuMenu.set(false) }
 <img src="/assets/lsu/images/lsu-logo.svg" alt="Last Soul Ultra" width="877" height="177" class="lsu-scope-nav">
 </a>
 <div class="lsu-scope-nav nav-links">
-<a href="/" class="lsu-scope-nav">Home</a>
-<a href="/format" class="lsu-scope-nav">Format</a>
-<a href="/world-series" class="lsu-scope-nav">World Series</a>
-<a href="/soul-races" class="lsu-scope-nav">Soul Races</a>
-<a href="/sponsorship" class="lsu-scope-nav">Sponsorship</a>
-<a href="/coaching" class="lsu-scope-nav">Coaching</a>
-<a href="/contact" class="lsu-scope-nav">Contact &amp; FAQ</a>
+<a href="/" class="lsu-scope-nav" @if(here('/')) aria-current="page" @endif>Home</a>
+<a href="/format" class="lsu-scope-nav" @if(here('/format')) aria-current="page" @endif>Format</a>
+<a href="/world-series" class="lsu-scope-nav" @if(here('/world-series')) aria-current="page" @endif>World Series</a>
+<a href="/soul-races" class="lsu-scope-nav" @if(here('/soul-races')) aria-current="page" @endif>Soul Races</a>
+<a href="/sponsorship" class="lsu-scope-nav" @if(here('/sponsorship')) aria-current="page" @endif>Sponsorship</a>
+<a href="/coaching" class="lsu-scope-nav" @if(here('/coaching')) aria-current="page" @endif>Coaching</a>
+<a href="/contact" class="lsu-scope-nav" @if(here('/contact')) aria-current="page" @endif>Contact &amp; FAQ</a>
 </div>
 <div class="lsu-scope-nav nav-end">
-<a href="/profile" class="lsu-scope-nav nav-profile">Profile</a>
+<a href="/profile" class="lsu-scope-nav nav-profile" @if(here('/profile')) aria-current="page" @endif>Profile</a>
 <a href="/world-series" class="lsu-scope-nav nav-cta" data-apply data-view-href="/profile" data-view-label="View entry">Request a race entry</a>
 <button class="burger lsu-scope-nav" data-burger aria-label="Menu" :aria-expanded="lsuMenu" @click="lsuToggleMenu()" aria-controls="nav-drawer">
 <span class="lsu-scope-nav">
@@ -35,14 +55,14 @@ function lsuCloseMenu() { lsuMenu.set(false) }
 <aside :data-open="lsuMenu ? '' : null" :inert="!lsuMenu" @keydown.escape="lsuCloseMenu()" class="drawer lsu-scope-nav" id="nav-drawer" data-drawer :aria-hidden="!lsuMenu">
 <div class="drawer-kicker lsu-scope-nav">Last Soul Ultra events</div>
 <div class="drawer-links lsu-scope-nav">
-<a href="/" class="lsu-scope-nav">Home</a>
-<a href="/format" class="lsu-scope-nav">Format</a>
-<a href="/world-series" class="lsu-scope-nav">World Series</a>
-<a href="/soul-races" class="lsu-scope-nav">Soul Races</a>
-<a href="/sponsorship" class="lsu-scope-nav">Sponsorship</a>
-<a href="/coaching" class="lsu-scope-nav">Coaching</a>
-<a href="/contact" class="lsu-scope-nav">Contact &amp; FAQ</a>
-<a href="/profile" class="lsu-scope-nav">Profile</a>
+<a href="/" class="lsu-scope-nav" @if(here('/')) aria-current="page" @endif>Home</a>
+<a href="/format" class="lsu-scope-nav" @if(here('/format')) aria-current="page" @endif>Format</a>
+<a href="/world-series" class="lsu-scope-nav" @if(here('/world-series')) aria-current="page" @endif>World Series</a>
+<a href="/soul-races" class="lsu-scope-nav" @if(here('/soul-races')) aria-current="page" @endif>Soul Races</a>
+<a href="/sponsorship" class="lsu-scope-nav" @if(here('/sponsorship')) aria-current="page" @endif>Sponsorship</a>
+<a href="/coaching" class="lsu-scope-nav" @if(here('/coaching')) aria-current="page" @endif>Coaching</a>
+<a href="/contact" class="lsu-scope-nav" @if(here('/contact')) aria-current="page" @endif>Contact &amp; FAQ</a>
+<a href="/profile" class="lsu-scope-nav" @if(here('/profile')) aria-current="page" @endif>Profile</a>
 </div>
 <a href="/world-series" class="drawer-cta lsu-scope-nav" data-apply data-view-href="/profile" data-view-label="View entry">Request a race entry</a>
 <div class="drawer-social lsu-scope-nav">
