@@ -226,3 +226,12 @@ describe('the microphone the feedback module needs', () => {
       expect(headersFor(path)['Permissions-Policy']).toBeUndefined()
   })
 })
+
+describe('reaching coaching from the rest of the site', () => {
+  const chrome = ['resources/components/SiteNav.stx', 'resources/components/SiteFooter.stx']
+
+  it('is linked from the navigation and the footer', async () => {
+    for (const path of chrome)
+      expect(await Bun.file(path).text()).toContain('href="/coaching"')
+  })
+})
