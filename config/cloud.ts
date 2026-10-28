@@ -10,7 +10,7 @@ import { env } from '@stacksjs/env'
  * project attached to this box, and must never equal `attachTo`.
  */
 const APP_SLUG = 'lastsoulultra'
-const APP_DOMAIN = env.APP_DOMAIN || 'lastsoulultra.hq.training'
+const APP_DOMAIN = env.APP_DOMAIN || 'lsu.stacksjs.com'
 
 /**
  * Ports on the shared box.
@@ -37,6 +37,21 @@ export const tsCloud: TsCloudConfig = {
     // labelled `ts-cloud/project=lastsoulultra` and quietly provisions a NEW
     // box, which is an expensive way to discover a missing line.
     attachTo: 'stacks',
+
+    /**
+     * Where this site used to answer.
+     *
+     * The deploy refuses to replace an rpx fragment that still serves a
+     * domain the config no longer declares, which is the right instinct - it
+     * is the difference between moving a site and silently taking one down.
+     * Naming the old host here is how you say the takedown is deliberate.
+     *
+     * It was only ever a preview, on a subdomain of the coaching platform
+     * rather than of this race, and it answered without a password. Leaving
+     * it up alongside a gated lsu.stacksjs.com would have left the open door
+     * open.
+     */
+    retiredDomains: ['lastsoulultra.hq.training'],
   },
 
   mode: 'server',
@@ -64,32 +79,28 @@ export const tsCloud: TsCloudConfig = {
 
     /**
      * No `dns` block, so the deploy writes no records and needs no registrar
-     * credentials. Only one host is ever served at a time - `APP_DOMAIN` is a
-     * single value - and both candidates point at the shared `stacks` box this
-     * project attaches to, 178.105.248.188 / 2a01:4f8:c014:6186::1.
-     *
-     * `lastsoulultra.hq.training` is the one that answers today. A subdomain
-     * of the coaching platform rather than of this race, which is the wrong
-     * home in the long run, but it resolves and it serves.
-     *
-     * `lsu.stacksjs.com` is where this is meant to go, and it is blocked on
-     * access rather than on anything in this repository. `stacksjs.com` is
-     * delegated to Cloudflare (`alex`/`melany.ns.cloudflare.com`, confirmed
-     * against the .com root and three public resolvers). A Route53 hosted
-     * zone for the same name also exists and now holds `lsu` A and AAAA
-     * records, but nothing is delegated to it, so no resolver ever reads
-     * them. Records have to be created in CLOUDFLARE:
+     * credentials. `lsu.stacksjs.com` is one host that will not move, and its
+     * A and AAAA were created once by hand on 29 October 2026, pointing at
+     * the shared `stacks` box this project attaches to:
      *
      *   lsu  A     178.105.248.188
      *   lsu  AAAA  2a01:4f8:c014:6186::1
      *
-     * DNS-only, never proxied: rpx terminates TLS on the box with on-demand
-     * certificates, and a proxy in front would terminate it somewhere else
-     * and break the issuance.
+     * DNS only, never proxied. Cloudflare creates both record types proxied
+     * by default, and the first attempt went in that way: the host answered
+     * 526, because rpx issues its certificate when the first request arrives
+     * and a proxy in front answers the challenge itself, so the certificate
+     * can never be issued. The grey cloud is load-bearing.
      *
-     * Moving then takes two more things, because the box refuses to drop a
-     * domain it is already serving: set `APP_DOMAIN`, and list the old host
-     * in `cloud.retiredDomains` so the deploy may replace the rpx fragment.
+     * Finding the zone took longer than it should have, so for the next
+     * person: `stacksjs.com` is registered at GoDaddy, not at Route 53, and
+     * its nameservers are Cloudflare (`alex`/`melany.ns.cloudflare.com`).
+     * Two Route 53 hosted zones for the same name also exist, in two
+     * different AWS accounts, holding 97 and 58 records and agreeing with
+     * neither each other nor reality. Nothing is delegated to either, so
+     * records added there resolve nowhere. The `stacks` account does
+     * register a domain through Route 53, which is where the belief came
+     * from, but that domain is `stacks-js.org`.
      */
   },
 
