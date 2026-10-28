@@ -74,6 +74,16 @@
 .coaching-surface .coach-offer-trial {display:block;margin-top:8px;color:var(--lsu-dim-3);font:400 13px/1.4 var(--lsu-body)}
 .coaching-surface .coach-offer-note {margin:14px 0 0;color:var(--lsu-dim-3);font:400 13px/1.5 var(--lsu-body)}
 
+/* The hub's index of modules. A ruled list rather than a card grid: eight
+   cards is a wall, and the sentence beside each name is the part that is
+   worth reading. The whole row is the target, not the word. */
+.coaching-surface .coach-index {display:grid;margin:clamp(34px,4vw,56px) 0 0;padding:0;list-style:none;border-top:var(--coach-rule)}
+.coaching-surface .coach-index li {border-bottom:var(--coach-rule)}
+.coaching-surface .coach-index a {display:grid;grid-template-columns:minmax(0,15rem) minmax(0,1fr);gap:clamp(12px,3vw,40px);align-items:baseline;padding:clamp(18px,2.2vw,26px) 0;text-decoration:none}
+.coaching-surface .coach-index a:hover .coach-index-label {color:var(--lsu-red)}
+.coaching-surface .coach-index-label {font:400 clamp(20px,2.2vw,28px)/1.1 var(--lsu-display);text-transform:uppercase;color:var(--lsu-white);transition:color .18s}
+.coaching-surface .coach-index-summary {max-width:60ch;color:var(--lsu-dim-1);font:400 15px/1.65 var(--lsu-body)}
+
 /* Nothing published yet. The honest state, and the one that ships today. */
 .coaching-surface .coach-empty {margin:0 0 clamp(40px,5vw,72px);padding:clamp(30px,5vw,56px);border:var(--coach-rule);background:var(--lsu-card)}
 .coaching-surface .coach-empty h2 {margin:0;font:400 clamp(24px,3vw,34px)/1.1 var(--lsu-display);text-transform:uppercase}
@@ -85,6 +95,7 @@
 
 @media (max-width:760px) {
   .coaching-surface .coach-offer {grid-template-columns:minmax(0,1fr);gap:18px}
+  .coaching-surface .coach-index a {grid-template-columns:minmax(0,1fr);gap:8px}
   .coaching-surface .coach-offer-price {text-align:left}
   .coaching-surface .coach-panel {min-height:520px}
 }

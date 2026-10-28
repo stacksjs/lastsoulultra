@@ -1,0 +1,22 @@
+<script server>
+import { enabledModules, modulePath } from '../data/coaching'
+import { loadBrand } from '../functions/coaching-source'
+
+/* The hub's version of the nav: the same modules, but with the sentence that
+   says what each one is for. A row of eight words is navigation; this is the
+   page that has to explain itself. */
+const indexBrand = await loadBrand()
+const indexModules = enabledModules(indexBrand?.modules)
+</script>
+@if(indexModules.length > 1)
+<ul class="coach-index">
+  @foreach(indexModules as item)
+  <li>
+    <a href="{{ modulePath(item.slug) }}">
+      <span class="coach-index-label">{{ item.label }}</span>
+      <span class="coach-index-summary">{{ item.summary }}</span>
+    </a>
+  </li>
+  @endforeach
+</ul>
+@endif
