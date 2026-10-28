@@ -1,0 +1,118 @@
+<script server>
+import { liveSnapshot, livePayload } from '../data/live'
+import { race } from '../data/race'
+
+/* A best-effort snapshot at render time.
+ *
+ * On a server render this is current. In the static build it is whatever the
+ * board said when the build ran, which during a race is hours old - so the
+ * client below refuses a stale seed rather than painting standings that are
+ * several laps behind. Same LivePayload shape either way, which is the point:
+ * the table cannot drift between the server copy and the polled one. */
+const boardSeed = livePayload(await liveSnapshot(), race.loopMetres)
+</script>
+<script client>
+/* Older than this and the seed is a build artefact, not the board. */
+const LSU_SEED_MAX_AGE = 120000
+/* The board regenerates about once a minute; a lap lasts an hour. */
+const LSU_POLL_MS = 30000
+
+const lsuSeedFresh = Boolean(boardSeed.ok && boardSeed.fetchedAt && Date.now() - boardSeed.fetchedAt < LSU_SEED_MAX_AGE)
+const lsuLive = state(lsuSeedFresh ? boardSeed : null)
+const lsuTick = state(Date.now())
+
+const lsuShown = derived(() => lsuLive())
+const lsuRunning = derived(() => Boolean(lsuShown() && !lsuShown().raceOver))
+const lsuStillIn = derived(() => (lsuShown()?.runners || []).filter(row => row.status === 'active'))
+const lsuOut = derived(() => (lsuShown()?.runners || []).length - lsuStillIn().length)
+
+/** Seconds to the next bell, recomputed locally between polls. */
+const lsuToBell = derived(() => {
+  const board = lsuShown()
+  if (!board || board.raceOver || board.secondsToNextLap === null) return null
+  const elapsed = Math.floor((lsuTick() - (board.fetchedAt || lsuTick())) / 1000)
+  const left = board.secondsToNextLap - elapsed
+  return left > 0 ? left : 0
+})
+const lsuBell = derived(() => {
+  const left = lsuToBell()
+  if (left === null) return ''
+  return `${String(Math.floor(left / 60)).padStart(2, '0')}:${String(left % 60).padStart(2, '0')}`
+})
+
+async function lsuReadBoard() {
+  try {
+    const response = await fetch('/api/live', { headers: { accept: 'application/json' } })
+    // 503 carries ok:false rather than a body of zeroes, so read it either way.
+    const payload = await response.json()
+    lsuLive.set(payload && payload.ok ? payload : null)
+  }
+  catch {
+    // Leave the last good board up rather than blanking it on one blip.
+  }
+}
+
+onMount(() => { lsuReadBoard() })
+useInterval(() => { lsuTick.set(Date.now()) }, 1000)
+useInterval(() => { if (lsuRunning() || !lsuShown()) lsuReadBoard() }, LSU_POLL_MS)
+</script>
+<section class="live" :if="lsuShown()" x-cloak>
+  <div class="shell">
+    <div class="live-head">
+      <div class="kicker">
+        <span :if="!lsuRunning()">Final standing</span>
+        <span :if="lsuRunning()" :text="'Live · lap ' + lsuShown().currentLap"></span>
+      </div>
+      <h2 class="h2" :if="lsuRunning()">The race is on.</h2>
+      <h2 class="h2" :if="!lsuRunning()">The last soul.</h2>
+      <p :if="lsuRunning() && lsuBell()" class="live-bell">
+        <span class="live-bell-n" :text="lsuBell()"></span> to the next bell
+      </p>
+    </div>
+
+    <div class="live-stats statgrid">
+      <div :if="lsuRunning()">
+        <div class="stat-v" :text="lsuShown().remaining"></div>
+        <div class="stat-l">still in</div>
+      </div>
+      <div>
+        <div class="stat-v" :text="lsuRunning() ? lsuShown().currentLap : lsuShown().finalLap || lsuShown().currentLap"></div>
+        <div class="stat-l" :text="lsuRunning() ? 'lap now running' : 'laps in the end'"></div>
+      </div>
+      <div>
+        <div class="stat-v" :text="lsuShown().totalKm"></div>
+        <div class="stat-l">kilometres run between them</div>
+      </div>
+      <div>
+        <div class="stat-v" :text="lsuShown().starters"></div>
+        <div class="stat-l">on the start line</div>
+      </div>
+    </div>
+
+    <div :if="lsuShown().winner" class="live-winner">
+      <div class="kicker">Winner · last soul</div>
+      <div class="live-winner-name" :text="lsuShown().winner.name"></div>
+      <div class="live-winner-yards"><span :text="lsuShown().winner.laps"></span> yards · <span :text="lsuShown().winner.km"></span> km</div>
+    </div>
+
+    <ol class="live-rows" :if="lsuRunning() && lsuStillIn().length">
+      <li :for="row in lsuStillIn()" class="live-row">
+        <span class="live-rank" :text="row.rank"></span>
+        <span class="live-name">
+          <span :text="row.name"></span>
+          <span class="live-stale" :if="row.stale" title="The tracker has not reported a position recently">no fix</span>
+        </span>
+        <span class="live-bib" :text="'bib ' + row.bib"></span>
+        <span class="live-laps"><span :text="row.laps"></span> yards</span>
+        <span class="live-km" :text="row.km + ' km'"></span>
+      </li>
+    </ol>
+
+    <p class="live-note">
+      <span :if="lsuRunning() && lsuOut() > 0" :text="lsuOut() + ' eliminated so far. '"></span>
+      <span :if="lsuShown().provisional">Provisional until the organiser confirms it. </span>
+      <span :if="!lsuShown().sourcesOk">Some of the board's own feeds are down, so a position may lag. </span>
+      <a href="https://lsu-live.bspmedia.workers.dev/" rel="noopener">The board itself</a>
+    </p>
+  </div>
+</section>

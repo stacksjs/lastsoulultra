@@ -1,1 +1,48 @@
 .ed-section{padding:clamp(70px,10vw,140px) var(--lsu-pad-x);border-bottom:1px solid var(--lsu-line-soft)}.ed-section:first-child{padding-top:var(--lsu-head-gap)}.ed-head{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:38px}.ed-link{color:var(--lsu-red);font-size:14px;letter-spacing:.12em;text-transform:uppercase}.ed-stats{margin-bottom:58px}.podium{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card{padding:28px;border:1px solid rgba(255,255,255,.14)}.card-win{border-color:var(--lsu-red)}.card-kicker,.kicker-sm{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--lsu-dim-2)}.card-name{margin-top:14px;font-family:var(--lsu-display);font-size:clamp(25px,3vw,42px);line-height:.95;text-transform:uppercase}.card-num{margin-top:22px;font-family:var(--lsu-display);font-size:56px;color:var(--lsu-red)}.card-num span{font-size:18px}.card-body{margin-top:12px;color:var(--lsu-dim-1);line-height:1.55;font-size:16px}.event-details{margin-top:54px}.event-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin:0;background:var(--lsu-line-soft);border:1px solid var(--lsu-line-soft)}.event-meta>div{padding:20px;background:var(--lsu-black)}.event-meta dt{font:12px var(--lsu-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--lsu-dim-2)}.event-meta dd{margin:10px 0 0;line-height:1.55;font-size:17px}.tables{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:48px;margin-top:64px}.table-title{margin-bottom:20px}.rows{border-top:1px solid var(--lsu-line)}.row{display:grid;grid-template-columns:82px 1fr auto;gap:18px;padding:22px 0;border-bottom:1px solid var(--lsu-line-soft)}.row-n{font-family:var(--lsu-display);font-size:32px;color:var(--lsu-red)}.row-n span,.row-n small{display:block;font:12px var(--lsu-mono);letter-spacing:.08em;color:var(--lsu-dim-2)}.row-name{font-size:18px;font-weight:600}.row-note,.row-km,.table-note{font-size:15px;color:var(--lsu-dim-2)}.runner-facts{display:flex;flex-wrap:wrap;gap:8px 16px;margin:10px 0 0}.runner-facts div{display:flex;gap:6px;font:12px var(--lsu-mono);letter-spacing:.04em}.runner-facts dt{color:var(--lsu-dim-2)}.runner-facts dd{margin:0}.runner-detail{margin-top:16px}.runner-detail summary{width:max-content;cursor:pointer;color:var(--lsu-red);font:12px var(--lsu-mono);letter-spacing:.1em;text-transform:uppercase}.runner-detail summary:hover{color:#fff}.runner-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;margin:16px 0 0;background:var(--lsu-line-soft);border:1px solid var(--lsu-line-soft)}.runner-stats>div{padding:14px;background:var(--lsu-black)}.runner-stats dt{font:11px var(--lsu-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--lsu-dim-2)}.runner-stats dd{margin:7px 0 0;font:14px var(--lsu-mono)}.edon{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:46px;padding:28px;border:1px solid rgba(255,255,255,.14)}.edon-title{font-family:var(--lsu-display);font-size:28px;text-transform:uppercase}.edon-v{font-family:var(--lsu-display);font-size:38px;color:var(--lsu-red)}@media(max-width:760px){.podium,.tables,.edon,.event-meta{grid-template-columns:1fr}.runner-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.ed-head{align-items:start;flex-direction:column}.row{grid-template-columns:42px 1fr}.row-km{grid-column:2}}
+
+/* The live board, mirrored from the race's own scoreboard.
+
+   Only ever on screen while there is a race to show: the section carries
+   `:if` on the payload, so off-season it is absent rather than an error box
+   telling a reader something is broken when nothing is.
+
+   Built on .statgrid, .stat-v and .stat-l from the edition sections above,
+   so a lap count during the race and a lap count in the archive are the same
+   object at the same size. Red is the live state and nothing else. */
+
+.live{padding:clamp(60px,8vw,110px) var(--lsu-pad-x) clamp(50px,7vw,90px);border-bottom:1px solid var(--lsu-line-soft);background:radial-gradient(ellipse 70% 60% at 50% 0,#140305,#000)}
+.live-head{display:flex;flex-direction:column;gap:14px;margin-bottom:clamp(28px,3.4vw,44px)}
+.live-head .h2{max-width:18ch}
+.live-head .kicker{display:flex;align-items:center;gap:10px}
+/* The pulse is the one thing on the page that says "now". */
+.live-head .kicker:before{content:"";width:10px;height:10px;background:var(--lsu-red);box-shadow:0 0 12px var(--lsu-red);animation:lsu-live-pulse 2s ease-in-out infinite}
+@keyframes lsu-live-pulse{50%{opacity:.25}}
+.live-bell{margin:0;color:var(--lsu-dim-1);font-size:15px}
+.live-bell-n{font-family:var(--lsu-seg);font-size:clamp(22px,2.4vw,30px);color:var(--lsu-white);letter-spacing:.04em}
+
+.live-stats{margin-bottom:clamp(28px,3.4vw,44px)}
+.live-stats>div{padding:clamp(20px,2.4vw,30px);background:var(--lsu-black)}
+
+.live-winner{padding:clamp(22px,2.6vw,32px);border-left:3px solid var(--lsu-red);background:var(--lsu-card);margin-bottom:clamp(24px,3vw,38px)}
+.live-winner-name{margin-top:10px;font:400 clamp(28px,3.4vw,46px)/1.05 var(--lsu-display);text-transform:uppercase}
+.live-winner-yards{margin-top:8px;color:var(--lsu-dim-1);font-size:15px}
+
+.live-rows{display:grid;margin:0;padding:0;list-style:none;border-top:1px solid var(--lsu-line)}
+.live-row{display:grid;grid-template-columns:3.5rem minmax(0,1fr) auto auto auto;gap:clamp(10px,2vw,26px);align-items:baseline;padding:14px 0;border-bottom:1px solid var(--lsu-line-faint)}
+.live-rank{font-family:var(--lsu-display);font-size:20px;color:var(--lsu-red)}
+.live-name{display:flex;align-items:baseline;gap:10px;min-width:0;font-size:17px}
+.live-bib,.live-km{color:var(--lsu-dim-2);font-size:13px}
+.live-laps{font-family:var(--lsu-display);font-size:19px}
+/* Beside the name, because it is the runner's tracker that is quiet,
+   not the row. As a sixth child it fell to a line of its own. */
+.live-stale{flex:none;color:var(--lsu-dim-2);font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+.live-note{margin:clamp(20px,2.4vw,30px) 0 0;max-width:68ch;color:var(--lsu-dim-2);font-size:13px;line-height:1.6}
+.live-note a{color:var(--lsu-white);text-decoration:underline;text-underline-offset:4px}
+.live-note a:hover{color:var(--lsu-red)}
+
+@media(max-width:700px){
+.live-row{grid-template-columns:2.6rem minmax(0,1fr) auto;row-gap:4px}
+.live-bib{grid-column:2}
+.live-km{grid-column:3}
+}
+@media(prefers-reduced-motion:reduce){.live-head .kicker:before{animation:none}}
