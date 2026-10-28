@@ -16,7 +16,7 @@ bun scripts/build-site-assets.ts
 
 `bun run audit:html` reads `dist/` after a build and reports dead internal links, duplicate ids, skipped heading levels, images with no alt and links with no accessible name. The same rules run over the rendered views in `bun test`, so a build is only needed to check a release against what was actually produced.
 
-`pantry.json` pins Bun 1.4.4; `./buddy --version` should match. `bun run build` builds local styles before the framework build. `bun scripts/seo.ts` regenerates the sitemap and robots file; `SITE_ORIGIN` overrides the production canonical origin for deployment.
+`pantry.json` pins Bun 1.4.4; `./buddy --version` should match. `bun run build` builds local styles, runs the framework build, then lifts each page's own module bundle out of its HTML into `_stx/modules.<hash>.js` so it can be cached (`bun run build:bundles`, idempotent). That step is what keeps `/world-series` at 34 KB of HTML rather than 879 KB: the globe library is used by one page, so the framework's own externaliser, which lifts what repeats across pages, leaves it inline. `bun scripts/seo.ts` regenerates the sitemap and robots file; `SITE_ORIGIN` overrides the production canonical origin for deployment.
 
 `resources/assets/styles/site/` contains the production brand styles adapted to stable semantic classes. `resources/data/production-pages.ts` supplies page metadata. Photos, logos and fonts are self-hosted under `public/assets/lsu/`, with source URLs and hashes in `asset-integrity.json`. The public site content and 2025/2026 result data are preserved; do not replace race facts with sample content.
 
