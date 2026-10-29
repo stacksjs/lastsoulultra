@@ -9,7 +9,7 @@ description: Manage LSU organization access, published experience settings and o
 
 Open [Administration](https://lsu.stacksjs.com/admin) and sign in with an LSU owner or administrator account. Use the account menu to enter the organization or staff workspace and select **Last Soul Ultra**. Confirm the organization name before changing anything. On first sign-in, read the policies and complete your own consent choices before continuing.
 
-The Sam and Pawel review accounts are organization administrators. Inside Last Soul Ultra that is everything the owner can do except delete the organization, payment setup included, so treat them as full access rather than as a limited review login. They grant nothing over any other organization.
+The Sam and Pawel review accounts are organization administrators. Inside Last Soul Ultra that is everything the owner can do except delete the organization. Among other things, such an account can change what the organization charges, issue refunds, alter staff and read payroll figures, so treat it as full access rather than as a limited review login. They grant nothing over any other organization.
 
 For the full account map and the difference between permissions and training subscriptions, see [Roles and plan access](/roles).
 
@@ -18,7 +18,7 @@ For the full account map and the difference between permissions and training sub
 | Role | Purpose |
 | --- | --- |
 | Owner | Owns the organization and its settings |
-| Administrator | Everything an owner can do except delete the organization, including LSU's payment setup |
+| Administrator | Everything an owner can do except delete the organization: payment setup, pricing, refunds, staff changes, the access system and payroll figures |
 | Manager | Manages permitted member, scheduling and operational work |
 | Front desk | Handles permitted member and desk operations |
 | Trainer | Works in the permitted training and staff areas |
