@@ -13,7 +13,7 @@ Only sessions from your accessible training enrollment appear in the branded tra
 
 ## Exercise demonstrations
 
-For strength exercises and drills, consult the [exercise library](/training/exercise-library) for the built-in names, equipment and available illustration mappings. The [illustration catalog](/style-guide/illustrations) lists all supplied SVG figures and their sampled poses. Several exercises share a movement figure, and some entries currently have no mapped illustration. Follow the session's own instructions and demonstration when provided.
+For strength exercises and drills, consult the [exercise library](/training/exercise-library) for the built-in names, equipment and matching illustrations. The [illustration catalog](/style-guide/illustrations) lists all supplied SVG figures and their sampled poses. All 184 built-in exercises have a matching figure. Exercises with the same movement can share a figure. Open Strength A or Strength B in the demo calendar to inspect its exercise figures, instructions, blocks and sets. Tick a set to record it, then reopen the session to check the saved state. Follow the session's own instructions and demonstration when provided.
 
 ## Record what happened
 

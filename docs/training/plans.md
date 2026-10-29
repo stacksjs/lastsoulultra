@@ -13,7 +13,7 @@ Open **Coaching** or **Store** to see published offers. Read the method summary,
 
 The private preview includes **Running and strength, demo**, priced at **USD 29 per month**. It includes both running and strength in one enrollment. Both Alex and Jamie use this same tier; their historical runner email names do not restrict them to running.
 
-The fictional eight-week plan has four running sessions and two structured strength sessions per week, with exercise illustrations, sets and repetitions or timed efforts. Open a strength session to review its blocks and player. This sample illustrates the app and is not an approved LSU training prescription. Personal one-to-one coaching and Mind training are not included in this demo offer.
+The fictional eight-week plan has four running sessions and two structured strength sessions per week, with exercise illustrations, sets and repetitions or timed efforts. Open a strength session to review its blocks and set controls. This sample illustrates the app and is not an approved LSU training prescription. Personal one-to-one coaching and Mind training are not included in this demo offer.
 
 The review accounts have complimentary access. The displayed price describes the sample tier; it is not an active charge. See [Roles and plan access](/roles) for the complete account map.
 

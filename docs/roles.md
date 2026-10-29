@@ -11,7 +11,7 @@ An account's **organization role** controls what it can manage. Its **training e
 
 The private review offer is **Running and strength, demo**, shown at **USD 29 per month**. Both disciplines belong to one tier and one athlete calendar. Each enrolled demo athlete has the same eight-week sample: four running sessions and two structured strength sessions per week, for 48 sessions in total.
 
-**Alex and Jamie are two people reviewing the same combined tier.** The names `runner@lsu-demo.test` and `runner2@lsu-demo.test` are historical login labels, not separate running-only roles. Both accounts can review running and strength, including exercise illustrations, sets and the strength player. A separate strength login is not required.
+**Alex and Jamie are two people reviewing the same combined tier.** The names `runner@lsu-demo.test` and `runner2@lsu-demo.test` are historical login labels, not separate running-only roles. Both accounts can review running and strength, including exercise illustrations, sets and set-completion controls. A separate strength login is not required.
 
 These accounts have complimentary review access. No payment-provider subscription or real charge is attached. The sample offer does not include personal one-to-one coaching or Mind training. The published offer defines the disciplines for any other tier. See [Plans and subscriptions](/training/plans).
 
