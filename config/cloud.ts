@@ -138,7 +138,7 @@ export const tsCloud: TsCloudConfig = {
       // photography is served from the organiser's own CDN, so the release
       // carries no images at all.
       preStart: [
-        'pantry install --no-save',
+        `pantry install bun.sh@${source.bun} --no-save`,
         'echo "[lastsoulultra] preStart: install"',
         'bun install --frozen-lockfile',
         'echo "[lastsoulultra] preStart: migrate"',
@@ -155,7 +155,7 @@ export const tsCloud: TsCloudConfig = {
         PORT_API: String(PORT_API),
         API_URL: `http://127.0.0.1:${PORT_API}`,
         DB_CONNECTION: 'sqlite', DB_DATABASE: 'stacks', DB_USERNAME: '', DB_PASSWORD: '',
-        DB_DATABASE_PATH: `${WEBSITE_STORAGE}/database/stacks.sqlite`,
+        DB_DATABASE_PATH: `${WEBSITE_STORAGE}/database/preview.sqlite`,
       },
     },
 
@@ -171,7 +171,7 @@ export const tsCloud: TsCloudConfig = {
       port: PORT_API,
       // No migrate here: `main` owns the schema, and running two migrations
       // against one shared database is how a deploy races itself.
-      preStart: ['pantry install --no-save', 'bun install --frozen-lockfile'],
+      preStart: [`pantry install bun.sh@${source.bun} --no-save`, 'bun install --frozen-lockfile'],
       env: {
         APP_KEY: process.env.APP_KEY || '',
         HOST: '127.0.0.1',
@@ -180,7 +180,7 @@ export const tsCloud: TsCloudConfig = {
         APP_URL: `https://${APP_DOMAIN}`,
         HQ_ORIGIN: deployment.origin, HQ_BRAND_SLUG: 'last-soul-ultra',
         DB_CONNECTION: 'sqlite', DB_DATABASE: 'stacks', DB_USERNAME: '', DB_PASSWORD: '',
-        DB_DATABASE_PATH: `${WEBSITE_STORAGE}/database/stacks.sqlite`,
+        DB_DATABASE_PATH: `${WEBSITE_STORAGE}/database/preview.sqlite`,
       },
     },
   },
