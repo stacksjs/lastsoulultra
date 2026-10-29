@@ -9,9 +9,11 @@ description: Browse training tiers, understand enrollment and review subscriptio
 
 Open **Coaching** or **Store** to see published offers. Read the method summary, author, included training, price, currency and billing interval. A tier can cover running alone or combine other training disciplines; only the published offer establishes what is included.
 
-## The $29 Run + Strength review tier
+LSU launch pricing is **€19.99 per month for Running** and **€29.99 per month for Running + Strength**, including applicable tax. Revenue shares are calculated after tax is removed. Coach-authored workout access can also be offered separately under its published terms.
 
-The private preview includes **Running and strength, demo**, priced at **USD 29 per month**. It includes both running and strength in one enrollment. Both Alex and Jamie use this same tier; their historical runner email names do not restrict them to running.
+## The €29.99 Run + Strength review tier
+
+The private preview includes **Running and strength, demo**, priced at **€29.99 per month, tax included**. It includes both running and strength in one enrollment. Both Alex and Jamie use this same tier; their historical runner email names do not restrict them to running.
 
 The fictional eight-week plan has four running sessions and two structured strength sessions per week, with exercise illustrations, sets and repetitions or timed efforts. Open a strength session to review its blocks and set controls. This sample illustrates the app and is not an approved LSU training prescription. Personal one-to-one coaching and Mind training are not included in this demo offer.
 

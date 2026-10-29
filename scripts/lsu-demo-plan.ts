@@ -1,5 +1,5 @@
 /** Fictional, complimentary review access. This is not an approved training prescription. */
-export const demoTier = { name: 'Running and strength, demo', price_cents: 2900, currency: 'USD', billing_interval: 'month', sports: ['Run', 'Strength'] } as const
+export const demoTier = { name: 'Running and strength, demo', price_cents: 2999, currency: 'EUR', billing_interval: 'month', sports: ['Run', 'Strength'] } as const
 
 export const demoStrengthDescription = 'Fictional demo session for reviewing illustrated exercises, sets and set-completion controls. Not an approved LSU prescription.'
 

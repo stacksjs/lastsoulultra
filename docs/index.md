@@ -12,7 +12,7 @@ Last Soul Ultra brings race information and your training into one place. Use th
 | You want to | Start here |
 | --- | --- |
 | Explore the app for the first time | [Getting started](/getting-started) |
-| Understand roles and the $29 Run + Strength tier | [Roles and plan access](/roles) |
+| Understand roles and the €29.99 Run + Strength tier | [Roles and plan access](/roles) |
 | Prepare for a race | [Race information](/races) |
 | Choose a training tier | [Plans and subscriptions](/training/plans) |
 | Follow and record a session | [Workouts](/training/workouts) |

@@ -2,8 +2,8 @@ import { describe, expect, it } from 'bun:test'
 import { combinedRunKey, demoPlan, demoTier } from '../scripts/lsu-demo-plan'
 
 describe('LSU review plan', () => {
-  it('includes running and structured strength in the $29 monthly tier', () => {
-    expect(demoTier).toMatchObject({ price_cents: 2900, currency: 'USD', billing_interval: 'month', sports: ['Run', 'Strength'] })
+  it('includes running and structured strength in the approved EUR 29.99 monthly tier', () => {
+    expect(demoTier).toMatchObject({ price_cents: 2999, currency: 'EUR', billing_interval: 'month', sports: ['Run', 'Strength'] })
     const plan = demoPlan()
     expect(plan.weeks).toHaveLength(8)
     for (const week of plan.weeks) {
