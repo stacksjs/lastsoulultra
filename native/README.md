@@ -61,6 +61,11 @@ profile names. Evidence is kept under ignored `storage/native/release/`.
 Upload success is not TestFlight availability: verify Apple's processing state
 and assign the processed build to an internal testing group in App Store Connect.
 
+After `native:ios` has already generated this release, `native:testflight --prepared`
+can reuse it. The release checks its receipt, product and frozen-lock hashes,
+and rejects native input changes since generation; it still verifies the live
+backend and bundled screen before archiving and uploading.
+
 To adopt an HQ update, change the full commit SHA in `hq-source.json`, build
 both targets, run lint/type checks/tests and review the native screens. The pin
 makes each release reproducible; it deliberately does not float with HQ main.

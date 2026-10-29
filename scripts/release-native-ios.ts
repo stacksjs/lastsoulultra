@@ -23,7 +23,18 @@ const run = async (args: string[], cwd = root) => {
   const child = Bun.spawn(args, { cwd, env: { ...process.env, PATH: `${dirname(process.execPath)}${delimiter}${process.env.PATH || ''}` }, stdout: 'inherit', stderr: 'inherit' })
   if (await child.exited !== 0) throw new Error(`Native release failed: ${args[0]}`)
 }
-await run([process.execPath, 'run', 'native:ios'])
+if (process.argv.includes('--prepared')) {
+  const receipt = JSON.parse(readFileSync(join(output, 'ios/lsu-source.json'), 'utf8'))
+  const sha256 = (path: string) => new Bun.CryptoHasher('sha256').update(readFileSync(path)).digest('hex')
+  if (receipt.platform !== 'ios' || receipt.app !== product.bundleId || receipt.version !== product.version || receipt.build !== product.build
+    || receipt.hqRevision !== source.revision || receipt.productSha256 !== sha256(join(root, 'native/product.json'))
+    || receipt.hqLockSha256 !== sha256(join(sourceRoot, 'bun.lock')) || !/^[a-f0-9]{40}$/.test(receipt.lsuRevision || ''))
+    throw new Error('Prepared iOS source does not match the current release inputs')
+  execFileSync('git', ['merge-base', '--is-ancestor', receipt.lsuRevision, 'HEAD'], { cwd: root })
+  const changed = execFileSync('git', ['diff', '--name-only', receipt.lsuRevision, 'HEAD', '--', 'native', 'scripts/native-source.ts', 'scripts/build-native.ts', 'scripts/restore-ios-shell.ts', 'public/assets/lsu/images/lsu-logo.svg'], { cwd: root, encoding: 'utf8' }).trim()
+  if (changed) throw new Error('Regenerate iOS after changing native build inputs')
+}
+else await run([process.execPath, 'run', 'native:ios'])
 await run([process.execPath, 'run', 'native:verify-ios'])
 const ios = join(output, 'ios')
 const scheme = 'LastSoulUltra'

@@ -88,7 +88,7 @@ export const tsCloud: TsCloudConfig = {
   },
 
   sites: {
-    ...trainingSites,
+    ...trainingSites(),
     docs: {
       deploy: 'server',
       root: 'dist/docs/.bunpress',
