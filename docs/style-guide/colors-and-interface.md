@@ -44,6 +44,6 @@ Use a clear title, then the details needed to act. Keep the session's status and
 
 ## Space and responsive layout
 
-The site's horizontal gutters grow from 18 to 40 pixels, and its main content is capped at 1,360 pixels. Section spacing grows from 72 to 130 pixels. The docs use a narrower reading column; these values describe the app rather than the documentation layout.
+The site's horizontal gutters grow from 18 to 40 px, and its main content is capped at 1360 px. Section spacing grows from 72 to 130 px. The docs use a narrower reading column; these values describe the app rather than the documentation layout.
 
 Review the [typefaces](/style-guide/typography) and [illustration palettes](/style-guide/illustrations) at narrow widths as well as on desktop. Text should wrap, controls should remain readable and the page should not require horizontal scrolling.

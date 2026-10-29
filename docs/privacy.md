@@ -21,4 +21,4 @@ Review the transcript before sending voice feedback. The adaptive training conve
 
 Demo users and their training are fictional. Anyone with the same demo credentials can see that account's data, so do not add real health information, personal messages, payment details or wearable connections.
 
-For the published legal policies, open [Privacy](https://lsu.stacksjs.com/privacy) and [Terms](https://lsu.stacksjs.com/terms).
+For the published legal pages, open [Privacy](https://lsu.stacksjs.com/privacy), [Terms](https://lsu.stacksjs.com/terms) and the [Imprint](https://lsu.stacksjs.com/imprint) (Impressum).
