@@ -9,7 +9,7 @@ description: Browse training tiers, understand enrollment and review subscriptio
 
 Open **Coaching** or **Store** to see published offers. Read the method summary, author, included training, price, currency and billing interval. A tier can cover running alone or combine other training disciplines; only the published offer establishes what is included.
 
-LSU launch pricing is **€19.99 per month for Running** and **€29.99 per month for Running + Strength**, including applicable tax. Revenue shares are calculated after tax is removed. Coach-authored workout access can also be offered separately under its published terms.
+LSU launch pricing is **€19.99 per month for Running** and **€29.99 per month for Running + Strength**, including applicable tax. Coach-authored workout access can also be offered separately under its published terms.
 
 ## The €29.99 Run + Strength review tier
 
@@ -21,7 +21,7 @@ The review accounts have complimentary access. The displayed price describes the
 
 ## Join a tier
 
-Choose the offer and follow its checkout instructions. Confirm the total and recurring terms before authorizing payment. Return to the app after checkout and wait for the confirmed subscription or purchase to appear. A browser return by itself is not proof that payment succeeded.
+Choose the offer and follow its checkout instructions. Confirm the total and recurring terms before authorizing payment. Checkout hands you back to the LSU app itself; wait there for the confirmed subscription or purchase to appear. A browser return by itself is not proof that payment succeeded, and if the app does not reopen, report it.
 
 **Reviewing the private preview?** The supplied accounts already hold the tier with complimentary access, so there is nothing to buy and no real charge is attached to them. See [Roles and plan access](/roles). Do not enter real card details anywhere in this preview.
 

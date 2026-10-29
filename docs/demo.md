@@ -47,9 +47,11 @@ Open [Administration](https://lsu.stacksjs.com/admin) with Sam's or Pawel's admi
 
 Explore the [data model and ERD](/erd) to trace account permissions, subscriptions, workouts and feedback.
 
-## 6. Leave billing alone
+## 6. Do not test payments
 
-Sample training access does not represent a paid order or real payment-provider subscription. Do not enter a real card, issue refunds or expect provider billing actions to work for seeded records.
+Sample training access is not a paid order and carries no real payment-provider subscription. The review accounts already hold the tier with complimentary access, so there is nothing to buy in order to review training.
+
+Do not enter a card at all, your own or a test one, and do not try to bill, refund or reverse a charge against a seeded record. If you need to walk the purchase flow itself, ask whoever sent you this handoff to confirm which payment mode the preview is running in and to set up a throwaway account for it.
 
 ## Review notes
 
