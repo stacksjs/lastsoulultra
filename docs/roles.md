@@ -1,19 +1,17 @@
 ---
 title: Roles and plan access
-description: Understand LSU account permissions, the €29.99 Run + Strength tier and every private review account.
+description: Understand LSU account permissions, the combined review tier and every private review account.
 ---
 
 # Roles and plan access
 
 An account's **organization role** controls what it can manage. Its **training enrollment** controls which plan and disciplines it receives. A coach profile provides an authoring workspace. These are separate: buying a plan does not make someone a coach or administrator, and being an administrator does not automatically enroll someone in training.
 
-## The €29.99 tier includes running and strength
+## The combined review tier
 
-The private review offer is **Running and strength, demo**, shown at **€29.99 per month, tax included**. Both disciplines belong to one tier and one athlete calendar. Each enrolled demo athlete has the same eight-week sample: four running sessions and two structured strength sessions per week, for 48 sessions in total.
+**Alex and Jamie are two people reviewing the same Run + Strength tier**, with complimentary review access and no real charge attached. The names `runner@lsu-demo.test` and `runner2@lsu-demo.test` are historical login labels, not separate running-only roles: both accounts review running and strength, including exercise illustrations, sets and set-completion controls. A separate strength login is not required.
 
-**Alex and Jamie are two people reviewing the same combined tier.** The names `runner@lsu-demo.test` and `runner2@lsu-demo.test` are historical login labels, not separate running-only roles. Both accounts can review running and strength, including exercise illustrations, sets and set-completion controls. A separate strength login is not required.
-
-These accounts have complimentary review access. No payment-provider subscription or real charge is attached. The sample offer does not include personal one-to-one coaching or Mind training. The published offer defines the disciplines for any other tier. See [Plans and subscriptions](/training/plans).
+An enrollment is the plan an account is signed up to. See [Plans and subscriptions](/training/plans) for the price, what the sample plan contains and what it leaves out.
 
 For the stored relationships behind these distinctions, see the [data model and ERD](/erd).
 
@@ -51,8 +49,8 @@ All demo passwords are listed in the protected [demo walkthrough](/demo#demo-cre
 | Demo front desk | `frontdesk@lsu-demo.test` | Front desk | Desk operations review |
 | Demo trainer | `trainer@lsu-demo.test` | Trainer | Training staff and separate coach workspace |
 | Demo coach | `coach@lsu-demo.test` | Trainer | Author of the sample method and plan; coach library |
-| Alex | `runner@lsu-demo.test` | Member | Enrolled in €29.99 Run + Strength; sample calendar and health |
-| Jamie | `runner2@lsu-demo.test` | Member | Same €29.99 Run + Strength tier; independent sample calendar and health |
+| Alex | `runner@lsu-demo.test` | Member | Enrolled in Run + Strength; sample calendar and health |
+| Jamie | `runner2@lsu-demo.test` | Member | Same Run + Strength tier; independent sample calendar and health |
 | Demo member | `member@lsu-demo.test` | Member | Member account without the combined training enrollment |
 | Demo visitor | `visitor@lsu-demo.test` | None | Browsing without the combined training enrollment |
 

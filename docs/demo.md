@@ -27,7 +27,7 @@ Sign in with the visitor account. Open Coaching and inspect the published offer.
 
 ## 3. Review an enrolled athlete
 
-Use Alex or Jamie. Both athlete accounts have the €29.99/month, tax included, Run + Strength tier with complimentary review access. Open Workouts, inspect a completed session and a future session, then check Progress and the method Library. Each enrolled athlete starts with 48 sessions: 32 running and 16 strength, with 21 sessions completed at setup. Each also has 21 days of sample health metrics. The sample dates include recent history and upcoming sessions. Counts can change as reviewers complete or edit training.
+Use Alex or Jamie. Both accounts use the same Run + Strength tier with complimentary review access (see [Plans and subscriptions](/training/plans)). Open Workouts, inspect a completed session and a future session, then check Progress and the method Library. Each enrolled athlete starts with 48 sessions: 32 running and 16 strength, with 21 sessions completed at setup. Each also has 21 days of sample health metrics. The sample dates include recent history and upcoming sessions. Counts can change as reviewers complete or edit training.
 
 Open a **Strength A** or **Strength B** session. Inspect its illustrated exercises, blocks and sets, and try ticking off a set. Compare it with a running session and its timed steps. The two disciplines belong to the same plan.
 
@@ -47,7 +47,17 @@ Open [Administration](https://lsu.stacksjs.com/admin) with Sam's or Pawel's admi
 
 Explore the [data model and ERD](/erd) to trace account permissions, subscriptions, workouts and feedback.
 
-## 6. Do not test payments
+## 6. Check the role boundaries
+
+These five accounts exist to prove where one role stops, not to show LSU screens of their own.
+
+Sign in as the demo manager. Open the staff list, change the demo trainer to front desk and back, then try to make someone an administrator: it is refused with "Only the owner or an admin can change who is an admin". Open Administration and confirm the Experience refuses to save with a permission error.
+
+Sign in as the demo front desk and confirm that scheduling changes, refunds and reports are not available. Sign in as the demo trainer and confirm the training areas open but the desk and back office do not. Sign in as the demo member and confirm it reaches its own account and nothing else. The demo owner differs from an administrator in one way only: it can delete the organization. Do not.
+
+If a role boundary here does not matter to LSU, say so in your review notes. Whether LSU needs all six roles is a fair question, and these five accounts are the evidence for answering it.
+
+## 7. Do not test payments
 
 Sample training access is not a paid order and carries no real payment-provider subscription. The review accounts already hold the tier with complimentary access, so there is nothing to buy in order to review training.
 
