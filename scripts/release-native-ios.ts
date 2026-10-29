@@ -75,6 +75,15 @@ const app = join(auditDir, 'Payload', `${scheme}.app`)
 await run(['codesign', '--verify', '--deep', '--strict', app])
 const content = execFileSync('codesign', ['-d', '--entitlements', ':-', app], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] })
 if (!content.includes(`${product.teamId}.${product.bundleId}`) || !content.includes('beta-reports-active')) throw new Error('IPA has no LSU App Store distribution identity')
+if (process.argv.includes('--archive-only')) {
+  process.stdout.write(`Signed LSU archive and IPA are ready at ${ipa}. No upload requested.\n`)
+  process.exit(0)
+}
+for (const [page, url] of [['privacy', product.identity.privacyUrl], ['terms', product.identity.termsUrl]]) {
+  const response = await fetch(url!, { redirect: 'error', signal: AbortSignal.timeout(15000) })
+  if (!response.ok || !(await response.text()).includes(`data-enterprise-legal="${page}"`))
+    throw new Error(`The installation's public ${page} notice is not ready for beta review`)
+}
 // altool reads the existing key from its documented key search directory.
 const privateKeyDir = join(releaseDir, 'private_keys')
 mkdirSync(privateKeyDir, { recursive: true, mode: 0o700 })

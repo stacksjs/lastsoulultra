@@ -1,13 +1,8 @@
+@extends('layouts/auth')
 @section('title', 'Training privacy | Last Soul Ultra')
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Training privacy | Last Soul Ultra</title>
-</head>
-<body class="font-sans text-white bg-black">
-  <main class="mx-auto px-6 py-12 max-w-3xl leading-relaxed">
+@section('content')
+<div class="w-full font-sans text-white bg-black">
+  <article data-enterprise-legal="privacy" class="mx-auto px-6 py-12 max-w-3xl leading-relaxed">
     <a href="/login"><img src="/assets/native-product/lsu-logo.svg" alt="Last Soul Ultra" width="220" height="64"></a>
     <h1 class="mt-8 font-bold text-3xl">Training app privacy</h1>
     <p class="mt-4">This notice covers the Last Soul Ultra training app and training.lsu.stacksjs.com. The race website and race-entry accounts are separate. The operator is Last Soul IP GmbH, represented by Kim Gottwald and Alexander Krenzek. Contact <a href="mailto:mail@lastsoulultra.com" class="underline">mail@lastsoulultra.com</a> about your data.</p>
@@ -30,6 +25,6 @@
     <p class="mt-3">You can disconnect providers, revoke share links, change app permissions in device settings, export supported training and health records, and delete your account in Settings. Disconnecting stops future access and does not itself erase records already imported. Account deletion removes the account's application data; it cannot erase copies another provider already received.</p>
     <p class="mt-3">Contact the operator for access, correction, deletion, backup handling or the retention periods applying to your records, including any records the operator must retain. Operational logs may contain request and security information needed to run the service. This notice does not promise immediate deletion from every log, backup or external provider.</p>
     <p class="mt-6"><a href="/legal/lsu/terms" class="underline">Training beta terms</a> · <a href="https://www.lastsoulultra.com/imprint" class="underline">Operator details</a></p>
-  </main>
-</body>
-</html>
+  </article>
+</div>
+@endsection

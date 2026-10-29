@@ -1,13 +1,8 @@
+@extends('layouts/auth')
 @section('title', 'Training beta terms | Last Soul Ultra')
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Training beta terms | Last Soul Ultra</title>
-</head>
-<body class="font-sans text-white bg-black">
-  <main class="mx-auto px-6 py-12 max-w-3xl leading-relaxed">
+@section('content')
+<div class="w-full font-sans text-white bg-black">
+  <article data-enterprise-legal="terms" class="mx-auto px-6 py-12 max-w-3xl leading-relaxed">
     <a href="/login"><img src="/assets/native-product/lsu-logo.svg" alt="Last Soul Ultra" width="220" height="64"></a>
     <h1 class="mt-8 font-bold text-3xl">Training beta terms</h1>
     <p class="mt-4">These terms cover the Last Soul Ultra training beta, operated by Last Soul IP GmbH. Race-entry rules and agreements are separate. Features depend on your account permissions, device and the services configured for this installation. Updated October 29, 2026.</p>
@@ -21,6 +16,6 @@
     <p class="mt-3">You retain your rights in the content you provide. The service processes and displays it to operate the features and sharing you choose. Connecting a provider authorizes the access you grant; its own terms and availability apply. You can disconnect providers, export supported records and delete your account in Settings. Read the <a href="/legal/lsu/privacy" class="underline">training privacy notice</a> for storage, access and deletion information.</p>
     <h2 class="mt-8 font-bold text-xl">Contact</h2>
     <p class="mt-3">Contact <a href="mailto:mail@lastsoulultra.com" class="underline">mail@lastsoulultra.com</a> about the service, account access or a moderation concern. These terms do not exclude rights or responsibilities that applicable law does not allow to be excluded.</p>
-  </main>
-</body>
-</html>
+  </article>
+</div>
+@endsection
