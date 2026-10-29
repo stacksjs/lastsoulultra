@@ -1,6 +1,8 @@
 /** Fictional, complimentary review access. This is not an approved training prescription. */
 export const demoTier = { name: 'Running and strength, demo', price_cents: 2900, currency: 'USD', billing_interval: 'month', sports: ['Run', 'Strength'] } as const
 
+export const demoStrengthDescription = 'Fictional demo session for reviewing illustrated exercises, sets and set-completion controls. Not an approved LSU prescription.'
+
 const exercise = (title: string, set: Record<string, number>) => ({ title, notes: 'Fictional review example. Follow the exercise instructions; no load is prescribed.', sets: [{ ...set }, { ...set }] })
 const strength = (second: boolean) => ({ blocks: [
   { kind: 'warmup', title: 'Movement preparation', exercises: [exercise(second ? 'High Knees' : 'A-Skip', { seconds: 20 })] },
@@ -17,7 +19,7 @@ export function demoPlan() {
     { day: 5, title: 'Recovery run', duration_minutes: 30, distance_km: 4, tss: 18 },
     { day: 6, title: 'Long easy trail run', duration_minutes: 90, distance_km: 12, tss: 65 },
   ].map(workout => ({ ...workout, sport: 'Run', description: 'Fictional demo session. Keep the effort comfortable; review the session instructions before training.', steps: [{ name: 'Warm up', duration_minutes: 5, zone: 'Z1', intensity: 'Easy', notes: '' }, { name: workout.title, duration_minutes: workout.duration_minutes - 10, zone: 'Z2', intensity: 'Easy', notes: 'Sample session for reviewing the application.' }, { name: 'Cool down', duration_minutes: 5, zone: 'Z1', intensity: 'Easy', notes: '' }] }))
-  const lifts = [false, true].map(second => ({ day: second ? 4 : 2, title: second ? 'Strength B: upper body and control' : 'Strength A: single-leg stability', sport: 'Strength', description: 'Fictional demo session for reviewing illustrated exercises, sets and set-completion controls. Not an approved LSU prescription.', duration_minutes: 30, distance_km: 0, tss: 15, steps: [], strength: strength(second) }))
+  const lifts = [false, true].map(second => ({ day: second ? 4 : 2, title: second ? 'Strength B: upper body and control' : 'Strength A: single-leg stability', sport: 'Strength', description: demoStrengthDescription, duration_minutes: 30, distance_km: 0, tss: 15, steps: [], strength: strength(second) }))
   return { summary: 'Fictional eight-week Run + Strength plan for the private LSU review.', phases: [{ name: 'Consistency', start_week: 1, end_week: 4, focus: 'Easy volume and routine' }, { name: 'Endurance', start_week: 5, end_week: 8, focus: 'Long-run consistency and recovery' }], weeks: Array.from({ length: 8 }, (_, index) => ({ week: index + 1, focus: index < 4 ? 'Consistency' : 'Endurance', planned_hours: 4.5, workouts: structuredClone([...runs, ...lifts].sort((a, b) => a.day - b.day)) })) }
 }
 

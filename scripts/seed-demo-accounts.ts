@@ -6,7 +6,7 @@
  */
 import { resolve } from 'node:path'
 import { pathToFileURL } from 'node:url'
-import { combinedRunKey, demoPlan, demoTier } from './lsu-demo-plan'
+import { combinedRunKey, demoPlan, demoStrengthDescription, demoTier } from './lsu-demo-plan'
 
 interface DemoAccount { key: string, name: string, email: string, password: string, membership?: string, coach?: boolean, athlete?: boolean, subscriber?: boolean }
 const accountsFile = process.env.LSU_DEMO_ACCOUNTS_FILE
@@ -116,6 +116,8 @@ await transaction(async () => {
     // Preserve every existing workout, including reviewer edits and completion history.
     const existingIds = new Set(before.map((row: any) => Number(row.id)))
     await writePlanWorkouts(Number(athlete.id), null, key, planToWorkouts(template, start, key))
+    // Repair only the old, exact demo copy; keep any reviewer-written description.
+    await db.updateTable('workouts').set({ description: demoStrengthDescription }).where('athlete_id', '=', Number(athlete.id)).where('external_source', '=', 'hq-plan').where('external_id', 'like', `${key}:%`).where('sport', '=', 'Strength').where('description', '=', 'Fictional demo session for reviewing illustrated exercises, sets and the strength player. Not an approved LSU prescription.').execute()
     const after = await db.selectFrom('workouts').select(['id', 'date', 'planned_duration', 'planned_distance_km', 'planned_tss']).where('athlete_id', '=', Number(athlete.id)).where('external_source', '=', 'hq-plan').where('external_id', 'like', `${key}:%`).execute()
     for (const [index, workout] of after.entries()) {
       if (existingIds.has(Number(workout.id)) || String(toYmd(workout.date)) >= today) continue
