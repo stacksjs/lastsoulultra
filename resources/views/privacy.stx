@@ -31,6 +31,10 @@ const canonicalPath = "/privacy"
 <p>You can delete your account at any time in the app, or by writing to <a href="mailto:mail@lastsoulultra.com">mail@lastsoulultra.com</a>. Your personal data is then erased; what remains of an application is kept without your name, so the draw stays verifiable. Otherwise we keep your data for TK — to be supplied, and records we are legally required to keep, such as payment records, for as long as the law requires.</p>
 <h2 class="legal-h2">Email</h2>
 <p>If you write to us, your message and address are stored so we can reply and, where a business relationship follows, for as long as commercial and tax retention rules require. The legal basis is Art. 6(1)(b) GDPR for entry-related correspondence and Art. 6(1)(f) for everything else.</p>
+<h2 class="legal-h2">The mailing list</h2>
+<p>The form in the footer asks for an email address and nothing else. We store the address, where on the site it was entered and when, so we can send two emails a year: one when entries open, one when the race starts. The legal basis is Art. 6(1)(a) GDPR, your consent.</p>
+<p>It is a double opt-in. Signing up records the address as pending and sends a single email asking you to confirm it. Nothing else is ever sent to an address that has not been confirmed, so if you never click that link, nothing follows. The link is the consent; the form on its own is not.</p>
+<p>Every email we send to the list carries an unsubscribe link that works without signing in or replying, and you can also write to <a href="mailto:mail@lastsoulultra.com">mail@lastsoulultra.com</a> to be taken off it. Withdrawing consent stops anything further and does not affect the lawfulness of what was sent before you withdrew it.</p>
 <h2 class="legal-h2">Links to other platforms</h2>
 <p>The footer links to Instagram, YouTube, Twitch and Linktree. These are ordinary links, not embeds — nothing loads from those services until you click through, at which point that platform's own privacy policy applies.</p>
 <h2 class="legal-h2">Your rights</h2>
