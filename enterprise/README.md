@@ -34,6 +34,8 @@ Buddy enforces SCRAM password authentication for loopback SQL and replication;
 an owned-host guard prevents applying that host-wide policy to another tenant's server.
 Uploads and speech data stay under this project's persistent directory.
 The private speech service has its own token, model/runtime directory and port.
+Buddy installs the pinned FFmpeg decoder into this installation's shared media
+runtime and exposes it to the API and workers; it never relies on another app's tools.
 Cloud inference, remote object storage, telemetry and integration credentials
 are not inherited from HQ. An external provider needs its own reviewed setup.
 These controls describe this installation; they do not certify legal compliance.

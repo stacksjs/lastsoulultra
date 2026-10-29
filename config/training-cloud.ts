@@ -18,12 +18,13 @@ export function trainingSites(): NonNullable<CloudConfig['sites']> {
     DB_CONNECTION: 'postgres', DB_HOST: deployment.database.host, DB_PORT: String(deployment.database.port),
     DB_DATABASE: deployment.database.name, DB_USERNAME: deployment.database.user, DB_PASSWORD: secrets.LSU_TRAINING_DB_PASSWORD || '',
     STORAGE_DRIVER: 'bun', STORAGE_ROOT: shared, STORAGE_PUBLIC_URL: deployment.origin,
+    PATH: `${shared}/media/pantry/.bin:/opt/pantry/pantry/.bin:/usr/local/bin:/usr/bin:/bin`,
     QUEUE_DRIVER: 'database', HQ_SCHEDULER: 'off', HQ_PAGE_WARMUP: 'off', TYPESENSE_ENABLED: 'false', SEED_DEMO_DATA: 'false',
     MAIL_MAILER: 'log', COACHING_SPEECH_PROVIDER: 'local', COACHING_SPEECH_PORT: String(deployment.ports.speech),
     COACHING_SPEECH_RUNTIME_DIR: `${shared}/speech`, COACHING_SPEECH_TOKEN_FILE: `${shared}/speech/token`,
     COACHING_SPEECH_URL: `http://127.0.0.1:${deployment.ports.speech}/v1`, COACHING_SPEECH_MODEL: 'whisper-1',
   }
-  const install = ['sh scripts/install-release-runtime.sh', 'export PATH=$PWD/.hq-runtime/bin:$PATH', 'sh scripts/install-release-dependencies.sh']
+  const install = ['sh scripts/install-release-runtime.sh', 'export PATH=$PWD/.hq-runtime/bin:$PATH', 'sh scripts/install-release-dependencies.sh', `mkdir -p ${shared}/media`, `printf '%s\\n' '{"dependencies":{"ffmpeg.org":"9.0.2"}}' > ${shared}/media/pantry.json`, `(cd ${shared}/media && pantry install --no-save)`]
   const common = {
     root, inheritEnv: false, isolation: true, keepReleases: 2,
     exclude: ['.hq-runtime', 'storage/framework/mobile', 'storage/logs', 'storage/app', 'build', '.claude'],

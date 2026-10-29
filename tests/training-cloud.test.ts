@@ -33,6 +33,7 @@ it('resolves isolated runtime secrets again after Buddy switches to production',
       expect(sites[name].env?.APP_KEY).toBe('production-sentinel')
       expect(sites[name].env?.DB_PASSWORD).toBe('own-database-sentinel')
       expect(sites[name].env?.DB_DATABASE).toBe('lsu_training')
+      expect(sites[name].env?.PATH).toContain('/lastsoulultra-shared/training/media/pantry/.bin')
       expect(sites[name].env?.CLOUDFLARE_API_TOKEN).toBeUndefined()
     }
     expect(sites.training.env?.LSU_DEMO_ACCOUNTS_JSON).toBeUndefined()
