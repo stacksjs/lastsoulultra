@@ -373,7 +373,7 @@ const rrYardCount = derived(() => rrSource.results.filter(row => Number(row.yard
 <section class="ls-sheet" aria-labelledby="h-women">
 <header class="ls-sh">
 <span class="ls-sh-n" aria-hidden="true">04</span>
-<h2 class="ls-sh-t" id="h-women">Women — last woman standing</h2>
+<h2 class="ls-sh-t" id="h-women">Women: last woman standing</h2>
 <span class="ls-sh-m" data-tpl="led.secWomenNote">20 of 93 starters</span>
 </header>
 <div data-block="women">
@@ -2132,7 +2132,7 @@ const rrYardCount = derived(() => rrSource.results.filter(row => Number(row.yard
 </div>
 <div>
 <h3 class="ls-lg-t">Ten past 28</h3>
-<p class="ls-lg-b">Ten runners pass 28 laps — more than 187 km of continuous hourly running.</p>
+<p class="ls-lg-b">Ten runners pass 28 laps, more than 187 km of continuous hourly running.</p>
 </div>
 </div>
 <div class="ls-lg">

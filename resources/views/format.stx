@@ -21,7 +21,7 @@ onDestroy(() => lsuLoopClock.pause())
 <span class="kicker lsu-scope-format">What a backyard ultra is</span>One loop.<br class="lsu-scope-format">Every hour.<br class="lsu-scope-format">
 <span class="accent lsu-scope-format">One last soul.</span>
 </h1>
-<p class="lsu-scope-format">The simplest format in ultrarunning and the hardest to survive. There is no distance to reach and no overall time limit — only the next bell, and then the one after that. Places are allocated through a combination of LSU team selection and a random draw: <a href="/world-series">request a race entry</a> for an open event.</p>
+<p class="lsu-scope-format">The simplest format in ultrarunning and the hardest to survive. There is no distance to reach and no overall time limit, only the next bell, and then the one after that. Places are allocated through a combination of LSU team selection and a random draw: <a href="/world-series">request a race entry</a> for an open event.</p>
 </div>
 </section>
 <section class="lsu-scope-format pad-top">
@@ -101,7 +101,7 @@ onDestroy(() => lsuLoopClock.pause())
 </div>
 <div class="lsu-scope-format">
 <h3 class="lsu-scope-format">Miss the bell, you are out</h3>
-<p class="lsu-scope-format">No grace period, no appeal — at yard 3 and at yard 93.</p>
+<p class="lsu-scope-format">No grace period, no appeal. At yard 3 and at yard 93.</p>
 <details class="lsu-scope-format">
 <summary class="lsu-scope-format">More</summary>
 <p class="lsu-scope-format">Not in the corral when the hour turns, race over. However far you had come.</p>
@@ -177,7 +177,7 @@ onDestroy(() => lsuLoopClock.pause())
 <dl class="camp-list lsu-scope-format">
 <div class="lsu-scope-format">
 <dt class="lsu-scope-format">Provided</dt>
-<dd class="lsu-scope-format">Water in containers. No power, no race support — plan for yourself.</dd>
+<dd class="lsu-scope-format">Water in containers. No power, no race support. Plan for yourself.</dd>
 </div>
 <div class="lsu-scope-format">
 <dt class="lsu-scope-format">Crew</dt>

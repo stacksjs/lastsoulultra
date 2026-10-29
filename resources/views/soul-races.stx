@@ -127,7 +127,7 @@ onMount(async () => {
 <section class="lsu-scope-soul-races sr-host">
 <div class="lsu-scope-soul-races">
 <h2 class="lsu-scope-soul-races">Want your race to become a Soul Race?</h2>
-<p class="lsu-scope-soul-races">You keep your race, your entries and your money. You run our format, use the Soul Race name and get listed here — and your best runners can earn a place at the Last Soul Ultra.</p>
+<p class="lsu-scope-soul-races">You keep your race, your entries and your money. You run our format, use the Soul Race name and get listed here, and your best runners can earn a place at the Last Soul Ultra.</p>
 <button type="button" class="btn lsu-scope-soul-races" @click="srHostOpen.set(true)" data-host-open>Apply to host</button>
 </div>
 <div class="lsu-scope-soul-races">

@@ -21,7 +21,7 @@ const canonicalPath = "/sponsorship"
 <h2 class="h2 lsu-scope-sponsorship why-title">Nothing in sport<br class="lsu-scope-sponsorship">holds people like this</h2>
 </div>
 <div class="lsu-scope-sponsorship why-copy">
-<p class="lsu-scope-sponsorship">A football match is 90 minutes. A marathon is a morning. Last Soul Ultra takes days and nights, and nobody knows when it ends — <a href="/format">one 6.7 km loop every hour until one runner is left</a>. Every hour a start, a fight and a cut.</p>
+<p class="lsu-scope-sponsorship">A football match is 90 minutes. A marathon is a morning. Last Soul Ultra takes days and nights, and nobody knows when it ends: <a href="/format">one 6.7 km loop every hour until one runner is left</a>. Every hour a start, a fight and a cut.</p>
 <p class="lsu-scope-sponsorship why-dim">So people don’t check in. They stay, because they won’t miss the moment it happens. A format like no other. And your brand is there the entire time: in the experience, the emotion, the moments that change an athlete’s life.</p>
 </div>
 </div>
@@ -101,7 +101,7 @@ const canonicalPath = "/sponsorship"
 <h2 class="h2 lsu-scope-sponsorship why-title">Year one built the base.<br class="lsu-scope-sponsorship">Year two redefined the sport</h2>
 </div>
 <div class="lsu-scope-sponsorship why-copy">
-<p class="lsu-scope-sponsorship">The first edition already made national headlines. The second one — <a href="/results">94 yards over four days and nights</a> — tripled the watch time, nearly tripled the peak audience, added Twitch as a second home and put the race on RTL Aktuell and Tagesschau. No other backyard race in the world has been watched like this.</p>
+<p class="lsu-scope-sponsorship">The first edition already made national headlines. The second one, <a href="/results">94 yards over four days and nights</a>, tripled the watch time, nearly tripled the peak audience, added Twitch as a second home and put the race on RTL Aktuell and Tagesschau. No other backyard race in the world has been watched like this.</p>
 </div>
 </div>
 </section>

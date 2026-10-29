@@ -30,7 +30,7 @@ const rrYardCount = derived(() => rrSource.results.filter(row => Number(row.yard
 <h1>Last Soul Ultra<span class="ls-yr">
 <span data-tpl="heroH1.1">Season 2</span> · 2026</span>
 </h1>
-<p class="ls-lead" data-tpl="heroLead">Mark Dowdle ran 94 yards — about 630.4 km — and finished the last one alone on Tuesday morning, four days after the start. <a href="/results/last-soul-ultra-2025">The season before it stopped at 67</a>.</p>
+<p class="ls-lead" data-tpl="heroLead">Mark Dowdle ran 94 yards, about 630.4 km, and finished the last one alone on Tuesday morning, four days after the start. <a href="/results/last-soul-ultra-2025">The season before it stopped at 67</a>.</p>
 <dl class="ls-cert" data-block="cert">
 <div>
 <dt>Last soul standing</dt>
@@ -442,7 +442,7 @@ const rrYardCount = derived(() => rrSource.results.filter(row => Number(row.yard
 <section class="ls-sheet" aria-labelledby="h-women">
 <header class="ls-sh">
 <span class="ls-sh-n" aria-hidden="true">04</span>
-<h2 class="ls-sh-t" id="h-women">Women — last woman standing</h2>
+<h2 class="ls-sh-t" id="h-women">Women: last woman standing</h2>
 <span class="ls-sh-m" data-tpl="led.secWomenNote">42 of 160 starters</span>
 </header>
 <div data-block="women">
@@ -3506,7 +3506,7 @@ const rrYardCount = derived(() => rrSource.results.filter(row => Number(row.yard
 </div>
 <div>
 <h3 class="ls-lg-t">Last woman standing</h3>
-<p class="ls-lg-b">Caroline Maria Bolte stops at 52 yards and 348 km — a German women&#39;s backyard record in her first backyard ultra.</p>
+<p class="ls-lg-b">Caroline Maria Bolte stops at 52 yards and 348 km, a German women&#39;s backyard record in her first backyard ultra.</p>
 </div>
 </div>
 <div class="ls-lg">
