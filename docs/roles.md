@@ -23,11 +23,13 @@ For the stored relationships behind these distinctions, see the [data model and 
 | --- | --- | --- |
 | Owner | The organization owner | LSU ownership, settings and member administration |
 | Administrator | An administrator within LSU | Organization settings, members and the published Experience |
-| Manager | An operational staff member | Permitted scheduling and member operations |
+| Manager | Day to day operations staff | Members, plans, scheduling, refunds, reports, staff and the access system. Cannot change organization settings, cannot set up or change payment accounts, and cannot make anyone an administrator |
 | Front desk | A desk staff member | Permitted member and front-desk operations |
 | Trainer | A training staff member | Permitted training and staff areas |
 | Member | An LSU organization member | Their own account and member-facing access |
 
+
+Manager is the role for someone who runs LSU day to day without holding the organization itself or its money. It sits between front desk, which cannot change a schedule, issue a refund or see reports, and administrator, which can do everything an owner can except delete the organization. For LSU specifically the role adds nothing a reviewer will see, because everything it grants over front desk covers point of sale, door access, class scheduling, ranks and payroll, and none of those are among the sections LSU has switched on.
 
 Owner and administrator accounts can manage the LSU **Experience**. The other supplied roles cannot save those settings. Staff access to a particular feature still depends on its permission checks. A trainer's organization role and a coach's authoring profile are separate, even when a person has both.
 

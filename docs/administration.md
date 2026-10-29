@@ -19,9 +19,9 @@ For the full account map and the difference between permissions and training sub
 | --- | --- |
 | Owner | Owns the organization and its settings |
 | Administrator | Everything an owner can do except delete the organization: payment setup, pricing, refunds, staff changes, the access system and payroll figures |
-| Manager | Manages permitted member, scheduling and operational work |
-| Front desk | Handles permitted member and desk operations |
-| Trainer | Works in the permitted training and staff areas |
+| Manager | Runs LSU day to day: members, plans, scheduling, refunds, reports, staff and the access system. Cannot change organization settings and cannot set up or change payment accounts |
+| Front desk | Members and desk work. No scheduling changes, no refunds, no reports |
+| Trainer | Sees members and the schedule, books their own sessions, manages ranks |
 | Member or subscriber | Uses their own enrolled training and account |
 
 Those six are the organization roles. **Coach is not one of them**: a coach is a separate authoring profile, and someone who authors methods usually holds Trainer as well. **Visitor is not a role either**; it describes someone browsing without a membership. Neither appears in the staff screen, so do not go looking for them there.
@@ -34,11 +34,13 @@ Open the **Experience** area in the staff workspace. This is the published LSU a
 
 ## Manage offers and methods
 
-Check that the author is an active permitted LSU contributor, that the method is published and that the offer references the intended training plan. Review recurring terms, currency and price before making an offer available. Do not connect real payment credentials to the seeded demonstration records.
+An offer only appears once every part of it lines up: the method is published and belongs to LSU, its author holds an active LSU membership as owner, administrator, manager or trainer, the product belongs to that same author, is active, carries the intended training plan, is a self-coaching product rather than one that includes personal coaching, and bills monthly. Any listed contributor must also be a coach with an active LSU membership. If one of these is wrong the offer is left out of the published app silently, with no error shown, so check the published page after saving. These checks run again on every read, so an offer can disappear later if its author's membership or role changes. Review recurring terms, currency and price before making an offer available. Do not connect real payment credentials to the seeded demonstration records.
 
 ## Manage access
 
 Review members and their organization roles. Use the least access needed for the job. After changing a role, sign in with that account and check the actual screen and API permissions. A hidden navigation item is not a permission check by itself.
+
+Three rules apply when you change a role. The owner's role cannot be changed by anyone. Only the owner or an administrator can make someone an administrator, or change someone who already is one, so a manager is refused here even though it can otherwise edit staff. And owner is not on the list you can choose from: the roles you can assign are administrator, manager, front desk, trainer and member.
 
 ## Review safely
 
