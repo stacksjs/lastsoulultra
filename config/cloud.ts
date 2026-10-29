@@ -67,7 +67,8 @@ export const tsCloud: TsCloudConfig = {
       runtimeVersion: source.bun,
       managedServices: { postgres: true },
       instances: 1,
-      size: 'medium',
+      // Available x86 capacity in fsn1; the private speech runtime requires x86.
+      size: 'cpx32',
       disk: { size: 20, type: 'ssd', encrypted: true },
       // Without `webServer: 'rpx'` the gateway step is gated off entirely: the
       // deploy prints "App deployed", writes no route, and the domain never
@@ -102,6 +103,8 @@ export const tsCloud: TsCloudConfig = {
      */
     main: {
       root: '.',
+      inheritEnv: false,
+      isolation: true,
       exclude: ['storage/runtime', 'storage/native', 'storage/framework/mobile'],
       path: '/',
       domain: APP_DOMAIN,
@@ -140,6 +143,7 @@ export const tsCloud: TsCloudConfig = {
         'echo "[lastsoulultra] preStart: done"',
       ],
       env: {
+        APP_KEY: process.env.APP_KEY || '',
         APP_ENV: 'production',
         NODE_ENV: 'production',
         APP_URL: `https://${APP_DOMAIN}`,
@@ -154,6 +158,8 @@ export const tsCloud: TsCloudConfig = {
      *  port off the public network. */
     api: {
       root: '.',
+      inheritEnv: false,
+      isolation: true,
       exclude: ['storage/runtime', 'storage/native', 'storage/framework/mobile'],
       start: 'bun node_modules/@stacksjs/actions/dist/serve/api.js',
       port: PORT_API,
@@ -161,6 +167,7 @@ export const tsCloud: TsCloudConfig = {
       // against one shared database is how a deploy races itself.
       preStart: ['bun install --frozen-lockfile'],
       env: {
+        APP_KEY: process.env.APP_KEY || '',
         HOST: '127.0.0.1',
         APP_ENV: 'production',
         NODE_ENV: 'production',

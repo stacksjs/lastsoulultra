@@ -8,6 +8,12 @@ it('keeps the enterprise installation off a shared host and pins provider placem
   expect(tsCloud.cloud?.provider).toBe('hetzner')
   expect(tsCloud.hetzner?.location).toBe(deployment.residency.location)
   expect(tsCloud.cloud?.residency?.countries).toEqual([deployment.residency.country])
+  for (const name of ['training', 'training-api', 'main', 'api']) {
+    expect(tsCloud.sites?.[name]?.inheritEnv).toBe(false)
+    expect(tsCloud.sites?.[name]?.isolation).toBe(true)
+    expect(tsCloud.sites?.[name]?.env?.CLOUDFLARE_API_TOKEN).toBeUndefined()
+    expect(tsCloud.sites?.[name]?.env?.HCLOUD_TOKEN).toBeUndefined()
+  }
 })
 
 it('resolves isolated runtime secrets again after Buddy switches to production', () => {
