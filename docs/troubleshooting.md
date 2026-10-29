@@ -11,15 +11,15 @@ Use the shared preview username and password supplied with the handoff. Your per
 
 ## I can open the site but cannot see training
 
-Open Coaching and sign into the intended app account. A visitor has no subscriber sessions. Try the supplied runner account for populated workouts and progress. Refresh the panel after switching accounts.
+Open Coaching and sign into the intended app account. A visitor has no subscriber sessions. Try the supplied runner account for populated workouts and progress. Refresh the screen after switching accounts.
 
 ## I cannot enter administration
 
 Sign in as the owner or one of the supplied administrators, then switch into the Last Soul Ultra organization workspace. An athlete or coach account does not automatically have administrator rights. If the role was just changed, sign out and back in.
 
-## A page says an offer or module is unavailable
+## A page says an offer or section is unavailable
 
-The organization may not have published it, or its linked method or product may no longer be eligible. An administrator should check the published Experience and the linked method, author, plan and product.
+LSU may not have published it yet, or the method or product behind it may no longer be available. An administrator should open the published LSU app settings (the brand name, logo, navigation and the offers the app shows) and check the method, its author, the training plan and the product it points at.
 
 ## Voice recording or transcription fails
 

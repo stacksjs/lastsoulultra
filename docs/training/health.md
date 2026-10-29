@@ -5,13 +5,13 @@ description: Review health summaries, data sharing and fictional demo measuremen
 
 # Health and connected data
 
-## Open your health panel
+## Open your health screen
 
-Open [Health](https://lsu.stacksjs.com/coaching/health) while signed in. The panel reads the health information available to your own account, such as sleep and heart-rate summaries. The metrics shown depend on connected sources, sync status and your permissions.
+Open [Health](https://lsu.stacksjs.com/coaching/health) while signed in. The screen reads the health information available to your own account, such as sleep and heart-rate summaries. The metrics shown depend on connected sources, sync status and your permissions.
 
-On iPhone the app also reads Apple Health. The first time you open **Health**, iOS asks whether LSU may read the workouts and readings you choose to share, and whether it may write finished workouts and mindful minutes back. The wording is LSU's own, in German for a German account. You choose what to share in Apple's own sheet, you can change it later in iOS Settings, and declining leaves the rest of the app working. The website panel does not read Apple Health.
+On iPhone the app also reads Apple Health. The first time you open **Health**, iOS asks whether LSU may read the workouts and readings you choose to share, and whether it may write finished workouts and mindful minutes back. The wording is LSU's own, in German for a German account. You choose what to share in Apple's own sheet, you can change it later in iOS Settings, and declining leaves the rest of the app working. The website screen does not read Apple Health.
 
-An empty panel can mean no source is connected or that the source has not supplied data for the selected period. It does not mean that a zero-valued measurement was recorded.
+An empty screen can mean no source is connected or that the source has not supplied data for the selected period. It does not mean that a zero-valued measurement was recorded.
 
 ## Data sharing
 

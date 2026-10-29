@@ -30,7 +30,7 @@ A user can have both a training identity and an organization membership. A subsc
 
 ## Manage the experience
 
-Open the **Experience** area in the staff workspace. Review the brand name, logo, description, enabled modules, navigation, links and published offers. Save a draft to review changes. Publish only when the available methods and offers match the intended experience.
+Open the **Experience** area in the staff workspace. This is the published LSU app itself: the brand name, logo, description, the sections of the app that are switched on, its navigation, its links and its published offers. Save a draft to review changes. Publish only when the available methods and offers match the intended experience.
 
 ## Manage offers and methods
 

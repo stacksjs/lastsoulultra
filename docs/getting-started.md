@@ -27,8 +27,8 @@ On the website, phone navigation keeps the first five destinations at the bottom
 
 Confirm your name and time zone before reviewing scheduled sessions. Calendar dates follow your account's time zone. A session around midnight can fall on a different date for someone in another zone.
 
-Use your own account for private training and messages. Sign out before trying a different demo role, then refresh the training panel.
+Use your own account for private training and messages. Sign out before trying a different demo role, then refresh the training screen.
 
-## If a panel is empty
+## If a screen is empty
 
 Check that you signed into the intended account, that its subscription grants access and that the module has been published. A visitor without a subscription can browse offers but does not receive a subscriber's workouts. See [Troubleshooting](/troubleshooting).

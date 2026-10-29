@@ -19,4 +19,4 @@ Sample conversations identify themselves as demo content. Sign into the correspo
 
 ## Missing or stale messages
 
-Refresh the panel and verify which account is signed in. If you switched users in another tab, sign out and back in before continuing. Contact the organiser through the [Contact page](https://lsu.stacksjs.com/contact) for race questions.
+Refresh the screen and verify which account is signed in. If you switched users in another tab, sign out and back in before continuing. Contact the organiser through the [Contact page](https://lsu.stacksjs.com/contact) for race questions.

@@ -42,7 +42,7 @@ Share the page link, movement or typeface name, browser and screen size. For an 
 
 ## Web and native training
 
-The web training workspace uses the same panels, workout detail, exercise demonstrations, feedback controls and account actions as the branded native app. LSU supplies the colors and typefaces. On a phone, the primary destinations stay at the bottom; additional destinations appear above the content. Wider screens keep navigation at the side. Browser audio uploads and native recording use the same review-before-send workflow.
+The web training workspace uses the same screens, workout detail, exercise demonstrations, feedback controls and account actions as the branded native app. LSU supplies the colors and typefaces. On a phone, the primary destinations stay at the bottom; additional destinations appear above the content. Wider screens keep navigation at the side. Browser audio uploads and native recording use the same review-before-send workflow.
 
 ## Staff and coach surfaces
 

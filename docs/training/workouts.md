@@ -19,7 +19,7 @@ For strength exercises and drills, consult the [exercise library](/training/exer
 
 Open a session and use the available completion controls. Enter the actual result rather than copying the plan when the two differ. Where offered, record duration, distance, effort and how you felt, then save. Reopen the session to check the saved result.
 
-Use the notes or [feedback panel](/training/feedback) to explain missed or changed training. A calendar entry by itself does not tell the method why a session changed.
+Use the notes or [feedback screen](/training/feedback) to explain missed or changed training. A calendar entry by itself does not tell the method why a session changed.
 
 ## Browse dates
 

@@ -30,4 +30,4 @@ Last Soul Ultra brings race information and your training into one place. Use th
 
 A coach writes a method and publishes a tier. A runner joins that tier and receives its sessions. The runner records training and sends feedback. Where adaptive coaching is available, AI proposes changes inside the method's rules. A subscription does not promise a personal coach or human review of every message.
 
-The available tiers and modules depend on what LSU has published. Your private training, health and messages require an account.
+The available tiers and sections of the app depend on what LSU has published. Your private training, health and messages require an account.
