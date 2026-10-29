@@ -60,7 +60,7 @@ export async function prepareNativeSource(): Promise<void> {
   const changes = git(['diff', '--name-only', 'HEAD'], sourceRoot).split('\n').filter(Boolean)
   if (changes.some(path => !overlays.has(path))) throw new Error('HQ source has local changes outside the branding inputs; use a fresh source cache')
   const untracked = git(['ls-files', '--others', '--exclude-standard'], sourceRoot).split('\n').filter(Boolean)
-  const inputs = new Set(['public/assets/native-product/lsu-logo.svg', 'deployment/lsu/seed-demo-accounts.ts', 'deployment/lsu/lsu-demo-plan.ts', 'deployment/lsu/seed-review.ts', 'deployment/lsu/assets/icon.png', 'deployment/lsu/assets/logo.svg', 'deployment/lsu/product.json'])
+  const inputs = new Set(['public/assets/native-product/lsu-logo.svg', 'deployment/lsu/seed-demo-accounts.ts', 'deployment/lsu/lsu-demo-plan.ts', 'deployment/lsu/seed-review.ts', 'deployment/lsu/assets/icon.png', 'deployment/lsu/assets/logo.svg', 'deployment/lsu/product.json', 'resources/views/legal/lsu/privacy.stx', 'resources/views/legal/lsu/terms.stx'])
   if (untracked.some(path => !inputs.has(path))) throw new Error('HQ source has untracked application inputs; use a fresh source cache')
   const installEnv = { ...process.env, PATH: `${dirname(process.execPath)}${delimiter}${process.env.PATH || ''}` }
   delete installEnv.HQ_SOURCE_SSH_KEY

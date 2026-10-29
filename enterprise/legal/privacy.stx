@@ -1,0 +1,35 @@
+@section('title', 'Training privacy | Last Soul Ultra')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Training privacy | Last Soul Ultra</title>
+</head>
+<body class="font-sans text-white bg-black">
+  <main class="mx-auto px-6 py-12 max-w-3xl leading-relaxed">
+    <a href="/login"><img src="/assets/native-product/lsu-logo.svg" alt="Last Soul Ultra" width="220" height="64"></a>
+    <h1 class="mt-8 font-bold text-3xl">Training app privacy</h1>
+    <p class="mt-4">This notice covers the Last Soul Ultra training app and training.lsu.stacksjs.com. The race website and race-entry accounts are separate. The operator is Last Soul IP GmbH, represented by Kim Gottwald and Alexander Krenzek. Contact <a href="mailto:mail@lastsoulultra.com" class="underline">mail@lastsoulultra.com</a> about your data.</p>
+    <p class="mt-4">Updated October 29, 2026. The beta includes fictional review accounts and sample training. Do not treat those samples as an approved personal training prescription.</p>
+
+    <h2 class="mt-8 font-bold text-xl">Data you choose to provide</h2>
+    <p class="mt-3">The service stores your account name, email and a password hash; your training calendar, recorded workouts, effort, feedback and messages; and the profile and membership details needed for the features you use. It stores health measurements only when you enter them or authorize a connection. Device and account settings determine which features are available.</p>
+    <p class="mt-3">Apple Health and Android Health Connect permissions are optional. Only authorized data is read, such as workouts, heart rate, recovery, sleep, steps and weight. Location is used while you record an outdoor activity, including with the screen locked until recording stops. Voice feedback uses the microphone when you choose to record it.</p>
+
+    <h2 class="mt-8 font-bold text-xl">Purpose and access</h2>
+    <p class="mt-3">This information provides your training, analysis, workout recording, coaching, messages and account controls. Access depends on your account, organization, authorized coaching relationships and any sharing you enable. A coach you authorize can access the training and health information made available by that relationship. Share links expose the categories you select and can be revoked.</p>
+    <p class="mt-3">The training app has no advertising and does not sell health data or share it with advertisers or data brokers. The beta's sample accounts are synthetic; production HQ athlete records and sessions are not copied into this installation.</p>
+
+    <h2 class="mt-8 font-bold text-xl">This installation and connected services</h2>
+    <p class="mt-3">The application, its independent PostgreSQL database, uploaded files and private speech service run on a Hetzner server in Falkenstein, Germany. LSU uses its own database role, application encryption key and persistent storage. Voice feedback submitted for transcription is processed by this installation's local speech service.</p>
+    <p class="mt-3">Connections use HTTPS. Passwords are hashed, and stored provider credentials are encrypted by the application. These controls are not a claim that every health record or backup is individually encrypted, or that the service has obtained a security certification.</p>
+    <p class="mt-3">External health providers, AI services, payment processors and email delivery require their own configuration and authorization; they do not inherit HQ's credentials. If you connect an external service, its processing locations and policies also apply. Primary application storage in Germany does not mean that a service you connect processes all data there. Apple separately processes TestFlight installation, feedback and diagnostics under its own terms.</p>
+
+    <h2 class="mt-8 font-bold text-xl">Your controls</h2>
+    <p class="mt-3">You can disconnect providers, revoke share links, change app permissions in device settings, export supported training and health records, and delete your account in Settings. Disconnecting stops future access and does not itself erase records already imported. Account deletion removes the account's application data; it cannot erase copies another provider already received.</p>
+    <p class="mt-3">Contact the operator for access, correction, deletion, backup handling or the retention periods applying to your records, including any records the operator must retain. Operational logs may contain request and security information needed to run the service. This notice does not promise immediate deletion from every log, backup or external provider.</p>
+    <p class="mt-6"><a href="/legal/lsu/terms" class="underline">Training beta terms</a> · <a href="https://www.lastsoulultra.com/imprint" class="underline">Operator details</a></p>
+  </main>
+</body>
+</html>

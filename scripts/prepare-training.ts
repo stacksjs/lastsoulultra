@@ -17,6 +17,9 @@ export async function prepareTrainingSource(): Promise<void> {
   copyFileSync(join(root, 'enterprise/seed-review.ts'), join(directory, 'seed-review.ts'))
   copyFileSync(join(root, 'native/assets/icon.png'), join(directory, 'assets/icon.png'))
   copyFileSync(join(root, 'public/assets/lsu/images/lsu-logo.svg'), join(directory, 'assets/logo.svg'))
+  const legal = join(sourceRoot, 'resources/views/legal/lsu')
+  mkdirSync(legal, { recursive: true })
+  for (const page of ['privacy', 'terms']) copyFileSync(join(root, 'enterprise/legal', `${page}.stx`), join(legal, `${page}.stx`))
   writeFileSync(join(directory, 'product.json'), JSON.stringify({ ...product, output: '../../storage/framework/mobile', assets: { icon: 'assets/icon.png', splash: 'assets/logo.svg' } }))
   writeFileSync(join(sourceRoot, 'resources/functions/enterprise-deployment.json'), JSON.stringify({ deployment }))
 }

@@ -6,8 +6,8 @@
     "scheme": "lastsoulultra",
     "logo": "/assets/native-product/lsu-logo.svg",
     "supportUrl": "https://www.lastsoulultra.com/contact",
-    "privacyUrl": "https://www.lastsoulultra.com/privacy",
-    "termsUrl": "https://www.lastsoulultra.com/terms",
+    "privacyUrl": "https://training.lsu.stacksjs.com/legal/lsu/privacy",
+    "termsUrl": "https://training.lsu.stacksjs.com/legal/lsu/terms",
     "theme": {
       "background": "#000000",
       "surface": "#0d0d0f",
