@@ -1,0 +1,109 @@
+import { execFileSync } from 'node:child_process'
+import { chmodSync, mkdirSync, writeFileSync } from 'node:fs'
+import { createRequire } from 'node:module'
+import { dirname, join, resolve } from 'node:path'
+import { pathToFileURL } from 'node:url'
+import product from '../native/product.json'
+import source from '../native/hq-source.json'
+import { nativeBuildEnvironment, root, sourceRoot } from './native-source'
+import { demoTier } from './lsu-demo-plan'
+
+interface Account { key: string, name: string, email: string, password: string }
+const accounts = JSON.parse(process.env.LSU_NATIVE_TEST_ACCOUNTS || '[]') as Account[]
+const runner = accounts.find(account => account.key === 'runner')
+const visitor = accounts.find(account => account.key === 'visitor')
+if (!runner || !visitor || [runner, visitor].some(account => !account.email.endsWith('@lsu-demo.test') || !account.password))
+  throw new Error('Native acceptance requires only the dedicated synthetic LSU runner and visitor')
+const require = createRequire(join(sourceRoot, 'package.json'))
+const kit = await import(pathToFileURL(require.resolve('@stacksjs/mobile/testing')).href)
+const artifact = resolve(process.argv[2] || join(root, `storage/native/simulator/${product.version}-${product.build}/LastSoulUltra-simulator.app.zip`))
+const evidence = join(root, 'storage/native/acceptance', `${product.version}-${product.build}`)
+const receipt = await Bun.file(join(dirname(artifact), 'receipt.json')).json()
+const artifactSha256 = new Bun.CryptoHasher('sha256').update(await Bun.file(artifact).arrayBuffer()).digest('hex')
+if (receipt.hqSource !== source.revision || receipt.bundle !== product.bundleId || receipt.version !== product.version || receipt.build !== product.build || receipt.artifactSha256 !== artifactSha256)
+  throw new Error('Downloaded application does not match its release source and checksum receipt')
+mkdirSync(evidence, { recursive: true, mode: 0o700 })
+chmodSync(evidence, 0o700)
+if (process.env.GITHUB_ACTIONS === 'true') for (const account of [runner, visitor]) console.log(`::add-mask::${account.password}`)
+const info = JSON.parse(execFileSync('xcrun', ['simctl', 'list', '--json'], { encoding: 'utf8' }))
+const runtime = info.runtimes.find((item: any) => item.isAvailable && item.identifier.includes('iOS'))
+const device = info.devicetypes.find((item: any) => item.name.includes('iPhone 17 Pro') && !item.name.includes('Max'))
+if (!runtime || !device) throw new Error('Install an available iPhone simulator runtime')
+let simulator = ''
+let child: ReturnType<typeof Bun.spawn> | undefined
+const environment = nativeBuildEnvironment()
+function redact(text: string): string {
+  return text.split('\n').map(line => /\bType\s+'.*\binto\b/.test(line) ? '[XCUITest text entry redacted]' : line.replaceAll(runner!.password, '[redacted]').replaceAll(visitor!.password, '[redacted]')).join('\n')
+}
+async function relay(stream: ReadableStream<Uint8Array>) {
+  const decoder = new TextDecoder()
+  let pending = ''
+  for await (const chunk of stream) {
+    pending += decoder.decode(chunk, { stream: true })
+    const newline = pending.lastIndexOf('\n')
+    if (newline >= 0) { process.stdout.write(redact(pending.slice(0, newline + 1))); pending = pending.slice(newline + 1) }
+  }
+  if (pending) process.stdout.write(redact(pending))
+}
+async function run(args: string[], cwd = root, timeout = 20 * 60_000) {
+  child = Bun.spawn(args, { cwd, env: environment, stdout: 'pipe', stderr: 'pipe' })
+  const output = Promise.all([relay(child.stdout as ReadableStream<Uint8Array>), relay(child.stderr as ReadableStream<Uint8Array>)])
+  const timer = setTimeout(() => child?.kill(), timeout)
+  try { const status = await child.exited; await output; if (status !== 0) throw new Error(`Native acceptance failed: ${args[0]}`) }
+  finally { clearTimeout(timer); child = undefined }
+}
+const steps: any[] = []
+function signIn(account: Account) {
+  steps.push({ command: 'openurl', url: `${product.identity.scheme}:///m/login` }, { command: 'expectid', text: 'login-email', seconds: 30 }, { command: 'typeid', id: 'login-email', text: account.email }, { command: 'typeid', id: 'login-password', text: account.password }, { command: 'tapid', text: 'login-submit' }, { command: 'wait', seconds: 2 })
+  for (const id of ['agree-health', 'agree-data']) steps.push({ command: 'ifid', id, step: { command: 'scrollto', text: id } }, { command: 'ifid', id, step: { command: 'tapid', text: id } })
+  steps.push({ command: 'ifid', id: 'agree-submit', step: { command: 'scrollto', text: 'agree-submit' } }, { command: 'ifid', id: 'agree-submit', step: { command: 'tapid', text: 'agree-submit' } }, { command: 'ifid', id: 'welcome-skip', step: { command: 'tapid', text: 'welcome-skip' } }, { command: 'dismiss', text: 'Not Now' }, { command: 'expectid', text: 'today-screen', seconds: 40 })
+}
+steps.push({ command: 'launch' }, { command: 'openurl', url: `${product.identity.scheme}:///m/login` }, { command: 'expectid', text: 'login-logo', seconds: 30 }, { command: 'shot', name: 'lsu-sign-in' }, { command: 'tree', name: 'lsu-sign-in' })
+signIn(runner)
+steps.push({ command: 'shot', name: 'lsu-today' }, { command: 'tab', text: 'Workouts' }, { command: 'expectid', text: 'library-record-run', seconds: 30 }, { command: 'shot', name: 'lsu-workouts' }, { command: 'tab', text: 'Progress' }, { command: 'expectid', text: 'progress-screen', seconds: 30 }, { command: 'shot', name: 'lsu-progress' }, { command: 'tab', text: 'Health' }, { command: 'expectid', text: 'health-progress', seconds: 30 }, { command: 'shot', name: 'lsu-health' }, { command: 'tab', text: 'Me' }, { command: 'expect', text: runner.name, seconds: 30 }, { command: 'shot', name: 'lsu-me' }, { command: 'scrollto', text: 'me-coaching-accounts' }, { command: 'tapid', text: 'me-coaching-accounts' }, { command: 'expectid', text: 'coaching-accounts', seconds: 30 }, { command: 'absentid', text: 'coaching-accounts-error' }, { command: 'shot', name: 'lsu-coaching-accounts' }, { command: 'openurl', url: `${product.identity.scheme}:///m/calendar` }, { command: 'expectid', text: 'calendar-scope', seconds: 30 }, { command: 'shot', name: 'lsu-calendar' }, { command: 'tab', text: 'Me' }, { command: 'scrollto', text: 'me-sign-out' }, { command: 'tapid', text: 'me-sign-out' })
+signIn(visitor)
+steps.push({ command: 'tab', text: 'Me' }, { command: 'expect', text: visitor.name, seconds: 30 }, { command: 'absent', text: runner.name }, { command: 'shot', name: 'lsu-visitor-account' }, { command: 'scrollto', text: 'me-sign-out' }, { command: 'tapid', text: 'me-sign-out' }, { command: 'expectid', text: 'login-submit', seconds: 30 }, { command: 'shot', name: 'lsu-signed-out' })
+const ownedCoachingShot = steps.findIndex(step => step.command === 'shot' && step.name === 'lsu-coaching-accounts')
+steps.splice(ownedCoachingShot, 0, { command: 'expect', text: demoTier.name, seconds: 30 }, { command: 'absentid', text: 'coaching-accounts-empty' })
+const todayShot = steps.findIndex(step => step.command === 'shot' && step.name === 'lsu-today')
+steps.splice(todayShot + 1, 0, { command: 'swipe', direction: 'up' }, { command: 'shot', name: 'lsu-today-scrolled' }, { command: 'tree', name: 'lsu-today-scrolled' })
+const script = kit.serializeSimulatorSteps(steps)
+const server = Bun.serve({ hostname: '127.0.0.1', port: 0, async fetch(request) {
+  const url = new URL(request.url)
+  if (url.pathname === '/script') return new Response(script)
+  if (url.pathname === '/note') { console.log(redact(await request.text())); return new Response('ok') }
+  if (url.pathname === '/save') {
+    const name = url.searchParams.get('name') || ''
+    if (!/^lsu-[a-z-]+\.(png|txt)$/.test(name)) return new Response('Invalid evidence name', { status: 400 })
+    if (name.endsWith('.txt')) await Bun.write(join(evidence, name), redact(await request.text()))
+    else await Bun.write(join(evidence, name), await request.arrayBuffer())
+    return new Response('ok')
+  }
+  return new Response('Not found', { status: 404 })
+} })
+try {
+  const appDirectory = join(evidence, 'downloaded-app'); mkdirSync(appDirectory, { recursive: true })
+  execFileSync('ditto', ['-x', '-k', artifact, appDirectory])
+  const app = join(appDirectory, 'LastSoulUltra.app')
+  const appInfo = JSON.parse(execFileSync('plutil', ['-convert', 'json', '-o', '-', join(app, 'Info.plist')], { encoding: 'utf8' }))
+  if (appInfo.CFBundleIdentifier !== product.bundleId || appInfo.CFBundleVersion !== String(product.build) || appInfo.CFBundleShortVersionString !== product.version) throw new Error('Downloaded simulator application has the wrong identity')
+  simulator = execFileSync('xcrun', ['simctl', 'create', `LSU Release ${product.build} Acceptance`, device.identifier, runtime.identifier], { encoding: 'utf8' }).trim()
+  await run(['xcrun', 'simctl', 'boot', simulator], root, 120_000)
+  await run(['xcrun', 'simctl', 'bootstatus', simulator, '-b'], root, 600_000)
+  await run(['xcrun', 'simctl', 'install', simulator, app])
+  const projectName = 'LSUAcceptance'
+  const driver = kit.prepareIosSimulatorDriver({ appName: product.identity.name, bundleId: product.bundleId, tabs: ['Today', 'Workouts', 'Progress', 'Health', 'Me'].map(title => ({ title, url: '' })), simulator: { output: join(evidence, 'driver'), projectName, bundleIdPrefix: 'com.lastsoulultra.acceptance', controlUrl: `http://127.0.0.1:${server.port}` } }, root)
+  const tools = await import(pathToFileURL(require.resolve('@stacksjs/actions/build/ios-toolchain')).href)
+  tools.generateXcodeProject(await tools.resolveXcodegen(sourceRoot), driver.output)
+  const args = ['xcodebuild', '-project', `${projectName}.xcodeproj`, '-scheme', projectName, '-configuration', 'Debug', '-destination', `platform=iOS Simulator,id=${simulator}`, '-derivedDataPath', join(evidence, 'DriverDerivedData'), '-parallel-testing-enabled', 'NO', '-jobs', '2']
+  await run([...args, 'build-for-testing'], driver.output)
+  await run([...args, '-resultBundlePath', join(evidence, `Acceptance-${Date.now()}.xcresult`), '-collect-test-diagnostics', 'never', 'test-without-building'], driver.output)
+  writeFileSync(join(evidence, 'result.json'), JSON.stringify({ passed: true, version: product.version, build: product.build, hqSource: source.revision, bundle: product.bundleId, artifactSha256, scenarios: ['sign-in', 'five-tabs', 'calendar', 'owned-coaching', 'account-switch', 'sign-out'] }, null, 2))
+}
+finally {
+  server.stop(true)
+  if (simulator) {
+    Bun.spawnSync(['xcrun', 'simctl', 'shutdown', simulator], { stdout: 'ignore', stderr: 'ignore' })
+    Bun.spawnSync(['xcrun', 'simctl', 'delete', simulator], { stdout: 'ignore', stderr: 'ignore' })
+  }
+}

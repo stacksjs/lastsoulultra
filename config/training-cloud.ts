@@ -18,12 +18,17 @@ export function trainingSites(): NonNullable<CloudConfig['sites']> {
     FRONTEND_APP_URL: deployment.origin, STX_PUBLIC_API_URL: `${deployment.origin}/api`,
     API_URL: `http://127.0.0.1:${deployment.ports.api}`, PORT_API: String(deployment.ports.api),
     APP_KEY: secrets.LSU_TRAINING_APP_KEY || '',
+    APNS_TEAM_ID: secrets.LSU_APNS_TEAM_ID || '', APNS_KEY_ID: secrets.LSU_APNS_KEY_ID || '', APNS_PRIVATE_KEY: secrets.LSU_APNS_PRIVATE_KEY || '',
+    APNS_TOPIC: 'com.lastsoulultra.app', APNS_ENVIRONMENT: 'production',
+    APPLE_TEAM_ID: secrets.LSU_APPLE_TEAM_ID || '', APPLE_KEY_ID: secrets.LSU_APPLE_KEY_ID || '', APPLE_PRIVATE_KEY: secrets.LSU_APPLE_PRIVATE_KEY || '',
     DB_CONNECTION: 'postgres', DB_HOST: deployment.database.host, DB_PORT: String(deployment.database.port),
     DB_DATABASE: deployment.database.name, DB_USERNAME: deployment.database.user, DB_PASSWORD: secrets.LSU_TRAINING_DB_PASSWORD || '',
     STORAGE_DRIVER: 'bun', STORAGE_ROOT: shared, STORAGE_PUBLIC_URL: deployment.origin,
     PATH: `${shared}/media/pantry/.bin:/opt/pantry/pantry/.bin:/usr/local/bin:/usr/bin:/bin`,
     QUEUE_DRIVER: 'database', HQ_SCHEDULER: 'off', HQ_PAGE_WARMUP: 'off', TYPESENSE_ENABLED: 'false', SEED_DEMO_DATA: 'false',
-    MAIL_MAILER: 'log', COACHING_SPEECH_PROVIDER: 'local', COACHING_SPEECH_PORT: String(deployment.ports.speech),
+    MAIL_MAILER: 'log', MAIL_DOMAIN: new URL(deployment.origin).hostname,
+    MAIL_FROM_NAME: 'Last Soul Ultra', MAIL_FROM_ADDRESS: `hello@${new URL(deployment.origin).hostname}`,
+    COACHING_SPEECH_PROVIDER: 'local', COACHING_SPEECH_PORT: String(deployment.ports.speech),
     COACHING_SPEECH_RUNTIME_DIR: `${shared}/speech`, COACHING_SPEECH_TOKEN_FILE: `${shared}/speech/token`,
     COACHING_SPEECH_URL: `http://127.0.0.1:${deployment.ports.speech}/v1`, COACHING_SPEECH_MODEL: 'whisper-1',
   }
@@ -38,6 +43,7 @@ export function trainingSites(): NonNullable<CloudConfig['sites']> {
   return {
     training: {
       ...common, domain: new URL(deployment.origin).hostname, path: '/', port: deployment.ports.web,
+      aliases: [`mail.${new URL(deployment.origin).hostname}`],
       start: `${launcher} storage/framework/runtime/production/serve.js`,
       healthCheck: { path: '/login' }, env: runtime,
       preStart: [...install, 'mkdir -p storage/framework/runtime/production', 'bun scripts/build-production.ts web'],

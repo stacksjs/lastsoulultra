@@ -4,6 +4,7 @@ import { env } from '@stacksjs/env'
 import { trainingSites } from './training-cloud'
 import deployment from '../enterprise/deployment.json'
 import source from '../native/hq-source.json'
+import backups from '../enterprise/backups.json'
 
 /**
  * The slug names the files this deploy OWNS on the box:
@@ -67,6 +68,15 @@ export const tsCloud: TsCloudConfig = {
       runtime: 'bun',
       runtimeVersion: source.bun,
       managedServices: { postgres: true },
+      backups: {
+        ...backups, enabled: true, schedule: '15 2 * * *', retentionCount: 3, retentionDays: 30,
+        credentials: { accessKeyId: process.env.LSU_BACKUP_ACCESS_KEY || '', secretAccessKey: process.env.LSU_BACKUP_SECRET_KEY || '' },
+        encryptionKey: process.env.LSU_BACKUP_ENCRYPTION_KEY || '',
+        files: [
+          { name: 'lsu-uploads', path: `${deployment.storageRoot}/storage/app` },
+          { name: 'lsu-runtime-recovery', path: '/var/www/lastsoulultra-training-api/current/.env' },
+        ],
+      },
       instances: 1,
       // Available x86 capacity in fsn1; the private speech runtime requires x86.
       size: 'cpx32',

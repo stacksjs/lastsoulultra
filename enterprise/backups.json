@@ -1,0 +1,11 @@
+{
+  "bucket": "lastsoulultra-production-backups",
+  "endpoint": "https://fsn1.your-objectstorage.com",
+  "region": "fsn1",
+  "prefix": "lastsoulultra-production",
+  "version": "0.1.6",
+  "archive": {
+    "url": "https://github.com/stacksjs/ts-backups/releases/download/v0.1.6/ts-backups-0.1.6.tgz",
+    "sha256": "20b8295d8c092f9e0ed17239b0233e781d71466077b555f163d67dfcfa2a9744"
+  }
+}

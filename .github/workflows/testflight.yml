@@ -14,7 +14,7 @@ jobs:
   release:
     if: github.ref == 'refs/heads/main'
     runs-on: xcode-27
-    timeout-minutes: 60
+    timeout-minutes: 90
     environment: ios-testflight
     steps:
       - name: Checkout the requested main revision
@@ -46,6 +46,41 @@ jobs:
         env:
           HQ_SOURCE_SSH_KEY: ${{ secrets.HQ_SOURCE_SSH_KEY }}
         run: bun run native:ios
+
+      - name: Build the simulator application from the same source
+        run: bun scripts/build-native-simulator.ts
+
+      - name: Publish the simulator artifact for acceptance
+        uses: actions/upload-artifact@v6
+        with:
+          name: lsu-simulator-${{ github.run_id }}-${{ github.run_attempt }}
+          retention-days: 7
+          path: |
+            storage/native/simulator/*/LastSoulUltra-simulator.app.zip
+            storage/native/simulator/*/receipt.json
+
+      - name: Download the published application for XCUITest
+        uses: actions/download-artifact@v7
+        with:
+          name: lsu-simulator-${{ github.run_id }}-${{ github.run_attempt }}
+          path: storage/native/downloaded-simulator
+
+      - name: Test the downloaded application against the isolated LSU API
+        env:
+          LSU_NATIVE_TEST_ACCOUNTS: ${{ secrets.LSU_NATIVE_TEST_ACCOUNTS }}
+        run: bun scripts/test-native-ios.ts "storage/native/downloaded-simulator/$(bun -e 'import p from "./native/product.json"; console.log(`${p.version}-${p.build}`)')/LastSoulUltra-simulator.app.zip"
+
+      - name: Save screenshots and redacted acceptance results
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: lsu-acceptance-${{ github.run_id }}-${{ github.run_attempt }}
+          retention-days: 7
+          if-no-files-found: warn
+          path: |
+            storage/native/acceptance/*/lsu-*.png
+            storage/native/acceptance/*/lsu-*.txt
+            storage/native/acceptance/*/result.json
 
       - name: Prepare temporary signing material
         env:

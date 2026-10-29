@@ -1,4 +1,6 @@
 import { prepareTrainingSource } from '../scripts/prepare-training'
+import { S3Client } from '@stacksjs/ts-cloud'
+import backups from '../enterprise/backups.json'
 /**
  * Custom Deploy Script
  *
@@ -26,6 +28,12 @@ export async function beforeDeploy({ environment, region }: { environment: strin
   if (environment !== 'production') throw new Error('Declare a separate enterprise database and residency contract before deploying another environment')
   if (!process.env.LSU_TRAINING_APP_KEY || !process.env.LSU_TRAINING_DB_PASSWORD || !process.env.LSU_DEMO_ACCOUNTS_JSON)
     throw new Error('The enterprise backend needs its own encryption key, database password and synthetic review accounts')
+  const credentials = { accessKeyId: process.env.LSU_BACKUP_ACCESS_KEY || '', secretAccessKey: process.env.LSU_BACKUP_SECRET_KEY || '' }
+  if (!credentials.accessKeyId || !credentials.secretAccessKey || (process.env.LSU_BACKUP_ENCRYPTION_KEY || '').length < 32)
+    throw new Error('Production requires the independent encrypted backup recovery key and storage credentials')
+  const storage = new S3Client({ endpoint: backups.endpoint, region: backups.region, forcePathStyle: true, credentials })
+  if (await storage.getBucketLocation(backups.bucket) !== 'fsn1' || /AllUsers|AuthenticatedUsers/.test(JSON.stringify(await storage.getBucketAcl(backups.bucket))))
+    throw new Error('The backup bucket must remain private and in the declared German location')
   await prepareTrainingSource()
 }
 
