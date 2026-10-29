@@ -34,7 +34,10 @@ export interface CoachingModule {
 export const coachingModules: CoachingModule[] = [
   {
     slug: 'plans',
-    label: 'Tiers',
+    // Store, Workouts, Health, Messages, Me are the native app's tabs. The
+    // nav word matches them so one product does not greet you with two
+    // vocabularies; the page headings below stay in this site's voice.
+    label: 'Store',
     title: 'What is open',
     summary: 'The tiers a coach has published, what each one covers and what it costs. Nothing here is set by this site.',
     scope: 'public',
@@ -87,7 +90,7 @@ export const coachingModules: CoachingModule[] = [
   },
   {
     slug: 'account',
-    label: 'Account',
+    label: 'Me',
     title: 'Billing and renewal',
     summary: 'Cancel, resume a renewal, or open billing. Payment is handled where your account lives, never on this site.',
     scope: 'athlete',
