@@ -51,7 +51,7 @@ jobs:
         run: bun scripts/build-native-simulator.ts
 
       - name: Publish the simulator artifact for acceptance
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: lsu-simulator-${{ github.run_id }}-${{ github.run_attempt }}
           retention-days: 7
@@ -60,7 +60,7 @@ jobs:
             storage/native/simulator/*/receipt.json
 
       - name: Download the published application for XCUITest
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: lsu-simulator-${{ github.run_id }}-${{ github.run_attempt }}
           path: storage/native/downloaded-simulator
@@ -72,7 +72,7 @@ jobs:
 
       - name: Save screenshots and redacted acceptance results
         if: always()
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: lsu-acceptance-${{ github.run_id }}-${{ github.run_attempt }}
           retention-days: 7
@@ -102,7 +102,7 @@ jobs:
 
       - name: Save signed app and source receipts
         if: always()
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: lsu-ios-${{ github.run_id }}-${{ github.run_attempt }}
           retention-days: 7
