@@ -43,7 +43,7 @@ Use a fresh session and the coach account. Open the [coach workspace](https://ls
 
 ## 5. Review administration
 
-Open [Administration](https://lsu.stacksjs.com/admin) with Sam's or Pawel's administrator account. Complete your own policy choices if prompted and select the Last Soul Ultra organization workspace. Open Experience and verify that its settings and linked offers load. Confirm that an athlete account cannot perform the same management action.
+Open [Administration](https://lsu.stacksjs.com/admin) with Sam's or Pawel's administrator account. Complete your own policy choices if prompted. Administration opens the LSU Experience directly; verify that its settings and linked offers load. Use the workspace menu to reach the other management tools. Confirm that an athlete account cannot perform the same management action.
 
 Explore the [data model and ERD](/erd) to trace account permissions, subscriptions, workouts and feedback.
 
@@ -56,3 +56,7 @@ Sample training access does not represent a paid order or real payment-provider 
 To switch roles, use sign-out where available or start a clean browser session as described in [Your account](/my-account#switch-roles-safely). Separate private windows can share a login until all private windows are closed.
 
 Record the account role, page and observed behavior. Send feedback to the person who supplied the handoff. Keep passwords out of screenshots and shared issue reports.
+
+## Admin and coach workspaces
+
+[Administration](https://lsu.stacksjs.com/admin) opens LSU’s Experience settings directly for Sam and Pawel. [Coach workspace](https://lsu.stacksjs.com/coach) opens methods, with [Exercises](https://lsu.stacksjs.com/coach/exercises) and [Subscribers](https://lsu.stacksjs.com/coach/subscribers) in the workspace navigation. Both workspaces use the native app’s controls and grouped layouts, with LSU’s black surfaces, red actions, Anton headings and Barlow text. On a phone, open **Workspace menu** to reach the other tools and sign out. Links and saved changes stay in the LSU organization. The website password also protects these entry pages.

@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html lang="en-GB" class="lsu-scope-site">
+<head>@include('head')<style>html,body{margin:0;background:#000;color:#fff}.workspace-frame{display:block;width:100%;height:100dvh;min-height:640px;border:0}.workspace-heading{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}a.workspace-fallback{display:block;padding:12px 24px;font:16px Barlow,sans-serif;color:#b6b6bd}</style></head>
+<body class="lsu-scope-site">
+<main id="main"><h1 class="workspace-heading">{{ currentPage.title }}</h1>
+@slot('content')
+</main>
+<a href="/docs/demo" class="workspace-fallback">Last Soul Ultra demo guide and account help</a>
+</body>
+</html>

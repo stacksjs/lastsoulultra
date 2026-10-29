@@ -60,6 +60,6 @@ The trainer and coach accounts have coach profiles; the published sample belongs
 
 For training, open [Workouts](https://lsu.stacksjs.com/coaching/calendar) with Alex or Jamie. Compare a run with **Strength A** or **Strength B**, then inspect Progress, Library and Health. The sample club conversation is attached to Alex and the general demo administrator.
 
-For authoring, use the demo coach and open the [coach workspace](https://lsu.stacksjs.com/coach) or [coach exercise library](https://lsu.stacksjs.com/coach/exercises). For management, use Sam or Pawel and open [Administration](https://lsu.stacksjs.com/admin), then select **Last Soul Ultra** and **Experience**. Complete your own policy choices if prompted.
+For authoring, use the demo coach and open the [coach workspace](https://lsu.stacksjs.com/coach) or [coach exercise library](https://lsu.stacksjs.com/coach/exercises). For management, use Sam or Pawel and open [Administration](https://lsu.stacksjs.com/admin), which opens the LSU Experience directly. Use the workspace menu for team, member and organization settings. Complete your own policy choices if prompted.
 
 Use sign-out or a separate browser profile when changing accounts. Private windows in one browser can share the same session. The shared preview password unlocks the website and docs; the email and personal password select your app account. See the [demo walkthrough](/demo) and [Your account](/my-account#switch-roles-safely).

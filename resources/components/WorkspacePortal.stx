@@ -1,0 +1,8 @@
+<script server>
+import { coachingBrand, coachingOrigin } from '~/resources/functions/coaching-source'
+const workspacePath = String($props.path || '')
+if (!['/staff/experience', '/coaches/methods', '/coaches/exercises', '/coaches/subscribers'].includes(workspacePath)) throw new Error('Unknown workspace entry')
+const workspaceSource = coachingOrigin() + workspacePath + '?brand=' + encodeURIComponent(coachingBrand())
+const workspaceLabel = 'Last Soul Ultra — ' + String($props.label || 'Workspace')
+</script>
+<iframe src="{{ workspaceSource }}" title="{{ workspaceLabel }}" class="workspace-frame" allow="microphone; clipboard-write" referrerpolicy="strict-origin-when-cross-origin"></iframe>

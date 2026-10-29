@@ -1,5 +1,9 @@
 /** Current public LSU content and route metadata, migrated to STX on 23 October 2026. */
 export const productionPages: Record<string, { title: string, description: string, styles: string[], noindex?: boolean }> = {
+  "/admin": { "title": "Administration - Last Soul Ultra", "description": "Last Soul Ultra staff and coaching workspace.", "styles": [], "noindex": true },
+  "/coach": { "title": "Coach workspace - Last Soul Ultra", "description": "Last Soul Ultra staff and coaching workspace.", "styles": [], "noindex": true },
+  "/coach/exercises": { "title": "Exercise library - Last Soul Ultra", "description": "Last Soul Ultra staff and coaching workspace.", "styles": [], "noindex": true },
+  "/coach/subscribers": { "title": "Subscriber training - Last Soul Ultra", "description": "Last Soul Ultra staff and coaching workspace.", "styles": [], "noindex": true },
   "/profile": {
     "noindex": true,
     "title": "Your profile — Last Soul Ultra entry requests",

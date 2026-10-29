@@ -43,3 +43,7 @@ Share the page link, movement or typeface name, browser and screen size. For an 
 ## Web and native training
 
 The web training workspace uses the same panels, workout detail, exercise demonstrations, feedback controls and account actions as the branded native app. LSU supplies the colors and typefaces. On a phone, the primary destinations stay at the bottom; additional destinations appear above the content. Wider screens keep navigation at the side. Browser audio uploads and native recording use the same review-before-send workflow.
+
+## Staff and coach surfaces
+
+The [admin](https://lsu.stacksjs.com/admin) and [coach](https://lsu.stacksjs.com/coach) workspaces share the native app’s controls, form behavior, lists and grouped layouts. They use the published LSU palette and fonts: black page background, `#0d0d0f` panels, `#333338` separators, red `#dd0f15` actions, Anton headings and Barlow body text. Inputs and actions have at least 44 px touch targets. The workspace menu collapses on phones; Guide, Roles and Demo guide lead back to this protected documentation.

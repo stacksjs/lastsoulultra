@@ -12,7 +12,7 @@ async function headings(html: string, selector = 'h1, h2, h3') {
   return values.filter(Boolean)
 }
 const report = []
-for (const path of Object.keys(productionPages).filter(path => !['/lottery', '/profile', '/404', '/coaching'].includes(path))) {
+for (const path of Object.keys(productionPages).filter(path => !productionPages[path]?.noindex && !['/lottery', '/coaching'].includes(path))) {
   const file = Bun.file(`dist/${path === '/' ? 'index' : path.slice(1)}.html`)
   const response = await fetch(`https://www.lastsoulultra.com${path}`)
   if (!response.ok || !await file.exists()) throw new Error(`Unable to compare ${path}`)
