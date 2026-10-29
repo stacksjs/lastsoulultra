@@ -54,7 +54,7 @@ provider from the zone rather than being told, the same as HQ's config.
 `HQ_SOURCE_SSH_KEY` is a read-only key for the pinned application source.
 `CLOUDFLARE_API_TOKEN` is configured for the authoritative `stacksjs.com` zone.
 Buddy discovers that zone and reconciles A/AAAA records for both the website
-and `training.lsu.stacksjs.com`, using the verified attached server's addresses.
+and `training.lsu.stacksjs.com`, using LSU's dedicated German server's addresses.
 Records stay DNS-only so rpx can issue and terminate TLS on the German host.
 No manual DNS setup is required.
 

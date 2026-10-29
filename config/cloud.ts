@@ -3,27 +3,20 @@ import type { CloudConfig as TsCloudConfig } from '@stacksjs/ts-cloud'
 import { env } from '@stacksjs/env'
 import { trainingSites } from './training-cloud'
 import deployment from '../enterprise/deployment.json'
+import source from '../native/hq-source.json'
 
 /**
  * The slug names the files this deploy OWNS on the box:
  * `/etc/rpx/sites.d/<slug>.json` and the `rpx-cert-renew-<slug>.*` units. The
- * fragment is replaced wholesale, so a slug colliding with another tenant's
- * silently takes over its routes and TLS. It must be unique across every
- * project attached to this box, and must never equal `attachTo`.
+ * fragment is replaced wholesale, so the project always owns its own routes.
+ * LSU provisions a dedicated host: a shared host's global backups must never
+ * collect enterprise training data outside the declared residency policy.
  */
 const APP_SLUG = 'lastsoulultra'
 const APP_DOMAIN = env.APP_DOMAIN || 'lsu.stacksjs.com'
 
 /**
- * Ports on the shared box.
- *
- * Read from a live `ss -lntp`, not from another project's config: those list
- * what a project declares, not what is bound, and they miss any tenant not
- * checked out locally. Two services CAN bind one port here, so a collision
- * shows up as two domains serving each other's site half the time.
- *
- * 3200/3201 were free on 2026-08-27; 3190/3191 are rappid's, the highest
- * neighbour before that.
+ * Stable loopback ports, reached only through this host's rpx gateway.
  */
 const PORT_MAIN = 3200
 const PORT_API = 3201
@@ -35,10 +28,6 @@ export const tsCloud: TsCloudConfig = {
 
   cloud: {
     provider: 'hetzner',
-    // The owner project's slug. Without this, ts-cloud finds no server
-    // labelled `ts-cloud/project=lastsoulultra` and quietly provisions a NEW
-    // box, which is an expensive way to discover a missing line.
-    attachTo: 'stacks',
     residency: { countries: [deployment.residency.country], locations: [deployment.residency.location] },
 
     /**
@@ -57,6 +46,8 @@ export const tsCloud: TsCloudConfig = {
     retiredDomains: ['lastsoulultra.hq.training'],
   },
 
+  hetzner: { location: deployment.residency.location },
+
   mode: 'server',
 
   environments: {
@@ -72,9 +63,11 @@ export const tsCloud: TsCloudConfig = {
     appDatabase: { engine: 'postgres', name: deployment.database.name, username: deployment.database.user, password: process.env.LSU_TRAINING_DB_PASSWORD || '', host: deployment.database.host, port: deployment.database.port },
     dns: { domain: APP_DOMAIN },
     compute: {
+      runtime: 'bun',
+      runtimeVersion: source.bun,
       managedServices: { postgres: true },
       instances: 1,
-      size: 'small',
+      size: 'medium',
       disk: { size: 20, type: 'ssd', encrypted: true },
       // Without `webServer: 'rpx'` the gateway step is gated off entirely: the
       // deploy prints "App deployed", writes no route, and the domain never

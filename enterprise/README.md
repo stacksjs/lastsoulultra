@@ -18,6 +18,10 @@ The key is excluded from dependency installation and native build environments.
 
 The deployment requires fresh Hetzner evidence for Germany (`DE`), Falkenstein
 (`fsn1`). A missing credential, unknown location or other location stops it.
+Buddy provisions LSU's dedicated host in that location. It does not attach to
+the shared Stacks host, whose global backup policy copies data outside Germany.
+Off-host backups and external integrations require an explicit residency review;
+no shared-host backup credentials or jobs are inherited by this installation.
 The native release checks `/api/deployment` for the expected installation, origin,
 source revision and residency metadata before building or uploading.
 

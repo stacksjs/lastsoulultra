@@ -1,5 +1,14 @@
 import { expect, it } from 'bun:test'
 import { trainingSites } from '../config/training-cloud'
+import { tsCloud } from '../config/cloud'
+import deployment from '../enterprise/deployment.json'
+
+it('keeps the enterprise installation off a shared host and pins provider placement', () => {
+  expect(tsCloud.cloud?.attachTo).toBeUndefined()
+  expect(tsCloud.cloud?.provider).toBe('hetzner')
+  expect(tsCloud.hetzner?.location).toBe(deployment.residency.location)
+  expect(tsCloud.cloud?.residency?.countries).toEqual([deployment.residency.country])
+})
 
 it('resolves isolated runtime secrets again after Buddy switches to production', () => {
   const keys = ['LSU_TRAINING_APP_KEY', 'LSU_TRAINING_DB_PASSWORD', 'LSU_DEMO_ACCOUNTS_JSON'] as const
