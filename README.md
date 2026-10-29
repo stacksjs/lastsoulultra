@@ -110,29 +110,34 @@ HQ's **Brand experience** editor controls colors, fonts, corners, density, modul
 
 HQ's repository documents provisioning, API endpoints, native app builds and launch decisions in `docs/developers/branded-coaching.md`. The new HQ database migrations and application deployment must be released before enabling the live LSU embed. This repository change does not deploy either site.
 
-## Built, with nothing on the site reaching it
+## The live scoreboard
 
-Two working features have no entry point in the current pages. Both were
-added and then lost when the site was rebuilt from the production capture, so
-they are listed here rather than left to be found again by accident.
+`resources/data/live.ts` mirrors the race's own board. That board publishes no
+JSON, so this lifts the state out of the HTML the worker serves. It is the most
+fragile thing on the site, and fragile on purpose: reading their page is what
+lets the standings live here instead of behind an outbound link.
 
-**The live scoreboard.** `resources/data/live.ts` mirrors the race's own board
-- which publishes no JSON, so it lifts the state out of the page the worker
-serves - and `routes/api.ts` serves it at `GET /api/live`, cached for a minute
-and answering 503 with `ok: false` rather than a page of zeroes when upstream
-is down. Nothing fetches it. The only consumer left is the 404 page, which
-asks it whether the race is running to decide what to link to. Restoring the
-standings means rendering `livePayload` on `/results` and polling that
-endpoint; the shape is the same server-side and in the browser so the table
-cannot drift between them.
+The cost is that their refactor is our outage, with no warning and no version
+marker. On 29 October 2026 it turned out they had renamed the global and
+renested the payload some time earlier, and the board had been quietly dark
+ever since:
 
-**The newsletter.** `app/Actions/SubscriberEmailAction.ts`,
-`ConfirmSubscriptionAction.ts`, both `app/Mail/Subscription*` classes and the
-three templates in `resources/emails/` implement a real double opt-in, and
-`/api/email/confirm` is the middle step the framework does not provide. No
-page has a signup form, so nobody can start the flow. Adding one also needs
-privacy copy: the current `/privacy` documents analytics, server logs,
-accounts and entries, and says nothing about a mailing list.
+    window.__LSU__      = { state:   ... }   ->  window.__LSU_SUMMARY__ = { summary: ... }
+    runner.lapsCompleted                     ->  runner.laps
+    state.finalLap                           ->  summary.lastLap
+    status 'active'                          ->  status 'finisher'
+
+Both spellings are read now, and `tests/fixtures/live-summary.json` is a trimmed
+copy of what the worker actually served that day, so the next rename fails a
+test rather than a page. If the board goes blank, start by diffing the live
+payload against that fixture.
+
+`routes/api.ts` serves it at `GET /api/live`, answering `ok: false` rather than
+a page of zeroes when upstream is down. `<LiveBoard />` renders it on `/results`
+and polls that endpoint, and `liveRaceState` asks it site-wide whether the race
+is running. Both the snapshot and the brand loader answer from cache and refresh
+behind the response, so no visitor ever waits on an upstream fetch.
+
 
 ## Existing race service
 
