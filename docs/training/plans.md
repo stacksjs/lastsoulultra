@@ -23,6 +23,8 @@ The review accounts have complimentary access. The displayed price describes the
 
 Choose the offer and follow its checkout instructions. Confirm the total and recurring terms before authorizing payment. Return to the app after checkout and wait for the confirmed subscription or purchase to appear. A browser return by itself is not proof that payment succeeded.
 
+**Reviewing the private preview?** The supplied accounts already hold the tier with complimentary access, so there is nothing to buy and no real charge is attached to them. See [Roles and plan access](/roles). Do not enter real card details anywhere in this preview.
+
 An active enrollment supplies the sessions shown in **Workouts**, the method in **Library** and its totals in **Progress**. This is self-coaching within an authored method unless an offer explicitly says otherwise.
 
 ## Renewal and access

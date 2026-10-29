@@ -9,7 +9,7 @@ description: Manage LSU organization access, published experience settings and o
 
 Open [Administration](https://lsu.stacksjs.com/admin) and sign in with an LSU owner or administrator account. Use the account menu to enter the organization or staff workspace and select **Last Soul Ultra**. Confirm the organization name before changing anything. On first sign-in, read the policies and complete your own consent choices before continuing.
 
-The Sam and Pawel review accounts are organization administrators. These accounts manage the LSU workspace. They do not grant platform-wide administration over other organizations.
+The Sam and Pawel review accounts are organization administrators. Inside Last Soul Ultra that is everything the owner can do except delete the organization, payment setup included, so treat them as full access rather than as a limited review login. They grant nothing over any other organization.
 
 For the full account map and the difference between permissions and training subscriptions, see [Roles and plan access](/roles).
 
@@ -18,13 +18,13 @@ For the full account map and the difference between permissions and training sub
 | Role | Purpose |
 | --- | --- |
 | Owner | Owns the organization and its settings |
-| Administrator | Manages permitted organization settings, members and published experience |
+| Administrator | Everything an owner can do except delete the organization, including LSU's payment setup |
 | Manager | Manages permitted member, scheduling and operational work |
 | Front desk | Handles permitted member and desk operations |
 | Trainer | Works in the permitted training and staff areas |
-| Coach | Authors methods and manages the training they are permitted to access |
 | Member or subscriber | Uses their own enrolled training and account |
-| Visitor | Browses published information and offers |
+
+Those six are the organization roles. **Coach is not one of them**: a coach is a separate authoring profile, and someone who authors methods usually holds Trainer as well. **Visitor is not a role either**; it describes someone browsing without a membership. Neither appears in the staff screen, so do not go looking for them there.
 
 A user can have both a training identity and an organization membership. A subscription alone does not make its holder an administrator.
 
