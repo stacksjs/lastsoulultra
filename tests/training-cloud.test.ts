@@ -11,6 +11,9 @@ it('keeps the enterprise installation off a shared host and pins provider placem
   expect(tsCloud.infrastructure?.appDatabase?.requireLocalPasswordAuth).toBe(true)
   expect(tsCloud.sites?.main?.env?.DB_DATABASE_PATH).toBe('/var/www/lastsoulultra-shared/website/database/stacks.sqlite')
   expect(tsCloud.sites?.api?.env?.DB_DATABASE_PATH).toBe(tsCloud.sites?.main?.env?.DB_DATABASE_PATH)
+  expect(tsCloud.sites?.main?.start).toStartWith('./pantry/.bin/bun ')
+  expect(tsCloud.sites?.api?.start).toStartWith('./pantry/.bin/bun ')
+  expect(trainingSites()['training-api'].backgroundBun).toBe('.hq-runtime/pantry/bun.com/v1.4.4/bin/bun')
   expect(trainingSites()['training-api'].daemons?.find(daemon => daemon.name === 'local-speech')?.command).toContain('COACHING_SPEECH_RUNTIME_DIR=/var/www/lastsoulultra-shared/training/speech')
   for (const name of ['training', 'training-api', 'main', 'api']) {
     expect(tsCloud.sites?.[name]?.inheritEnv).toBe(false)

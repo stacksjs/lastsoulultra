@@ -45,7 +45,8 @@ export function trainingSites(): NonNullable<CloudConfig['sites']> {
     'training-api': {
       ...common, port: deployment.ports.api,
       start: `${launcher} storage/framework/runtime/production/api.js`,
-      backgroundBun: '.hq-runtime/bin/bun',
+      // Scheduler admission selects the native binary, rather than Pantry's shell launcher.
+      backgroundBun: `.hq-runtime/pantry/bun.com/v${source.bun}/bin/bun`,
       env: { ...runtime, LSU_DEMO_ACCOUNTS_JSON: secrets.LSU_DEMO_ACCOUNTS_JSON || '', LSU_SEED_DATABASE: deployment.database.name, LSU_SEED_CONFIRM: 'last-soul-ultra' },
       healthCheck: { path: '/api/deployment' },
       preStart: [...install, './buddy migrate --no-generate --auth', './buddy queue:table', 'mkdir -p storage/framework/runtime/production', 'bun scripts/build-production.ts api', 'bun deployment/lsu/seed-review.ts', 'sh scripts/ensure-speech-runtime.sh'],

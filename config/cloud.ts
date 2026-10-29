@@ -132,12 +132,13 @@ export const tsCloud: TsCloudConfig = {
       ...(env.SITE_AUTH_USER && env.SITE_AUTH_PASSWORD
         ? { auth: { username: env.SITE_AUTH_USER, password: env.SITE_AUTH_PASSWORD, realm: 'Last Soul Ultra preview' } }
         : {}),
-      start: 'bun node_modules/@stacksjs/buddy/dist/serve-entry.js',
+      start: './pantry/.bin/bun node_modules/@stacksjs/buddy/dist/serve-entry.js',
       port: PORT_MAIN,
       // Build-time-only source art would go here if there were any; the race
       // photography is served from the organiser's own CDN, so the release
       // carries no images at all.
       preStart: [
+        'pantry install --no-save',
         'echo "[lastsoulultra] preStart: install"',
         'bun install --frozen-lockfile',
         'echo "[lastsoulultra] preStart: migrate"',
@@ -166,11 +167,11 @@ export const tsCloud: TsCloudConfig = {
       isolation: true,
       sharedPaths: [{ path: 'website-data', target: WEBSITE_STORAGE }],
       exclude: ['storage/runtime', 'storage/native', 'storage/framework/mobile'],
-      start: 'bun node_modules/@stacksjs/actions/dist/serve/api.js',
+      start: './pantry/.bin/bun node_modules/@stacksjs/actions/dist/serve/api.js',
       port: PORT_API,
       // No migrate here: `main` owns the schema, and running two migrations
       // against one shared database is how a deploy races itself.
-      preStart: ['bun install --frozen-lockfile'],
+      preStart: ['pantry install --no-save', 'bun install --frozen-lockfile'],
       env: {
         APP_KEY: process.env.APP_KEY || '',
         HOST: '127.0.0.1',
