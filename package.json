@@ -81,7 +81,8 @@
     "native:ios": "bun scripts/build-native.ts ios",
     "native:android": "bun scripts/build-native.ts android",
     "native:restore-ios": "bun scripts/restore-native-ios.ts",
-    "native:testflight": "bun scripts/release-native-ios.ts"
+    "native:testflight": "bun scripts/release-native-ios.ts",
+    "native:verify-ios": "bun scripts/verify-native.ts"
   },
   "dependencies": {
     "@stacksjs/bunpress": "0.2.30",

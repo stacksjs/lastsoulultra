@@ -28,7 +28,8 @@
   "build": 1,
   "assets": {
     "icon": "assets/icon.png",
-    "splash": "../public/assets/lsu/images/lsu-logo.svg"
+    "splash": "../public/assets/lsu/images/lsu-logo.svg",
+    "wordmark": "assets/wordmark.png"
   },
   "output": "../storage/framework/mobile",
   "push": {

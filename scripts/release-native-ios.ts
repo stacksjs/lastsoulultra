@@ -17,6 +17,7 @@ const run = async (args: string[], cwd = root) => {
   if (await child.exited !== 0) throw new Error(`Native release failed: ${args[0]}`)
 }
 await run([process.execPath, 'run', 'native:ios'])
+await run([process.execPath, 'run', 'native:verify-ios'])
 const ios = join(output, 'ios')
 const scheme = 'LastSoulUltra'
 const appProfile = process.env.IOS_APP_PROFILE || 'Last Soul Ultra App Store'

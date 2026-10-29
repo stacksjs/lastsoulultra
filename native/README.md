@@ -6,7 +6,7 @@ come from the immutable HQ commit in `hq-source.json`. There is no second
 implementation of those features in this repository.
 
 `product.json` owns LSU's name, store identity, version, colors, fonts and legal
-links. The public LSU wordmark is the existing website asset. Native builds
+links. The public LSU wordmark is rasterized from the existing website asset and embedded in the screen bundle so it works offline. Native builds
 materialize HQ under ignored `storage/native/hq/<commit>`, install its frozen
 `bun.lock`, and supply `HQ_NATIVE_PRODUCT` to HQ's build. Only the two public
 branding JSON inputs are overlaid; other source changes stop the build.
@@ -18,6 +18,7 @@ Use the exact Bun version in `pantry.json`:
 ```sh
 bun run native:prepare
 bun run native:ios
+bun run native:verify-ios
 bun run native:android
 ```
 
