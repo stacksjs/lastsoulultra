@@ -6,7 +6,7 @@ import { pathToFileURL } from 'node:url'
 import product from '../native/product.json'
 import deployment from '../enterprise/deployment.json'
 import source from '../native/hq-source.json'
-import { root, output, sourceRoot } from './native-source'
+import { nativeBuildEnvironment, root, output, sourceRoot } from './native-source'
 
 const keyId = process.env.APP_STORE_CONNECT_KEY_ID
 const issuerId = process.env.APP_STORE_CONNECT_ISSUER_ID
@@ -19,8 +19,8 @@ if (!backendResponse.ok) throw new Error('The LSU enterprise backend is not read
 const backend = await backendResponse.json() as { id?: string, origin?: string, source?: string, residency?: { country?: string, location?: string } }
 if (backend.id !== deployment.id || backend.origin !== product.site || backend.source !== source.revision || backend.residency?.country !== deployment.residency.country || backend.residency?.location !== deployment.residency.location)
   throw new Error('Refusing to release an app connected to another installation or residency contract')
-const run = async (args: string[], cwd = root) => {
-  const child = Bun.spawn(args, { cwd, env: { ...process.env, PATH: `${dirname(process.execPath)}${delimiter}${process.env.PATH || ''}` }, stdout: 'inherit', stderr: 'inherit' })
+const run = async (args: string[], cwd = root, scoped: Record<string, string | undefined> = {}) => {
+  const child = Bun.spawn(args, { cwd, env: { ...nativeBuildEnvironment(), ...scoped, PATH: `${dirname(process.execPath)}${delimiter}${process.env.PATH || ''}` }, stdout: 'inherit', stderr: 'inherit' })
   if (await child.exited !== 0) throw new Error(`Native release failed: ${args[0]}`)
 }
 if (process.argv.includes('--prepared')) {
@@ -34,7 +34,7 @@ if (process.argv.includes('--prepared')) {
   const changed = execFileSync('git', ['diff', '--name-only', receipt.lsuRevision, 'HEAD', '--', 'native', 'scripts/native-source.ts', 'scripts/build-native.ts', 'scripts/restore-ios-shell.ts', 'public/assets/lsu/images/lsu-logo.svg'], { cwd: root, encoding: 'utf8' }).trim()
   if (changed) throw new Error('Regenerate iOS after changing native build inputs')
 }
-else await run([process.execPath, 'run', 'native:ios'])
+else await run([process.execPath, 'run', 'native:ios'], root, { HQ_SOURCE_SSH_KEY: process.env.HQ_SOURCE_SSH_KEY })
 await run([process.execPath, 'run', 'native:verify-ios'])
 const ios = join(output, 'ios')
 const scheme = 'LastSoulUltra'
