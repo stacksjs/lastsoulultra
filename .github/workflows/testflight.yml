@@ -39,6 +39,9 @@ jobs:
       - name: Install the frozen application dependencies
         run: bun install --frozen-lockfile
 
+      - name: Install the pinned native project generator
+        run: pantry install --user github.com/yonaskolb/XcodeGen@2.46.0
+
       - name: Build the complete native app from pinned HQ source
         env:
           HQ_SOURCE_SSH_KEY: ${{ secrets.HQ_SOURCE_SSH_KEY }}
