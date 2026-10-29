@@ -4,8 +4,9 @@ import { resolve } from 'node:path'
 /** Keep review credentials in the gated build, outside this public repository. */
 const source = process.env.LSU_DEMO_ACCOUNTS_JSON
   || await Bun.file(process.env.LSU_DEMO_ACCOUNTS_FILE || 'storage/runtime/lsu-handoff/accounts.json').text().catch(() => '')
-const keys = ['sam', 'pawel', 'runner', 'runner2', 'coach', 'trainer', 'manager', 'frontdesk', 'member', 'visitor', 'admin', 'owner']
-const labels: Record<string, string> = { sam: 'Sam — administrator', pawel: 'Pawel — administrator', runner: 'Alex — Run + Strength', runner2: 'Jamie — Run + Strength', coach: 'Coach', trainer: 'Trainer', manager: 'Manager', frontdesk: 'Front desk', member: 'Member — no training enrollment', visitor: 'Visitor — no membership or enrollment', admin: 'Administrator', owner: 'Owner' }
+const keys = ['sam', 'pawel', 'owner', 'admin', 'manager', 'frontdesk', 'trainer', 'coach', 'runner', 'runner2', 'member', 'visitor']
+/** Row headers for the credentials table. Names and order follow docs/roles.md. */
+const labels: Record<string, string> = { sam: 'Sam, administrator', pawel: 'Pawel, administrator', owner: 'Demo owner', admin: 'Demo administrator', manager: 'Demo manager', frontdesk: 'Demo front desk', trainer: 'Demo trainer', coach: 'Demo coach', runner: 'Alex, Run + Strength', runner2: 'Jamie, Run + Strength', member: 'Demo member, no training enrollment', visitor: 'Demo visitor, no membership or enrollment' }
 const supplied: { key: string, email: string, password: string }[] = source ? JSON.parse(source) : []
 const accounts = keys.map(key => {
   const account = supplied.find(account => account.key === key)
