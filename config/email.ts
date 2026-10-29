@@ -1,22 +1,22 @@
 import type { EmailConfig } from '@stacksjs/types'
 import { env } from '@stacksjs/env'
+import deployment from '../enterprise/deployment.json'
 
 export default {
   from: {
-    name: env.MAIL_FROM_NAME || 'Lastsoulultra',
-    address: env.MAIL_FROM_ADDRESS || 'hello@example.com',
+    name: 'Last Soul Ultra',
+    address: `hello@${new URL(deployment.origin).hostname}`,
   },
 
-  domain: env.MAIL_DOMAIN || env.APP_DOMAIN || 'example.com',
+  domain: new URL(deployment.origin).hostname,
   mailboxes: [],
   forwards: {},
   url: env.APP_URL || 'lastsoulultra.localhost',
   charset: 'UTF-8',
 
   server: {
-    // Explicit opt-in: a generated application must never reconcile the
-    // framework repository's shared mail server or mailboxes.
-    enabled: false,
+    // The dedicated host's mail service and DKIM keys belong to this installation.
+    enabled: true,
     scan: true,
     subdomain: 'mail',
   },

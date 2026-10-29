@@ -67,6 +67,19 @@ const ownedCoachingShot = steps.findIndex(step => step.command === 'shot' && ste
 steps.splice(ownedCoachingShot, 0, { command: 'expect', text: demoTier.name, seconds: 30 }, { command: 'absentid', text: 'coaching-accounts-empty' })
 const todayShot = steps.findIndex(step => step.command === 'shot' && step.name === 'lsu-today')
 steps.splice(todayShot + 1, 0, { command: 'swipe', direction: 'up' }, { command: 'shot', name: 'lsu-today-scrolled' }, { command: 'tree', name: 'lsu-today-scrolled' })
+for (let index = steps.length - 1; index >= 0; index--) {
+  if (steps[index].command === 'tapid' && steps[index].text === 'me-sign-out')
+    steps.splice(index + 1, 0, { command: 'tapexact', text: 'Sign out' }, { command: 'expectid', text: 'login-submit', seconds: 30 })
+}
+for (let index = steps.length - 1; index >= 0; index--) {
+  if (steps[index].command === 'tapid' && steps[index].text === 'login-submit') {
+    steps.splice(index, 1, { command: 'return' }, { command: 'ifid', id: 'login-submit', step: { command: 'scrollto', text: 'login-submit' } }, { command: 'ifid', id: 'login-submit', step: { command: 'tapid', text: 'login-submit' } }, { command: 'shot', name: 'lsu-after-sign-in' }, { command: 'tree', name: 'lsu-after-sign-in' })
+  }
+}
+for (let index = steps.length - 1; index >= 0; index--) {
+  if (steps[index].command === 'expectid' && steps[index].text === 'today-screen')
+    steps.splice(index, 0, { command: 'shot', name: 'lsu-post-auth' }, { command: 'tree', name: 'lsu-post-auth' })
+}
 const script = kit.serializeSimulatorSteps(steps)
 const server = Bun.serve({ hostname: '127.0.0.1', port: 0, async fetch(request) {
   const url = new URL(request.url)
@@ -91,6 +104,7 @@ try {
   await run(['xcrun', 'simctl', 'boot', simulator], root, 120_000)
   await run(['xcrun', 'simctl', 'bootstatus', simulator, '-b'], root, 600_000)
   await run(['xcrun', 'simctl', 'install', simulator, app])
+  if (process.env.LSU_NATIVE_DIAGNOSTICS === '1') await run(['xcrun', 'simctl', 'spawn', simulator, 'defaults', 'write', product.bundleId, 'CraftFramePacing', '-bool', 'YES'])
   const projectName = 'LSUAcceptance'
   const driver = kit.prepareIosSimulatorDriver({ appName: product.identity.name, bundleId: product.bundleId, tabs: ['Today', 'Workouts', 'Progress', 'Health', 'Me'].map(title => ({ title, url: '' })), simulator: { output: join(evidence, 'driver'), projectName, bundleIdPrefix: 'com.lastsoulultra.acceptance', controlUrl: `http://127.0.0.1:${server.port}` } }, root)
   const tools = await import(pathToFileURL(require.resolve('@stacksjs/actions/build/ios-toolchain')).href)
@@ -103,6 +117,13 @@ try {
 finally {
   server.stop(true)
   if (simulator) {
+    if (process.env.LSU_NATIVE_DIAGNOSTICS === '1') {
+      try {
+        const log = execFileSync('xcrun', ['simctl', 'spawn', simulator, 'log', 'show', '--last', '5m', '--style', 'compact', '--predicate', 'process == "LastSoulUltra"'], { encoding: 'utf8', timeout: 30000 })
+        writeFileSync(join(evidence, 'native-diagnostics.log'), redact(log), { mode: 0o600 })
+      }
+      catch { console.log('Native diagnostics were unavailable') }
+    }
     Bun.spawnSync(['xcrun', 'simctl', 'shutdown', simulator], { stdout: 'ignore', stderr: 'ignore' })
     Bun.spawnSync(['xcrun', 'simctl', 'delete', simulator], { stdout: 'ignore', stderr: 'ignore' })
   }

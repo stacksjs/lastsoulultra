@@ -31,6 +31,7 @@ export async function beforeDeploy({ environment, region }: { environment: strin
   const credentials = { accessKeyId: process.env.LSU_BACKUP_ACCESS_KEY || '', secretAccessKey: process.env.LSU_BACKUP_SECRET_KEY || '' }
   if (!credentials.accessKeyId || !credentials.secretAccessKey || (process.env.LSU_BACKUP_ENCRYPTION_KEY || '').length < 32)
     throw new Error('Production requires the independent encrypted backup recovery key and storage credentials')
+  if ((process.env.LSU_MAIL_PASSWORD || '').length < 32) throw new Error('Production requires the independent managed sender credential')
   const storage = new S3Client({ endpoint: backups.endpoint, region: backups.region, forcePathStyle: true, credentials })
   if (await storage.getBucketLocation(backups.bucket) !== 'fsn1' || /AllUsers|AuthenticatedUsers/.test(JSON.stringify(await storage.getBucketAcl(backups.bucket))))
     throw new Error('The backup bucket must remain private and in the declared German location')

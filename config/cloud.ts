@@ -67,7 +67,16 @@ export const tsCloud: TsCloudConfig = {
     compute: {
       runtime: 'bun',
       runtimeVersion: source.bun,
-      managedServices: { postgres: true },
+      managedServices: {
+        postgres: true,
+        mail: {
+          mode: 'server', version: '0.3.26', hostname: `mail.${new URL(deployment.origin).hostname}`,
+          domains: [new URL(deployment.origin).hostname], delivery: 'direct', webmail: false,
+          storagePath: '/var/lib/ts-cloud/lastsoulultra-mail',
+          tls: { systemCredentials: { certPath: `/etc/rpx/certs/mail.${new URL(deployment.origin).hostname}.crt`, keyPath: `/etc/rpx/certs/mail.${new URL(deployment.origin).hostname}.key` } },
+          accounts: [{ address: `hello@${new URL(deployment.origin).hostname}`, password: process.env.LSU_MAIL_PASSWORD || '', passwordPolicy: 'managed' }],
+        },
+      },
       backups: {
         ...backups, enabled: true, schedule: '15 2 * * *', retentionCount: 3, retentionDays: 30,
         credentials: { accessKeyId: process.env.LSU_BACKUP_ACCESS_KEY || '', secretAccessKey: process.env.LSU_BACKUP_SECRET_KEY || '' },
@@ -75,6 +84,8 @@ export const tsCloud: TsCloudConfig = {
         files: [
           { name: 'lsu-uploads', path: `${deployment.storageRoot}/storage/app` },
           { name: 'lsu-runtime-recovery', path: '/var/www/lastsoulultra-training-api/current/.env' },
+          { name: 'lsu-mail-config', path: '/etc/mail' },
+          { name: 'lsu-mail-data', path: '/var/lib/ts-cloud/lastsoulultra-mail', exclude: ['smtp.db', 'smtp.db-wal', 'smtp.db-shm'] },
         ],
       },
       instances: 1,

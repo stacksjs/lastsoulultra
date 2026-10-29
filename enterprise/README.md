@@ -20,8 +20,11 @@ The deployment requires fresh Hetzner evidence for Germany (`DE`), Falkenstein
 (`fsn1`). A missing credential, unknown location or other location stops it.
 Buddy provisions LSU's dedicated host in that location. It does not attach to
 the shared Stacks host, whose global backup policy copies data outside Germany.
-Off-host backups and external integrations require an explicit residency review;
-no shared-host backup credentials or jobs are inherited by this installation.
+Off-host recovery copies are explicitly confined to a private `fsn1` bucket,
+encrypted with a separate recovery key and scheduled by Buddy. The application
+services do not receive backup credentials. See `enterprise/RECOVERY.md` for
+the restore procedure and verification requirements. External integrations
+require their own explicit configuration.
 The native release checks `/api/deployment` for the expected installation, origin,
 source revision and residency metadata before building or uploading.
 
