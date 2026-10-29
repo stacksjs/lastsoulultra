@@ -20,6 +20,7 @@ const APP_DOMAIN = env.APP_DOMAIN || 'lsu.stacksjs.com'
  */
 const PORT_MAIN = 3200
 const PORT_API = 3201
+const WEBSITE_STORAGE = '/var/www/lastsoulultra-shared/website'
 
 export const tsCloud: TsCloudConfig = {
   project: { name: APP_SLUG, slug: APP_SLUG, region: deployment.residency.location },
@@ -105,6 +106,7 @@ export const tsCloud: TsCloudConfig = {
       root: '.',
       inheritEnv: false,
       isolation: true,
+      sharedPaths: [{ path: 'website-data', target: WEBSITE_STORAGE }],
       exclude: ['storage/runtime', 'storage/native', 'storage/framework/mobile'],
       path: '/',
       domain: APP_DOMAIN,
@@ -139,6 +141,7 @@ export const tsCloud: TsCloudConfig = {
         'echo "[lastsoulultra] preStart: install"',
         'bun install --frozen-lockfile',
         'echo "[lastsoulultra] preStart: migrate"',
+        `mkdir -p ${WEBSITE_STORAGE}/database`,
         'bun node_modules/@stacksjs/buddy/dist/cli.js migrate',
         'echo "[lastsoulultra] preStart: done"',
       ],
@@ -151,6 +154,7 @@ export const tsCloud: TsCloudConfig = {
         PORT_API: String(PORT_API),
         API_URL: `http://127.0.0.1:${PORT_API}`,
         DB_CONNECTION: 'sqlite', DB_DATABASE: 'stacks', DB_USERNAME: '', DB_PASSWORD: '',
+        DB_DATABASE_PATH: `${WEBSITE_STORAGE}/database/stacks.sqlite`,
       },
     },
 
@@ -160,6 +164,7 @@ export const tsCloud: TsCloudConfig = {
       root: '.',
       inheritEnv: false,
       isolation: true,
+      sharedPaths: [{ path: 'website-data', target: WEBSITE_STORAGE }],
       exclude: ['storage/runtime', 'storage/native', 'storage/framework/mobile'],
       start: 'bun node_modules/@stacksjs/actions/dist/serve/api.js',
       port: PORT_API,
@@ -174,6 +179,7 @@ export const tsCloud: TsCloudConfig = {
         APP_URL: `https://${APP_DOMAIN}`,
         HQ_ORIGIN: deployment.origin, HQ_BRAND_SLUG: 'last-soul-ultra',
         DB_CONNECTION: 'sqlite', DB_DATABASE: 'stacks', DB_USERNAME: '', DB_PASSWORD: '',
+        DB_DATABASE_PATH: `${WEBSITE_STORAGE}/database/stacks.sqlite`,
       },
     },
   },
