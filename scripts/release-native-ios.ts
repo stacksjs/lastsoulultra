@@ -42,6 +42,7 @@ const appProfile = process.env.IOS_APP_PROFILE || 'Last Soul Ultra App Store'
 const activityProfile = process.env.IOS_ACTIVITY_PROFILE || 'Last Soul Ultra Live Activity App Store'
 const yamlPath = join(ios, 'project.yml')
 let yaml = readFileSync(yamlPath, 'utf8')
+yaml = yaml.replace(/^ {6}(?:CODE_SIGN_STYLE|CODE_SIGN_IDENTITY|PROVISIONING_PROFILE_SPECIFIER):[^\n]*\n/gm, '')
 for (const [bundle, profile] of [[product.bundleId, appProfile], [`${product.bundleId}.liveactivity`, activityProfile]]) {
   const line = `      PRODUCT_BUNDLE_IDENTIFIER: ${bundle}\n`
   if (!yaml.includes(line)) throw new Error(`Generated project is missing ${bundle}`)
