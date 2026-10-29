@@ -7,7 +7,7 @@ const { level = '3' } = defineProps<Props>()
 </script>
 <script server>
 import { formatPrice, formatTrial } from '../functions/coaching-brand'
-import { loadBrand, portalHost } from '../functions/coaching-source'
+import { loadBrand } from '../functions/coaching-source'
 
 /* The one piece of coaching this site renders itself. The published brand is
    public, so the tiers, the coach behind each one and the coach's own price
@@ -17,7 +17,6 @@ import { loadBrand, portalHost } from '../functions/coaching-source'
 const offerBrand = await loadBrand()
 const offers = offerBrand?.offers ?? []
 const offerLocale = offerBrand?.locale ?? 'en'
-const offerHost = portalHost()
 /* A tier name sits directly under the page heading on /coaching/plans and
    under a section heading on the hub, so the level is the caller's to say.
    Getting it wrong is an h1 followed by an h3, which is how a screen-reader
@@ -52,7 +51,7 @@ const offerRows = offers.map((offer) => {
       @if(offer.approach)
       <p class="coach-offer-method">{{ offer.approach }}</p>
       @endif
-      <p class="coach-offer-note">{{ offer.method.name }}, version {{ offer.method.version }}. Bought and billed at {{ offerHost }}.</p>
+      <p class="coach-offer-note">{{ offer.method.name }}, version {{ offer.method.version }}.</p>
     </div>
     <div class="coach-offer-price">
       <b>{{ formatPrice(offer.product, offerLocale) }}</b>

@@ -4,7 +4,7 @@ const { slug } = defineProps<Props>()
 </script>
 <script server>
 import { coachingModule } from '../data/coaching'
-import { loadBrand, portalHost, portalUrl } from '../functions/coaching-source'
+import { loadBrand, portalUrl } from '../functions/coaching-source'
 
 /* The registry is the only place a module's words live, so a page cannot
    disagree with the nav about what it is called. */
@@ -25,7 +25,6 @@ const panelStorefront = panel.slug === 'plans'
    browser blocking third-party frames, an extension. When that happens the
    embed leaves a tall empty box, so the way out never lives inside it. */
 const panelHref = portalUrl(panel.slug)
-const panelHost = portalHost()
 </script>
 <div class="coaching-surface">
   <header class="coach-head">
@@ -59,8 +58,8 @@ const panelHost = portalHost()
     @endif
     @if(panelLive)
     <div class="coach-panel-bar">
-      <p>Loaded from {{ panelHost }}. Your training account lives there, not here.</p>
-      <a href="{{ panelHref }}" target="_blank" rel="noopener">Open it there<span class="coach-sr"> (opens in a new tab)</span></a>
+      <p>Your Last Soul Ultra training workspace.</p>
+      <a href="{{ panelHref }}" target="_blank" rel="noopener">Open your training<span class="coach-sr"> (opens in a new tab)</span></a>
     </div>
     <div class="coach-panel">
       <CoachingPortal section="{{ panel.slug }}" />
