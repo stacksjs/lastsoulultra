@@ -30,6 +30,8 @@ explicit installation credentials reach them. They run under a project Unix
 identity with a filesystem namespace exposing their own release and project
 shared data, private temporary storage and no access to upstream PostgreSQL
 Unix sockets. PostgreSQL access uses LSU's own role over authenticated loopback.
+Buddy enforces SCRAM password authentication for loopback SQL and replication;
+an owned-host guard prevents applying that host-wide policy to another tenant's server.
 Uploads and speech data stay under this project's persistent directory.
 The private speech service has its own token, model/runtime directory and port.
 Cloud inference, remote object storage, telemetry and integration credentials

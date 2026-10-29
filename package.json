@@ -80,6 +80,7 @@
     "native:prepare": "bun scripts/build-native.ts prepare",
     "native:ios": "bun scripts/build-native.ts ios",
     "native:android": "bun scripts/build-native.ts android",
+    "native:sign-android": "bun scripts/sign-native-android.ts",
     "native:restore-ios": "bun scripts/restore-native-ios.ts",
     "native:testflight": "bun scripts/release-native-ios.ts",
     "native:verify-ios": "bun scripts/verify-native.ts"
@@ -88,7 +89,7 @@
     "@stacksjs/bunpress": "0.2.30",
     "@stacksjs/components": "0.2.741",
     "@stacksjs/stx": "0.2.741",
-    "@stacksjs/ts-cloud": "^0.16.73",
+    "@stacksjs/ts-cloud": "^0.16.75",
     "@ts-maps/stx": "0.5.7",
     "bun-plugin-stx": "0.2.741",
     "stacks": "0.75.373",

@@ -145,15 +145,23 @@ behind the response, so no visitor ever waits on an upstream fetch.
 
 ## Existing race service
 
-`resources/functions/race-api.ts` talks to the existing `https://api.lastsoulultra.com/v1` service for public events, sign-in, profile updates and entry requests. Its established bearer session remains under `lsu.runner.session`. Coaching has its own HQ account session; credentials are never silently transferred or linked by unverified email. Form submissions reach the real race service, so use an approved test account/service for write testing.
+`resources/functions/race-api.ts` talks to the existing `https://api.lastsoulultra.com/v1` service for public events, sign-in, profile updates and entry requests. Its established bearer session remains under `lsu.runner.session`. Coaching uses its separate LSU training installation and account session; credentials are never silently transferred or linked by unverified email. Form submissions reach the real race service, so use an approved test account/service for write testing.
 
 Public reference snapshots live in ignored `storage/reference/lsu-2026-10-23/` locally. They document source content and API behavior; no production runtime scripts or Astro runtime are embedded in the Stacks application.
 
-LSU prices, approved methodology, revenue shares and local versus cloud inference are commercial/product decisions still to finalize. HQ currently uses its existing cloud assistant and browser/native dictation; this is not an uploaded voice-message transcription service.
+LSU prices, approved methodology, revenue shares and local versus cloud inference are commercial/product decisions still to finalize. LSU training uses a private local speech service; cloud assistant and other external integrations require their own reviewed setup.
 
 ## Native iOS and Android
 
 `bun run native:ios` and `bun run native:android` build the complete HQ app from a pinned source revision with LSU branding. `bun run native:testflight` archives and uploads the iOS app using existing local signing credentials. See [native/README.md](native/README.md) for the source-sharing contract, provenance and release setup.
+
+To sign the prepared Android APK, set `LSU_ANDROID_SIGNING_CONFIG` to a private
+JSON file with `keystore`, `alias` and `password`, then run
+`bun run native:sign-android`. Keep the persistent signing identity outside Git.
+The signer checks the embedded application identity and source receipt, verifies
+16 KB alignment, signs through Android SDK tools and verifies the certificate.
+The directly installable APK and hash receipt are saved under ignored
+`storage/native/release/<version>-<build>/android`. Play Store distribution is separate.
 
 ## Enterprise training backend
 

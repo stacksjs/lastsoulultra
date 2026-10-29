@@ -60,7 +60,7 @@ export const tsCloud: TsCloudConfig = {
   },
 
   infrastructure: {
-    appDatabase: { engine: 'postgres', name: deployment.database.name, username: deployment.database.user, password: process.env.LSU_TRAINING_DB_PASSWORD || '', host: deployment.database.host, port: deployment.database.port },
+    appDatabase: { engine: 'postgres', name: deployment.database.name, username: deployment.database.user, password: process.env.LSU_TRAINING_DB_PASSWORD || '', host: deployment.database.host, port: deployment.database.port, requireLocalPasswordAuth: true },
     dns: { domain: APP_DOMAIN },
     compute: {
       runtime: 'bun',

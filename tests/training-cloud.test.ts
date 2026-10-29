@@ -8,6 +8,7 @@ it('keeps the enterprise installation off a shared host and pins provider placem
   expect(tsCloud.cloud?.provider).toBe('hetzner')
   expect(tsCloud.hetzner?.location).toBe(deployment.residency.location)
   expect(tsCloud.cloud?.residency?.countries).toEqual([deployment.residency.country])
+  expect(tsCloud.infrastructure?.appDatabase?.requireLocalPasswordAuth).toBe(true)
   for (const name of ['training', 'training-api', 'main', 'api']) {
     expect(tsCloud.sites?.[name]?.inheritEnv).toBe(false)
     expect(tsCloud.sites?.[name]?.isolation).toBe(true)
