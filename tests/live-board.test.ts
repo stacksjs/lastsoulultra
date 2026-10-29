@@ -1,5 +1,5 @@
 import type { LiveSnapshot, LiveState } from '../resources/data/live'
-import { afterEach, describe, expect, it } from 'bun:test'
+import { afterEach, describe, expect, it, setSystemTime } from 'bun:test'
 import { resolve } from 'node:path'
 import { processDirectives } from '@stacksjs/stx'
 import { currentLap, forgetBoard, livePayload, liveSnapshot, secondsToNextLap, standings, stillIn, totalLaps, winner } from '../resources/data/live'
@@ -324,3 +324,82 @@ describe('the feed shapes the worker serves', () => {
     expect(snap.error).toContain('window.__LSU__')
   })
 })
+
+/**
+ * Who waits for the upstream.
+ *
+ * `liveRaceState` runs from the nav, so `liveSnapshot` is on the critical path
+ * of every page. It used to await the refresh whenever the cache expired,
+ * which put one visitor a minute behind a network fetch of up to
+ * FETCH_TIMEOUT_MS: the deployed site measured a floor near 0.73s with
+ * individual requests at 2.1s. A stale board is worth far more than a fast one
+ * nobody has been served yet.
+ */
+describe('refreshing the board without making anyone wait', () => {
+  const realFetch = globalThis.fetch
+
+  afterEach(() => { globalThis.fetch = realFetch; setSystemTime(); forgetBoard() })
+
+  function serveBoard(state: Record<string, unknown>, delayMs = 0): void {
+    globalThis.fetch = (async () => {
+      if (delayMs) await new Promise(resolve => setTimeout(resolve, delayMs))
+      return new Response(
+        `<!doctype html><html><body><script>window.__LSU_SUMMARY__=${JSON.stringify({ summary: state })};</script></body></html>`,
+        { headers: { 'content-type': 'text/html' } },
+      )
+    }) as typeof fetch
+
+  }
+
+  const sample = { raceStartUtc: GUN, generatedAt: GUN, raceOver: true, lastLap: 9, runners: [runner('Ada', 9)] }
+
+  it('answers from a stale cache instead of waiting for the refresh', async () => {
+    forgetBoard()
+    serveBoard(sample)
+    const first = await liveSnapshot()
+    expect(first.ok).toBe(true)
+    expect(first.stale).toBe(false)
+
+    // Past FRESH_MS, so the cache is stale, and the upstream is now slow
+    // enough that awaiting it would be obvious.
+    setSystemTime(new Date(Date.now() + 61_000))
+    serveBoard(sample, 5_000)
+
+    const began = performance.now()
+    const second = await liveSnapshot()
+    const waited = performance.now() - began
+
+    expect(second.ok).toBe(true)
+    expect(second.stale).toBe(true)
+    expect(second.state?.runners[0]?.name).toBe('Ada')
+    // The refresh is still running; this caller did not wait for it.
+    expect(waited).toBeLessThan(1_000)
+  })
+
+  it('still waits when there is nothing cached to serve', async () => {
+    forgetBoard()
+    serveBoard(sample)
+    const snap = await liveSnapshot()
+
+    // A cold start has no honest alternative to waiting once.
+    expect(snap.ok).toBe(true)
+    expect(snap.stale).toBe(false)
+  })
+
+  it('does not open a second request while one is in flight', async () => {
+    forgetBoard()
+    let calls = 0
+    globalThis.fetch = (async () => {
+      calls++
+      await new Promise(resolve => setTimeout(resolve, 50))
+      return new Response(
+        `<!doctype html><html><body><script>window.__LSU_SUMMARY__=${JSON.stringify({ summary: sample })};</script></body></html>`,
+        { headers: { 'content-type': 'text/html' } },
+      )
+    }) as typeof fetch
+
+    await Promise.all([liveSnapshot(), liveSnapshot(), liveSnapshot()])
+    expect(calls).toBe(1)
+  })
+})
+

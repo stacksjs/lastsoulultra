@@ -231,6 +231,33 @@ export async function liveSnapshot(): Promise<LiveSnapshot> {
   if (failedAt && Date.now() - failedAt < RETRY_AFTER_FAILURE_MS)
     return snapshotFromCache(lastError)
 
+  // Stale but still usable: answer from the cache now, refresh behind the
+  // response.
+  //
+  // Without this, one visitor every sixty seconds paid for the upstream fetch
+  // before receiving any HTML. `liveRaceState` runs from the nav, so that is
+  // every page on the site, and the deployed site showed it plainly: a floor
+  // near 0.73s with individual requests at 2.1s, about one per expiry. Nobody
+  // should wait on somebody else's scoreboard.
+  //
+  // Deliberately not awaited, and nothing can escape it: the closure in
+  // `refreshBoard` catches everything and reports through `snapshotFromCache`.
+  if (cache && Date.now() - cache.at <= STALE_LIMIT_MS) {
+    void refreshBoard()
+    return { ok: true, state: cache.state, fetchedAt: cache.at, stale: true, error: lastError }
+  }
+
+  // Nothing usable cached, so this caller does have to wait for one.
+  return refreshBoard()
+}
+
+/**
+ * Fetch the board and replace the cache.
+ *
+ * Shared by the blocking path and the background one, so a refresh means the
+ * same thing either way, and two callers can never open two requests.
+ */
+function refreshBoard(): Promise<LiveSnapshot> {
   if (inFlight)
     return inFlight
 

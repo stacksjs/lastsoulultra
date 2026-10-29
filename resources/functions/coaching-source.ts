@@ -22,6 +22,12 @@ import { parseBrand } from './coaching-brand'
 const HIT_TTL_MS = 60_000
 /** Short enough that a brand going live shows up within a minute. */
 const MISS_TTL_MS = 10_000
+/**
+ * How long past `HIT_TTL_MS` a cached brand may still be served while a fresh
+ * one is fetched behind the response. Past this it is too old to stand in for
+ * what HQ publishes now, and a caller waits instead.
+ */
+const STALE_GRACE_MS = 10 * 60_000
 /** A render blocked on another service is a broken page, not a slow one. */
 const TIMEOUT_MS = 2500
 
@@ -111,8 +117,35 @@ async function request(slug: string, origin: string): Promise<CoachingBrand | nu
 export async function loadBrand(slug = coaching.brand, origin = coaching.origin): Promise<CoachingBrand | null> {
   const key = `${origin}|${slug}`
   const cached = cache.get(key)
-  if (cached && cached.until > Date.now()) return cached.brand
+  const now = Date.now()
+  if (cached && cached.until > now) return cached.brand
 
+  // Stale but still usable: answer with it now and refresh behind the
+  // response, the same bargain the live board makes. HQ being slow should
+  // cost this site nothing it can avoid, and a coaching page that renders
+  // last minute's tiers beats one that renders in two and a half seconds.
+  //
+  // Only a hit is served this way. A cached miss means the brand was absent
+  // or rejected, and there is nothing to show from it, so that case waits.
+  if (cached?.brand && cached.until + STALE_GRACE_MS > now) {
+    if (!inFlight.has(key))
+      void refreshBrand(key, slug, origin)
+    return cached.brand
+  }
+
+  const existing = inFlight.get(key)
+  if (existing) return existing
+
+  return refreshBrand(key, slug, origin)
+}
+
+/**
+ * Fetch the brand and replace its cache entry.
+ *
+ * One definition shared by the blocking path and the background one, holding
+ * the single-flight promise so concurrent callers never open two requests.
+ */
+function refreshBrand(key: string, slug: string, origin: string): Promise<CoachingBrand | null> {
   const existing = inFlight.get(key)
   if (existing) return existing
 

@@ -1,5 +1,5 @@
 import type { Server } from 'bun'
-import { afterEach, beforeEach, describe, expect, it } from 'bun:test'
+import { afterEach, beforeEach, describe, expect, it, setSystemTime } from 'bun:test'
 import { brandEndpoint, forgetBrand, loadBrand } from '../resources/functions/coaching-source'
 
 /**
@@ -106,3 +106,66 @@ describe('loading the published brand', () => {
     expect(hits).toBe(1)
   })
 })
+
+/**
+ * Who pays for HQ being slow.
+ *
+ * `loadBrand` runs from the coaching nav, the offers list and the page meta,
+ * so it sits on the render path of every coaching page. It used to await the
+ * refresh the moment HIT_TTL_MS lapsed, which handed one visitor a minute a
+ * wait of up to TIMEOUT_MS before any HTML. Last minute's tiers are worth far
+ * more than this minute's tiers nobody has been shown yet.
+ */
+describe('refreshing the brand without making anyone wait', () => {
+  afterEach(() => setSystemTime())
+
+  it('answers from a stale brand and refreshes behind the response', async () => {
+    let slow = false
+    const origin = serve(async () => {
+      if (slow) await new Promise(resolve => setTimeout(resolve, 5_000))
+      return Response.json(published)
+    })
+
+    const first = await loadBrand('last-soul-ultra', origin)
+    expect(first?.name).toBe('Last Soul Ultra')
+    expect(hits).toBe(1)
+
+    // Past the hit TTL, with an origin now slow enough that awaiting it would
+    // be unmistakable.
+    setSystemTime(new Date(Date.now() + 61_000))
+    slow = true
+
+    const began = performance.now()
+    const second = await loadBrand('last-soul-ultra', origin)
+    const waited = performance.now() - began
+
+    expect(second?.name).toBe('Last Soul Ultra')
+    expect(waited).toBeLessThan(1_000)
+  })
+
+  it('waits when the only cached answer is a miss', async () => {
+    const origin = serve(() => new Response('nope', { status: 404 }))
+
+    expect(await loadBrand('last-soul-ultra', origin)).toBeNull()
+    setSystemTime(new Date(Date.now() + 61_000))
+
+    // Nothing to stand in for the brand, so this one has to ask again.
+    expect(await loadBrand('last-soul-ultra', origin)).toBeNull()
+    expect(hits).toBe(2)
+  })
+
+  it('opens one request even when several callers arrive together', async () => {
+    const origin = serve(async () => {
+      await new Promise(resolve => setTimeout(resolve, 50))
+      return Response.json(published)
+    })
+
+    await Promise.all([
+      loadBrand('last-soul-ultra', origin),
+      loadBrand('last-soul-ultra', origin),
+      loadBrand('last-soul-ultra', origin),
+    ])
+    expect(hits).toBe(1)
+  })
+})
+
