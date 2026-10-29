@@ -39,6 +39,7 @@ const database = await db.unsafe('SELECT current_database() AS name').execute()
 if (database[0]?.name !== process.env.LSU_SEED_DATABASE)
   throw new Error('LSU_SEED_DATABASE must match the connected database explicitly.')
 const origin = 'https://lsu.stacksjs.com'
+const applicationOrigin = String(process.env.APP_URL || 'https://training.lsu.stacksjs.com').replace(/\/$/, '')
 const now = new Date().toISOString()
 const zone = 'Europe/Berlin'
 const today = todayIn(zone)
@@ -93,7 +94,7 @@ await transaction(async () => {
   if (!product) product = await db.insertInto('products').values({ ...productValues, organization_id: organizationId, coach_id: Number(coach.id), slug: 'lsu-private-demo-running', type: 'coaching', created_at: now }).returningAll().executeTakeFirstOrThrow()
   else await db.updateTable('products').set(productValues).where('id', '=', Number(product.id)).execute()
   const offer = { product_id: Number(product.id), method_id: Number(method.id), label: demoTier.name }
-  await saveExperience(organizationId, existingSettings ? { ...existingSettings, offers: existingSettings.offers.map((item: any) => Number(item.product_id) === Number(product.id) ? offer : item) } : { ...lastSoulExperience(), home_url: `${origin}/coaching`, logo_url: 'https://www.lastsoulultra.com/assets/lsu-logo.svg', support_url: `${origin}/contact`, privacy_url: `${origin}/privacy`, terms_url: `${origin}/terms`, embed_origins: [origin], show_powered_by: false, offers: [offer] }, existingBrand?.status || 'published')
+  await saveExperience(organizationId, existingSettings ? { ...existingSettings, offers: existingSettings.offers.map((item: any) => Number(item.product_id) === Number(product.id) ? offer : item) } : { ...lastSoulExperience(), home_url: `${origin}/coaching`, logo_url: `${applicationOrigin}/assets/native-product/lsu-logo.svg`, support_url: `${origin}/contact`, privacy_url: `${origin}/privacy`, terms_url: `${origin}/terms`, embed_origins: [origin], show_powered_by: false, offers: [offer] }, existingBrand?.status || 'published')
   const brand = await db.selectFrom('brand_experiences').select('id').where('organization_id', '=', organizationId).executeTakeFirstOrThrow()
   for (const account of accounts.filter(account => account.subscriber)) {
     const athlete = await db.selectFrom('athletes').select('id').where('user_id', '=', ids[account.key]).executeTakeFirstOrThrow()
