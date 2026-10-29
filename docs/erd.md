@@ -7,13 +7,13 @@ description: Explore how LSU accounts, roles, Run + Strength plans, sessions, fe
 
 [Open the interactive LSU ERD](/diagrams/lsu-erd/index.html).
 
-The diagram documents 23 related tables, all 465 physical columns in those tables and 53 declared foreign-key relationships from the deployed schema. It contains structure only: no account records, passwords, payment details, health readings or conversations. It covers the LSU review flows rather than every supporting database table.
+The diagram documents 23 related tables, all 465 physical columns in those tables and 54 declared foreign keys from the deployed schema: 53 links between tables and one self-reference. It contains structure only: no account records, passwords, payment details, health readings or conversations. It covers the LSU review flows rather than every supporting database table.
 
 ## Explore the diagram
 
 Use **Lens** or the search control to locate a table. Pan and zoom to inspect it, then select it to focus its relationships. The flow table below identifies the tables for accounts and roles, Run + Strength access, AI and voice feedback, and health and messages. On a phone, open the full diagram and zoom into one area at a time. The full schema is deliberately larger than a phone screen.
 
-`PK` identifies a primary key, `FK` a foreign key and `UK` a unique key. A column can carry several roles. Unique-together notes identify compound constraints; a nullable type ends in `?`. Relationship ends distinguish one from many and optional from required. Lines represent declared foreign keys; application-level references without a database constraint remain visible as columns rather than invented relationships.
+`PK` identifies a primary key, `FK` a foreign key and `UK` a unique key. A column can carry several roles. Unique-together notes identify compound constraints; a nullable type ends in `?`. Relationship ends distinguish one from many and optional from required. The self-reference `plan_drafts.parent_id → plan_drafts.id` records draft ancestry; it is shown in the fields and schema note rather than as a loop. Lines represent declared foreign keys; application-level references without a database constraint remain visible as columns rather than invented relationships.
 
 ## Read the main flows
 

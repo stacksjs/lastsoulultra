@@ -2,9 +2,11 @@
   "generated_at": "2026-10-29",
   "tables": 23,
   "columns": 465,
-  "foreign_keys": 53,
+  "foreign_keys": 54,
+  "rendered_relationships": 53,
+  "self_references": 1,
   "sha256": {
-    "index.html": "e5346e359c6e849eb642e13d64565f461b4c8bdd23262b6b848205beb4efe9e6",
-    "schema.json": "f80c667d8eaa4c6b7f119acf239f7a090ad92cd5a925cb808e69139a5a194b04"
+    "index.html": "735ea5b86b743ef20e0ff661add87be3550d9f2bf08a85d404ffe0607a41ded5",
+    "schema.json": "29db3d3884f209b03ac5f19f792b2ec6223a90ffe8964ffbdea99b93360adb73"
   }
 }
