@@ -11,13 +11,17 @@ Open [Last Soul Ultra](https://lsu.stacksjs.com). Your browser first asks for th
 
 Open **Coaching**, then **Open your training**. Sign in with your personal account when prompted. For a demonstration, use the account supplied for the role you want to review. See [Roles and plan access](/roles) for the account differences and the [demo walkthrough](/demo) for a suggested review.
 
+The first time you sign into the iOS app it asks you to agree to LSU's terms, LSU's privacy policy and the training platform's Health & Safety information before anything else. The terms and privacy policy are LSU's own documents. The LSU app has no guided tour, by design: the platform's own tour walks through the platform's screens rather than LSU's, so its absence here is intended rather than missing.
+
 ## Find your way around
 
 The race site's header has Home, Format, World Series, Soul Races, Sponsorship, Coaching, **Contact & FAQ** and Profile, plus a **Request a race entry** button. Results are not in the header: they are in the footer, under **Results overview**. Coaching leads to the training tiers, workouts, feedback, progress, method library, health, messages and account screens.
 
-The training app's main tabs are **Store**, **Workouts**, **Health**, **Messages** and **Me**. Progress and method details are available from the training panels. Some modules appear only after publication or an active enrollment.
+The app has five tabs: **Store**, **Workouts**, **Health**, **Messages** and **Me**. Feedback, Progress and your method library do not get a tab of their own. Open them from the buttons above the content, labelled **Training feedback**, **Training progress** and **Your methods**. Those are the app's own words: the website calls the same three Say how it felt, Progress and The method, so a step that says "open Say how it felt" means **Training feedback** once you are in the app. Progress also leads the **Health** tab. A section appears only once LSU has published it and your account has an active plan.
 
-In the training workspace, phone navigation keeps the first five destinations at the bottom and the remaining destinations above the content. Desktop navigation sits at the side. The same training panels are used in the native app.
+The app follows the brand's language. In German the same five tabs read **Store**, **Training**, **Gesundheit**, **Nachrichten** and **Ich**, so the tab this guide calls Workouts is labelled Training there.
+
+On the website, phone navigation keeps the first five destinations at the bottom and the remaining destinations above the content; desktop navigation sits at the side. The iOS app shows the same screens but navigates differently: its five tabs are built in, and there is no second row above the content.
 
 ## Check your account
 
