@@ -29,7 +29,7 @@ const PORT_MAIN = 3200
 const PORT_API = 3201
 
 export const tsCloud: TsCloudConfig = {
-  project: { name: APP_SLUG, slug: APP_SLUG, region: 'us-east-1' },
+  project: { name: APP_SLUG, slug: APP_SLUG, region: deployment.residency.location },
 
   stateDir: 'storage/cloud',
 
@@ -63,7 +63,7 @@ export const tsCloud: TsCloudConfig = {
     production: {
       type: 'production',
       deployBranch: 'main',
-      region: 'us-east-1',
+      region: deployment.residency.location,
       variables: { APP_ENV: 'production', NODE_ENV: 'production', LOG_LEVEL: 'info' },
     },
   },
