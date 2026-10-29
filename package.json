@@ -82,7 +82,7 @@
     "@stacksjs/stx": "0.2.740",
     "@ts-maps/stx": "0.5.7",
     "bun-plugin-stx": "0.2.740",
-    "stacks": "^0.75.345",
+    "stacks": "^0.75.346",
     "ts-images": "0.2.32",
     "ts-maps": "0.5.7"
   },
