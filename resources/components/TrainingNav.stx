@@ -1,0 +1,27 @@
+<script>
+interface Props { current?: string }
+const { current = '' } = defineProps<Props>()
+</script>
+<script server>
+import { enabledModules, modulePath } from '../data/coaching'
+import { loadBrand } from '../functions/coaching-source'
+const trainingBrand = await loadBrand()
+const trainingEnabled = enabledModules(trainingBrand?.modules)
+const trainingLabels = new Map((trainingBrand?.navigation || []).map(item => [item.module, item.label]))
+const trainingOrder = [...(trainingBrand?.navigation || []).map(item => item.module), ...trainingEnabled.map(item => item.slug)]
+const trainingIcons = { plans: 'i-hugeicons-store-01', calendar: 'i-hugeicons-calendar-03', feedback: 'i-hugeicons-bubble-chat', progress: 'i-hugeicons-chart-line-data-01', library: 'i-hugeicons-books-01', health: 'i-hugeicons-heart-pulse', messages: 'i-hugeicons-message-01', account: 'i-hugeicons-user-circle' }
+const trainingItems = [...new Set(trainingOrder)].map(slug => trainingEnabled.find(item => item.slug === slug)).filter(Boolean).map(item => ({ ...item, label: trainingLabels.get(item.slug) || item.label, icon: trainingIcons[item.slug] }))
+const trainingCurrent = current
+</script>
+<nav class="training-nav" aria-label="Training">
+  <ul class="training-primary">
+    @foreach(trainingItems.slice(0, 5) as item)
+    <li><a href="{{ modulePath(item.slug) }}" @if(item.slug === trainingCurrent) aria-current="page" @endif><span aria-hidden="true" class="{{ item.icon }}"></span><span>{{ item.label }}</span></a></li>
+    @endforeach
+  </ul>
+  <ul class="training-secondary">
+    @foreach(trainingItems.slice(5) as item)
+    <li><a href="{{ modulePath(item.slug) }}" @if(item.slug === trainingCurrent) aria-current="page" @endif><span aria-hidden="true" class="{{ item.icon }}"></span><span>{{ item.label }}</span></a></li>
+    @endforeach
+  </ul>
+</nav>

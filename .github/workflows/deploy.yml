@@ -83,6 +83,13 @@ jobs:
         if: steps.check.outputs.configured == 'true'
         run: bun install --frozen-lockfile
 
+      - name: Prepare the protected demo credentials
+        if: steps.check.outputs.configured == 'true'
+        env:
+          LSU_DEMO_ACCOUNTS_JSON: ${{ secrets.LSU_DEMO_ACCOUNTS_JSON }}
+          LSU_REQUIRE_DEMO_ACCOUNTS: '1'
+        run: bun run docs:demo
+
       # The deploy talks to the server as root over SSH with BatchMode on, so
       # the key has to be in an agent before it runs — there is no prompt to
       # fall back to.

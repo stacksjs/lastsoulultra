@@ -86,7 +86,7 @@ describe('a module route, with a brand published', () => {
 
   it('says which scope a panel is before the click', async () => {
     expect(await render('plans')).not.toContain('coach-scope')
-    expect(await render('calendar')).toContain('Needs a training account')
+    expect(await render('calendar')).toContain('Your training account')
     expect(await render('health')).toContain('Only you see this')
     expect(await render('messages')).toContain('Only you see this')
   })
@@ -142,7 +142,7 @@ describe('a module route, with nothing published', () => {
   it('drops the notice that promised an account would open the panel', async () => {
     // With nothing to sign in to, "needs a training account" is an excuse,
     // not an explanation.
-    expect(await render('calendar')).not.toContain('Needs a training account')
+    expect(await render('calendar')).not.toContain('Your training account')
     expect(await render('health')).not.toContain('Only you see this')
   })
 
@@ -158,7 +158,7 @@ describe('getting back out of a module', () => {
   it('links to the hub from every module, published or not', async () => {
     stubHq(null)
     for (const module of coachingModules)
-      expect(await render(module.slug)).toMatch(/<a class="[^"]*coach-up[^"]*" href="\/coaching">Coaching<\/a>/)
+      expect(await render(module.slug)).toMatch(/<a class="[^"]*coach-up[^"]*" href="\/coaching"[^>]*>Coaching<\/a>/)
   })
 
   it('leaves the storefront a way back when the nav has hidden itself', async () => {

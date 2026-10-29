@@ -22,7 +22,7 @@ async function render(view: string): Promise<string> {
 /** Every href marked as the current page, deduplicated. */
 async function marked(view: string): Promise<string[]> {
   const html = await render(view)
-  return [...new Set([...html.matchAll(/<a href="([^"]+)"[^>]*aria-current="page"/g)].map(match => match[1]!))]
+  return [...new Set([...html.matchAll(/<a\b[^>]*aria-current="(?:page|location)"[^>]*>/g)].map(match => /href="([^"]+)"/.exec(match[0])?.[1]).filter(Boolean))] as string[]
 }
 
 describe('knowing which page you are on', () => {
@@ -54,7 +54,7 @@ describe('knowing which page you are on', () => {
   it('marks it in the drawer and the footer too, not just the bar', async () => {
     const html = await render('format')
     // Three copies of the Format link: the bar, the mobile drawer, the footer.
-    expect([...html.matchAll(/href="\/format"[^>]*aria-current="page"/g)].length).toBeGreaterThanOrEqual(3)
+    expect([...html.matchAll(/href="\/format"[^>]*aria-current="(?:page|location)"/g)].length).toBeGreaterThanOrEqual(3)
   })
 
   it('tells it apart by more than colour', async () => {

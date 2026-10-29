@@ -58,6 +58,7 @@ export default {
           { text: 'Coach guide', link: '/coaches' },
           { text: 'Administration', link: '/administration' },
           { text: 'Privacy', link: '/privacy' },
+          { text: 'Data model and ERD', link: '/erd' },
           { text: 'Troubleshooting', link: '/troubleshooting' },
           { text: 'Demo walkthrough', link: '/demo' },
         ] },

@@ -25,4 +25,4 @@ Use the [account panel](https://lsu.stacksjs.com/coaching/account) to review ren
 
 ## Passwords and support
 
-Keep the shared preview password and your personal password separate. Demo addresses ending in `.test` do not receive email, so do not use email recovery as your only way back into a demo account. Ask the person who supplied the credentials for a replacement if needed.
+Keep the shared preview password and your personal password separate. Demo addresses ending in `.test` do not receive email, so do not use email recovery as your only way back into a demo account. Find the current shared demo passwords in the protected [demo walkthrough](/demo#demo-credentials).

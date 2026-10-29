@@ -5,9 +5,17 @@ description: Review the private preview as a visitor, runner, coach and administ
 
 # Demo walkthrough
 
-Use the credentials supplied privately with the handoff. Passwords are deliberately absent from this guide. All seeded training and conversations are fictional demonstration content.
+This walkthrough and all demo credentials are protected by the same preview login as the website. All seeded training and conversations are fictional demonstration content.
 
 The [roles page](/roles) maps all twelve accounts and explains organization permissions versus training entitlements.
+
+## Demo credentials
+
+Use [Training](https://lsu.stacksjs.com/coaching/calendar) for athlete and browsing accounts, [Administration](https://lsu.stacksjs.com/admin) for Sam and Pawel, and the [Coach workspace](https://lsu.stacksjs.com/coach) for the coach. The race-entry Profile has a separate account system.
+
+<DemoCredentials :accounts="data.demoAccounts" />
+
+These are shared review accounts. Their `.test` addresses do not receive email. Use the listed passwords rather than email recovery, and keep real personal or payment information out of them. Complete your own policy choices when a workspace asks.
 
 ## 1. Check the preview gate
 
@@ -23,6 +31,8 @@ Use Alex or Jamie. Both athlete accounts have the USD 29/month Run + Strength ti
 
 Open a **Strength A** or **Strength B** session. Inspect its illustrated exercises, blocks and sets, and try ticking off a set. Compare it with a running session and its timed steps. The two disciplines belong to the same plan.
 
+Open **Say how it felt**, select the combined method, and send a fictional training note. Wait for its AI response. Then record a short voice note or upload an audio file, transcribe it, review and correct the text, and send it. Both enrolled demo athletes can use these flows. See [Feedback](/training/feedback).
+
 Open Health and Messages to inspect any supplied sample records. Avoid connecting real devices or entering personal information.
 
 Open the [Style Guide](/style-guide/) to review the typefaces, colors and interface specimens alongside the workout figures.
@@ -34,6 +44,8 @@ Use a fresh session and the coach account. Open the [coach workspace](https://ls
 ## 5. Review administration
 
 Open [Administration](https://lsu.stacksjs.com/admin) with Sam's or Pawel's administrator account. Complete your own policy choices if prompted and select the Last Soul Ultra organization workspace. Open Experience and verify that its settings and linked offers load. Confirm that an athlete account cannot perform the same management action.
+
+Explore the [data model and ERD](/erd) to trace account permissions, subscriptions, workouts and feedback.
 
 ## 6. Leave billing alone
 

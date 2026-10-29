@@ -111,7 +111,7 @@ onDestroy(() => rpAutosave.stop())
   <p :if="rpError" :text="rpError" role="alert"></p><p :if="rpMessage" :text="rpMessage" role="status"></p>
   <template :if="!rpSigned">
     <h2 :text="rpMode === 'register' ? 'Create account' : rpMode === 'login' ? 'Sign in' : rpMode === 'forgot' ? 'Reset your password' : 'Check your email'"></h2>
-    <p>Use the same account as the Last Soul app.</p>
+    <p>Use your race-entry account. For your training subscription, <a href="/coaching/calendar">sign in to Training</a>.</p>
     <div class="race-tabs"><button type="button" @click="rpMode.set('login')" :aria-selected="rpMode === 'login'">Sign in</button><button type="button" @click="rpMode.set('register')" :aria-selected="rpMode === 'register'">Create account</button><button type="button" @click="rpMode.set('forgot')">Forgot password?</button></div>
     <form @submit.prevent="rpAuth()">
       <div :if="rpMode === 'register'" class="field-row"><label>First name<input x-model="rpFirst" autocomplete="given-name" required></label><label>Last name<input x-model="rpLast" autocomplete="family-name" required></label></div>

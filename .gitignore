@@ -177,3 +177,6 @@ storage/framework/core/defaults/*
 # Generated comparison receipts.
 /storage/production-parity.json
 /storage/browser-parity.json
+
+# Injected review logins for the protected BunPress preview.
+/docs/.data/demoAccounts.json

@@ -39,3 +39,7 @@ Open a figure to compare its sampled poses on light and dark surfaces. Expand **
 ## Leave useful feedback
 
 Share the page link, movement or typeface name, browser and screen size. For an exercise figure, describe the pose or equipment contact that needs attention. For type, note the text and size that was difficult to read. Keep account passwords and personal training data out of screenshots.
+
+## Web and native training
+
+The web training workspace uses the same panels, workout detail, exercise demonstrations, feedback controls and account actions as the branded native app. LSU supplies the colors and typefaces. On a phone, the primary destinations stay at the bottom; additional destinations appear above the content. Wider screens keep navigation at the side. Browser audio uploads and native recording use the same review-before-send workflow.

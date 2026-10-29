@@ -172,6 +172,89 @@ await stripe.checkout.sessions.retrieve(sessionId, asAccount(account))
 await connectRefund(paymentIntentId, { account, amount: 500 })
 ```
 
+#### Fees after tax
+
+Inline recurring prices accept `taxBehavior: 'inclusive' | 'exclusive'` and an
+optional merchant `taxCode` (`txcd_` followed by eight digits). These preserve
+price treatment; enable `automatic_tax` separately and configure the merchant's
+own tax registrations. A language or currency never selects a jurisdiction.
+
+Stripe's `application_fee_percent` applies to the invoice total, including tax.
+For a share contracted AFTER tax, use `prepareDirectInvoiceFee(invoiceId,
+account, { customer, subscription?, currency, platformFeePercent })` on an
+editable draft invoice. It retrieves current provider amounts, verifies the
+original merchant/customer/subscription/currency, requires complete balanced tax
+facts, computes the exact fee and sets `auto_advance: false` with the fee. The
+caller owns durable retries and finalization/payment. Changed amounts or credits
+requiring separate settlement are errors, never an assumed zero tax.
+
+Renewals can prepare fees from `invoice.created`. An ordinary Checkout
+subscription's first invoice is already finalized; use a subscription schedule
+when the first invoice needs editing. Do not grant paid access from a schedule's
+active status before its initial invoice is paid. The helper does not finalize
+invoices, collect payment, or implement the application's access policy.
+
+`collectDirectInvoice(invoiceId, account, { customer, subscription?, currency,
+platformFeePercent, approvedTotal, paymentMethod })` performs that collection
+step. `approvedTotal` is the inclusive minor-unit amount the buyer approved;
+the saved method must belong to the original merchant customer. It holds the
+invoice, prepares its exact after-tax fee, finalizes, verifies the actual invoice
+PaymentIntent's identity/amount/fee, then pays. Open invoices recover without a
+new purchase; paid invoices replay without another payment. A zero trial invoice
+finalizes without a charge. Results distinguish `paid`, `processing` and
+`requires_payment`; the last includes the canonical hosted invoice URL when
+available. Do not grant access for processing or customer action. Network errors
+propagate for durable retry. This helper does not create purchases, establish
+customer consent or reverse access after a later refund; those remain app policy.
+
+After a successful direct-charge refund, `creditDirectInvoiceRefund(invoiceId,
+account, refundId, [{ invoiceLineItem, amount }])` links it to the original
+invoice lines without moving money again. `amount` uses the original price's
+tax behavior (inclusive prices use inclusive minor units). Stripe's preview must
+equal the actual refund; its tax breakdown is retained. Amount-only credit notes
+can omit tax. The operation verifies the paid invoice/refund relationship on the
+original merchant and returns an existing matching credit on replay, including
+after the provider's idempotency window. Pending refunds and differing existing
+credits remain errors for durable retry/review. It sends no email; applications
+own receipt delivery.
+
+For the complete first-purchase flow, `ensureDirectInvoicePrice(account, {
+reference, name, amount, currency, taxCode, interval?, intervalCount? })` creates
+or finds a merchant catalog price using Stripe's durable unique lookup key.
+Prices are inclusive; changed offer terms get a new immutable price. Existing
+prices must still match and be active, including their product/classification.
+The merchant supplies `taxCode`; the helper does not invent classifications.
+
+Freeze a `DirectInvoicePurchaseOptions` record with a unique purchase reference,
+original customer/price/amount/currency/tax code, explicit platform percentage,
+Checkout `expiresAt`, optional recurrence/trial and application metadata. Copy
+`directInvoicePurchaseMetadata(account, purchase)` onto Setup Checkout's
+`setup_intent_data.metadata`. Use `directCheckout` in setup mode with a required
+billing address, `customer_update.address: 'auto'`, the same expiry and clear
+localized confirmation text for the approved price, recurrence and trial.
+Persist the quote and serialize its durable reference in the app.
+
+`completeDirectInvoicePurchase(setupIntentId, account, purchase)` requires the
+successful off-session setup's original customer and quote binding. It recovers
+one-time invoices or released subscription schedules through complete provider
+lists, holds the first subscription invoice before releasing its schedule, and
+uses `collectDirectInvoice` to collect. Native trial state survives release.
+Paid replays remain read-only even after expiry or product retirement. Missing
+original purchases may only be created before quote expiry and within 24 hours
+of setup creation, when Stripe still guarantees the idempotency key; older
+missing bindings require review, never another purchase. Renewals still need
+the app's durable `invoice.created` hold/collection path. Apply access policy
+from both the collection result and current subscription/refund state.
+
+`directInvoiceTaxFinancials(invoiceId, paymentIntentId, account)` reads canonical
+collected/credited gross, net and tax plus `requiresReview`. Read it under the
+application's payment lock alongside `directChargeFinancials`, and compare its
+gross/currency with the original captured payment before releasing contributor
+amounts. Missing tax credits, pending refunds, bulk or non-cash credits stay
+under review. `invoiceTaxAmounts` validates balanced provider totals without
+inventing tax when a calculation is missing. These are accounting facts, not
+the merchant's available Stripe balance or a tax remittance operation.
+
 ### Destination charges (a platform that took on loss liability)
 
 ```typescript

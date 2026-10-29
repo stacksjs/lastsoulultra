@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en-GB" class="lsu-scope-site">
+<head>@include('head')</head>
+<body class="lsu-scope-site training-app">
+  <a class="lsu-skip" href="#main">Skip to content</a>
+  <div class="training-layout">
+    <header class="training-top">
+      <a href="/" aria-label="Last Soul Ultra home"><img src="/assets/lsu/images/lsu-logo.svg" alt="Last Soul Ultra" width="120" height="32"></a>
+      <span>Training</span><a class="coach-up" href="/coaching" aria-current="location">Coaching</a>
+      <a href="/docs" class="training-guide">Guide</a>
+    </header>
+    <main id="main" tabindex="-1">@slot('content')</main>
+  </div>
+</body>
+</html>

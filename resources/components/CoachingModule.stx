@@ -5,65 +5,33 @@ const { slug } = defineProps<Props>()
 <script server>
 import { coachingModule } from '../data/coaching'
 import { loadBrand, portalUrl } from '../functions/coaching-source'
-
-/* The registry is the only place a module's words live, so a page cannot
-   disagree with the nav about what it is called. */
 const panel = coachingModule(slug)
 if (!panel) throw new Error(`unknown coaching module: ${slug}`)
-
-/* Whether the brand has published this module, read from the brand itself
-   rather than from what the nav chooses to show. Without it the page framed
-   a panel that answers 404, under a notice promising an account would open
-   it. The storefront keeps its own empty state, so it is excluded here
-   rather than carrying two. */
 const panelBrand = await loadBrand()
 const panelLive = Boolean(panelBrand?.modules.includes(panel.slug))
-const panelStorefront = panel.slug === 'plans'
-
-/* The panel is a cross-origin frame, and a frame can decline to load for
-   reasons this page cannot see: an origin the brand has not allowed, a
-   browser blocking third-party frames, an extension. When that happens the
-   embed leaves a tall empty box, so the way out never lives inside it. */
 const panelHref = portalUrl(panel.slug)
 </script>
-<div class="coaching-surface">
-  <header class="coach-head">
-    <div class="coach-shell">
-      <a class="coach-up kicker" href="/coaching">Coaching</a>
-      <h1>{{ panel.title }}</h1>
-      <p>{{ panel.summary }}</p>
-    </div>
-  </header>
-  <CoachingNav current="{{ panel.slug }}" />
-  <div class="coach-shell">
-    @if(panelLive && panel.scope === 'private')
-    <div class="coach-scope">
-      <strong>Only you see this</strong>
-      <p>This panel reads your own training account, not anything this site holds. Last Soul Ultra cannot see it, and neither can the coach whose method you are following.</p>
-    </div>
-    @elseif(panelLive && panel.scope === 'athlete')
-    <div class="coach-scope">
-      <strong>Needs a training account</strong>
-      <p>Sign in happens inside the panel, with the account that holds your subscription. That is a separate account from the one you use to request a race entry.</p>
-    </div>
-    @endif
-    @if(panelStorefront)
-    <CoachingOffers level="2" />
-    @elseif(!panelLive)
-    <div class="coach-empty">
-      <h2>Not open yet</h2>
-      <p>No coach has published a method here, so there is nothing for this panel to show. It fills in once the first tier opens, under the coach's own name and the coach's own price.</p>
-      <p class="coach-empty-back"><a href="/coaching">Read what coaching here will be</a></p>
-    </div>
-    @endif
+<div class="coaching-surface training-surface">
+  <TrainingNav current="{{ panel.slug }}" />
+  <div class="training-content">
+    <header class="training-title"><h1>{{ panel.title }}</h1></header>
     @if(panelLive)
-    <div class="coach-panel-bar">
-      <p>Your Last Soul Ultra training workspace.</p>
-      <a href="{{ panelHref }}" target="_blank" rel="noopener">Open your training<span class="coach-sr"> (opens in a new tab)</span></a>
-    </div>
-    <div class="coach-panel">
-      <CoachingPortal section="{{ panel.slug }}" />
-    </div>
+    @if(panel.slug === 'plans')
+    <noscript><CoachingOffers level="2" /></noscript>
+    @endif
+    <div class="coach-panel"><CoachingPortal section="{{ panel.slug }}" /></div>
+    <details class="training-about">
+      <summary>About your training workspace</summary>
+      @if(panel.scope === 'private')
+      <strong>Only you see this</strong><p>Your health and messages belong to your training account. An organization role does not grant access to every athlete's private records.</p>
+      @elseif(panel.scope === 'athlete')
+      <strong>Your training account</strong><p>Sign in inside the panel with the account that holds your subscription. Race entry uses a separate account.</p>
+      @endif
+      <p>{{ panel.summary }}</p>
+      <a href="{{ panelHref }}" target="_blank" rel="noopener">Open your training in a new tab</a>
+    </details>
+    @else
+    <div class="coach-empty"><h2>{{ panel.slug === 'plans' ? 'Nothing is open yet' : 'Not open yet' }}</h2><p>No coach has published a method here. This workspace fills in once a tier opens.</p><a href="/coaching">Back to coaching</a></div>
     @endif
   </div>
 </div>

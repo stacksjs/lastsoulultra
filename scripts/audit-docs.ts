@@ -28,5 +28,18 @@ async function scan(directory: string): Promise<void> {
 await scan(root)
 const index = await Bun.file(resolve(root, 'search-index.json')).json()
 if (!index) errors.push('Missing search index')
+const reviewFile = Bun.file('docs/.data/demoAccounts.json')
+if (await reviewFile.exists()) {
+  const accounts = await reviewFile.json() as { email: string, password: string }[]
+  if (accounts.length) {
+    const demo = await Bun.file(resolve(root, 'demo/index.html')).text()
+    if (accounts.length !== 12) errors.push('The protected review guide requires all twelve accounts')
+    for (const account of accounts) {
+      if (!demo.includes(account.email) || !demo.includes(account.password)) errors.push('A review login is missing from the protected walkthrough')
+    }
+    if (await Bun.file(resolve(root, '.data/demoAccounts.json')).exists()) errors.push('The private source data must not be copied into the docs artifact')
+  }
+}
+
 if (errors.length) throw new Error(errors.join('\n'))
 console.log(`Verified ${pages} LSU docs pages, mounted links, branding and search index.`)

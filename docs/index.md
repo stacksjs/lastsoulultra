@@ -23,6 +23,7 @@ Last Soul Ultra brings race information and your training into one place. Use th
 | Review completed training | [Progress](/training/progress) |
 | Manage a coaching method | [Coach guide](/coaches) |
 | Manage LSU access and published content | [Administration](/administration) |
+| Explore accounts, training and feedback relationships | [Data model and ERD](/erd) |
 | Review the private preview | [Demo walkthrough](/demo) |
 
 ## How training fits together

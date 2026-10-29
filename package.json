@@ -75,14 +75,16 @@
     "build:assets": "bun scripts/build-site-assets.ts",
     "build:bundles": "bun scripts/externalize-page-bundles.ts",
     "audit:html": "bun scripts/audit-html.ts",
-    "audit:docs": "bun scripts/sync-workout-art.ts --check && bun scripts/sync-style-guide-assets.ts --check && bun scripts/audit-docs.ts"
+    "audit:docs": "bun scripts/sync-workout-art.ts --check && bun scripts/sync-style-guide-assets.ts --check && bun scripts/audit-docs.ts",
+    "docs:demo": "bun scripts/prepare-demo-docs.ts"
   },
   "dependencies": {
-    "@stacksjs/components": "0.2.740",
-    "@stacksjs/stx": "0.2.740",
+    "@stacksjs/bunpress": "0.2.30",
+    "@stacksjs/components": "0.2.741",
+    "@stacksjs/stx": "0.2.741",
     "@ts-maps/stx": "0.5.7",
-    "bun-plugin-stx": "0.2.740",
-    "stacks": "^0.75.346",
+    "bun-plugin-stx": "0.2.741",
+    "stacks": "0.75.362",
     "ts-images": "0.2.32",
     "ts-maps": "0.5.7"
   },

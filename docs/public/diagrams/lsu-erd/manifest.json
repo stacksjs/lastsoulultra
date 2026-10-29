@@ -1,0 +1,10 @@
+{
+  "generated_at": "2026-10-29",
+  "tables": 23,
+  "columns": 465,
+  "foreign_keys": 53,
+  "sha256": {
+    "index.html": "e5346e359c6e849eb642e13d64565f461b4c8bdd23262b6b848205beb4efe9e6",
+    "schema.json": "f80c667d8eaa4c6b7f119acf239f7a090ad92cd5a925cb808e69139a5a194b04"
+  }
+}

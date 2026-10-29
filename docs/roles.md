@@ -15,6 +15,8 @@ The private review offer is **Running and strength, demo**, shown at **USD 29 pe
 
 These accounts have complimentary review access. No payment-provider subscription or real charge is attached. The sample offer does not include personal one-to-one coaching or Mind training. The published offer defines the disciplines for any other tier. See [Plans and subscriptions](/training/plans).
 
+For the stored relationships behind these distinctions, see the [data model and ERD](/erd).
+
 ## Organization roles
 
 | Role | What it represents | Review focus |
@@ -35,7 +37,7 @@ Sam and Pawel are **LSU organization administrators**. Their access applies to t
 
 ## Private review accounts
 
-Passwords are supplied privately in the handoff, never in this guide. All accounts and sample data are fictional.
+All demo passwords are listed in the protected [demo walkthrough](/demo#demo-credentials). All accounts and sample data are fictional.
 
 | Person or account | Login | Organization role | Training or authoring access |
 | --- | --- | --- | --- |

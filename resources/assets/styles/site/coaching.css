@@ -114,3 +114,22 @@
   .coaching-surface .coach-offer-price {text-align:left}
   .coaching-surface .coach-panel {min-height:520px}
 }
+
+/* The web training shell follows the branded app: a compact title, persistent
+   destinations and the shared training screens, with LSU's published tokens. */
+.training-app{margin:0;background:#000;color:#fff;font-family:Barlow,system-ui,sans-serif}
+.training-top{height:64px;display:flex;align-items:center;gap:20px;padding:0 24px;border-bottom:1px solid #333338;background:#000;position:sticky;top:0;z-index:20}
+.training-top img{display:block;object-fit:contain}.training-top>span{font-size:16px;color:#b6b6bd}.training-top .training-guide{margin-left:auto;font-size:16px;color:#fff;text-underline-offset:4px}
+.training-content{max-width:1120px;margin:0 auto;padding:20px 12px 32px}.training-title{padding:0 24px 12px}.training-title h1{font-family:Anton,Impact,sans-serif;font-size:28px;font-weight:400;line-height:1.25;margin:0}
+.training-nav{position:fixed;top:64px;bottom:0;left:0;width:216px;border-right:1px solid #333338;background:#0d0d0f;z-index:15;padding:20px 12px}
+.training-nav ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}.training-nav a{display:flex;align-items:center;gap:12px;min-height:48px;padding:10px 12px;color:#b6b6bd;font:600 16px/1.25 Barlow,system-ui,sans-serif;text-decoration:none;border-radius:0}
+.training-nav a[aria-current=page]{background:#dd0f15;color:#fff}.training-nav a:focus-visible,.training-guide:focus-visible{outline:2px solid #fff;outline-offset:3px}.training-nav [aria-hidden=true]{display:block;flex:0 0 24px;width:24px;height:24px;font-size:24px}
+.training-surface{padding-left:216px}.training-about{margin:20px 24px 0;padding-top:16px;border-top:1px solid #333338;color:#b6b6bd;font-size:14px;line-height:1.6}.training-about summary{cursor:pointer;color:#fff;padding:8px 0;min-height:44px}.training-about strong{display:block;margin-top:12px;color:#fff}.training-about a{color:#fff;text-underline-offset:4px}
+.training-content .coach-panel{border:0;margin:0;min-height:360px}.training-content .coach-panel hq-coaching{display:block;min-height:360px}
+@media(max-width:759px){.training-top{height:56px;padding:0 16px}.training-top img{width:100px;height:28px}.training-nav{top:auto;bottom:0;right:0;width:auto;height:auto;min-height:72px;padding:8px 4px calc(8px + env(safe-area-inset-bottom));border-right:0;border-top:1px solid #333338;background:#0d0d0f}.training-nav ul{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:2px}.training-nav li:nth-child(n+6){display:none}.training-nav a{flex-direction:column;gap:4px;min-height:52px;padding:4px 2px;font-size:11px;line-height:1.15;text-align:center;border-radius:0}.training-nav a[aria-current=page]{background:transparent;color:#fff;border-top:2px solid #dd0f15;padding-top:2px}.training-surface{padding-left:0;padding-bottom:calc(84px + env(safe-area-inset-bottom))}.training-content{padding:16px 0 20px}.training-title{padding:0 24px 8px}.training-title h1{font-size:24px}.training-about{margin-inline:24px}}
+
+.training-nav .training-secondary{margin-top:18px;padding-top:14px;border-top:1px solid #333338}
+@media(max-width:759px){.training-nav{position:static;min-height:0;padding:0;border:0;background:transparent}.training-nav .training-primary{position:fixed;z-index:30;bottom:0;left:0;right:0;min-height:72px;padding:8px 4px calc(8px + env(safe-area-inset-bottom));border-top:1px solid #333338;background:#0d0d0f;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:2px}.training-nav .training-secondary{display:flex;flex-direction:row;flex-wrap:wrap;gap:8px;margin:0;padding:12px 24px;border-top:0;border-bottom:1px solid #333338}.training-nav .training-secondary a{flex-direction:row;font-size:14px;min-height:44px;padding:8px 12px;border:1px solid #333338;border-radius:0}.training-nav .training-secondary a[aria-current=page]{border-color:#dd0f15;background:#dd0f15;color:#fff}.training-nav .training-secondary [aria-hidden=true]{width:18px;height:18px;flex-basis:18px}}
+
+.training-top .coach-up{color:#b6b6bd;font:600 14px Barlow,system-ui,sans-serif;text-underline-offset:4px}
+@media(max-width:759px){.training-top>span{display:none}}

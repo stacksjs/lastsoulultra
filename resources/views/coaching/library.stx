@@ -1,4 +1,4 @@
-@extends('layouts/LSU')
+@extends('layouts/Training')
 @section('content')
 <script server>
 import { modulePath } from '~/resources/data/coaching'

@@ -17,6 +17,8 @@ The race site includes Format, World Series, Soul Races, Results, Coaching and C
 
 The training app's main tabs are **Store**, **Workouts**, **Health**, **Messages** and **Me**. Progress and method details are available from the training panels. Some modules appear only after publication or an active enrollment.
 
+In the training workspace, phone navigation keeps the first five destinations at the bottom and the remaining destinations above the content. Desktop navigation sits at the side. The same training panels are used in the native app.
+
 ## Check your account
 
 Confirm your name and time zone before reviewing scheduled sessions. Calendar dates follow your account's time zone. A session around midnight can fall on a different date for someone in another zone.
