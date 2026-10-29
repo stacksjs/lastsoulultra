@@ -1,5 +1,5 @@
 {
-  "sourceRevision": "ec6257128527c3829dc6c4548d4fe674fd1e4dde",
+  "sourceRevision": "7e436785c64ae5288ceb48bd0418dbac06deef45",
   "illustrations": [
     {
       "name": "a-skip",
@@ -425,8 +425,8 @@
       "name": "hammer-curl",
       "seconds": 2.6,
       "view": "side",
-      "svgHash": "b73b396a402f3e254066a42d2b1167d577374bd4f08cbdf017d6fa32a5ca42b0",
-      "posesHash": "3e0d08518fce5f8665454f56be9db105443b011c04272c47ff9b2ad30d1def94"
+      "svgHash": "4327b56e35bb341fb392f0a7f184ad4c559ef24eb78ead59e4f7189c02f20e62",
+      "posesHash": "2097de0108d598d0c84521d0b6f46d1e913d8e6accbe9845a4e4a877d2c3c6bb"
     },
     {
       "name": "hamstring-stretch",
