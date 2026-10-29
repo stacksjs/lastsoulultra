@@ -20,6 +20,8 @@ if (accounts.some(account => !/^[a-z0-9]+@lsu-demo\.test$/.test(account.email) |
   throw new Error('Only LSU demo addresses and generated strong passwords are accepted.')
 const appModule = (name: string) => import(pathToFileURL(resolve(root, 'app/Support', `${name}.ts`)).href)
 const { db } = await import(Bun.resolveSync('@stacksjs/database/runtime', root))
+// Standalone scripts provide the server database global used by application helpers.
+Object.assign(globalThis, { db })
 const { transaction } = await import(Bun.resolveSync('@stacksjs/orm', root))
 const { todayIn, addDays, startOfIsoWeek } = await import(Bun.resolveSync('@stacksjs/datetime', root))
 const { saveExperience, saveMethod } = await appModule('brandExperience')
