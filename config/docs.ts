@@ -37,6 +37,7 @@ export default {
           { text: 'Getting started', link: '/getting-started' },
           { text: 'Race information', link: '/races' },
           { text: 'Your account', link: '/my-account' },
+          { text: 'Roles and plan access', link: '/roles' },
         ] },
         { text: 'Your training', items: [
           { text: 'Plans and subscriptions', link: '/training/plans' },

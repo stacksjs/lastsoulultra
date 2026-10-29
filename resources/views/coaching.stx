@@ -95,7 +95,7 @@ const canonicalPath = '/coaching'
         <p>Breathing, meditation and the bit nobody trains: what you do at 3 a.m. when you want to stop.</p>
       </article>
     </div>
-    <p class="coaching-tiers">A tier can be running only, or all three together. The portal shows which tiers are open and what they cost.</p>
+    <p class="coaching-tiers">A tier can include running, strength or a combination of disciplines. The portal shows which tiers are open and what they cost.</p>
   </section>
 
   <section id="training">

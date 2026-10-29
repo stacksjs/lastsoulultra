@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 768 128" role="img" aria-label="sumo-deadlift: six poses across one repetition"><svg x="0" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Sumo deadlift"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(5.4 9.8) scale(0.9153)"><g ><polyline class="ink" stroke-width="7" points="55,67.8 58.5,87.5 63.7,104.7"/><polyline class="ink" stroke-width="8" points="57,84 29.5,89 28,116 19,116"/><path class="ink" stroke-width="11" d="M64 84Q64 75.9 64 67.8"/><polyline class="ink" stroke-width="8" points="71,84 98.5,89 100,116 109,116"/><polyline class="ink" stroke-width="7" points="73,67.8 69.5,87.5 64.3,104.7"/><circle class="head" cx="64" cy="52.8" r="8.5"/><polyline class="gear-line" stroke-width="3" points="20,104.7 108,104.7"/><rect class="gear" x="21" y="93.7" width="6" height="22" rx="1"/><rect class="gear" x="101" y="93.7" width="6" height="22" rx="1"/></g></g></svg>
+<svg x="128" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Sumo deadlift"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(5.4 9.8) scale(0.9153)"><g ><polyline class="ink" stroke-width="7" points="55,64.895 58.5,84.595 63.7,101.795"/><polyline class="ink" stroke-width="8" points="57,82.892 29.659,89.1 28,116 19,116"/><path class="ink" stroke-width="11" d="M64 82.892Q64 73.944 64 64.895"/><polyline class="ink" stroke-width="8" points="71,82.892 98.341,89.1 100,116 109,116"/><polyline class="ink" stroke-width="7" points="73,64.895 69.5,84.595 64.3,101.795"/><circle class="head" cx="64" cy="49.895" r="8.5"/><polyline class="gear-line" stroke-width="3" points="20,101.795 108,101.795"/><rect class="gear" x="21" y="90.795" width="6" height="22" rx="1"/><rect class="gear" x="101" y="90.795" width="6" height="22" rx="1"/></g></g></svg>
+<svg x="256" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Sumo deadlift"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(5.4 9.8) scale(0.9153)"><g ><polyline class="ink" stroke-width="7" points="55,38.125 58.5,57.825 63.7,75.025"/><polyline class="ink" stroke-width="8" points="57,72.199 35.401,90.015 28,116 19,116"/><path class="ink" stroke-width="11" d="M64 72.199Q64 55.169 64 38.125"/><polyline class="ink" stroke-width="8" points="71,72.199 92.599,90.015 100,116 109,116"/><polyline class="ink" stroke-width="7" points="73,38.125 69.5,57.825 64.3,75.025"/><circle class="head" cx="64" cy="23.125" r="8.5"/><polyline class="gear-line" stroke-width="3" points="20,75.025 108,75.025"/><rect class="gear" x="21" y="64.025" width="6" height="22" rx="1"/><rect class="gear" x="101" y="64.025" width="6" height="22" rx="1"/></g></g></svg>
+<svg x="384" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Sumo deadlift"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(5.4 9.8) scale(0.9153)"><g ><polyline class="ink" stroke-width="7" points="55,35 58.5,54.7 63.7,71.9"/><polyline class="ink" stroke-width="8" points="57,71 36.9,90.5 28,116 19,116"/><path class="ink" stroke-width="11" d="M64 71Q64 53 64 35"/><polyline class="ink" stroke-width="8" points="71,71 91.1,90.5 100,116 109,116"/><polyline class="ink" stroke-width="7" points="73,35 69.5,54.7 64.3,71.9"/><circle class="head" cx="64" cy="20" r="8.5"/><polyline class="gear-line" stroke-width="3" points="20,71.9 108,71.9"/><rect class="gear" x="21" y="60.9" width="6" height="22" rx="1"/><rect class="gear" x="101" y="60.9" width="6" height="22" rx="1"/></g></g></svg>
+<svg x="512" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Sumo deadlift"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(5.4 9.8) scale(0.9153)"><g ><polyline class="ink" stroke-width="7" points="55,39.766 58.5,59.466 63.7,76.666"/><polyline class="ink" stroke-width="8" points="57,72.85 34.75,89.817 28,116 19,116"/><path class="ink" stroke-width="11" d="M64 72.85Q64 56.308 64 39.766"/><polyline class="ink" stroke-width="8" points="71,72.85 93.25,89.817 100,116 109,116"/><polyline class="ink" stroke-width="7" points="73,39.766 69.5,59.466 64.3,76.666"/><circle class="head" cx="64" cy="24.766" r="8.5"/><polyline class="gear-line" stroke-width="3" points="20,76.666 108,76.666"/><rect class="gear" x="21" y="65.666" width="6" height="22" rx="1"/><rect class="gear" x="101" y="65.666" width="6" height="22" rx="1"/></g></g></svg>
+<svg x="640" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Sumo deadlift"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(5.4 9.8) scale(0.9153)"><g ><polyline class="ink" stroke-width="7" points="55,62.816 58.5,82.516 63.7,99.812"/><polyline class="ink" stroke-width="8" points="57,82.066 29.908,89.1 28,116 19,116"/><path class="ink" stroke-width="11" d="M64 82.066Q64 72.441 64 62.816"/><polyline class="ink" stroke-width="8" points="71,82.066 98.092,89.1 100,116 109,116"/><polyline class="ink" stroke-width="7" points="73,62.816 69.5,82.516 64.3,99.812"/><circle class="head" cx="64" cy="47.816" r="8.5"/><polyline class="gear-line" stroke-width="3" points="20,99.812 108,99.812"/><rect class="gear" x="21" y="88.812" width="6" height="22" rx="1"/><rect class="gear" x="101" y="88.812" width="6" height="22" rx="1"/></g></g></svg>
+</svg>

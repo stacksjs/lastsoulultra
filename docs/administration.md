@@ -11,6 +11,8 @@ Open [Administration](https://lsu.stacksjs.com/admin) and sign in with an LSU ow
 
 The Sam and Pawel review accounts are organization administrators. These accounts manage the LSU workspace. They do not grant platform-wide administration over other organizations.
 
+For the full account map and the difference between permissions and training subscriptions, see [Roles and plan access](/roles).
+
 ## Roles and permissions
 
 | Role | Purpose |

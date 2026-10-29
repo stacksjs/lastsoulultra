@@ -9,7 +9,7 @@ description: Unlock the preview, sign into training and choose the right review 
 
 Open [Last Soul Ultra](https://lsu.stacksjs.com). Your browser first asks for the shared preview username and password. This protects the entire site, including this guide. It is separate from your personal app account.
 
-Open **Coaching**, then **Open your training**. Sign in with your personal account when prompted. For a demonstration, use the account supplied for the role you want to review. See the [demo walkthrough](/demo).
+Open **Coaching**, then **Open your training**. Sign in with your personal account when prompted. For a demonstration, use the account supplied for the role you want to review. See [Roles and plan access](/roles) for the account differences and the [demo walkthrough](/demo) for a suggested review.
 
 ## Find your way around
 

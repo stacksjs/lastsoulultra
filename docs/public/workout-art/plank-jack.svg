@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Plank jacks, overhead view"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><rect class="floor" x="8" y="8" width="112" height="112" rx="4" fill="none" stroke-width="2"/><g transform="translate(9.5 17.2) scale(0.8513999999999999)"><g class="exercise-art-motion"><polyline class="ink" stroke-width="7" points="55,16 46.6,24.6 40,16"/><polyline class="ink" stroke-width="8" points="57,52 57,80 57,107 57,116"><animate attributeName="points" dur="1.1s" repeatCount="indefinite" values="57,52 57,80 57,107 57,116;57,52 56.9,80 56.9,107 56.8,116;57,52 56.5,80 55.9,107 55.8,116;57,52 55.2,79.9 53.4,106.9 52.9,115.9;57,52 52.7,79.7 48.6,106.4 47.2,115.3;57,52 49.2,78.9 41.6,104.8 39.1,113.5;57,52 46.8,78.1 37,103.2 33.8,111.6;57,52 45.7,77.6 34.7,102.3 31.1,110.5;57,52 45.2,77.4 33.9,101.9 30.1,110.1;57,52 45.2,77.4 33.8,101.8 30,110;57,52 45.2,77.4 33.9,101.9 30.1,110.1;57,52 45.7,77.6 34.7,102.3 31.1,110.5;57,52 46.8,78.1 37,103.2 33.8,111.6;57,52 49.2,78.9 41.6,104.8 39.1,113.5;57,52 52.7,79.7 48.6,106.4 47.2,115.3;57,52 55.2,79.9 53.4,106.9 52.9,115.9;57,52 56.5,80 55.9,107 55.8,116;57,52 56.9,80 56.9,107 56.8,116;57,52 57,80 57,107 57,116" keyTimes="0;0.055556;0.111111;0.166667;0.222222;0.277778;0.333333;0.388889;0.444444;0.5;0.555556;0.611111;0.666667;0.722222;0.777778;0.833333;0.888889;0.944444;1"/></polyline><path class="ink" stroke-width="11" d="M64 52Q64 34 64 16"/><polyline class="ink" stroke-width="8" points="71,52 71,80 71,107 71,116"><animate attributeName="points" dur="1.1s" repeatCount="indefinite" values="71,52 71,80 71,107 71,116;71,52 71.1,80 71.1,107 71.2,116;71,52 71.5,80 72.1,107 72.2,116;71,52 72.8,79.9 74.6,106.9 75.1,115.9;71,52 75.3,79.7 79.4,106.4 80.8,115.3;71,52 78.8,78.9 86.4,104.8 88.9,113.5;71,52 81.2,78.1 91,103.2 94.2,111.6;71,52 82.3,77.6 93.3,102.3 96.9,110.5;71,52 82.8,77.4 94.1,101.9 97.9,110.1;71,52 82.8,77.4 94.2,101.8 98,110;71,52 82.8,77.4 94.1,101.9 97.9,110.1;71,52 82.3,77.6 93.3,102.3 96.9,110.5;71,52 81.2,78.1 91,103.2 94.2,111.6;71,52 78.8,78.9 86.4,104.8 88.9,113.5;71,52 75.3,79.7 79.4,106.4 80.8,115.3;71,52 72.8,79.9 74.6,106.9 75.1,115.9;71,52 71.5,80 72.1,107 72.2,116;71,52 71.1,80 71.1,107 71.2,116;71,52 71,80 71,107 71,116" keyTimes="0;0.055556;0.111111;0.166667;0.222222;0.277778;0.333333;0.388889;0.444444;0.5;0.555556;0.611111;0.666667;0.722222;0.777778;0.833333;0.888889;0.944444;1"/></polyline><polyline class="ink" stroke-width="7" points="73,16 81.4,24.6 88,16"/><circle class="head" cx="64" cy="1" r="8.5"/></g><g class="exercise-art-still"><polyline class="ink" stroke-width="7" points="55,16 46.6,24.6 40,16"/><polyline class="ink" stroke-width="8" points="57,52 57,80 57,107 57,116"/><path class="ink" stroke-width="11" d="M64 52Q64 34 64 16"/><polyline class="ink" stroke-width="8" points="71,52 71,80 71,107 71,116"/><polyline class="ink" stroke-width="7" points="73,16 81.4,24.6 88,16"/><circle class="head" cx="64" cy="1" r="8.5"/></g></g></svg>

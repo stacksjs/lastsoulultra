@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 768 128" role="img" aria-label="calf-raise-single: six poses across one repetition"><svg x="0" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Single-leg calf raise"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(-4.8 16.5) scale(0.8576)"><g ><rect class="kit" x="105" y="16" width="5" height="100" rx="1.5"/><polyline class="far" stroke-width="7" points="64,25 64,45 64,63"/><polyline class="far" stroke-width="8" points="66,61 56.4,87.3 81.8,96.5 90.7,98.1"/><path class="ink" stroke-width="11" d="M66 61Q66 43 66 25"/><polyline class="ink" stroke-width="8" points="66,61 66,89 66,116 75,116"/><polyline class="ink" stroke-width="7" points="68,25 85.4,34.9 102,28"/><circle class="head" cx="66" cy="10" r="8.5"/></g></g></svg>
+<svg x="128" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Single-leg calf raise"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(-4.8 16.5) scale(0.8576)"><g ><rect class="kit" x="105" y="16" width="5" height="100" rx="1.5"/><polyline class="far" stroke-width="7" points="64.324,24.552 64.324,44.552 64.324,62.552"/><polyline class="far" stroke-width="8" points="66.324,60.552 56.724,86.852 82.124,96.052 90.936,97.652"/><path class="ink" stroke-width="11" d="M66.324 60.552Q66.324 42.552 66.324 24.552"/><polyline class="ink" stroke-width="8" points="66.324,60.552 66.324,88.552 66.324,115.552 75.324,116.112"/><polyline class="ink" stroke-width="7" points="68.324,24.552 85.4,34.9 102,28"/><circle class="head" cx="66.324" cy="9.552" r="8.5"/></g></g></svg>
+<svg x="256" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Single-leg calf raise"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(-4.8 16.5) scale(0.8576)"><g ><rect class="kit" x="105" y="16" width="5" height="100" rx="1.5"/><polyline class="far" stroke-width="7" points="67.98,18.695 67.98,38.695 67.98,56.695"/><polyline class="far" stroke-width="8" points="69.98,54.695 60.38,80.995 85.78,90.252 94.636,91.795"/><path class="ink" stroke-width="11" d="M69.98 54.695Q69.98 36.695 69.98 18.695"/><polyline class="ink" stroke-width="8" points="69.98,54.695 69.98,82.695 69.98,109.695 75.788,116.544"/><polyline class="ink" stroke-width="7" points="71.98,18.695 84.944,33.832 102,28"/><circle class="head" cx="69.98" cy="3.695" r="8.5"/></g></g></svg>
+<svg x="384" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Single-leg calf raise"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(-4.8 16.5) scale(0.8576)"><g ><rect class="kit" x="105" y="16" width="5" height="100" rx="1.5"/><polyline class="far" stroke-width="7" points="69.1,16.9 69.1,36.9 69.1,54.9"/><polyline class="far" stroke-width="8" points="71.1,52.9 61.5,79.2 86.9,88.4 95.8,90"/><path class="ink" stroke-width="11" d="M71.1 52.9Q71.1 34.9 71.1 16.9"/><polyline class="ink" stroke-width="8" points="71.1,52.9 71.1,80.9 71.1,107.9 75,116"/><polyline class="ink" stroke-width="7" points="73.1,16.9 84.8,33.2 102,28"/><circle class="head" cx="71.1" cy="1.9" r="8.5"/></g></g></svg>
+<svg x="512" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Single-leg calf raise"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(-4.8 16.5) scale(0.8576)"><g ><rect class="kit" x="105" y="16" width="5" height="100" rx="1.5"/><polyline class="far" stroke-width="7" points="68.776,17.348 68.776,37.348 68.776,55.348"/><polyline class="far" stroke-width="8" points="70.776,53.348 61.264,79.648 86.576,88.948 95.464,90.448"/><path class="ink" stroke-width="11" d="M70.776 53.348Q70.776 35.348 70.776 17.348"/><polyline class="ink" stroke-width="8" points="70.776,53.348 70.776,81.348 70.776,108.348 75.224,116.212"/><polyline class="ink" stroke-width="7" points="72.776,17.348 84.812,33.324 102,28"/><circle class="head" cx="70.776" cy="2.348" r="8.5"/></g></g></svg>
+<svg x="640" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Single-leg calf raise"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(-4.8 16.5) scale(0.8576)"><g ><rect class="kit" x="105" y="16" width="5" height="100" rx="1.5"/><polyline class="far" stroke-width="7" points="65.12,23.205 65.12,43.205 65.12,61.205"/><polyline class="far" stroke-width="8" points="67.12,59.205 57.52,85.505 82.92,94.748 91.82,96.305"/><path class="ink" stroke-width="11" d="M67.12 59.205Q67.12 41.205 67.12 23.205"/><polyline class="ink" stroke-width="8" points="67.12,59.205 67.12,87.205 67.12,114.205 75.832,116.388"/><polyline class="ink" stroke-width="7" points="69.12,23.205 85.356,34.856 102,28"/><circle class="head" cx="67.12" cy="8.205" r="8.5"/></g></g></svg>
+</svg>

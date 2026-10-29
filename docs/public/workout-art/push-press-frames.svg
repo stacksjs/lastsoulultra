@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 768 128" role="img" aria-label="push-press: six poses across one repetition"><svg x="0" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Barbell push press"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(15.1 27.3) scale(0.7643)"><g ><polyline class="ink" stroke-width="7" points="55,27 39.7,39.9 42.8,22.1"/><polyline class="ink" stroke-width="8" points="57,63 47,89.2 50,116 41,116"/><path class="ink" stroke-width="11" d="M64 63Q64 45 64 27"/><polyline class="ink" stroke-width="8" points="71,63 81,89.2 78,116 87,116"/><polyline class="ink" stroke-width="7" points="73,27 88.3,39.9 85.2,22.1"/><circle class="head" cx="64" cy="12" r="8.5"/><polyline class="gear-line" stroke-width="3" points="20,22.1 108,22.1"/><rect class="gear" x="21" y="11.1" width="6" height="22" rx="1"/><rect class="gear" x="101" y="11.1" width="6" height="22" rx="1"/></g></g></svg>
+<svg x="128" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Barbell push press"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(15.1 27.3) scale(0.7643)"><g ><polyline class="ink" stroke-width="7" points="55,30.854 39.7,43.71 42.8,25.954"/><polyline class="ink" stroke-width="8" points="57,66.854 41.746,90.351 50,116 41,116"/><path class="ink" stroke-width="11" d="M64 66.854Q64 48.854 64 30.854"/><polyline class="ink" stroke-width="8" points="71,66.854 86.254,90.351 78,116 87,116"/><polyline class="ink" stroke-width="7" points="73,30.854 88.3,43.71 85.2,25.954"/><circle class="head" cx="64" cy="15.854" r="8.5"/><polyline class="gear-line" stroke-width="3" points="20,25.954 108,25.954"/><rect class="gear" x="21" y="14.954" width="6" height="22" rx="1"/><rect class="gear" x="101" y="14.954" width="6" height="22" rx="1"/></g></g></svg>
+<svg x="256" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Barbell push press"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(15.1 27.3) scale(0.7643)"><g ><polyline class="ink" stroke-width="7" points="55,28.351 35.181,30.773 35.734,12.837"/><polyline class="ink" stroke-width="8" points="57,64.351 44.796,89.581 50,116 41,116"/><path class="ink" stroke-width="11" d="M64 64.351Q64 46.351 64 28.351"/><polyline class="ink" stroke-width="8" points="71,64.351 83.204,89.581 78,116 87,116"/><polyline class="ink" stroke-width="7" points="73,28.351 92.819,30.773 92.266,12.837"/><circle class="head" cx="64" cy="13.351" r="8.5"/><polyline class="gear-line" stroke-width="3" points="20,12.837 108,12.837"/><rect class="gear" x="21" y="1.837" width="6" height="22" rx="1"/><rect class="gear" x="101" y="1.837" width="6" height="22" rx="1"/></g></g></svg>
+<svg x="384" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Barbell push press"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(15.1 27.3) scale(0.7643)"><g ><polyline class="ink" stroke-width="7" points="55,27 51.247,7.384 51.247,-10.616"/><polyline class="ink" stroke-width="8" points="57,63 47,89.2 50,116 41,116"/><path class="ink" stroke-width="11" d="M64 63Q64 45 64 27"/><polyline class="ink" stroke-width="8" points="71,63 81,89.2 78,116 87,116"/><polyline class="ink" stroke-width="7" points="73,27 76.753,7.384 76.753,-10.616"/><circle class="head" cx="64" cy="12" r="8.5"/><polyline class="gear-line" stroke-width="3" points="20,-10.616 108,-10.616"/><rect class="gear" x="21" y="-21.616" width="6" height="22" rx="1"/><rect class="gear" x="101" y="-21.616" width="6" height="22" rx="1"/></g></g></svg>
+<svg x="512" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Barbell push press"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(15.1 27.3) scale(0.7643)"><g ><polyline class="ink" stroke-width="7" points="55,27 50.524,7.519 50.583,-10.481"/><polyline class="ink" stroke-width="8" points="57,63 47,89.2 50,116 41,116"/><path class="ink" stroke-width="11" d="M64 63Q64 45 64 27"/><polyline class="ink" stroke-width="8" points="71,63 81,89.2 78,116 87,116"/><polyline class="ink" stroke-width="7" points="73,27 77.476,7.519 77.417,-10.481"/><circle class="head" cx="64" cy="12" r="8.5"/><polyline class="gear-line" stroke-width="3" points="20,-10.481 108,-10.481"/><rect class="gear" x="21" y="-21.481" width="6" height="22" rx="1"/><rect class="gear" x="101" y="-21.481" width="6" height="22" rx="1"/></g></g></svg>
+<svg x="640" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Barbell push press"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(15.1 27.3) scale(0.7643)"><g ><polyline class="ink" stroke-width="7" points="55,27 38.997,38.945 42.021,21.245"/><polyline class="ink" stroke-width="8" points="57,63 47,89.2 50,116 41,116"/><path class="ink" stroke-width="11" d="M64 63Q64 45 64 27"/><polyline class="ink" stroke-width="8" points="71,63 81,89.2 78,116 87,116"/><polyline class="ink" stroke-width="7" points="73,27 89.003,38.945 85.979,21.245"/><circle class="head" cx="64" cy="12" r="8.5"/><polyline class="gear-line" stroke-width="3" points="20,21.245 108,21.245"/><rect class="gear" x="21" y="10.245" width="6" height="22" rx="1"/><rect class="gear" x="101" y="10.245" width="6" height="22" rx="1"/></g></g></svg>
+</svg>

@@ -32,7 +32,7 @@ This is a visual specimen. The links open real pages; the sample session text is
 
 ## Review artwork in context
 
-The illustration catalog contains 145 movement figures. The exercise index contains 184 built-in exercises: 149 have a figure mapping and 35 currently have none. Those missing mappings are marked in the index. A shared figure illustrates a movement pattern; it does not replace a session's technique instructions or prescribe that exercise to every runner.
+The illustration catalog contains 178 movement figures covering all 184 built-in exercises. Every exercise links to its matching figure. Entries identify side, front or overhead views; overhead figures are shown against a mat or bench outline. A shared figure illustrates a movement pattern; it does not replace a session's technique instructions or prescribe that exercise to every runner.
 
 Open a figure to compare its sampled poses on light and dark surfaces. Expand **Play animation** to view the moving asset. Keep reduced motion enabled if you prefer a still presentation.
 

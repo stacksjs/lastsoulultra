@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 768 128" role="img" aria-label="trap-bar-deadlift: six poses across one repetition"><svg x="0" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Trap-bar deadlift"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(4.2 7.7) scale(0.9339)"><g ><polyline class="ink" stroke-width="7" points="55,66 58.5,85.7 58.5,103.7"/><polyline class="ink" stroke-width="8" points="57,84 31.2,94.9 48,116 39,116"/><path class="ink" stroke-width="11" d="M64 84Q64 75 64 66"/><polyline class="ink" stroke-width="8" points="71,84 96.8,94.9 80,116 89,116"/><polyline class="ink" stroke-width="7" points="73,66 69.5,85.7 69.5,103.7"/><circle class="head" cx="64" cy="51" r="8.5"/><polyline class="gear-line" stroke-width="3" points="36,103.7 44,95.7 84,95.7 92,103.7 84,111.7 44,111.7 36,103.7"/><rect class="gear" x="29" y="92.7" width="6" height="22" rx="1"/><rect class="gear" x="93" y="92.7" width="6" height="22" rx="1"/><polyline class="gear-line" stroke-width="3" points="58.5,103.7 39,103.7"/><polyline class="gear-line" stroke-width="3" points="69.5,103.7 89,103.7"/></g></g></svg>
+<svg x="128" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Trap-bar deadlift"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(4.2 7.7) scale(0.9339)"><g ><polyline class="ink" stroke-width="7" points="55,62.576 58.5,82.276 58.5,100.276"/><polyline class="ink" stroke-width="8" points="57,82.173 31.819,94.411 48,116 39,116"/><path class="ink" stroke-width="11" d="M64 82.173Q64 72.355 64 62.576"/><polyline class="ink" stroke-width="8" points="71,82.173 96.181,94.411 80,116 89,116"/><polyline class="ink" stroke-width="7" points="73,62.576 69.5,82.276 69.5,100.276"/><circle class="head" cx="64" cy="47.576" r="8.5"/><polyline class="gear-line" stroke-width="3" points="36,100.276 44,92.276 84,92.276 92,100.276 84,108.276 44,108.276 36,100.276"/><rect class="gear" x="29" y="89.276" width="6" height="22" rx="1"/><rect class="gear" x="93" y="89.276" width="6" height="22" rx="1"/><polyline class="gear-line" stroke-width="3" points="58.5,100.276 39,100.276"/><polyline class="gear-line" stroke-width="3" points="69.5,100.276 89,100.276"/></g></g></svg>
+<svg x="256" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Trap-bar deadlift"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(4.2 7.7) scale(0.9339)"><g ><polyline class="ink" stroke-width="7" points="55,30.696 58.5,50.396 58.5,68.396"/><polyline class="ink" stroke-width="8" points="57,64.969 43.36,89.428 48,116 39,116"/><path class="ink" stroke-width="11" d="M64 64.969Q64 47.825 64 30.696"/><polyline class="ink" stroke-width="8" points="71,64.969 84.64,89.428 80,116 89,116"/><polyline class="ink" stroke-width="7" points="73,30.696 69.5,50.396 69.5,68.396"/><circle class="head" cx="64" cy="15.696" r="8.5"/><polyline class="gear-line" stroke-width="3" points="36,68.396 44,60.396 84,60.396 92,68.396 84,76.396 44,76.396 36,68.396"/><rect class="gear" x="29" y="57.396" width="6" height="22" rx="1"/><rect class="gear" x="93" y="57.396" width="6" height="22" rx="1"/><polyline class="gear-line" stroke-width="3" points="58.5,68.396 39,68.396"/><polyline class="gear-line" stroke-width="3" points="69.5,68.396 89,68.396"/></g></g></svg>
+<svg x="384" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Trap-bar deadlift"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(4.2 7.7) scale(0.9339)"><g ><polyline class="ink" stroke-width="7" points="55,27 58.5,46.7 58.5,64.7"/><polyline class="ink" stroke-width="8" points="57,63 46.7,89 48,116 39,116"/><path class="ink" stroke-width="11" d="M64 63Q64 45 64 27"/><polyline class="ink" stroke-width="8" points="71,63 81.3,89 80,116 89,116"/><polyline class="ink" stroke-width="7" points="73,27 69.5,46.7 69.5,64.7"/><circle class="head" cx="64" cy="12" r="8.5"/><polyline class="gear-line" stroke-width="3" points="36,64.7 44,56.7 84,56.7 92,64.7 84,72.7 44,72.7 36,64.7"/><rect class="gear" x="29" y="53.7" width="6" height="22" rx="1"/><rect class="gear" x="93" y="53.7" width="6" height="22" rx="1"/><polyline class="gear-line" stroke-width="3" points="58.5,64.7 39,64.7"/><polyline class="gear-line" stroke-width="3" points="69.5,64.7 89,64.7"/></g></g></svg>
+<svg x="512" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Trap-bar deadlift"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(4.2 7.7) scale(0.9339)"><g ><polyline class="ink" stroke-width="7" points="55,32.641 58.5,52.341 58.5,70.341"/><polyline class="ink" stroke-width="8" points="57,66.016 42.009,89.675 48,116 39,116"/><path class="ink" stroke-width="11" d="M64 66.016Q64 49.283 64 32.641"/><polyline class="ink" stroke-width="8" points="71,66.016 85.991,89.675 80,116 89,116"/><polyline class="ink" stroke-width="7" points="73,32.641 69.5,52.341 69.5,70.341"/><circle class="head" cx="64" cy="17.641" r="8.5"/><polyline class="gear-line" stroke-width="3" points="36,70.341 44,62.341 84,62.341 92,70.341 84,78.341 44,78.341 36,70.341"/><rect class="gear" x="29" y="59.341" width="6" height="22" rx="1"/><rect class="gear" x="93" y="59.341" width="6" height="22" rx="1"/><polyline class="gear-line" stroke-width="3" points="58.5,70.341 39,70.341"/><polyline class="gear-line" stroke-width="3" points="69.5,70.341 89,70.341"/></g></g></svg>
+<svg x="640" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Trap-bar deadlift"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(4.2 7.7) scale(0.9339)"><g ><polyline class="ink" stroke-width="7" points="55,60.099 58.5,79.799 58.5,97.799"/><polyline class="ink" stroke-width="8" points="57,80.845 32.321,93.987 48,116 39,116"/><path class="ink" stroke-width="11" d="M64 80.845Q64 70.52 64 60.099"/><polyline class="ink" stroke-width="8" points="71,80.845 95.679,93.987 80,116 89,116"/><polyline class="ink" stroke-width="7" points="73,60.099 69.5,79.799 69.5,97.799"/><circle class="head" cx="64" cy="45.099" r="8.5"/><polyline class="gear-line" stroke-width="3" points="36,97.799 44,89.799 84,89.799 92,97.799 84,105.799 44,105.799 36,97.799"/><rect class="gear" x="29" y="86.799" width="6" height="22" rx="1"/><rect class="gear" x="93" y="86.799" width="6" height="22" rx="1"/><polyline class="gear-line" stroke-width="3" points="58.5,97.799 39,97.799"/><polyline class="gear-line" stroke-width="3" points="69.5,97.799 89,97.799"/></g></g></svg>
+</svg>

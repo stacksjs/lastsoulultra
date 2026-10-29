@@ -6,6 +6,7 @@
  */
 import { resolve } from 'node:path'
 import { pathToFileURL } from 'node:url'
+import { combinedRunKey, demoPlan, demoTier } from './lsu-demo-plan'
 
 interface DemoAccount { key: string, name: string, email: string, password: string, membership?: string, coach?: boolean, athlete?: boolean, subscriber?: boolean }
 const accountsFile = process.env.LSU_DEMO_ACCOUNTS_FILE
@@ -24,7 +25,14 @@ const { todayIn, addDays, startOfIsoWeek } = await import(Bun.resolveSync('@stac
 const { saveExperience, saveMethod } = await appModule('brandExperience')
 const { lastSoulExperience } = await appModule('experiencePresets')
 const { grantComp } = await appModule('platformBilling')
-const { grantSubscriptionEnrollment } = await appModule('storefront')
+const { grantSubscriptionEnrollment, enrollmentKey } = await appModule('storefront')
+const { normalizePlan } = await appModule('planEdit')
+const { planToWorkouts } = await appModule('planBuilder')
+const { writePlanWorkouts } = await appModule('planDrafts')
+const { toYmd } = await appModule('helpers')
+const normalized = normalizePlan(demoPlan(), true)
+if (!normalized.plan) throw new Error(normalized.error)
+const template = normalized.plan
 const database = await db.unsafe('SELECT current_database() AS name').execute()
 if (database[0]?.name !== process.env.LSU_SEED_DATABASE)
   throw new Error('LSU_SEED_DATABASE must match the connected database explicitly.')
@@ -46,7 +54,7 @@ await transaction(async () => {
     if (!user) user = await db.insertInto('users').values({ name: account.name, email: account.email, password: await Bun.password.hash(account.password, { algorithm: 'bcrypt', cost: 12 }), role: account.coach ? 'coach' : 'athlete', email_verified_at: now, profile_public: false, created_at: now }).returning(['id']).executeTakeFirstOrThrow()
     ids[account.key] = Number(user.id)
   }
-  if (!org) org = await db.insertInto('organizations').values({ user_id: ids.owner, name: 'Last Soul Ultra', slug: 'last-soul-ultra', status: 'active', kind: 'club', currency: 'EUR', timezone: zone, profile_public: false, public_join: false, lead_form: false, settings: JSON.stringify({ demo_seed: 'lsu-private-review-v1' }), created_at: now }).returningAll().executeTakeFirstOrThrow()
+  if (!org) org = await db.insertInto('organizations').values({ user_id: ids.owner, name: 'Last Soul Ultra', slug: 'last-soul-ultra', status: 'active', kind: 'club', currency: demoTier.currency, timezone: zone, profile_public: false, public_join: false, lead_form: false, settings: JSON.stringify({ demo_seed: 'lsu-private-review-v1' }), created_at: now }).returningAll().executeTakeFirstOrThrow()
   organizationId = Number(org.id)
   for (const account of accounts) {
     const userId = ids[account.key]
@@ -64,39 +72,54 @@ await transaction(async () => {
   await grantComp(ids.coach, 'coach_ai')
   await grantComp(ids.trainer, 'coach')
   const coach = await db.selectFrom('coaches').select('id').where('user_id', '=', ids.coach).executeTakeFirstOrThrow()
-  let method = await db.selectFrom('coaching_methods').selectAll().where('organization_id', '=', organizationId).where('name', '=', 'LSU demo endurance method').executeTakeFirst()
-  if (!method) method = await saveMethod(organizationId, { coach_id: Number(coach.id), name: 'LSU demo endurance method', summary: 'Fictional eight-week endurance sample for reviewing workouts and feedback. Not an approved LSU coaching method.', instructions: 'Demonstration method only. Build consistency with easy running, a controlled hill session, a long easy run and recovery. Respect the runner\'s availability and discomfort. Ask for clarification when needed. Only adapt future unfinished sessions after reviewed feedback; never invent completed history.', contact_url: `${origin}/contact`, status: 'published' })
-  let plan = await db.selectFrom('training_plans').select('id').where('coach_id', '=', Number(coach.id)).where('name', '=', 'LSU demo: eight weeks of endurance').executeTakeFirst()
-  if (!plan) {
-    const template = { summary: 'Sample training for the private LSU review.', phases: [{ name: 'Consistency', start_week: 1, end_week: 4, focus: 'Easy volume and routine' }, { name: 'Endurance', start_week: 5, end_week: 8, focus: 'Long-run consistency and recovery' }], weeks: Array.from({ length: 8 }, (_, week) => ({ week: week + 1, focus: week < 4 ? 'Consistency' : 'Endurance', planned_hours: 4, workouts: [
-      { day: 1, title: 'Easy aerobic run', duration_minutes: 40, distance_km: 6, tss: 30 },
-      { day: 3, title: 'Controlled hill session', duration_minutes: 50, distance_km: 7, tss: 45 },
-      { day: 5, title: 'Recovery run', duration_minutes: 30, distance_km: 4, tss: 18 },
-      { day: 6, title: 'Long easy trail run', duration_minutes: 90, distance_km: 12, tss: 65 },
-    ].map(workout => ({ ...workout, sport: 'Run', description: 'Fictional demo session. Keep the effort comfortable; review the session instructions before training.', steps: [{ name: 'Warm up', duration_minutes: 5, zone: 'Z1', intensity: 'Easy', notes: '' }, { name: workout.title, duration_minutes: workout.duration_minutes - 10, zone: 'Z2', intensity: 'Easy', notes: 'Sample session for reviewing the application.' }, { name: 'Cool down', duration_minutes: 5, zone: 'Z1', intensity: 'Easy', notes: '' }] })) })) }
-    plan = await db.insertInto('training_plans').values({ coach_id: Number(coach.id), name: 'LSU demo: eight weeks of endurance', description: template.summary, sport: 'Run', weeks: 8, plan: JSON.stringify(template), created_at: now }).returning(['id']).executeTakeFirstOrThrow()
-  }
+  const priorVersion = Number(JSON.parse(String(org.settings || '{}')).demo_schema_version || 1)
   let product = await db.selectFrom('products').selectAll().where('slug', '=', 'lsu-private-demo-running').executeTakeFirst()
-  if (!product) product = await db.insertInto('products').values({ organization_id: organizationId, coach_id: Number(coach.id), name: 'Endurance running, demo', slug: 'lsu-private-demo-running', type: 'coaching', description: 'Private review sample. Fictional EUR 19.99 monthly tier; existing demo access is complimentary. No payment account is connected.', price_cents: 1999, currency: 'EUR', billing_interval: 'month', includes_coaching: false, training_plan_id: Number(plan.id), status: 'active', created_at: now }).returningAll().executeTakeFirstOrThrow()
-  const experience = await db.selectFrom('brand_experiences').select(['id']).where('organization_id', '=', organizationId).executeTakeFirst()
-  if (!experience) await saveExperience(organizationId, { ...lastSoulExperience(), home_url: `${origin}/coaching`, logo_url: 'https://www.lastsoulultra.com/assets/lsu-logo.svg', support_url: `${origin}/contact`, privacy_url: `${origin}/privacy`, terms_url: `${origin}/terms`, embed_origins: [origin], show_powered_by: false, offers: [{ product_id: Number(product.id), method_id: Number(method.id), label: 'Endurance running, demo' }] }, 'published')
+  if (product && (Number(product.organization_id) !== organizationId || Number(product.coach_id) !== Number(coach.id))) throw new Error('The demo product is owned by another organization or coach.')
+  const oldOffer = product ? await db.selectFrom('coaching_subscriptions').selectAll().where('product_id', '=', Number(product.id)).execute() : []
+  if (oldOffer.some((row: any) => row.stripe_subscription_id || row.stripe_checkout_session_id || !Object.values(ids).includes(Number(row.user_id)))) throw new Error('Refusing to alter a purchased or non-demo subscription.')
+  const previousPlan = product?.training_plan_id ? await db.selectFrom('training_plans').selectAll().where('id', '=', Number(product.training_plan_id)).executeTakeFirst() : null
+  if (previousPlan && Number(previousPlan.coach_id) !== Number(coach.id)) throw new Error('The demo plan belongs to another coach.')
+  const methodInput = { coach_id: Number(coach.id), name: 'LSU demo running and strength method', summary: 'Fictional eight-week Run + Strength sample for reviewing workouts and feedback. Not an approved LSU coaching method.', instructions: 'Demonstration method only. Review four running sessions and two illustrated strength sessions per week. Respect the athlete\'s availability and discomfort. Ask for clarification when needed. Only adapt future unfinished sessions after reviewed feedback; never invent completed history.', contact_url: `${origin}/contact`, status: 'published' }
+  const existingBrand = await db.selectFrom('brand_experiences').selectAll().where('organization_id', '=', organizationId).executeTakeFirst()
+  const existingSettings = existingBrand ? JSON.parse(String(existingBrand.settings)) : null
+  const oldMethodId = existingSettings?.offers?.find((offer: any) => Number(offer.product_id) === Number(product?.id))?.method_id
+  const method = await saveMethod(organizationId, methodInput, oldMethodId ? Number(oldMethodId) : undefined)
+  const planValues = { name: 'LSU demo: eight weeks of running and strength', description: template.summary, sport: 'Multisport', weeks: 8, plan: JSON.stringify(template), updated_at: now }
+  const plan = previousPlan || await db.insertInto('training_plans').values({ ...planValues, coach_id: Number(coach.id), created_at: now }).returning(['id']).executeTakeFirstOrThrow()
+  if (previousPlan) await db.updateTable('training_plans').set(planValues).where('id', '=', Number(plan.id)).execute()
+  const productValues = { name: demoTier.name, description: 'Private review sample. USD 29 monthly Run + Strength tier; demo access is complimentary. No payment account is connected.', price_cents: demoTier.price_cents, currency: demoTier.currency, billing_interval: demoTier.billing_interval, allowed_training_sports: JSON.stringify(demoTier.sports), includes_coaching: false, training_plan_id: Number(plan.id), status: 'active', updated_at: now }
+  if (!product) product = await db.insertInto('products').values({ ...productValues, organization_id: organizationId, coach_id: Number(coach.id), slug: 'lsu-private-demo-running', type: 'coaching', created_at: now }).returningAll().executeTakeFirstOrThrow()
+  else await db.updateTable('products').set(productValues).where('id', '=', Number(product.id)).execute()
+  const offer = { product_id: Number(product.id), method_id: Number(method.id), label: demoTier.name }
+  await saveExperience(organizationId, existingSettings ? { ...existingSettings, offers: existingSettings.offers.map((item: any) => Number(item.product_id) === Number(product.id) ? offer : item) } : { ...lastSoulExperience(), home_url: `${origin}/coaching`, logo_url: 'https://www.lastsoulultra.com/assets/lsu-logo.svg', support_url: `${origin}/contact`, privacy_url: `${origin}/privacy`, terms_url: `${origin}/terms`, embed_origins: [origin], show_powered_by: false, offers: [offer] }, existingBrand?.status || 'published')
   const brand = await db.selectFrom('brand_experiences').select('id').where('organization_id', '=', organizationId).executeTakeFirstOrThrow()
   for (const account of accounts.filter(account => account.subscriber)) {
     const athlete = await db.selectFrom('athletes').select('id').where('user_id', '=', ids[account.key]).executeTakeFirstOrThrow()
-    let subscription = await db.selectFrom('coaching_subscriptions').select('id').where('user_id', '=', ids[account.key]).where('product_id', '=', Number(product.id)).executeTakeFirst()
-    if (!subscription) {
-      subscription = await db.insertInto('coaching_subscriptions').values({ user_id: ids[account.key], product_id: Number(product.id), coach_id: Number(coach.id), brand_experience_id: Number(brand.id), coaching_method_id: Number(method.id), status: 'active', price_cents: 1999, currency: 'EUR', billing_interval: 'month', plan_start_date: today, created_at: now, updated_at: now }).returning('id').executeTakeFirstOrThrow()
-      // The enrollment primitive delivers the real plan without the purchase
-      // workflow's welcome notifications. Demo access has no provider charge.
-      await grantSubscriptionEnrollment({ userId: ids[account.key], productId: Number(product.id), athleteId: Number(athlete.id), planStart: today, coachingSubscriptionId: Number(subscription.id) })
-      await db.updateTable('coaching_subscriptions').set({ access_started_at: now, athlete_id: Number(athlete.id), linked_coach: false }).where('id', '=', Number(subscription.id)).execute()
-      const enrollment = await db.selectFrom('product_enrollments').select('id').where('coaching_subscription_id', '=', Number(subscription.id)).executeTakeFirstOrThrow()
-      const workouts = await db.selectFrom('workouts').select(['id', 'planned_duration', 'planned_distance_km', 'planned_tss']).where('athlete_id', '=', Number(athlete.id)).where('external_source', '=', 'hq-plan').where('external_id', 'like', `enroll-${Number(enrollment.id)}:%`).orderBy('date').orderBy('id').execute()
-      for (const [index, workout] of workouts.entries()) {
-        const date = addDays(startOfIsoWeek(today), -21 + Math.floor(index / 4) * 7 + [0, 2, 4, 5][index % 4])
-        const completed = date < today
-        await db.updateTable('workouts').set({ date, completed, ...(completed ? { completed_duration: workout.planned_duration, completed_distance_km: workout.planned_distance_km, completed_tss: workout.planned_tss, avg_hr: 138 + index % 9, rpe: 3 + index % 3, feeling: 3 + index % 2 } : {}) }).where('id', '=', Number(workout.id)).execute()
-      }
+    let subscription = await db.selectFrom('coaching_subscriptions').selectAll().where('user_id', '=', ids[account.key]).where('product_id', '=', Number(product.id)).executeTakeFirst()
+    const sampleStart = addDays(startOfIsoWeek(today), -21)
+    if (!subscription) subscription = await db.insertInto('coaching_subscriptions').values({ user_id: ids[account.key], product_id: Number(product.id), coach_id: Number(coach.id), brand_experience_id: Number(brand.id), coaching_method_id: Number(method.id), status: 'active', price_cents: demoTier.price_cents, currency: demoTier.currency, billing_interval: demoTier.billing_interval, plan_start_date: sampleStart, created_at: now, updated_at: now }).returningAll().executeTakeFirstOrThrow()
+    // Enrollment delivers the real plan without purchase welcome notifications.
+    await grantSubscriptionEnrollment({ userId: ids[account.key], productId: Number(product.id), athleteId: Number(athlete.id), planStart: sampleStart, coachingSubscriptionId: Number(subscription.id) })
+    const enrollment = await db.selectFrom('product_enrollments').selectAll().where('coaching_subscription_id', '=', Number(subscription.id)).executeTakeFirstOrThrow()
+    if (Number(enrollment.plan_revision || 0) !== 0 || enrollment.revoked_at || enrollment.order_id) throw new Error('Refusing to replace a revised or purchased demo enrollment.')
+    const key = enrollmentKey(Number(enrollment.id))
+    const before = await db.selectFrom('workouts').select(['id', 'external_id', 'sport', 'date']).where('athlete_id', '=', Number(athlete.id)).where('external_source', '=', 'hq-plan').where('external_id', 'like', `${key}:%`).execute()
+    const start = toYmd(before.find((row: any) => String(row.external_id) === `${key}:w1:1`)?.date) || toYmd(enrollment.plan_start_date) || sampleStart
+    if (priorVersion < 2 && before.length && before.every((row: any) => row.sport === 'Run')) {
+      const rekeys = before.map((row: any) => ({ id: Number(row.id), next: combinedRunKey(String(row.external_id), key) }))
+      // Two phases avoid collisions between old slot 3 and its new occupant.
+      for (const row of rekeys) await db.updateTable('workouts').set({ external_id: `${key}:migration:${row.id}` }).where('id', '=', row.id).execute()
+      for (const row of rekeys) await db.updateTable('workouts').set({ external_id: row.next }).where('id', '=', row.id).execute()
+    }
+    await db.updateTable('product_enrollments').set({ plan_start_date: start, plan_snapshot: JSON.stringify(template), released_units: template.weeks.length, updated_at: now }).where('id', '=', Number(enrollment.id)).execute()
+    await db.updateTable('coaching_subscriptions').set({ price_cents: demoTier.price_cents, currency: demoTier.currency, billing_interval: demoTier.billing_interval, plan_start_date: start, access_started_at: subscription.access_started_at || now, athlete_id: Number(athlete.id), linked_coach: false, updated_at: now }).where('id', '=', Number(subscription.id)).execute()
+    // Preserve every existing workout, including reviewer edits and completion history.
+    const existingIds = new Set(before.map((row: any) => Number(row.id)))
+    await writePlanWorkouts(Number(athlete.id), null, key, planToWorkouts(template, start, key))
+    const after = await db.selectFrom('workouts').select(['id', 'date', 'planned_duration', 'planned_distance_km', 'planned_tss']).where('athlete_id', '=', Number(athlete.id)).where('external_source', '=', 'hq-plan').where('external_id', 'like', `${key}:%`).execute()
+    for (const [index, workout] of after.entries()) {
+      if (existingIds.has(Number(workout.id)) || String(toYmd(workout.date)) >= today) continue
+      await db.updateTable('workouts').set({ completed: true, completed_duration: workout.planned_duration, completed_distance_km: workout.planned_distance_km, completed_tss: workout.planned_tss, avg_hr: 138 + index % 9, rpe: 3 + index % 3, feeling: 3 + index % 2 }).where('id', '=', Number(workout.id)).execute()
     }
     for (let day = 0; day < 21; day++) {
       const date = addDays(today, -day)
@@ -104,6 +127,7 @@ await transaction(async () => {
       await db.insertInto('health_metrics').values({ athlete_id: Number(athlete.id), date, source: 'lsu-demo', sleep_hours: 7.2 + day % 4 * 0.2, sleep_score: 79 + day % 10, hrv: 50 + day % 11, resting_hr: 50 + day % 5, readiness: 77 + day % 14, steps: 8500 + day * 160, created_at: now }).execute()
     }
   }
+  await db.updateTable('organizations').set({ currency: demoTier.currency, settings: JSON.stringify({ ...JSON.parse(String(org.settings || '{}')), demo_schema_version: 2 }), updated_at: now }).where('id', '=', organizationId).execute()
   // A club-scoped sample conversation to an admin, without assigning a personal coach.
   const first = Math.min(ids.runner, ids.admin), second = Math.max(ids.runner, ids.admin)
   const scope = `hq:gym:${organizationId}`

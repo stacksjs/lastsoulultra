@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 768 128" role="img" aria-label="split-squat-calf-raise: six poses across one repetition"><svg x="0" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Bulgarian split squat with calf raise"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(14.8 12.3) scale(0.894)"><g ><rect class="kit" x="8" y="90" width="34" height="26" rx="2.5"/><path class="kit-line" stroke-width="3" d="M12 116 V116 M38 116 V116"/><polyline class="far" stroke-width="7" points="63.3,30 62.2,50 63.5,68"/><polyline class="far" stroke-width="8" points="64,66 55.9,92.8 30,85 21,84.2"/><path class="ink" stroke-width="11" d="M64 66Q64.7 48 65.3 30"/><polyline class="ink" stroke-width="8" points="64,66 78.1,90.2 86,116 95,116"/><polyline class="ink" stroke-width="7" points="67.3,30 66.2,50 67.5,68"/><circle class="head" cx="65.8" cy="15" r="8.5"/></g></g></svg>
+<svg x="128" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Bulgarian split squat with calf raise"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(14.8 12.3) scale(0.894)"><g ><rect class="kit" x="8" y="90" width="34" height="26" rx="2.5"/><path class="kit-line" stroke-width="3" d="M12 116 V116 M38 116 V116"/><polyline class="far" stroke-width="7" points="64.863,41.157 63.763,61.144 65.063,79.057"/><polyline class="far" stroke-width="8" points="62.962,76.944 50.821,102.117 30,85 21,84.2"/><path class="ink" stroke-width="11" d="M62.962 76.944Q64.913 59.044 66.863 41.157"/><polyline class="ink" stroke-width="8" points="62.962,76.944 88.14,89.113 86,116 95,116"/><polyline class="ink" stroke-width="7" points="68.863,41.157 67.763,61.144 69.063,79.057"/><circle class="head" cx="68.414" cy="26.257" r="8.5"/></g></g></svg>
+<svg x="256" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Bulgarian split squat with calf raise"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(14.8 12.3) scale(0.894)"><g ><rect class="kit" x="8" y="90" width="34" height="26" rx="2.5"/><path class="kit-line" stroke-width="3" d="M12 116 V116 M38 116 V116"/><polyline class="far" stroke-width="7" points="66.275,51.5 65.2,71.5 66.5,89.475"/><polyline class="far" stroke-width="8" points="62,87 43.8,108.2 30,85 21,84.2"/><path class="ink" stroke-width="11" d="M62 87Q65.175 69.3 68.275 51.5"/><polyline class="ink" stroke-width="8" points="62,87 89.9,89.3 86,116 95,116"/><polyline class="ink" stroke-width="7" points="70.275,51.5 69.2,71.5 70.5,89.475"/><circle class="head" cx="70.875" cy="36.775" r="8.5"/></g></g></svg>
+<svg x="384" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Bulgarian split squat with calf raise"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(14.8 12.3) scale(0.894)"><g ><rect class="kit" x="8" y="90" width="34" height="26" rx="2.5"/><path class="kit-line" stroke-width="3" d="M12 116 V116 M38 116 V116"/><polyline class="far" stroke-width="7" points="63.3,30 62.2,50 63.5,68"/><polyline class="far" stroke-width="8" points="64,66 55.9,92.8 30,85 21,84.2"/><path class="ink" stroke-width="11" d="M64 66Q64.7 48 65.3 30"/><polyline class="ink" stroke-width="8" points="64,66 78.1,90.2 86,116 95,116"/><polyline class="ink" stroke-width="7" points="67.3,30 66.2,50 67.5,68"/><circle class="head" cx="65.8" cy="15" r="8.5"/></g></g></svg>
+<svg x="512" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Bulgarian split squat with calf raise"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(14.8 12.3) scale(0.894)"><g ><rect class="kit" x="8" y="90" width="34" height="26" rx="2.5"/><path class="kit-line" stroke-width="3" d="M12 116 V116 M38 116 V116"/><polyline class="far" stroke-width="7" points="68.37,21.9 67.3,41.9 68.57,59.9"/><polyline class="far" stroke-width="8" points="69.1,57.9 56.9,83.13 30,85 21,84.2"/><path class="ink" stroke-width="11" d="M69.1 57.9Q69.77 39.9 70.37 21.9"/><polyline class="ink" stroke-width="8" points="69.1,57.9 83.2,82.1 91.1,107.9 95.03,116"/><polyline class="ink" stroke-width="7" points="72.37,21.9 71.3,41.9 72.57,59.9"/><circle class="head" cx="70.9" cy="6.93" r="8.5"/></g></g></svg>
+<svg x="640" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Bulgarian split squat with calf raise"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(14.8 12.3) scale(0.894)"><g ><rect class="kit" x="8" y="90" width="34" height="26" rx="2.5"/><path class="kit-line" stroke-width="3" d="M12 116 V116 M38 116 V116"/><polyline class="far" stroke-width="7" points="63.372,29.856 62.272,49.856 63.572,67.828"/><polyline class="far" stroke-width="8" points="64.072,65.856 55.9,92.656 30,85 21,84.2"/><path class="ink" stroke-width="11" d="M64.072 65.856Q64.772 47.856 65.372 29.856"/><polyline class="ink" stroke-width="8" points="64.072,65.856 78.244,90.028 86.072,115.856 95.072,116"/><polyline class="ink" stroke-width="7" points="67.372,29.856 66.272,49.856 67.572,67.828"/><circle class="head" cx="65.872" cy="14.856" r="8.5"/></g></g></svg>
+</svg>
