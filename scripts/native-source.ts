@@ -25,7 +25,7 @@ async function fetchSource(): Promise<void> {
     if (!hostKey) throw new Error('GitHub did not supply its expected SSH host key')
     const identity = join(directory, 'identity')
     const hosts = join(directory, 'known_hosts')
-    writeFileSync(identity, key, { mode: 0o600 })
+    writeFileSync(identity, `${key.replace(/\r\n/g, '\n').trim()}\n`, { mode: 0o600 })
     writeFileSync(hosts, `github.com ${hostKey}\n`, { mode: 0o600 })
     const quote = (value: string) => `'${value.replace(/'/g, `'\\''`)}'`
     const ssh = `ssh -i ${quote(identity)} -p 443 -o HostName=ssh.github.com -o HostKeyAlias=github.com -o ConnectTimeout=15 -o ConnectionAttempts=1 -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o HostKeyAlgorithms=ssh-ed25519 -o UserKnownHostsFile=${quote(hosts)}`
