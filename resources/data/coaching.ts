@@ -152,6 +152,17 @@ export interface CoachingPageMeta {
  * Head metadata for a module route. A module that needs an account is noindex:
  * a crawler sees the chrome and a sign-in prompt, which is not a page worth
  * putting in a search result.
+ *
+ * The <title> leads with `label`, not `title`. They do different jobs: the
+ * heading is read with the page in front of you and can afford a sentence,
+ * while a tab is read in a strip of eight and is cut to a couple of words.
+ * "What you have done" and "What is open" truncate to the same shrug, and
+ * seven of these eight are noindex, so this string is almost only ever a tab
+ * label. Leading with the nav word also matches the rest of the site
+ * ("Administration - Last Soul Ultra"), the nav the reader just clicked and
+ * the native app's own tab. The heading below keeps LSU's voice, and so does
+ * the breadcrumb, which reads `title` from this registry rather than parsing
+ * the string built here.
  */
 export function coachingPage(slug: string): CoachingPageMeta {
   const module = coachingModule(slug)
@@ -159,7 +170,7 @@ export function coachingPage(slug: string): CoachingPageMeta {
     throw new Error(`unknown coaching module: ${slug}`)
 
   return {
-    title: `${module.title} - Last Soul Ultra coaching`,
+    title: `${module.label} - Last Soul Ultra coaching`,
     description: module.summary,
     styles: coachingStyles,
     noindex: module.scope !== 'public',

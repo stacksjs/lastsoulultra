@@ -53,10 +53,27 @@ describe('a module route, with a brand published', () => {
     for (const module of coachingModules) {
       const html = await render(module.slug)
 
-      expect(html).toContain(`<title>${module.title} - Last Soul Ultra coaching</title>`)
+      expect(html).toContain(`<title>${module.label} - Last Soul Ultra coaching</title>`)
       expect(html).toContain(`content="${module.summary}"`)
       expect(html).toContain(`rel="canonical" href="${absolute(`/coaching/${module.slug}`)}"`)
     }
+  })
+
+  // The two are allowed to differ and mostly do, so assert the split rather
+  // than the strings: the tab takes the nav word a reader just clicked, the
+  // heading keeps LSU's own sentence. Collapsing either into the other is the
+  // change this guards against.
+  it('puts the nav word in the tab and the site voice in the heading', async () => {
+    for (const module of coachingModules) {
+      const html = await render(module.slug)
+
+      expect(html).toContain(`<title>${module.label} - Last Soul Ultra coaching</title>`)
+      expect(html).toContain(module.title)
+    }
+
+    const store = await render('plans')
+    expect(store).toContain('<title>Store - Last Soul Ultra coaching</title>')
+    expect(store).toContain('What is open')
   })
 
   it('highlights its own tab, once', async () => {
@@ -128,7 +145,7 @@ describe('a module route, with nothing published', () => {
   it('still renders the page it was asked for', async () => {
     const calendar = await render('calendar')
 
-    expect(calendar).toContain('<title>Your workouts - Last Soul Ultra coaching</title>')
+    expect(calendar).toContain('<title>Workouts - Last Soul Ultra coaching</title>')
     expect(calendar).toContain('Not open yet')
   })
 
