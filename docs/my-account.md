@@ -11,7 +11,9 @@ The browser's preview password unlocks the private website. Your app email and p
 
 ## Your profile
 
-Open **Me** or the [account panel](https://lsu.stacksjs.com/coaching/account) to review your subscription and the fitness-sharing preference offered for an active enrollment. This panel does not contain every profile setting. Use the full account workspace for profile settings where available. Calendar dates follow the time zone stored on your account.
+Open the [account panel](https://lsu.stacksjs.com/coaching/account) on the website to review your subscription and the fitness-sharing preference offered for an active enrollment. This screen does not contain every profile setting. Use the full account workspace for profile settings where available. Calendar dates follow the time zone stored on your account.
+
+In the iOS app, the **Me** tab is your profile, notifications, settings and LSU's privacy policy. Your subscription is one row down: choose **Your subscription** there, which opens the same status, renewal and billing actions as the website panel. In German that row reads **Dein Abo**.
 
 ## Switch roles safely
 
