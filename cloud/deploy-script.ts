@@ -1,3 +1,4 @@
+import { prepareTrainingSource } from '../scripts/prepare-training'
 /**
  * Custom Deploy Script
  *
@@ -22,6 +23,10 @@ export async function beforeDeploy({ environment, region }: { environment: strin
   if (!process.env.SITE_AUTH_USER || !process.env.SITE_AUTH_PASSWORD)
     throw new Error('The LSU private preview requires SITE_AUTH_USER and SITE_AUTH_PASSWORD for both the site and documentation.')
   console.log(`  Preparing deployment to ${environment} in ${region}...`)
+  if (environment !== 'production') throw new Error('Declare a separate enterprise database and residency contract before deploying another environment')
+  if (!process.env.LSU_TRAINING_APP_KEY || !process.env.LSU_TRAINING_DB_PASSWORD || !process.env.LSU_DEMO_ACCOUNTS_JSON)
+    throw new Error('The enterprise backend needs its own encryption key, database password and synthetic review accounts')
+  await prepareTrainingSource()
 }
 
 /**

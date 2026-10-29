@@ -10,7 +10,7 @@
 if (!Bun.env.STRIPE_SECRET_KEY)
   Bun.env.STRIPE_SECRET_KEY = 'sk_test_fake_key_for_testing'
 
-// config/coaching defaults HQ_ORIGIN to the real hq.training, and the coaching
+// config/coaching defaults HQ_ORIGIN to the live LSU backend, and the coaching
 // components read the published brand while rendering. Left alone, a suite run
 // would make live requests to another service - slow, flaky, and answered
 // differently depending on who is running it. Loopback port 1 refuses at once,

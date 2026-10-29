@@ -19,13 +19,14 @@
       "radius": 0,
       "font": "barlow",
       "heading_font": "anton"
-    }
+    },
+    "apiOrigin": "https://training.lsu.stacksjs.com"
   },
   "bundleId": "com.lastsoulultra.app",
   "teamId": "3JJRNQW6B7",
-  "site": "https://hq.training",
+  "site": "https://training.lsu.stacksjs.com",
   "version": "1.0.0",
-  "build": 1,
+  "build": 2,
   "assets": {
     "icon": "assets/icon.png",
     "splash": "../public/assets/lsu/images/lsu-logo.svg",
@@ -35,5 +36,10 @@
   "push": {
     "ios": true,
     "android": false
+  },
+  "deployment": {
+    "id": "lastsoulultra-training",
+    "country": "DE",
+    "location": "fsn1"
   }
 }

@@ -8,10 +8,12 @@ implementation of those features in this repository.
 `product.json` owns LSU's name, store identity, version, colors, fonts and legal
 links. The public LSU wordmark is rasterized from the existing website asset and embedded in the screen bundle so it works offline. Native builds
 materialize HQ under ignored `storage/native/hq/<commit>`, install its frozen
-`bun.lock`, and supply `HQ_NATIVE_PRODUCT` to HQ's build. Only the two public
-branding JSON inputs are overlaid; other source changes stop the build.
-HQ's API and account authorization remain the same. This skin never grants
-coaching or health-data access and does not link separate race accounts.
+`bun.lock`, and supply `HQ_NATIVE_PRODUCT` to HQ's build. Only the declared branding and deployment inputs are overlaid; other source
+changes stop the build.
+The same pinned application source runs LSU's own training backend. Native
+requests go only to `training.lsu.stacksjs.com`; its database, encryption key,
+private uploads, sessions and jobs are separate from HQ. A cached HQ API address
+cannot change the packaged origin. Race accounts remain a separate service.
 
 Use the exact Bun version in `pantry.json`:
 
@@ -31,8 +33,8 @@ lockfile; it does not restore a different Craft version from LSU's website.
 
 The app uses `com.lastsoulultra.app`, team `3JJRNQW6B7`, and the
 `lastsoulultra://` scheme. The Live Activity extension uses
-`com.lastsoulultra.app.liveactivity`. iOS notifications register with HQ as
-`last-soul-ultra`; HQ resolves its allowlisted bundle ID and APNs topic.
+`com.lastsoulultra.app.liveactivity`. iOS notifications register with LSU's own
+backend as `last-soul-ultra`, which resolves its allowlisted bundle ID and APNs topic.
 Android push stays disabled until this package has its own Firebase client.
 HQ's Firebase file and app-link ownership are never inherited by a new app.
 
@@ -51,7 +53,8 @@ export APP_STORE_CONNECT_PRIVATE_KEY_PATH=<private-p8-path>
 bun run native:testflight
 ```
 
-The release builds from the pin, archives and exports with App Store profiles,
+The release first verifies the live enterprise installation, source revision and
+residency contract. It builds from the pin, archives and exports with App Store profiles,
 checks the bundle/version and distribution entitlements, and uploads the IPA.
 `IOS_APP_PROFILE` and `IOS_ACTIVITY_PROFILE` can select alternative installed
 profile names. Evidence is kept under ignored `storage/native/release/`.

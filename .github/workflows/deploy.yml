@@ -121,6 +121,7 @@ jobs:
         if: steps.check.outputs.configured == 'true'
         run: ./buddy deploy --${{ github.event.inputs.environment == 'staging' && 'staging' || github.event.inputs.environment == 'development' && 'dev' || 'prod' }} --yes
         env:
+          HQ_SOURCE_SSH_KEY: ${{ secrets.HQ_SOURCE_SSH_KEY }}
           # Decrypts .env.production. Without it the encrypted values silently
           # fall back to defaults, which is how an app deploys with the wrong
           # APP_KEY and invalidates every session it had.

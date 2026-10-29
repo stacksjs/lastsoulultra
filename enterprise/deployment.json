@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "id": "lastsoulultra-training",
+  "origin": "https://training.lsu.stacksjs.com",
+  "residency": { "country": "DE", "location": "fsn1" },
+  "database": { "name": "lsu_training", "user": "lsu_training", "host": "127.0.0.1", "port": 5432 },
+  "storageRoot": "/var/www/lastsoulultra-shared/training",
+  "ports": { "web": 3250, "api": 3251, "speech": 8098 }
+}

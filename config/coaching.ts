@@ -1,5 +1,5 @@
-/** The HQ tenant is configurable; no coach IDs, prices, keys or billing state live in this app. */
+/** Coaching uses the independent LSU backend; credentials and billing state stay server-side. */
 export default {
-  origin: process.env.HQ_ORIGIN || 'https://hq.training',
+  origin: process.env.HQ_ORIGIN || 'https://training.lsu.stacksjs.com',
   brand: process.env.HQ_BRAND_SLUG || 'last-soul-ultra',
 }

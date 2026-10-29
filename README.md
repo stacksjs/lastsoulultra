@@ -44,32 +44,22 @@ The site deploys to `lsu.stacksjs.com`, a password-gated preview on the shared
 commit never ships.
 
 `config/cloud.ts` holds the shape: Hetzner, attach mode, rpx with on-demand TLS,
-one `main` site on the domain and a loopback-only `api`. DNS is the
+the website, a loopback-only website API, and the independent training web/API services. DNS is the
 `stacksjs.com` zone, which is on Cloudflare nameservers - ts-cloud detects the
 provider from the zone rather than being told, the same as HQ's config.
 
 ### What has to be in place
 
-`DEPLOY_SSH_KEY` and `DOTENV_PRIVATE_KEY_PRODUCTION` are already set as repository
-secrets; the workflow skips the whole deploy when either is missing. Nothing else is needed: with no `dns` block the deploy asks no registrar for
-anything.
+`DEPLOY_SSH_KEY` and `DOTENV_PRIVATE_KEY_PRODUCTION` are repository secrets.
+`HQ_SOURCE_SSH_KEY` is a read-only key for the pinned application source.
+`CLOUDFLARE_API_TOKEN` is configured for the authoritative `stacksjs.com` zone.
+Buddy discovers that zone and reconciles A/AAAA records for both the website
+and `training.lsu.stacksjs.com`, using the verified attached server's addresses.
+Records stay DNS-only so rpx can issue and terminate TLS on the German host.
+No manual DNS setup is required.
 
-The DNS record is made by hand, once. `config/cloud.ts` carries no `dns`
-block, so the deploy writes no records and needs no registrar credentials -
-`stacksjs.com` is delegated to Cloudflare while a Route53 hosted zone for the
-same name also exists and is not the one being asked, so there was no settled
-answer to which credentials were the right ones. In whichever zone is actually
-answering (`dig NS stacksjs.com`), create:
-
-| Name | Type | Value |
-|---|---|---|
-| `lsu` | A | `178.105.248.188` |
-| `lsu` | AAAA | `2a01:4f8:c014:6186::1` |
-
-The same pair `hq.training` resolves to, which is the shared `stacks` box this
-project attaches to. Not proxied: rpx terminates TLS on the box with on-demand
-certificates, and a proxy in front would terminate it elsewhere and break
-issuance.
+See [the enterprise deployment contract](enterprise/README.md) for LSU's own
+database, runtime isolation, source preparation and residency checks.
 
 `.env.production` is committed with every value encrypted (dotenvx; the private
 key lives in the gitignored `.env.keys`). `APP_DOMAIN` is set there and wins over
@@ -83,8 +73,8 @@ the default in `config/cloud.ts`, so it has to name the new host:
 
 `SITE_AUTH_USER` and `SITE_AUTH_PASSWORD` turn on rpx's HTTP Basic challenge for
 the site - the same gate the nginx driver applies as an htpasswd file - so the
-preview is neither readable by the public nor indexable. Both unset leaves the
-site open, which is what you want the day it goes public.
+preview is neither readable by the public nor indexable. The deploy hook requires both values for this private preview. A public launch
+requires an explicit change to that policy.
 
 ```sh
 ./buddy env:set SITE_AUTH_USER lsu --file .env.production
@@ -108,7 +98,7 @@ gh workflow run Deploy --repo stacksjs/lastsoulultra -f environment=production
 Set in the deployment environment:
 
 ```dotenv
-HQ_ORIGIN=https://hq.training
+HQ_ORIGIN=https://training.lsu.stacksjs.com
 HQ_BRAND_SLUG=last-soul-ultra
 ```
 
@@ -164,3 +154,7 @@ LSU prices, approved methodology, revenue shares and local versus cloud inferenc
 ## Native iOS and Android
 
 `bun run native:ios` and `bun run native:android` build the complete HQ app from a pinned source revision with LSU branding. `bun run native:testflight` archives and uploads the iOS app using existing local signing credentials. See [native/README.md](native/README.md) for the source-sharing contract, provenance and release setup.
+
+## Enterprise training backend
+
+`./buddy deploy --prod --yes` prepares the pinned HQ application source and deploys LSU's training web/API services alongside the race site. `enterprise/deployment.json` names the own installation at `training.lsu.stacksjs.com`, the Germany/Falkenstein residency policy, the dedicated PostgreSQL role/database, persistent private data and service ports. Native and server builds use the same immutable source revision. See [enterprise/README.md](enterprise/README.md).

@@ -4,6 +4,8 @@ import { join, dirname, delimiter } from 'node:path'
 import { createRequire } from 'node:module'
 import { pathToFileURL } from 'node:url'
 import product from '../native/product.json'
+import deployment from '../enterprise/deployment.json'
+import source from '../native/hq-source.json'
 import { root, output, sourceRoot } from './native-source'
 
 const keyId = process.env.APP_STORE_CONNECT_KEY_ID
@@ -12,6 +14,11 @@ const keyPath = process.env.APP_STORE_CONNECT_PRIVATE_KEY_PATH
 if (!keyId || !issuerId || !keyPath) throw new Error('Set APP_STORE_CONNECT_KEY_ID, APP_STORE_CONNECT_ISSUER_ID and APP_STORE_CONNECT_PRIVATE_KEY_PATH')
 const dirty = execFileSync('git', ['status', '--porcelain', '--untracked-files=no'], { cwd: root, encoding: 'utf8' }).trim()
 if (dirty) throw new Error('Commit and push the release inputs before uploading to TestFlight')
+const backendResponse = await fetch(`${product.site}/api/deployment`, { redirect: 'error', signal: AbortSignal.timeout(15000) })
+if (!backendResponse.ok) throw new Error('The LSU enterprise backend is not ready for a native release')
+const backend = await backendResponse.json() as { id?: string, origin?: string, source?: string, residency?: { country?: string, location?: string } }
+if (backend.id !== deployment.id || backend.origin !== product.site || backend.source !== source.revision || backend.residency?.country !== deployment.residency.country || backend.residency?.location !== deployment.residency.location)
+  throw new Error('Refusing to release an app connected to another installation or residency contract')
 const run = async (args: string[], cwd = root) => {
   const child = Bun.spawn(args, { cwd, env: { ...process.env, PATH: `${dirname(process.execPath)}${delimiter}${process.env.PATH || ''}` }, stdout: 'inherit', stderr: 'inherit' })
   if (await child.exited !== 0) throw new Error(`Native release failed: ${args[0]}`)

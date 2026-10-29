@@ -1,6 +1,8 @@
 import type { CloudConfig } from '@stacksjs/types'
 import type { CloudConfig as TsCloudConfig } from '@stacksjs/ts-cloud'
 import { env } from '@stacksjs/env'
+import { trainingSites } from './training-cloud'
+import deployment from '../enterprise/deployment.json'
 
 /**
  * The slug names the files this deploy OWNS on the box:
@@ -37,6 +39,7 @@ export const tsCloud: TsCloudConfig = {
     // labelled `ts-cloud/project=lastsoulultra` and quietly provisions a NEW
     // box, which is an expensive way to discover a missing line.
     attachTo: 'stacks',
+    residency: { countries: [deployment.residency.country], locations: [deployment.residency.location] },
 
     /**
      * Where this site used to answer.
@@ -66,7 +69,10 @@ export const tsCloud: TsCloudConfig = {
   },
 
   infrastructure: {
+    appDatabase: { engine: 'postgres', name: deployment.database.name, username: deployment.database.user, password: process.env.LSU_TRAINING_DB_PASSWORD || '', host: deployment.database.host, port: deployment.database.port },
+    dns: { domain: APP_DOMAIN },
     compute: {
+      managedServices: { postgres: true },
       instances: 1,
       size: 'small',
       disk: { size: 20, type: 'ssd', encrypted: true },
@@ -77,34 +83,12 @@ export const tsCloud: TsCloudConfig = {
       proxy: { engine: 'rpx', onDemandTls: true },
     },
 
-    /**
-     * No `dns` block, so the deploy writes no records and needs no registrar
-     * credentials. `lsu.stacksjs.com` is one host that will not move, and its
-     * A and AAAA were created once by hand on 29 October 2026, pointing at
-     * the shared `stacks` box this project attaches to:
-     *
-     *   lsu  A     178.105.248.188
-     *   lsu  AAAA  2a01:4f8:c014:6186::1
-     *
-     * DNS only, never proxied. Cloudflare creates both record types proxied
-     * by default, and the first attempt went in that way: the host answered
-     * 526, because rpx issues its certificate when the first request arrives
-     * and a proxy in front answers the challenge itself, so the certificate
-     * can never be issued. The grey cloud is load-bearing.
-     *
-     * Finding the zone took longer than it should have, so for the next
-     * person: `stacksjs.com` is registered at GoDaddy, not at Route 53, and
-     * its nameservers are Cloudflare (`alex`/`melany.ns.cloudflare.com`).
-     * Two Route 53 hosted zones for the same name also exist, in two
-     * different AWS accounts, holding 97 and 58 records and agreeing with
-     * neither each other nor reality. Nothing is delegated to either, so
-     * records added there resolve nowhere. The `stacks` account does
-     * register a domain through Route 53, which is where the belief came
-     * from, but that domain is `stacks-js.org`.
-     */
+    // Cloudflare is authoritative for stacksjs.com. Buddy reconciles every
+    // declared site's A/AAAA records as DNS-only so rpx can issue its TLS cert.
   },
 
   sites: {
+    ...trainingSites,
     docs: {
       deploy: 'server',
       root: 'dist/docs/.bunpress',
@@ -125,7 +109,7 @@ export const tsCloud: TsCloudConfig = {
      */
     main: {
       root: '.',
-      exclude: ['storage/runtime'],
+      exclude: ['storage/runtime', 'storage/native', 'storage/framework/mobile'],
       path: '/',
       domain: APP_DOMAIN,
       /**
@@ -138,8 +122,7 @@ export const tsCloud: TsCloudConfig = {
        * Credentials come from the environment, never from this file - a
        * password in the repository is a password on every fork and in every
        * clone. Set SITE_AUTH_USER and SITE_AUTH_PASSWORD and the gate turns
-       * itself on; leave them unset and the site is open, which is the right
-       * default for the day it goes public.
+       * itself on. The deploy hook requires both for this private preview.
        *
        * On the deploy they come from GitHub repository secrets of the same
        * two names, passed through in `.github/workflows/deploy.yml`. That is
@@ -169,6 +152,7 @@ export const tsCloud: TsCloudConfig = {
         APP_URL: `https://${APP_DOMAIN}`,
         PORT_API: String(PORT_API),
         API_URL: `http://127.0.0.1:${PORT_API}`,
+        DB_CONNECTION: 'sqlite', DB_DATABASE: 'stacks', DB_USERNAME: '', DB_PASSWORD: '',
       },
     },
 
@@ -176,7 +160,7 @@ export const tsCloud: TsCloudConfig = {
      *  port off the public network. */
     api: {
       root: '.',
-      exclude: ['storage/runtime'],
+      exclude: ['storage/runtime', 'storage/native', 'storage/framework/mobile'],
       start: 'bun node_modules/@stacksjs/actions/dist/serve/api.js',
       port: PORT_API,
       // No migrate here: `main` owns the schema, and running two migrations
@@ -187,6 +171,7 @@ export const tsCloud: TsCloudConfig = {
         APP_ENV: 'production',
         NODE_ENV: 'production',
         APP_URL: `https://${APP_DOMAIN}`,
+        DB_CONNECTION: 'sqlite', DB_DATABASE: 'stacks', DB_USERNAME: '', DB_PASSWORD: '',
       },
     },
   },

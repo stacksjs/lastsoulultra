@@ -11,7 +11,7 @@ const read=(path:string)=>{const b=readFileSync(path);return (b[0]===0x1f&&b[1]=
 const messages:Record<string,string>={}
 for(const lang of readdirSync(join(directory,'__messages'))){if(lang.includes('.'))continue;for(const file of readdirSync(join(directory,'__messages',lang)))if(file.endsWith('.json'))messages[`${lang}/${file.slice(0,-5)}`]=read(join(directory,'__messages',lang,file))}
 const code=`globalThis.__stxNativeReadMessages=function(language,area){return (${JSON.stringify(messages)})[language+'/'+area]||null};\n${read(join(directory,'__runtime.js'))}\n${read(join(directory,'views-login.js'))}`
-const phone=mountNativeScreen(code,'views-login',{platform:'ios',colorScheme:'dark',appURL:'https://hq.training/m',apiBase:'https://fixture.invalid/api',sessionTokenKey:'auth.token',api:(path:string)=>path.includes('social/providers')?{providers:[]}:undefined})
+const phone=mountNativeScreen(code,'views-login',{platform:'ios',colorScheme:'dark',appURL:`${product.site}/m`,apiBase:`${product.site}/api`,sessionTokenKey:'auth.token',api:(path:string)=>path.includes('social/providers')?{providers:[]}:undefined})
 try {
  await phone.settle(200)
  const nodes=[...phone.nodes.values()]
