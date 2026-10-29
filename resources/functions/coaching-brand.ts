@@ -162,7 +162,7 @@ export function parseBrand(raw: unknown, expectedSlug: string): CoachingBrand | 
 /** The site renders in en-GB; a German brand prints German money. */
 const LOCALES: Record<'en' | 'de', string> = { en: 'en-GB', de: 'de-DE' }
 
-/** "€19.99 a month", from the coach's own product. This site sets no price. */
+/** "€19.99 a month", from the published product. This formats, it does not price. */
 export function formatPrice(product: CoachingProduct, locale: 'en' | 'de' = 'en'): string {
   const amount = new Intl.NumberFormat(LOCALES[locale], {
     style: 'currency',

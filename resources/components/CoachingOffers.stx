@@ -10,10 +10,14 @@ import { formatPrice, formatTrial } from '../functions/coaching-brand'
 import { loadBrand } from '../functions/coaching-source'
 
 /* The one piece of coaching this site renders itself. The published brand is
-   public, so the tiers, the coach behind each one and the coach's own price
-   can be read here rather than only inside the frame - a search result, a
-   shared link and a visitor with frames blocked all get the same answer.
-   Nothing is composed: no price, no trial and no coach name originates here. */
+   public, so the tiers, the coach behind each one and the price can be read
+   here rather than only inside the frame - a search result, a shared link and
+   a visitor with frames blocked all get the same answer.
+
+   Nothing is composed: no price, no trial and no coach name originates in this
+   repository. That is provenance, not authority. Last Soul Ultra sets its own
+   pricing and a coach writes the method; this file renders what the published
+   brand already says about both. */
 const offerBrand = await loadBrand()
 const offers = offerBrand?.offers ?? []
 const offerLocale = offerBrand?.locale ?? 'en'
@@ -69,6 +73,6 @@ const offerRows = offers.map((offer) => {
   @else
   <h3>Nothing is open yet</h3>
   @endif
-  <p>No coach has published a method here and no price has been set. When the first tier opens it appears here, under the coach's own name and at the coach's own price. This site does not set either.</p>
+  <p>No method has been published here yet. When the first tier opens it appears here, with the coach who wrote the method and what Last Soul Ultra charges for it.</p>
 </div>
 @endif

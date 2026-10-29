@@ -39,7 +39,7 @@ export const coachingModules: CoachingModule[] = [
     // vocabularies; the page headings below stay in this site's voice.
     label: 'Store',
     title: 'What is open',
-    summary: 'The tiers a coach has published, what each one covers and what it costs. Nothing here is set by this site.',
+    summary: 'The tiers that are open, what each one covers and what it costs.',
     scope: 'public',
   },
   {
