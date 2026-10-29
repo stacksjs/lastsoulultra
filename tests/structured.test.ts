@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'bun:test'
 import { breadcrumbs, organization, structuredData, structuredDataJson } from '../resources/data/structured'
+import { coachingPage } from '../resources/data/coaching'
 
 /**
  * Structured data makes claims on the site's behalf in places nobody on the
@@ -54,8 +55,15 @@ describe('breadcrumbs', () => {
     expect(crumbs.itemListElement[2].item).toBeUndefined()
   })
 
-  it('names a coaching module the way the module pages do', () => {
-    const crumbs = breadcrumbs('/coaching/account', 'Billing and renewal - Last Soul Ultra coaching') as any
+  // Fed the title the page really sends, which leads with the nav word, to
+  // show the crumb does not come from that string: it reads the heading from
+  // the registry. Passing "Billing and renewal - ..." here would have passed
+  // for the wrong reason, since leafName ignores the argument for /coaching.
+  it('names a coaching module by its heading, not by its tab', () => {
+    const sent = coachingPage('account').title
+    expect(sent).toBe('Me - Last Soul Ultra coaching')
+
+    const crumbs = breadcrumbs('/coaching/account', sent) as any
     expect(crumbs.itemListElement[2].name).toBe('Billing and renewal')
   })
 
@@ -73,7 +81,7 @@ describe('what is deliberately not published', () => {
   it('describes no event, no FAQ and no offer', () => {
     // The 2026 edition has been run, the FAQ answers live in a view rather
     // than in data, and coaching prices are the coach's and served from HQ.
-    const json = structuredDataJson('/coaching/plans', 'What is open - Last Soul Ultra coaching')
+    const json = structuredDataJson('/coaching/plans', coachingPage('plans').title)
 
     for (const type of ['Event', 'SportsEvent', 'FAQPage', 'Offer', 'Product', 'Review'])
       expect(json).not.toContain(`"${type}"`)
