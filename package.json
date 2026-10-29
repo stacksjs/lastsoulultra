@@ -92,7 +92,7 @@
     "@stacksjs/ts-cloud": "^0.16.79",
     "@ts-maps/stx": "0.5.7",
     "bun-plugin-stx": "0.2.741",
-    "stacks": "0.75.373",
+    "stacks": "0.75.374",
     "ts-images": "0.2.32",
     "ts-maps": "0.5.7"
   },

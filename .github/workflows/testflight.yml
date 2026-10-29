@@ -1,0 +1,76 @@
+name: TestFlight
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: lsu-testflight
+  cancel-in-progress: false
+
+jobs:
+  release:
+    if: github.ref == 'refs/heads/main'
+    runs-on: xcode-27
+    timeout-minutes: 60
+    environment: ios-testflight
+    steps:
+      - name: Checkout the requested main revision
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Setup Pantry
+        uses: pantry-pm/pantry/packages/action@ee7f116a5363bfe2667b2d76f8f1f567f68148ef
+        with:
+          install: 'false'
+
+      - name: Setup the pinned Bun runtime
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: '1.4.4'
+
+      - name: Select and verify released Xcode
+        run: |
+          bun -e 'import { appendFileSync } from "node:fs"; import { releaseXcodeVersion, assertReleaseXcode } from "./scripts/ios-release-toolchain"; const directory=`/Applications/Xcode_${releaseXcodeVersion}.app/Contents/Developer`; const result=Bun.spawnSync(["/usr/bin/xcodebuild","-version"],{env:{...process.env,DEVELOPER_DIR:directory},stdout:"pipe",stderr:"pipe"}); if(result.exitCode)throw Error("The pinned released Xcode is unavailable on this runner"); const version=result.stdout.toString(); assertReleaseXcode(version); appendFileSync(process.env.GITHUB_ENV!,`DEVELOPER_DIR=${directory}\n`); console.log(version);'
+
+      - name: Install the frozen application dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Build the complete native app from pinned HQ source
+        env:
+          HQ_SOURCE_SSH_KEY: ${{ secrets.HQ_SOURCE_SSH_KEY }}
+        run: bun run native:ios
+
+      - name: Prepare temporary signing material
+        env:
+          LSU_IOS_DISTRIBUTION_P12_BASE64: ${{ secrets.LSU_IOS_DISTRIBUTION_P12_BASE64 }}
+          LSU_IOS_DISTRIBUTION_PASSWORD: ${{ secrets.LSU_IOS_DISTRIBUTION_PASSWORD }}
+          LSU_IOS_APP_PROFILE_BASE64: ${{ secrets.LSU_IOS_APP_PROFILE_BASE64 }}
+          LSU_IOS_ACTIVITY_PROFILE_BASE64: ${{ secrets.LSU_IOS_ACTIVITY_PROFILE_BASE64 }}
+          LSU_ASC_PRIVATE_KEY_BASE64: ${{ secrets.LSU_ASC_PRIVATE_KEY_BASE64 }}
+          LSU_ASC_KEY_ID: ${{ secrets.LSU_ASC_KEY_ID }}
+          LSU_ASC_ISSUER_ID: ${{ secrets.LSU_ASC_ISSUER_ID }}
+        run: bun scripts/ios-ci-signing.ts stage
+
+      - name: Verify, sign and upload the prepared application
+        run: bun run native:testflight --prepared
+
+      - name: Remove signing files and temporary keychain
+        if: always()
+        run: bun scripts/ios-ci-signing.ts cleanup
+
+      - name: Save signed app and source receipts
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: lsu-ios-${{ github.run_id }}-${{ github.run_attempt }}
+          retention-days: 7
+          if-no-files-found: warn
+          path: |
+            storage/native/release/*/export/*.ipa
+            storage/native/release/*/upload.json
+            storage/framework/mobile/ios/lsu-source.json
+            storage/native/bundled-login-report.json

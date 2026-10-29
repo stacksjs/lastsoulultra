@@ -7,6 +7,9 @@ import product from '../native/product.json'
 import deployment from '../enterprise/deployment.json'
 import source from '../native/hq-source.json'
 import { nativeBuildEnvironment, root, output, sourceRoot } from './native-source'
+import { assertReleaseXcode } from './ios-release-toolchain'
+
+assertReleaseXcode(execFileSync('xcodebuild', ['-version'], { encoding: 'utf8' }))
 
 const keyId = process.env.APP_STORE_CONNECT_KEY_ID
 const issuerId = process.env.APP_STORE_CONNECT_ISSUER_ID

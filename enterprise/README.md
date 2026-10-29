@@ -42,6 +42,13 @@ Cloud inference, remote object storage, telemetry and integration credentials
 are not inherited from HQ. An external provider needs its own reviewed setup.
 These controls describe this installation; they do not certify legal compliance.
 
+TestFlight releases use the manually dispatched `TestFlight` GitHub workflow on
+`main`, with Xcode 27.1 (27A9275). Native generation runs before signing secrets
+are available. Signing credentials belong to the `ios-testflight` environment;
+the job removes its temporary keychain and profiles and saves only the signed
+IPA and public source receipts. Production backend credentials are not supplied
+to this job. A local upload requires the same released Xcode build.
+
 Store these values using `buddy env:set KEY --stdin --file .env.production`:
 
 - `CLOUDFLARE_API_TOKEN` and optional `CLOUDFLARE_ZONE_ID` for automated DNS.
