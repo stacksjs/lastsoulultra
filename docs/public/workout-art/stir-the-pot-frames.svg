@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 768 128" role="img" aria-label="stir-the-pot: six poses across one repetition"><svg x="0" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Stir the pot"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(0.7 7.8) scale(0.9326)"><g ><circle class="kit" cx="105" cy="99" r="17"/><circle class="gear-line" stroke-width="1.5" cx="105" cy="99" r="17"/><polyline class="far" stroke-width="7" points="92.8,62.5 92.8,82.5 110.8,82.5"/><polyline class="far" stroke-width="8" points="63.6,80.5 39.6,95 16,108 17.6,116.9"/><path class="ink" stroke-width="11" d="M63.6 80.5Q79.2 71.5 94.8 62.5"/><polyline class="ink" stroke-width="8" points="63.6,80.5 39.6,95 16,108 17.6,116.9"/><polyline class="ink" stroke-width="7" points="96.8,62.5 96.8,82.5 114.8,82.5"/><circle class="head" cx="106.9" cy="53.7" r="8.5"/></g></g></svg>
+<svg x="128" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Stir the pot"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(0.7 7.8) scale(0.9326)"><g ><circle class="kit" cx="105" cy="99" r="17"/><circle class="gear-line" stroke-width="1.5" cx="105" cy="99" r="17"/><polyline class="far" stroke-width="7" points="92.8,62.5 96.267,82.2 114.2,80.5"/><polyline class="far" stroke-width="8" points="63.6,80.5 39.6,95 16,108 17.6,116.9"/><path class="ink" stroke-width="11" d="M63.6 80.5Q79.2 71.5 94.8 62.5"/><polyline class="ink" stroke-width="8" points="63.6,80.5 39.6,95 16,108 17.6,116.9"/><polyline class="ink" stroke-width="7" points="96.8,62.5 100.267,82.2 118.2,80.5"/><circle class="head" cx="106.9" cy="53.7" r="8.5"/></g></g></svg>
+<svg x="256" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Stir the pot"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(0.7 7.8) scale(0.9326)"><g ><circle class="kit" cx="105" cy="99" r="17"/><circle class="gear-line" stroke-width="1.5" cx="105" cy="99" r="17"/><polyline class="far" stroke-width="7" points="92.8,62.5 96.067,81.233 113.1,79.6"/><polyline class="far" stroke-width="8" points="63.6,80.5 39.6,95 16,108 17.6,116.9"/><path class="ink" stroke-width="11" d="M63.6 80.5Q79.2 71.5 94.8 62.5"/><polyline class="ink" stroke-width="8" points="63.6,80.5 39.6,95 16,108 17.6,116.9"/><polyline class="ink" stroke-width="7" points="96.8,62.5 100.067,81.233 117.1,79.6"/><circle class="head" cx="106.9" cy="53.7" r="8.5"/></g></g></svg>
+<svg x="384" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Stir the pot"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(0.7 7.8) scale(0.9326)"><g ><circle class="kit" cx="105" cy="99" r="17"/><circle class="gear-line" stroke-width="1.5" cx="105" cy="99" r="17"/><polyline class="far" stroke-width="7" points="92.8,62.5 92.8,79.5 108.1,79.5"/><polyline class="far" stroke-width="8" points="63.6,80.5 39.6,95 16,108 17.6,116.9"/><path class="ink" stroke-width="11" d="M63.6 80.5Q79.2 71.5 94.8 62.5"/><polyline class="ink" stroke-width="8" points="63.6,80.5 39.6,95 16,108 17.6,116.9"/><polyline class="ink" stroke-width="7" points="96.8,62.5 96.8,79.5 112.1,79.5"/><circle class="head" cx="106.9" cy="53.7" r="8.5"/></g></g></svg>
+<svg x="512" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Stir the pot"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(0.7 7.8) scale(0.9326)"><g ><circle class="kit" cx="105" cy="99" r="17"/><circle class="gear-line" stroke-width="1.5" cx="105" cy="99" r="17"/><polyline class="far" stroke-width="7" points="92.8,62.5 89.533,81.233 106.567,82.8"/><polyline class="far" stroke-width="8" points="63.6,80.5 39.6,95 16,108 17.6,116.9"/><path class="ink" stroke-width="11" d="M63.6 80.5Q79.2 71.5 94.8 62.5"/><polyline class="ink" stroke-width="8" points="63.6,80.5 39.6,95 16,108 17.6,116.9"/><polyline class="ink" stroke-width="7" points="96.8,62.5 93.533,81.233 110.567,82.8"/><circle class="head" cx="106.9" cy="53.7" r="8.5"/></g></g></svg>
+<svg x="640" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Stir the pot"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(0.7 7.8) scale(0.9326)"><g ><circle class="kit" cx="105" cy="99" r="17"/><circle class="gear-line" stroke-width="1.5" cx="105" cy="99" r="17"/><polyline class="far" stroke-width="7" points="92.8,62.5 89.333,82.2 107.233,83.867"/><polyline class="far" stroke-width="8" points="63.6,80.5 39.6,95 16,108 17.6,116.9"/><path class="ink" stroke-width="11" d="M63.6 80.5Q79.2 71.5 94.8 62.5"/><polyline class="ink" stroke-width="8" points="63.6,80.5 39.6,95 16,108 17.6,116.9"/><polyline class="ink" stroke-width="7" points="96.8,62.5 93.333,82.2 111.233,83.867"/><circle class="head" cx="106.9" cy="53.7" r="8.5"/></g></g></svg>
+</svg>

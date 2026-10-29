@@ -105,6 +105,9 @@ export default {
     '/legal/privacy': '/privacy',
     '/legal/terms': '/terms',
     '/admin': { to: `${hqOrigin}/login?next=%2Fstaff%2Fexperience`, status: 302, preserveQuery: false },
+    '/coach': { to: `${hqOrigin}/login?next=%2Fcoaches%2Fmethods`, status: 302, preserveQuery: false },
+    '/coach/exercises': { to: `${hqOrigin}/login?next=%2Fcoaches%2Fexercises`, status: 302, preserveQuery: false },
+    '/coach/subscribers': { to: `${hqOrigin}/login?next=%2Fcoaches%2Fsubscribers`, status: 302, preserveQuery: false },
   },
 
   /**

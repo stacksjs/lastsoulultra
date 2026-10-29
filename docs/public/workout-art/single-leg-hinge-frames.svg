@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 768 128" role="img" aria-label="single-leg-hinge: six poses across one repetition"><svg x="0" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Single leg deadlift"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(16 12.1) scale(0.8957999999999999)"><g ><polyline class="far" stroke-width="7" points="59,25 58,45 58,63"/><polyline class="far" stroke-width="8" points="61,61 58.1,88.8 53.4,115.4 62.2,117"/><path class="ink" stroke-width="11" d="M61 61Q61 43 61 25"/><polyline class="ink" stroke-width="8" points="61,61 62,89 62,116 71,116"/><polyline class="ink" stroke-width="7" points="63,25 62,45 62,63"/><circle class="head" cx="61" cy="10" r="8.5"/><path class="gear" d="M58 64 a4 4 0 0 1 8 0 M62 72 m-6.5 0 a6.5 6 0 1 0 13 0 a6.5 6 0 1 0 -13 0" stroke="none"/></g></g></svg>
+<svg x="128" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Single leg deadlift"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(16 12.1) scale(0.8957999999999999)"><g ><polyline class="far" stroke-width="7" points="61.056,25.289 60.078,45.267 60.078,63.267"/><polyline class="far" stroke-width="8" points="60.656,61.244 56.044,88.8 49.8,115.111 58.556,117.122"/><path class="ink" stroke-width="11" d="M60.656 61.244Q61.856 43.267 63.056 25.289"/><polyline class="ink" stroke-width="8" points="60.656,61.244 63.756,89.022 62,116 71,116"/><polyline class="ink" stroke-width="7" points="65.056,25.289 64.078,45.267 64.078,63.267"/><circle class="head" cx="63.933" cy="10.367" r="8.5"/><path class="gear" d="M60.078 64.267 a4 4 0 0 1 8 0 M64.078 72.267 m-6.5 0 a6.5 6 0 1 0 13 0 a6.5 6 0 1 0 -13 0" stroke="none"/></g></g></svg>
+<svg x="256" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Single leg deadlift"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(16 12.1) scale(0.8957999999999999)"><g ><polyline class="far" stroke-width="7" points="84.358,44.817 84.022,64.817 84.022,82.817"/><polyline class="far" stroke-width="8" points="56.263,64.392 32.35,78.814 8.965,92.182 13.782,99.738"/><path class="ink" stroke-width="11" d="M56.263 64.392Q71.319 54.604 86.358 44.817"/><polyline class="ink" stroke-width="8" points="56.263,64.392 68.146,89.7 62,116 71,116"/><polyline class="ink" stroke-width="7" points="88.358,44.817 88.022,64.817 88.022,82.817"/><circle class="head" cx="98.051" cy="35.574" r="8.5"/><path class="gear" d="M84.022 83.817 a4 4 0 0 1 8 0 M88.022 91.817 m-6.5 0 a6.5 6 0 1 0 13 0 a6.5 6 0 1 0 -13 0" stroke="none"/></g></g></svg>
+<svg x="384" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Single leg deadlift"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(16 12.1) scale(0.8957999999999999)"><g ><polyline class="far" stroke-width="7" points="87.8,62.083 87.8,82.083 87.8,100.083"/><polyline class="far" stroke-width="8" points="54,66 26.2,69.017 -0.642,71.975 0.958,80.817"/><path class="ink" stroke-width="11" d="M54 66Q71.9 64.042 89.8 62.083"/><polyline class="ink" stroke-width="8" points="54,66 68.7,89.8 62,116 71,116"/><polyline class="ink" stroke-width="7" points="91.8,62.083 91.8,82.083 91.8,100.083"/><circle class="head" cx="104.342" cy="58.425" r="8.5"/><path class="gear" d="M87.8 101.083 a4 4 0 0 1 8 0 M91.8 109.083 m-6.5 0 a6.5 6 0 1 0 13 0 a6.5 6 0 1 0 -13 0" stroke="none"/></g></g></svg>
+<svg x="512" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Single leg deadlift"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(16 12.1) scale(0.8957999999999999)"><g ><polyline class="far" stroke-width="7" points="87.8,61.067 87.8,81.067 87.8,99.067"/><polyline class="far" stroke-width="8" points="54.167,65.933 26.4,69.6 -0.4,73.1 1.433,81.9"/><path class="ink" stroke-width="11" d="M54.167 65.933Q72 63.5 89.8 61.067"/><polyline class="ink" stroke-width="8" points="54.167,65.933 68.7,89.8 62,116 71,116"/><polyline class="ink" stroke-width="7" points="91.8,61.067 91.8,81.067 91.8,99.067"/><circle class="head" cx="104.233" cy="57.067" r="8.5"/><path class="gear" d="M87.8 100.067 a4 4 0 0 1 8 0 M91.8 108.067 m-6.5 0 a6.5 6 0 1 0 13 0 a6.5 6 0 1 0 -13 0" stroke="none"/></g></g></svg>
+<svg x="640" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Single leg deadlift"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(16 12.1) scale(0.8957999999999999)"><g ><polyline class="far" stroke-width="7" points="71.9,29.867 71.167,49.833 71.167,67.833"/><polyline class="far" stroke-width="8" points="58.967,62.5 45.467,86.9 31.333,109.833 39.033,114.333"/><path class="ink" stroke-width="11" d="M58.967 62.5Q66.467 46.2 73.9 29.867"/><polyline class="ink" stroke-width="8" points="58.967,62.5 66.6,89.367 62,116 71,116"/><polyline class="ink" stroke-width="7" points="75.9,29.867 75.167,49.833 75.167,67.833"/><circle class="head" cx="79.6" cy="16.033" r="8.5"/><path class="gear" d="M71.167 68.833 a4 4 0 0 1 8 0 M75.167 76.833 m-6.5 0 a6.5 6 0 1 0 13 0 a6.5 6 0 1 0 -13 0" stroke="none"/></g></g></svg>
+</svg>

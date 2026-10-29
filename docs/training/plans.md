@@ -1,6 +1,6 @@
 ---
 title: Plans and subscriptions
-description: Plans and subscriptions in Last Soul Ultra.
+description: Browse training tiers, understand enrollment and review subscription access.
 ---
 
 # Plans and subscriptions

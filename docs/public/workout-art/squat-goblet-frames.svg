@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 768 128" role="img" aria-label="squat-goblet: six poses across one repetition"><svg x="0" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Goblet squat"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(4.8 9.5) scale(0.9177000000000001)"><g ><polyline class="far" stroke-width="7" points="64,25 70.8,43.8 67.7,26.1"/><polyline class="far" stroke-width="8" points="66,61 66.5,89 66,116 75,116"/><path class="ink" stroke-width="11" d="M66 61Q66 43 66 25"/><polyline class="ink" stroke-width="8" points="66,61 66.5,89 66,116 75,116"/><polyline class="ink" stroke-width="7" points="68,25 74.8,43.8 71.7,26.1"/><circle class="head" cx="66" cy="10" r="8.5"/><path class="gear" d="M69.7 33.1 a4 4 0 0 1 8 0 M73.7 41.1 m-6.5 0 a6.5 6 0 1 0 13 0 a6.5 6 0 1 0 -13 0" stroke="none"/></g></g></svg>
+<svg x="128" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Goblet squat"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(4.8 9.5) scale(0.9177000000000001)"><g ><polyline class="far" stroke-width="7" points="63.644,25.019 70.681,43.8 67.581,26.019"/><polyline class="far" stroke-width="8" points="64.95,61.019 66.475,89 66,116 75,116"/><path class="ink" stroke-width="11" d="M64.95 61.019Q65.288 43.019 65.644 25.019"/><polyline class="ink" stroke-width="8" points="64.95,61.019 66.475,89 66,116 75,116"/><polyline class="ink" stroke-width="7" points="67.644,25.019 74.681,43.8 71.581,26.019"/><circle class="head" cx="65.9" cy="10.019" r="8.5"/><path class="gear" d="M69.581 33.019 a4 4 0 0 1 8 0 M73.581 41.019 m-6.5 0 a6.5 6 0 1 0 13 0 a6.5 6 0 1 0 -13 0" stroke="none"/></g></g></svg>
+<svg x="256" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Goblet squat"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(4.8 9.5) scale(0.9177000000000001)"><g ><polyline class="far" stroke-width="7" points="60.873,35.701 70.638,53.082 67.538,35.382"/><polyline class="far" stroke-width="8" points="52.986,70.236 72.849,89.919 66,116 75,116"/><path class="ink" stroke-width="11" d="M52.986 70.236Q57.916 52.982 62.873 35.701"/><polyline class="ink" stroke-width="8" points="52.986,70.236 72.849,89.919 66,116 75,116"/><polyline class="ink" stroke-width="7" points="64.873,35.701 74.638,53.082 71.538,35.382"/><circle class="head" cx="66.984" cy="21.247" r="8.5"/><path class="gear" d="M69.538 42.382 a4 4 0 0 1 8 0 M73.538 50.382 m-6.5 0 a6.5 6 0 1 0 13 0 a6.5 6 0 1 0 -13 0" stroke="none"/></g></g></svg>
+<svg x="384" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Goblet squat"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(4.8 9.5) scale(0.9177000000000001)"><g ><polyline class="far" stroke-width="7" points="62.727,47.455 73.927,64.027 70.8,46.327"/><polyline class="far" stroke-width="8" points="50.2,80.355 76.1,90.927 66,116 75,116"/><path class="ink" stroke-width="11" d="M50.2 80.355Q57.5 63.855 64.727 47.455"/><polyline class="ink" stroke-width="8" points="50.2,80.355 76.1,90.927 66,116 75,116"/><polyline class="ink" stroke-width="7" points="66.727,47.455 77.927,64.027 74.8,46.327"/><circle class="head" cx="70.827" cy="33.755" r="8.5"/><path class="gear" d="M72.8 53.327 a4 4 0 0 1 8 0 M76.8 61.327 m-6.5 0 a6.5 6 0 1 0 13 0 a6.5 6 0 1 0 -13 0" stroke="none"/></g></g></svg>
+<svg x="512" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Goblet squat"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(4.8 9.5) scale(0.9177000000000001)"><g ><polyline class="far" stroke-width="7" points="62.594,46.874 73.74,63.528 70.594,45.728"/><polyline class="far" stroke-width="8" points="50.2,79.881 75.947,90.9 66,116 75,116"/><path class="ink" stroke-width="11" d="M50.2 79.881Q57.447 63.374 64.594 46.874"/><polyline class="ink" stroke-width="8" points="50.2,79.881 75.947,90.9 66,116 75,116"/><polyline class="ink" stroke-width="7" points="66.594,46.874 77.74,63.528 74.594,45.728"/><circle class="head" cx="70.64" cy="33.128" r="8.5"/><path class="gear" d="M72.594 52.728 a4 4 0 0 1 8 0 M76.594 60.728 m-6.5 0 a6.5 6 0 1 0 13 0 a6.5 6 0 1 0 -13 0" stroke="none"/></g></g></svg>
+<svg x="640" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Goblet squat"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(4.8 9.5) scale(0.9177000000000001)"><g ><polyline class="far" stroke-width="7" points="61.886,27.348 70.053,45.528 66.953,27.828"/><polyline class="far" stroke-width="8" points="59.292,63.028 69.154,89.173 66,116 75,116"/><path class="ink" stroke-width="11" d="M59.292 63.028Q61.626 45.174 63.886 27.348"/><polyline class="ink" stroke-width="8" points="59.292,63.028 69.154,89.173 66,116 75,116"/><polyline class="ink" stroke-width="7" points="65.886,27.348 74.053,45.528 70.953,27.828"/><circle class="head" cx="65.773" cy="12.448" r="8.5"/><path class="gear" d="M68.953 34.828 a4 4 0 0 1 8 0 M72.953 42.828 m-6.5 0 a6.5 6 0 1 0 13 0 a6.5 6 0 1 0 -13 0" stroke="none"/></g></g></svg>
+</svg>

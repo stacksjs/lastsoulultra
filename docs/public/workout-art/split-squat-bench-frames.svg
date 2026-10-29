@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 768 128" role="img" aria-label="split-squat-bench: six poses across one repetition"><svg x="0" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Bulgarian split squat"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(11.7 4.7) scale(0.9595)"><g ><rect class="kit" x="8" y="90" width="34" height="26" rx="2.5"/><path class="kit-line" stroke-width="3" d="M12 116 V116 M38 116 V116"/><polyline class="far" stroke-width="7" points="63.3,30 62.2,50 63.5,68"/><polyline class="far" stroke-width="8" points="64,66 55.9,92.8 30,85 21,84.2"/><path class="ink" stroke-width="11" d="M64 66Q64.7 48 65.3 30"/><polyline class="ink" stroke-width="8" points="64,66 78.1,90.2 86,116 95,116"/><polyline class="ink" stroke-width="7" points="67.3,30 66.2,50 67.5,68"/><circle class="head" cx="65.8" cy="15" r="8.5"/></g></g></svg>
+<svg x="128" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Bulgarian split squat"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(11.7 4.7) scale(0.9595)"><g ><rect class="kit" x="8" y="90" width="34" height="26" rx="2.5"/><path class="kit-line" stroke-width="3" d="M12 116 V116 M38 116 V116"/><polyline class="far" stroke-width="7" points="63.419,30.95 62.319,50.931 63.619,68.85"/><polyline class="far" stroke-width="8" points="63.9,66.931 55.563,93.631 30,85 21,84.2"/><path class="ink" stroke-width="11" d="M63.9 66.931Q64.7 48.931 65.419 30.95"/><polyline class="ink" stroke-width="8" points="63.9,66.931 80.325,89.644 86,116 95,116"/><polyline class="ink" stroke-width="7" points="67.419,30.95 66.319,50.931 67.619,68.85"/><circle class="head" cx="66.037" cy="15.95" r="8.5"/></g></g></svg>
+<svg x="256" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Bulgarian split squat"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(11.7 4.7) scale(0.9595)"><g ><rect class="kit" x="8" y="90" width="34" height="26" rx="2.5"/><path class="kit-line" stroke-width="3" d="M12 116 V116 M38 116 V116"/><polyline class="far" stroke-width="7" points="65.292,44.271 64.192,64.271 65.492,82.244"/><polyline class="far" stroke-width="8" points="62.681,79.998 48.786,104.314 30,85 21,84.2"/><path class="ink" stroke-width="11" d="M62.681 79.998Q65 62.171 67.292 44.271"/><polyline class="ink" stroke-width="8" points="62.681,79.998 89.111,89.173 86,116 95,116"/><polyline class="ink" stroke-width="7" points="69.292,44.271 68.192,64.271 69.492,82.244"/><circle class="head" cx="69.211" cy="29.444" r="8.5"/></g></g></svg>
+<svg x="384" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Bulgarian split squat"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(11.7 4.7) scale(0.9595)"><g ><rect class="kit" x="8" y="90" width="34" height="26" rx="2.5"/><path class="kit-line" stroke-width="3" d="M12 116 V116 M38 116 V116"/><polyline class="far" stroke-width="7" points="66.2,51.427 65.2,71.427 66.427,89.427"/><polyline class="far" stroke-width="8" points="62,86.927 43.8,108.2 30,85 21,84.2"/><path class="ink" stroke-width="11" d="M62 86.927Q65.1 69.227 68.2 51.427"/><polyline class="ink" stroke-width="8" points="62,86.927 89.9,89.3 86,116 95,116"/><polyline class="ink" stroke-width="7" points="70.2,51.427 69.2,71.427 70.427,89.427"/><circle class="head" cx="70.827" cy="36.727" r="8.5"/></g></g></svg>
+<svg x="512" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Bulgarian split squat"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(11.7 4.7) scale(0.9595)"><g ><rect class="kit" x="8" y="90" width="34" height="26" rx="2.5"/><path class="kit-line" stroke-width="3" d="M12 116 V116 M38 116 V116"/><polyline class="far" stroke-width="7" points="66.2,51.187 65.147,71.087 66.4,89.087"/><polyline class="far" stroke-width="8" points="62.053,86.587 44.06,108.094 30,85 21,84.2"/><path class="ink" stroke-width="11" d="M62.053 86.587Q65.153 68.887 68.2 51.187"/><polyline class="ink" stroke-width="8" points="62.053,86.587 89.9,89.3 86,116 95,116"/><polyline class="ink" stroke-width="7" points="70.2,51.187 69.147,71.087 70.4,89.087"/><circle class="head" cx="70.747" cy="36.387" r="8.5"/></g></g></svg>
+<svg x="640" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Bulgarian split squat"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(11.7 4.7) scale(0.9595)"><g ><rect class="kit" x="8" y="90" width="34" height="26" rx="2.5"/><path class="kit-line" stroke-width="3" d="M12 116 V116 M38 116 V116"/><polyline class="far" stroke-width="7" points="64.194,36.482 63.094,56.408 64.394,74.382"/><polyline class="far" stroke-width="8" points="63.38,72.308 53.346,98.488 30,85 21,84.2"/><path class="ink" stroke-width="11" d="M63.38 72.308Q64.8 54.408 66.194 36.482"/><polyline class="ink" stroke-width="8" points="63.38,72.308 85.821,89 86,116 95,116"/><polyline class="ink" stroke-width="7" points="68.194,36.482 67.094,56.408 68.394,74.382"/><circle class="head" cx="67.34" cy="21.482" r="8.5"/></g></g></svg>
+</svg>

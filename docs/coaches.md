@@ -1,13 +1,15 @@
 ---
 title: Coach guide
-description: Coach guide in Last Soul Ultra.
+description: Review coaching methods, exercises, offers and permitted subscriber training.
 ---
 
 # Coach guide
 
 ## Enter the coach workspace
 
-Sign in with a coach account. Choose the coach workspace from the account menu if it is not already active. A coach's access is separate from organization administration; method authors do not automatically manage every LSU setting.
+Open the [coach workspace](https://lsu.stacksjs.com/coach) and sign in with a coach account. Choose the coach workspace from the account menu if needed. A coach's access is separate from organization administration; method authors do not automatically manage every LSU setting.
+
+Use [Exercise library](https://lsu.stacksjs.com/coach/exercises) to inspect built-in and custom exercises. The guide's [complete exercise index](/training/exercise-library) and [illustration catalog](/style-guide/illustrations) provide a shared reference. Open [Subscriber training](https://lsu.stacksjs.com/coach/subscribers) to review the training your account is permitted to access.
 
 ## Maintain a method
 
@@ -17,7 +19,7 @@ A method is the author's approach, not a promise that every runner receives the 
 
 ## Prepare training and offers
 
-Create or review the training plan that supplies sessions. Organization managers connect the eligible plan, product and published method into an offer. Price, currency, billing interval and included services belong to that offer. See [Administration](/administration).
+Create or review the training plan that supplies sessions. An LSU owner or administrator connects the eligible plan, product and published method into an offer. Price, currency, billing interval and included services belong to that offer. See [Administration](/administration).
 
 ## Review subscriber training
 

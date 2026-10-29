@@ -9,6 +9,12 @@ export default {
   outDir: './dist/docs',
   basePath: '/docs',
   url: 'https://lsu.stacksjs.com/docs',
+  head: [
+    ['link', { rel: 'icon', href: '/docs/favicon.svg', type: 'image/svg+xml' }],
+    ['link', { rel: 'stylesheet', href: '/docs/style-guide/fonts.css' }],
+    ['link', { rel: 'stylesheet', href: '/docs/style-guide/tokens.css' }],
+    ['link', { rel: 'stylesheet', href: '/docs/style-guide/style-guide.css' }],
+  ],
   themeConfig: {
     siteTitle: 'Last Soul Ultra',
     socialLinks: [],
@@ -18,6 +24,7 @@ export default {
   nav: [
     { text: 'Guide', link: '/' },
     { text: 'Demo walkthrough', link: '/demo' },
+    { text: 'Style Guide', link: '/style-guide/' },
     { text: 'Open LSU', link: 'https://lsu.stacksjs.com' },
   ],
   markdown: {
@@ -34,10 +41,17 @@ export default {
         { text: 'Your training', items: [
           { text: 'Plans and subscriptions', link: '/training/plans' },
           { text: 'Workouts', link: '/training/workouts' },
+          { text: 'Exercise library', link: '/training/exercise-library' },
           { text: 'Feedback', link: '/training/feedback' },
           { text: 'Progress and library', link: '/training/progress' },
           { text: 'Health', link: '/training/health' },
           { text: 'Messages', link: '/training/messages' },
+        ] },
+        { text: 'Style Guide', items: [
+          { text: 'Overview', link: '/style-guide/' },
+          { text: 'Typography', link: '/style-guide/typography' },
+          { text: 'Colors and interface', link: '/style-guide/colors-and-interface' },
+          { text: 'Workout illustrations', link: '/style-guide/illustrations' },
         ] },
         { text: 'Manage and review', items: [
           { text: 'Coach guide', link: '/coaches' },

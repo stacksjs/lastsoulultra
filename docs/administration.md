@@ -1,6 +1,6 @@
 ---
 title: Administration
-description: Administration in Last Soul Ultra.
+description: Manage LSU organization access, published experience settings and offers.
 ---
 
 # Administration

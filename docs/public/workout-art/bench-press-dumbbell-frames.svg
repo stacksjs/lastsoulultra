@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 768 128" role="img" aria-label="bench-press-dumbbell: six poses across one repetition"><svg x="0" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Dumbbell bench press"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(-0.1 -7.4) scale(1.064)"><g ><rect class="kit" x="20" y="94" width="66" height="22" rx="2.5"/><path class="kit-line" stroke-width="3" d="M24 116 V116 M82 116 V116"/><polyline class="far" stroke-width="7" points="32,89 32,69 32,51"/><polyline class="far" stroke-width="8" points="70,89 98,89.1 96,116 105,116"/><path class="ink" stroke-width="11" d="M70 89Q52 89 34 89"/><polyline class="ink" stroke-width="8" points="70,89 98,89.1 96,116 105,116"/><polyline class="ink" stroke-width="7" points="36,89 36,69 36,51"/><circle class="head" cx="19" cy="89" r="8.5"/><circle class="gear" cx="36" cy="51" r="5"/></g></g></svg>
+<svg x="128" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Dumbbell bench press"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(-0.1 -7.4) scale(1.064)"><g ><rect class="kit" x="20" y="94" width="66" height="22" rx="2.5"/><path class="kit-line" stroke-width="3" d="M24 116 V116 M82 116 V116"/><polyline class="far" stroke-width="7" points="32,89 34.044,69.074 33.969,51.074"/><polyline class="far" stroke-width="8" points="70,89 98,89.1 96,116 105,116"/><path class="ink" stroke-width="11" d="M70 89Q52 89 34 89"/><polyline class="ink" stroke-width="8" points="70,89 98,89.1 96,116 105,116"/><polyline class="ink" stroke-width="7" points="36,89 38.044,69.074 37.969,51.074"/><circle class="head" cx="19" cy="89" r="8.5"/><circle class="gear" cx="37.969" cy="51.074" r="5"/></g></g></svg>
+<svg x="256" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Dumbbell bench press"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(-0.1 -7.4) scale(1.064)"><g ><rect class="kit" x="20" y="94" width="66" height="22" rx="2.5"/><path class="kit-line" stroke-width="3" d="M24 116 V116 M82 116 V116"/><polyline class="far" stroke-width="7" points="32,89 51.8,90.492 50.856,72.492"/><polyline class="far" stroke-width="8" points="70,89 98,89.1 96,116 105,116"/><path class="ink" stroke-width="11" d="M70 89Q52 89 34 89"/><polyline class="ink" stroke-width="8" points="70,89 98,89.1 96,116 105,116"/><polyline class="ink" stroke-width="7" points="36,89 55.8,90.492 54.856,72.492"/><circle class="head" cx="19" cy="89" r="8.5"/><circle class="gear" cx="54.856" cy="72.492" r="5"/></g></g></svg>
+<svg x="384" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Dumbbell bench press"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(-0.1 -7.4) scale(1.064)"><g ><rect class="kit" x="20" y="94" width="66" height="22" rx="2.5"/><path class="kit-line" stroke-width="3" d="M24 116 V116 M82 116 V116"/><polyline class="far" stroke-width="7" points="32,89 37.985,108.038 36.485,90.138"/><polyline class="far" stroke-width="8" points="70,89 98,89.1 96,116 105,116"/><path class="ink" stroke-width="11" d="M70 89Q52 89 34 89"/><polyline class="ink" stroke-width="8" points="70,89 98,89.1 96,116 105,116"/><polyline class="ink" stroke-width="7" points="36,89 41.985,108.038 40.485,90.138"/><circle class="head" cx="19" cy="89" r="8.5"/><circle class="gear" cx="40.485" cy="90.138" r="5"/></g></g></svg>
+<svg x="512" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Dumbbell bench press"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(-0.1 -7.4) scale(1.064)"><g ><rect class="kit" x="20" y="94" width="66" height="22" rx="2.5"/><path class="kit-line" stroke-width="3" d="M24 116 V116 M82 116 V116"/><polyline class="far" stroke-width="7" points="32,89 37.841,108.086 36.341,90.186"/><polyline class="far" stroke-width="8" points="70,89 98,89.1 96,116 105,116"/><path class="ink" stroke-width="11" d="M70 89Q52 89 34 89"/><polyline class="ink" stroke-width="8" points="70,89 98,89.1 96,116 105,116"/><polyline class="ink" stroke-width="7" points="36,89 41.841,108.086 40.341,90.186"/><circle class="head" cx="19" cy="89" r="8.5"/><circle class="gear" cx="40.341" cy="90.186" r="5"/></g></g></svg>
+<svg x="640" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Dumbbell bench press"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(-0.1 -7.4) scale(1.064)"><g ><rect class="kit" x="20" y="94" width="66" height="22" rx="2.5"/><path class="kit-line" stroke-width="3" d="M24 116 V116 M82 116 V116"/><polyline class="far" stroke-width="7" points="32,89 47.701,76.597 47.204,58.597"/><polyline class="far" stroke-width="8" points="70,89 98,89.1 96,116 105,116"/><path class="ink" stroke-width="11" d="M70 89Q52 89 34 89"/><polyline class="ink" stroke-width="8" points="70,89 98,89.1 96,116 105,116"/><polyline class="ink" stroke-width="7" points="36,89 51.701,76.597 51.204,58.597"/><circle class="head" cx="19" cy="89" r="8.5"/><circle class="gear" cx="51.204" cy="58.597" r="5"/></g></g></svg>
+</svg>

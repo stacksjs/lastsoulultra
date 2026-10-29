@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 768 128" role="img" aria-label="row: six poses across one repetition"><svg x="0" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Bent-over row"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(-3.6 -17.4) scale(1.15)"><g ><polyline class="far" stroke-width="7" points="64.5,50.9 64.5,70.9 64.5,88.9"/><polyline class="far" stroke-width="8" points="36,70 56.3,89.3 60,116 69,116"/><path class="ink" stroke-width="11" d="M36 70Q51.3 60.5 66.5 50.9"/><polyline class="ink" stroke-width="8" points="36,70 56.3,89.3 60,116 69,116"/><polyline class="ink" stroke-width="7" points="68.5,50.9 68.5,70.9 68.5,88.9"/><circle class="head" cx="78" cy="41.3" r="8.5"/><circle class="gear" cx="68.5" cy="88.9" r="10"/><circle class="hub" cx="68.5" cy="88.9" r="2.5"/></g></g></svg>
+<svg x="128" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Bent-over row"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(-3.6 -17.4) scale(1.15)"><g ><polyline class="far" stroke-width="7" points="64.5,50.9 62.566,70.838 62.566,88.838"/><polyline class="far" stroke-width="8" points="36,70 56.3,89.3 60,116 69,116"/><path class="ink" stroke-width="11" d="M36 70Q51.3 60.5 66.5 50.9"/><polyline class="ink" stroke-width="8" points="36,70 56.3,89.3 60,116 69,116"/><polyline class="ink" stroke-width="7" points="68.5,50.9 66.566,70.838 66.566,88.838"/><circle class="head" cx="78" cy="41.3" r="8.5"/><circle class="gear" cx="66.566" cy="88.838" r="10"/><circle class="hub" cx="66.566" cy="88.838" r="2.5"/></g></g></svg>
+<svg x="256" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Bent-over row"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(-3.6 -17.4) scale(1.15)"><g ><polyline class="far" stroke-width="7" points="64.5,50.9 46.969,60.443 46.969,78.443"/><polyline class="far" stroke-width="8" points="36,70 56.3,89.3 60,116 69,116"/><path class="ink" stroke-width="11" d="M36 70Q51.3 60.5 66.5 50.9"/><polyline class="ink" stroke-width="8" points="36,70 56.3,89.3 60,116 69,116"/><polyline class="ink" stroke-width="7" points="68.5,50.9 50.969,60.443 50.969,78.443"/><circle class="head" cx="78" cy="41.3" r="8.5"/><circle class="gear" cx="50.969" cy="78.443" r="10"/><circle class="hub" cx="50.969" cy="78.443" r="2.5"/></g></g></svg>
+<svg x="384" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Bent-over row"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(-3.6 -17.4) scale(1.15)"><g ><polyline class="far" stroke-width="7" points="64.5,50.9 45.7,57.8 45.7,75.8"/><polyline class="far" stroke-width="8" points="36,70 56.3,89.3 60,116 69,116"/><path class="ink" stroke-width="11" d="M36 70Q51.3 60.5 66.5 50.9"/><polyline class="ink" stroke-width="8" points="36,70 56.3,89.3 60,116 69,116"/><polyline class="ink" stroke-width="7" points="68.5,50.9 49.7,57.8 49.7,75.8"/><circle class="head" cx="78" cy="41.3" r="8.5"/><circle class="gear" cx="49.7" cy="75.8" r="10"/><circle class="hub" cx="49.7" cy="75.8" r="2.5"/></g></g></svg>
+<svg x="512" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Bent-over row"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(-3.6 -17.4) scale(1.15)"><g ><polyline class="far" stroke-width="7" points="64.5,50.9 46.949,60.498 46.949,78.498"/><polyline class="far" stroke-width="8" points="36,70 56.3,89.3 60,116 69,116"/><path class="ink" stroke-width="11" d="M36 70Q51.3 60.5 66.5 50.9"/><polyline class="ink" stroke-width="8" points="36,70 56.3,89.3 60,116 69,116"/><polyline class="ink" stroke-width="7" points="68.5,50.9 50.949,60.498 50.949,78.498"/><circle class="head" cx="78" cy="41.3" r="8.5"/><circle class="gear" cx="50.949" cy="78.498" r="10"/><circle class="hub" cx="50.949" cy="78.498" r="2.5"/></g></g></svg>
+<svg x="640" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Bent-over row"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(-3.6 -17.4) scale(1.15)"><g ><polyline class="far" stroke-width="7" points="64.5,50.9 60.523,70.483 60.523,88.483"/><polyline class="far" stroke-width="8" points="36,70 56.3,89.3 60,116 69,116"/><path class="ink" stroke-width="11" d="M36 70Q51.3 60.5 66.5 50.9"/><polyline class="ink" stroke-width="8" points="36,70 56.3,89.3 60,116 69,116"/><polyline class="ink" stroke-width="7" points="68.5,50.9 64.523,70.483 64.523,88.483"/><circle class="head" cx="78" cy="41.3" r="8.5"/><circle class="gear" cx="64.523" cy="88.483" r="10"/><circle class="hub" cx="64.523" cy="88.483" r="2.5"/></g></g></svg>
+</svg>

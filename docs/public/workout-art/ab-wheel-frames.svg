@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 768 128" role="img" aria-label="ab-wheel: six poses across one repetition"><svg x="0" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Ab wheel rollout"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(11.5 30.4) scale(0.7381)"><g ><polyline class="far" stroke-width="7" points="76.7,73.1 82.3,92.3 86.5,109.8"/><polyline class="far" stroke-width="8" points="44.9,85.4 40,113 13,113 4,113"/><path class="ink" stroke-width="11" d="M44.9 85.4Q61.8 79.3 78.7 73.1"/><polyline class="ink" stroke-width="8" points="44.9,85.4 40,113 13,113 4,113"/><polyline class="ink" stroke-width="7" points="80.7,73.1 86.3,92.3 90.5,109.8"/><circle class="head" cx="93.2" cy="69.5" r="8.5"/><circle class="gear-line" stroke-width="2.5" cx="90.5" cy="109.8" r="6"/><circle class="gear" cx="90.5" cy="109.8" r="2"/></g></g></svg>
+<svg x="128" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Ab wheel rollout"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(11.5 30.4) scale(0.7381)"><g ><polyline class="far" stroke-width="7" points="77.328,73.411 84.173,92.1 87.551,109.8"/><polyline class="far" stroke-width="8" points="45.422,85.506 40,113 13,113 4,113"/><path class="ink" stroke-width="11" d="M45.422 85.506Q62.328 79.506 79.328 73.411"/><polyline class="ink" stroke-width="8" points="45.422,85.506 40,113 13,113 4,113"/><polyline class="ink" stroke-width="7" points="81.328,73.411 88.173,92.1 91.551,109.8"/><circle class="head" cx="93.834" cy="69.817" r="8.5"/><circle class="gear-line" stroke-width="2.5" cx="91.551" cy="109.8" r="6"/><circle class="gear" cx="91.551" cy="109.8" r="2"/></g></g></svg>
+<svg x="256" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Ab wheel rollout"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(11.5 30.4) scale(0.7381)"><g ><polyline class="far" stroke-width="7" points="89.913,82.327 107.183,92.457 111.482,109.9"/><polyline class="far" stroke-width="8" points="56.941,90.742 40,113 13,113 4,113"/><path class="ink" stroke-width="11" d="M56.941 90.742Q74.427 86.499 91.913 82.327"/><polyline class="ink" stroke-width="8" points="56.941,90.742 40,113 13,113 4,113"/><polyline class="ink" stroke-width="7" points="93.913,82.327 111.183,92.457 115.482,109.9"/><circle class="head" cx="106.798" cy="80.084" r="8.5"/><circle class="gear-line" stroke-width="2.5" cx="115.482" cy="109.9" r="6"/><circle class="gear" cx="115.482" cy="109.9" r="2"/></g></g></svg>
+<svg x="384" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Ab wheel rollout"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(11.5 30.4) scale(0.7381)"><g ><polyline class="far" stroke-width="7" points="97.731,93.597 116.5,100.457 131.728,110"/><polyline class="far" stroke-width="8" points="64.066,98.731 40,113 13,113 4,113"/><path class="ink" stroke-width="11" d="M64.066 98.731Q81.866 96.197 99.731 93.597"/><polyline class="ink" stroke-width="8" points="64.066,98.731 40,113 13,113 4,113"/><polyline class="ink" stroke-width="7" points="101.731,93.597 120.5,100.457 135.728,110"/><circle class="head" cx="114.666" cy="92.563" r="8.5"/><circle class="gear-line" stroke-width="2.5" cx="135.728" cy="110" r="6"/><circle class="gear" cx="135.728" cy="110" r="2"/></g></g></svg>
+<svg x="512" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Ab wheel rollout"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(11.5 30.4) scale(0.7381)"><g ><polyline class="far" stroke-width="7" points="97.837,93.875 116.388,101.375 132.112,110"/><polyline class="far" stroke-width="8" points="64.2,98.937 40,113 13,113 4,113"/><path class="ink" stroke-width="11" d="M64.2 98.937Q82.037 96.375 99.837 93.875"/><polyline class="ink" stroke-width="8" points="64.2,98.937 40,113 13,113 4,113"/><polyline class="ink" stroke-width="7" points="101.837,93.875 120.388,101.375 136.112,110"/><circle class="head" cx="114.837" cy="92.775" r="8.5"/><circle class="gear-line" stroke-width="2.5" cx="136.112" cy="110" r="6"/><circle class="gear" cx="136.112" cy="110" r="2"/></g></g></svg>
+<svg x="640" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Ab wheel rollout"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(11.5 30.4) scale(0.7381)"><g ><polyline class="far" stroke-width="7" points="86.1,78.818 100.98,92.069 103.63,109.9"/><polyline class="far" stroke-width="8" points="53.462,88.5 40,113 13,113 4,113"/><path class="ink" stroke-width="11" d="M53.462 88.5Q70.831 83.675 88.1 78.818"/><polyline class="ink" stroke-width="8" points="53.462,88.5 40,113 13,113 4,113"/><polyline class="ink" stroke-width="7" points="90.1,78.818 104.98,92.069 107.63,109.9"/><circle class="head" cx="102.868" cy="76.193" r="8.5"/><circle class="gear-line" stroke-width="2.5" cx="107.63" cy="109.9" r="6"/><circle class="gear" cx="107.63" cy="109.9" r="2"/></g></g></svg>
+</svg>

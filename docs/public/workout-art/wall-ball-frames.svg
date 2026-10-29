@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 768 128" role="img" aria-label="wall-ball: six poses across one repetition"><svg x="0" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Wall ball"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(9.2 32.9) scale(0.7162000000000001)"><g ><rect class="kit" x="120" y="-32" width="5" height="148" rx="1.5"/><polyline class="far" stroke-width="7" points="47.9,48.1 65.3,58.1 56.3,42.5"/><polyline class="far" stroke-width="8" points="34.2,80.5 60.1,91 50,116 59,116"/><path class="ink" stroke-width="11" d="M34.2 80.5Q42 64.3 49.9 48.1"/><polyline class="ink" stroke-width="8" points="34.2,80.5 60.1,91 50,116 59,116"/><polyline class="ink" stroke-width="7" points="51.9,48.1 69.3,58.1 60.3,42.5"/><circle class="head" cx="56.5" cy="34.6" r="8.5"/><circle class="gear" cx="63.3" cy="38.5" r="7"/></g></g></svg>
+<svg x="128" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Wall ball"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(9.2 32.9) scale(0.7162000000000001)"><g ><rect class="kit" x="120" y="-32" width="5" height="148" rx="1.5"/><polyline class="far" stroke-width="7" points="45.888,28.785 62.917,18.418 61.212,0.518"/><polyline class="far" stroke-width="8" points="41.615,64.217 53.992,89.256 50,116 59,116"/><path class="ink" stroke-width="11" d="M41.615 64.217Q44.752 46.473 47.888 28.785"/><polyline class="ink" stroke-width="8" points="41.615,64.217 53.992,89.256 50,116 59,116"/><polyline class="ink" stroke-width="7" points="49.888,28.785 66.917,18.418 65.212,0.518"/><circle class="head" cx="50.512" cy="14.041" r="8.5"/><circle class="gear" cx="68.212" cy="-3.482" r="7"/></g></g></svg>
+<svg x="256" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Wall ball"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(9.2 32.9) scale(0.7162000000000001)"><g ><rect class="kit" x="120" y="-32" width="5" height="148" rx="1.5"/><polyline class="far" stroke-width="7" points="48,25 54.85,6.2 58,-11.5"/><polyline class="far" stroke-width="8" points="49.95,61 50.5,89 50,116 59,116"/><path class="ink" stroke-width="11" d="M49.95 61Q50 43 50 25"/><polyline class="ink" stroke-width="8" points="49.95,61 50.5,89 50,116 59,116"/><polyline class="ink" stroke-width="7" points="52,25 58.85,6.2 62,-11.5"/><circle class="head" cx="50" cy="10" r="8.5"/><circle class="gear" cx="65" cy="-15.5" r="7"/></g></g></svg>
+<svg x="384" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Wall ball"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(9.2 32.9) scale(0.7162000000000001)"><g ><rect class="kit" x="120" y="-32" width="5" height="148" rx="1.5"/><polyline class="far" stroke-width="7" points="48,25 54.8,6.2 58,-11.5"/><polyline class="far" stroke-width="8" points="50,61 50.5,89 50,116 59,116"/><path class="ink" stroke-width="11" d="M50 61Q50 43 50 25"/><polyline class="ink" stroke-width="8" points="50,61 50.5,89 50,116 59,116"/><polyline class="ink" stroke-width="7" points="52,25 58.8,6.2 62,-11.5"/><circle class="head" cx="50" cy="10" r="8.5"/><circle class="gear" cx="108.843" cy="-23.3" r="7"/></g></g></svg>
+<svg x="512" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Wall ball"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(9.2 32.9) scale(0.7162000000000001)"><g ><rect class="kit" x="120" y="-32" width="5" height="148" rx="1.5"/><polyline class="far" stroke-width="7" points="48,25 54.89,6.2 58,-11.5"/><polyline class="far" stroke-width="8" points="50,61 50.5,89 50,116 59,116"/><path class="ink" stroke-width="11" d="M50 61Q50 43 50 25"/><polyline class="ink" stroke-width="8" points="50,61 50.5,89 50,116 59,116"/><polyline class="ink" stroke-width="7" points="52,25 58.89,6.2 62,-11.5"/><circle class="head" cx="50" cy="10" r="8.5"/><circle class="gear" cx="65" cy="-15.5" r="7"/></g></g></svg>
+<svg x="640" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Wall ball"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(9.2 32.9) scale(0.7162000000000001)"><g ><rect class="kit" x="120" y="-32" width="5" height="148" rx="1.5"/><polyline class="far" stroke-width="7" points="45.515,33.198 65.016,28.837 61.015,11.317"/><polyline class="far" stroke-width="8" points="38.243,67.933 55.916,89.68 50,116 59,116"/><path class="ink" stroke-width="11" d="M38.243 67.933Q42.879 50.613 47.515 33.198"/><polyline class="ink" stroke-width="8" points="38.243,67.933 55.916,89.68 50,116 59,116"/><polyline class="ink" stroke-width="7" points="49.515,33.198 69.016,28.837 65.015,11.317"/><circle class="head" cx="51.456" cy="18.688" r="8.5"/><circle class="gear" cx="68.015" cy="7.317" r="7"/></g></g></svg>
+</svg>

@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 768 128" role="img" aria-label="pallof-press: six poses across one repetition"><svg x="0" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Pallof press"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(19.5 9.5) scale(0.9181)"><g ><line class="kit-line" stroke-width="2" x1="8" y1="34" x2="71.3" y2="30"/><circle class="kit" cx="8" cy="34" r="4"/><polyline class="ink" stroke-width="7" points="48.5,25 64.7,13.3 71.3,30"/><polyline class="ink" stroke-width="8" points="50.5,61 49.1,89 49.1,116 40.1,116.6"/><path class="ink" stroke-width="11" d="M57.5 61Q57.5 43 57.5 25"/><polyline class="ink" stroke-width="8" points="64.5,61 66,89 66,116 75,116.6"/><polyline class="ink" stroke-width="7" points="66.5,25 59.7,43.8 71.3,30"/><circle class="head" cx="57.5" cy="10" r="8.5"/></g></g></svg>
+<svg x="128" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Pallof press"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(19.5 9.5) scale(0.9181)"><g ><line class="kit-line" stroke-width="2" x1="8" y1="34" x2="73.73" y2="31.333"/><circle class="kit" cx="8" cy="34" r="4"/><polyline class="ink" stroke-width="7" points="48.5,25 65.897,15.094 73.73,31.333"/><polyline class="ink" stroke-width="8" points="50.5,61 49.1,89 49.1,116 40.1,116.6"/><path class="ink" stroke-width="11" d="M57.5 61Q57.5 43 57.5 25"/><polyline class="ink" stroke-width="8" points="64.5,61 66,89 66,116 75,116.6"/><polyline class="ink" stroke-width="7" points="66.5,25 61.37,43.788 73.73,31.333"/><circle class="head" cx="57.5" cy="10" r="8.5"/></g></g></svg>
+<svg x="256" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Pallof press"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(19.5 9.5) scale(0.9181)"><g ><line class="kit-line" stroke-width="2" x1="8" y1="34" x2="86.632" y2="37.12"/><circle class="kit" cx="8" cy="34" r="4"/><polyline class="ink" stroke-width="7" points="48.5,25 67.7,30.644 84.756,36.532"/><polyline class="ink" stroke-width="8" points="50.5,61 49.1,89 49.1,116 40.1,116.6"/><path class="ink" stroke-width="11" d="M57.5 61Q57.5 43 57.5 25"/><polyline class="ink" stroke-width="8" points="64.5,61 66,89 66,116 75,116.6"/><polyline class="ink" stroke-width="7" points="66.5,25 75.248,34.635 86.632,37.12"/><circle class="head" cx="57.5" cy="10" r="8.5"/></g></g></svg>
+<svg x="384" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Pallof press"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(19.5 9.5) scale(0.9181)"><g ><line class="kit-line" stroke-width="2" x1="8" y1="34" x2="84.6" y2="35.5"/><circle class="kit" cx="8" cy="34" r="4"/><polyline class="ink" stroke-width="7" points="48.5,25 68.3,27.8 84.6,35.5"/><polyline class="ink" stroke-width="8" points="50.5,61 49.1,89 49.1,116 40.1,116.6"/><path class="ink" stroke-width="11" d="M57.5 61Q57.5 43 57.5 25"/><polyline class="ink" stroke-width="8" points="64.5,61 66,89 66,116 75,116.6"/><polyline class="ink" stroke-width="7" points="66.5,25 76.1,30.5 84.6,35.5"/><circle class="head" cx="57.5" cy="10" r="8.5"/></g></g></svg>
+<svg x="512" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Pallof press"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(19.5 9.5) scale(0.9181)"><g ><line class="kit-line" stroke-width="2" x1="8" y1="34" x2="85.373" y2="36.048"/><circle class="kit" cx="8" cy="34" r="4"/><polyline class="ink" stroke-width="7" points="48.5,25 67.8,30.312 84.9,35.924"/><polyline class="ink" stroke-width="8" points="50.5,61 49.1,89 49.1,116 40.1,116.6"/><path class="ink" stroke-width="11" d="M57.5 61Q57.5 43 57.5 25"/><polyline class="ink" stroke-width="8" points="64.5,61 66,89 66,116 75,116.6"/><polyline class="ink" stroke-width="7" points="66.5,25 75.988,31.609 85.373,36.048"/><circle class="head" cx="57.5" cy="10" r="8.5"/></g></g></svg>
+<svg x="640" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Pallof press"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(19.5 9.5) scale(0.9181)"><g ><line class="kit-line" stroke-width="2" x1="8" y1="34" x2="79.462" y2="34.303"/><circle class="kit" cx="8" cy="34" r="4"/><polyline class="ink" stroke-width="7" points="48.5,25 67.952,20.582 79.462,34.303"/><polyline class="ink" stroke-width="8" points="50.5,61 49.1,89 49.1,116 40.1,116.6"/><path class="ink" stroke-width="11" d="M57.5 61Q57.5 43 57.5 25"/><polyline class="ink" stroke-width="8" points="64.5,61 66,89 66,116 75,116.6"/><polyline class="ink" stroke-width="7" points="66.5,25 65.742,43.005 79.462,34.303"/><circle class="head" cx="57.5" cy="10" r="8.5"/></g></g></svg>
+</svg>

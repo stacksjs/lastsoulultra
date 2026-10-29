@@ -1,6 +1,6 @@
 ---
 title: Your account and access
-description: Your account and access in Last Soul Ultra.
+description: Understand preview access, training sign-in, subscription controls and demo accounts.
 ---
 
 # Your account and access
@@ -11,11 +11,13 @@ The browser's preview password unlocks the private website. Your app email and p
 
 ## Your profile
 
-Open **Me** or the account panel to review your account. Keep your time zone accurate so workouts are shown on the intended calendar date. Your role and active organization determine which management screens are available.
+Open **Me** or the [account panel](https://lsu.stacksjs.com/coaching/account) to review your subscription and the fitness-sharing preference offered for an active enrollment. This panel does not contain every profile setting. Use the full account workspace for profile settings where available. Calendar dates follow the time zone stored on your account.
 
 ## Switch roles safely
 
-Sign out, then sign in with the next demo account. Reload any other open training tabs. A runner account should show its own training; a coach account should show the coach's permitted work; an administrator should enter the LSU organization workspace.
+Use the account menu's sign-out action where available, then sign in with the next demo account and reload open training tabs. For a clean review of the embedded panels, use a separate browser profile, or close all private windows before starting another private session. Private windows in the same browser can share a session.
+
+A runner should see their own training, a coach should see their permitted workspace, and an administrator should enter the LSU organization workspace.
 
 ## Subscription and billing
 

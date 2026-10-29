@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Clamshell"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><rect class="kit exercise-art-mat" x="8" y="114" width="112" height="3" rx="1.5" opacity=".8"/><g transform="translate(22.5 24.5) scale(0.7888999999999999)"><g class="exercise-art-motion"><polyline class="far" stroke-width="7" points="28,107 8,105.6 -9.9,104.3"/><polyline class="far" stroke-width="8" points="66,107 86.4,100.9 106,107 115,107"/><path class="ink" stroke-width="11" d="M66 107Q48 107 30 107"/><polyline class="ink" stroke-width="8" points="66,107 86.4,100.9 106,107 115,107"><animate attributeName="points" dur="2.4s" repeatCount="indefinite" values="66,107 86.4,100.9 106,107 115,107;66,107 86.4,100.9 106,107 115,107;66,107 86.4,100.9 106,107 115,107;66,107 86.4,100.8 106,107 115,107;66,107 86.4,100.4 106,107 115,107;66,107 86.4,99.6 106,107 115,107;66,107 86.4,98.6 106,107 115,107;66,107 86.5,97.2 106,107 115,107;66,107 86.5,95.4 106,107 115,107;66,107 86.5,93.4 106,107 115,107;66,107 86.6,91.5 106,107 115,107;66,107 86.6,90.2 106,107 115,107;66,107 86.6,89.3 106,107 115,107;66,107 86.7,88.7 106,107 115,107;66,107 86.7,88.4 106,107 115,107;66,107 86.7,88.2 106,107 115,107;66,107 86.7,88.1 106,107 115,107;66,107 86.7,88.1 106,107 115,107;66,107 86.7,88.1 106,107 115,107;66,107 86.7,88.1 106,107 115,107;66,107 86.7,88.2 106,107 115,107;66,107 86.7,88.4 106,107 115,107;66,107 86.7,88.7 106,107 115,107;66,107 86.6,89.3 106,107 115,107;66,107 86.6,90.2 106,107 115,107;66,107 86.6,91.5 106,107 115,107;66,107 86.5,93.4 106,107 115,107;66,107 86.5,95.4 106,107 115,107;66,107 86.5,97.2 106,107 115,107;66,107 86.4,98.6 106,107 115,107;66,107 86.4,99.6 106,107 115,107;66,107 86.4,100.4 106,107 115,107;66,107 86.4,100.8 106,107 115,107;66,107 86.4,100.9 106,107 115,107;66,107 86.4,100.9 106,107 115,107" keyTimes="0;0.06;0.085625;0.11125;0.136875;0.1625;0.188125;0.21375;0.239375;0.265;0.290625;0.31625;0.341875;0.3675;0.393125;0.41875;0.444375;0.47;0.59;0.615625;0.64125;0.666875;0.6925;0.718125;0.74375;0.769375;0.795;0.820625;0.84625;0.871875;0.8975;0.923125;0.94875;0.974375;1"/></polyline><polyline class="ink" stroke-width="7" points="32,107 52,108.4 69.9,109.7"/><circle class="head" cx="15.3" cy="103.9" r="8.5"/></g><g class="exercise-art-still"><polyline class="far" stroke-width="7" points="28,107 8,105.6 -9.9,104.3"/><polyline class="far" stroke-width="8" points="66,107 86.4,100.9 106,107 115,107"/><path class="ink" stroke-width="11" d="M66 107Q48 107 30 107"/><polyline class="ink" stroke-width="8" points="66,107 86.4,100.9 106,107 115,107"/><polyline class="ink" stroke-width="7" points="32,107 52,108.4 69.9,109.7"/><circle class="head" cx="15.3" cy="103.9" r="8.5"/></g></g></svg>

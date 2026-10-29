@@ -1,6 +1,6 @@
 ---
 title: Progress and the method library
-description: Progress and the method library in Last Soul Ultra.
+description: Compare completed sessions and read the published summary of your method.
 ---
 
 # Progress and the method library

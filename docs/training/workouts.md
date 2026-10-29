@@ -1,6 +1,6 @@
 ---
 title: Workouts and calendar
-description: Workouts and calendar in Last Soul Ultra.
+description: Open planned sessions, record completed training and understand calendar dates.
 ---
 
 # Workouts and calendar
@@ -10,6 +10,10 @@ description: Workouts and calendar in Last Soul Ultra.
 Open [Workouts](https://lsu.stacksjs.com/coaching/calendar). Sign in as a subscriber. Select a session to inspect its title, sport, date, planned duration, distance and instructions. Read any warm-up, main effort and cool-down steps before recording a result.
 
 Only sessions from your accessible training enrollment appear in the branded training panel. An account with no enrollment can have an empty calendar.
+
+## Exercise demonstrations
+
+For strength exercises and drills, consult the [exercise library](/training/exercise-library) for the built-in names, equipment and available illustration mappings. The [illustration catalog](/style-guide/illustrations) lists all supplied SVG figures and their sampled poses. Several exercises share a movement figure, and some entries currently have no mapped illustration. Follow the session's own instructions and demonstration when provided.
 
 ## Record what happened
 

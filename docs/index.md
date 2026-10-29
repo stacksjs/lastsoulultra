@@ -1,6 +1,6 @@
 ---
 title: Last Soul Ultra guide
-description: Last Soul Ultra guide in Last Soul Ultra.
+description: Find race information, follow your training and manage LSU access.
 ---
 
 # Last Soul Ultra guide
@@ -15,6 +15,9 @@ Last Soul Ultra brings race information and your training into one place. Use th
 | Prepare for a race | [Race information](/races) |
 | Choose a training tier | [Plans and subscriptions](/training/plans) |
 | Follow and record a session | [Workouts](/training/workouts) |
+| Look up a movement or its equipment | [Exercise library](/training/exercise-library) |
+| Review LSU typefaces, colors and interface examples | [Style Guide](/style-guide/) |
+| Review every supplied workout figure | [Illustrations and SVG animations](/style-guide/illustrations) |
 | Tell the plan how training felt | [Feedback](/training/feedback) |
 | Review completed training | [Progress](/training/progress) |
 | Manage a coaching method | [Coach guide](/coaches) |

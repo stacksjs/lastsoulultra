@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 768 128" role="img" aria-label="slam: six poses across one repetition"><svg x="0" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Medicine ball slam"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(-2.5 28.1) scale(0.7573)"><g ><polyline class="far" stroke-width="7" points="64,25 61.9,5.1 61.3,-12.9"/><polyline class="far" stroke-width="8" points="66,61 66.5,89 66,116 75,116"/><path class="ink" stroke-width="11" d="M66 61Q66 43 66 25"/><polyline class="ink" stroke-width="8" points="66,61 66.5,89 66,116 75,116"/><polyline class="ink" stroke-width="7" points="68,25 65.9,5.1 65.3,-12.9"/><circle class="head" cx="66" cy="10" r="8.5"/><circle class="gear" cx="65.3" cy="-15.9" r="7"/></g></g></svg>
+<svg x="128" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Medicine ball slam"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(-2.5 28.1) scale(0.7573)"><g ><polyline class="far" stroke-width="7" points="68.882,26.304 80.098,9.79 91.561,-4.099"/><polyline class="far" stroke-width="8" points="63.322,61.452 68.078,89.1 66,116 75,116"/><path class="ink" stroke-width="11" d="M63.322 61.452Q67.078 43.878 70.882 26.304"/><polyline class="ink" stroke-width="8" points="63.322,61.452 68.078,89.1 66,116 75,116"/><polyline class="ink" stroke-width="7" points="72.882,26.304 84.098,9.79 95.561,-4.099"/><circle class="head" cx="74.012" cy="11.63" r="8.5"/><circle class="gear" cx="95.561" cy="-7.099" r="7"/></g></g></svg>
+<svg x="256" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Medicine ball slam"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(-2.5 28.1) scale(0.7573)"><g ><polyline class="far" stroke-width="7" points="81.9,45.7 88.8,64.5 91.9,82.3"/><polyline class="far" stroke-width="8" points="56.3,68.9 74.3,90.3 66,116 75,116"/><path class="ink" stroke-width="11" d="M56.3 68.9Q70.1 57.3 83.9 45.7"/><polyline class="ink" stroke-width="8" points="56.3,68.9 74.3,90.3 66,116 75,116"/><polyline class="ink" stroke-width="7" points="85.9,45.7 92.8,64.5 95.9,82.3"/><circle class="head" cx="95.4" cy="36.1" r="8.5"/><circle class="gear" cx="98.42" cy="97.449" r="7"/></g></g></svg>
+<svg x="384" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Medicine ball slam"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(-2.5 28.1) scale(0.7573)"><g ><polyline class="far" stroke-width="7" points="81.9,45.7 88.8,64.5 91.9,82.3"/><polyline class="far" stroke-width="8" points="56.3,68.9 74.3,90.3 66,116 75,116"/><path class="ink" stroke-width="11" d="M56.3 68.9Q70.1 57.3 83.9 45.7"/><polyline class="ink" stroke-width="8" points="56.3,68.9 74.3,90.3 66,116 75,116"/><polyline class="ink" stroke-width="7" points="85.9,45.7 92.8,64.5 95.9,82.3"/><circle class="head" cx="95.4" cy="36.1" r="8.5"/><circle class="gear" cx="95.9" cy="79.3" r="7"/></g></g></svg>
+<svg x="512" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Medicine ball slam"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(-2.5 28.1) scale(0.7573)"><g ><polyline class="far" stroke-width="7" points="80.324,41.547 92.853,57.116 101.623,72.801"/><polyline class="far" stroke-width="8" points="57.159,67.282 73.462,90.021 66,116 75,116"/><path class="ink" stroke-width="11" d="M57.159 67.282Q69.741 54.444 82.324 41.547"/><polyline class="ink" stroke-width="8" points="57.159,67.282 73.462,90.021 66,116 75,116"/><polyline class="ink" stroke-width="7" points="84.324,41.547 96.853,57.116 105.623,72.801"/><circle class="head" cx="92.865" cy="30.83" r="8.5"/><circle class="gear" cx="105.623" cy="69.801" r="7"/></g></g></svg>
+<svg x="640" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Medicine ball slam"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(-2.5 28.1) scale(0.7573)"><g ><polyline class="far" stroke-width="7" points="67.413,25.641 75.002,7.096 83.17,-8.86"/><polyline class="far" stroke-width="8" points="64.138,61.221 67.452,89.01 66,116 75,116"/><path class="ink" stroke-width="11" d="M64.138 61.221Q66.821 43.431 69.413 25.641"/><polyline class="ink" stroke-width="8" points="64.138,61.221 67.452,89.01 66,116 75,116"/><polyline class="ink" stroke-width="7" points="71.413,25.641 79.002,7.096 87.17,-8.86"/><circle class="head" cx="71.686" cy="10.762" r="8.5"/><circle class="gear" cx="87.17" cy="-11.86" r="7"/></g></g></svg>
+</svg>

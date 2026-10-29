@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 768 128" role="img" aria-label="landmine-press: six poses across one repetition"><svg x="0" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Landmine press"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(-5.6 14.7) scale(0.8734)"><g ><line class="gear-line" stroke-width="3" x1="118" y1="114" x2="74" y2="27.1"/><polyline class="far" stroke-width="7" points="66.3,26 73.2,44.8 70,27.1"/><polyline class="far" stroke-width="8" points="62.1,61.4 53,87.9 43.3,113.1 52.3,113.1"/><path class="ink" stroke-width="11" d="M62.1 61.4Q65.2 43.7 68.3 26"/><polyline class="ink" stroke-width="8" points="62.1,61.4 66.9,89 66,116 75,116"/><polyline class="ink" stroke-width="7" points="70.3,26 77.2,44.8 74,27.1"/><circle class="head" cx="70.9" cy="11.2" r="8.5"/></g></g></svg>
+<svg x="128" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Landmine press"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(-5.6 14.7) scale(0.8734)"><g ><line class="gear-line" stroke-width="3" x1="118" y1="114" x2="77.152" y2="25.976"/><polyline class="far" stroke-width="7" points="66.3,26 75.227,43.836 73.152,25.976"/><polyline class="far" stroke-width="8" points="62.1,61.4 53,87.9 43.3,113.1 52.3,113.1"/><path class="ink" stroke-width="11" d="M62.1 61.4Q65.2 43.7 68.3 26"/><polyline class="ink" stroke-width="8" points="62.1,61.4 66.9,89 66,116 75,116"/><polyline class="ink" stroke-width="7" points="70.3,26 79.227,43.836 77.152,25.976"/><circle class="head" cx="70.9" cy="11.2" r="8.5"/></g></g></svg>
+<svg x="256" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Landmine press"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(-5.6 14.7) scale(0.8734)"><g ><line class="gear-line" stroke-width="3" x1="118" y1="114" x2="99.482" y2="5.552"/><polyline class="far" stroke-width="7" points="66.3,26 85.558,20.529 95.482,5.552"/><polyline class="far" stroke-width="8" points="62.1,61.4 53,87.9 43.3,113.1 52.3,113.1"/><path class="ink" stroke-width="11" d="M62.1 61.4Q65.2 43.7 68.3 26"/><polyline class="ink" stroke-width="8" points="62.1,61.4 66.9,89 66,116 75,116"/><polyline class="ink" stroke-width="7" points="70.3,26 89.558,20.529 99.482,5.552"/><circle class="head" cx="70.9" cy="11.2" r="8.5"/></g></g></svg>
+<svg x="384" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Landmine press"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(-5.6 14.7) scale(0.8734)"><g ><line class="gear-line" stroke-width="3" x1="118" y1="114" x2="98.6" y2="0.6"/><polyline class="far" stroke-width="7" points="66.3,26 81.7,13.1 94.6,0.6"/><polyline class="far" stroke-width="8" points="62.1,61.4 53,87.9 43.3,113.1 52.3,113.1"/><path class="ink" stroke-width="11" d="M62.1 61.4Q65.2 43.7 68.3 26"/><polyline class="ink" stroke-width="8" points="62.1,61.4 66.9,89 66,116 75,116"/><polyline class="ink" stroke-width="7" points="70.3,26 85.7,13.1 98.6,0.6"/><circle class="head" cx="70.9" cy="11.2" r="8.5"/></g></g></svg>
+<svg x="512" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Landmine press"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(-5.6 14.7) scale(0.8734)"><g ><line class="gear-line" stroke-width="3" x1="118" y1="114" x2="99.182" y2="1.724"/><polyline class="far" stroke-width="7" points="66.3,26 82.985,14.967 95.182,1.724"/><polyline class="far" stroke-width="8" points="62.1,61.4 53,87.9 43.3,113.1 52.3,113.1"/><path class="ink" stroke-width="11" d="M62.1 61.4Q65.2 43.7 68.3 26"/><polyline class="ink" stroke-width="8" points="62.1,61.4 66.9,89 66,116 75,116"/><polyline class="ink" stroke-width="7" points="70.3,26 86.985,14.967 99.182,1.724"/><circle class="head" cx="70.9" cy="11.2" r="8.5"/></g></g></svg>
+<svg x="640" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Landmine press"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(-5.6 14.7) scale(0.8734)"><g ><line class="gear-line" stroke-width="3" x1="118" y1="114" x2="84.947" y2="22.368"/><polyline class="far" stroke-width="7" points="66.3,26 80.212,40.348 80.947,22.368"/><polyline class="far" stroke-width="8" points="62.1,61.4 53,87.9 43.3,113.1 52.3,113.1"/><path class="ink" stroke-width="11" d="M62.1 61.4Q65.2 43.7 68.3 26"/><polyline class="ink" stroke-width="8" points="62.1,61.4 66.9,89 66,116 75,116"/><polyline class="ink" stroke-width="7" points="70.3,26 84.212,40.348 84.947,22.368"/><circle class="head" cx="70.9" cy="11.2" r="8.5"/></g></g></svg>
+</svg>

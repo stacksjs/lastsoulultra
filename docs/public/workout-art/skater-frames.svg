@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 768 128" role="img" aria-label="skater: six poses across one repetition"><svg x="0" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Skater jump"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(2.4 20.1) scale(0.8269)"><g ><polyline class="ink" stroke-width="7" points="33.6,29.7 26.7,48.5 15.2,62.3"/><polyline class="ink" stroke-width="8" points="25.7,64.3 41.7,87.3 66.2,98.7 75.2,98.7"/><path class="ink" stroke-width="11" d="M32.7 64.3Q37.7 47 42.6 29.7"/><polyline class="ink" stroke-width="8" points="39.7,64.3 49.2,90.6 40,116 49,116"/><polyline class="ink" stroke-width="7" points="51.6,29.7 66.9,42.6 83.8,48.7"/><circle class="head" cx="46.7" cy="15.3" r="8.5"/></g></g></svg>
+<svg x="128" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Skater jump"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(2.4 20.1) scale(0.8269)"><g ><polyline class="ink" stroke-width="7" points="35.929,29.381 28.69,48.062 16.871,61.643"/><polyline class="ink" stroke-width="8" points="28.686,64.2 43.71,87.857 67.176,101.148 76.076,100.152"/><path class="ink" stroke-width="11" d="M35.686 64.2Q40.267 46.8 44.929 29.381"/><polyline class="ink" stroke-width="8" points="42.686,64.2 51.41,90.819 41.671,116 50.671,116"/><polyline class="ink" stroke-width="7" points="53.929,29.381 69.129,42.381 85.81,49.038"/><circle class="head" cx="48.71" cy="14.962" r="8.5"/></g></g></svg>
+<svg x="256" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Skater jump"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(2.4 20.1) scale(0.8269)"><g ><polyline class="ink" stroke-width="7" points="81.643,33.714 68.105,48.476 52.176,56.829"/><polyline class="ink" stroke-width="8" points="88.657,69.395 80.176,96.129 65.79,118.838 59.395,112.462"/><path class="ink" stroke-width="11" d="M95.657 69.395Q93.2 51.595 90.643 33.714"/><polyline class="ink" stroke-width="8" points="102.657,69.395 94.224,96.057 75.967,116 84.967,116"/><polyline class="ink" stroke-width="7" points="99.643,33.714 113.133,48.524 122.848,63.671"/><circle class="head" cx="88.505" cy="18.914" r="8.5"/></g></g></svg>
+<svg x="384" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Skater jump"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(2.4 20.1) scale(0.8269)"><g ><polyline class="ink" stroke-width="7" points="96.8,39.8 81.4,52.6 64.5,58.8"/><polyline class="ink" stroke-width="8" points="108.7,74.4 92.6,97.3 68.2,108.7 59.2,108.7"/><path class="ink" stroke-width="11" d="M115.7 74.4Q110.8 57.1 105.8 39.8"/><polyline class="ink" stroke-width="8" points="122.7,74.4 108.7,98.6 88,116 97,116"/><polyline class="ink" stroke-width="7" points="114.8,39.8 127.6,55.1 133.8,72"/><circle class="head" cx="101.6" cy="25.4" r="8.5"/></g></g></svg>
+<svg x="512" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Skater jump"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(2.4 20.1) scale(0.8269)"><g ><polyline class="ink" stroke-width="7" points="94.671,38.805 79.61,51.924 62.81,58.362"/><polyline class="ink" stroke-width="8" points="105.914,73.624 90.829,97.181 67.343,110.571 58.443,109.576"/><path class="ink" stroke-width="11" d="M112.914 73.624Q108.333 56.205 103.671 38.805"/><polyline class="ink" stroke-width="8" points="119.914,73.624 106.69,98.262 86.329,116 95.329,116"/><polyline class="ink" stroke-width="7" points="112.671,38.805 125.59,54.005 132.248,70.767"/><circle class="head" cx="99.81" cy="24.305" r="8.5"/></g></g></svg>
+<svg x="640" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Skater jump"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(2.4 20.1) scale(0.8269)"><g ><polyline class="ink" stroke-width="7" points="49.838,28.61 40.595,46.429 27.324,58.567"/><polyline class="ink" stroke-width="8" points="46.824,64.29 55.214,91.024 69.69,113.724 76.086,107.438"/><path class="ink" stroke-width="11" d="M53.824 64.29Q56.371 46.5 58.838 28.61"/><polyline class="ink" stroke-width="8" points="60.824,64.29 64.467,92.062 52.033,116 61.033,116"/><polyline class="ink" stroke-width="7" points="67.838,28.61 82.557,42.181 97.795,51.814"/><circle class="head" cx="60.886" cy="13.81" r="8.5"/></g></g></svg>
+</svg>

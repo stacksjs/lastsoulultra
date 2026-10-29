@@ -75,7 +75,7 @@
     "build:assets": "bun scripts/build-site-assets.ts",
     "build:bundles": "bun scripts/externalize-page-bundles.ts",
     "audit:html": "bun scripts/audit-html.ts",
-    "audit:docs": "bun scripts/audit-docs.ts"
+    "audit:docs": "bun scripts/sync-workout-art.ts --check && bun scripts/sync-style-guide-assets.ts --check && bun scripts/audit-docs.ts"
   },
   "dependencies": {
     "@stacksjs/components": "0.2.740",

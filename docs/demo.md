@@ -1,6 +1,6 @@
 ---
 title: Demo walkthrough
-description: Demo walkthrough in Last Soul Ultra.
+description: Review the private preview as a visitor, runner, coach and administrator.
 ---
 
 # Demo walkthrough
@@ -17,22 +17,26 @@ Sign in with the visitor account. Open Coaching and inspect the published offer.
 
 ## 3. Review an enrolled runner
 
-Sign out and use the runner account. Open Workouts, inspect a completed session and a future session, then check Progress and the method Library. The sample dates include recent history and upcoming sessions.
+Use the runner account. Open Workouts, inspect a completed session and a future session, then check Progress and the method Library. Each of the two enrolled demo runners starts with 32 sessions, including 14 completed. The sample dates include recent history and upcoming sessions. Counts can change as reviewers complete or edit training.
 
 Open Health and Messages to inspect any supplied sample records. Avoid connecting real devices or entering personal information.
 
+Open the [Style Guide](/style-guide/) to review the typefaces, colors and interface specimens alongside the workout figures.
+
 ## 4. Review the coach
 
-Sign out and use the coach account. Enter the coach workspace and inspect the sample method and plan. Keep demonstration methodology clearly identified as sample content.
+Use a fresh session and the coach account. Open the [coach workspace](https://lsu.stacksjs.com/coach) and inspect the sample method and plan. Then open the [exercise library](/training/exercise-library) and [illustration catalog](/style-guide/illustrations). The demo plans do not prescribe every exercise in the reference. Keep demonstration methodology clearly identified as sample content.
 
 ## 5. Review administration
 
-Sign out and use Sam's or Pawel's administrator account. Select the Last Soul Ultra organization workspace. Open Experience and verify that its settings and linked offers load. Confirm that an athlete account cannot perform the same management action.
+Open [Administration](https://lsu.stacksjs.com/admin) with Sam's or Pawel's administrator account. Complete your own policy choices if prompted and select the Last Soul Ultra organization workspace. Open Experience and verify that its settings and linked offers load. Confirm that an athlete account cannot perform the same management action.
 
 ## 6. Leave billing alone
 
 Sample training access does not represent a paid order or real payment-provider subscription. Do not enter a real card, issue refunds or expect provider billing actions to work for seeded records.
 
 ## Review notes
+
+To switch roles, use sign-out where available or start a clean browser session as described in [Your account](/my-account#switch-roles-safely). Separate private windows can share a login until all private windows are closed.
 
 Record the account role, page and observed behavior. Send feedback to the person who supplied the handoff. Keep passwords out of screenshots and shared issue reports.

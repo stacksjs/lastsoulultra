@@ -1,0 +1,133 @@
+/* eslint-disable no-console */
+import { createHash } from 'node:crypto'
+import { mkdir, readdir, readFile, rm, writeFile } from 'node:fs/promises'
+import { join, resolve } from 'node:path'
+import { pathToFileURL } from 'node:url'
+
+interface Exercise { name: string, category: string, equipment: string[], pattern: string }
+interface Illustration { name: string, seconds: number | null, svgHash: string, posesHash: string }
+interface Catalog { sourceRevision: string, illustrations: Illustration[], exercises: Exercise[] }
+const assetRoot = resolve('docs/public/workout-art')
+const manifest = join(assetRoot, 'catalog.json')
+const digest = (source: string) => createHash('sha256').update(source).digest('hex')
+const title = (name: string) => name.replace(/-/g, ' ').replace(/^./, letter => letter.toUpperCase())
+const escape = (value: string) => value.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;')
+const cell = (value: string) => escape(value).replaceAll('|', '&#124;')
+const args = process.argv.slice(2)
+const check = args.includes('--check')
+const sourceArgument = args.find(argument => !argument.startsWith('--'))
+
+// Synchronize from the canonical training source. CI checks the committed snapshot
+// without needing a sibling checkout or depending on another site's availability.
+if (sourceArgument) {
+  if (check) throw new Error('Use a source path to synchronize, or --check to verify the snapshot.')
+  const source = resolve(sourceArgument)
+  const { PATTERNS, artPatternFor } = await import(pathToFileURL(join(source, 'app/Support/exercisePatterns.ts')).href)
+  const { generateExerciseArtDocs } = await import(pathToFileURL(join(source, 'scripts/exercise-art-docs.ts')).href)
+  generateExerciseArtDocs(true)
+  const library = await Bun.file(join(source, 'database/data/exercise-library.json')).json()
+  const revision = Bun.spawnSync(['git', 'rev-parse', 'HEAD'], { cwd: source })
+  if (revision.exitCode !== 0) throw new Error('Cannot identify the source revision.')
+  const catalog: Catalog = { sourceRevision: revision.stdout.toString().trim(), illustrations: [], exercises: [] }
+  await mkdir(assetRoot, { recursive: true })
+  const expected = new Set(['catalog.json'])
+  for (const name of Object.keys(PATTERNS).sort()) {
+    const svg = await Bun.file(join(source, 'public/assets/images/exercises', `${name}.svg`)).text()
+    const poses = await Bun.file(join(source, 'docs/public/exercise-animations', `${name}-frames.svg`)).text()
+    const seconds = svg.match(/dur="([\d.]+)s"/)?.[1]
+    catalog.illustrations.push({ name, seconds: seconds ? Number(seconds) : null, svgHash: digest(svg), posesHash: digest(poses) })
+    for (const [file, content] of [[`${name}.svg`, svg], [`${name}-frames.svg`, poses]]) {
+      expected.add(file!)
+      await writeFile(join(assetRoot, file!), content!)
+    }
+  }
+  catalog.exercises = library.map((exercise: any) => ({ name: exercise.name, category: exercise.category, equipment: exercise.equipment || [], pattern: exercise.art || artPatternFor(exercise.name) }))
+    .sort((a: Exercise, b: Exercise) => a.name.localeCompare(b.name, 'en'))
+  for (const file of await readdir(assetRoot)) if (!expected.has(file)) await rm(join(assetRoot, file))
+  await writeFile(manifest, `${JSON.stringify(catalog, null, 2)}\n`)
+}
+
+const catalog: Catalog = await Bun.file(manifest).json()
+const patterns = new Set(catalog.illustrations.map(illustration => illustration.name))
+if (patterns.size !== catalog.illustrations.length || !patterns.size) throw new Error('Illustration names must be unique and nonempty.')
+if (new Set(catalog.exercises.map(exercise => exercise.name)).size !== catalog.exercises.length) throw new Error('Exercise names must be unique.')
+const expectedAssets = new Set(['catalog.json'])
+for (const illustration of catalog.illustrations) {
+  if (!/^[a-z0-9-]+$/.test(illustration.name)) throw new Error('Invalid illustration identifier.')
+  for (const [file, hash] of [[`${illustration.name}.svg`, illustration.svgHash], [`${illustration.name}-frames.svg`, illustration.posesHash]]) {
+    expectedAssets.add(file!)
+    if (digest(await readFile(join(assetRoot, file!), 'utf8')) !== hash) throw new Error(`Illustration snapshot changed: ${file}`)
+  }
+}
+for (const exercise of catalog.exercises) if (exercise.pattern && !patterns.has(exercise.pattern)) throw new Error(`Missing illustration for ${exercise.name}`)
+for (const file of await readdir(assetRoot)) if (!expectedAssets.has(file)) throw new Error(`Unlisted illustration asset: ${file}`)
+
+const categories = ['strength', 'core', 'mobility', 'plyometric', 'cardio', 'drill']
+if (catalog.exercises.some(exercise => !categories.includes(exercise.category))) throw new Error('Add the new exercise category to the reference.')
+const exercisePage = `---
+title: Exercise library
+description: All built-in exercises, their equipment and available illustration mappings.
+---
+
+<!-- Generated by scripts/sync-workout-art.ts. Update the snapshot rather than editing these lists. -->
+
+# Exercise library
+
+The built-in library contains **${catalog.exercises.length} exercises** across six categories. **${catalog.exercises.filter(exercise => exercise.pattern).length} exercises have an illustration mapping** and **${catalog.exercises.filter(exercise => !exercise.pattern).length} currently have none**. The separate catalog contains **${patterns.size} available movement illustrations**, listed in their own catalog. Several exercises can share an illustration.
+
+## Find an exercise
+
+Use your browser's Find to search this complete list. Select a mapped illustration to see its sampled poses and open its SVG animation in the [workout illustration catalog](/style-guide/illustrations). **No illustration mapped** means that the built-in entry does not currently select a figure; use its instructions and available demonstration video.
+
+The names and equipment below describe the built-in library. A coach can add exercises or replace a demonstration for their own athletes. Those private additions are not part of this fixed reference. Your session's instructions and the equipment it specifies take precedence over a shared illustration.
+
+## Use the coach library
+
+Open [Coach workspace](https://lsu.stacksjs.com/coach/exercises) with a coach account. Search by name, muscle or equipment, or filter by category. Open an exercise to inspect its instructions and demonstration. Adding a custom exercise does not publish it as an LSU training method.
+
+${categories.map(category => {
+  const exercises = catalog.exercises.filter(exercise => exercise.category === category)
+  return `## ${category === 'drill' ? 'Drills' : title(category)} (${exercises.length})\n\n| Exercise | Equipment | Illustration |\n| --- | --- | --- |\n${exercises.map(exercise => `| ${cell(exercise.name)} | ${exercise.equipment.map(cell).join(', ') || 'None listed'} | ${exercise.pattern ? `[${title(exercise.pattern)}](/style-guide/illustrations#${exercise.pattern})` : 'No illustration mapped'} |`).join('\n')}`
+}).join('\n\n')}
+`
+const illustrationPage = `---
+title: Workout illustrations and SVG animations
+description: The complete workout-art catalog, with animation links and sampled poses for every movement.
+---
+
+<!-- Generated by scripts/sync-workout-art.ts. Update the snapshot rather than editing these lists. -->
+
+# Workout illustrations and SVG animations
+
+This catalog lists all **${patterns.size} built-in movement illustrations** available to the training library. The [${catalog.exercises.length}-exercise index](/training/exercise-library) shows which entries select each figure. Each entry includes the SVG asset and a sheet of six sampled poses. These are the supplied exercise figures; race photography, brand marks, charts and coach-uploaded videos are outside this catalog.
+
+## Review a movement
+
+Find a movement by name, then expand its entry. The pose sheet samples one repetition at 0%, 17%, 33%, 50%, 67% and 83%. Expand **Play animation** to inspect the moving figure on light and dark surfaces, or select **Open SVG animation** to view its file in a separate tab. The assets follow your device's reduced-motion preference and can show a still pose when reduced motion is enabled.
+
+Check the starting position, range of movement, equipment contact and return to the start. These figures illustrate movement patterns; follow the actual session instructions for load, duration, repetitions and technique. A sample exercise does not mean that it is prescribed in the demo runners' plans.
+
+## Complete illustration catalog
+
+<div class="lsu-guide sg-art-grid">
+
+${catalog.illustrations.map(illustration => {
+  const exercises = catalog.exercises.filter(exercise => exercise.pattern === illustration.name).map(exercise => exercise.name)
+  return `<details id="${illustration.name}">
+<summary><span class="sg-art-thumb"><img src="/docs/workout-art/${illustration.name}-frames.svg" width="384" height="64" loading="lazy" alt="" aria-hidden="true"></span><span class="sg-art-name">${escape(title(illustration.name))}<small>${exercises.length} mapped library exercise${exercises.length === 1 ? "" : "s"}</small></span></summary>
+<div class="sg-art-body"><p>${illustration.seconds ? `${illustration.seconds} seconds per animation loop. ` : ""}${exercises.length ? `Library exercises: ${exercises.map(escape).join(", ")}.` : "Available movement pattern; no built-in exercise in this reference currently selects it."}</p>
+<div class="sg-art-palettes"><figure class="sg-art-light"><img src="/docs/workout-art/${illustration.name}-frames.svg" width="768" height="128" loading="lazy" alt="${escape(title(illustration.name))}: six sampled poses on a light surface"><figcaption>Light surface: six poses from one repetition.</figcaption></figure><figure class="sg-art-dark"><img src="/docs/workout-art/${illustration.name}-frames.svg" width="768" height="128" loading="lazy" alt="${escape(title(illustration.name))}: six sampled poses on a dark surface"><figcaption>Dark surface: the same six poses.</figcaption></figure></div>
+<details class="sg-art-play"><summary>Play animation</summary><div class="sg-art-live sg-art-palettes"><figure class="sg-art-light"><img src="/docs/workout-art/${illustration.name}.svg" width="128" height="128" loading="lazy" alt="${escape(title(illustration.name))}: animation on a light surface"><figcaption>Light surface</figcaption></figure><figure class="sg-art-dark"><img src="/docs/workout-art/${illustration.name}.svg" width="128" height="128" loading="lazy" alt="${escape(title(illustration.name))}: animation on a dark surface"><figcaption>Dark surface</figcaption></figure></div></details>
+<p><a href="/docs/workout-art/${illustration.name}.svg" target="_blank" rel="noopener">Open SVG animation</a> · <a href="/docs/workout-art/${illustration.name}-frames.svg" target="_blank" rel="noopener">Open pose sheet</a></p></div>
+</details>`
+}).join('\n\n')}
+
+</div>
+`
+for (const [file, content] of [['docs/training/exercise-library.md', exercisePage], ['docs/style-guide/illustrations.md', illustrationPage]]) {
+  if (check) {
+    if (await Bun.file(file!).text() !== content) throw new Error(`Generated exercise reference is stale: ${file}`)
+  }
+  else await writeFile(file!, content!)
+}
+console.log(`Verified ${catalog.exercises.length} exercises, ${patterns.size} illustrations and ${patterns.size * 2} SVG assets${check ? '' : '; generated both reference pages'}.`)

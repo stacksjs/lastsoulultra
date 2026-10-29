@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 768 128" role="img" aria-label="carry: six poses across one repetition"><svg x="0" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Farmer's carry"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(7.8 8.9) scale(0.9234)"><g ><polyline class="ink" stroke-width="7" points="49.8,25.8 49.8,45.8 49.8,63.8"/><polyline class="ink" stroke-width="8" points="51.8,61.8 45.1,89 35.8,114.4 44.3,117.5"/><path class="ink" stroke-width="11" d="M58.8 61.8Q58.8 43.8 58.8 25.8"/><polyline class="ink" stroke-width="8" points="65.8,61.8 70.7,89.4 66,116 75,116"/><polyline class="ink" stroke-width="7" points="67.8,25.8 67.8,45.8 67.8,63.8"/><circle class="head" cx="58.8" cy="10.8" r="8.5"/><path class="gear" d="M63.8 64.8 a4 4 0 0 1 8 0 M67.8 72.8 m-6.5 0 a6.5 6 0 1 0 13 0 a6.5 6 0 1 0 -13 0" stroke="none"/><path class="gear" d="M45.8 64.8 a4 4 0 0 1 8 0 M49.8 72.8 m-6.5 0 a6.5 6 0 1 0 13 0 a6.5 6 0 1 0 -13 0" stroke="none"/></g></g></svg>
+<svg x="128" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Farmer's carry"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(7.8 8.9) scale(0.9234)"><g ><polyline class="ink" stroke-width="7" points="52.4,25.7 52.4,45.7 52.4,63.7"/><polyline class="ink" stroke-width="8" points="54.4,61.7 49.4,89.267 40.9,114.867 49.533,117.5"/><path class="ink" stroke-width="11" d="M61.4 61.7Q61.4 43.7 61.4 25.7"/><polyline class="ink" stroke-width="8" points="68.4,61.7 71.433,89.533 66,116 75,116.467"/><polyline class="ink" stroke-width="7" points="70.4,25.7 70.4,45.7 70.4,63.7"/><circle class="head" cx="61.4" cy="10.7" r="8.5"/><path class="gear" d="M66.4 64.7 a4 4 0 0 1 8 0 M70.4 72.7 m-6.5 0 a6.5 6 0 1 0 13 0 a6.5 6 0 1 0 -13 0" stroke="none"/><path class="gear" d="M48.4 64.7 a4 4 0 0 1 8 0 M52.4 72.7 m-6.5 0 a6.5 6 0 1 0 13 0 a6.5 6 0 1 0 -13 0" stroke="none"/></g></g></svg>
+<svg x="256" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Farmer's carry"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(7.8 8.9) scale(0.9234)"><g ><polyline class="ink" stroke-width="7" points="63.5,26.833 63.5,46.833 63.5,64.833"/><polyline class="ink" stroke-width="8" points="65.5,62.833 68.533,90.667 63.1,117.133 72.1,117.6"/><path class="ink" stroke-width="11" d="M72.5 62.833Q72.5 44.833 72.5 26.833"/><polyline class="ink" stroke-width="8" points="79.5,62.833 74.567,90.4 66,116 74.633,118.633"/><polyline class="ink" stroke-width="7" points="81.5,26.833 81.5,46.833 81.5,64.833"/><circle class="head" cx="72.5" cy="11.833" r="8.5"/><path class="gear" d="M77.5 65.833 a4 4 0 0 1 8 0 M81.5 73.833 m-6.5 0 a6.5 6 0 1 0 13 0 a6.5 6 0 1 0 -13 0" stroke="none"/><path class="gear" d="M59.5 65.833 a4 4 0 0 1 8 0 M63.5 73.833 m-6.5 0 a6.5 6 0 1 0 13 0 a6.5 6 0 1 0 -13 0" stroke="none"/></g></g></svg>
+<svg x="384" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Farmer's carry"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(7.8 8.9) scale(0.9234)"><g ><polyline class="ink" stroke-width="7" points="66,27.5 66,47.5 66,65.5"/><polyline class="ink" stroke-width="8" points="68,63.5 72.9,91 68.2,117.6 77.2,117.6"/><path class="ink" stroke-width="11" d="M75 63.5Q75 45.5 75 27.5"/><polyline class="ink" stroke-width="8" points="82,63.5 75.2,90.6 66,116 74.5,119.1"/><polyline class="ink" stroke-width="7" points="84,27.5 84,47.5 84,65.5"/><circle class="head" cx="75" cy="12.5" r="8.5"/><path class="gear" d="M80 66.5 a4 4 0 0 1 8 0 M84 74.5 m-6.5 0 a6.5 6 0 1 0 13 0 a6.5 6 0 1 0 -13 0" stroke="none"/><path class="gear" d="M62 66.5 a4 4 0 0 1 8 0 M66 74.5 m-6.5 0 a6.5 6 0 1 0 13 0 a6.5 6 0 1 0 -13 0" stroke="none"/></g></g></svg>
+<svg x="512" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Farmer's carry"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(7.8 8.9) scale(0.9234)"><g ><polyline class="ink" stroke-width="7" points="63.5,26.833 63.5,46.833 63.5,64.833"/><polyline class="ink" stroke-width="8" points="65.5,62.833 68.533,90.667 63.1,117.133 72.1,117.6"/><path class="ink" stroke-width="11" d="M72.5 62.833Q72.5 44.833 72.5 26.833"/><polyline class="ink" stroke-width="8" points="79.5,62.833 74.567,90.4 66,116 74.633,118.633"/><polyline class="ink" stroke-width="7" points="81.5,26.833 81.5,46.833 81.5,64.833"/><circle class="head" cx="72.5" cy="11.833" r="8.5"/><path class="gear" d="M77.5 65.833 a4 4 0 0 1 8 0 M81.5 73.833 m-6.5 0 a6.5 6 0 1 0 13 0 a6.5 6 0 1 0 -13 0" stroke="none"/><path class="gear" d="M59.5 65.833 a4 4 0 0 1 8 0 M63.5 73.833 m-6.5 0 a6.5 6 0 1 0 13 0 a6.5 6 0 1 0 -13 0" stroke="none"/></g></g></svg>
+<svg x="640" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Farmer's carry"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(7.8 8.9) scale(0.9234)"><g ><polyline class="ink" stroke-width="7" points="52.4,25.7 52.4,45.7 52.4,63.7"/><polyline class="ink" stroke-width="8" points="54.4,61.7 49.4,89.267 40.9,114.867 49.533,117.5"/><path class="ink" stroke-width="11" d="M61.4 61.7Q61.4 43.7 61.4 25.7"/><polyline class="ink" stroke-width="8" points="68.4,61.7 71.433,89.533 66,116 75,116.467"/><polyline class="ink" stroke-width="7" points="70.4,25.7 70.4,45.7 70.4,63.7"/><circle class="head" cx="61.4" cy="10.7" r="8.5"/><path class="gear" d="M66.4 64.7 a4 4 0 0 1 8 0 M70.4 72.7 m-6.5 0 a6.5 6 0 1 0 13 0 a6.5 6 0 1 0 -13 0" stroke="none"/><path class="gear" d="M48.4 64.7 a4 4 0 0 1 8 0 M52.4 72.7 m-6.5 0 a6.5 6 0 1 0 13 0 a6.5 6 0 1 0 -13 0" stroke="none"/></g></g></svg>
+</svg>

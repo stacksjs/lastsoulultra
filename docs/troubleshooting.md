@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting
-description: Troubleshooting in Last Soul Ultra.
+description: Resolve preview access, training sign-in, permissions and service problems.
 ---
 
 # Troubleshooting

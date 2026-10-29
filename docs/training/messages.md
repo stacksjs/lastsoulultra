@@ -1,6 +1,6 @@
 ---
 title: Messages
-description: Messages in Last Soul Ultra.
+description: Open account conversations and distinguish messages from training feedback.
 ---
 
 # Messages

@@ -1,6 +1,6 @@
 ---
 title: Getting started
-description: Getting started in Last Soul Ultra.
+description: Unlock the preview, sign into training and choose the right review account.
 ---
 
 # Getting started

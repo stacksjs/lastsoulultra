@@ -1,6 +1,6 @@
 ---
 title: Privacy and account boundaries
-description: Privacy and account boundaries in Last Soul Ultra.
+description: Understand who can access published information, training and shared demo data.
 ---
 
 # Privacy and account boundaries

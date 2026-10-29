@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 768 128" role="img" aria-label="hanging-knee-raise: six poses across one repetition"><svg x="0" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Hanging knee raise"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(8.6 29.4) scale(0.7465)"><g ><path class="kit-line" stroke-width="4" d="M44 -20 H96"/><path class="kit-line" stroke-width="3" d="M46 -20 V-26 M94 -20 V-26"/><polyline class="far" stroke-width="7" points="66,18 65.6,-2 66,-20"/><polyline class="far" stroke-width="8" points="68,54 65.6,81.9 46.5,101 51,108.8"/><path class="ink" stroke-width="11" d="M68 54Q68 36 68 18"/><polyline class="ink" stroke-width="8" points="68,54 65.6,81.9 46.5,101 51,108.8"/><polyline class="ink" stroke-width="7" points="70,18 69.6,-2 70,-20"/><circle class="head" cx="68" cy="3" r="8.5"/></g></g></svg>
+<svg x="128" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Hanging knee raise"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(8.6 29.4) scale(0.7465)"><g ><path class="kit-line" stroke-width="4" d="M44 -20 H96"/><path class="kit-line" stroke-width="3" d="M46 -20 V-26 M94 -20 V-26"/><polyline class="far" stroke-width="7" points="66,18 65.6,-2 66,-20"/><polyline class="far" stroke-width="8" points="68,54 69.105,81.969 51.084,102.086 56.046,109.624"/><path class="ink" stroke-width="11" d="M68 54Q68 36 68 18"/><polyline class="ink" stroke-width="8" points="68,54 69.105,81.969 51.084,102.086 56.046,109.624"/><polyline class="ink" stroke-width="7" points="70,18 69.6,-2 70,-20"/><circle class="head" cx="68" cy="3" r="8.5"/></g></g></svg>
+<svg x="256" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Hanging knee raise"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(8.6 29.4) scale(0.7465)"><g ><path class="kit-line" stroke-width="4" d="M44 -20 H96"/><path class="kit-line" stroke-width="3" d="M46 -20 V-26 M94 -20 V-26"/><polyline class="far" stroke-width="7" points="66,18 65.6,-2 66,-20"/><polyline class="far" stroke-width="8" points="68,54 94.826,61.991 90.274,88.599 98.383,92.382"/><path class="ink" stroke-width="11" d="M68 54Q68 36 68 18"/><polyline class="ink" stroke-width="8" points="68,54 94.826,61.991 90.274,88.599 98.383,92.382"/><polyline class="ink" stroke-width="7" points="70,18 69.6,-2 70,-20"/><circle class="head" cx="68" cy="3" r="8.5"/></g></g></svg>
+<svg x="384" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Hanging knee raise"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(8.6 29.4) scale(0.7465)"><g ><path class="kit-line" stroke-width="4" d="M44 -20 H96"/><path class="kit-line" stroke-width="3" d="M46 -20 V-26 M94 -20 V-26"/><polyline class="far" stroke-width="7" points="66,18 65.6,-2 66,-20"/><polyline class="far" stroke-width="8" points="68,54 95.8,56.9 93.5,83.8 102,86.9"/><path class="ink" stroke-width="11" d="M68 54Q68 36 68 18"/><polyline class="ink" stroke-width="8" points="68,54 95.8,56.9 93.5,83.8 102,86.9"/><polyline class="ink" stroke-width="7" points="70,18 69.6,-2 70,-20"/><circle class="head" cx="68" cy="3" r="8.5"/></g></g></svg>
+<svg x="512" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Hanging knee raise"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(8.6 29.4) scale(0.7465)"><g ><path class="kit-line" stroke-width="4" d="M44 -20 H96"/><path class="kit-line" stroke-width="3" d="M46 -20 V-26 M94 -20 V-26"/><polyline class="far" stroke-width="7" points="66,18 65.6,-2 66,-20"/><polyline class="far" stroke-width="8" points="68,54 94.751,62.112 90.137,88.721 98.345,92.495"/><path class="ink" stroke-width="11" d="M68 54Q68 36 68 18"/><polyline class="ink" stroke-width="8" points="68,54 94.751,62.112 90.137,88.721 98.345,92.495"/><polyline class="ink" stroke-width="7" points="70,18 69.6,-2 70,-20"/><circle class="head" cx="68" cy="3" r="8.5"/></g></g></svg>
+<svg x="640" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Hanging knee raise"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(8.6 29.4) scale(0.7465)"><g ><path class="kit-line" stroke-width="4" d="M44 -20 H96"/><path class="kit-line" stroke-width="3" d="M46 -20 V-26 M94 -20 V-26"/><polyline class="far" stroke-width="7" points="66,18 65.6,-2 66,-20"/><polyline class="far" stroke-width="8" points="68,54 72.737,81.529 56.034,102.717 61.396,109.954"/><path class="ink" stroke-width="11" d="M68 54Q68 36 68 18"/><polyline class="ink" stroke-width="8" points="68,54 72.737,81.529 56.034,102.717 61.396,109.954"/><polyline class="ink" stroke-width="7" points="70,18 69.6,-2 70,-20"/><circle class="head" cx="68" cy="3" r="8.5"/></g></g></svg>
+</svg>

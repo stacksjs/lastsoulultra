@@ -1,6 +1,6 @@
 ---
 title: Health and connected data
-description: Health and connected data in Last Soul Ultra.
+description: Review health summaries, data sharing and fictional demo measurements.
 ---
 
 # Health and connected data

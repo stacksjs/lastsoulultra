@@ -1,6 +1,6 @@
 ---
 title: Feedback and plan adaptation
-description: Feedback and plan adaptation in Last Soul Ultra.
+description: Send training feedback, transcribe a recording and review a proposed plan change.
 ---
 
 # Feedback and plan adaptation
@@ -15,7 +15,7 @@ Describe the session and the reason for an adjustment: how the effort felt, whet
 
 ## Record voice feedback
 
-Allow microphone access when the browser asks. Record, stop and wait for the transcript. Read and correct the transcript, then send it yourself. Recording a voice message and submitting its transcript are separate steps.
+Choose **Record voice feedback** and allow microphone access when the browser asks. Stop recording, then select **Transcribe recording**. Wait for the transcript, read and correct it, then select **Send feedback**. Recording, transcription and sending are separate actions. You can also upload an audio file where the upload control is available.
 
 If recording is unavailable, use text feedback. A denied microphone permission, unsupported browser or unavailable transcription service can prevent the voice path without preventing text entry.
 

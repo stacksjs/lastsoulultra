@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 768 128" role="img" aria-label="push-up-plyo: six poses across one repetition"><svg x="0" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Plyometric push up"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(-2.5 12.4) scale(0.8935)"><g ><polyline class="far" stroke-width="7" points="108.7,100.1 89.4,105.3 103.9,115.9"/><polyline class="far" stroke-width="8" points="74.8,103.2 46.9,106.2 20,108 21.6,116.9"/><path class="ink" stroke-width="11" d="M74.8 103.2Q92.8 101.7 110.7 100.1"/><polyline class="ink" stroke-width="8" points="74.8,103.2 46.9,106.2 20,108 21.6,116.9"/><polyline class="ink" stroke-width="7" points="112.7,100.1 93.4,105.3 107.9,115.9"/><circle class="head" cx="125.4" cy="97.2" r="8.5"/></g></g></svg>
+<svg x="128" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Plyometric push up"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(-2.5 12.4) scale(0.8935)"><g ><polyline class="far" stroke-width="7" points="102.542,74.267 99.946,94.078 104,111.684"/><polyline class="far" stroke-width="8" points="71.065,87.619 45.283,98.459 20,108 21.6,116.9"/><path class="ink" stroke-width="11" d="M71.065 87.619Q87.754 80.99 104.542 74.267"/><polyline class="ink" stroke-width="8" points="71.065,87.619 45.283,98.459 20,108 21.6,116.9"/><polyline class="ink" stroke-width="7" points="106.542,74.267 103.946,94.078 108,111.684"/><circle class="head" cx="117.83" cy="67.249" r="8.5"/></g></g></svg>
+<svg x="256" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Plyometric push up"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(-2.5 12.4) scale(0.8935)"><g ><polyline class="far" stroke-width="7" points="100.161,68.922 102.13,88.822 103.8,106.722"/><polyline class="far" stroke-width="8" points="69.63,84.361 44.565,96.896 20,108 21.6,116.9"/><path class="ink" stroke-width="11" d="M69.63 84.361Q85.896 76.626 102.161 68.922"/><polyline class="ink" stroke-width="8" points="69.63,84.361 44.565,96.896 20,108 21.6,116.9"/><polyline class="ink" stroke-width="7" points="104.161,68.922 106.13,88.822 107.8,106.722"/><circle class="head" cx="114.961" cy="61.087" r="8.5"/></g></g></svg>
+<svg x="384" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Plyometric push up"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(-2.5 12.4) scale(0.8935)"><g ><polyline class="far" stroke-width="7" points="103.9,77.9 103.5,97.9 103.9,115.9"/><polyline class="far" stroke-width="8" points="71.9,89.8 45.7,99.6 20,108 21.6,116.9"/><path class="ink" stroke-width="11" d="M71.9 89.8Q88.9 83.8 105.9 77.9"/><polyline class="ink" stroke-width="8" points="71.9,89.8 45.7,99.6 20,108 21.6,116.9"/><polyline class="ink" stroke-width="7" points="107.9,77.9 107.5,97.9 107.9,115.9"/><circle class="head" cx="119.4" cy="71.5" r="8.5"/></g></g></svg>
+<svg x="512" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Plyometric push up"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(-2.5 12.4) scale(0.8935)"><g ><polyline class="far" stroke-width="7" points="104.483,79.848 98.4,98.843 103.9,115.9"/><polyline class="far" stroke-width="8" points="72.291,90.965 45.861,100.152 20,108 21.6,116.9"/><path class="ink" stroke-width="11" d="M72.291 90.965Q89.422 85.357 106.483 79.848"/><polyline class="ink" stroke-width="8" points="72.291,90.965 45.861,100.152 20,108 21.6,116.9"/><polyline class="ink" stroke-width="7" points="108.483,79.848 102.4,98.843 107.9,115.9"/><circle class="head" cx="120.213" cy="73.739" r="8.5"/></g></g></svg>
+<svg x="640" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Plyometric push up"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(-2.5 12.4) scale(0.8935)"><g ><polyline class="far" stroke-width="7" points="108.126,95.587 90.143,104.287 103.9,115.9"/><polyline class="far" stroke-width="8" points="74.496,100.539 46.83,104.852 20,108 21.6,116.9"/><path class="ink" stroke-width="11" d="M74.496 100.539Q92.261 98.096 110.126 95.587"/><polyline class="ink" stroke-width="8" points="74.496,100.539 46.83,104.852 20,108 21.6,116.9"/><polyline class="ink" stroke-width="7" points="112.126,95.587 94.143,104.287 107.9,115.9"/><circle class="head" cx="124.691" cy="92.013" r="8.5"/></g></g></svg>
+</svg>

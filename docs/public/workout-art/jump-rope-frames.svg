@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 768 128" role="img" aria-label="jump-rope: six poses across one repetition"><svg x="0" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Jump rope"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(17.4 34) scale(0.7068)"><g ><polyline class="far" stroke-width="7" points="64,25 70.8,43.8 86.4,52.8"/><polyline class="far" stroke-width="8" points="66,61 66.5,89 66,116 75,116"/><path class="ink" stroke-width="11" d="M66 61Q66 43 66 25"/><polyline class="ink" stroke-width="8" points="66,61 66.5,89 66,116 75,116"/><polyline class="ink" stroke-width="7" points="68,25 74.8,43.8 90.4,52.8"/><circle class="head" cx="66" cy="10" r="8.5"/><path class="gear-line" stroke-width="2.5" d="M90.4 52.8Q78.2 14 66 -3"/></g></g></svg>
+<svg x="128" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Jump rope"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(17.4 34) scale(0.7068)"><g ><polyline class="far" stroke-width="7" points="64.267,23.9 71.133,42.7 86.733,51.7"/><polyline class="far" stroke-width="8" points="66.267,59.9 66.633,87.9 66,114.9 74.867,116.367"/><path class="ink" stroke-width="11" d="M66.267 59.9Q66.267 41.9 66.267 23.9"/><polyline class="ink" stroke-width="8" points="66.267,59.9 66.633,87.9 66,114.9 74.867,116.367"/><polyline class="ink" stroke-width="7" points="68.267,23.9 75.133,42.7 90.733,51.7"/><circle class="head" cx="66.267" cy="8.9" r="8.5"/><path class="gear-line" stroke-width="2.5" d="M90.733 51.7Q114.433 34.5 119.5 28.167"/></g></g></svg>
+<svg x="256" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Jump rope"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(17.4 34) scale(0.7068)"><g ><polyline class="far" stroke-width="7" points="65.633,19.1 72.433,37.9 88.033,46.9"/><polyline class="far" stroke-width="8" points="67.633,55.1 67.367,83.1 66.167,110.1 71.8,117.033"/><path class="ink" stroke-width="11" d="M67.633 55.1Q67.633 37.1 67.633 19.1"/><polyline class="ink" stroke-width="8" points="67.633,55.1 67.367,83.1 66.167,110.1 71.8,117.033"/><polyline class="ink" stroke-width="7" points="69.633,19.1 76.433,37.9 92.033,46.9"/><circle class="head" cx="67.633" cy="4.1" r="8.5"/><path class="gear-line" stroke-width="2.5" d="M92.033 46.9Q115.067 73.8 119.5 89.833"/></g></g></svg>
+<svg x="384" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Jump rope"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(17.4 34) scale(0.7068)"><g ><polyline class="far" stroke-width="7" points="65.9,18.1 72.7,36.9 88.3,45.9"/><polyline class="far" stroke-width="8" points="67.9,54.1 67.6,82.1 66.2,109 70.7,116.8"/><path class="ink" stroke-width="11" d="M67.9 54.1Q67.9 36.1 67.9 18.1"/><polyline class="ink" stroke-width="8" points="67.9,54.1 67.6,82.1 66.2,109 70.7,116.8"/><polyline class="ink" stroke-width="7" points="69.9,18.1 76.7,36.9 92.3,45.9"/><circle class="head" cx="67.9" cy="3.1" r="8.5"/><path class="gear-line" stroke-width="2.5" d="M92.3 45.9Q79.2 94.3 66 121"/></g></g></svg>
+<svg x="512" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Jump rope"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(17.4 34) scale(0.7068)"><g ><polyline class="far" stroke-width="7" points="65.633,19.1 72.433,37.9 88.033,46.9"/><polyline class="far" stroke-width="8" points="67.633,55.1 67.367,83.1 66.167,110.1 71.8,117.033"/><path class="ink" stroke-width="11" d="M67.633 55.1Q67.633 37.1 67.633 19.1"/><polyline class="ink" stroke-width="8" points="67.633,55.1 67.367,83.1 66.167,110.1 71.8,117.033"/><polyline class="ink" stroke-width="7" points="69.633,19.1 76.433,37.9 92.033,46.9"/><circle class="head" cx="67.633" cy="4.1" r="8.5"/><path class="gear-line" stroke-width="2.5" d="M92.033 46.9Q42.9 73.8 12.5 89.833"/></g></g></svg>
+<svg x="640" width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Jump rope"><style>
+  .ink { stroke: #1e293b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .far { stroke: #94a3b8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .head { fill: #1e293b; }
+  .gear { fill: #2563eb; }
+  .gear-line { stroke: #2563eb; fill: none; stroke-linecap: round; }
+  .hub { fill: #93c5fd; }
+  .kit { fill: #cbd5e1; }
+  .kit-line { stroke: #94a3b8; fill: none; stroke-linecap: round; }
+  .floor { stroke: #e2e8f0; stroke-linecap: round; }
+  @media (prefers-color-scheme: dark) {
+    .ink { stroke: #e2e8f0; } .head { fill: #e2e8f0; } .far { stroke: #64748b; }
+    .gear { fill: #60a5fa; } .gear-line { stroke: #60a5fa; } .hub { fill: #1e3a8a; }
+    .kit { fill: #334155; } .kit-line { stroke: #475569; } .floor { stroke: #1e293b; }
+  }.exercise-art-still { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .exercise-art-motion { display: none; }
+    .exercise-art-still { display: inline; }
+  }</style><line class="floor" x1="8" y1="119" x2="120" y2="119" stroke-width="3"/><g transform="translate(17.4 34) scale(0.7068)"><g ><polyline class="far" stroke-width="7" points="64.267,23.9 71.133,42.7 86.733,51.7"/><polyline class="far" stroke-width="8" points="66.267,59.9 66.633,87.9 66,114.9 74.867,116.367"/><path class="ink" stroke-width="11" d="M66.267 59.9Q66.267 41.9 66.267 23.9"/><polyline class="ink" stroke-width="8" points="66.267,59.9 66.633,87.9 66,114.9 74.867,116.367"/><polyline class="ink" stroke-width="7" points="68.267,23.9 75.133,42.7 90.733,51.7"/><circle class="head" cx="66.267" cy="8.9" r="8.5"/><path class="gear-line" stroke-width="2.5" d="M90.733 51.7Q42.233 34.5 12.5 28.167"/></g></g></svg>
+</svg>

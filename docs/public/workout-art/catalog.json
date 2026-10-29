@@ -1,0 +1,2463 @@
+{
+  "sourceRevision": "73b183ebe804de2f5637f090c08a901b31de9c98",
+  "illustrations": [
+    {
+      "name": "ab-wheel",
+      "seconds": 2.8,
+      "svgHash": "5c936554cc1507334e9e266f523c29ffe9666b1f9b989ed393b7860c48f46d9b",
+      "posesHash": "7d081f8840b46cd1b6a32579cd0b014b5791e5fc4172f897293ce013acf937a2"
+    },
+    {
+      "name": "band-dislocate",
+      "seconds": 4,
+      "svgHash": "f4af65ce1df838e14698be7a5f362cc4ba4cc91f55d41a5c6d3aace189e62abf",
+      "posesHash": "a0d6a9b501e99ba5558af61d2bb3bd6f8e96dfdd2297e1f47172abd08a333e13"
+    },
+    {
+      "name": "band-pull-apart",
+      "seconds": 2.4,
+      "svgHash": "37117a9d3310496733f10d0d13667c745cbb2cc7b6623b62754275caa10ccef0",
+      "posesHash": "d1432bca07f73051e7d0386739f56cdb55017b4af10b432c6a84c766f1579128"
+    },
+    {
+      "name": "band-walk",
+      "seconds": 1.4,
+      "svgHash": "02c68acc46bc5e40b41b6cf05650da943d8f5b59a86aeabb30a06a763175b564",
+      "posesHash": "da8278f424bd5d3819a6f4985b03f739845ed86c609430a60d21c1be1b3a890b"
+    },
+    {
+      "name": "battle-ropes",
+      "seconds": 0.8,
+      "svgHash": "3ca741926b42abb4eb7a1461e45387ac4366adf05855f0e031010034ddaae0a5",
+      "posesHash": "f2b59f00535fa54f47bf6a145f0c7ac78445b1a1ba07a3a31f6ffe0d2b3b7059"
+    },
+    {
+      "name": "bear-crawl",
+      "seconds": 1.1,
+      "svgHash": "dab7b782402703310eea006aa702117f51dbdf7c0180062702c8dc3b9d7e00a0",
+      "posesHash": "42a7994a2f110ba9b066e56e403ba936543b27dc0d1b074be317232fe27feb65"
+    },
+    {
+      "name": "bear-plank",
+      "seconds": 3.6,
+      "svgHash": "87435146218b4294d9d23ee7760bbecb5d4e3660a367407d30ccbecc988529fa",
+      "posesHash": "87a40425aabe8d57e86761990e143286f7f22ee0e34835c1529799f2c6c670e9"
+    },
+    {
+      "name": "bench-dip",
+      "seconds": 2.4,
+      "svgHash": "9d971f59dff3208b42018b040ff20388ab65dd1c65da3aaa45ade9d8e3f11ab4",
+      "posesHash": "ca86042384d981c4a96f6da5f25aa888b447f64e72e0621a78f3fb744a5af4a3"
+    },
+    {
+      "name": "bench-press",
+      "seconds": 2.4,
+      "svgHash": "440211618cf942cbb7ac1de72381e9de554cd7532ee1f60a3149bbea7bc559db",
+      "posesHash": "95ed5da1a63366700f1c0bdb859990b6e5e2ae2db2bba330d66347819a42fdfb"
+    },
+    {
+      "name": "bench-press-dumbbell",
+      "seconds": 2.4,
+      "svgHash": "9d2044a90dcecc7b7ae3a503065c9d4e5f740ad2cb39f59b6f0d89ce5330c71c",
+      "posesHash": "acb106a13c6e5f0499842449e867ba22af2c11fbd806c7bfed4639c838217323"
+    },
+    {
+      "name": "bicycle-crunch",
+      "seconds": 1.4,
+      "svgHash": "dfa8866c3925b104e38217c50e3d454face52f7a6fcb9e726be3667a65e6b8dc",
+      "posesHash": "7c4b4c3c827784616e1612b6cbd5f0c072b12ad642b58dc2280744bcf877e33f"
+    },
+    {
+      "name": "bird-dog",
+      "seconds": 2.8,
+      "svgHash": "53229fad4d71df8b12adb942609c4143773aa681025f8b19b47172a541a94b47",
+      "posesHash": "b3d341fa7856e636436402f60511d70ed639dd3ab2a2d61e588b9028b24f9be4"
+    },
+    {
+      "name": "bound",
+      "seconds": 1.4,
+      "svgHash": "ba17de95adb7848c77d7b3d6874bade29e12ec0bf4c3260f59b1d0a54e865c72",
+      "posesHash": "e54aa1bd412f4e5629a11f0a822a3fd90f09a82e77c3e580d2daf94ebd851726"
+    },
+    {
+      "name": "box-jump",
+      "seconds": 4.8,
+      "svgHash": "7ab9948530d868a61ff2c47f5d5cc0d795d9f5141122a8fc6735be35b4fce6db",
+      "posesHash": "5651dae3b2f60b50b242335085eeb757ef5f9608ce9d7cca434e093f03a46253"
+    },
+    {
+      "name": "broad-jump",
+      "seconds": 5.2,
+      "svgHash": "5284e7b0e772ddb2d4fa241fa89b9310765fedd31b56a012dff3782f30f79e29",
+      "posesHash": "8617050996b44552c0d7b19ab12b5863d5bcbd9eb7e2c71a752e6f449147ffb5"
+    },
+    {
+      "name": "burpee",
+      "seconds": 3,
+      "svgHash": "a491e6562e46d455055212db7c3fe6dd46f0cfcc4f8f9e6c17e998599968b655",
+      "posesHash": "23e562140e45e266f3e97fdc02a86377efa1cf302bcdaf0e720a3553f6809fc9"
+    },
+    {
+      "name": "butt-kick",
+      "seconds": 0.9,
+      "svgHash": "12d65b76edd8b87051f64bea6040065355bd93d629c5401da0af6ae2a7fda05b",
+      "posesHash": "8cc6446293074a396f80aa702c2e4022df0c45bb47b0cb18aa889761a83d4427"
+    },
+    {
+      "name": "calf-raise",
+      "seconds": 2,
+      "svgHash": "c699fa241106136c3737b2e3eb67ab5c0843a214d4be5418d84417643081b097",
+      "posesHash": "a0de6893b4636b67b6bca3ee7bf6de32aceaaf721286f1f9c0d7dccd26b8ad20"
+    },
+    {
+      "name": "calf-raise-seated",
+      "seconds": 2.4,
+      "svgHash": "c0d5c3a840c5c59718486a665a1101003fa806e118a7797c5eb43ae860e93707",
+      "posesHash": "efdd3f58d27750998ce78a94ee390b7de47f48e8edf07cd2475f605bad3d5501"
+    },
+    {
+      "name": "calf-stretch",
+      "seconds": 3.6,
+      "svgHash": "4f89578a4f91a9ce41c0723d5a2c4d0549cf246aaf82ac60c0560642a47bb394",
+      "posesHash": "619f1fa86d869e4659c2a01516683098c697501c34063b272633efc91f7e5c29"
+    },
+    {
+      "name": "carry",
+      "seconds": 1.2,
+      "svgHash": "be03712bdc5ab18e8e74c1df19e22daa818d076e0c25e41777212d73e00b1a12",
+      "posesHash": "57d65da26a5fc4246e33f3c56a58394da885b3e1cf89eaf7bb013f1d3e1b095b"
+    },
+    {
+      "name": "cat-cow",
+      "seconds": 3.6,
+      "svgHash": "4e018d99b4f79e667b58ead5179f93af4ec5c91f5c608a4fa0dc4df8fe13dcfa",
+      "posesHash": "3fe85f464164a264a7c3d3440bbba292f07a780f8de54c3a555b2eb57746ff1b"
+    },
+    {
+      "name": "chest-fly",
+      "seconds": 2.8,
+      "svgHash": "81a0fc558d16e31e86cfd98516c704c4101987e2fb0f05eebf727a3a1bdcb0ba",
+      "posesHash": "3884cec91ab69694fa7487daa39c01c5d8cff30bb1c9d5690bf9d7bc35b84483"
+    },
+    {
+      "name": "childs-pose",
+      "seconds": 3.6,
+      "svgHash": "dfbff5e50589eceb2d2a9a9e3968147a0ae71ffd972467c673fa949d96b2045d",
+      "posesHash": "aa370b6b244e57bf0e700cb16b2ba66ab98a046eb9fb1e9a55866ae4e5ba739c"
+    },
+    {
+      "name": "clamshell",
+      "seconds": 2.4,
+      "svgHash": "ba0012c894b30a5f8856c7b125c837e2f307963a8712fcd8f1340ab2b9a44ba6",
+      "posesHash": "226339f5f03c1ffe87d4599db3957e4d8e29b4d29861cebda1ad0063f2bcd693"
+    },
+    {
+      "name": "cobra",
+      "seconds": 3.2,
+      "svgHash": "69a603d7223f0ac20c6fe05a0e2d58063011befad695a98a72e1747144ccbbaf",
+      "posesHash": "0998eb648f0ceef6d27a9991b566f67f91a0824b9ed648d80eb08010159d2a0e"
+    },
+    {
+      "name": "copenhagen",
+      "seconds": 3.6,
+      "svgHash": "6909b447804931bdf22f5857fb12e5d025ba72e21a8ab4592cd84093ec7da3e6",
+      "posesHash": "9636b51378a7dbee660ab5b2be56a050fbd3ba20fcb8170b3b179c98579b8efe"
+    },
+    {
+      "name": "crossover",
+      "seconds": 2.4,
+      "svgHash": "acbe9e3c17861bccf83071fa113535770d2f94619c54cf662b197c0a1d934758",
+      "posesHash": "1aa93d71d7330767aba6494ab77df1413aeff575b49feb7f4f3afac06b58ee04"
+    },
+    {
+      "name": "crunch",
+      "seconds": 2.4,
+      "svgHash": "f8bb48f6f24ba0420ef46a88bcb305b48d5785b36d1f80a9e66b5013e0a0ea85",
+      "posesHash": "b12d8f6b8549ba6c2dda672b519c47d56c186f2ffd62094ff1e072b4a0ff7387"
+    },
+    {
+      "name": "curl",
+      "seconds": 2.4,
+      "svgHash": "4fe6b6364b49c1abd394f33bb8a67269fe7948292934c2c8ad11052c9f0fbe13",
+      "posesHash": "a7335b492bc8f88dde45c59a13277a7e59567a9efa8642bbafbab53e63fc904f"
+    },
+    {
+      "name": "dead-bug",
+      "seconds": 2.8,
+      "svgHash": "a85244bbdfa0688846bcd4d6f1c899621af40921d0d36647259ba3d2bc5100e9",
+      "posesHash": "74888c2de96b5a3ae4c10a6ffab5c42a9113508693336f42e2b48e1e6bce13ea"
+    },
+    {
+      "name": "dead-hang",
+      "seconds": 3.6,
+      "svgHash": "3dec0de7287eac64a1a431a62fb32b0e8cbdb51286019176f2b232c6363f13c7",
+      "posesHash": "3544ac5ba3fc45fab7a1e09f7aad5b399f88671409a3567ee6e17269fe4f3d3e"
+    },
+    {
+      "name": "deadlift",
+      "seconds": 2.4,
+      "svgHash": "899c2bdd9288bc93d0ba9892eea3d2cb9ccaf65a66919db2644b20e5aec353a2",
+      "posesHash": "205276fda826b4bbb43c962a24dfdd5fd4ac9913265734c550c23eba60a39018"
+    },
+    {
+      "name": "dip",
+      "seconds": 2.4,
+      "svgHash": "dd545e909c6a0f45af19569422cff748d373c0ba0787230ff7eeb0ae7bc0e79f",
+      "posesHash": "324b8e4b36dcc23a9b24617dd6ecac5b80b3890da5b69630996bb919fc113327"
+    },
+    {
+      "name": "donkey-kick",
+      "seconds": 2.4,
+      "svgHash": "93ab4d099b82d1d0db571eb171726703f1172cea9f4495aeeb2e368390c36b09",
+      "posesHash": "ff4e03a6e14086c3d68aa2bef93f4d35fb85c218390d8aa03040da0087f9db43"
+    },
+    {
+      "name": "downward-dog",
+      "seconds": 3.6,
+      "svgHash": "32cc8a7bf7b3ee2856f29a0e757d1f11e41c90018e74ab55c61cec77bf3cc2c0",
+      "posesHash": "185e3c84ebbc7166ea311ddbec6030d96b5a370c3caf0a0db71c7fc3740b813b"
+    },
+    {
+      "name": "face-pull",
+      "seconds": 2.4,
+      "svgHash": "775732df82caa12c1d4e16fda1c0e0cea8287553f7add01f319ad28a12c24705",
+      "posesHash": "2cc2b1f9cad6cbf56d3752ccec892fbfddc06a63788c8be6eb7b3ff017904ae8"
+    },
+    {
+      "name": "figure-four",
+      "seconds": 3.6,
+      "svgHash": "60778d11d54cdebd2bb309c44f6e0cc019a03748149e4bd88a355062c8565b98",
+      "posesHash": "1999e60cf5a009b8c3ea94f9237f4b663e6ba207910a57d56d6e96eca8ae25f1"
+    },
+    {
+      "name": "fire-hydrant",
+      "seconds": 2.4,
+      "svgHash": "d734dedb7e5b0a825ed41a7a3ea48b6d235803afc65d12a21736a83f7eb97886",
+      "posesHash": "eba6a1f83d68f1a71bb53aee6d8d9aa40315c12bfdd6443885e3879b8a9ac90f"
+    },
+    {
+      "name": "flutter-kick",
+      "seconds": 1,
+      "svgHash": "ff72c905623b12924d5534b0a9fb0a88f9dec419d6bff3e3cd7ffa76c4dc7393",
+      "posesHash": "aa61e9870eabd4aba122b6bc5862af24deaaea626f4f1fb4796fe27ae568ef16"
+    },
+    {
+      "name": "foam-roll",
+      "seconds": 3,
+      "svgHash": "3629b36f84542e7675a63f6f761e05368fcb268ef2ab24de1e285754d7638461",
+      "posesHash": "e10d73580e2178c0b6da46e1e69dc36626bdf9d74f22dcc9176d1f2ade4d6ced"
+    },
+    {
+      "name": "frog-stretch",
+      "seconds": 3.6,
+      "svgHash": "d2f4d1c1299b5b4e6c3be9829f37edbe675c0218a6d700dee702404367ba3e63",
+      "posesHash": "3bc47ae64debd78a60df6b8086f1998ca88bd78331d1a5e422171e2f86bd0566"
+    },
+    {
+      "name": "front-raise",
+      "seconds": 2.4,
+      "svgHash": "33c5edc10665a672a8cd121fe6efb1adc99443119fea5e9779315b4746f0af63",
+      "posesHash": "f752b8e88e3095fe568f6a88d180996a57a01b4389931e724ff217240c874147"
+    },
+    {
+      "name": "get-up",
+      "seconds": 9,
+      "svgHash": "d0221651c03e2a1f8dc450bd28944256503c19043113b2c7201f98bb38fe0841",
+      "posesHash": "de5065662f29f4e3a0febae61f0e45b4827eee49e08350d28a4c4400b18c0991"
+    },
+    {
+      "name": "glute-bridge",
+      "seconds": 2.4,
+      "svgHash": "272b658084d1200f43170dad3146aadcfbd3fd0454b74d62ee3ad5015a4abaa2",
+      "posesHash": "e4283a94372b6ab842db5adcbd84ce836ce19933399874e71db98b5d8de663a0"
+    },
+    {
+      "name": "good-morning",
+      "seconds": 2.4,
+      "svgHash": "678d5108eea9bdf7d56f6f7bf4ef0517ab8d55a165b99c06ba499f423d45a46e",
+      "posesHash": "919a3f18ececd57154e49e14bcdfeecef8c6d21d4151231ca210c7e72e332a96"
+    },
+    {
+      "name": "halo",
+      "seconds": 2.6,
+      "svgHash": "d82007287df62ad507e5e8a5f66c746ef16feb1cf1a5132b850200b849e68fc8",
+      "posesHash": "291e274a78ded0b6896856ea7979bc3b3276fff216899abce96b01ec34a10644"
+    },
+    {
+      "name": "hamstring-stretch",
+      "seconds": 3.6,
+      "svgHash": "bd8d319b744120f0def33dcfd347547f6bad7306cea0603cc0ecfee83571a377",
+      "posesHash": "aaddb790afde3bf31911ec4645af2f3d79d80c9bbb72e6fd6a9119116f7cdf86"
+    },
+    {
+      "name": "hanging-knee-raise",
+      "seconds": 2.4,
+      "svgHash": "fa5ebacc621e436dd102ff36c31bd89fc0da1da2efb4dcba43ed6294f4393f0d",
+      "posesHash": "8832224b96308ac12d7faf50827651a7a571ae8aa8d052a339c1dee7c7dd3d99"
+    },
+    {
+      "name": "hanging-leg-raise",
+      "seconds": 2.4,
+      "svgHash": "3f3b36279b7996f225e6ac0a9dd48fe6dba054691b6a46cc16c96cca34941cba",
+      "posesHash": "d285521d0735700bb2724c4d5bb4c4ef63374bca266d39c2bf354f0fd30c3596"
+    },
+    {
+      "name": "hinge",
+      "seconds": 2.4,
+      "svgHash": "b2742098ffc8da6b73649a2e69235d3df7e0480ae9e852fb7d4cc879e0eb8ab8",
+      "posesHash": "9fd58731c0478130f4dbfcb87e81ab57bab889410e5d954715a6e8aa258043f1"
+    },
+    {
+      "name": "hip-90-90",
+      "seconds": 3.2,
+      "svgHash": "362894493b441a68604ee01325b83f92a8693fff925f8f055df8ad785e27ea52",
+      "posesHash": "27bdeea64654744a4d6de2448156c51da820a25976ec597a51d51cda8b3f83f5"
+    },
+    {
+      "name": "hip-circle",
+      "seconds": 2.6,
+      "svgHash": "01959ddc0299acd4f875bfe324cc25dcf97298b74de2620b9a89facfd25726e8",
+      "posesHash": "6bdaefec1a5c8b919f915c2fe715c4682a1a4ef697b67322987e416d5bd2b64f"
+    },
+    {
+      "name": "hip-flexor-stretch",
+      "seconds": 3,
+      "svgHash": "8de63be774d650e5fb3ef86e2c0c00c7d136ab630bfb78f40fcf67391765b525",
+      "posesHash": "d63cc9851da1dd730263f2588a9ba99fa4a7982268e6582a63ae6c94e25fcc77"
+    },
+    {
+      "name": "hip-thrust",
+      "seconds": 2.4,
+      "svgHash": "2bc3b7399bb4336c931a54aa14509b947120caf2bb161528c048c47c116e5164",
+      "posesHash": "07c593c8ba236122fccc47fa4765fcf0962017b24f79cbafb83266c8ba74a777"
+    },
+    {
+      "name": "hollow-hold",
+      "seconds": 3.6,
+      "svgHash": "10201077cc94c8dac41f8c6097397b12b24d2f3158f4ae7d4971f4937e01b16a",
+      "posesHash": "a938568efc6e85b50967a7b86a954de641cd0f18c94555d66e0246438a3d0873"
+    },
+    {
+      "name": "hollow-rock",
+      "seconds": 1.6,
+      "svgHash": "f1f2cb2c23f104acf381df9559a835e186ff7b5a8efcfa26297869026277a9e8",
+      "posesHash": "1a8dcf25656d75ef7761d9c83535f0da2916a191e3dca0c0b9fa10f274b0a81b"
+    },
+    {
+      "name": "hop",
+      "seconds": 1.2,
+      "svgHash": "7a8935cf1be720e712121e1566bfdf4bdd3797f407e76d3860a39113767903dc",
+      "posesHash": "10ef0ff2059033477ec17033cd2732d38d1c727cadd990652a9d09745bc52230"
+    },
+    {
+      "name": "inchworm",
+      "seconds": 4.2,
+      "svgHash": "2f0572e1327ea4ecc2905c95c46e04a57a1d766f5ba583f01b86fb3adc8e50ea",
+      "posesHash": "b0187deab0d7491dd5a84dcd86c9e84ed8a59d629cfa2a9856732ce2d05ce89f"
+    },
+    {
+      "name": "incline-press",
+      "seconds": 2.4,
+      "svgHash": "ef42d76e16f9110199bf4e0f98c035c08490363b5d2e3ee033edc60123d054f6",
+      "posesHash": "cad715b967e091aac714cf7ca50091137434d97ff54f0d96df723acada9bb3ad"
+    },
+    {
+      "name": "jump",
+      "seconds": 1.4,
+      "svgHash": "a234c810febb47eb1ecb890e6c58f2f1398111345d691bbf1848c49bf2b637b8",
+      "posesHash": "88971a05d7f1542af565f19cb823f2e2590b7118b632423c129033ec5391317e"
+    },
+    {
+      "name": "jump-rope",
+      "seconds": 0.9,
+      "svgHash": "0a717c9e3df005af966ac90c5c66be431f6126f0dfa8e35d5f0c2ce55c2bfa05",
+      "posesHash": "ca207f053ac48ec66cecff5d60566f08c7236688685f412981c853bd43255ad9"
+    },
+    {
+      "name": "jump-squat",
+      "seconds": 1.5,
+      "svgHash": "82bce6543e7ebcff123364bbb6c4dc754d5e08f40862dd1ad189b6e98c42f772",
+      "posesHash": "7db00d4a810a2d7c89f28ebe46d09422ea28dc6a0b6246dfac7bbdb2f13581cb"
+    },
+    {
+      "name": "jumping-jack",
+      "seconds": 1.2,
+      "svgHash": "c85ee95033d55de6a18e3c44c132d86d8dfcf4aaed1912b9549cdf274c6a28d3",
+      "posesHash": "5a12b55bd40bd30b9d4f6df26dfd2bd0ee5f6dbfd798cc09c283f875ebe77bd7"
+    },
+    {
+      "name": "kb-clean",
+      "seconds": 2.4,
+      "svgHash": "f53ab2d491592865d88a6c42757ea6167301c5cdcd05d535bc1f116b5bbc42d2",
+      "posesHash": "0ec0f6809165039346bebb3c82ecc095a306beeeb44afba22207f4551ba765e4"
+    },
+    {
+      "name": "kb-swing",
+      "seconds": 1.6,
+      "svgHash": "77f8647e2744c19e99eafd200bbfd60d11b4c9882ebd0bbc43df99a4555f9a8f",
+      "posesHash": "33ba7ea6898101460b09daf0badf569e8b109607b9b663aab0987f4581f340f3"
+    },
+    {
+      "name": "knee-to-wall",
+      "seconds": 2.8,
+      "svgHash": "941f2b7ed6f4b704a0fae142dafe9488ff016ba32891cccbf91bf460981fe711",
+      "posesHash": "eade0d27d7a15a852da18566434fb0d903ab1faa8317290be374f52231b0b0b1"
+    },
+    {
+      "name": "landmine-press",
+      "seconds": 2.4,
+      "svgHash": "abab821172d24d73c2da47e3bae9d3116b3d13f68e91710867bccd2e8269adb9",
+      "posesHash": "70cdd7b4c970b48cc3379c3d0138251119b36aa0d0d2bdda699b960cf56f4688"
+    },
+    {
+      "name": "lat-pulldown",
+      "seconds": 2.4,
+      "svgHash": "ac6d0d3186cfc672dd8da233d6d7fbce27f418fe8835e0e977c1d2c9bf81e799",
+      "posesHash": "0939a4645644f236fa8628405dc648dae0af8a5b4129e2565348f253fa6b44fd"
+    },
+    {
+      "name": "lateral-raise",
+      "seconds": 2.4,
+      "svgHash": "29df457419a06869b7cc880d878a72af4dbca91f2c42e3104f7120926e2ffe10",
+      "posesHash": "b81c7853230e8f6332a8aee90b699c0e224291ed7d077edd295c1eb0d35f5650"
+    },
+    {
+      "name": "leg-curl",
+      "seconds": 2.4,
+      "svgHash": "6b1fc249031864ff39e8c301b3e865f1376f560396ffb0979d81af612696d668",
+      "posesHash": "cdfacf8455a6bbf5cd6d513fba268a0cf73e38c3df9150c98c2afc7dc083057d"
+    },
+    {
+      "name": "leg-extension",
+      "seconds": 2.4,
+      "svgHash": "52ca53f9d404bfefc836fd2673c209eb3cef38ef5c78d32cb93cedaaf5c6fc8c",
+      "posesHash": "517c1df016d1e7ffff8f406a5eb55a9a2eeaac1e6b7a6028d3af9539fb202f41"
+    },
+    {
+      "name": "leg-press",
+      "seconds": 2.4,
+      "svgHash": "93cef522ff75b5865307d13b7b54be403ec26ea22a72d6d5ab2f740740299bfb",
+      "posesHash": "f7a9998160ac9f6559d5c10092aa2e5e8b3e8b42f2e5edbf6a68b3287b8d7298"
+    },
+    {
+      "name": "leg-raise",
+      "seconds": 2.4,
+      "svgHash": "d805d62cd173d32b64de7ad9ecf8b4630ad56430f199a9f0257e00d41a7edc4e",
+      "posesHash": "06eb61d2019dd067ccd9440ba9df64e3f0a180935ca83e667fa85234296dd70b"
+    },
+    {
+      "name": "leg-swing",
+      "seconds": 1.6,
+      "svgHash": "0efac277cee97bd207c0c9c4646fc28e0b7ccd7f4f7266bee9b0d313fdf2e861",
+      "posesHash": "f15feefd428576c54d15ed9b7c4470ca01437dcb04db21f5c1fb031bd5a9f764"
+    },
+    {
+      "name": "lunge",
+      "seconds": 2.4,
+      "svgHash": "d02847a681908355e15e06d0caeae2e31a4c11587db50bbd7ddd5843fd105662",
+      "posesHash": "da97f7c2bee55b47541085908fdd2aacb5cbd1cfc84863ea90abf893d7d3626e"
+    },
+    {
+      "name": "lunge-side",
+      "seconds": 2.4,
+      "svgHash": "5820324a4cb6450712a26686869a9f2fba2d5f58e4b39189963a983a634e3dff",
+      "posesHash": "ef1f6aee1db1205c5d268efcb78ed41199288398fbc2f1f0b57c9885dbbe86a4"
+    },
+    {
+      "name": "lunge-weighted",
+      "seconds": 2.4,
+      "svgHash": "56c8a8747b512836db26437f7eef1142a4360134b6a8f34b2006b478e6e450c5",
+      "posesHash": "f8a3a3feac3daa999b97257b8b2b211de74daf9611f0183a23e96bb45122e08d"
+    },
+    {
+      "name": "mountain-climber",
+      "seconds": 1,
+      "svgHash": "b9b55b86d407e58c8b1b3cc8402a7f07b4f5e9b8e94ffa02a63b4c5fc55e11e4",
+      "posesHash": "7398962edcb7dbf9473174f68d50dd2c5381e311e56a905fe4cb3a301d808433"
+    },
+    {
+      "name": "nordic",
+      "seconds": 3.4,
+      "svgHash": "6f52342d54f29cf83453822fabcc6ebc0953af886ebba0aa2e9d18e07f44d653",
+      "posesHash": "5a174d0de820e7af151ce46904fef5c5ee6d5940ff3e1468b920493b6b86426d"
+    },
+    {
+      "name": "open-book",
+      "seconds": 3.2,
+      "svgHash": "456a749ae95e8f1a48c656cad0baa587ff1b71c13d95a1f7702802900bc478ff",
+      "posesHash": "d076c5d0281840ac7f257323e7c02b99576c0317ea4d66f18cea24ad46ff0f69"
+    },
+    {
+      "name": "overhead-press",
+      "seconds": 2.4,
+      "svgHash": "f93d0d6252f0a8d53effdb879740ad9c27ed0acf4abdb9697355128f5b284e4f",
+      "posesHash": "0e7d27ba94a1377722a6ec3424971dff5e6fd1697528d428bdd1121eac00444b"
+    },
+    {
+      "name": "overhead-press-dumbbell",
+      "seconds": 2.4,
+      "svgHash": "4e877e9ce0eb589574f6046064687435241b8aece409061d7201d91a7826b914",
+      "posesHash": "582fd0ee396ae5861d1d093a8c4cd6fe3d098b6d4dfcfb66db88cfbb6a4b3a13"
+    },
+    {
+      "name": "pallof-press",
+      "seconds": 2.4,
+      "svgHash": "1a14c493b1a0fb4af9adee241cadf558a0c94fade9c5598be1ffd3d97c3ad42a",
+      "posesHash": "8bd4ec7f15e21e2476b0cd64213393cdafb71357064c49e1550e4a3e0087bef5"
+    },
+    {
+      "name": "pigeon",
+      "seconds": 4,
+      "svgHash": "d55f32653315fe74eaa1451fa23c4e1b06f82668895f25d27356a59e51af4d6a",
+      "posesHash": "1316fc729e3eb0fc6449391ee8331a1233de147df03b054a0c91f7b58a7c56e1"
+    },
+    {
+      "name": "pistol",
+      "seconds": 2.4,
+      "svgHash": "090aeb88dfb6fa075fefeb6a104a701657c86e990e351af0d1a4bfdc7b61a998",
+      "posesHash": "22ee7c92c9810e75437f19bdd644bbe62d37e0b54fcc1097111bf6a8cf7cb030"
+    },
+    {
+      "name": "plank",
+      "seconds": 3.6,
+      "svgHash": "48294effc5a309546b128e0fc49a156a456675602dabf38f67fa8be89d65a893",
+      "posesHash": "d897c9a403df5c94e9bfa5996d5861f6675bc00e48a30ae68047a7e71f4b4c6d"
+    },
+    {
+      "name": "plank-high",
+      "seconds": 3.6,
+      "svgHash": "d851c6797c974e857ef07850c971d87595170ba96a637a710c534b32216a0b96",
+      "posesHash": "50ef08c3efe4ad049bcc6a7e7dc259d2b9deee67682e6a09dbb631577e24076d"
+    },
+    {
+      "name": "plank-shoulder-tap",
+      "seconds": 1.4,
+      "svgHash": "60eb70c051c810c705bf097c1d7e8177baebc4ed13ba54fd3b45c0b0ef9d11d2",
+      "posesHash": "346a843012579afb441178633c682141b61435a7a8332e6d0a8119b83120d4c8"
+    },
+    {
+      "name": "pogo",
+      "seconds": 0.7,
+      "svgHash": "508f2d33e8e59883cf8547aa92ed68f9f75999edabc4bbceb69b8b12514ca55a",
+      "posesHash": "b6748734db1fcb3182dd83f5aa6531842327fe8a24080b69e3f6edbbae060b00"
+    },
+    {
+      "name": "pull-up",
+      "seconds": 2.4,
+      "svgHash": "91edbdb5b1ea46bef54808fd27506822c18b4ef85b03992baf0788c90c4b6f79",
+      "posesHash": "3b1c43a2772ae630f6dee8443390c6c8a9ee821f1f26cf6557ea7792c0ff6264"
+    },
+    {
+      "name": "push-up",
+      "seconds": 2.4,
+      "svgHash": "bc50380bb184aba52a9309a6c439bd633260195c4c5b238ad68274157377eb32",
+      "posesHash": "2bbfb2816b07899d635bae3fec4aeb86f4d22e5c8843f457af48b8b1be8cb5fb"
+    },
+    {
+      "name": "push-up-decline",
+      "seconds": 2.4,
+      "svgHash": "93e801ae0e00ccdc370e3109415f1d965e6418870cc7816a0916d8b395a77579",
+      "posesHash": "9396c455db2466ce9e587e698f536410ba6c69d14e4e34b602812d4409fb0eca"
+    },
+    {
+      "name": "push-up-incline",
+      "seconds": 2.4,
+      "svgHash": "f1eb03a719593fe0dc1369dca0c8dbd39b92a62bef068a66cfb62faea2e94a09",
+      "posesHash": "3f3e0f58e69551475aeb3d0bcf9afb4bc9ad7ec9aee2161ce57c98d5d771cdd2"
+    },
+    {
+      "name": "push-up-knee",
+      "seconds": 2.4,
+      "svgHash": "e5e93ebeb543f2c05ff4d974c932c9da48dc17e5ef1327828479d78e4b134f06",
+      "posesHash": "63d0fbba696298f3fee8fa50dd7ae0d50b964bd5071b1fa3c1da648bb1a2c7bb"
+    },
+    {
+      "name": "push-up-pike",
+      "seconds": 2.4,
+      "svgHash": "7bf3ab9cb4924901665e18d3d6b4ba0146f631d586a70d55f2a152564cdd05dd",
+      "posesHash": "0c15fe6bb6884f22fab14d1ea6df6a09fb390d441bb38f8f71c7fcc186891870"
+    },
+    {
+      "name": "push-up-plyo",
+      "seconds": 1.5,
+      "svgHash": "06bd4c56e96cd40f002ea77705bd4463276c7be70fe2e2c42feb78ecff9ea719",
+      "posesHash": "39d28e91687645230c94e67786110c96d7218e9b6163c4b34a97c1ca584c5c71"
+    },
+    {
+      "name": "quad-stretch",
+      "seconds": 3.6,
+      "svgHash": "d10eb3be99ec6a797473bde1f2f73b5ea1ef3861828ce072d35b7870cde3d7e0",
+      "posesHash": "e2aba00cfd5d3cbf7b8d8dd7d487c8b89ba1c9941629e14363ed180a163da850"
+    },
+    {
+      "name": "renegade-row",
+      "seconds": 2,
+      "svgHash": "b5a5209646b0cea8fd502bdda2f0bf3083b19c5246fa2dc84a9f888e03596e67",
+      "posesHash": "cd36cfcd4a45940a502cf71915737173b0d13f17ff7572025dac522ad94a5283"
+    },
+    {
+      "name": "reverse-crunch",
+      "seconds": 2.4,
+      "svgHash": "8bf34fe1c7b0d5c93c992f48ae436524bf77e349d88608a78f6b08e55b12b61b",
+      "posesHash": "106fa4dc57c8d9a9ac32bf0f6bdf813d47acb59d57cb8a73ce7786ca59e14b54"
+    },
+    {
+      "name": "reverse-fly",
+      "seconds": 2.4,
+      "svgHash": "0dc9ae165fbed1709962d30deb9ac4584ca74b2269f3f4efe4b497ed5b5969bc",
+      "posesHash": "7ebe8095fb65cb677460e38145dbd07a7d18f3da672da1d9f15c8e68b81e20ce"
+    },
+    {
+      "name": "row",
+      "seconds": 2.4,
+      "svgHash": "9dfe07917044694eadf8bd0952b8a87ec9ccafca0fc45feee8ec547e6a95d2ec",
+      "posesHash": "f81b23db9d70380c1eb79c737c661c423bc630d36332cf713396a4964a2e082c"
+    },
+    {
+      "name": "row-chest-supported",
+      "seconds": 2.4,
+      "svgHash": "e8fb1825bf4f2acf2eb8d8734e38485b8cff28afa11e4f5200e5020379f96603",
+      "posesHash": "c769f307dec235c978198fa2a072fe064ea97c227294c37818bcf9173b2a731f"
+    },
+    {
+      "name": "row-dumbbell",
+      "seconds": 2.4,
+      "svgHash": "f77924359b633d2b04a6646e39ae3b1aac67e3a91d7cfdb9f93a3d37fd790e2a",
+      "posesHash": "ccdab8a8678410c7d6df377e8998d363960d24c8948716bf7432862617266793"
+    },
+    {
+      "name": "row-inverted",
+      "seconds": 2.4,
+      "svgHash": "0bb76d4391704a208f67040d71c7c2190c881b08c41f4a695226d8bdd05007f0",
+      "posesHash": "4f932fcb5f9261cf64295e2a9bd4264a03a32b95aecd02ef2b9daebe6bb547d3"
+    },
+    {
+      "name": "row-seated",
+      "seconds": 2.4,
+      "svgHash": "fe2483e32854cce11f7f594bd42213d40029cab0eb6407ee8b4c4512f5dcdbd5",
+      "posesHash": "ef4d166366016927af3ce6a12b8fe67e8c6533452726865acf2df93a6608ad43"
+    },
+    {
+      "name": "run",
+      "seconds": 0.9,
+      "svgHash": "bf62f341ba9d120041a243b4149d7b7dd3ec2917ab7288ab6faa58f3e546cad7",
+      "posesHash": "816e2d1041e620b96e5faf5a1f533597d20db94bcae44ae264fcbc2e487bebfd"
+    },
+    {
+      "name": "russian-twist",
+      "seconds": 1.4,
+      "svgHash": "90c0df829321388127fcecd39f67956f31ed83ddcb714a1bec0c4253f529a762",
+      "posesHash": "0c6a911968cf950e822ba2a11b4c4a4b0c5ea562019771f34ab8cde23ebe26b8"
+    },
+    {
+      "name": "scapular-pull",
+      "seconds": 1.8,
+      "svgHash": "3123f372b2e3f10291d5d8a44a0bb3b1bdc155966ced76156d4f32d9ce013043",
+      "posesHash": "563fa88913529b23d700b74f243ad739ad4fdb7cfec0fb9f72a40cd39bcffab3"
+    },
+    {
+      "name": "shrug",
+      "seconds": 1.8,
+      "svgHash": "c140584b66a610b7937b232b9b5c07b2523f322794db0cb2120995742ec8c40f",
+      "posesHash": "0a2c0c3904363051a4ed46a94fea3da7a487cb4de77a35eb3b6ab38dcbd5356e"
+    },
+    {
+      "name": "shuffle",
+      "seconds": 1,
+      "svgHash": "4d2ed31b12f82ad1b2b10d37dfc6e01797e28deb9718a5d66f6aec8a1c89d9eb",
+      "posesHash": "31876a6e9f8ac54e12a504a5e0c610c037af0a883709f765e1e165fd44ca4297"
+    },
+    {
+      "name": "side-plank",
+      "seconds": 3.6,
+      "svgHash": "481f91b9d1a7861af4b8bfa4c6daf116898735d325960b6e1e5769181c59e6e0",
+      "posesHash": "41fda26a0ad4c3232f97b9c1e3ddf207d3f7b35d8b088b9ce33cbd7cb4dc5211"
+    },
+    {
+      "name": "side-plank-dip",
+      "seconds": 2.4,
+      "svgHash": "725b7a7dc5a0b45b40bddfcfe59404fdd5623e20ed29f7cf6bd81498d2e5e9bd",
+      "posesHash": "a19fddecfe24b258b30da38255de9a7e1ce688492861d44a007f97e0a58230af"
+    },
+    {
+      "name": "single-leg-bridge",
+      "seconds": 2.4,
+      "svgHash": "716c5d25d2af4ae54f1b9cc482177cbfba2444ef0b2dd3051a2ad7f1a309aa34",
+      "posesHash": "ff7f5dfe60824a4b2711a1713906bdc4e1ef0ee4c5bdd6bfc8e1618c9c82e62c"
+    },
+    {
+      "name": "single-leg-hinge",
+      "seconds": 2.4,
+      "svgHash": "b35675358952d79c9b2510fda4fdf98045cf01bac32776c004db305718c783e9",
+      "posesHash": "bc9f8030f9638719aa184781794dc8835a9b954ed5f038db44c93fd25d61c515"
+    },
+    {
+      "name": "sit-up",
+      "seconds": 2.4,
+      "svgHash": "ab1752a5b0439ae6adf4dac93bb4623e7a008ca467cb4103d6cd353cf915ff0e",
+      "posesHash": "01092814dc6afa364ee40ce74aee37df64ada4d5bc97cb6d038e3688564582df"
+    },
+    {
+      "name": "skater",
+      "seconds": 1.4,
+      "svgHash": "749af08cca8a7f99e2848f8d5cf1746cc5631d17ede5679d641596a42661574f",
+      "posesHash": "9a57a4d428e1b2a33449857af5588921a51c108e12af0b7a24089406aae5de8a"
+    },
+    {
+      "name": "skull-crusher",
+      "seconds": 2.4,
+      "svgHash": "c7128fc56c9c39ad7031ed0396d88b3909ec637be22664fd0015a15d0a8764b4",
+      "posesHash": "397ed28431a49097cbb37f0bd541d8788f6bfa3899de61ac341f9920f80b90ab"
+    },
+    {
+      "name": "slam",
+      "seconds": 2.4,
+      "svgHash": "3dd617434fd14e344761238311229ab1f3630266c67461d16366824f4bf278bd",
+      "posesHash": "2e8b7def67640fa12a837a6a83ee8d209271a1644e054ef99c8fa961800e23fd"
+    },
+    {
+      "name": "sled-push",
+      "seconds": 1.3,
+      "svgHash": "5ef0d17e66a64966a97c57480e3cc25ef6330ff6c9957d2f4413cf8653a14be0",
+      "posesHash": "5392a84909220828c7479e73bfe0fc662264a86debc1483dfe64c9f34286b2f3"
+    },
+    {
+      "name": "split-squat-bench",
+      "seconds": 2.4,
+      "svgHash": "e84d1024e34297da45f177f4a9ce03a654878d4483d62d2266a57e041c302cf7",
+      "posesHash": "207412ae52924986eb988add6995b846483f2e133c63ab6b230884f14687c544"
+    },
+    {
+      "name": "squat",
+      "seconds": 2.4,
+      "svgHash": "20462e911e1bc17f353fac4652ab8e4e94b5fcd7ad958d9d657bbf1b684d9f8d",
+      "posesHash": "9b4cf2b888c7c9e0b4480ea31ddde9063192522f4b4abc7adcc462ed84f18941"
+    },
+    {
+      "name": "squat-barbell",
+      "seconds": 2.4,
+      "svgHash": "95083bdab16a96d5f57893937d9864f7e37ed6b13652c2606c224033ca05afc2",
+      "posesHash": "f00163ab717ee4b33e759937ec3b1baa3e1d997655f212c5e4a4478cda3630cd"
+    },
+    {
+      "name": "squat-front",
+      "seconds": 2.4,
+      "svgHash": "3538c7c7b4697c5859e6e5965d8544492901e56b44e678427ae218ca376ca50e",
+      "posesHash": "3f0347599d73082bfe3781296d0efe1d7772dd78146a6c20d9c4daf713c7372c"
+    },
+    {
+      "name": "squat-goblet",
+      "seconds": 2.4,
+      "svgHash": "5badb71c29631c119759bf11fe3964878b03e057d9b8f221eb190cc1f9032aeb",
+      "posesHash": "a683b692d8bd1c777d5c1a5c6e97078d6e474fcb890f3ea23f9f9dff1c0efc7d"
+    },
+    {
+      "name": "squat-hold",
+      "seconds": 3.6,
+      "svgHash": "bb71a85674fe450583546dbb8be8ec73f46cb376ed6f544775f546896cef9376",
+      "posesHash": "6c17c57f8435bde1cec6d54cf33a230cd22c17ad430c0b96f0055756ea5e8c5c"
+    },
+    {
+      "name": "step-up",
+      "seconds": 2.4,
+      "svgHash": "3d05d85502b46a3c8b71f5c1805b98f56ad470c62e4da49ff5aca61fb015fc29",
+      "posesHash": "2b7b88447ebf03f3defa2eeb3c6daf5179287b019218233ba03b88774201fe9f"
+    },
+    {
+      "name": "stir-the-pot",
+      "seconds": 3.2,
+      "svgHash": "d36e48ad865022c41c631b9f1143441c185caf18ed4c0fbd585b0cf3456b5a51",
+      "posesHash": "434ff6436be34b6e6b1ce522f744111264519a9d8facb342114ca3e8ec0d1ab3"
+    },
+    {
+      "name": "straight-arm-pulldown",
+      "seconds": 2.4,
+      "svgHash": "dc350cd0013f180bba81e04113997aec823d0704c28d4fed9d37ea40256bd430",
+      "posesHash": "350fe32d229c217dfc977a82ab736f3ceeefae52f867ae7735018d403a8a35ec"
+    },
+    {
+      "name": "superman",
+      "seconds": 2.4,
+      "svgHash": "d9c208fef9b5c4b500dd5dc40551f4ed158766e2e088ff3167f55cd047a110ff",
+      "posesHash": "98c150eae331e971743970cd2894094ce89165d53e97b7a241d013953a315d75"
+    },
+    {
+      "name": "swimmer",
+      "seconds": 3,
+      "svgHash": "2bb6a8d4e90c0da0f7cadc3026b998c2402f103f610980a24d488c096405ef57",
+      "posesHash": "e35eaca6a206f890ab1481c05265c5fac4bec00fd299fb753350d7963dc81bda"
+    },
+    {
+      "name": "thread-needle",
+      "seconds": 3.2,
+      "svgHash": "4ca3b932de48486f4c75e7bd258f02d8f41448be7c89c8bd0719afeccd6acd31",
+      "posesHash": "161869dff1eb26b5fc3bd43257251931a4f87087199dfc7ceec1d5320353a1b2"
+    },
+    {
+      "name": "thruster",
+      "seconds": 2.4,
+      "svgHash": "37b0c89d61004f3b6abdbd302d160bfdf8bf6bb17349664a5fc0a79309bd918d",
+      "posesHash": "664973bd28106ce895bbc53d2dac6abe67beeac05286e034b1716fa66f0177a7"
+    },
+    {
+      "name": "tibialis-raise",
+      "seconds": 1.8,
+      "svgHash": "0487b4f98e9e9b93558e0723b03b2e980e05200096c6f0012ef79fcbbe563477",
+      "posesHash": "66fd2ee5b23ee6ea35a69adecba5ccfe58bbde4c932a20766e070ccd364d9ff3"
+    },
+    {
+      "name": "toe-touch",
+      "seconds": 2.4,
+      "svgHash": "eb35693c8eddf6f142823622adc76ed27d88f89255fa80ffa52a098eae010c03",
+      "posesHash": "ae5ce0b02770cff2516fedf7b407bade17215c7d3299625496ed816b061e9aa8"
+    },
+    {
+      "name": "triceps-overhead",
+      "seconds": 2.4,
+      "svgHash": "3816de13e22a2fd574c0919a4d9abc56402a4213b1f77ff6d280d9a17a90add0",
+      "posesHash": "4a66ad2d1d4b834a4212f0ea0be5a2c6afe8771c84ac493c34a236ba0f2bd26d"
+    },
+    {
+      "name": "triceps-pushdown",
+      "seconds": 2.4,
+      "svgHash": "63c0a2264578a97f9bf9fca84977365666910448a48917c295e1611481fe253c",
+      "posesHash": "fab75ef52a3325348c552021b9ea057b0a3939a8941a9a6afdcf5b66fd1471ca"
+    },
+    {
+      "name": "tuck-jump",
+      "seconds": 1.4,
+      "svgHash": "7edcabaef6a50ceb2c7f4bdd31a23b507ea88d3d2ae0d4634d92440020db0902",
+      "posesHash": "c7039a1d3a4cbef43d385a3bb4d0f67718e41cc067d918f0e68e1b6dffb32ca4"
+    },
+    {
+      "name": "v-up",
+      "seconds": 2.4,
+      "svgHash": "a75594c72a8515b8772a7d76c78aaa44a6dd857d014d39a318f31aedfafb6a7f",
+      "posesHash": "3747eccb81eda2308872fe0340b2263c152dd9a089dad75668d5f5de52e6c1cb"
+    },
+    {
+      "name": "wall-ball",
+      "seconds": 3,
+      "svgHash": "ea334cbe57226a3941cced78b55e5cfdac5df269789fa5524675179f4139fe75",
+      "posesHash": "0fb289ef5df86db8ce3d8d2e26d5f43ef281d29aa6dc95ed0e95a5aa09c5bb78"
+    },
+    {
+      "name": "wall-sit",
+      "seconds": 3.6,
+      "svgHash": "c16a34f12a28f1e02d877ced70cef6c830d64e9cd0aa97e63190b7d2b42d91b7",
+      "posesHash": "b4d5aad22ed3bedc2734826d2ece3387b8b4929449349efd2320c192a645730e"
+    },
+    {
+      "name": "wall-slide",
+      "seconds": 3,
+      "svgHash": "aeed4d2213ca9ebf9d69cf66e2f1ec764218c699763b5102cd05a67dc0ac92d6",
+      "posesHash": "2b5359c4d9f988ef8ff8d9e76f4f13347d20ef880151a9a63d0e0011603cd94e"
+    },
+    {
+      "name": "woodchop",
+      "seconds": 2.4,
+      "svgHash": "53631b1c063b658a84247e42f1561d0025379cbe16e60ebfe5dbfe644850fa71",
+      "posesHash": "fe1a24f2d5e5468b2b087694b79386e2fb46e30f18f1ffeeafa0aebfc63d59cf"
+    },
+    {
+      "name": "worlds-greatest",
+      "seconds": 3.4,
+      "svgHash": "3f35e450ff8d904c72702a10ce41288ff0d0dd62e959cfc9c2e29d509272b593",
+      "posesHash": "424f3c969a55d380cae6e1b06b547229422e85713674e7e3fb0b781eb981ccfe"
+    },
+    {
+      "name": "y-raise",
+      "seconds": 2.4,
+      "svgHash": "929f92f616e12daf8f2fadce1c8278a48204d16b12ed2616e5959f7061823572",
+      "posesHash": "23127712db2531b56fa6b28ff02cec09a97e4f6bcaac72590849d70b1aae9980"
+    }
+  ],
+  "exercises": [
+    {
+      "name": "3/4 Sit Up",
+      "category": "core",
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ],
+      "pattern": "sit-up"
+    },
+    {
+      "name": "90/90 Hip Switch",
+      "category": "mobility",
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ],
+      "pattern": "hip-90-90"
+    },
+    {
+      "name": "A-Skip",
+      "category": "drill",
+      "equipment": [
+        "bodyweight"
+      ],
+      "pattern": ""
+    },
+    {
+      "name": "Ab Wheel Rollout",
+      "category": "core",
+      "equipment": [
+        "other",
+        "mat"
+      ],
+      "pattern": "ab-wheel"
+    },
+    {
+      "name": "Arnold Press",
+      "category": "strength",
+      "equipment": [
+        "dumbbell"
+      ],
+      "pattern": ""
+    },
+    {
+      "name": "Assisted Pull Up (band)",
+      "category": "strength",
+      "equipment": [
+        "pullup-bar",
+        "band"
+      ],
+      "pattern": "pull-up"
+    },
+    {
+      "name": "B-Skip",
+      "category": "drill",
+      "equipment": [
+        "bodyweight"
+      ],
+      "pattern": ""
+    },
+    {
+      "name": "Back Squat",
+      "category": "strength",
+      "equipment": [
+        "barbell"
+      ],
+      "pattern": "squat-barbell"
+    },
+    {
+      "name": "Band Pull Apart",
+      "category": "mobility",
+      "equipment": [
+        "band"
+      ],
+      "pattern": "band-pull-apart"
+    },
+    {
+      "name": "Band Shoulder Dislocates",
+      "category": "mobility",
+      "equipment": [
+        "band"
+      ],
+      "pattern": "band-dislocate"
+    },
+    {
+      "name": "Banded Lateral Walk",
+      "category": "drill",
+      "equipment": [
+        "band"
+      ],
+      "pattern": "band-walk"
+    },
+    {
+      "name": "Banded Mountain Climbers",
+      "category": "cardio",
+      "equipment": [
+        "band",
+        "bodyweight",
+        "mat"
+      ],
+      "pattern": "mountain-climber"
+    },
+    {
+      "name": "Battle Ropes",
+      "category": "cardio",
+      "equipment": [
+        "other"
+      ],
+      "pattern": "battle-ropes"
+    },
+    {
+      "name": "Bear Crawl",
+      "category": "drill",
+      "equipment": [
+        "bodyweight"
+      ],
+      "pattern": "bear-crawl"
+    },
+    {
+      "name": "Bear Plank Hold",
+      "category": "core",
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ],
+      "pattern": "bear-plank"
+    },
+    {
+      "name": "Bench Dip",
+      "category": "strength",
+      "equipment": [
+        "bodyweight",
+        "bench"
+      ],
+      "pattern": "bench-dip"
+    },
+    {
+      "name": "Bench Press",
+      "category": "strength",
+      "equipment": [
+        "barbell",
+        "bench"
+      ],
+      "pattern": "bench-press"
+    },
+    {
+      "name": "Bent Over Barbell Row",
+      "category": "strength",
+      "equipment": [
+        "barbell"
+      ],
+      "pattern": "row"
+    },
+    {
+      "name": "Bicep Curl",
+      "category": "strength",
+      "equipment": [
+        "dumbbell"
+      ],
+      "pattern": "curl"
+    },
+    {
+      "name": "Bicycle Crunch",
+      "category": "core",
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ],
+      "pattern": "bicycle-crunch"
+    },
+    {
+      "name": "Bird Dog",
+      "category": "core",
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ],
+      "pattern": "bird-dog"
+    },
+    {
+      "name": "Bodyweight Squat",
+      "category": "strength",
+      "equipment": [
+        "bodyweight"
+      ],
+      "pattern": "squat"
+    },
+    {
+      "name": "Box Jump",
+      "category": "plyometric",
+      "equipment": [
+        "box",
+        "bodyweight"
+      ],
+      "pattern": "box-jump"
+    },
+    {
+      "name": "Broad Jump",
+      "category": "plyometric",
+      "equipment": [
+        "bodyweight"
+      ],
+      "pattern": "broad-jump"
+    },
+    {
+      "name": "Bulgarian Split Squat",
+      "category": "strength",
+      "equipment": [
+        "bodyweight",
+        "dumbbell",
+        "bench"
+      ],
+      "pattern": "split-squat-bench"
+    },
+    {
+      "name": "Bulgarian Split Squat with Calf Raise",
+      "category": "strength",
+      "equipment": [
+        "bodyweight",
+        "dumbbell",
+        "bench"
+      ],
+      "pattern": ""
+    },
+    {
+      "name": "Burpee",
+      "category": "cardio",
+      "equipment": [
+        "bodyweight"
+      ],
+      "pattern": "burpee"
+    },
+    {
+      "name": "Butt Kicks",
+      "category": "cardio",
+      "equipment": [
+        "bodyweight"
+      ],
+      "pattern": "butt-kick"
+    },
+    {
+      "name": "Cable Crossover",
+      "category": "strength",
+      "equipment": [
+        "cable"
+      ],
+      "pattern": "crossover"
+    },
+    {
+      "name": "Cable Woodchop",
+      "category": "core",
+      "equipment": [
+        "cable"
+      ],
+      "pattern": "woodchop"
+    },
+    {
+      "name": "Calf Raise",
+      "category": "strength",
+      "equipment": [
+        "bodyweight",
+        "machine",
+        "dumbbell"
+      ],
+      "pattern": "calf-raise"
+    },
+    {
+      "name": "Calf Stretch",
+      "category": "mobility",
+      "equipment": [
+        "bodyweight",
+        "other"
+      ],
+      "pattern": "calf-stretch"
+    },
+    {
+      "name": "Carioca",
+      "category": "drill",
+      "equipment": [
+        "bodyweight"
+      ],
+      "pattern": ""
+    },
+    {
+      "name": "Cat Cow",
+      "category": "mobility",
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ],
+      "pattern": "cat-cow"
+    },
+    {
+      "name": "Chest Supported Row",
+      "category": "strength",
+      "equipment": [
+        "dumbbell",
+        "bench"
+      ],
+      "pattern": "row-chest-supported"
+    },
+    {
+      "name": "Child's Pose",
+      "category": "mobility",
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ],
+      "pattern": "childs-pose"
+    },
+    {
+      "name": "Chin Up",
+      "category": "strength",
+      "equipment": [
+        "pullup-bar",
+        "bodyweight"
+      ],
+      "pattern": "pull-up"
+    },
+    {
+      "name": "Clamshell",
+      "category": "mobility",
+      "equipment": [
+        "bodyweight",
+        "band"
+      ],
+      "pattern": "clamshell"
+    },
+    {
+      "name": "Cobra Stretch",
+      "category": "mobility",
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ],
+      "pattern": "cobra"
+    },
+    {
+      "name": "Copenhagen Plank",
+      "category": "core",
+      "equipment": [
+        "bench"
+      ],
+      "pattern": "copenhagen"
+    },
+    {
+      "name": "Copenhagen Plank Dip",
+      "category": "core",
+      "equipment": [
+        "bench"
+      ],
+      "pattern": "copenhagen"
+    },
+    {
+      "name": "Cossack Squat",
+      "category": "mobility",
+      "equipment": [
+        "bodyweight",
+        "kettlebell"
+      ],
+      "pattern": ""
+    },
+    {
+      "name": "Couch Stretch",
+      "category": "mobility",
+      "equipment": [
+        "bodyweight",
+        "other"
+      ],
+      "pattern": ""
+    },
+    {
+      "name": "Cross Body Mountain Climbers",
+      "category": "cardio",
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ],
+      "pattern": ""
+    },
+    {
+      "name": "Crossover Crunch",
+      "category": "core",
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ],
+      "pattern": ""
+    },
+    {
+      "name": "Crunch",
+      "category": "core",
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ],
+      "pattern": "crunch"
+    },
+    {
+      "name": "Curtsy Lunge",
+      "category": "strength",
+      "equipment": [
+        "bodyweight",
+        "dumbbell"
+      ],
+      "pattern": ""
+    },
+    {
+      "name": "Dead Bug",
+      "category": "core",
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ],
+      "pattern": "dead-bug"
+    },
+    {
+      "name": "Dead Hang",
+      "category": "mobility",
+      "equipment": [
+        "pullup-bar",
+        "bodyweight"
+      ],
+      "pattern": "dead-hang"
+    },
+    {
+      "name": "Deadlift",
+      "category": "strength",
+      "equipment": [
+        "barbell"
+      ],
+      "pattern": "deadlift"
+    },
+    {
+      "name": "Decline Push Up",
+      "category": "strength",
+      "equipment": [
+        "bodyweight",
+        "bench",
+        "box"
+      ],
+      "pattern": "push-up-decline"
+    },
+    {
+      "name": "Deep Squat Hold",
+      "category": "mobility",
+      "equipment": [
+        "bodyweight"
+      ],
+      "pattern": "squat-hold"
+    },
+    {
+      "name": "Diamond Push Up",
+      "category": "strength",
+      "equipment": [
+        "bodyweight"
+      ],
+      "pattern": "push-up"
+    },
+    {
+      "name": "Dips",
+      "category": "strength",
+      "equipment": [
+        "bodyweight",
+        "pullup-bar",
+        "other"
+      ],
+      "pattern": "dip"
+    },
+    {
+      "name": "Donkey Kick",
+      "category": "strength",
+      "equipment": [
+        "bodyweight"
+      ],
+      "pattern": "donkey-kick"
+    },
+    {
+      "name": "Downward Dog",
+      "category": "mobility",
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ],
+      "pattern": "downward-dog"
+    },
+    {
+      "name": "Dumbbell Bench Press",
+      "category": "strength",
+      "equipment": [
+        "dumbbell",
+        "bench"
+      ],
+      "pattern": "bench-press-dumbbell"
+    },
+    {
+      "name": "Dumbbell Chest Fly",
+      "category": "strength",
+      "equipment": [
+        "dumbbell",
+        "bench"
+      ],
+      "pattern": "chest-fly"
+    },
+    {
+      "name": "Dumbbell Shoulder Press",
+      "category": "strength",
+      "equipment": [
+        "dumbbell"
+      ],
+      "pattern": "overhead-press-dumbbell"
+    },
+    {
+      "name": "Dumbbell Shrug",
+      "category": "strength",
+      "equipment": [
+        "dumbbell"
+      ],
+      "pattern": "shrug"
+    },
+    {
+      "name": "External Rotation (band)",
+      "category": "mobility",
+      "equipment": [
+        "band"
+      ],
+      "pattern": ""
+    },
+    {
+      "name": "Face Pull",
+      "category": "strength",
+      "equipment": [
+        "cable"
+      ],
+      "pattern": "face-pull"
+    },
+    {
+      "name": "Farmer's Carry",
+      "category": "strength",
+      "equipment": [
+        "dumbbell",
+        "kettlebell",
+        "other"
+      ],
+      "pattern": "carry"
+    },
+    {
+      "name": "Figure Four Glute Stretch",
+      "category": "mobility",
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ],
+      "pattern": "figure-four"
+    },
+    {
+      "name": "Fire Hydrant",
+      "category": "strength",
+      "equipment": [
+        "bodyweight",
+        "band"
+      ],
+      "pattern": "fire-hydrant"
+    },
+    {
+      "name": "Flutter Kicks",
+      "category": "core",
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ],
+      "pattern": "flutter-kick"
+    },
+    {
+      "name": "Foam Roll IT Band",
+      "category": "mobility",
+      "equipment": [
+        "foam-roller",
+        "mat"
+      ],
+      "pattern": ""
+    },
+    {
+      "name": "Foam Roll Quads",
+      "category": "mobility",
+      "equipment": [
+        "foam-roller",
+        "mat"
+      ],
+      "pattern": ""
+    },
+    {
+      "name": "Foam Roll Thoracic Spine",
+      "category": "mobility",
+      "equipment": [
+        "foam-roller",
+        "mat"
+      ],
+      "pattern": ""
+    },
+    {
+      "name": "Forearm Plank",
+      "category": "core",
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ],
+      "pattern": "plank"
+    },
+    {
+      "name": "Forward Lunge",
+      "category": "strength",
+      "equipment": [
+        "bodyweight",
+        "dumbbell"
+      ],
+      "pattern": ""
+    },
+    {
+      "name": "Frog Stretch",
+      "category": "mobility",
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ],
+      "pattern": "frog-stretch"
+    },
+    {
+      "name": "Front Raise",
+      "category": "strength",
+      "equipment": [
+        "dumbbell"
+      ],
+      "pattern": "front-raise"
+    },
+    {
+      "name": "Front Squat",
+      "category": "strength",
+      "equipment": [
+        "barbell"
+      ],
+      "pattern": "squat-front"
+    },
+    {
+      "name": "Glute Bridge",
+      "category": "strength",
+      "equipment": [
+        "bodyweight"
+      ],
+      "pattern": "glute-bridge"
+    },
+    {
+      "name": "Glute Bridge March",
+      "category": "core",
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ],
+      "pattern": ""
+    },
+    {
+      "name": "Goblet Squat",
+      "category": "strength",
+      "equipment": [
+        "dumbbell",
+        "kettlebell"
+      ],
+      "pattern": "squat-goblet"
+    },
+    {
+      "name": "Good Morning",
+      "category": "strength",
+      "equipment": [
+        "barbell"
+      ],
+      "pattern": "good-morning"
+    },
+    {
+      "name": "Hammer Curl",
+      "category": "strength",
+      "equipment": [
+        "dumbbell"
+      ],
+      "pattern": ""
+    },
+    {
+      "name": "Hanging Knee Raise",
+      "category": "core",
+      "equipment": [
+        "pullup-bar",
+        "bodyweight"
+      ],
+      "pattern": "hanging-knee-raise"
+    },
+    {
+      "name": "Hanging Leg Raise",
+      "category": "core",
+      "equipment": [
+        "pullup-bar",
+        "bodyweight"
+      ],
+      "pattern": "hanging-leg-raise"
+    },
+    {
+      "name": "Heel Taps",
+      "category": "core",
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ],
+      "pattern": ""
+    },
+    {
+      "name": "High Knees",
+      "category": "cardio",
+      "equipment": [
+        "bodyweight"
+      ],
+      "pattern": ""
+    },
+    {
+      "name": "High Plank",
+      "category": "core",
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ],
+      "pattern": "plank-high"
+    },
+    {
+      "name": "Hip Circles",
+      "category": "mobility",
+      "equipment": [
+        "bodyweight"
+      ],
+      "pattern": "hip-circle"
+    },
+    {
+      "name": "Hip Thrust",
+      "category": "strength",
+      "equipment": [
+        "barbell",
+        "bench"
+      ],
+      "pattern": "hip-thrust"
+    },
+    {
+      "name": "Hollow Hold",
+      "category": "core",
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ],
+      "pattern": "hollow-hold"
+    },
+    {
+      "name": "Hollow Rock",
+      "category": "core",
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ],
+      "pattern": "hollow-rock"
+    },
+    {
+      "name": "Hollow Rock Leg Extensions",
+      "category": "core",
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ],
+      "pattern": ""
+    },
+    {
+      "name": "Inchworm",
+      "category": "mobility",
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ],
+      "pattern": "inchworm"
+    },
+    {
+      "name": "Incline Dumbbell Press",
+      "category": "strength",
+      "equipment": [
+        "dumbbell",
+        "bench"
+      ],
+      "pattern": "incline-press"
+    },
+    {
+      "name": "Incline Push Up",
+      "category": "strength",
+      "equipment": [
+        "bodyweight",
+        "bench"
+      ],
+      "pattern": "push-up-incline"
+    },
+    {
+      "name": "Inverted Row",
+      "category": "strength",
+      "equipment": [
+        "bodyweight",
+        "other"
+      ],
+      "pattern": "row-inverted"
+    },
+    {
+      "name": "Jump Rope",
+      "category": "cardio",
+      "equipment": [
+        "other"
+      ],
+      "pattern": "jump-rope"
+    },
+    {
+      "name": "Jump Squat",
+      "category": "plyometric",
+      "equipment": [
+        "bodyweight"
+      ],
+      "pattern": "jump-squat"
+    },
+    {
+      "name": "Jumping Jacks",
+      "category": "cardio",
+      "equipment": [
+        "bodyweight"
+      ],
+      "pattern": "jumping-jack"
+    },
+    {
+      "name": "Kettlebell Clean",
+      "category": "strength",
+      "equipment": [
+        "kettlebell"
+      ],
+      "pattern": "kb-clean"
+    },
+    {
+      "name": "Kettlebell Goblet Reverse Lunge",
+      "category": "strength",
+      "equipment": [
+        "kettlebell"
+      ],
+      "pattern": ""
+    },
+    {
+      "name": "Kettlebell Halo",
+      "category": "mobility",
+      "equipment": [
+        "kettlebell"
+      ],
+      "pattern": "halo"
+    },
+    {
+      "name": "Kettlebell Press",
+      "category": "strength",
+      "equipment": [
+        "kettlebell"
+      ],
+      "pattern": ""
+    },
+    {
+      "name": "Kettlebell Sumo Squat",
+      "category": "strength",
+      "equipment": [
+        "kettlebell"
+      ],
+      "pattern": ""
+    },
+    {
+      "name": "Kettlebell Swing",
+      "category": "strength",
+      "equipment": [
+        "kettlebell"
+      ],
+      "pattern": "kb-swing"
+    },
+    {
+      "name": "Knee Push Up",
+      "category": "strength",
+      "equipment": [
+        "bodyweight"
+      ],
+      "pattern": "push-up-knee"
+    },
+    {
+      "name": "Knee to Wall Ankle Mobility",
+      "category": "mobility",
+      "equipment": [
+        "bodyweight",
+        "other"
+      ],
+      "pattern": "knee-to-wall"
+    },
+    {
+      "name": "Kneeling Hip Flexor Stretch",
+      "category": "mobility",
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ],
+      "pattern": "hip-flexor-stretch"
+    },
+    {
+      "name": "Landmine Press",
+      "category": "strength",
+      "equipment": [
+        "barbell",
+        "other"
+      ],
+      "pattern": "landmine-press"
+    },
+    {
+      "name": "Lat Pulldown",
+      "category": "strength",
+      "equipment": [
+        "cable",
+        "machine"
+      ],
+      "pattern": "lat-pulldown"
+    },
+    {
+      "name": "Lateral Bounds",
+      "category": "plyometric",
+      "equipment": [
+        "bodyweight"
+      ],
+      "pattern": "skater"
+    },
+    {
+      "name": "Lateral Lunge",
+      "category": "strength",
+      "equipment": [
+        "bodyweight",
+        "dumbbell"
+      ],
+      "pattern": "lunge-side"
+    },
+    {
+      "name": "Lateral Raise",
+      "category": "strength",
+      "equipment": [
+        "dumbbell"
+      ],
+      "pattern": "lateral-raise"
+    },
+    {
+      "name": "Lateral Shuffle",
+      "category": "drill",
+      "equipment": [
+        "bodyweight"
+      ],
+      "pattern": "shuffle"
+    },
+    {
+      "name": "Leg Extension",
+      "category": "strength",
+      "equipment": [
+        "machine"
+      ],
+      "pattern": "leg-extension"
+    },
+    {
+      "name": "Leg Press",
+      "category": "strength",
+      "equipment": [
+        "machine"
+      ],
+      "pattern": "leg-press"
+    },
+    {
+      "name": "Leg Raise",
+      "category": "core",
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ],
+      "pattern": "leg-raise"
+    },
+    {
+      "name": "Leg Swings",
+      "category": "mobility",
+      "equipment": [
+        "bodyweight"
+      ],
+      "pattern": "leg-swing"
+    },
+    {
+      "name": "Lying Leg Curl",
+      "category": "strength",
+      "equipment": [
+        "machine"
+      ],
+      "pattern": "leg-curl"
+    },
+    {
+      "name": "Medicine Ball Slam",
+      "category": "plyometric",
+      "equipment": [
+        "medicine-ball"
+      ],
+      "pattern": "slam"
+    },
+    {
+      "name": "Monster Walk",
+      "category": "drill",
+      "equipment": [
+        "band"
+      ],
+      "pattern": "band-walk"
+    },
+    {
+      "name": "Mountain Climbers",
+      "category": "cardio",
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ],
+      "pattern": "mountain-climber"
+    },
+    {
+      "name": "Nordic Hamstring Curl",
+      "category": "strength",
+      "equipment": [
+        "bodyweight",
+        "other"
+      ],
+      "pattern": "nordic"
+    },
+    {
+      "name": "Open Book Thoracic Rotation",
+      "category": "mobility",
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ],
+      "pattern": "open-book"
+    },
+    {
+      "name": "Overhead Press",
+      "category": "strength",
+      "equipment": [
+        "barbell"
+      ],
+      "pattern": "overhead-press"
+    },
+    {
+      "name": "Overhead Tricep Extension",
+      "category": "strength",
+      "equipment": [
+        "dumbbell"
+      ],
+      "pattern": "triceps-overhead"
+    },
+    {
+      "name": "Pallof Press",
+      "category": "core",
+      "equipment": [
+        "band",
+        "cable"
+      ],
+      "pattern": "pallof-press"
+    },
+    {
+      "name": "Paused Push Up",
+      "category": "strength",
+      "equipment": [
+        "bodyweight"
+      ],
+      "pattern": "push-up"
+    },
+    {
+      "name": "Pigeon Stretch",
+      "category": "mobility",
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ],
+      "pattern": "pigeon"
+    },
+    {
+      "name": "Pike Push Up",
+      "category": "strength",
+      "equipment": [
+        "bodyweight"
+      ],
+      "pattern": "push-up-pike"
+    },
+    {
+      "name": "Pistol Squat",
+      "category": "strength",
+      "equipment": [
+        "bodyweight"
+      ],
+      "pattern": "pistol"
+    },
+    {
+      "name": "Plank Jacks",
+      "category": "core",
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ],
+      "pattern": ""
+    },
+    {
+      "name": "Plank Shoulder Taps",
+      "category": "core",
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ],
+      "pattern": "plank-shoulder-tap"
+    },
+    {
+      "name": "Plyometric Push Up",
+      "category": "plyometric",
+      "equipment": [
+        "bodyweight"
+      ],
+      "pattern": "push-up-plyo"
+    },
+    {
+      "name": "Pogo Hops",
+      "category": "plyometric",
+      "equipment": [
+        "bodyweight"
+      ],
+      "pattern": "pogo"
+    },
+    {
+      "name": "Prone Swimmer",
+      "category": "mobility",
+      "equipment": [
+        "bodyweight"
+      ],
+      "pattern": "swimmer"
+    },
+    {
+      "name": "Pull Up",
+      "category": "strength",
+      "equipment": [
+        "pullup-bar",
+        "bodyweight"
+      ],
+      "pattern": "pull-up"
+    },
+    {
+      "name": "Push Press",
+      "category": "strength",
+      "equipment": [
+        "barbell"
+      ],
+      "pattern": ""
+    },
+    {
+      "name": "Push Up",
+      "category": "strength",
+      "equipment": [
+        "bodyweight"
+      ],
+      "pattern": "push-up"
+    },
+    {
+      "name": "Renegade Row",
+      "category": "core",
+      "equipment": [
+        "dumbbell"
+      ],
+      "pattern": "renegade-row"
+    },
+    {
+      "name": "Reverse Crunch",
+      "category": "core",
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ],
+      "pattern": "reverse-crunch"
+    },
+    {
+      "name": "Reverse Fly",
+      "category": "strength",
+      "equipment": [
+        "dumbbell"
+      ],
+      "pattern": "reverse-fly"
+    },
+    {
+      "name": "Reverse Lunge",
+      "category": "strength",
+      "equipment": [
+        "bodyweight",
+        "dumbbell"
+      ],
+      "pattern": ""
+    },
+    {
+      "name": "Romanian Deadlift",
+      "category": "strength",
+      "equipment": [
+        "barbell",
+        "dumbbell"
+      ],
+      "pattern": "hinge"
+    },
+    {
+      "name": "Russian Twist",
+      "category": "core",
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ],
+      "pattern": "russian-twist"
+    },
+    {
+      "name": "Scapular Pull Up",
+      "category": "drill",
+      "equipment": [
+        "pullup-bar",
+        "bodyweight"
+      ],
+      "pattern": "scapular-pull"
+    },
+    {
+      "name": "Scissor Kicks",
+      "category": "core",
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ],
+      "pattern": ""
+    },
+    {
+      "name": "Seated Cable Row",
+      "category": "strength",
+      "equipment": [
+        "cable",
+        "machine"
+      ],
+      "pattern": "row-seated"
+    },
+    {
+      "name": "Seated Calf Raise",
+      "category": "strength",
+      "equipment": [
+        "machine"
+      ],
+      "pattern": "calf-raise-seated"
+    },
+    {
+      "name": "Side Plank",
+      "category": "core",
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ],
+      "pattern": "side-plank"
+    },
+    {
+      "name": "Side Plank Hip Dips",
+      "category": "core",
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ],
+      "pattern": "side-plank-dip"
+    },
+    {
+      "name": "Single Arm Dumbbell Row",
+      "category": "strength",
+      "equipment": [
+        "dumbbell",
+        "bench"
+      ],
+      "pattern": "row-dumbbell"
+    },
+    {
+      "name": "Single Leg Calf Raise",
+      "category": "strength",
+      "equipment": [
+        "bodyweight",
+        "dumbbell"
+      ],
+      "pattern": ""
+    },
+    {
+      "name": "Single Leg Glute Bridge",
+      "category": "strength",
+      "equipment": [
+        "bodyweight"
+      ],
+      "pattern": "single-leg-bridge"
+    },
+    {
+      "name": "Single Leg Hop",
+      "category": "plyometric",
+      "equipment": [
+        "bodyweight"
+      ],
+      "pattern": "hop"
+    },
+    {
+      "name": "Single Leg Romanian Deadlift",
+      "category": "strength",
+      "equipment": [
+        "bodyweight",
+        "dumbbell",
+        "kettlebell"
+      ],
+      "pattern": "single-leg-hinge"
+    },
+    {
+      "name": "Sit Up",
+      "category": "core",
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ],
+      "pattern": "sit-up"
+    },
+    {
+      "name": "Skater Jump",
+      "category": "plyometric",
+      "equipment": [
+        "bodyweight"
+      ],
+      "pattern": "skater"
+    },
+    {
+      "name": "Skull Crusher",
+      "category": "strength",
+      "equipment": [
+        "barbell",
+        "dumbbell",
+        "bench"
+      ],
+      "pattern": "skull-crusher"
+    },
+    {
+      "name": "Sled Push",
+      "category": "strength",
+      "equipment": [
+        "other"
+      ],
+      "pattern": "sled-push"
+    },
+    {
+      "name": "Split Squat",
+      "category": "strength",
+      "equipment": [
+        "bodyweight",
+        "dumbbell"
+      ],
+      "pattern": "lunge"
+    },
+    {
+      "name": "Standing Hamstring Stretch",
+      "category": "mobility",
+      "equipment": [
+        "bodyweight"
+      ],
+      "pattern": "hamstring-stretch"
+    },
+    {
+      "name": "Step Down (eccentric)",
+      "category": "strength",
+      "equipment": [
+        "box",
+        "bodyweight"
+      ],
+      "pattern": ""
+    },
+    {
+      "name": "Step Up",
+      "category": "strength",
+      "equipment": [
+        "box",
+        "bodyweight",
+        "dumbbell"
+      ],
+      "pattern": "step-up"
+    },
+    {
+      "name": "Stir the Pot",
+      "category": "core",
+      "equipment": [
+        "other",
+        "mat"
+      ],
+      "pattern": "stir-the-pot"
+    },
+    {
+      "name": "Straight Arm Pulldown",
+      "category": "strength",
+      "equipment": [
+        "cable"
+      ],
+      "pattern": "straight-arm-pulldown"
+    },
+    {
+      "name": "Straight Leg Bounds",
+      "category": "plyometric",
+      "equipment": [
+        "bodyweight"
+      ],
+      "pattern": "bound"
+    },
+    {
+      "name": "Suitcase Carry",
+      "category": "strength",
+      "equipment": [
+        "dumbbell",
+        "kettlebell"
+      ],
+      "pattern": ""
+    },
+    {
+      "name": "Sumo Deadlift",
+      "category": "strength",
+      "equipment": [
+        "barbell"
+      ],
+      "pattern": ""
+    },
+    {
+      "name": "Superman",
+      "category": "core",
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ],
+      "pattern": "superman"
+    },
+    {
+      "name": "Thread the Needle",
+      "category": "mobility",
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ],
+      "pattern": "thread-needle"
+    },
+    {
+      "name": "Thruster",
+      "category": "strength",
+      "equipment": [
+        "barbell",
+        "dumbbell"
+      ],
+      "pattern": "thruster"
+    },
+    {
+      "name": "Tibialis Raise",
+      "category": "mobility",
+      "equipment": [
+        "bodyweight",
+        "other"
+      ],
+      "pattern": "tibialis-raise"
+    },
+    {
+      "name": "Toe Touches",
+      "category": "core",
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ],
+      "pattern": "toe-touch"
+    },
+    {
+      "name": "Trap Bar Deadlift",
+      "category": "strength",
+      "equipment": [
+        "barbell",
+        "other"
+      ],
+      "pattern": ""
+    },
+    {
+      "name": "Tricep Pushdown",
+      "category": "strength",
+      "equipment": [
+        "cable"
+      ],
+      "pattern": "triceps-pushdown"
+    },
+    {
+      "name": "TRX Row",
+      "category": "strength",
+      "equipment": [
+        "trx",
+        "bodyweight"
+      ],
+      "pattern": "row-inverted"
+    },
+    {
+      "name": "Tuck Jump",
+      "category": "plyometric",
+      "equipment": [
+        "bodyweight"
+      ],
+      "pattern": "tuck-jump"
+    },
+    {
+      "name": "Turkish Get Up",
+      "category": "strength",
+      "equipment": [
+        "kettlebell",
+        "dumbbell"
+      ],
+      "pattern": "get-up"
+    },
+    {
+      "name": "V-Up",
+      "category": "core",
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ],
+      "pattern": "v-up"
+    },
+    {
+      "name": "Walking Lunge",
+      "category": "strength",
+      "equipment": [
+        "bodyweight",
+        "dumbbell"
+      ],
+      "pattern": ""
+    },
+    {
+      "name": "Wall Ball",
+      "category": "strength",
+      "equipment": [
+        "medicine-ball"
+      ],
+      "pattern": "wall-ball"
+    },
+    {
+      "name": "Wall Sit",
+      "category": "strength",
+      "equipment": [
+        "bodyweight"
+      ],
+      "pattern": "wall-sit"
+    },
+    {
+      "name": "Wall Slide",
+      "category": "mobility",
+      "equipment": [
+        "bodyweight"
+      ],
+      "pattern": "wall-slide"
+    },
+    {
+      "name": "Windshield Wipers",
+      "category": "core",
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ],
+      "pattern": ""
+    },
+    {
+      "name": "World's Greatest Stretch",
+      "category": "mobility",
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ],
+      "pattern": "worlds-greatest"
+    },
+    {
+      "name": "Y-T-W Raise",
+      "category": "strength",
+      "equipment": [
+        "dumbbell",
+        "bench"
+      ],
+      "pattern": ""
+    }
+  ]
+}

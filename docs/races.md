@@ -1,6 +1,6 @@
 ---
 title: Race information
-description: Race information in Last Soul Ultra.
+description: Find race formats, event details, entry information and published results.
 ---
 
 # Race information
