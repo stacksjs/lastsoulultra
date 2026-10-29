@@ -180,3 +180,13 @@ storage/framework/core/defaults/*
 
 # Injected review logins for the protected BunPress preview.
 /docs/.data/demoAccounts.json
+
+# Pinned HQ source and its frozen dependencies are materialized for native builds.
+/storage/native/
+/storage/framework/mobile/android/
+/storage/framework/mobile/ios/build/
+/storage/framework/mobile/ios/**/xcuserdata/
+*.xcarchive
+*.ipa
+*.p12
+*.mobileprovision

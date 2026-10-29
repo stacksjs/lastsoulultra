@@ -76,7 +76,12 @@
     "build:bundles": "bun scripts/externalize-page-bundles.ts",
     "audit:html": "bun scripts/audit-html.ts",
     "audit:docs": "bun scripts/sync-workout-art.ts --check && bun scripts/sync-style-guide-assets.ts --check && bun scripts/audit-docs.ts",
-    "docs:demo": "bun scripts/prepare-demo-docs.ts"
+    "docs:demo": "bun scripts/prepare-demo-docs.ts",
+    "native:prepare": "bun scripts/build-native.ts prepare",
+    "native:ios": "bun scripts/build-native.ts ios",
+    "native:android": "bun scripts/build-native.ts android",
+    "native:restore-ios": "bun scripts/restore-native-ios.ts",
+    "native:testflight": "bun scripts/release-native-ios.ts"
   },
   "dependencies": {
     "@stacksjs/bunpress": "0.2.30",

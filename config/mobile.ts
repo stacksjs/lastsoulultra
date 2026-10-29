@@ -1,25 +1,33 @@
 import type { MobileConfig } from '@stacksjs/types'
-import { env } from '@stacksjs/env'
+import product from '../native/product.json'
 
+/** Website metadata only. native:ios/native:android build HQ's complete config from the source pin. */
 export default {
   ios: {
-    appName: env.APP_NAME ?? 'Stacks',
-    bundleId: 'com.stacksjs.app',
-    version: '1.0.0',
-    buildNumber: '1',
+    appName: product.identity.name,
+    bundleId: product.bundleId,
+    teamId: product.teamId,
+    version: product.version,
+    buildNumber: String(product.build),
     deploymentTarget: '16.0',
-    url: env.APP_URL,
-    darkMode: true,
-    backgroundColor: '#0b1712',
+    renderer: 'native',
+    url: `${product.site}/m`,
+    urlSchemes: [product.identity.scheme],
+    appIcon: 'native/assets/icon.png',
+    backgroundColor: product.identity.theme.background,
+    appearance: 'dark',
     orientations: ['portrait'],
-    capabilities: {
-      haptics: true,
-      share: true,
-      secureStorage: true,
-      clipboard: true,
-      localDatabase: true,
-      screenCapture: true,
-      pdfViewer: true,
-    },
+  },
+  android: {
+    appName: product.identity.name,
+    packageName: product.bundleId,
+    version: product.version,
+    versionCode: product.build,
+    renderer: 'native',
+    url: `${product.site}/m`,
+    urlSchemes: [product.identity.scheme],
+    appIcon: 'native/assets/icon.png',
+    backgroundColor: product.identity.theme.background,
+    appearance: 'dark',
   },
 } satisfies MobileConfig

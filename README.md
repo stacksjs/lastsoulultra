@@ -156,3 +156,7 @@ behind the response, so no visitor ever waits on an upstream fetch.
 Public reference snapshots live in ignored `storage/reference/lsu-2026-10-23/` locally. They document source content and API behavior; no production runtime scripts or Astro runtime are embedded in the Stacks application.
 
 LSU prices, approved methodology, revenue shares and local versus cloud inference are commercial/product decisions still to finalize. HQ currently uses its existing cloud assistant and browser/native dictation; this is not an uploaded voice-message transcription service.
+
+## Native iOS and Android
+
+`bun run native:ios` and `bun run native:android` build the complete HQ app from a pinned source revision with LSU branding. `bun run native:testflight` archives and uploads the iOS app using existing local signing credentials. See [native/README.md](native/README.md) for the source-sharing contract, provenance and release setup.
