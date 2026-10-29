@@ -125,6 +125,7 @@ export const tsCloud: TsCloudConfig = {
      */
     main: {
       root: '.',
+      exclude: ['storage/runtime'],
       path: '/',
       domain: APP_DOMAIN,
       /**
@@ -175,6 +176,7 @@ export const tsCloud: TsCloudConfig = {
      *  port off the public network. */
     api: {
       root: '.',
+      exclude: ['storage/runtime'],
       start: 'bun node_modules/@stacksjs/actions/dist/serve/api.js',
       port: PORT_API,
       // No migrate here: `main` owns the schema, and running two migrations
