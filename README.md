@@ -16,7 +16,7 @@ bun scripts/build-site-assets.ts
 
 `bun run audit:html` reads `dist/` after a build and reports dead internal links, duplicate ids, skipped heading levels, images with no alt and links with no accessible name. The same rules run over the rendered views in `bun test`, so a build is only needed to check a release against what was actually produced.
 
-`pantry.json` pins the Bun version; `./buddy --version` reports the Bun it is actually running, and the two can drift apart after a Bun upgrade without anything failing.
+`pantry.json` pins the Bun version and `./buddy --version` reports the Bun actually in use, so the two should agree. `pantry install` is what makes them agree: it puts the pinned Bun in the gitignored `./pantry`, which `buddy` prefers over whatever is on your PATH, and it leaves the machine's own Bun alone. Skip that step and `buddy` runs your system Bun instead, which is usually invisible until `tests/native-source.test.ts` fails with `Native builds require Bun X; current runtime is Y`. That message means run `pantry install`, not that anything is wrong with the code; CI installs the pinned Bun and stays green while a stale machine fails.
 
 Three things about `./buddy dev` are worth knowing before you conclude it is broken.
 
