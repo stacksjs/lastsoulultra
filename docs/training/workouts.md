@@ -9,7 +9,7 @@ description: Open planned sessions, record completed training and understand cal
 
 Open [Workouts](https://lsu.stacksjs.com/coaching/calendar). Sign in as a subscriber. Select a session to inspect its title, sport, date, planned duration, distance and instructions. Read any warm-up, main effort and cool-down steps before recording a result.
 
-Only sessions from your accessible training enrollment appear in the branded training panel. An account with no enrollment can have an empty calendar.
+Only sessions from the plan you are signed up to appear in the LSU app. An account with no plan can have an empty calendar.
 
 ## Exercise demonstrations
 
@@ -23,7 +23,9 @@ Use the notes or [feedback panel](/training/feedback) to explain missed or chang
 
 ## Browse dates
 
-Move through the displayed calendar range or load more sessions when offered. Dates use your account's time zone. [Progress](/training/progress) counts training across accessible enrollments and can include completed sessions outside the calendar's current window.
+Move through the displayed calendar range or load more sessions when offered. Dates use your account's time zone. [Progress](/training/progress) counts training across every plan you are signed up to, and can include completed sessions outside the calendar's current window.
+
+The iOS app keeps your coming sessions and their exercise videos on the phone, so **Workouts** still opens where there is no signal and sends what you recorded once you are back online. If the app closes during a session, it reopens that session where the clock had reached. Where notifications are on, the app refreshes your calendar when your plan is synced. Turning on airplane mode and opening Workouts is the quickest way to check this.
 
 ## Changes to a plan
 
