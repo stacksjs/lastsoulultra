@@ -13,7 +13,7 @@ Open **Coaching**, then **Open your training**. Sign in with your personal accou
 
 ## Find your way around
 
-The race site includes Format, World Series, Soul Races, Results, Coaching and Contact. Coaching links lead to the training tiers, workouts, feedback, progress, method library, health, messages and account panels.
+The race site's header has Home, Format, World Series, Soul Races, Sponsorship, Coaching, **Contact & FAQ** and Profile, plus a **Request a race entry** button. Results are not in the header: they are in the footer, under **Results overview**. Coaching leads to the training tiers, workouts, feedback, progress, method library, health, messages and account screens.
 
 The training app's main tabs are **Store**, **Workouts**, **Health**, **Messages** and **Me**. Progress and method details are available from the training panels. Some modules appear only after publication or an active enrollment.
 

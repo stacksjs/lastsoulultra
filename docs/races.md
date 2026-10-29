@@ -11,7 +11,11 @@ Open **Format** for the race rules, loop structure, start procedure and what kee
 
 ## Browse the series
 
-**World Series** describes the series. **Soul Races** lists individual events and their available details. Follow each event's own entry or lottery link and check its venue, date, requirements and terms before submitting an entry.
+**World Series** lists the races LSU runs itself. To ask for a place in one, choose **Request a race entry** in the site header, pick an open event and complete LSU's entry form.
+
+**Soul Races** are independent backyard ultras that run the Last Soul format and carry the name. LSU lists the race, the date and a link; **View race and entry details** takes you to the organiser's own registration. Prices, refunds and race rules belong to that organiser.
+
+Check venue, date, requirements and terms before you enter either kind.
 
 ## Entries and the lottery
 
@@ -19,8 +23,8 @@ Open the published entry or lottery page for the event. Follow the instructions 
 
 ## Results and runner profiles
 
-Use **Results** to select a race edition and inspect its published results. Where a runner profile is linked, open it to review that runner's published race information. Race results are separate from your private training progress.
+Open **Results overview** in the site footer, then choose **Season 1 results** or **Season 2 results** for that edition. Where a runner profile is linked, open it to review that runner's published race information. Race results are separate from your private training progress.
 
 ## Questions for the organiser
 
-Use [Contact](https://lsu.stacksjs.com/contact) for race questions. Your training inbox is a private account inbox and does not automatically contact the race organiser.
+Use [Contact & FAQ](https://lsu.stacksjs.com/contact) for race questions, and read the FAQ there before writing. Your training inbox is a private account inbox and does not automatically reach the race organiser.
