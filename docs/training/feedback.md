@@ -25,7 +25,9 @@ If recording is unavailable, use text feedback. A denied microphone permission, 
 
 ## Review the response
 
-AI interprets feedback inside the coach's method. This is not a private session with a human coach, and a voice message does not imply that someone listened to the recording. Where a proposed change needs approval, inspect it before confirming. Check the resulting future sessions in [Workouts](/training/workouts).
+AI interprets feedback inside the coach's method. This is not a private session with a human coach, and a voice message does not imply that someone listened to the recording. The method answers with the change it made and the reason for it. There is no approval step: the change is already in your plan when you read the reply. Check the affected future sessions in [Workouts](/training/workouts).
+
+A change the method applies can be reversed. Open the feedback conversation and choose **Undo this change** on the reply that proposed it; the sessions it moved go back to how they were.
 
 ## When something fails
 

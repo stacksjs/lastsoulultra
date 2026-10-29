@@ -27,4 +27,4 @@ Move through the displayed calendar range or load more sessions when offered. Da
 
 ## Changes to a plan
 
-Adaptive coaching can revise eligible future unfinished sessions. Completed history is a record of what you did. Review any proposed changes and their explanation before accepting them when approval is requested.
+Adaptive coaching can revise eligible future unfinished sessions. Completed history is a record of what you did and does not change. A revision is applied straight away, so read the explanation on the feedback reply and use **Undo this change** there if you disagree.
