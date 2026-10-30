@@ -26,7 +26,15 @@ const { transaction } = await import(Bun.resolveSync('@stacksjs/orm', root))
 const { Auth, RateLimiter } = await import(Bun.resolveSync('@stacksjs/auth', root))
 const { todayIn, addDays, startOfIsoWeek } = await import(Bun.resolveSync('@stacksjs/datetime', root))
 const { saveExperience, saveMethod } = await appModule('brandExperience')
-const { lastSoulExperience } = await appModule('experiencePresets')
+// LSU's brand is the installation's packaged preset (enterprise/presets.json,
+// written by native-source.ts). HQ releases before installation presets kept a
+// copy of it under LSU's name; read that only from such an older kit.
+const experiencePresets = await appModule('experiencePresets')
+const lsuExperience = (): Record<string, any> => {
+  const preset = experiencePresets.installationExperiencePreset?.() ?? experiencePresets.lastSoulExperience?.()
+  if (!preset) throw new Error('Package enterprise/presets.json into the HQ source before seeding (native-source.ts).')
+  return preset
+}
 const { grantComp } = await appModule('platformBilling')
 const { recordPolicyAcceptance } = await appModule('policyAcceptance')
 const { policyKey } = await appModule('policies')
@@ -156,7 +164,7 @@ await transaction(async () => {
   if (!product) product = await db.insertInto('products').values({ ...productValues, organization_id: organizationId, coach_id: Number(coach.id), slug: 'lsu-private-demo-running', type: 'coaching', created_at: now }).returningAll().executeTakeFirstOrThrow()
   else await db.updateTable('products').set(productValues).where('id', '=', Number(product.id)).execute()
   const offer = { product_id: Number(product.id), method_id: Number(method.id), label: demoTier.name }
-  await saveExperience(organizationId, existingSettings ? { ...existingSettings, offers: existingSettings.offers.map((item: any) => Number(item.product_id) === Number(product.id) ? offer : item) } : { ...lastSoulExperience(), home_url: `${origin}/coaching`, logo_url: `${applicationOrigin}/assets/native-product/lsu-logo.svg`, support_url: `${origin}/contact`, privacy_url: `${applicationOrigin}/legal/lsu/privacy`, terms_url: `${applicationOrigin}/legal/lsu/terms`, embed_origins: [origin], show_powered_by: false, offers: [offer] }, existingBrand?.status || 'published')
+  await saveExperience(organizationId, existingSettings ? { ...existingSettings, offers: existingSettings.offers.map((item: any) => Number(item.product_id) === Number(product.id) ? offer : item) } : { ...lsuExperience(), home_url: `${origin}/coaching`, logo_url: `${applicationOrigin}/assets/native-product/lsu-logo.svg`, support_url: `${origin}/contact`, privacy_url: `${applicationOrigin}/legal/lsu/privacy`, terms_url: `${applicationOrigin}/legal/lsu/terms`, embed_origins: [origin], show_powered_by: false, offers: [offer] }, existingBrand?.status || 'published')
   const brand = await db.selectFrom('brand_experiences').select('id').where('organization_id', '=', organizationId).executeTakeFirstOrThrow()
   for (const account of accounts.filter(account => account.subscriber)) {
     const athlete = await db.selectFrom('athletes').select('id').where('user_id', '=', ids[account.key]).executeTakeFirstOrThrow()

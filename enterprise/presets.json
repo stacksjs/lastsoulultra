@@ -1,0 +1,51 @@
+{
+  "organization": "last-soul-ultra",
+  "name": "Last Soul Ultra",
+  "experience": {
+    "headline": "Train for the next start.",
+    "description": "Coach-authored methods, your weekly training and feedback that helps your plan fit your life.",
+    "translations": {
+      "en": {
+        "headline": "Train for the next start.",
+        "description": "Coach-authored methods, your weekly training and feedback that helps your plan fit your life.",
+        "navigation": { "plans": "Store", "calendar": "Workouts", "health": "Health", "messages": "Messages", "account": "Me" }
+      },
+      "de": {
+        "headline": "Trainiere für deinen nächsten Start.",
+        "description": "Trainingsmethoden von LSU Coaches, dein Wochenplan und Feedback, mit dem dein Training zu deinem Leben passt.",
+        "navigation": { "plans": "Store", "calendar": "Training", "health": "Gesundheit", "messages": "Nachrichten", "account": "Ich" }
+      }
+    },
+    "home_url": "https://www.lastsoulultra.com/coaching",
+    "logo_url": "https://www.lastsoulultra.com/assets/lsu/images/lsu-logo.svg",
+    "support_url": "https://www.lastsoulultra.com/contact",
+    "privacy_url": "https://www.lastsoulultra.com/privacy",
+    "terms_url": "https://www.lastsoulultra.com/terms",
+    "embed_origins": ["https://www.lastsoulultra.com", "https://lastsoulultra.com"],
+    "theme": {
+      "background": "#000000",
+      "surface": "#0d0d0f",
+      "text": "#ffffff",
+      "muted": "#b6b6bd",
+      "accent": "#dd0f15",
+      "accent_text": "#ffffff",
+      "border": "#333338",
+      "font": "barlow",
+      "heading_font": "anton",
+      "radius": 0,
+      "density": "comfortable"
+    },
+    "navigation": [
+      { "module": "plans", "label": "Store", "symbol": "bag" },
+      { "module": "calendar", "label": "Workouts", "symbol": "figure.run" },
+      { "module": "health", "label": "Health" },
+      { "module": "messages", "label": "Messages" },
+      { "module": "account", "label": "Me" }
+    ],
+    "show_powered_by": false
+  },
+  "products": [
+    { "key": "lsu-running", "name": "LSU Running", "description": "Running workouts assigned by LSU coaches.", "price_cents": 1999, "currency": "EUR", "type": "coaching", "billing_interval": "month", "includes_coaching": false, "allowed_training_sports": ["Run"] },
+    { "key": "lsu-running-strength", "name": "LSU Running + Strength", "description": "Running and strength workouts assigned by LSU coaches.", "price_cents": 2999, "currency": "EUR", "type": "coaching", "billing_interval": "month", "includes_coaching": false, "allowed_training_sports": ["Run", "Strength"] }
+  ]
+}

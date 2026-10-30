@@ -4,6 +4,7 @@ import { execFileSync } from 'node:child_process'
 import { createHash } from 'node:crypto'
 import source from '../native/hq-source.json'
 import product from '../native/product.json'
+import presets from '../enterprise/presets.json'
 
 export const root = resolve(import.meta.dir, '..')
 export const sourceRoot = join(root, 'storage/native/hq', source.revision)
@@ -48,9 +49,21 @@ export async function prepareNativeSource(): Promise<void> {
   const logo = `data:image/png;base64,${readFileSync(resolve(root, 'native', product.assets.wordmark)).toString('base64')}`
   writeFileSync(join(sourceRoot, 'resources/functions/native-product.json'), `${JSON.stringify({ product: { ...product.identity, logo } }, null, 2)}\n`)
   writeFileSync(join(sourceRoot, 'resources/functions/brand-assets.json'), `${JSON.stringify({ wordmarkLight: logo, wordmarkDark: logo, favicon: product.identity.logo }, null, 2)}\n`)
+  // LSU's brand and coaching tiers as the installation's presets: HQ offers them to
+  // this organization only, and ships none of its own (docs/developers/native-product-builds.md).
+  writeFileSync(join(sourceRoot, 'resources/functions/installation-presets.json'), `${JSON.stringify({ presets: installationPresets() }, null, 2)}\n`)
   const fonts = Object.fromEntries(['Anton-Regular', 'Barlow-Regular'].map(name => [name, { src: join(sourceRoot, `public/assets/brands/${name}.ttf`), license: join(sourceRoot, `public/assets/brands/${name.split('-')[0]}-OFL.txt`) }]))
   mkdirSync(join(root, 'storage/native'), { recursive: true })
   writeFileSync(manifestPath, `${JSON.stringify({ ...product, output, assets: { icon: resolve(root, 'native', product.assets.icon), splash: resolve(root, 'native', product.assets.splash), fonts } }, null, 2)}\n`)
+}
+
+/** The packaged presets, checked against the product they belong to before they are written. */
+export function installationPresets(value: typeof presets = presets, slug: string = product.identity.slug): typeof presets {
+  if (value.organization !== slug || !value.name || !Array.isArray(value.products)
+    || value.products.some(item => !/^[a-z0-9-]+$/.test(item.key) || !Number.isSafeInteger(item.price_cents) || item.price_cents <= 0 || !/^[A-Z]{3}$/.test(item.currency) || item.type !== 'coaching')
+    || new Set(value.products.map(item => item.key)).size !== value.products.length)
+    throw new Error('enterprise/presets.json must belong to the packaged product and list unique, priced coaching tiers')
+  return value
 }
 
 export function nativeBuildEnvironment(): Record<string, string | undefined> {

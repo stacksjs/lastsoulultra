@@ -5,7 +5,8 @@ import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import pantry from '../pantry.json'
-import { assertInstalledKit, assertSourceLock, nativeBuildEnvironment, manifestPath } from '../scripts/native-source'
+import presets from '../enterprise/presets.json'
+import { assertInstalledKit, assertSourceLock, installationPresets, nativeBuildEnvironment, manifestPath } from '../scripts/native-source'
 
 it('requires an exact HQ platform release, its commit and the pinned Bun runtime', () => {
   expect(() => assertSourceLock(source)).not.toThrow()
@@ -59,4 +60,21 @@ it('builds with LSU identity and removes local native overrides from the release
     if (previousSecrets.database === undefined) delete process.env.LSU_TRAINING_DB_PASSWORD
     else process.env.LSU_TRAINING_DB_PASSWORD = previousSecrets.database
   }
+})
+
+it('packages LSU’s brand and approved coaching tiers as the installation’s own presets', () => {
+  expect(installationPresets()).toBe(presets)
+  expect(presets.organization).toBe(product.identity.slug)
+  expect(presets.name).toBe(product.identity.name)
+  // Approved 2026-10-28: EUR 19.99 running, EUR 29.99 running plus strength, no personal coaching or trial.
+  expect(presets.products.map(item => [item.key, item.price_cents, item.currency, item.billing_interval, item.includes_coaching, item.allowed_training_sports])).toEqual([
+    ['lsu-running', 1999, 'EUR', 'month', false, ['Run']],
+    ['lsu-running-strength', 2999, 'EUR', 'month', false, ['Run', 'Strength']],
+  ])
+  expect(presets.experience.navigation.map(item => item.label)).toEqual(['Store', 'Workouts', 'Health', 'Messages', 'Me'])
+  expect(presets.experience.show_powered_by).toBe(false)
+  expect(presets.experience.theme).toMatchObject({ accent: product.identity.theme.accent, background: product.identity.theme.background, font: 'barlow', heading_font: 'anton' })
+  expect(() => installationPresets({ ...presets, organization: 'another-brand' })).toThrow('must belong to the packaged product')
+  expect(() => installationPresets({ ...presets, products: [presets.products[0]!, presets.products[0]!] })).toThrow('unique, priced coaching tiers')
+  expect(() => installationPresets({ ...presets, products: [{ ...presets.products[0]!, price_cents: 0 }] })).toThrow('unique, priced coaching tiers')
 })
