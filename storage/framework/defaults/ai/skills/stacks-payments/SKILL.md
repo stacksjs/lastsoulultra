@@ -144,6 +144,15 @@ holding unsettled liabilities. Returned provider objects are server-only. Moveme
 amounts/fees/net retain their settlement currency and exchange rate; never mix them
 with presentment-currency contributor shares or infer a fee refund from a charge refund.
 
+`directChargeFeeAmounts(facts)` reports the charge's exact retained presentment
+fee when no fee was returned, and exact zero after the full fee was returned,
+including across settlement currencies. A partial foreign-currency fee return
+has null remaining/returned presentment cents and requires review; do not infer
+an FX amount. When the application fee and charge share a currency, use the
+fee's canonical `amount_refunded`, even when individual FeeRefund records settle
+in another currency. Never sum those records across currencies; retain their
+actual settlement amounts independently.
+
 `createConnectedAccount` makes a Managed Risk account unless you pass `type` or
 `controller` (`MANAGED_RISK_CONTROLLER`: Stripe carries losses, full Stripe
 Dashboard, Stripe-hosted onboarding). Stripe refuses `type: 'express'`/`'custom'`
@@ -195,7 +204,7 @@ active status before its initial invoice is paid. The helper does not finalize
 invoices, collect payment, or implement the application's access policy.
 
 `collectDirectInvoice(invoiceId, account, { customer, subscription?, currency,
-platformFeePercent, approvedTotal, paymentMethod })` performs that collection
+platformFeePercent, approvedTotal, paymentMethod? })` performs that collection
 step. `approvedTotal` is the inclusive minor-unit amount the buyer approved;
 the saved method must belong to the original merchant customer. It holds the
 invoice, prepares its exact after-tax fee, finalizes, verifies the actual invoice
@@ -206,6 +215,8 @@ finalizes without a charge. Results distinguish `paid`, `processing` and
 available. Do not grant access for processing or customer action. Network errors
 propagate for durable retry. This helper does not create purchases, establish
 customer consent or reverse access after a later refund; those remain app policy.
+Without a saved method it returns the held invoice's payment page without a
+charge attempt. Paid recovery needs no card.
 
 After a successful direct-charge refund, `creditDirectInvoiceRefund(invoiceId,
 account, refundId, [{ invoiceLineItem, amount }])` links it to the original
@@ -245,6 +256,10 @@ of setup creation, when Stripe still guarantees the idempotency key; older
 missing bindings require review, never another purchase. Renewals still need
 the app's durable `invoice.created` hold/collection path. Apply access policy
 from both the collection result and current subscription/refund state.
+`DirectInvoicePurchaseExpiredError` is raised only when no bound purchase or
+unbound customer resource was found. Before retiring that attempt, also check
+the app's original invoice/subscription IDs. Unknown resources require review;
+a replacement purchase always needs fresh buyer consent.
 
 `directInvoiceTaxFinancials(invoiceId, paymentIntentId, account)` reads canonical
 collected/credited gross, net and tax plus `requiresReview`. Read it under the
@@ -369,6 +384,10 @@ plainly. Pass a deterministic `idempotencyKey`; without one each call is a new
 refund. Also `Payment.connect.refund` / `.refundParams` / `.isDestinationCharge`.
 
 #### Checkout outcomes: `checkoutOutcome(event)`
+
+Only `payment` and `subscription` modes have payment outcomes. Setup sessions
+save a payment method and return null, as do unknown or absent modes. Never
+fulfil a purchase from a setup session's `no_payment_required` status.
 
 ```typescript
 import { checkoutOutcome } from '@stacksjs/payments'
