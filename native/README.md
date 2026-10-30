@@ -34,7 +34,9 @@ lockfile; it does not restore a different Craft version from LSU's website.
 The app uses `com.lastsoulultra.app`, team `3JJRNQW6B7`, and the
 `lastsoulultra://` scheme. The Live Activity extension uses
 `com.lastsoulultra.app.liveactivity`. iOS notifications register with LSU's own
-backend as `last-soul-ultra`, which resolves its allowlisted bundle ID and APNs topic.
+backend as `last-soul-ultra`. That backend knows only its own packaged product:
+the slug and scheme in `native-product.json` and, from its manifest
+(`HQ_NATIVE_PRODUCT`), the bundle ID and APNs topic. HQ's own server knows no LSU app.
 Android push stays disabled until this package has its own Firebase client.
 HQ's Firebase file and app-link ownership are never inherited by a new app.
 

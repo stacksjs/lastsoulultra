@@ -65,3 +65,7 @@ public authentication and catalog endpoints remain available for the app.
 The documented fake training is seeded idempotently only into the explicit LSU
 database; passwords and edits are preserved. Provider-backed payments and real
 athlete records are not manufactured or imported.
+
+LSU's brand preset and coaching tiers (`enterprise/presets.json`), its
+onboarding decisions and the preview/acceptance history formerly kept in HQ are
+described in `enterprise/hq-acceptance.md`.
