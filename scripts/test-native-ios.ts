@@ -14,6 +14,22 @@ const runner = accounts.find(account => account.key === 'runner')
 const visitor = accounts.find(account => account.key === 'visitor')
 if (!runner || !visitor || [runner, visitor].some(account => !account.email.endsWith('@lsu-demo.test') || !account.password))
   throw new Error('Native acceptance requires only the dedicated synthetic LSU runner and visitor')
+async function firstRunState(account: Account): Promise<{ policies: boolean, welcome: boolean }> {
+  const api = `${product.identity.apiOrigin}/api`
+  const login = await fetch(`${api}/auth/login`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: account.email, password: account.password }), signal: AbortSignal.timeout(30_000) })
+  const answer = await login.json() as any
+  if (!login.ok || !answer.token) throw new Error(`The dedicated ${account.key} fixture cannot sign in to LSU`)
+  const headers = { Authorization: `Bearer ${answer.token}` }
+  try {
+    const response = await fetch(`${api}/auth/me`, { headers, signal: AbortSignal.timeout(30_000) })
+    const profile = await response.json() as any
+    if (!response.ok || profile.name !== account.name || typeof profile.policies?.due !== 'boolean' || typeof profile.onboarding?.due !== 'boolean')
+      throw new Error(`The dedicated ${account.key} fixture has unexpected account state`)
+    return { policies: profile.policies.due, welcome: profile.onboarding.due }
+  }
+  finally { await fetch(`${api}/auth/logout`, { method: 'POST', headers, signal: AbortSignal.timeout(30_000) }) }
+}
+const firstRuns = new Map(await Promise.all([runner, visitor].map(async account => [account.key, await firstRunState(account)] as const)))
 const require = createRequire(join(sourceRoot, 'package.json'))
 const kit = await import(pathToFileURL(require.resolve('@stacksjs/mobile/testing')).href)
 const artifact = resolve(process.argv[2] || join(root, `storage/native/simulator/${product.version}-${product.build}/LastSoulUltra-simulator.app.zip`))
@@ -61,10 +77,21 @@ async function run(args: string[], cwd = root, timeout = 20 * 60_000) {
   finally { clearTimeout(timer); child = undefined }
 }
 const steps: any[] = []
+function declineOptionalPrompts(): any[] {
+  // Password saving and the app's notification offer can both say Not Now.
+  // tapif selects a hittable match; the stable ID then closes the app offer.
+  return [{ command: 'tapif', text: 'Not Now' }, { command: 'dismiss', text: 'Not Now' }, { command: 'tapif', text: 'Not Now' }, { command: 'ifid', id: 'nav-not-now', step: { command: 'tapid', text: 'nav-not-now' } }]
+}
 function signIn(account: Account) {
-  steps.push({ command: 'openurl', url: `${product.identity.scheme}:///m/login` }, { command: 'expectid', text: 'login-email', seconds: 30 }, { command: 'typeid', id: 'login-email', text: account.email }, { command: 'typeid', id: 'login-password', text: account.password }, { command: 'tapid', text: 'login-submit' }, { command: 'wait', seconds: 2 })
-  for (const id of ['agree-health', 'agree-data']) steps.push({ command: 'ifid', id: 'agree-submit', step: { command: 'scrollto', text: id } }, { command: 'ifid', id: 'agree-submit', step: { command: 'tapid', text: id } })
-  steps.push({ command: 'ifid', id: 'agree-submit', step: { command: 'scrollto', text: 'agree-submit' } }, { command: 'ifid', id: 'agree-submit', step: { command: 'tapid', text: 'agree-submit' } }, { command: 'ifid', id: 'welcome-skip', step: { command: 'tapid', text: 'welcome-skip' } }, { command: 'dismiss', text: 'Not Now' }, { command: 'expectid', text: 'today-screen', seconds: 40 })
+  const firstRun = firstRuns.get(account.key)!
+  steps.push({ command: 'openurl', url: `${product.identity.scheme}:///m/login` }, { command: 'expectid', text: 'login-email', seconds: 30 }, { command: 'typeid', id: 'login-email', text: account.email }, { command: 'typeid', id: 'login-password', text: account.password }, { command: 'return' }, { command: 'wait', seconds: 2 }, { command: 'shot', name: 'lsu-after-sign-in' }, { command: 'tree', name: 'lsu-after-sign-in' })
+  if (firstRun.policies) {
+    steps.push({ command: 'expectid', text: 'agree-submit', seconds: 40 }, { command: 'dismiss', text: 'Not Now' })
+    for (const id of ['agree-health', 'agree-data']) steps.push({ command: 'scrollto', text: id }, { command: 'tapid', text: id })
+    steps.push({ command: 'scrollto', text: 'agree-submit' }, { command: 'tapid', text: 'agree-submit' })
+  }
+  if (firstRun.welcome) steps.push({ command: 'expectid', text: 'welcome-skip', seconds: 40 }, { command: 'dismiss', text: 'Not Now' }, { command: 'tapid', text: 'welcome-skip' })
+  steps.push(...declineOptionalPrompts(), { command: 'expectid', text: 'today-screen', seconds: 40 }, { command: 'dismiss', text: 'Not Now' })
 }
 steps.push({ command: 'launch' }, { command: 'openurl', url: `${product.identity.scheme}:///m/login` }, { command: 'expectid', text: 'login-logo', seconds: 30 }, { command: 'shot', name: 'lsu-sign-in' }, { command: 'tree', name: 'lsu-sign-in' })
 signIn(runner)
@@ -73,6 +100,10 @@ signIn(visitor)
 steps.push({ command: 'tab', text: 'Me' }, { command: 'expect', text: visitor.name, seconds: 30 }, { command: 'absent', text: runner.name }, { command: 'shot', name: 'lsu-visitor-account' }, { command: 'scrollto', text: 'me-sign-out' }, { command: 'tapid', text: 'me-sign-out' }, { command: 'expectid', text: 'login-submit', seconds: 30 }, { command: 'shot', name: 'lsu-signed-out' })
 const ownedCoachingShot = steps.findIndex(step => step.command === 'shot' && step.name === 'lsu-coaching-accounts')
 steps.splice(ownedCoachingShot, 0, { command: 'expect', text: demoTier.name, seconds: 30 }, { command: 'absentid', text: 'coaching-accounts-empty' })
+const coachingOpen = steps.findIndex(step => step.command === 'tapid' && step.text === 'me-coaching-accounts')
+steps.splice(coachingOpen + 1, 0, { command: 'shot', name: 'lsu-coaching-opened' }, { command: 'tree', name: 'lsu-coaching-opened' })
+const coachingReady = steps.findIndex(step => step.command === 'expectid' && step.text === 'coaching-accounts')
+steps.splice(coachingReady, 0, ...declineOptionalPrompts())
 const todayShot = steps.findIndex(step => step.command === 'shot' && step.name === 'lsu-today')
 steps.splice(todayShot + 1, 0, { command: 'swipe', direction: 'up' }, { command: 'shot', name: 'lsu-today-scrolled' }, { command: 'tree', name: 'lsu-today-scrolled' })
 for (let index = steps.length - 1; index >= 0; index--) {
@@ -80,15 +111,11 @@ for (let index = steps.length - 1; index >= 0; index--) {
     steps.splice(index + 1, 0, { command: 'tapexact', text: 'Sign out' }, { command: 'expectid', text: 'login-submit', seconds: 30 })
 }
 for (let index = steps.length - 1; index >= 0; index--) {
-  if (steps[index].command === 'tapid' && steps[index].text === 'login-submit') {
-    steps.splice(index, 1, { command: 'return' }, { command: 'wait', seconds: 2 }, { command: 'shot', name: 'lsu-after-sign-in' }, { command: 'tree', name: 'lsu-after-sign-in' })
-  }
-}
-for (let index = steps.length - 1; index >= 0; index--) {
   if (steps[index].command === 'expectid' && steps[index].text === 'today-screen')
     steps.splice(index, 0, { command: 'shot', name: 'lsu-post-auth' }, { command: 'tree', name: 'lsu-post-auth' })
 }
 for (let index = steps.length - 1; index >= 0; index--) {
+  if (steps[index].command === 'tab') steps.splice(index, 0, { command: 'tapif', text: 'Not Now' }, { command: 'ifid', id: 'nav-not-now', step: { command: 'tapid', text: 'nav-not-now' } })
   if (steps[index].command === 'shot') steps.splice(index, 0, { command: 'expectapp', text: product.bundleId, seconds: 10 })
 }
 const script = kit.serializeSimulatorSteps(steps)
@@ -124,6 +151,13 @@ try {
   await run([...args, 'build-for-testing'], driver.output)
   await run([...args, '-resultBundlePath', join(evidence, `Acceptance-${Date.now()}.xcresult`), '-collect-test-diagnostics', 'never', 'test-without-building'], driver.output)
   writeFileSync(join(evidence, 'result.json'), JSON.stringify({ passed: true, version: product.version, build: product.build, hqSource: source.revision, bundle: product.bundleId, artifactSha256, scenarios: ['sign-in', 'five-tabs', 'calendar', 'owned-coaching', 'account-switch', 'sign-out'] }, null, 2))
+}
+catch (error) {
+  if (simulator) {
+    try { execFileSync('xcrun', ['simctl', 'io', simulator, 'screenshot', join(evidence, 'lsu-failure.png')], { stdio: 'ignore', timeout: 15_000 }) }
+    catch { /* Preserve the original test failure if its simulator has exited. */ }
+  }
+  throw error
 }
 finally {
   server.stop(true)

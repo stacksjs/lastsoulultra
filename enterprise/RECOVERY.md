@@ -45,10 +45,15 @@ An uploaded object or successful cron invocation alone does not prove recovery.
 Record an actual download, authenticated decryption and isolated database restore
 exercise before treating the recovery path as verified.
 
-The October 29, 2026 rehearsal downloaded the encrypted PostgreSQL, uploads and
-runtime snapshots from object storage, verified authenticated decryption and
+The October 30, 2026 UTC rehearsal downloaded the encrypted PostgreSQL, uploads,
+runtime, mail configuration and mail data snapshots from object storage, verified authenticated decryption and
 matched their original snapshot checksums. The isolated restore contained 13
 accounts, 96 workouts, 1,848 constraints and 498 indexes. A
 temporary 64 KiB random upload fixture also survived archive restoration byte
 for byte. The scratch database, fixture and decrypted staging files were removed.
 Production remained the backup source throughout, never the restore target.
+
+Mail snapshots exclude the live SQLite authentication database and its WAL/SHM
+files. This installation declares its technical mailbox with managed credentials;
+Buddy recreates that account from the separately encrypted deployment environment.
+Maildir data and DKIM keys are included in the encrypted file snapshots.
