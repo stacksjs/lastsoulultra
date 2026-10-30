@@ -47,6 +47,15 @@ const zone = 'Europe/Berlin'
 const today = todayIn(zone)
 const ids: Record<string, number> = {}
 let organizationId = 0
+let created = 0
+let realigned = 0
+/** An unreadable, empty or foreign hash counts as a mismatch, so the published password wins. */
+const verifies = async (stored: unknown, password: string): Promise<boolean> => {
+  const hash = String(stored || '')
+  if (!hash) return false
+  try { return await Bun.password.verify(password, hash) }
+  catch { return false }
+}
 
 await transaction(async () => {
   await db.unsafe("SELECT pg_advisory_xact_lock(hashtext('lsu-private-demo-seed'))").execute()
@@ -57,27 +66,48 @@ await transaction(async () => {
    * is right on the shared host, where `last-soul-ultra` could name a real
    * tenant with real athletes.
    *
-   * On LSU's dedicated installation it locked the seeder out instead. The
-   * organization there is provisioned before this ever runs, by the brand and
-   * experience setup, so it carries no marker and never will: the throw fired on
-   * every deploy, created nobody, and left the handed-out logins failing with
-   * "Invalid credentials", which reads as a password problem rather than an
-   * account that was never made.
-   *
    * Adopting an unclaimed organization is safe only on `lsu_training`, a
    * database dedicated to this one brand that the operator has already had to
    * name twice to reach this line: LSU_SEED_DATABASE, checked against
    * current_database() above, and DB_DATABASE in enterprise/seed-review.ts. An
    * organization carrying somebody else's marker is still refused.
+   *
+   * This path has never run here, and the commit that added it was wrong about
+   * why the handed-out logins were failing. The organization on this
+   * installation carries the marker because this seeder created it, so every
+   * deploy has taken the claimed path. A deploy proves that by itself: any
+   * throw in here exits the wrapper non-zero, which fails the remote script
+   * under `set -e` and turns the deploy red, and none of them were. The real
+   * cause was the password rule below.
    */
   const dedicated = database[0]?.name === 'lsu_training'
   const adopting = Boolean(org) && !claim && dedicated
   if (org && claim !== 'lsu-private-review-v1' && !adopting)
     throw new Error('Refusing to modify an existing LSU organization that this seeder does not own.')
   for (const account of accounts) {
-    let user = await db.selectFrom('users').select(['id', 'name']).where('email', '=', account.email).executeTakeFirst()
+    let user = await db.selectFrom('users').select(['id', 'name', 'password']).where('email', '=', account.email).executeTakeFirst()
     if (user && (!org || user.name !== account.name)) throw new Error(`Refusing to adopt existing account ${account.email}`)
-    if (!user) user = await db.insertInto('users').values({ name: account.name, email: account.email, password: await Bun.password.hash(account.password, { algorithm: 'bcrypt', cost: 12 }), role: account.coach ? 'coach' : 'athlete', email_verified_at: now, profile_public: false, created_at: now }).returning(['id']).executeTakeFirstOrThrow()
+    /*
+     * A credential we publish has to be the one that works. Progress, plans and
+     * messages belong to the reviewer and are preserved everywhere below, but
+     * the password is not theirs: it is handed out in the gated docs, which
+     * scripts/prepare-demo-docs.ts regenerates from LSU_DEMO_ACCOUNTS_JSON on
+     * every deploy. Leaving an existing hash alone meant rotating that secret
+     * republished twelve logins the database had never been told about, and
+     * every one came back "Invalid credentials", which from outside is
+     * indistinguishable from an account that was never created.
+     *
+     * Rehash only on a real mismatch, so a deploy that changes nothing leaves
+     * password_changed_at alone and keeps the review sessions signed in.
+     */
+    if (user && !await verifies(user.password, account.password)) {
+      await db.updateTable('users').set({ password: await Bun.password.hash(account.password, { algorithm: 'bcrypt', cost: 12 }), password_changed_at: now, updated_at: now }).where('id', '=', Number(user.id)).execute()
+      realigned += 1
+    }
+    if (!user) {
+      user = await db.insertInto('users').values({ name: account.name, email: account.email, password: await Bun.password.hash(account.password, { algorithm: 'bcrypt', cost: 12 }), role: account.coach ? 'coach' : 'athlete', email_verified_at: now, profile_public: false, created_at: now }).returning(['id']).executeTakeFirstOrThrow()
+      created += 1
+    }
     ids[account.key] = Number(user.id)
     // These reserved .test identities are fixtures, never evidence of human consent.
     await recordPolicyAcceptance(ids[account.key], policyKey(), { method: 'seed', client: 'phone', locale: 'en' })
@@ -88,7 +118,7 @@ await transaction(async () => {
     // Claim it, so this is a one-off: every later run takes the marker path.
     const settings = JSON.parse(String(org.settings || '{}'))
     await db.updateTable('organizations').set({ settings: JSON.stringify({ ...settings, demo_seed: 'lsu-private-review-v1' }) }).where('id', '=', organizationId).execute()
-    console.log(`  Adopted the existing last-soul-ultra organization (#${organizationId}) and marked it for this seeder.`)
+    console.log(`[ts-cloud] lsu review seed: adopted the existing last-soul-ultra organization (#${organizationId}) and marked it for this seeder.`)
   }
   for (const account of accounts) {
     const userId = ids[account.key]
@@ -175,5 +205,14 @@ await transaction(async () => {
     await db.insertInto('chat_messages').values({ conversation_id: id, sender_id: ids.runner, body: 'Demo reply: I found the long trail run and the method summary. I will review my completed sessions next.', client_key: crypto.randomUUID(), created_at: now }).execute()
   }
 })
-console.log(JSON.stringify({ organization_id: organizationId, users: ids, result: 'LSU demo seeded; existing passwords and edited content preserved' }))
+/*
+ * ts-cloud forwards a successful hook's output only for lines beginning
+ * "[ts-cloud]"; its SSH printer drops every other line and keeps the rest only
+ * when the command fails. So this summary wears that prefix or it is never
+ * seen, and until it did, a green deploy said nothing at all about whether the
+ * twelve review logins existed. That silence is most of why the password rule
+ * above went unnoticed for a day.
+ */
+console.log(`[ts-cloud] lsu review seed: organization #${organizationId}, ${accounts.length} accounts, ${created} created, ${realigned} password${realigned === 1 ? '' : 's'} realigned`)
+console.log(`[ts-cloud] ${JSON.stringify({ organization_id: organizationId, users: ids, created, realigned, result: 'LSU demo seeded; published passwords enforced, edited content preserved' })}`)
 process.exit(0)
