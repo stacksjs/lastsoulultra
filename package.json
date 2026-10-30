@@ -83,7 +83,8 @@
     "native:sign-android": "bun scripts/sign-native-android.ts",
     "native:restore-ios": "bun scripts/restore-native-ios.ts",
     "native:testflight": "bun scripts/release-native-ios.ts",
-    "native:verify-ios": "bun scripts/verify-native.ts"
+    "native:verify-ios": "bun scripts/verify-native.ts",
+    "native:parity": "bun scripts/verify-hq-parity.ts"
   },
   "dependencies": {
     "@stacksjs/bunpress": "0.2.30",

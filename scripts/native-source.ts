@@ -1,7 +1,6 @@
-import { execFileSync } from 'node:child_process'
-import { mkdirSync, mkdtempSync, rmSync, readFileSync, copyFileSync, writeFileSync, existsSync } from 'node:fs'
-import { tmpdir } from 'node:os'
+import { cpSync, mkdirSync, readdirSync, rmSync, readFileSync, copyFileSync, writeFileSync, existsSync } from 'node:fs'
 import { resolve, join, dirname, delimiter } from 'node:path'
+import { execFileSync } from 'node:child_process'
 import { createHash } from 'node:crypto'
 import source from '../native/hq-source.json'
 import product from '../native/product.json'
@@ -10,60 +9,36 @@ export const root = resolve(import.meta.dir, '..')
 export const sourceRoot = join(root, 'storage/native/hq', source.revision)
 export const output = resolve(root, 'storage/framework/mobile')
 export const manifestPath = join(root, 'storage/native/product.json')
-const git = (args: string[], cwd = root, env = process.env) => execFileSync('git', args, { cwd, env, timeout: 180000, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }).trim()
+/** The HQ platform kit, as `pantry install` places it: HQ's release, not access to HQ's repository. */
+export const kitRoot = join(root, 'pantry', source.package)
 
-/** CI receives a repository-scoped read-only deploy key, never a user's broad GitHub token. */
-async function fetchSource(): Promise<void> {
-  const key = process.env.HQ_SOURCE_SSH_KEY
-  if (!key) { git(['fetch', '--depth=1', 'origin', source.revision], sourceRoot); return }
-  const directory = mkdtempSync(join(tmpdir(), 'lsu-source-key-'))
-  try {
-    const response = await fetch('https://api.github.com/meta', { signal: AbortSignal.timeout(15000) })
-    if (!response.ok) throw new Error('Could not verify GitHub source host identity')
-    const meta = await response.json() as { ssh_keys?: string[] }
-    const hostKey = meta.ssh_keys?.find(value => /^ssh-ed25519 [A-Za-z0-9+/=]+$/.test(value))
-    if (!hostKey) throw new Error('GitHub did not supply its expected SSH host key')
-    const identity = join(directory, 'identity')
-    const hosts = join(directory, 'known_hosts')
-    writeFileSync(identity, `${key.replace(/\r\n/g, '\n').trim()}\n`, { mode: 0o600 })
-    writeFileSync(hosts, `github.com ${hostKey}\n`, { mode: 0o600 })
-    const quote = (value: string) => `'${value.replace(/'/g, `'\\''`)}'`
-    const ssh = `ssh -i ${quote(identity)} -p 443 -o HostName=ssh.github.com -o HostKeyAlias=github.com -o ConnectTimeout=15 -o ConnectionAttempts=1 -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o HostKeyAlgorithms=ssh-ed25519 -o UserKnownHostsFile=${quote(hosts)}`
-    git(['-c', `url.ssh://git@github.com/stacksjs/hq.training.git.insteadOf=${source.repository}`, 'fetch', '--depth=1', 'origin', source.revision], sourceRoot, { ...process.env, GIT_TERMINAL_PROMPT: '0', GIT_SSH_COMMAND: ssh })
-  }
-  finally { rmSync(directory, { recursive: true, force: true }) }
+export function assertSourceLock(lock: { package: string, version: string, revision: string, bun: string }): void {
+  if (lock.package !== '@hq/platform' || !/^\d+\.\d+\.\d+$/.test(lock.version) || !/^[a-f0-9]{40}$/.test(lock.revision))
+    throw new Error('Pin an exact @hq/platform version and the commit it was cut from in native/hq-source.json')
+  if (Bun.version !== lock.bun) throw new Error(`Native builds require Bun ${lock.bun}; current runtime is ${Bun.version}`)
 }
 
-export function assertSourceLock(lock: { repository: string, revision: string, bun: string }): void {
-  if (lock.repository !== 'https://github.com/stacksjs/hq.training.git' || !/^[a-f0-9]{40}$/.test(lock.revision))
-    throw new Error('Pin HQ to a complete commit SHA in native/hq-source.json')
-  if (Bun.version !== lock.bun) throw new Error(`Native builds require Bun ${lock.bun}; current runtime is ${Bun.version}`)
+/** The installed kit is the version and commit the pin names, or nothing is built from it. */
+export function assertInstalledKit(directory = kitRoot): void {
+  const path = join(directory, 'platform.json')
+  if (!existsSync(path)) throw new Error(`Install the HQ platform kit first: pantry install, with PANTRY_REGISTRY_TOKEN granted ${source.package}`)
+  const kit = JSON.parse(readFileSync(path, 'utf8')) as { package?: string, version?: string, revision?: string, bun?: string }
+  if (kit.package !== source.package || kit.version !== source.version || kit.revision !== source.revision || kit.bun !== source.bun)
+    throw new Error(`The installed HQ platform kit (${kit.package}@${kit.version}, ${kit.revision?.slice(0, 9)}) is not the one native/hq-source.json pins; run pantry install`)
 }
 
 export async function prepareNativeSource(): Promise<void> {
   assertSourceLock(source)
+  assertInstalledKit()
+  // A fresh copy of the release every time, keeping only installed packages:
+  // what a build or a deploy runs is exactly HQ's kit plus LSU's own inputs,
+  // written below and by prepare-training.
   mkdirSync(sourceRoot, { recursive: true })
-  if (!existsSync(join(sourceRoot, '.git'))) {
-    git(['init', '--quiet'], sourceRoot)
-    git(['remote', 'add', 'origin', source.repository], sourceRoot)
+  for (const entry of readdirSync(sourceRoot)) {
+    if (entry !== 'node_modules') rmSync(join(sourceRoot, entry), { recursive: true, force: true })
   }
-  if (git(['remote', 'get-url', 'origin'], sourceRoot) !== source.repository) throw new Error('HQ source cache has an unexpected remote')
-  let checkedOut = false
-  try { checkedOut = !!git(['rev-parse', '--verify', 'HEAD'], sourceRoot) }
-  catch {}
-  if (!checkedOut) {
-    await fetchSource()
-    git(['checkout', '--detach', source.revision], sourceRoot)
-  }
-  if (git(['rev-parse', 'HEAD'], sourceRoot) !== source.revision) throw new Error('HQ checkout differs from the source lock')
-  const overlays = new Set(['resources/functions/native-product.json', 'resources/functions/brand-assets.json', 'resources/functions/enterprise-deployment.json', 'public/apple-touch-icon.png'])
-  const changes = git(['diff', '--name-only', 'HEAD'], sourceRoot).split('\n').filter(Boolean)
-  if (changes.some(path => !overlays.has(path))) throw new Error('HQ source has local changes outside the branding inputs; use a fresh source cache')
-  const untracked = git(['ls-files', '--others', '--exclude-standard'], sourceRoot).split('\n').filter(Boolean)
-  const inputs = new Set(['public/assets/native-product/lsu-logo.svg', 'deployment/lsu/seed-demo-accounts.ts', 'deployment/lsu/lsu-demo-plan.ts', 'deployment/lsu/seed-review.ts', 'deployment/lsu/assets/icon.png', 'deployment/lsu/assets/logo.svg', 'deployment/lsu/product.json', 'resources/views/legal/lsu/privacy.stx', 'resources/views/legal/lsu/terms.stx'])
-  if (untracked.some(path => !inputs.has(path))) throw new Error('HQ source has untracked application inputs; use a fresh source cache')
+  cpSync(join(kitRoot, 'source'), sourceRoot, { recursive: true })
   const installEnv = { ...process.env, PATH: `${dirname(process.execPath)}${delimiter}${process.env.PATH || ''}` }
-  delete installEnv.HQ_SOURCE_SSH_KEY
   const install = Bun.spawn([process.execPath, 'install', '--frozen-lockfile'], { cwd: sourceRoot, env: installEnv, stdout: 'inherit', stderr: 'inherit' })
   if (await install.exited !== 0) throw new Error('HQ frozen dependency install failed')
   const assets = join(sourceRoot, 'public/assets/native-product')
@@ -90,10 +65,10 @@ export function writeNativeReceipt(platform: 'ios' | 'android'): void {
   const lock = readFileSync(join(sourceRoot, 'bun.lock'))
   const receipt = {
     schemaVersion: 1, platform, app: product.bundleId, version: product.version, build: product.build,
-    hqRepository: source.repository, hqRevision: source.revision,
+    hqPlatform: `${source.package}@${source.version}`, hqRevision: source.revision,
     hqLockSha256: createHash('sha256').update(lock).digest('hex'),
     productSha256: createHash('sha256').update(readFileSync(join(root, 'native/product.json'))).digest('hex'),
-    lsuRevision: git(['rev-parse', 'HEAD']),
+    lsuRevision: execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' }).trim(),
     builtAt: new Date().toISOString(),
   }
   writeFileSync(join(output, platform, 'lsu-source.json'), `${JSON.stringify(receipt, null, 2)}\n`)

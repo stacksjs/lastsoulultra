@@ -1,5 +1,6 @@
 {
-  "repository": "https://github.com/stacksjs/hq.training.git",
-  "revision": "ae9b6a7bd4de663d4483e345ae9c2f1123149c1a",
+  "package": "@hq/platform",
+  "version": "1.0.3446",
+  "revision": "2cf0a7d0cd03ff17880bac6880e562a0357d902d",
   "bun": "1.4.4"
 }

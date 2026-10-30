@@ -37,7 +37,7 @@ if (process.argv.includes('--prepared')) {
   const changed = execFileSync('git', ['diff', '--name-only', receipt.lsuRevision, 'HEAD', '--', 'native', 'scripts/native-source.ts', 'scripts/build-native.ts', 'scripts/restore-ios-shell.ts', 'public/assets/lsu/images/lsu-logo.svg'], { cwd: root, encoding: 'utf8' }).trim()
   if (changed) throw new Error('Regenerate iOS after changing native build inputs')
 }
-else await run([process.execPath, 'run', 'native:ios'], root, { HQ_SOURCE_SSH_KEY: process.env.HQ_SOURCE_SSH_KEY })
+else await run([process.execPath, 'run', 'native:ios'], root)
 await run([process.execPath, 'run', 'native:verify-ios'])
 const ios = join(output, 'ios')
 const scheme = 'LastSoulUltra'

@@ -47,9 +47,12 @@ jobs:
       - name: Install the pinned native project generator
         run: pantry install --user github.com/yonaskolb/XcodeGen@2.46.0
 
-      - name: Build the complete native app from pinned HQ source
+      - name: Install the pinned HQ platform kit
         env:
-          HQ_SOURCE_SSH_KEY: ${{ secrets.HQ_SOURCE_SSH_KEY }}
+          PANTRY_REGISTRY_TOKEN: ${{ secrets.PANTRY_REGISTRY_TOKEN }}
+        run: pantry install
+
+      - name: Build the complete native app from the HQ platform kit
         run: bun run native:ios
 
       - name: Build the simulator application from the same source
