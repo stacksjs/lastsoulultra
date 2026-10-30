@@ -87,11 +87,11 @@
   },
   "dependencies": {
     "@stacksjs/bunpress": "0.2.30",
-    "@stacksjs/components": "0.2.741",
-    "@stacksjs/stx": "0.2.741",
+    "@stacksjs/components": "0.2.749",
+    "@stacksjs/stx": "0.2.749",
     "@stacksjs/ts-cloud": "0.16.88",
     "@ts-maps/stx": "0.5.7",
-    "bun-plugin-stx": "0.2.741",
+    "bun-plugin-stx": "0.2.749",
     "stacks": "0.75.374",
     "ts-images": "0.2.32",
     "ts-maps": "0.5.7"
@@ -112,5 +112,10 @@
   "devDependencies": {
     "better-dx": "^0.2.38",
     "buddy-bot": "0.10.5"
+  },
+  "overrides": {
+    "@stacksjs/stx": "0.2.749",
+    "@stacksjs/components": "0.2.749",
+    "bun-plugin-stx": "0.2.749"
   }
 }
