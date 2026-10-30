@@ -244,12 +244,27 @@ const probe = accounts[0]
 const limited = await RateLimiter.isRateLimited(probe.email)
 let outcome: string
 try {
-  const minted = await Auth.withVerifiedCredentials({ email: probe.email, password: probe.password }, async (candidate: { id: unknown }) => ({ id: Number(candidate.id) }))
-  outcome = minted ? `signs in as user #${minted.id}` : 'withVerifiedCredentials returned null'
+  const minted = await Auth.withVerifiedCredentials({ email: probe.email, password: probe.password }, async (candidate: { id: unknown }) => {
+    /* Mint exactly as the action does. This is the one step a password check
+     * never reaches, and the previous probe skipped it, which is why it could
+     * report a clean sign-in while the endpoint answered 401. */
+    const issued = await Auth.createTokenForUser(candidate, { name: 'lsu-seed-probe', expiresInMinutes: 1, withRefreshToken: false })
+    return { id: Number(candidate.id), token: issued?.plainTextToken as string | undefined }
+  })
+  if (minted?.token) {
+    await Auth.revokeToken(minted.token)
+    outcome = `signs in as user #${minted.id} and mints a token`
+  }
+  else outcome = minted ? `signs in as user #${minted.id} but minted nothing` : 'withVerifiedCredentials returned null'
 }
 catch (error) { outcome = `threw ${error instanceof Error ? error.message : String(error)}` }
 await RateLimiter.resetAttempts(probe.email)
-console.log(`[ts-cloud] lsu review seed: full path for ${probe.key}: ${outcome} (rate limited beforehand: ${limited})`)
+/* APP_KEY by length only, never its value. config/training-cloud.ts resolves it
+ * from LSU_TRAINING_APP_KEY, a secret this repository does not have and the
+ * deploy workflow does not pass, so it is expected to be empty here. Saying so
+ * out loud costs nothing and settles whether it matters. */
+const appKey = String(process.env.APP_KEY || '')
+console.log(`[ts-cloud] lsu review seed: full path for ${probe.key}: ${outcome} (rate limited beforehand: ${limited}, APP_KEY ${appKey ? `set, ${appKey.length} chars` : 'EMPTY'})`)
 
 /*
  * ts-cloud forwards a successful hook's output only for lines beginning
