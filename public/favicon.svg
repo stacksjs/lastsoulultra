@@ -1,7 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Last Soul Ultra">
-  <!-- The wordmark's orange full stop, which is the whole mark: "last soul."
-       A square rather than a circle to match the squared terminals of the
-       display face and the live-race indicator used across the site. -->
-  <rect width="32" height="32" fill="#0c0c0c"/>
-  <rect x="9" y="9" width="14" height="14" fill="#f04800"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Ebene_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 876.6 177.22">
+  <!-- Generator: Adobe Illustrator 30.8.1, SVG Export Plug-In . SVG Version: 2.1.4 Build 1)  -->
+  <defs>
+    <style>
+      .st0 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <path class="st0" d="M771.62,0l-64.63,141.78h-87.72l52-114.07h0l12.63-27.71h-395.35c-14.95,0-28.52,8.73-34.72,22.33l-38.29,84h157.46l-16.16,35.44H111.62L176.25,0h-104.97L1.57,152.93c-5.18,11.37,3.13,24.29,15.62,24.29h403.93c14.95,0,28.52-8.73,34.72-22.33l38.29-84h-157.46l16.16-35.44h209.95l-53.55,117.49c-5.18,11.37,3.13,24.29,15.62,24.29h246.43c14.95,0,28.52-8.73,34.72-22.33L876.6,0h-104.97Z"/>
 </svg>

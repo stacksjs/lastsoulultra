@@ -81,7 +81,7 @@ for (let index = steps.length - 1; index >= 0; index--) {
 }
 for (let index = steps.length - 1; index >= 0; index--) {
   if (steps[index].command === 'tapid' && steps[index].text === 'login-submit') {
-    steps.splice(index, 1, { command: 'return' }, { command: 'ifid', id: 'login-submit', step: { command: 'scrollto', text: 'login-submit' } }, { command: 'ifid', id: 'login-submit', step: { command: 'tapid', text: 'login-submit' } }, { command: 'shot', name: 'lsu-after-sign-in' }, { command: 'tree', name: 'lsu-after-sign-in' })
+    steps.splice(index, 1, { command: 'return' }, { command: 'wait', seconds: 2 }, { command: 'shot', name: 'lsu-after-sign-in' }, { command: 'tree', name: 'lsu-after-sign-in' })
   }
 }
 for (let index = steps.length - 1; index >= 0; index--) {
