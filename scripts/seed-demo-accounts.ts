@@ -23,6 +23,7 @@ const { db } = await import(Bun.resolveSync('@stacksjs/database/runtime', root))
 // Standalone scripts provide the server database global used by application helpers.
 Object.assign(globalThis, { db })
 const { transaction } = await import(Bun.resolveSync('@stacksjs/orm', root))
+const { Auth } = await import(Bun.resolveSync('@stacksjs/auth', root))
 const { todayIn, addDays, startOfIsoWeek } = await import(Bun.resolveSync('@stacksjs/datetime', root))
 const { saveExperience, saveMethod } = await appModule('brandExperience')
 const { lastSoulExperience } = await appModule('experiencePresets')
@@ -205,6 +206,29 @@ await transaction(async () => {
     await db.insertInto('chat_messages').values({ conversation_id: id, sender_id: ids.runner, body: 'Demo reply: I found the long trail run and the method summary. I will review my completed sessions next.', client_key: crypto.randomUUID(), created_at: now }).execute()
   }
 })
+/*
+ * Seeding a row is not the same as being able to sign in, and this seeder has
+ * never checked the second thing. Auth.validate is the lookup the login action
+ * itself ends up in, by way of Auth.withVerifiedCredentials: the same email
+ * normalization, the same table, the same hash comparison. Unlike
+ * verifyCredentials it touches no rate limiter, so asking it twelve questions
+ * on every deploy records no failed attempts and locks nobody out.
+ *
+ * This reports rather than throws. The installation serves more than these
+ * twelve fixtures, so a broken handout is not a reason to hold back a release
+ * of the application itself. It is only worth reporting now that a line from
+ * here can actually be read.
+ */
+const unusable: string[] = []
+for (const account of accounts) {
+  if (await Auth.validate({ email: account.email, password: account.password })) continue
+  /* Row count included because the lookups take the first match of an unordered
+   * query, so a duplicate address can pass this seeder and fail the login. */
+  const rows = await db.selectFrom('users').select(['id']).where('email', '=', account.email).execute()
+  unusable.push(`${account.key} (${rows.length} row${rows.length === 1 ? '' : 's'})`)
+}
+console.log(`[ts-cloud] lsu review seed: ${accounts.length - unusable.length}/${accounts.length} published credentials authenticate${unusable.length ? `; cannot sign in: ${unusable.join(', ')}` : ''}`)
+
 /*
  * ts-cloud forwards a successful hook's output only for lines beginning
  * "[ts-cloud]"; its SSH printer drops every other line and keeps the rest only
