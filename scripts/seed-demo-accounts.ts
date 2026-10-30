@@ -263,6 +263,35 @@ await RateLimiter.resetAttempts(probe.email)
  * from LSU_TRAINING_APP_KEY, a secret this repository does not have and the
  * deploy workflow does not pass, so it is expected to be empty here. Saying so
  * out loud costs nothing and settles whether it matters. */
+/*
+ * Everything above runs in this hook: the new release, this hook's environment,
+ * this hook's database handle. The 401 comes from the service that is actually
+ * listening, which is a different process with the environment systemd gave it,
+ * and nothing so far has asked that process anything.
+ *
+ * preStart runs before activation, so the port still answers from the release
+ * the site is serving right now, which is exactly the one the browser is
+ * hitting. Same credential, same endpoint, no Cloudflare and no rpx in between.
+ * A 200 here puts the fault at the edge; a 401 here, against twelve passwords
+ * this hook just verified, means that process is not reading what this hook
+ * reads.
+ */
+let local = 'not attempted'
+try {
+  const response = await fetch(`http://127.0.0.1:${process.env.PORT_API}/api/auth/login`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email: probe.email, password: probe.password, remember: true }),
+    signal: AbortSignal.timeout(15000),
+  })
+  const body = await response.text()
+  /* Never the token: only whether one came back. */
+  local = `${response.status} ${response.ok ? '(token issued)' : body.slice(0, 120)}`
+}
+catch (error) { local = `unreachable: ${error instanceof Error ? error.message : String(error)}` }
+await RateLimiter.resetAttempts(probe.email)
+console.log(`[ts-cloud] lsu review seed: live service on 127.0.0.1:${process.env.PORT_API} answered ${local}`)
+
 const appKey = String(process.env.APP_KEY || '')
 console.log(`[ts-cloud] lsu review seed: full path for ${probe.key}: ${outcome} (rate limited beforehand: ${limited}, APP_KEY ${appKey ? `set, ${appKey.length} chars` : 'EMPTY'})`)
 
