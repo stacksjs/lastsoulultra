@@ -1,5 +1,5 @@
 import { execFileSync } from 'node:child_process'
-import { chmodSync, mkdirSync, writeFileSync } from 'node:fs'
+import { chmodSync, mkdirSync, readdirSync, renameSync, writeFileSync } from 'node:fs'
 import { createRequire } from 'node:module'
 import { dirname, join, resolve } from 'node:path'
 import { pathToFileURL } from 'node:url'
@@ -20,10 +20,18 @@ const artifact = resolve(process.argv[2] || join(root, `storage/native/simulator
 const evidence = join(root, 'storage/native/acceptance', `${product.version}-${product.build}`)
 const receipt = await Bun.file(join(dirname(artifact), 'receipt.json')).json()
 const artifactSha256 = new Bun.CryptoHasher('sha256').update(await Bun.file(artifact).arrayBuffer()).digest('hex')
-if (receipt.hqSource !== source.revision || receipt.bundle !== product.bundleId || receipt.version !== product.version || receipt.build !== product.build || receipt.artifactSha256 !== artifactSha256)
+const productSha256 = new Bun.CryptoHasher('sha256').update(await Bun.file(join(root, 'native/product.json')).arrayBuffer()).digest('hex')
+if (receipt.hqSource !== source.revision || receipt.productSha256 !== productSha256 || receipt.simulatorSigning !== 'ad-hoc' || receipt.bundle !== product.bundleId || receipt.version !== product.version || receipt.build !== product.build || receipt.artifactSha256 !== artifactSha256)
   throw new Error('Downloaded application does not match its release source and checksum receipt')
 mkdirSync(evidence, { recursive: true, mode: 0o700 })
 chmodSync(evidence, 0o700)
+const previous = join(evidence, 'previous', String(Date.now()))
+for (const name of readdirSync(evidence)) {
+  if (/^lsu-[a-z-]+\.(png|txt)$/.test(name) || ['result.json', 'native-diagnostics.log'].includes(name)) {
+    mkdirSync(previous, { recursive: true, mode: 0o700 })
+    renameSync(join(evidence, name), join(previous, name))
+  }
+}
 if (process.env.GITHUB_ACTIONS === 'true') for (const account of [runner, visitor]) console.log(`::add-mask::${account.password}`)
 const info = JSON.parse(execFileSync('xcrun', ['simctl', 'list', '--json'], { encoding: 'utf8' }))
 const runtime = info.runtimes.find((item: any) => item.isAvailable && item.identifier.includes('iOS'))
@@ -55,7 +63,7 @@ async function run(args: string[], cwd = root, timeout = 20 * 60_000) {
 const steps: any[] = []
 function signIn(account: Account) {
   steps.push({ command: 'openurl', url: `${product.identity.scheme}:///m/login` }, { command: 'expectid', text: 'login-email', seconds: 30 }, { command: 'typeid', id: 'login-email', text: account.email }, { command: 'typeid', id: 'login-password', text: account.password }, { command: 'tapid', text: 'login-submit' }, { command: 'wait', seconds: 2 })
-  for (const id of ['agree-health', 'agree-data']) steps.push({ command: 'ifid', id, step: { command: 'scrollto', text: id } }, { command: 'ifid', id, step: { command: 'tapid', text: id } })
+  for (const id of ['agree-health', 'agree-data']) steps.push({ command: 'ifid', id: 'agree-submit', step: { command: 'scrollto', text: id } }, { command: 'ifid', id: 'agree-submit', step: { command: 'tapid', text: id } })
   steps.push({ command: 'ifid', id: 'agree-submit', step: { command: 'scrollto', text: 'agree-submit' } }, { command: 'ifid', id: 'agree-submit', step: { command: 'tapid', text: 'agree-submit' } }, { command: 'ifid', id: 'welcome-skip', step: { command: 'tapid', text: 'welcome-skip' } }, { command: 'dismiss', text: 'Not Now' }, { command: 'expectid', text: 'today-screen', seconds: 40 })
 }
 steps.push({ command: 'launch' }, { command: 'openurl', url: `${product.identity.scheme}:///m/login` }, { command: 'expectid', text: 'login-logo', seconds: 30 }, { command: 'shot', name: 'lsu-sign-in' }, { command: 'tree', name: 'lsu-sign-in' })
@@ -79,6 +87,9 @@ for (let index = steps.length - 1; index >= 0; index--) {
 for (let index = steps.length - 1; index >= 0; index--) {
   if (steps[index].command === 'expectid' && steps[index].text === 'today-screen')
     steps.splice(index, 0, { command: 'shot', name: 'lsu-post-auth' }, { command: 'tree', name: 'lsu-post-auth' })
+}
+for (let index = steps.length - 1; index >= 0; index--) {
+  if (steps[index].command === 'shot') steps.splice(index, 0, { command: 'expectapp', text: product.bundleId, seconds: 10 })
 }
 const script = kit.serializeSimulatorSteps(steps)
 const server = Bun.serve({ hostname: '127.0.0.1', port: 0, async fetch(request) {
@@ -119,7 +130,7 @@ finally {
   if (simulator) {
     if (process.env.LSU_NATIVE_DIAGNOSTICS === '1') {
       try {
-        const log = execFileSync('xcrun', ['simctl', 'spawn', simulator, 'log', 'show', '--last', '5m', '--style', 'compact', '--predicate', 'process == "LastSoulUltra"'], { encoding: 'utf8', timeout: 30000 })
+        const log = execFileSync('xcrun', ['simctl', 'spawn', simulator, 'log', 'show', '--last', '5m', '--info', '--debug', '--style', 'compact', '--predicate', 'process == "LastSoulUltra"'], { encoding: 'utf8', timeout: 30000 })
         writeFileSync(join(evidence, 'native-diagnostics.log'), redact(log), { mode: 0o600 })
       }
       catch { console.log('Native diagnostics were unavailable') }

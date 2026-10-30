@@ -27,6 +27,8 @@ const { todayIn, addDays, startOfIsoWeek } = await import(Bun.resolveSync('@stac
 const { saveExperience, saveMethod } = await appModule('brandExperience')
 const { lastSoulExperience } = await appModule('experiencePresets')
 const { grantComp } = await appModule('platformBilling')
+const { recordPolicyAcceptance } = await appModule('policyAcceptance')
+const { policyKey } = await appModule('policies')
 const { grantSubscriptionEnrollment, enrollmentKey } = await appModule('storefront')
 const { normalizePlan } = await appModule('planEdit')
 const { planToWorkouts } = await appModule('planBuilder')
@@ -56,6 +58,8 @@ await transaction(async () => {
     if (user && (!org || user.name !== account.name)) throw new Error(`Refusing to adopt existing account ${account.email}`)
     if (!user) user = await db.insertInto('users').values({ name: account.name, email: account.email, password: await Bun.password.hash(account.password, { algorithm: 'bcrypt', cost: 12 }), role: account.coach ? 'coach' : 'athlete', email_verified_at: now, profile_public: false, created_at: now }).returning(['id']).executeTakeFirstOrThrow()
     ids[account.key] = Number(user.id)
+    // These reserved .test identities are fixtures, never evidence of human consent.
+    await recordPolicyAcceptance(ids[account.key], policyKey(), { method: 'seed', client: 'phone', locale: 'en' })
   }
   if (!org) org = await db.insertInto('organizations').values({ user_id: ids.owner, name: 'Last Soul Ultra', slug: 'last-soul-ultra', status: 'active', kind: 'club', currency: demoTier.currency, timezone: zone, profile_public: false, public_join: false, lead_form: false, settings: JSON.stringify({ demo_seed: 'lsu-private-review-v1' }), created_at: now }).returningAll().executeTakeFirstOrThrow()
   organizationId = Number(org.id)

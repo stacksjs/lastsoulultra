@@ -56,7 +56,7 @@ export async function prepareNativeSource(): Promise<void> {
     git(['checkout', '--detach', source.revision], sourceRoot)
   }
   if (git(['rev-parse', 'HEAD'], sourceRoot) !== source.revision) throw new Error('HQ checkout differs from the source lock')
-  const overlays = new Set(['resources/functions/native-product.json', 'resources/functions/brand-assets.json', 'resources/functions/enterprise-deployment.json'])
+  const overlays = new Set(['resources/functions/native-product.json', 'resources/functions/brand-assets.json', 'resources/functions/enterprise-deployment.json', 'public/apple-touch-icon.png'])
   const changes = git(['diff', '--name-only', 'HEAD'], sourceRoot).split('\n').filter(Boolean)
   if (changes.some(path => !overlays.has(path))) throw new Error('HQ source has local changes outside the branding inputs; use a fresh source cache')
   const untracked = git(['ls-files', '--others', '--exclude-standard'], sourceRoot).split('\n').filter(Boolean)
@@ -69,6 +69,7 @@ export async function prepareNativeSource(): Promise<void> {
   const assets = join(sourceRoot, 'public/assets/native-product')
   mkdirSync(assets, { recursive: true })
   copyFileSync(join(root, 'public/assets/lsu/images/lsu-logo.svg'), join(assets, 'lsu-logo.svg'))
+  copyFileSync(resolve(root, 'native', product.assets.icon), join(sourceRoot, 'public/apple-touch-icon.png'))
   const logo = `data:image/png;base64,${readFileSync(resolve(root, 'native', product.assets.wordmark)).toString('base64')}`
   writeFileSync(join(sourceRoot, 'resources/functions/native-product.json'), `${JSON.stringify({ product: { ...product.identity, logo } }, null, 2)}\n`)
   writeFileSync(join(sourceRoot, 'resources/functions/brand-assets.json'), `${JSON.stringify({ wordmarkLight: logo, wordmarkDark: logo, favicon: product.identity.logo }, null, 2)}\n`)

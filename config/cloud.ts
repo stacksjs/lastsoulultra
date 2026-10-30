@@ -67,6 +67,7 @@ export const tsCloud: TsCloudConfig = {
     compute: {
       runtime: 'bun',
       runtimeVersion: source.bun,
+      reverseDns: `mail.${new URL(deployment.origin).hostname}`,
       managedServices: {
         postgres: true,
         mail: {

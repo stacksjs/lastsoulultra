@@ -2,6 +2,11 @@ name: TestFlight
 
 on:
   workflow_dispatch:
+    inputs:
+      upload:
+        description: Upload to TestFlight after downloaded-app acceptance passes
+        type: boolean
+        default: true
 
 permissions:
   contents: read
@@ -83,6 +88,7 @@ jobs:
             storage/native/acceptance/*/result.json
 
       - name: Prepare temporary signing material
+        if: inputs.upload
         env:
           LSU_IOS_DISTRIBUTION_P12_BASE64: ${{ secrets.LSU_IOS_DISTRIBUTION_P12_BASE64 }}
           LSU_IOS_DISTRIBUTION_PASSWORD: ${{ secrets.LSU_IOS_DISTRIBUTION_PASSWORD }}
@@ -94,6 +100,7 @@ jobs:
         run: bun scripts/ios-ci-signing.ts stage
 
       - name: Verify, sign and upload the prepared application
+        if: inputs.upload
         run: bun run native:testflight --prepared
 
       - name: Remove signing files and temporary keychain
