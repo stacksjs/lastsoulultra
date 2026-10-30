@@ -230,6 +230,18 @@ for (const account of accounts) {
 console.log(`[ts-cloud] lsu review seed: ${accounts.length - unusable.length}/${accounts.length} published credentials authenticate${unusable.length ? `; cannot sign in: ${unusable.join(', ')}` : ''}`)
 
 /*
+ * Everything about these accounts except the password, so the blob can be
+ * rebuilt without reading it back. LSU_DEMO_ACCOUNTS_JSON is a repository
+ * secret, and GitHub will not show you a secret again once it is set, so
+ * replacing it means reproducing `name`, `membership` and the role flags
+ * from memory. Get `name` wrong and the adoption guard above throws and
+ * fails the deploy, which is a slow way to learn you mistyped something.
+ *
+ * None of this is sensitive: it is the same roster published in docs/roles.md.
+ */
+console.log(`[ts-cloud] lsu review seed: roster ${JSON.stringify(accounts.map(({ key, name, email, membership, coach, athlete, subscriber }) => ({ key, name, email, membership, coach, athlete, subscriber })))}`)
+
+/*
  * validate() stops at the password. The login action carries on through
  * withVerifiedCredentials, which also consults the rate limiter and re-reads
  * the row under FOR UPDATE before anything is minted. Twelve passwords that
