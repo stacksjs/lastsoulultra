@@ -92,7 +92,7 @@ jobs:
         if: steps.check.outputs.configured == 'true'
         env:
           PANTRY_REGISTRY_TOKEN: ${{ secrets.PANTRY_REGISTRY_TOKEN }}
-        run: pantry install
+        run: pantry ci
 
       - name: Prepare the protected demo credentials
         if: steps.check.outputs.configured == 'true'

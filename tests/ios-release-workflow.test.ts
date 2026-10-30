@@ -21,7 +21,7 @@ it('keeps the native build free of signing and production credentials', () => {
   expect(job.steps.slice(build, acceptance).some((step: any) => step.uses?.startsWith('actions/download-artifact@'))).toBe(true)
   // The build reads HQ's release, installed with a registry token by the step before; it holds no credential itself.
   expect(job.steps[build].env).toBeUndefined()
-  expect(job.steps[build - 1]).toMatchObject({ run: 'pantry install', env: { PANTRY_REGISTRY_TOKEN: '${{ secrets.PANTRY_REGISTRY_TOKEN }}' } })
+  expect(job.steps[build - 1]).toMatchObject({ run: 'pantry ci', env: { PANTRY_REGISTRY_TOKEN: '${{ secrets.PANTRY_REGISTRY_TOKEN }}' } })
   const cleanup = job.steps.find((step: any) => step.run === 'bun scripts/ios-ci-signing.ts cleanup')
   expect(cleanup.if).toBe('always()')
   for (const credential of ['DOTENV_PRIVATE_KEY_PRODUCTION', 'CLOUDFLARE_API_TOKEN', 'LSU_TRAINING_DB_PASSWORD', 'LSU_TRAINING_APP_KEY']) expect(text).not.toContain(credential)

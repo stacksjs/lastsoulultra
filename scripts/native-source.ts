@@ -21,10 +21,10 @@ export function assertSourceLock(lock: { package: string, version: string, revis
 /** The installed kit is the version and commit the pin names, or nothing is built from it. */
 export function assertInstalledKit(directory = kitRoot): void {
   const path = join(directory, 'platform.json')
-  if (!existsSync(path)) throw new Error(`Install the HQ platform kit first: pantry install, with PANTRY_REGISTRY_TOKEN granted ${source.package}`)
+  if (!existsSync(path)) throw new Error(`Install the HQ platform kit first: pantry ci, with PANTRY_REGISTRY_TOKEN granted ${source.package}`)
   const kit = JSON.parse(readFileSync(path, 'utf8')) as { package?: string, version?: string, revision?: string, bun?: string }
   if (kit.package !== source.package || kit.version !== source.version || kit.revision !== source.revision || kit.bun !== source.bun)
-    throw new Error(`The installed HQ platform kit (${kit.package}@${kit.version}, ${kit.revision?.slice(0, 9)}) is not the one native/hq-source.json pins; run pantry install`)
+    throw new Error(`The installed HQ platform kit (${kit.package}@${kit.version}, ${kit.revision?.slice(0, 9)}) is not the one native/hq-source.json pins; run pantry ci`)
 }
 
 export async function prepareNativeSource(): Promise<void> {

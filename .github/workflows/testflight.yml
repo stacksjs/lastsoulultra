@@ -50,7 +50,7 @@ jobs:
       - name: Install the pinned HQ platform kit
         env:
           PANTRY_REGISTRY_TOKEN: ${{ secrets.PANTRY_REGISTRY_TOKEN }}
-        run: pantry install
+        run: pantry ci
 
       - name: Build the complete native app from the HQ platform kit
         run: bun run native:ios
