@@ -52,10 +52,42 @@ jobs:
           DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
           SITE_AUTH_USER: ${{ secrets.SITE_AUTH_USER }}
           SITE_AUTH_PASSWORD: ${{ secrets.SITE_AUTH_PASSWORD }}
+          LSU_TRAINING_APP_KEY: ${{ secrets.LSU_TRAINING_APP_KEY }}
+          LSU_TRAINING_DB_PASSWORD: ${{ secrets.LSU_TRAINING_DB_PASSWORD }}
+          LSU_MAIL_PASSWORD: ${{ secrets.LSU_MAIL_PASSWORD }}
+          LSU_APNS_TEAM_ID: ${{ secrets.LSU_APNS_TEAM_ID }}
+          LSU_APNS_KEY_ID: ${{ secrets.LSU_APNS_KEY_ID }}
+          LSU_APNS_PRIVATE_KEY: ${{ secrets.LSU_APNS_PRIVATE_KEY }}
+          LSU_APPLE_TEAM_ID: ${{ secrets.LSU_APPLE_TEAM_ID }}
+          LSU_APPLE_KEY_ID: ${{ secrets.LSU_APPLE_KEY_ID }}
+          LSU_APPLE_PRIVATE_KEY: ${{ secrets.LSU_APPLE_PRIVATE_KEY }}
         run: |
           if [ -z "$SITE_AUTH_USER" ] || [ -z "$SITE_AUTH_PASSWORD" ]; then
             echo '::error::The private LSU preview requires SITE_AUTH_USER and SITE_AUTH_PASSWORD. Refusing to deploy without the access gate.'
             exit 1
+          fi
+          # config/training-cloud.ts resolves each of the training sites' own
+          # secrets with `|| ''`, and ts-cloud writes every entry into the unit
+          # verbatim, so an unset one ships as Environment="APP_KEY=". With
+          # inheritEnv:false the service has nothing to fall back to. That is how
+          # this installation ran in production with an empty APP_KEY.
+          #
+          # APP_KEY is the one with no legitimate empty value: @stacksjs/security
+          # throws "APP_KEY is not defined" on it. The rest degrade a feature
+          # rather than the app, and DB_PASSWORD may be empty on purpose if the
+          # box authenticates the role by peer or trust, so they warn instead of
+          # failing and leave that call to a human.
+          if [ -z "$LSU_TRAINING_APP_KEY" ]; then
+            echo '::error::LSU_TRAINING_APP_KEY is unset, so the training sites would deploy with APP_KEY="". Refusing to ship an installation that cannot encrypt anything.'
+            exit 1
+          fi
+          blank=''
+          for name in LSU_TRAINING_DB_PASSWORD LSU_MAIL_PASSWORD LSU_APNS_TEAM_ID LSU_APNS_KEY_ID LSU_APNS_PRIVATE_KEY LSU_APPLE_TEAM_ID LSU_APPLE_KEY_ID LSU_APPLE_PRIVATE_KEY; do
+            value=$(printenv "$name" || true)
+            [ -n "$value" ] || blank="$blank $name"
+          done
+          if [ -n "$blank" ]; then
+            echo "::warning::Reaching the training sites as empty strings:$blank. An empty DB_PASSWORD means the lsu_training role is reachable without one; an empty MAIL_PASSWORD means SMTP auth fails, so password resets never send."
           fi
           if [ -n "$DOTENV_PRIVATE_KEY_PRODUCTION" ] && [ -n "$DEPLOY_SSH_KEY" ]; then
             echo 'configured=true' >> "$GITHUB_OUTPUT"
@@ -141,6 +173,20 @@ jobs:
           # the day it goes public.
           SITE_AUTH_USER: ${{ secrets.SITE_AUTH_USER }}
           SITE_AUTH_PASSWORD: ${{ secrets.SITE_AUTH_PASSWORD }}
+          # The training installation's own secrets, read straight from the
+          # environment by config/training-cloud.ts. They were never forwarded
+          # here, so setting any of them had no effect on a deploy: the config
+          # saw nothing and used its '' fallback either way. Forwarding them is
+          # what makes the guard above mean anything.
+          LSU_TRAINING_APP_KEY: ${{ secrets.LSU_TRAINING_APP_KEY }}
+          LSU_TRAINING_DB_PASSWORD: ${{ secrets.LSU_TRAINING_DB_PASSWORD }}
+          LSU_MAIL_PASSWORD: ${{ secrets.LSU_MAIL_PASSWORD }}
+          LSU_APNS_TEAM_ID: ${{ secrets.LSU_APNS_TEAM_ID }}
+          LSU_APNS_KEY_ID: ${{ secrets.LSU_APNS_KEY_ID }}
+          LSU_APNS_PRIVATE_KEY: ${{ secrets.LSU_APNS_PRIVATE_KEY }}
+          LSU_APPLE_TEAM_ID: ${{ secrets.LSU_APPLE_TEAM_ID }}
+          LSU_APPLE_KEY_ID: ${{ secrets.LSU_APPLE_KEY_ID }}
+          LSU_APPLE_PRIVATE_KEY: ${{ secrets.LSU_APPLE_PRIVATE_KEY }}
           # macOS resource forks in a tarball built on a developer machine make
           # the extraction on the server noisy and occasionally fatal.
           COPYFILE_DISABLE: '1'
