@@ -30,6 +30,9 @@ jobs:
       - name: Setup Pantry
         uses: pantry-pm/pantry/packages/action@ee7f116a5363bfe2667b2d76f8f1f567f68148ef
         with:
+          # 0.11.148 is the first Pantry that keeps @hq to its pinned registry
+          # (pantry.json "scopes"); an older one could look for the kit on npm.
+          version: '0.11.148'
           install: 'false'
 
       - name: Setup the pinned Bun runtime

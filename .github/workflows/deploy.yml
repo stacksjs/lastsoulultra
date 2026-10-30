@@ -79,6 +79,9 @@ jobs:
         if: steps.check.outputs.configured == 'true'
         uses: home-lang/pantry/packages/action@main
         with:
+          # 0.11.148 is the first Pantry that keeps @hq to its pinned registry
+          # (pantry.json "scopes"); an older one could look for the kit on npm.
+          version: '0.11.148'
           # Installed below, with the token the HQ platform kit needs.
           install: 'false'
 
