@@ -141,6 +141,21 @@ jobs:
           # the day it goes public.
           SITE_AUTH_USER: ${{ secrets.SITE_AUTH_USER }}
           SITE_AUTH_PASSWORD: ${{ secrets.SITE_AUTH_PASSWORD }}
+          # The same accounts blob the docs are built from, two steps above.
+          # Without this the two halves read different sources: the credentials
+          # table comes from this repository secret, while the seeder runs inside
+          # buddy deploy and takes LSU_DEMO_ACCOUNTS_JSON from .env.production.
+          # Nothing has ever required those to agree, and when they do not, every
+          # published login fails while the seeder reports twelve healthy
+          # accounts, because it checks the passwords it seeded against the rows
+          # it seeded them into.
+          #
+          # dotenvx does not overwrite a variable that is already set, so naming
+          # it here makes the repository secret win in both places. This is safe
+          # in a way the APP_KEY attempt in 0c87c7b was not: that one named
+          # secrets this repository does not have, which would have shadowed real
+          # decrypted values with empty strings. This secret does exist.
+          LSU_DEMO_ACCOUNTS_JSON: ${{ secrets.LSU_DEMO_ACCOUNTS_JSON }}
           # macOS resource forks in a tarball built on a developer machine make
           # the extraction on the server noisy and occasionally fatal.
           COPYFILE_DISABLE: '1'
