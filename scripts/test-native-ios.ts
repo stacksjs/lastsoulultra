@@ -94,7 +94,9 @@ function signIn(account: Account) {
     steps.push({ command: 'scrollto', text: 'agree-submit' }, { command: 'tapid', text: 'agree-submit' })
   }
   if (firstRun.welcome) steps.push({ command: 'expectid', text: 'welcome-skip', seconds: 40 }, ...declineOptionalPrompts(), { command: 'tapid', text: 'welcome-skip' })
-  steps.push(...declineOptionalPrompts(), { command: 'expectid', text: 'today-screen', seconds: 40 }, { command: 'tapif', text: 'Not Now' })
+  // iOS offers to save the password, and the app offers notifications, on
+  // their own schedules after signing in; either can land on the other.
+  steps.push(...Array.from({ length: 4 }, declineOptionalPrompts).flat(), { command: 'expectid', text: 'today-screen', seconds: 40 }, { command: 'tapif', text: 'Not Now' })
 }
 steps.push({ command: 'launch' }, { command: 'openurl', url: `${product.identity.scheme}:///m/login` }, { command: 'expectid', text: 'login-logo', seconds: 30 }, { command: 'shot', name: 'lsu-sign-in' }, { command: 'tree', name: 'lsu-sign-in' })
 signIn(runner)
@@ -109,6 +111,10 @@ const calendarOpen = steps.findIndex(step => step.command === 'openurl' && step.
 steps.splice(calendarOpen, 0, { command: 'back' })
 const calendarShot = steps.findIndex(step => step.command === 'shot' && step.name === 'lsu-calendar')
 steps.splice(calendarShot + 1, 0, { command: 'back' })
+// The rest of HQ's places, each by its app link: the same screens an HQ
+// member reaches, drawn in LSU's identity. Each returns before the next.
+const tour = [['settings', 'settings-name'], ['connections', 'connections-garmin-direct'], ['store', 'store-search'], ['plans', 'plans-website'], ['sharing', 'sharing-scroll'], ['notifications', 'notifications-list'], ['messages', 'messages-search']]
+steps.splice(calendarShot + 2, 0, ...tour.flatMap(([path, id]) => [{ command: 'openurl', url: `${product.identity.scheme}:///m/${path}` }, ...declineOptionalPrompts(), { command: 'expectid', text: id, seconds: 30 }, { command: 'shot', name: `lsu-${path}` }, { command: 'back' }]))
 const meShot = steps.findIndex(step => step.command === 'shot' && step.name === 'lsu-me')
 steps.splice(meShot + 1, 0, { command: 'scrollto', text: 'me-membership-card' }, { command: 'tapid', text: 'me-membership-card' }, { command: 'expectid', text: 'membership-card-id', seconds: 30 }, { command: 'expect', text: 'LSU-' }, { command: 'expect', text: runner.name }, { command: 'shot', name: 'lsu-membership-card' }, { command: 'back' })
 const coachingOpen = steps.findIndex(step => step.command === 'tapid' && step.text === 'me-coaching-accounts')
@@ -126,7 +132,9 @@ for (let index = steps.length - 1; index >= 0; index--) {
     steps.splice(index, 0, { command: 'shot', name: 'lsu-post-auth' }, { command: 'tree', name: 'lsu-post-auth' })
 }
 for (let index = steps.length - 1; index >= 0; index--) {
-  if (steps[index].command === 'tab') steps.splice(index, 0, { command: 'tapif', text: 'Not Now' }, { command: 'ifid', id: 'nav-not-now', step: { command: 'tapid', text: 'nav-not-now' } })
+  // The notification offer can slide in over the previous screen after it
+  // settled, so every tab switch first waits out and declines late prompts.
+  if (steps[index].command === 'tab') steps.splice(index, 0, ...declineOptionalPrompts())
   if (steps[index].command === 'shot') steps.splice(index, 0, { command: 'expectapp', text: product.bundleId, seconds: 10 })
 }
 const script = kit.serializeSimulatorSteps(steps)
@@ -161,7 +169,7 @@ try {
   const args = ['xcodebuild', '-project', `${projectName}.xcodeproj`, '-scheme', projectName, '-configuration', 'Debug', '-destination', `platform=iOS Simulator,id=${simulator}`, '-derivedDataPath', join(evidence, 'DriverDerivedData'), '-parallel-testing-enabled', 'NO', '-jobs', '2']
   await run([...args, 'build-for-testing'], driver.output)
   await run([...args, '-resultBundlePath', join(evidence, `Acceptance-${Date.now()}.xcresult`), '-collect-test-diagnostics', 'never', 'test-without-building'], driver.output)
-  writeFileSync(join(evidence, 'result.json'), JSON.stringify({ passed: true, version: product.version, build: product.build, hqSource: source.revision, bundle: product.bundleId, artifactSha256, scenarios: ['sign-in', 'five-tabs', 'branded-membership-card', 'calendar', 'owned-coaching', 'account-switch', 'sign-out'] }, null, 2))
+  writeFileSync(join(evidence, 'result.json'), JSON.stringify({ passed: true, version: product.version, build: product.build, hqSource: source.revision, bundle: product.bundleId, artifactSha256, scenarios: ['sign-in', 'five-tabs', 'branded-membership-card', 'calendar', 'hq-places', 'owned-coaching', 'account-switch', 'sign-out'] }, null, 2))
 }
 catch (error) {
   if (simulator) {
