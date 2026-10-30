@@ -79,19 +79,20 @@ async function run(args: string[], cwd = root, timeout = 20 * 60_000) {
 const steps: any[] = []
 function declineOptionalPrompts(): any[] {
   // Password saving and the app's notification offer can both say Not Now.
-  // tapif selects a hittable match; the stable ID then closes the app offer.
-  return [{ command: 'tapif', text: 'Not Now' }, { command: 'dismiss', text: 'Not Now' }, { command: 'tapif', text: 'Not Now' }, { command: 'ifid', id: 'nav-not-now', step: { command: 'tapid', text: 'nav-not-now' } }]
+  // The password sheet can arrive after the screen beneath it. tapif chooses
+  // a hittable indexed match, avoiding an ambiguous text-only button query.
+  return [...Array.from({ length: 3 }, () => [{ command: 'wait', seconds: 1 }, { command: 'tapif', text: 'Not Now' }]).flat(), { command: 'ifid', id: 'nav-not-now', step: { command: 'tapid', text: 'nav-not-now' } }]
 }
 function signIn(account: Account) {
   const firstRun = firstRuns.get(account.key)!
   steps.push({ command: 'openurl', url: `${product.identity.scheme}:///m/login` }, { command: 'expectid', text: 'login-email', seconds: 30 }, { command: 'typeid', id: 'login-email', text: account.email }, { command: 'typeid', id: 'login-password', text: account.password }, { command: 'return' }, { command: 'wait', seconds: 2 }, { command: 'shot', name: 'lsu-after-sign-in' }, { command: 'tree', name: 'lsu-after-sign-in' })
   if (firstRun.policies) {
-    steps.push({ command: 'expectid', text: 'agree-submit', seconds: 40 }, { command: 'dismiss', text: 'Not Now' })
+    steps.push({ command: 'expectid', text: 'agree-submit', seconds: 40 }, ...declineOptionalPrompts())
     for (const id of ['agree-health', 'agree-data']) steps.push({ command: 'scrollto', text: id }, { command: 'tapid', text: id })
     steps.push({ command: 'scrollto', text: 'agree-submit' }, { command: 'tapid', text: 'agree-submit' })
   }
-  if (firstRun.welcome) steps.push({ command: 'expectid', text: 'welcome-skip', seconds: 40 }, { command: 'dismiss', text: 'Not Now' }, { command: 'tapid', text: 'welcome-skip' })
-  steps.push(...declineOptionalPrompts(), { command: 'expectid', text: 'today-screen', seconds: 40 }, { command: 'dismiss', text: 'Not Now' })
+  if (firstRun.welcome) steps.push({ command: 'expectid', text: 'welcome-skip', seconds: 40 }, ...declineOptionalPrompts(), { command: 'tapid', text: 'welcome-skip' })
+  steps.push(...declineOptionalPrompts(), { command: 'expectid', text: 'today-screen', seconds: 40 }, { command: 'tapif', text: 'Not Now' })
 }
 steps.push({ command: 'launch' }, { command: 'openurl', url: `${product.identity.scheme}:///m/login` }, { command: 'expectid', text: 'login-logo', seconds: 30 }, { command: 'shot', name: 'lsu-sign-in' }, { command: 'tree', name: 'lsu-sign-in' })
 signIn(runner)
