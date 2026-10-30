@@ -23,7 +23,7 @@ const { db } = await import(Bun.resolveSync('@stacksjs/database/runtime', root))
 // Standalone scripts provide the server database global used by application helpers.
 Object.assign(globalThis, { db })
 const { transaction } = await import(Bun.resolveSync('@stacksjs/orm', root))
-const { Auth } = await import(Bun.resolveSync('@stacksjs/auth', root))
+const { Auth, RateLimiter } = await import(Bun.resolveSync('@stacksjs/auth', root))
 const { todayIn, addDays, startOfIsoWeek } = await import(Bun.resolveSync('@stacksjs/datetime', root))
 const { saveExperience, saveMethod } = await appModule('brandExperience')
 const { lastSoulExperience } = await appModule('experiencePresets')
@@ -228,6 +228,28 @@ for (const account of accounts) {
   unusable.push(`${account.key} (${rows.length} row${rows.length === 1 ? '' : 's'})`)
 }
 console.log(`[ts-cloud] lsu review seed: ${accounts.length - unusable.length}/${accounts.length} published credentials authenticate${unusable.length ? `; cannot sign in: ${unusable.join(', ')}` : ''}`)
+
+/*
+ * validate() stops at the password. The login action carries on through
+ * withVerifiedCredentials, which also consults the rate limiter and re-reads
+ * the row under FOR UPDATE before anything is minted. Twelve passwords that
+ * verify while the HTTP endpoint answers 401 means the difference lives in
+ * that tail, and only the host can say which part of it.
+ *
+ * One account, because a failure here records a failed attempt against the
+ * address. Reset it either way, so probing leaves the handout exactly as it
+ * was found and nobody is locked out by a deploy.
+ */
+const probe = accounts[0]
+const limited = await RateLimiter.isRateLimited(probe.email)
+let outcome: string
+try {
+  const minted = await Auth.withVerifiedCredentials({ email: probe.email, password: probe.password }, async (candidate: { id: unknown }) => ({ id: Number(candidate.id) }))
+  outcome = minted ? `signs in as user #${minted.id}` : 'withVerifiedCredentials returned null'
+}
+catch (error) { outcome = `threw ${error instanceof Error ? error.message : String(error)}` }
+await RateLimiter.resetAttempts(probe.email)
+console.log(`[ts-cloud] lsu review seed: full path for ${probe.key}: ${outcome} (rate limited beforehand: ${limited})`)
 
 /*
  * ts-cloud forwards a successful hook's output only for lines beginning
