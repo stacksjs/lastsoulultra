@@ -100,6 +100,14 @@ signIn(visitor)
 steps.push({ command: 'tab', text: 'Me' }, { command: 'expect', text: visitor.name, seconds: 30 }, { command: 'absent', text: runner.name }, { command: 'shot', name: 'lsu-visitor-account' }, { command: 'scrollto', text: 'me-sign-out' }, { command: 'tapid', text: 'me-sign-out' }, { command: 'expectid', text: 'login-submit', seconds: 30 }, { command: 'shot', name: 'lsu-signed-out' })
 const ownedCoachingShot = steps.findIndex(step => step.command === 'shot' && step.name === 'lsu-coaching-accounts')
 steps.splice(ownedCoachingShot, 0, { command: 'expect', text: demoTier.name, seconds: 30 }, { command: 'absentid', text: 'coaching-accounts-empty' })
+// A selected tab retains its navigation stack. Return from details before
+// opening another screen or looking for controls on the Me root.
+const calendarOpen = steps.findIndex(step => step.command === 'openurl' && step.url.endsWith('/m/calendar'))
+steps.splice(calendarOpen, 0, { command: 'back' })
+const calendarShot = steps.findIndex(step => step.command === 'shot' && step.name === 'lsu-calendar')
+steps.splice(calendarShot + 1, 0, { command: 'back' })
+const meShot = steps.findIndex(step => step.command === 'shot' && step.name === 'lsu-me')
+steps.splice(meShot + 1, 0, { command: 'scrollto', text: 'me-membership-card' }, { command: 'tapid', text: 'me-membership-card' }, { command: 'expectid', text: 'membership-card-id', seconds: 30 }, { command: 'expect', text: 'LSU-' }, { command: 'expect', text: runner.name }, { command: 'shot', name: 'lsu-membership-card' }, { command: 'back' })
 const coachingOpen = steps.findIndex(step => step.command === 'tapid' && step.text === 'me-coaching-accounts')
 steps.splice(coachingOpen + 1, 0, { command: 'shot', name: 'lsu-coaching-opened' }, { command: 'tree', name: 'lsu-coaching-opened' })
 const coachingReady = steps.findIndex(step => step.command === 'expectid' && step.text === 'coaching-accounts')
@@ -150,7 +158,7 @@ try {
   const args = ['xcodebuild', '-project', `${projectName}.xcodeproj`, '-scheme', projectName, '-configuration', 'Debug', '-destination', `platform=iOS Simulator,id=${simulator}`, '-derivedDataPath', join(evidence, 'DriverDerivedData'), '-parallel-testing-enabled', 'NO', '-jobs', '2']
   await run([...args, 'build-for-testing'], driver.output)
   await run([...args, '-resultBundlePath', join(evidence, `Acceptance-${Date.now()}.xcresult`), '-collect-test-diagnostics', 'never', 'test-without-building'], driver.output)
-  writeFileSync(join(evidence, 'result.json'), JSON.stringify({ passed: true, version: product.version, build: product.build, hqSource: source.revision, bundle: product.bundleId, artifactSha256, scenarios: ['sign-in', 'five-tabs', 'calendar', 'owned-coaching', 'account-switch', 'sign-out'] }, null, 2))
+  writeFileSync(join(evidence, 'result.json'), JSON.stringify({ passed: true, version: product.version, build: product.build, hqSource: source.revision, bundle: product.bundleId, artifactSha256, scenarios: ['sign-in', 'five-tabs', 'branded-membership-card', 'calendar', 'owned-coaching', 'account-switch', 'sign-out'] }, null, 2))
 }
 catch (error) {
   if (simulator) {
