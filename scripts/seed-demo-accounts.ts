@@ -51,7 +51,28 @@ let organizationId = 0
 await transaction(async () => {
   await db.unsafe("SELECT pg_advisory_xact_lock(hashtext('lsu-private-demo-seed'))").execute()
   let org = await db.selectFrom('organizations').selectAll().where('slug', '=', 'last-soul-ultra').executeTakeFirst()
-  if (org && JSON.parse(String(org.settings || '{}')).demo_seed !== 'lsu-private-review-v1')
+  const claim = org ? JSON.parse(String(org.settings || '{}')).demo_seed : undefined
+  /*
+   * The marker is this seeder's own signature, and refusing anything without it
+   * is right on the shared host, where `last-soul-ultra` could name a real
+   * tenant with real athletes.
+   *
+   * On LSU's dedicated installation it locked the seeder out instead. The
+   * organization there is provisioned before this ever runs, by the brand and
+   * experience setup, so it carries no marker and never will: the throw fired on
+   * every deploy, created nobody, and left the handed-out logins failing with
+   * "Invalid credentials", which reads as a password problem rather than an
+   * account that was never made.
+   *
+   * Adopting an unclaimed organization is safe only on `lsu_training`, a
+   * database dedicated to this one brand that the operator has already had to
+   * name twice to reach this line: LSU_SEED_DATABASE, checked against
+   * current_database() above, and DB_DATABASE in enterprise/seed-review.ts. An
+   * organization carrying somebody else's marker is still refused.
+   */
+  const dedicated = database[0]?.name === 'lsu_training'
+  const adopting = Boolean(org) && !claim && dedicated
+  if (org && claim !== 'lsu-private-review-v1' && !adopting)
     throw new Error('Refusing to modify an existing LSU organization that this seeder does not own.')
   for (const account of accounts) {
     let user = await db.selectFrom('users').select(['id', 'name']).where('email', '=', account.email).executeTakeFirst()
@@ -63,6 +84,12 @@ await transaction(async () => {
   }
   if (!org) org = await db.insertInto('organizations').values({ user_id: ids.owner, name: 'Last Soul Ultra', slug: 'last-soul-ultra', status: 'active', kind: 'club', currency: demoTier.currency, timezone: zone, profile_public: false, public_join: false, lead_form: false, settings: JSON.stringify({ demo_seed: 'lsu-private-review-v1' }), created_at: now }).returningAll().executeTakeFirstOrThrow()
   organizationId = Number(org.id)
+  if (adopting) {
+    // Claim it, so this is a one-off: every later run takes the marker path.
+    const settings = JSON.parse(String(org.settings || '{}'))
+    await db.updateTable('organizations').set({ settings: JSON.stringify({ ...settings, demo_seed: 'lsu-private-review-v1' }) }).where('id', '=', organizationId).execute()
+    console.log(`  Adopted the existing last-soul-ultra organization (#${organizationId}) and marked it for this seeder.`)
+  }
   for (const account of accounts) {
     const userId = ids[account.key]
     if (account.membership) {
