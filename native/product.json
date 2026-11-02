@@ -30,7 +30,7 @@
   "build": 5,
   "assets": {
     "icon": "assets/icon.png",
-    "splash": "../public/assets/lsu/images/lsu-logo.svg",
+    "splash": "../public/assets/lsu/images/lsu-splash.svg",
     "wordmark": "assets/wordmark.png"
   },
   "output": "../storage/framework/mobile",
