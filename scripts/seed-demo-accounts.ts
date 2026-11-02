@@ -4,6 +4,7 @@
  * Run from that application's root with a private LSU_DEMO_ACCOUNTS_FILE.
  * No provider requests, real charges, email or password resets are performed.
  */
+import { createHash } from 'node:crypto'
 import { resolve } from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { combinedRunKey, demoPlan, demoStrengthDescription, demoTier } from './lsu-demo-plan'
@@ -206,12 +207,30 @@ await transaction(async () => {
   // A club-scoped sample conversation to an admin, without assigning a personal coach.
   const first = Math.min(ids.runner, ids.admin), second = Math.max(ids.runner, ids.admin)
   const scope = `hq:gym:${organizationId}`
-  const thread = await db.selectFrom('chat_conversations').select('id').where('scope', '=', scope).where('first_id', '=', first).where('second_id', '=', second).executeTakeFirst()
-  if (!thread) {
-    const id = crypto.randomUUID()
-    await db.insertInto('chat_conversations').values({ id, first_id: first, second_id: second, scope, participant_type: 'users', created_at: now }).execute()
-    await db.insertInto('chat_messages').values({ conversation_id: id, sender_id: ids.admin, body: 'Welcome to the LSU review. This is a fictional sample conversation. Your demo calendar has completed sessions and upcoming training to explore.', client_key: crypto.randomUUID(), created_at: now }).execute()
-    await db.insertInto('chat_messages').values({ conversation_id: id, sender_id: ids.runner, body: 'Demo reply: I found the long trail run and the method summary. I will review my completed sessions next.', client_key: crypto.randomUUID(), created_at: now }).execute()
+  /*
+   * A conversation's id is derived, not chosen. createMessenger().direct()
+   * hashes [scope, participantType, first, second] with SHA-256, and opening a
+   * thread rejects an id that is not 64 hex characters before it even reads the
+   * row. A random UUID therefore seeds a conversation the inbox lists happily,
+   * because list() finds it by scope and participants, and no thread can ever
+   * open: tapping it derives the real id, misses, and silently creates an empty
+   * conversation beside it. That is the empty thread under a row showing its
+   * own last message.
+   */
+  const conversationId = createHash('sha256').update(JSON.stringify([scope, 'users', first, second])).digest('hex')
+  const legacy = await db.selectFrom('chat_conversations').select('id').where('scope', '=', scope).where('first_id', '=', first).where('second_id', '=', second).where('id', '!=', conversationId).executeTakeFirst()
+  if (!await db.selectFrom('chat_conversations').select('id').where('id', '=', conversationId).executeTakeFirst())
+    await db.insertInto('chat_conversations').values({ id: conversationId, first_id: first, second_id: second, scope, participant_type: 'users', created_at: now }).execute()
+  // An installation seeded before this carries an unreachable thread. Its
+  // messages move across rather than being dropped, since a reviewer may have
+  // written some of them, and the row nothing can reach goes.
+  if (legacy) {
+    await db.updateTable('chat_messages').set({ conversation_id: conversationId }).where('conversation_id', '=', legacy.id).execute()
+    await db.deleteFrom('chat_conversations').where('id', '=', legacy.id).execute()
+  }
+  if (!await db.selectFrom('chat_messages').select('id').where('conversation_id', '=', conversationId).executeTakeFirst()) {
+    await db.insertInto('chat_messages').values({ conversation_id: conversationId, sender_id: ids.admin, body: 'Welcome to the LSU review. This is a fictional sample conversation. Your demo calendar has completed sessions and upcoming training to explore.', client_key: crypto.randomUUID(), created_at: now }).execute()
+    await db.insertInto('chat_messages').values({ conversation_id: conversationId, sender_id: ids.runner, body: 'Demo reply: I found the long trail run and the method summary. I will review my completed sessions next.', client_key: crypto.randomUUID(), created_at: now }).execute()
   }
 })
 /*
