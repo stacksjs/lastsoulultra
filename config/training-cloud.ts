@@ -18,6 +18,11 @@ export function trainingSites(): NonNullable<CloudConfig['sites']> {
     FRONTEND_APP_URL: deployment.origin, STX_PUBLIC_API_URL: `${deployment.origin}/api`,
     API_URL: `http://127.0.0.1:${deployment.ports.api}`, PORT_API: String(deployment.ports.api),
     APP_KEY: secrets.LSU_TRAINING_APP_KEY || '',
+    // Provider sign-ins return here, and to this origin's pages, not HQ's defaults.
+    OAUTH_REDIRECT_BASE: deployment.origin, FRONTEND_URL: deployment.origin,
+    // HQ platform: Continue with HQ, and devices connected through HQ's provider apps.
+    HQ_PLATFORM_ISSUER: 'https://hq.training', HQ_PLATFORM_CLIENT_ID: secrets.LSU_HQ_PLATFORM_CLIENT_ID || '',
+    HQ_PLATFORM_CLIENT_SECRET: secrets.LSU_HQ_PLATFORM_CLIENT_SECRET || '', HQ_PLATFORM_RELAY_SECRET: secrets.LSU_HQ_PLATFORM_RELAY_SECRET || '',
     APNS_TEAM_ID: secrets.LSU_APNS_TEAM_ID || '', APNS_KEY_ID: secrets.LSU_APNS_KEY_ID || '', APNS_PRIVATE_KEY: secrets.LSU_APNS_PRIVATE_KEY || '',
     APNS_TOPIC: 'com.lastsoulultra.app', APNS_ENVIRONMENT: 'production',
     APPLE_TEAM_ID: secrets.LSU_APPLE_TEAM_ID || '', APPLE_KEY_ID: secrets.LSU_APPLE_KEY_ID || '', APPLE_PRIVATE_KEY: secrets.LSU_APPLE_PRIVATE_KEY || '',
@@ -61,6 +66,8 @@ export function trainingSites(): NonNullable<CloudConfig['sites']> {
       scheduler: true,
       daemons: [
         {name:'coaching-jobs',command:`${launcher} node_modules/@stacksjs/ts-cloud/dist/bin/stacks-queue-worker.js --queue=default --concurrency=1`},
+        // Device syncs, provider events HQ relays, and HQ history imports.
+        {name:'connection-sync',command:`${launcher} node_modules/@stacksjs/ts-cloud/dist/bin/stacks-queue-worker.js --queue=connection-sync,connection-events,platform-history --concurrency=1`},
         {name:'garmin-sync',command:`${launcher} node_modules/@stacksjs/ts-cloud/dist/bin/stacks-queue-worker.js --queue=garmin-direct --concurrency=1`},
         {name:'exercise-media',command:`${launcher} node_modules/@stacksjs/ts-cloud/dist/bin/stacks-queue-worker.js --queue=exercise-media --concurrency=1`},
         {name:'local-speech',command:`/usr/bin/env COACHING_SPEECH_RUNTIME_DIR=${runtime.COACHING_SPEECH_RUNTIME_DIR} ${launcher} --local-speech`,restart:'on-failure'},
