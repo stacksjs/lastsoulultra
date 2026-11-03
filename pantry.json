@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "bun.sh": "1.4.4",
-    "@hq/platform": "1.0.3504"
+    "@hq/platform": "1.0.3723"
   },
   "scopes": {
     "@hq": "pantry"
