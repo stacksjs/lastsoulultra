@@ -1,12 +1,13 @@
 import { expect, it } from 'bun:test'
 import product from '../native/product.json'
 import source from '../native/hq-source.json'
-import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
+import { getMetadata } from 'ts-images'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import pantry from '../pantry.json'
 import presets from '../enterprise/presets.json'
-import { assertInstalledKit, assertSourceLock, installationPresets, nativeBuildEnvironment, manifestPath } from '../scripts/native-source'
+import { assertInstalledKit, assertSourceLock, generateNativeSplash, installationPresets, manifestPath, nativeBuildEnvironment, root, splashOptions, splashPreset } from '../scripts/native-source'
 
 it('requires an exact HQ platform release, its commit and the pinned Bun runtime', () => {
   expect(() => assertSourceLock(source)).not.toThrow()
@@ -77,4 +78,28 @@ it('packages LSU’s brand and approved coaching tiers as the installation’s o
   expect(() => installationPresets({ ...presets, organization: 'another-brand' })).toThrow('must belong to the packaged product')
   expect(() => installationPresets({ ...presets, products: [presets.products[0]!, presets.products[0]!] })).toThrow('unique, priced coaching tiers')
   expect(() => installationPresets({ ...presets, products: [{ ...presets.products[0]!, price_cents: 0 }] })).toThrow('unique, priced coaching tiers')
+})
+
+it('draws the launch splash with ts-images’ preset from the wordmark, on the black the app opens on', async () => {
+  expect(splashPreset()).toEqual({ logo: join(root, 'public/assets/lsu/images/lsu-logo.svg'), accent: '#dd0f15' })
+  expect(splashOptions()).toEqual({ logo: join(root, 'public/assets/lsu/images/lsu-logo.svg'), light: { background: '#000000' }, dark: false, accent: '#dd0f15', shape: 'none' })
+  expect(() => splashPreset('../public/assets/lsu/images/lsu-splash.svg')).toThrow('must be a splash preset')
+  expect(() => splashPreset({ logo: 'x.svg', accent: 'red' })).toThrow('must be a splash preset')
+  const directory = mkdtempSync(join(tmpdir(), 'lsu-splash-'))
+  try {
+    const splash = await generateNativeSplash(directory)
+    expect(splash.ios).toBe(join(directory, 'ios/LaunchLogo.imageset/LaunchLogo.png'))
+    expect(splash.android).toBe(join(directory, 'android/res'))
+    const one = await getMetadata(readFileSync(splash.ios))
+    const three = await getMetadata(readFileSync(join(directory, 'ios/LaunchLogo.imageset/LaunchLogo@3x.png')))
+    expect([three.width, three.height]).toEqual([one.width * 3, one.height * 3])
+    // A wordmark, not a full-screen picture: no phone crops it.
+    expect(one.width).toBeLessThan(375)
+    expect(existsSync(join(directory, 'ios/LaunchLogo.imageset/LaunchLogo-dark.png'))).toBe(false)
+    for (const density of ['mdpi', 'hdpi', 'xhdpi', 'xxhdpi', 'xxxhdpi']) {
+      expect(existsSync(join(directory, `android/res/drawable-${density}/splash_icon.png`))).toBe(true)
+      expect(existsSync(join(directory, `android/res/drawable-${density}/splash_logo.png`))).toBe(true)
+    }
+  }
+  finally { rmSync(directory, { recursive: true, force: true }) }
 })

@@ -94,7 +94,7 @@
     "@ts-maps/stx": "0.5.7",
     "bun-plugin-stx": "0.2.749",
     "stacks": "0.75.374",
-    "ts-images": "0.2.32",
+    "ts-images": "0.2.33",
     "ts-maps": "0.5.7"
   },
   "workspaces": [

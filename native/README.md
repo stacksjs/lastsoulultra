@@ -6,7 +6,11 @@ come from the immutable HQ commit in `hq-source.json`. There is no second
 implementation of those features in this repository.
 
 `product.json` owns LSU's name, store identity, version, colors, fonts and legal
-links. The public LSU wordmark is rasterized from the existing website asset and embedded in the screen bundle so it works offline. Native builds
+links. The public LSU wordmark is rasterized from the existing website asset and embedded in the screen bundle so it works offline.
+The launch splash is not a hand-made file: `assets.splash` names the wordmark,
+and `native:prepare` draws it with ts-images' splash preset (the accent's glow
+on LSU's black, iOS @1x/@2x/@3x and Android 12's splash icon per density) into
+ignored `storage/native/splash`. Native builds
 materialize HQ under ignored `storage/native/hq/<commit>`, install its frozen
 `bun.lock`, and supply `HQ_NATIVE_PRODUCT` to HQ's build. Only the declared branding and deployment inputs are overlaid; other source
 changes stop the build.

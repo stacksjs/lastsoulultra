@@ -2,6 +2,7 @@ import { cpSync, mkdirSync, readdirSync, rmSync, readFileSync, copyFileSync, wri
 import { resolve, join, dirname, delimiter } from 'node:path'
 import { execFileSync } from 'node:child_process'
 import { createHash } from 'node:crypto'
+import { generateSplashScreens, type SplashOptions } from 'ts-images'
 import source from '../native/hq-source.json'
 import product from '../native/product.json'
 import presets from '../enterprise/presets.json'
@@ -10,6 +11,8 @@ export const root = resolve(import.meta.dir, '..')
 export const sourceRoot = join(root, 'storage/native/hq', source.revision)
 export const output = resolve(root, 'storage/framework/mobile')
 export const manifestPath = join(root, 'storage/native/product.json')
+/** The launch splash ts-images' preset draws for this build, rebuilt each time. */
+export const splashOutput = join(root, 'storage/native/splash')
 /** The HQ platform kit, as `pantry install` places it: HQ's release, not access to HQ's repository. */
 export const kitRoot = join(root, 'pantry', source.package)
 
@@ -54,7 +57,40 @@ export async function prepareNativeSource(): Promise<void> {
   writeFileSync(join(sourceRoot, 'resources/functions/installation-presets.json'), `${JSON.stringify({ presets: installationPresets() }, null, 2)}\n`)
   const fonts = Object.fromEntries(['Anton-Regular', 'Barlow-Regular'].map(name => [name, { src: join(sourceRoot, `public/assets/brands/${name}.ttf`), license: join(sourceRoot, `public/assets/brands/${name.split('-')[0]}-OFL.txt`) }]))
   mkdirSync(join(root, 'storage/native'), { recursive: true })
-  writeFileSync(manifestPath, `${JSON.stringify({ ...product, output, assets: { icon: resolve(root, 'native', product.assets.icon), splash: resolve(root, 'native', product.assets.splash), fonts } }, null, 2)}\n`)
+  const splash = await generateNativeSplash()
+  // HQ reads `splash` as the launch image; `LaunchLogo.png` has its @2x/@3x
+  // files beside it, which Craft 0.0.443+ installs by scale. `splashPreset`
+  // is the same preset for an HQ that hands it to Stacks' own generator.
+  writeFileSync(manifestPath, `${JSON.stringify({ ...product, output, assets: { icon: resolve(root, 'native', product.assets.icon), splash: splash.ios, splashPreset: splashPreset(), fonts } }, null, 2)}\n`)
+}
+
+type SplashPreset = { logo: string, accent?: string, size?: number }
+
+/** `assets.splash` with its paths resolved: the logo to draw, the glow (default the brand accent) and its size in points. */
+export function splashPreset(value: unknown = product.assets.splash, theme = product.identity.theme): SplashPreset {
+  const preset = value as Partial<SplashPreset> | null
+  if (!preset || typeof preset !== 'object' || typeof preset.logo !== 'string' || !preset.logo
+    || (preset.accent !== undefined && !/^#[a-f0-9]{6}$/i.test(preset.accent))
+    || (preset.size !== undefined && !(typeof preset.size === 'number' && preset.size > 0)))
+    throw new Error('native/product.json assets.splash must be a splash preset: { logo, accent?: "#RRGGBB", size?: points }')
+  return { logo: resolve(root, 'native', preset.logo), accent: preset.accent ?? theme.accent, ...(preset.size ? { size: preset.size } : {}) }
+}
+
+/**
+ * LSU's launch screen, drawn by ts-images' splash preset: the wordmark at its
+ * optical size in points with the accent's soft glow, on the black the app
+ * opens on (one appearance; the app is dark only). Nothing full-screen, so no
+ * phone crops it.
+ */
+export function splashOptions(preset: SplashPreset = splashPreset(), background = product.identity.theme.background): SplashOptions {
+  return { logo: preset.logo, light: { background }, dark: false, accent: preset.accent, shape: 'none', ...(preset.size ? { size: preset.size } : {}) }
+}
+
+export async function generateNativeSplash(outputDir = splashOutput): Promise<{ ios: string, android: string }> {
+  rmSync(outputDir, { recursive: true, force: true })
+  const result = await generateSplashScreens(splashOptions(), outputDir)
+  if (!result.ios || !result.android) throw new Error('The splash preset wrote no iOS or Android launch images')
+  return { ios: result.ios.image, android: result.android.resources }
 }
 
 /** The packaged presets, checked against the product they belong to before they are written. */
