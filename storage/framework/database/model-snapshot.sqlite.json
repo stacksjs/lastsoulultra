@@ -65,7 +65,7 @@
           },
           {
             "name": "last_ping",
-            "type": "integer",
+            "type": "bigint",
             "isPrimaryKey": false,
             "isUnique": false,
             "isNullable": true,
@@ -160,7 +160,7 @@
           },
           {
             "name": "time",
-            "type": "integer",
+            "type": "bigint",
             "isPrimaryKey": false,
             "isUnique": false,
             "isNullable": false,
@@ -305,7 +305,7 @@
           },
           {
             "name": "description",
-            "type": "string",
+            "type": "text",
             "isPrimaryKey": false,
             "isUnique": false,
             "isNullable": true,
@@ -337,7 +337,7 @@
           },
           {
             "name": "parent_category_id",
-            "type": "string",
+            "type": "integer",
             "isPrimaryKey": false,
             "isUnique": false,
             "isNullable": true,
@@ -512,7 +512,7 @@
           },
           {
             "name": "notes",
-            "type": "string",
+            "type": "text",
             "isPrimaryKey": false,
             "isUnique": false,
             "isNullable": true,
@@ -652,7 +652,7 @@
           },
           {
             "name": "properties",
-            "type": "string",
+            "type": "text",
             "isPrimaryKey": false,
             "isUnique": false,
             "isNullable": true,
@@ -1043,7 +1043,7 @@
           },
           {
             "name": "description",
-            "type": "string",
+            "type": "text",
             "isPrimaryKey": false,
             "isUnique": false,
             "isNullable": false,
@@ -1154,7 +1154,7 @@
           },
           {
             "name": "description",
-            "type": "string",
+            "type": "text",
             "isPrimaryKey": false,
             "isUnique": false,
             "isNullable": true,
@@ -1339,7 +1339,7 @@
           },
           {
             "name": "special_instructions",
-            "type": "string",
+            "type": "text",
             "isPrimaryKey": false,
             "isUnique": false,
             "isNullable": true,
@@ -1838,7 +1838,7 @@
           },
           {
             "name": "description",
-            "type": "string",
+            "type": "text",
             "isPrimaryKey": false,
             "isUnique": false,
             "isNullable": true,
@@ -1894,7 +1894,7 @@
           },
           {
             "name": "nutritional_info",
-            "type": "string",
+            "type": "text",
             "isPrimaryKey": false,
             "isUnique": false,
             "isNullable": true,
@@ -1948,6 +1948,15 @@
             "isUnique": true,
             "isNullable": true,
             "hasDefault": false
+          },
+          {
+            "name": "slug",
+            "type": "string",
+            "isPrimaryKey": false,
+            "isUnique": true,
+            "isNullable": false,
+            "hasDefault": false,
+            "maxLength": 255
           }
         ],
         "indexes": [
@@ -1955,6 +1964,13 @@
             "name": "products_uuid_unique",
             "columns": [
               "uuid"
+            ],
+            "type": "unique"
+          },
+          {
+            "name": "products_slug_unique",
+            "columns": [
+              "slug"
             ],
             "type": "unique"
           }
@@ -2039,7 +2055,7 @@
           },
           {
             "name": "metadata",
-            "type": "string",
+            "type": "text",
             "isPrimaryKey": false,
             "isUnique": false,
             "isNullable": true,
@@ -2125,7 +2141,7 @@
           },
           {
             "name": "description",
-            "type": "string",
+            "type": "text",
             "isPrimaryKey": false,
             "isUnique": false,
             "isNullable": true,
@@ -2133,7 +2149,7 @@
           },
           {
             "name": "options",
-            "type": "string",
+            "type": "text",
             "isPrimaryKey": false,
             "isUnique": false,
             "isNullable": true,
@@ -2454,7 +2470,7 @@
           },
           {
             "name": "error",
-            "type": "string",
+            "type": "text",
             "isPrimaryKey": false,
             "isUnique": false,
             "isNullable": true,
@@ -3163,7 +3179,7 @@
           },
           {
             "name": "text",
-            "type": "string",
+            "type": "text",
             "isPrimaryKey": false,
             "isUnique": false,
             "isNullable": true,
@@ -4112,7 +4128,7 @@
           },
           {
             "name": "description",
-            "type": "string",
+            "type": "text",
             "isPrimaryKey": false,
             "isUnique": false,
             "isNullable": true,
@@ -4332,6 +4348,18 @@
             "isUnique": true,
             "isNullable": true,
             "hasDefault": false
+          },
+          {
+            "name": "order_id",
+            "type": "bigint",
+            "isPrimaryKey": false,
+            "isUnique": false,
+            "isNullable": true,
+            "hasDefault": false,
+            "references": {
+              "table": "orders",
+              "column": "id"
+            }
           }
         ],
         "indexes": [
@@ -4698,7 +4726,7 @@
           },
           {
             "name": "error_message",
-            "type": "string",
+            "type": "text",
             "isPrimaryKey": false,
             "isUnique": false,
             "isNullable": true,
@@ -5022,7 +5050,7 @@
           },
           {
             "name": "properties",
-            "type": "string",
+            "type": "text",
             "isPrimaryKey": false,
             "isUnique": false,
             "isNullable": true,
@@ -5428,7 +5456,7 @@
           },
           {
             "name": "personal_message",
-            "type": "string",
+            "type": "text",
             "isPrimaryKey": false,
             "isUnique": false,
             "isNullable": true,
@@ -5631,7 +5659,7 @@
           },
           {
             "name": "special_instructions",
-            "type": "string",
+            "type": "text",
             "isPrimaryKey": false,
             "isUnique": false,
             "isNullable": true,
@@ -5767,7 +5795,7 @@
           },
           {
             "name": "description",
-            "type": "string",
+            "type": "text",
             "isPrimaryKey": false,
             "isUnique": false,
             "isNullable": true,
@@ -6430,7 +6458,7 @@
           },
           {
             "name": "payment_details",
-            "type": "string",
+            "type": "text",
             "isPrimaryKey": false,
             "isUnique": false,
             "isNullable": true,
@@ -6553,7 +6581,7 @@
           },
           {
             "name": "description",
-            "type": "string",
+            "type": "text",
             "isPrimaryKey": false,
             "isUnique": false,
             "isNullable": true,
@@ -6817,7 +6845,7 @@
           },
           {
             "name": "timestamp",
-            "type": "integer",
+            "type": "bigint",
             "isPrimaryKey": false,
             "isUnique": false,
             "isNullable": false,
@@ -7356,7 +7384,7 @@
           },
           {
             "name": "message",
-            "type": "string",
+            "type": "text",
             "isPrimaryKey": false,
             "isUnique": false,
             "isNullable": false,
@@ -7364,7 +7392,7 @@
           },
           {
             "name": "stack",
-            "type": "string",
+            "type": "text",
             "isPrimaryKey": false,
             "isUnique": false,
             "isNullable": true,
@@ -7380,7 +7408,7 @@
           },
           {
             "name": "additional_info",
-            "type": "string",
+            "type": "text",
             "isPrimaryKey": false,
             "isUnique": false,
             "isNullable": true,
@@ -7620,7 +7648,7 @@
           },
           {
             "name": "notes",
-            "type": "string",
+            "type": "text",
             "isPrimaryKey": false,
             "isUnique": false,
             "isNullable": true,
@@ -8031,7 +8059,7 @@
             "type": "string",
             "isPrimaryKey": false,
             "isUnique": false,
-            "isNullable": false,
+            "isNullable": true,
             "hasDefault": false
           },
           {
@@ -8082,6 +8110,84 @@
             "isUnique": true,
             "isNullable": true,
             "hasDefault": false
+          },
+          {
+            "name": "session_token",
+            "type": "string",
+            "isPrimaryKey": false,
+            "isUnique": true,
+            "isNullable": true,
+            "hasDefault": false,
+            "maxLength": 255
+          },
+          {
+            "name": "checkout_step",
+            "type": "enum",
+            "isPrimaryKey": false,
+            "isUnique": false,
+            "isNullable": true,
+            "hasDefault": true,
+            "defaultValue": "cart",
+            "enumValues": [
+              "cart",
+              "shipping",
+              "payment",
+              "placed"
+            ]
+          },
+          {
+            "name": "email",
+            "type": "string",
+            "isPrimaryKey": false,
+            "isUnique": false,
+            "isNullable": true,
+            "hasDefault": false,
+            "maxLength": 255
+          },
+          {
+            "name": "shipping_name",
+            "type": "string",
+            "isPrimaryKey": false,
+            "isUnique": false,
+            "isNullable": true,
+            "hasDefault": false,
+            "maxLength": 255
+          },
+          {
+            "name": "shipping_address",
+            "type": "string",
+            "isPrimaryKey": false,
+            "isUnique": false,
+            "isNullable": true,
+            "hasDefault": false,
+            "maxLength": 255
+          },
+          {
+            "name": "shipping_city",
+            "type": "string",
+            "isPrimaryKey": false,
+            "isUnique": false,
+            "isNullable": true,
+            "hasDefault": false,
+            "maxLength": 255
+          },
+          {
+            "name": "shipping_state",
+            "type": "string",
+            "isPrimaryKey": false,
+            "isUnique": false,
+            "isNullable": true,
+            "hasDefault": false,
+            "maxLength": 100
+          },
+          {
+            "name": "shipping_zip",
+            "type": "string",
+            "isPrimaryKey": false,
+            "isUnique": false,
+            "isNullable": true,
+            "hasDefault": false,
+            "maxLength": 20
           }
         ],
         "indexes": [
@@ -8089,6 +8195,13 @@
             "name": "carts_uuid_unique",
             "columns": [
               "uuid"
+            ],
+            "type": "unique"
+          },
+          {
+            "name": "carts_session_token_unique",
+            "columns": [
+              "session_token"
             ],
             "type": "unique"
           }
@@ -8149,7 +8262,7 @@
           },
           {
             "name": "last_active",
-            "type": "string",
+            "type": "bigint",
             "isPrimaryKey": false,
             "isUnique": false,
             "isNullable": false,
@@ -9971,7 +10084,7 @@
           },
           {
             "name": "description",
-            "type": "string",
+            "type": "text",
             "isPrimaryKey": false,
             "isUnique": false,
             "isNullable": true,
@@ -10134,7 +10247,7 @@
           },
           {
             "name": "description",
-            "type": "string",
+            "type": "text",
             "isPrimaryKey": false,
             "isUnique": false,
             "isNullable": true,
@@ -10516,7 +10629,7 @@
           },
           {
             "name": "error",
-            "type": "string",
+            "type": "text",
             "isPrimaryKey": false,
             "isUnique": false,
             "isNullable": true,
@@ -12677,13 +12790,6 @@
               "token"
             ],
             "type": "unique"
-          },
-          {
-            "name": "magic_link_tokens_token_unique",
-            "columns": [
-              "token"
-            ],
-            "type": "unique"
           }
         ]
       },
@@ -12750,13 +12856,6 @@
               "phone"
             ],
             "type": "unique"
-          },
-          {
-            "name": "sms_opt_outs_phone_unique",
-            "columns": [
-              "phone"
-            ],
-            "type": "unique"
           }
         ]
       },
@@ -12789,7 +12888,7 @@
           },
           {
             "name": "description",
-            "type": "string",
+            "type": "text",
             "isPrimaryKey": false,
             "isUnique": false,
             "isNullable": true,
@@ -13796,7 +13895,7 @@
       }
     ]
   },
-  "hash": "43173577e31aaee8afe6b4618c9273cca7b9b1c6ba959f7254e70b19637192b9",
+  "hash": "429d01f07b243c783fc62b60cef2cb8e2f0b540d4620018730272696dfbdfcc1",
   "dialect": "sqlite",
-  "updatedAt": "2026-10-28T13:40:43.752Z"
+  "updatedAt": "2026-11-04T16:13:24.961Z"
 }
