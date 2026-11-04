@@ -62,7 +62,7 @@ export function trainingSites(): NonNullable<CloudConfig['sites']> {
       backgroundBun: `.hq-runtime/pantry/bun.com/v${source.bun}/bin/bun`,
       env: { ...runtime, LSU_DEMO_ACCOUNTS_JSON: secrets.LSU_DEMO_ACCOUNTS_JSON || '', LSU_SEED_DATABASE: deployment.database.name, LSU_SEED_CONFIRM: 'last-soul-ultra' },
       healthCheck: { path: '/api/deployment' },
-      preStart: [...install, './buddy migrate --no-generate --auth', './buddy queue:table', 'mkdir -p storage/framework/runtime/production', 'bun scripts/build-production.ts api', 'bun deployment/lsu/seed-review.ts', 'sh scripts/ensure-speech-runtime.sh'],
+      preStart: [...install, './buddy migrate --no-generate --auth', './buddy queue:table', 'mkdir -p storage/framework/runtime/production', 'bun scripts/build-production.ts api', 'bun deployment/lsu/seed-review.ts', './buddy installation:admins', 'sh scripts/ensure-speech-runtime.sh'],
       scheduler: true,
       daemons: [
         {name:'coaching-jobs',command:`${launcher} node_modules/@stacksjs/ts-cloud/dist/bin/stacks-queue-worker.js --queue=default --concurrency=1`},
