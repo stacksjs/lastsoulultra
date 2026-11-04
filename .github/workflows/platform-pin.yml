@@ -1,0 +1,93 @@
+name: Platform pin
+
+# Repin the HQ platform kit.
+#
+# `pantry.lock` carries the kit's integrity hash, so moving the pin means
+# resolving the tarball, and that needs a registry grant for @hq/platform. The
+# grant is this repo's PANTRY_REGISTRY_TOKEN and lives nowhere else, so the
+# lock is refreshed here and downloaded rather than written by hand: a pin
+# committed without its lock is exactly what `pantry ci` rejects on the next
+# deploy, and that failure lands on the deploy, not on the commit that caused it.
+#
+# This job only reads the registry and uploads the result. Committing the three
+# files it produces stays a deliberate push.
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Kit version to pin, e.g. 1.0.3784
+        required: true
+      revision:
+        description: The hq.training commit it was cut from, full sha
+        required: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: lsu-platform-pin
+  cancel-in-progress: false
+
+jobs:
+  pin:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout the current pin
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Setup Pantry
+        uses: pantry-pm/pantry/packages/action@ee7f116a5363bfe2667b2d76f8f1f567f68148ef
+        with:
+          # 0.11.148 is the first Pantry that keeps @hq to its pinned registry
+          # (pantry.json "scopes"); an older one could look for the kit on npm.
+          version: '0.11.148'
+          install: 'false'
+
+      - name: Setup the pinned Bun runtime
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: '1.4.4'
+
+      - name: Rewrite the pin
+        env:
+          VERSION: ${{ inputs.version }}
+          REVISION: ${{ inputs.revision }}
+        run: |
+          bun -e 'import { readFileSync, writeFileSync } from "node:fs"; const version=process.env.VERSION!, revision=process.env.REVISION!; if(!/^\d+\.\d+\.\d+$/.test(version))throw Error(`Pin an exact kit version, not ${version}`); if(!/^[a-f0-9]{40}$/.test(revision))throw Error(`Pin the full commit the kit was cut from, not ${revision}`); const edit=(file,change)=>{const json=JSON.parse(readFileSync(file,"utf8")); change(json); writeFileSync(file,`${JSON.stringify(json,null,2)}\n`)}; edit("native/hq-source.json",json=>{json.version=version; json.revision=revision}); edit("pantry.json",json=>{json.dependencies["@hq/platform"]=version});'
+          git --no-pager diff --stat
+
+      - name: Install the frozen application dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Resolve the kit and refresh the lock
+        env:
+          PANTRY_REGISTRY_TOKEN: ${{ secrets.PANTRY_REGISTRY_TOKEN }}
+        run: pantry install
+
+      # The kit states its own version, revision and Bun in platform.json, so
+      # this is what catches a pin naming a commit the kit was not cut from -
+      # the one input above that is asserted rather than read from the release.
+      - name: Check the installed kit is the one pinned
+        run: bun -e 'import { assertInstalledKit } from "./scripts/native-source"; assertInstalledKit(); console.log("the installed kit matches native/hq-source.json");'
+
+      - name: Check the refreshed lock passes a frozen install
+        env:
+          PANTRY_REGISTRY_TOKEN: ${{ secrets.PANTRY_REGISTRY_TOKEN }}
+        run: pantry ci
+
+      - name: Show the new pin
+        run: git --no-pager diff -- native/hq-source.json pantry.json pantry.lock
+
+      - name: Upload the refreshed pin
+        uses: actions/upload-artifact@v6
+        with:
+          name: platform-pin-${{ inputs.version }}
+          path: |
+            native/hq-source.json
+            pantry.json
+            pantry.lock
+          if-no-files-found: error
