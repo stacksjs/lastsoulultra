@@ -99,6 +99,30 @@ function signIn(account: Account) {
   steps.push(...Array.from({ length: 4 }, declineOptionalPrompts).flat(), { command: 'expectid', text: 'today-screen', seconds: 40 }, { command: 'tapif', text: 'Not Now' })
 }
 steps.push({ command: 'launch' }, { command: 'openurl', url: `${product.identity.scheme}:///m/login` }, { command: 'expectid', text: 'login-logo', seconds: 30 }, { command: 'shot', name: 'lsu-sign-in' }, { command: 'tree', name: 'lsu-sign-in' })
+// Verify the released signup against this installation and HQ's real account
+// discovery, without creating a test person or granting any of Chris's data.
+steps.push(
+  { command: 'tapid', text: 'login-signup' },
+  { command: 'expectid', text: 'signup-email', seconds: 30 },
+  { command: 'absentid', text: 'signup-name' },
+  { command: 'absentid', text: 'signup-password' },
+  { command: 'absentid', text: 'signup-role' },
+  { command: 'shot', name: 'lsu-signup-email' },
+  { command: 'typeid', id: 'signup-email', text: 'chris@hq.training' },
+  { command: 'tapid', text: 'signup-submit' },
+  { command: 'expectid', text: 'social-hq', seconds: 40 },
+  { command: 'absentid', text: 'signup-password' },
+  { command: 'shot', name: 'lsu-signup-hq' },
+  { command: 'tapid', text: 'signup-hq-separate' },
+  { command: 'expectid', text: 'signup-name', seconds: 10 },
+  { command: 'expectid', text: 'signup-password', seconds: 10 },
+  { command: 'tapid', text: 'signup-edit-email' },
+  { command: 'expectid', text: 'signup-email', seconds: 10 },
+  { command: 'absentid', text: 'signup-password' },
+  { command: 'tapid', text: 'signup-signin' },
+  { command: 'expectid', text: 'login-email', seconds: 30 },
+  { command: 'typeid', id: 'login-email', text: '\u0008'.repeat('chris@hq.training'.length) },
+)
 signIn(runner)
 steps.push({ command: 'shot', name: 'lsu-today' }, { command: 'tab', text: 'Workouts' }, { command: 'expectid', text: 'library-record-run', seconds: 30 }, { command: 'shot', name: 'lsu-workouts' }, { command: 'tab', text: 'Progress' }, { command: 'expectid', text: 'progress-screen', seconds: 30 }, { command: 'shot', name: 'lsu-progress' }, { command: 'tab', text: 'Health' }, { command: 'expectid', text: 'health-progress', seconds: 30 }, { command: 'shot', name: 'lsu-health' }, { command: 'tab', text: 'Me' }, { command: 'expect', text: runner.name, seconds: 30 }, { command: 'shot', name: 'lsu-me' }, { command: 'scrollto', text: 'me-coaching-accounts' }, { command: 'tapid', text: 'me-coaching-accounts' }, { command: 'expectid', text: 'coaching-accounts', seconds: 30 }, { command: 'absentid', text: 'coaching-accounts-error' }, { command: 'shot', name: 'lsu-coaching-accounts' }, { command: 'openurl', url: `${product.identity.scheme}:///m/calendar` }, { command: 'expectid', text: 'calendar-scope', seconds: 30 }, { command: 'shot', name: 'lsu-calendar' }, { command: 'tab', text: 'Me' }, { command: 'scrollto', text: 'me-sign-out' }, { command: 'tapid', text: 'me-sign-out' })
 signIn(visitor)
@@ -169,7 +193,7 @@ try {
   const args = ['xcodebuild', '-project', `${projectName}.xcodeproj`, '-scheme', projectName, '-configuration', 'Debug', '-destination', `platform=iOS Simulator,id=${simulator}`, '-derivedDataPath', join(evidence, 'DriverDerivedData'), '-parallel-testing-enabled', 'NO', '-jobs', '2']
   await run([...args, 'build-for-testing'], driver.output)
   await run([...args, '-resultBundlePath', join(evidence, `Acceptance-${Date.now()}.xcresult`), '-collect-test-diagnostics', 'never', 'test-without-building'], driver.output)
-  writeFileSync(join(evidence, 'result.json'), JSON.stringify({ passed: true, version: product.version, build: product.build, hqSource: source.revision, bundle: product.bundleId, artifactSha256, scenarios: ['sign-in', 'five-tabs', 'branded-membership-card', 'calendar', 'hq-places', 'owned-coaching', 'account-switch', 'sign-out'] }, null, 2))
+  writeFileSync(join(evidence, 'result.json'), JSON.stringify({ passed: true, version: product.version, build: product.build, hqSource: source.revision, bundle: product.bundleId, artifactSha256, scenarios: ['email-first-signup', 'hq-account-discovery', 'local-account-alternative', 'sign-in', 'five-tabs', 'branded-membership-card', 'calendar', 'hq-places', 'owned-coaching', 'account-switch', 'sign-out'] }, null, 2))
 }
 catch (error) {
   if (simulator) {

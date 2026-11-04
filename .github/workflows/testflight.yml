@@ -109,6 +109,10 @@ jobs:
         if: inputs.upload
         run: bun run native:testflight --prepared
 
+      - name: Verify TestFlight processing and internal availability
+        if: inputs.upload
+        run: bun scripts/verify-native-testflight.ts
+
       - name: Remove signing files and temporary keychain
         if: always()
         run: bun scripts/ios-ci-signing.ts cleanup
@@ -123,5 +127,6 @@ jobs:
           path: |
             storage/native/release/*/export/*.ipa
             storage/native/release/*/upload.json
+            storage/native/release/*/testflight.json
             storage/framework/mobile/ios/lsu-source.json
             storage/native/bundled-login-report.json
