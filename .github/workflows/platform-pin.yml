@@ -63,10 +63,22 @@ jobs:
       - name: Install the frozen application dependencies
         run: bun install --frozen-lockfile
 
+      # A pantry install also provisions the dev database and runs the
+      # postDatabaseSetup commands in config/deps.ts, the second of which
+      # (`./buddy seed`) fails on three commerce seeders that have drifted from
+      # the schema. That has nothing to do with the pin but is fatal to the
+      # install, so the exit code is reported and the three steps below decide:
+      # the lock entry, the kit's own platform.json, and a frozen install.
       - name: Resolve the kit and refresh the lock
         env:
           PANTRY_REGISTRY_TOKEN: ${{ secrets.PANTRY_REGISTRY_TOKEN }}
-        run: pantry install
+        run: pantry install --ignore-scripts || echo "::warning::pantry install exited $?; the checks below decide whether the pin is good"
+
+      - name: Check the lock pins the requested kit, with its integrity hash
+        env:
+          VERSION: ${{ inputs.version }}
+        run: |
+          bun -e 'import { readFileSync } from "node:fs"; const version=process.env.VERSION!; const packages=JSON.parse(readFileSync("pantry.lock","utf8")).packages??{}; const entry=packages[`@hq/platform@${version}`]; if(!entry)throw Error(`pantry.lock does not pin @hq/platform@${version}; it has ${Object.keys(packages).join(", ")}`); if(!/^sha256:[a-f0-9]{64}$/.test(entry.integrity??""))throw Error(`pantry.lock pins @hq/platform@${version} without an integrity hash, so a frozen install cannot verify it`); console.log(`pantry.lock pins @hq/platform@${version} ${entry.integrity}`);'
 
       # The kit states its own version, revision and Bun in platform.json, so
       # this is what catches a pin naming a commit the kit was not cut from -
