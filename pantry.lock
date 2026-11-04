@@ -12,7 +12,7 @@
         "@ts-maps/stx": "0.5.7",
         "bun-plugin-stx": "0.2.749",
         "stacks": "0.75.374",
-        "ts-images": "0.2.32",
+        "ts-images": "0.2.33",
         "ts-maps": "0.5.7"
       },
       "devDependencies": {
@@ -36,12 +36,12 @@
     }
   },
   "packages": {
-    "@hq/platform@1.0.3504": {
+    "@hq/platform@1.0.3759": {
       "name": "@hq/platform",
-      "version": "1.0.3504",
+      "version": "1.0.3759",
       "source": "npm",
-      "resolved": "registry:@hq/platform@1.0.3504",
-      "integrity": "sha256:8e7f998a09e30824ff68aee6189c70d41ad1dd0e210ebacb9fd7f2325fbe4e26"
+      "resolved": "registry:@hq/platform@1.0.3759",
+      "integrity": "sha256:e42f418fde6092b1b986b2473747f53b1ad9e61104eddee945b9d475d1074745"
     },
     "bun.sh@1.4.4": {
       "name": "bun.sh",
