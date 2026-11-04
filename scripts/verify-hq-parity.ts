@@ -19,7 +19,7 @@
  *   bun run native:parity [HQ native-screens dir]
  */
 import { execFileSync } from 'node:child_process'
-import { cpSync, existsSync, readdirSync, readFileSync, symlinkSync, writeFileSync } from 'node:fs'
+import { cpSync, existsSync, readdirSync, readFileSync, lstatSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { gunzipSync } from 'node:zlib'
@@ -36,12 +36,14 @@ if (!existsSync(join(lsuDir, '__runtime.js'))) throw new Error('Build LSU first:
 function buildHq(): string {
   const plain = join(root, 'storage/native/hq-plain', pin.revision)
   const output = join(plain, 'storage/native/parity-ios')
-  if (existsSync(join(output, 'native-screens/__runtime.js'))) return join(output, 'native-screens')
   if (!existsSync(plain)) {
     cpSync(join(kitRoot, 'source'), plain, { recursive: true })
-    symlinkSync(join(source, 'node_modules'), join(plain, 'node_modules'))
   }
   const env = Object.fromEntries(Object.entries(process.env).filter(([key]) => /^(?:PATH|HOME|USER|SHELL|TMPDIR|LANG|LC_.*|DEVELOPER_DIR|SDKROOT)$/.test(key)))
+  const modules = join(plain, 'node_modules')
+  if (existsSync(modules) && lstatSync(modules).isSymbolicLink()) throw new Error('HQ parity requires its own frozen dependency install, not a shared node_modules link')
+  execFileSync(process.execPath, ['install', '--frozen-lockfile'], { cwd: plain, stdio: 'inherit', env })
+  if (existsSync(join(output, 'native-screens/__runtime.js'))) return join(output, 'native-screens')
   execFileSync('./buddy', ['build:ios'], { cwd: plain, stdio: 'inherit', env: { ...env, NODE_ENV: 'production', IOS_OUTPUT: output, STX_COMPONENTS_DIR: join(plain, 'node_modules/@stacksjs/components/src/ui') } })
   return join(output, 'native-screens')
 }
@@ -76,12 +78,18 @@ const build = (dir: string, site: string): Build => {
 const hq = build(hqDir, 'https://hq.training')
 const lsu = build(lsuDir, product.site)
 
-/** The same signed-out device for both: no account, every API read unanswered. */
+/** The same signed-out native device for both: its built-in Linking API, no account, every API read unanswered. */
 async function draw(target: Build, screen: string, language: string): Promise<string[]> {
   const code = `globalThis.__stxNativeReadMessages=function(language,area){return (${JSON.stringify(target.messages)})[language+'/'+area]||null};\n${read(join(target.dir, '__runtime.js'))}\n${read(join(target.dir, `${screen}.js`))}`
-  const phone = mountNativeScreen(code, screen, { platform: 'ios', colorScheme: 'dark', locale: language, appURL: `${target.site}/m`, apiBase: `${target.site}/api`, sessionTokenKey: 'auth.token', api: () => undefined })
+  const errors: string[] = []
+  const nativeConsole = { ...console, error: (...values: unknown[]) => {
+    errors.push(values.map(value => String(value)).join(' '))
+    console.error(...values)
+  } }
+  const phone = mountNativeScreen(code, screen, { platform: 'ios', colorScheme: 'dark', locale: language, appURL: `${target.site}/m`, apiBase: `${target.site}/api`, sessionTokenKey: 'auth.token', capabilities: ['linking'], api: () => undefined, globals: { console: nativeConsole } })
   try {
     await phone.settle(200)
+    if (errors.length) throw new Error(`Native lifecycle errors: ${errors.join('; ')}`)
     const lines: string[] = []
     const walk = (node: any, depth: number): void => {
       if (!node || node.props?.style?.display === 'none') return

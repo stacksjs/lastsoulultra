@@ -88,12 +88,12 @@
   },
   "dependencies": {
     "@stacksjs/bunpress": "0.2.30",
-    "@stacksjs/components": "0.2.749",
-    "@stacksjs/stx": "0.2.749",
-    "@stacksjs/ts-cloud": "0.16.88",
+    "@stacksjs/components": "0.2.800",
+    "@stacksjs/stx": "0.2.800",
+    "@stacksjs/ts-cloud": "0.16.93",
     "@ts-maps/stx": "0.5.7",
-    "bun-plugin-stx": "0.2.749",
-    "stacks": "0.75.374",
+    "bun-plugin-stx": "0.2.800",
+    "stacks": "0.75.478",
     "ts-images": "0.2.33",
     "ts-maps": "0.5.7"
   },
@@ -115,8 +115,12 @@
     "buddy-bot": "0.10.5"
   },
   "overrides": {
-    "@stacksjs/stx": "0.2.749",
-    "@stacksjs/components": "0.2.749",
-    "bun-plugin-stx": "0.2.749"
+    "@stacksjs/stx": "0.2.800",
+    "@stacksjs/components": "0.2.800",
+    "bun-plugin-stx": "0.2.800",
+    "stx-router": "0.2.800",
+    "craft-native": "0.0.451",
+    "@craft-native/ios": "0.0.451",
+    "@craft-native/android": "0.0.451"
   }
 }
