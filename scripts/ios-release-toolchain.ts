@@ -15,6 +15,17 @@ export function assertSigningProfile(profile: { uuid: string, team: string, appl
     throw new Error('The provisioning profile does not belong to this LSU application and signing team')
 }
 
+/** Profile permissions authorize the app's claims; they are not its signed entitlements. */
+export function assertProfileAssociatedDomains(permission: unknown, origin: string): void {
+  const host = new URL(origin).hostname
+  // Apple profiles may grant a scalar wildcard (TN3125). The exported app
+  // must still claim its explicit own domains, checked separately below.
+  const grants = permission === '*' ? ['*'] : Array.isArray(permission) ? permission : []
+  if (!grants.length || grants.some(grant => typeof grant !== 'string')
+    || ![`webcredentials:${host}`, `applinks:${host}`].every(domain => grants.includes('*') || grants.includes(domain)))
+    throw new Error('App Store profile does not authorize this installation’s associated domains')
+}
+
 /** An intermediate archive signature must never be delivered as the exported IPA. */
 export function assertAppStoreSignature(details: string, team: string): void {
   if (/^Signature=adhoc$/m.test(details)

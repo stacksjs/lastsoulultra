@@ -1,5 +1,33 @@
 import { expect, it } from 'bun:test'
-import { assertAppStoreEntitlements, assertAppStoreSignature, assertReleaseXcode, assertSigningProfile } from '../scripts/ios-release-toolchain'
+import { execFileSync } from 'node:child_process'
+import { mkdtempSync, rmSync, writeFileSync } from 'node:fs'
+import { tmpdir } from 'node:os'
+import { join } from 'node:path'
+import { assertAppStoreEntitlements, assertAppStoreSignature, assertProfileAssociatedDomains, assertReleaseXcode, assertSigningProfile } from '../scripts/ios-release-toolchain'
+
+it.skipIf(process.platform !== 'darwin')('decodes the literal associated-domains key with the native profile parser', () => {
+  const directory = mkdtempSync(join(tmpdir(), 'lsu-profile-domains-'))
+  try {
+    const file = join(directory, 'profile.plist')
+    for (const value of ['<string>*</string>', '<array><string>*</string></array>']) {
+      writeFileSync(file, `<?xml version="1.0"?><plist version="1.0"><dict><key>Entitlements</key><dict><key>com.apple.developer.associated-domains</key>${value}</dict></dict></plist>`)
+      const permissions = JSON.parse(execFileSync('/usr/bin/plutil', ['-extract', 'Entitlements', 'json', '-o', '-', file], { encoding: 'utf8' }))
+      expect(permissions['com.apple.developer.associated-domains']).toEqual(value.startsWith('<array>') ? ['*'] : '*')
+      expect(() => assertProfileAssociatedDomains(permissions['com.apple.developer.associated-domains'], 'https://training.lsu.stacksjs.com')).not.toThrow()
+    }
+  }
+  finally { rmSync(directory, { recursive: true, force: true }) }
+})
+
+it('reads Apple profile permissions independently of the final app’s explicit domain claims', () => {
+  const origin = 'https://training.lsu.stacksjs.com'
+  for (const permission of ['*', ['*'], ['webcredentials:training.lsu.stacksjs.com', 'applinks:training.lsu.stacksjs.com']])
+    expect(() => assertProfileAssociatedDomains(permission, origin)).not.toThrow()
+  for (const permission of [undefined, null, true, {}, [], ['webcredentials:hq.training'], ['webcredentials:training.lsu.stacksjs.com'], [42]])
+    expect(() => assertProfileAssociatedDomains(permission, origin)).toThrow('does not authorize')
+  for (const permission of ['*', ['*']])
+    expect(() => assertAppStoreEntitlements({ 'application-identifier': '3JJRNQW6B7.com.lastsoulultra.app', 'beta-reports-active': true, 'com.apple.developer.associated-domains': permission }, 'com.lastsoulultra.app', '3JJRNQW6B7', origin)).toThrow('only this installation')
+})
 
 it('rejects the beta SDK Apple refused before starting another release archive', () => {
   expect(() => assertReleaseXcode('Xcode 27.0\nBuild version 27A5218g\n')).toThrow('released toolchain')

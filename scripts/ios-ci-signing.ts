@@ -3,7 +3,7 @@ import { createHash, createPrivateKey, randomBytes } from 'node:crypto'
 import { basename, dirname, join, resolve } from 'node:path'
 import { appStoreConnectToken } from '@stacksjs/buddy/app-store-connect'
 import product from '../native/product.json'
-import { assertSigningProfile } from './ios-release-toolchain'
+import { assertProfileAssociatedDomains, assertSigningProfile } from './ios-release-toolchain'
 import { lsuAppStoreProfiles } from './ios-provisioning'
 
 if (process.env.GITHUB_ACTIONS !== 'true' || process.env.RUNNER_OS !== 'macOS')
@@ -103,8 +103,10 @@ else if (process.argv[2] === 'stage') {
     if (profile.uuid !== refreshed.uuid || field('Entitlements:beta-reports-active') !== 'true'
       || createHash('sha1').update(Buffer.from(publicCertificate, 'base64')).digest('hex').toUpperCase() !== sha1)
       throw new Error('Refreshed App Store profile does not match the imported distribution identity')
-    if (bundle === product.bundleId && !field('Entitlements:com.apple.developer.associated-domains').includes('Array'))
-      throw new Error('Refreshed app profile does not permit Associated Domains')
+    if (bundle === product.bundleId) {
+      const permissions = JSON.parse(command('/usr/bin/plutil', ['-extract', 'Entitlements', 'json', '-o', '-', plist]))
+      assertProfileAssociatedDomains(permissions['com.apple.developer.associated-domains'], product.site)
+    }
     specifiers[bundle] = profile.uuid
     for (const parent of profileDirectories) {
       mkdirSync(parent, { recursive: true })
