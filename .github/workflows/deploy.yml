@@ -97,6 +97,12 @@ jobs:
           PANTRY_REGISTRY_TOKEN: ${{ secrets.PANTRY_REGISTRY_TOKEN }}
         run: pantry ci
 
+      # A queue the kit dispatches to with no worker fills `jobs` and sends
+      # nothing, so a release that leaves one undrained stops here.
+      - name: Check every kit queue has a worker
+        if: steps.check.outputs.configured == 'true'
+        run: bun scripts/check-queues.ts
+
       - name: Prepare the protected demo credentials
         if: steps.check.outputs.configured == 'true'
         env:

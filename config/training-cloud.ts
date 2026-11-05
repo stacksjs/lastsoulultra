@@ -65,7 +65,8 @@ export function trainingSites(): NonNullable<CloudConfig['sites']> {
       preStart: [...install, './buddy migrate --no-generate --auth', './buddy queue:table', 'mkdir -p storage/framework/runtime/production', 'bun scripts/build-production.ts api', 'bun deployment/lsu/seed-review.ts', './buddy installation:admins', 'sh scripts/ensure-speech-runtime.sh'],
       scheduler: true,
       daemons: [
-        {name:'coaching-jobs',command:`${launcher} node_modules/@stacksjs/ts-cloud/dist/bin/stacks-queue-worker.js --queue=default --concurrency=1`},
+        // The catch-all queue, and a gym's webhook deliveries, as HQ's own deploy runs them.
+        {name:'coaching-jobs',command:`${launcher} node_modules/@stacksjs/ts-cloud/dist/bin/stacks-queue-worker.js --queue=default,webhooks --concurrency=1`},
         // Wind-down reminders, in-app pushes and notification deliveries, and emails: the queues HQ's own deploy gives a worker.
         {name:'notifications',command:`${launcher} node_modules/@stacksjs/ts-cloud/dist/bin/stacks-queue-worker.js --queue=notifications,emails --concurrency=1`},
         // Device syncs, provider events HQ relays, and HQ history imports.

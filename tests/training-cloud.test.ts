@@ -1,5 +1,9 @@
+import { existsSync, mkdirSync, mkdtempSync, writeFileSync } from 'node:fs'
+import { tmpdir } from 'node:os'
+import { join } from 'node:path'
 import { expect, it } from 'bun:test'
 import { trainingSites } from '../config/training-cloud'
+import { kitAppRoot, kitQueues, undrainedQueues } from '../scripts/check-queues'
 import { tsCloud } from '../config/cloud'
 import deployment from '../enterprise/deployment.json'
 
@@ -17,10 +21,10 @@ it('keeps the enterprise installation off a shared host and pins provider placem
   expect(tsCloud.sites?.api?.preStart).toContain('pantry install bun.sh@1.4.4 --no-save')
   expect(trainingSites()['training-api'].backgroundBun).toBe('.hq-runtime/pantry/bun.com/v1.4.4/bin/bun')
   expect(trainingSites()['training-api'].daemons?.find(daemon => daemon.name === 'local-speech')?.command).toContain('COACHING_SPEECH_RUNTIME_DIR=/var/www/lastsoulultra-shared/training/speech')
-  // Every queue the kit's jobs land on has a worker: without one they pile up in `jobs` and nothing is sent.
-  const drained = (trainingSites()['training-api'].daemons ?? []).flatMap(daemon => /--queue=(\S+)/.exec(daemon.command)?.[1]?.split(',') ?? [])
-  for (const queue of ['default', 'notifications', 'emails', 'connection-sync', 'connection-events', 'platform-history', 'garmin-direct', 'exercise-media'])
-    expect(drained).toContain(queue)
+  // Every queue the kit dispatches to has a worker. CI does not install the kit, so there this checks the
+  // queues kit 1.0.3874 used; the deploy checks the installed kit itself (scripts/check-queues.ts).
+  const queues = existsSync(kitAppRoot) ? kitQueues() : ['connection-events', 'connection-sync', 'default', 'exercise-media', 'garmin-direct', 'notifications', 'platform-history', 'platform-relay', 'webhooks']
+  expect(undrainedQueues(queues)).toEqual([])
   for (const name of ['training', 'training-api', 'main', 'api']) {
     expect(tsCloud.sites?.[name]?.inheritEnv).toBe(false)
     expect(tsCloud.sites?.[name]?.isolation).toBe(true)
@@ -57,4 +61,14 @@ it('resolves isolated runtime secrets again after Buddy switches to production',
       else process.env[key] = previous[key]
     }
   }
+})
+
+it('reads every queue a kit names, and leaves HQ its own', () => {
+  const app = mkdtempSync(join(tmpdir(), 'lsu-kit-'))
+  mkdirSync(join(app, 'Jobs'))
+  writeFileSync(join(app, 'Jobs', 'SendThing.ts'), `export default new Job({ name: 'SendThing', queue: 'brand-new' })\n`)
+  writeFileSync(join(app, 'relay.ts'), `Jobs.make('X').onQueue('platform-relay')\nconst JOB = { queue:'notifications' }\n`)
+  expect(kitQueues(app)).toEqual(['brand-new', 'notifications', 'platform-relay'])
+  // A queue the kit adds and no daemon works is reported; HQ's relay queue is not.
+  expect(undrainedQueues(kitQueues(app))).toEqual(['brand-new'])
 })
