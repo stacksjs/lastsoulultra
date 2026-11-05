@@ -17,6 +17,10 @@ it('keeps the enterprise installation off a shared host and pins provider placem
   expect(tsCloud.sites?.api?.preStart).toContain('pantry install bun.sh@1.4.4 --no-save')
   expect(trainingSites()['training-api'].backgroundBun).toBe('.hq-runtime/pantry/bun.com/v1.4.4/bin/bun')
   expect(trainingSites()['training-api'].daemons?.find(daemon => daemon.name === 'local-speech')?.command).toContain('COACHING_SPEECH_RUNTIME_DIR=/var/www/lastsoulultra-shared/training/speech')
+  // Every queue the kit's jobs land on has a worker: without one they pile up in `jobs` and nothing is sent.
+  const drained = (trainingSites()['training-api'].daemons ?? []).flatMap(daemon => /--queue=(\S+)/.exec(daemon.command)?.[1]?.split(',') ?? [])
+  for (const queue of ['default', 'notifications', 'emails', 'connection-sync', 'connection-events', 'platform-history', 'garmin-direct', 'exercise-media'])
+    expect(drained).toContain(queue)
   for (const name of ['training', 'training-api', 'main', 'api']) {
     expect(tsCloud.sites?.[name]?.inheritEnv).toBe(false)
     expect(tsCloud.sites?.[name]?.isolation).toBe(true)

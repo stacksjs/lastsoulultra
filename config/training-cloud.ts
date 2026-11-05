@@ -66,6 +66,8 @@ export function trainingSites(): NonNullable<CloudConfig['sites']> {
       scheduler: true,
       daemons: [
         {name:'coaching-jobs',command:`${launcher} node_modules/@stacksjs/ts-cloud/dist/bin/stacks-queue-worker.js --queue=default --concurrency=1`},
+        // Wind-down reminders, in-app pushes and notification deliveries, and emails: the queues HQ's own deploy gives a worker.
+        {name:'notifications',command:`${launcher} node_modules/@stacksjs/ts-cloud/dist/bin/stacks-queue-worker.js --queue=notifications,emails --concurrency=1`},
         // Device syncs, provider events HQ relays, and HQ history imports.
         {name:'connection-sync',command:`${launcher} node_modules/@stacksjs/ts-cloud/dist/bin/stacks-queue-worker.js --queue=connection-sync,connection-events,platform-history --concurrency=1`},
         {name:'garmin-sync',command:`${launcher} node_modules/@stacksjs/ts-cloud/dist/bin/stacks-queue-worker.js --queue=garmin-direct --concurrency=1`},
