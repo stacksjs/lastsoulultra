@@ -41,16 +41,19 @@ else await run([process.execPath, 'run', 'native:ios'], root)
 await run([process.execPath, 'run', 'native:verify-ios'])
 const ios = join(output, 'ios')
 const scheme = 'LastSoulUltra'
-// Xcode refreshes distribution provisioning at export using the existing CI API key.
-// https://help.apple.com/xcode/mac/current/en.lproj/devff5ececf8.html
-const provisioning = ['-allowProvisioningUpdates', '-authenticationKeyPath', keyPath, '-authenticationKeyID', keyId, '-authenticationKeyIssuerID', issuerId]
+// Profiles were refreshed against the existing imported certificate, without cloud signing.
+const signingIdentity = process.env.LSU_IOS_DISTRIBUTION_SHA1 || ''
+const profiles = JSON.parse(process.env.LSU_IOS_PROFILE_SPECIFIERS || '{}') as Record<string, string>
+if (!/^[A-F0-9]{40}$/.test(signingIdentity) || Object.keys(profiles).length !== 2
+  || [product.bundleId, `${product.bundleId}.liveactivity`].some(bundle => !/^[a-f0-9-]{36}$/i.test(profiles[bundle] || '')))
+  throw new Error('Stage the exact LSU distribution identity and refreshed App Store profiles before release')
 const yamlPath = join(ios, 'project.yml')
 let yaml = readFileSync(yamlPath, 'utf8')
 yaml = yaml.replace(/^ {6}(?:CODE_SIGN_STYLE|CODE_SIGN_IDENTITY|PROVISIONING_PROFILE_SPECIFIER):[^\n]*\n/gm, '')
 for (const bundle of [product.bundleId, `${product.bundleId}.liveactivity`]) {
   const line = `      PRODUCT_BUNDLE_IDENTIFIER: ${bundle}\n`
   if (!yaml.includes(line)) throw new Error(`Generated project is missing ${bundle}`)
-  yaml = yaml.replace(line, `${line}      CODE_SIGN_STYLE: Automatic\n`)
+  yaml = yaml.replace(line, `${line}      CODE_SIGN_STYLE: Manual\n      CODE_SIGN_IDENTITY: ${signingIdentity}\n      PROVISIONING_PROFILE_SPECIFIER: ${profiles[bundle]}\n`)
 }
 writeFileSync(yamlPath, yaml)
 const require = createRequire(join(sourceRoot, 'package.json'))
@@ -59,18 +62,15 @@ tools.generateXcodeProject(await tools.resolveXcodegen(sourceRoot), ios)
 const releaseDir = join(root, 'storage/native/release', `${product.version}-${product.build}`)
 mkdirSync(releaseDir, { recursive: true })
 const archive = join(releaseDir, `${scheme}.xcarchive`)
-// Like Xcode Cloud, stage an ad-hoc signed archive without creating development identities.
-// Export below must replace this signature with the existing distribution identity.
-// https://developer.apple.com/forums/thread/756119
-await run(['xcodebuild', '-project', join(ios, `${scheme}.xcodeproj`), '-scheme', scheme, '-configuration', 'Release', '-destination', 'generic/platform=iOS', '-archivePath', archive, 'CODE_SIGN_IDENTITY=-', 'AD_HOC_CODE_SIGNING_ALLOWED=YES', 'archive'], ios)
+await run(['xcodebuild', '-project', join(ios, `${scheme}.xcodeproj`), '-scheme', scheme, '-configuration', 'Release', '-destination', 'generic/platform=iOS', '-archivePath', archive, 'archive'], ios)
 const infoPath = join(archive, 'Products/Applications', `${scheme}.app/Info.plist`)
 const info = JSON.parse(execFileSync('plutil', ['-convert', 'json', '-o', '-', infoPath], { encoding: 'utf8' }))
 if (info.CFBundleIdentifier !== product.bundleId || info.CFBundleVersion !== String(product.build) || info.CFBundleShortVersionString !== product.version)
   throw new Error('Archived identity does not match the LSU release')
 const options = join(releaseDir, 'ExportOptions.plist')
-writeFileSync(options, `<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"><plist version="1.0"><dict><key>method</key><string>app-store-connect</string><key>destination</key><string>export</string><key>signingStyle</key><string>automatic</string><key>signingCertificate</key><string>Apple Distribution</string><key>teamID</key><string>${product.teamId}</string><key>manageAppVersionAndBuildNumber</key><false/></dict></plist>`)
+writeFileSync(options, `<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"><plist version="1.0"><dict><key>method</key><string>app-store-connect</string><key>destination</key><string>export</string><key>signingStyle</key><string>manual</string><key>signingCertificate</key><string>${signingIdentity}</string><key>teamID</key><string>${product.teamId}</string><key>provisioningProfiles</key><dict><key>${product.bundleId}</key><string>${profiles[product.bundleId]}</string><key>${product.bundleId}.liveactivity</key><string>${profiles[`${product.bundleId}.liveactivity`]}</string></dict><key>manageAppVersionAndBuildNumber</key><false/></dict></plist>`)
 const exported = join(releaseDir, 'export')
-await run(['xcodebuild', '-exportArchive', '-archivePath', archive, '-exportOptionsPlist', options, '-exportPath', exported, ...provisioning], ios)
+await run(['xcodebuild', '-exportArchive', '-archivePath', archive, '-exportOptionsPlist', options, '-exportPath', exported], ios)
 const ipas = readdirSync(exported).filter(name => name.endsWith('.ipa'))
 if (ipas.length !== 1) throw new Error('Expected one exported LSU IPA')
 const ipa = join(exported, ipas[0]!)

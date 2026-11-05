@@ -1,8 +1,10 @@
 import { appendFileSync, chmodSync, copyFileSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
-import { createPrivateKey, randomBytes } from 'node:crypto'
+import { createHash, createPrivateKey, randomBytes } from 'node:crypto'
 import { basename, dirname, join, resolve } from 'node:path'
+import { appStoreConnectToken } from '@stacksjs/buddy/app-store-connect'
 import product from '../native/product.json'
 import { assertSigningProfile } from './ios-release-toolchain'
+import { lsuAppStoreProfiles } from './ios-provisioning'
 
 if (process.env.GITHUB_ACTIONS !== 'true' || process.env.RUNNER_OS !== 'macOS')
   throw new Error('CI signing material is managed only on the ephemeral GitHub macOS runner')
@@ -62,16 +64,48 @@ else if (process.argv[2] === 'stage') {
   command('/usr/bin/security', ['import', certificate, '-f', 'pkcs12', '-P', secret('LSU_IOS_DISTRIBUTION_PASSWORD'), '-T', '/usr/bin/codesign', '-T', '/usr/bin/security', '-t', 'cert', '-k', keychain])
   command('/usr/bin/security', ['set-key-partition-list', '-S', 'apple-tool:,apple:,codesign:', '-s', '-k', password, keychain])
   command('/usr/bin/security', ['list-keychains', '-d', 'user', '-s', keychain])
-  if (!command('/usr/bin/security', ['find-identity', '-v', '-p', 'codesigning', keychain]).includes(product.teamId))
+  const identities = command('/usr/bin/security', ['find-identity', '-v', '-p', 'codesigning', keychain])
+  if (!identities.includes(product.teamId))
     throw new Error('The expected LSU distribution identity is unavailable')
-  for (const [name, bundle] of [['LSU_IOS_APP_PROFILE_BASE64', product.bundleId], ['LSU_IOS_ACTIVITY_PROFILE_BASE64', `${product.bundleId}.liveactivity`]]) {
-    const path = join(directory, `${name}.mobileprovision`)
+  const identity = identities.split('\n').find(line => line.includes(`(${product.teamId})`)) || ''
+  const sha1 = /^\s*\d+\)\s+([A-F0-9]{40})\s+"(?:Apple Distribution|iPhone Distribution):[^\n]+"/.exec(identity)?.[1]
+  if (!sha1) throw new Error('CI must import an existing Apple distribution private key')
+  const apiKey = Buffer.from(secret('LSU_ASC_PRIVATE_KEY_BASE64'), 'base64').toString('utf8')
+  if (createPrivateKey(apiKey).asymmetricKeyType !== 'ec') throw new Error('Invalid App Store Connect signing key')
+  const keyId = secret('LSU_ASC_KEY_ID')
+  const issuer = secret('LSU_ASC_ISSUER_ID')
+  if (!/^[A-Z0-9]{8,20}$/.test(keyId) || !/^[a-f0-9-]{36}$/i.test(issuer)) throw new Error('Invalid App Store Connect key identity')
+  const token = await appStoreConnectToken({ keyId, issuerId: issuer, privateKey: apiKey })
+  const profiles = await lsuAppStoreProfiles(async (path, body) => {
+    const response = await fetch(`https://api.appstoreconnect.apple.com${path}`, {
+      method: body ? 'POST' : 'GET',
+      headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+      ...(body ? { body: JSON.stringify(body) } : {}),
+      redirect: 'error', signal: AbortSignal.timeout(30_000),
+    })
+    if (!response.ok) {
+      const error = await response.json().catch(() => ({})) as { errors?: Array<{ code?: string, detail?: string }> }
+      const detail = error.errors?.map(item => `${item.code || 'Apple error'}: ${item.detail || ''}`).join('; ').slice(0, 500) || ''
+      throw new Error(`Apple provisioning ${body ? 'POST' : 'GET'} ${path} answered ${response.status}: ${detail}${response.status === 403 ? '; the existing CI key needs Certificates, Identifiers & Profiles access' : ''}`)
+    }
+    return response.json()
+  }, { bundle: product.bundleId, certificateSha1: sha1 })
+  const specifiers: Record<string, string> = {}
+  for (const [bundle, refreshed] of Object.entries(profiles)) {
+    const path = join(directory, `${bundle}.mobileprovision`)
     const plist = `${path}.plist`
-    privateFile(path, Buffer.from(secret(name!), 'base64'))
+    privateFile(path, Buffer.from(refreshed.content, 'base64'))
     privateFile(plist, command('/usr/bin/security', ['cms', '-D', '-i', path]))
     const field = (key: string) => command('/usr/libexec/PlistBuddy', ['-c', `Print :${key}`, plist])
     const profile = { uuid: field('UUID'), team: field('TeamIdentifier:0'), application: field('Entitlements:application-identifier') }
-    assertSigningProfile(profile, bundle!, product.teamId)
+    assertSigningProfile(profile, bundle, product.teamId)
+    const publicCertificate = command('/usr/bin/plutil', ['-extract', 'DeveloperCertificates.0', 'raw', '-o', '-', plist])
+    if (profile.uuid !== refreshed.uuid || field('Entitlements:beta-reports-active') !== 'true'
+      || createHash('sha1').update(Buffer.from(publicCertificate, 'base64')).digest('hex').toUpperCase() !== sha1)
+      throw new Error('Refreshed App Store profile does not match the imported distribution identity')
+    if (bundle === product.bundleId && !field('Entitlements:com.apple.developer.associated-domains').includes('Array'))
+      throw new Error('Refreshed app profile does not permit Associated Domains')
+    specifiers[bundle] = profile.uuid
     for (const parent of profileDirectories) {
       mkdirSync(parent, { recursive: true })
       const target = join(parent, `${profile.uuid}.mobileprovision`)
@@ -81,14 +115,9 @@ else if (process.argv[2] === 'stage') {
       chmodSync(target, 0o600)
     }
   }
-  const apiKey = Buffer.from(secret('LSU_ASC_PRIVATE_KEY_BASE64'), 'base64').toString('utf8')
-  if (createPrivateKey(apiKey).asymmetricKeyType !== 'ec') throw new Error('Invalid App Store Connect signing key')
   const apiKeyPath = join(directory, 'api-key.p8')
   privateFile(apiKeyPath, apiKey)
-  const keyId = secret('LSU_ASC_KEY_ID')
-  const issuer = secret('LSU_ASC_ISSUER_ID')
-  if (!/^[A-Z0-9]{8,20}$/.test(keyId) || !/^[a-f0-9-]{36}$/i.test(issuer)) throw new Error('Invalid App Store Connect key identity')
-  const environment = { APP_STORE_CONNECT_KEY_ID: keyId, APP_STORE_CONNECT_ISSUER_ID: issuer, APP_STORE_CONNECT_PRIVATE_KEY_PATH: apiKeyPath }
+  const environment = { APP_STORE_CONNECT_KEY_ID: keyId, APP_STORE_CONNECT_ISSUER_ID: issuer, APP_STORE_CONNECT_PRIVATE_KEY_PATH: apiKeyPath, LSU_IOS_DISTRIBUTION_SHA1: sha1, LSU_IOS_PROFILE_SPECIFIERS: JSON.stringify(specifiers) }
   for (const [name, value] of Object.entries(environment)) {
     if (/[\r\n]/.test(value)) throw new Error('Invalid release environment value')
     appendFileSync(secret('GITHUB_ENV'), `${name}=${value}\n`)
