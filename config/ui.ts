@@ -1,4 +1,5 @@
 import type { UiConfig } from '@stacksjs/types'
+import { siteOrigin } from '../resources/data/site-origin'
 
 /**
  * STX Configuration for Stacks
@@ -10,7 +11,7 @@ export default {
   // component, layout and partial resolution stable for CLI, dev and build
   // processes instead of asking each process to infer the same root.
   root: 'resources',
-  site: { url: process.env.SITE_ORIGIN || 'https://www.lastsoulultra.com' },
+  site: { url: siteOrigin },
 
   // Where stx keeps everything it generates: the compiled-template cache, the
   // Crosswind CSS cache, client-script bundles, the route manifest and route

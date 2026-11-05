@@ -1,5 +1,6 @@
 import { readdir } from 'node:fs/promises'
 import { join } from 'node:path'
+import { writeSeoArtifacts } from './seo'
 
 /** Static assets for the Stacks site. All application styles are maintained in resources/. */
 for (const name of await readdir('resources/assets/styles/site')) {
@@ -16,3 +17,6 @@ for (const year of [2025, 2026]) {
   story[year] = { maxYards, loopMetres: source.event.loop_metres, startersByYard: Array.from({ length: maxYards }, (_, index) => source.results.filter((row: { yards: number }) => Number(row.yards) >= index + 1).length) }
 }
 await Bun.write('resources/data/race-story.json', `${JSON.stringify(story, null, 2)}\n`)
+
+// Rebuild public metadata for this deployment’s configured site origin.
+await writeSeoArtifacts()

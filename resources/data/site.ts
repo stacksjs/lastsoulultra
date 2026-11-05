@@ -1,4 +1,5 @@
-import { env } from '@stacksjs/env'
+import { siteOrigin } from './site-origin'
+export { siteOrigin } from './site-origin'
 import { indexableModulePaths } from './coaching'
 import { race } from './race'
 
@@ -11,21 +12,6 @@ import { race } from './race'
  * SiteNav and SiteFooter are the only copy now. Share cards moved to
  * `share.ts`, which maps each page to one of the cards on disk.
  */
-
-/**
- * The canonical origin, read from APP_URL rather than hard-coded, so a
- * canonical or an og:image never names a host this build does not serve.
- * APP_URL is a bare host in development and a full URL in production.
- */
-export const siteOrigin = normalizeOrigin(String(env.APP_URL || 'https://lastsoulultra.com'))
-
-function normalizeOrigin(value: string): string {
-  const trimmed = value.trim().replace(/\/+$/, '')
-  if (/^https?:\/\//.test(trimmed)) return trimmed
-  const host = trimmed.split(':')[0] ?? ''
-  const local = /(^|\.)localhost$|^127\.|^0\.0\.0\.0$/.test(host)
-  return `${local ? 'http' : 'https'}://${trimmed}`
-}
 
 /** Absolute URL for a site-relative path. */
 export function absolute(path: string): string {

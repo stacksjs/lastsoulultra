@@ -15,15 +15,9 @@
 
 import { indexablePaths } from '../resources/data/site'
 
-/**
- * The origin the published files must name. `siteOrigin` follows APP_URL,
- * which in dev is the .localhost host - baking that into a committed sitemap
- * would publish URLs nobody can reach. Pass SITE_ORIGIN to regenerate for a
- * new domain; tests/seo.test.ts pins the committed files to this value, so a
- * domain move fails the test rather than shipping a stale sitemap.
- */
-export const publishedOrigin: string = process.env.SITE_ORIGIN
-  || 'https://www.lastsoulultra.com'
+// The same public origin feeds canonicals, social metadata and STX configuration.
+export { siteOrigin as publishedOrigin } from '../resources/data/site-origin'
+import { siteOrigin as publishedOrigin } from '../resources/data/site-origin'
 
 export function robotsTxt(origin: string): string {
   return [
@@ -50,7 +44,7 @@ export function sitemapXml(origin: string, paths: string[]): string {
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`
 }
 
-if (import.meta.main) {
+export async function writeSeoArtifacts(): Promise<void> {
   const robots = robotsTxt(publishedOrigin)
   const sitemap = sitemapXml(publishedOrigin, indexablePaths)
 
@@ -61,3 +55,5 @@ if (import.meta.main) {
   console.log(`  origin : ${publishedOrigin}`)
   console.log(`  urls   : ${indexablePaths.length}`)
 }
+
+if (import.meta.main) await writeSeoArtifacts()
