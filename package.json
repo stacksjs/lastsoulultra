@@ -93,7 +93,7 @@
     "@stacksjs/ts-cloud": "0.16.93",
     "@ts-maps/stx": "0.5.7",
     "bun-plugin-stx": "0.2.806",
-    "stacks": "0.75.478",
+    "stacks": "0.75.480",
     "ts-images": "0.2.33",
     "ts-maps": "0.5.7"
   },
@@ -119,9 +119,9 @@
     "@stacksjs/components": "0.2.806",
     "bun-plugin-stx": "0.2.806",
     "stx-router": "0.2.806",
-    "craft-native": "0.0.464",
-    "@craft-native/ios": "0.0.464",
-    "@craft-native/android": "0.0.464",
+    "craft-native": "0.0.467",
+    "@craft-native/ios": "0.0.467",
+    "@craft-native/android": "0.0.467",
     "bun-query-builder": "0.3.38"
   }
 }
