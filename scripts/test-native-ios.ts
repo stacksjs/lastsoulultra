@@ -109,7 +109,7 @@ steps.push(
   { command: 'absentid', text: 'signup-role' },
   { command: 'shot', name: 'lsu-signup-email' },
   { command: 'typeid', id: 'signup-email', text: 'chris@hq.training' },
-  { command: 'tapid', text: 'signup-submit' },
+  { command: 'return' },
   { command: 'expectid', text: 'social-hq', seconds: 40 },
   { command: 'absentid', text: 'signup-password' },
   { command: 'shot', name: 'lsu-signup-hq' },
@@ -139,6 +139,14 @@ steps.splice(calendarShot + 1, 0, { command: 'back' })
 // member reaches, drawn in LSU's identity. Each returns before the next.
 const tour = [['settings', 'settings-name'], ['connections', 'connections-garmin-direct'], ['store', 'store-search'], ['plans', 'plans-website'], ['sharing', 'sharing-scroll'], ['notifications', 'notifications-list'], ['messages', 'messages-search']]
 steps.splice(calendarShot + 2, 0, ...tour.flatMap(([path, id]) => [{ command: 'openurl', url: `${product.identity.scheme}:///m/${path}` }, ...declineOptionalPrompts(), { command: 'expectid', text: id, seconds: 30 }, { command: 'shot', name: `lsu-${path}` }, { command: 'back' }]))
+const securityShot = steps.findIndex(step => step.command === 'shot' && step.name === 'lsu-settings')
+steps.splice(securityShot + 1, 0,
+  { command: 'scrollto', text: 'settings-security' }, { command: 'tapid', text: 'settings-security' },
+  { command: 'expectid', text: 'security-factor-setup', seconds: 30 }, { command: 'tapid', text: 'security-factor-setup' },
+  { command: 'expectid', text: 'security-factor-qr', seconds: 30 }, { command: 'expectid', text: 'security-factor-secret', seconds: 30 },
+  { command: 'scrollto', text: 'security-factor-cancel' }, { command: 'tapid', text: 'security-factor-cancel' },
+  { command: 'absentid', text: 'security-factor-secret' }, { command: 'expectid', text: 'security-passkey-add', seconds: 30 },
+  { command: 'shot', name: 'lsu-security' })
 const meShot = steps.findIndex(step => step.command === 'shot' && step.name === 'lsu-me')
 steps.splice(meShot + 1, 0, { command: 'scrollto', text: 'me-membership-card' }, { command: 'tapid', text: 'me-membership-card' }, { command: 'expectid', text: 'membership-card-id', seconds: 30 }, { command: 'expect', text: 'LSU-' }, { command: 'expect', text: runner.name }, { command: 'shot', name: 'lsu-membership-card' }, { command: 'back' })
 const coachingOpen = steps.findIndex(step => step.command === 'tapid' && step.text === 'me-coaching-accounts')
@@ -193,7 +201,7 @@ try {
   const args = ['xcodebuild', '-project', `${projectName}.xcodeproj`, '-scheme', projectName, '-configuration', 'Debug', '-destination', `platform=iOS Simulator,id=${simulator}`, '-derivedDataPath', join(evidence, 'DriverDerivedData'), '-parallel-testing-enabled', 'NO', '-jobs', '2']
   await run([...args, 'build-for-testing'], driver.output)
   await run([...args, '-resultBundlePath', join(evidence, `Acceptance-${Date.now()}.xcresult`), '-collect-test-diagnostics', 'never', 'test-without-building'], driver.output)
-  writeFileSync(join(evidence, 'result.json'), JSON.stringify({ passed: true, version: product.version, build: product.build, hqSource: source.revision, bundle: product.bundleId, artifactSha256, scenarios: ['email-first-signup', 'hq-account-discovery', 'local-account-alternative', 'sign-in', 'five-tabs', 'branded-membership-card', 'calendar', 'hq-places', 'owned-coaching', 'account-switch', 'sign-out'] }, null, 2))
+  writeFileSync(join(evidence, 'result.json'), JSON.stringify({ passed: true, version: product.version, build: product.build, hqSource: source.revision, bundle: product.bundleId, artifactSha256, scenarios: ['email-first-signup', 'hq-account-discovery', 'local-account-alternative', 'sign-in', 'five-tabs', 'branded-membership-card', 'calendar', 'hq-places', 'security-setup-and-cancel', 'native-passkey-availability', 'owned-coaching', 'account-switch', 'sign-out'] }, null, 2))
 }
 catch (error) {
   if (simulator) {

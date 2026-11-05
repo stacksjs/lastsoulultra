@@ -62,6 +62,10 @@ export async function prepareNativeSource(): Promise<void> {
   // files beside it, which Craft 0.0.443+ installs by scale. `splashPreset`
   // is the same preset for an HQ that hands it to Stacks' own generator.
   writeFileSync(manifestPath, `${JSON.stringify({ ...product, output, assets: { icon: resolve(root, 'native', product.assets.icon), splash: splash.ios, splashPreset: splashPreset(), fonts } }, null, 2)}\n`)
+  // The installed HQ kit generates this installation's credential association.
+  // LSU owns its webcredentials domain and never advertises HQ's app identity.
+  const associations = Bun.spawn([process.execPath, 'scripts/generate-profile-associations.ts'], { cwd: sourceRoot, env: nativeBuildEnvironment(), stdout: 'inherit', stderr: 'inherit' })
+  if (await associations.exited !== 0) throw new Error('Installation credential association generation failed')
 }
 
 type SplashPreset = { logo: string, accent?: string, size?: number }
