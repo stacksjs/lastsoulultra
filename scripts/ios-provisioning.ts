@@ -39,12 +39,14 @@ export async function lsuAppStoreProfiles(request: AppleProvisioningRequest, inp
       .filter(row => row.attributes.identifier === identifier && ['IOS', 'UNIVERSAL'].includes(row.attributes.platform))
     if (bundles.length !== 1) throw new Error(`Expected one existing Apple bundle ID for ${identifier}`)
     const bundle = bundles[0]!
-    let capabilities = await list(`/v1/bundleIds/${encodeURIComponent(bundle.id)}/bundleIdCapabilities?limit=200`)
+    // This relationship rejects a client-supplied limit; follow only Apple's next links.
+    const capabilitiesPath = `/v1/bundleIds/${encodeURIComponent(bundle.id)}/bundleIdCapabilities`
+    let capabilities = await list(capabilitiesPath)
     if (identifier === input.bundle && !capabilities.some(row => row.attributes.capabilityType === 'ASSOCIATED_DOMAINS')) {
       // Enable only the already requested passkey/universal-link capability on this app.
       // https://developer.apple.com/documentation/appstoreconnectapi/post-v1-bundleidcapabilities
       await request('/v1/bundleIdCapabilities', { data: { type: 'bundleIdCapabilities', attributes: { capabilityType: 'ASSOCIATED_DOMAINS' }, relationships: { bundleId: { data: { type: 'bundleIds', id: bundle.id } } } } })
-      capabilities = await list(`/v1/bundleIds/${encodeURIComponent(bundle.id)}/bundleIdCapabilities?limit=200`)
+      capabilities = await list(capabilitiesPath)
       if (!capabilities.some(row => row.attributes.capabilityType === 'ASSOCIATED_DOMAINS')) throw new Error('Apple did not enable this app’s Associated Domains capability')
     }
     const state = capabilities.map(row => row.attributes).sort((a, b) => String(a.capabilityType).localeCompare(String(b.capabilityType)))

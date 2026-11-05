@@ -20,7 +20,11 @@ function apple() {
       const identifier = url.searchParams.get('filter[identifier]')!
       return { data: [{ id: identifier === bundle ? 'app' : 'activity', attributes: { identifier, platform: 'IOS' } }] }
     }
-    if (!body && url.pathname.endsWith('/bundleIdCapabilities')) return { data: [{ id: 'push', attributes: { capabilityType: 'PUSH_NOTIFICATIONS' } }, ...(url.pathname.includes('/app/') && associated ? [{ id: 'domains', attributes: { capabilityType: 'ASSOCIATED_DOMAINS' } }] : [])] }
+    if (!body && url.pathname.endsWith('/bundleIdCapabilities')) {
+      // The live Apple relationship endpoint rejects limit with PARAMETER_ERROR.ILLEGAL.
+      if (url.searchParams.has('limit')) throw new Error('The parameter limit can not be used with this request')
+      return { data: [{ id: 'push', attributes: { capabilityType: 'PUSH_NOTIFICATIONS' } }, ...(url.pathname.includes('/app/') && associated ? [{ id: 'domains', attributes: { capabilityType: 'ASSOCIATED_DOMAINS' } }] : [])] }
+    }
     if (url.pathname === '/v1/bundleIdCapabilities') {
       expect(body.data.relationships.bundleId.data.id).toBe('app')
       associated = true
