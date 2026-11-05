@@ -14,6 +14,7 @@ export async function prepareTrainingSource(): Promise<void> {
   mkdirSync(join(directory, 'assets'), { recursive: true })
   copyFileSync(join(root, 'scripts/seed-demo-accounts.ts'), join(directory, 'seed-demo-accounts.ts'))
   copyFileSync(join(root, 'scripts/lsu-demo-plan.ts'), join(directory, 'lsu-demo-plan.ts'))
+  copyFileSync(join(root, 'scripts/lsu-demo-catalog.ts'), join(directory, 'lsu-demo-catalog.ts'))
   copyFileSync(join(root, 'enterprise/seed-review.ts'), join(directory, 'seed-review.ts'))
   copyFileSync(join(root, 'native/assets/icon.png'), join(directory, 'assets/icon.png'))
   copyFileSync(join(root, 'public/assets/lsu/images/lsu-logo.svg'), join(directory, 'assets/logo.svg'))

@@ -8,6 +8,7 @@ import { createHash } from 'node:crypto'
 import { resolve } from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { combinedRunKey, demoPlan, demoStrengthDescription, demoTier } from './lsu-demo-plan'
+import { CATALOG, CATALOG_COACH_EMAIL, catalogDescription } from './lsu-demo-catalog'
 
 interface DemoAccount { key: string, name: string, email: string, password: string, membership?: string, coach?: boolean, athlete?: boolean, subscriber?: boolean }
 const accountsFile = process.env.LSU_DEMO_ACCOUNTS_FILE
@@ -204,6 +205,37 @@ await transaction(async () => {
     }
   }
   await db.updateTable('organizations').set({ currency: demoTier.currency, settings: JSON.stringify({ ...JSON.parse(String(org.settings || '{}')), demo_schema_version: 2 }), updated_at: now }).where('id', '=', organizationId).execute()
+  /*
+   * The demo storefront (scripts/lsu-demo-catalog.ts), shown under the
+   * installation admin it is drafted for. Each plan and product is made once
+   * and then left alone: he may edit, unpublish or delete them, and a deploy
+   * must not put back what he changed. A slug already used by anyone else is
+   * refused rather than taken over.
+   */
+  const catalogUser = await db.selectFrom('users').select(['id']).where('email', '=', CATALOG_COACH_EMAIL).executeTakeFirst()
+  let catalogMade = 0
+  if (!catalogUser) console.log(`[ts-cloud] lsu review seed: no ${CATALOG_COACH_EMAIL} account yet, so no demo storefront`)
+  else {
+    const member = await db.selectFrom('org_members').select(['id']).where('organization_id', '=', organizationId).where('user_id', '=', Number(catalogUser.id)).executeTakeFirst()
+    if (!member) throw new Error('The demo storefront coach is not a member of the LSU organization.')
+    let catalogCoach = await db.selectFrom('coaches').select(['id', 'organization_id']).where('user_id', '=', Number(catalogUser.id)).executeTakeFirst()
+    if (catalogCoach && Number(catalogCoach.organization_id) !== organizationId) throw new Error('The demo storefront coach coaches for another organization.')
+    if (!catalogCoach) catalogCoach = await db.insertInto('coaches').values({ user_id: Number(catalogUser.id), organization_id: organizationId, specialty: 'Ultra running', accepting_athletes: false, created_at: now }).returning(['id', 'organization_id']).executeTakeFirstOrThrow()
+    for (const item of CATALOG) {
+      const existing = await db.selectFrom('products').select(['id', 'coach_id', 'organization_id']).where('slug', '=', item.slug).executeTakeFirst()
+      if (existing) {
+        if (Number(existing.coach_id) !== Number(catalogCoach.id) || Number(existing.organization_id) !== organizationId) throw new Error(`Refusing to adopt product ${item.slug}, which someone else owns.`)
+        continue
+      }
+      const checked = normalizePlan(item.plan(), true)
+      if (!checked.plan) throw new Error(`${item.slug}: ${checked.error}`)
+      const description = catalogDescription(item)
+      const plan = await db.insertInto('training_plans').values({ name: item.name, description: checked.plan.summary, sport: item.sport, weeks: checked.plan.weeks.length, plan: JSON.stringify(checked.plan), coach_id: Number(catalogCoach.id), created_at: now, updated_at: now }).returning(['id']).executeTakeFirstOrThrow()
+      await db.insertInto('products').values({ organization_id: organizationId, coach_id: Number(catalogCoach.id), slug: item.slug, type: 'training_plan', name: item.name, description, price_cents: item.price_cents, currency: 'EUR', allowed_training_sports: JSON.stringify(item.sports), includes_coaching: false, training_plan_id: Number(plan.id), release_mode: 'all_at_once', status: 'active', created_at: now, updated_at: now }).execute()
+      catalogMade += 1
+    }
+    console.log(`[ts-cloud] lsu review seed: demo storefront under coach #${Number(catalogCoach.id)}, ${catalogMade} of ${CATALOG.length} plans made this run`)
+  }
   // A club-scoped sample conversation to an admin, without assigning a personal coach.
   const first = Math.min(ids.runner, ids.admin), second = Math.max(ids.runner, ids.admin)
   const scope = `hq:gym:${organizationId}`
