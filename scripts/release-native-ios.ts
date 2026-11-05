@@ -7,6 +7,7 @@ import product from '../native/product.json'
 import deployment from '../enterprise/deployment.json'
 import source from '../native/hq-source.json'
 import { nativeBuildEnvironment, root, output, sourceRoot } from './native-source'
+import { createIosUploadReceipt } from './ios-release-provenance'
 import { assertAppStoreEntitlements, assertAppStoreSignature, assertReleaseXcode } from './ios-release-toolchain'
 
 assertReleaseXcode(execFileSync('xcodebuild', ['-version'], { encoding: 'utf8' }))
@@ -96,6 +97,11 @@ for (const [page, url] of [['privacy', product.identity.privacyUrl], ['terms', p
   if (!response.ok || !(await response.text()).includes(`data-enterprise-legal="${page}"`))
     throw new Error(`The installation's public ${page} notice is not ready for beta review`)
 }
+// Validate the generated build's provenance before sending a binary to Apple.
+const upload = createIosUploadReceipt(JSON.parse(readFileSync(join(ios, 'lsu-source.json'), 'utf8')), new Bun.CryptoHasher('sha256').update(readFileSync(ipa)).digest('hex'), {
+  app: product.bundleId, version: product.version, build: product.build, hqRevision: source.revision,
+  productSha256: new Bun.CryptoHasher('sha256').update(readFileSync(join(root, 'native/product.json'))).digest('hex'),
+})
 // altool reads the existing key from its documented key search directory.
 const privateKeyDir = join(releaseDir, 'private_keys')
 mkdirSync(privateKeyDir, { recursive: true, mode: 0o700 })
@@ -104,5 +110,5 @@ try {
   await run(['xcrun', 'altool', '--upload-app', '--type', 'ios', '--file', ipa, '--apiKey', keyId, '--apiIssuer', issuerId], releaseDir)
 }
 finally { unlinkSync(join(privateKeyDir, `AuthKey_${keyId}.p8`)) }
-writeFileSync(join(releaseDir, 'upload.json'), JSON.stringify({ app: product.bundleId, version: product.version, build: product.build, ipaSha256: new Bun.CryptoHasher('sha256').update(readFileSync(ipa)).digest('hex'), uploadedAt: new Date().toISOString() }, null, 2))
+writeFileSync(join(releaseDir, 'upload.json'), JSON.stringify({ ...upload, uploadedAt: new Date().toISOString() }, null, 2))
 process.stdout.write(`Uploaded Last Soul Ultra ${product.version} (${product.build}); verify processing in App Store Connect before announcing TestFlight availability.\n`)
