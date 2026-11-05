@@ -1,5 +1,5 @@
 import { expect, it } from 'bun:test'
-import { assertReleaseXcode, assertSigningProfile } from '../scripts/ios-release-toolchain'
+import { assertAppStoreEntitlements, assertReleaseXcode, assertSigningProfile } from '../scripts/ios-release-toolchain'
 
 it('rejects the beta SDK Apple refused before starting another release archive', () => {
   expect(() => assertReleaseXcode('Xcode 27.0\nBuild version 27A5218g\n')).toThrow('released toolchain')
@@ -13,4 +13,18 @@ it('admits only the LSU app and extension profiles for the configured signing te
   expect(() => assertSigningProfile({ ...profile, application: `${profile.application}.liveactivity` }, 'com.lastsoulultra.app.liveactivity', profile.team)).not.toThrow()
   for (const changed of [{ ...profile, application: '3JJRNQW6B7.training.hq.app' }, { ...profile, team: 'OTHERTEAM1' }, { ...profile, uuid: '../profile' }])
     expect(() => assertSigningProfile(changed, 'com.lastsoulultra.app', profile.team)).toThrow()
+})
+
+it('requires distribution signing and the installation’s own passkey domain in the exported app', () => {
+  const identity = { 'application-identifier': '3JJRNQW6B7.com.lastsoulultra.app', 'beta-reports-active': true }
+  const origin = 'https://training.lsu.stacksjs.com'
+  const check = (changes: Record<string, unknown>) => assertAppStoreEntitlements({ ...identity, ...changes }, 'com.lastsoulultra.app', '3JJRNQW6B7', origin)
+  expect(() => check({})).toThrow('associated domains')
+  expect(() => check({ 'com.apple.developer.associated-domains': ['webcredentials:hq.training'] })).toThrow('associated domains')
+  expect(() => check({ 'com.apple.developer.associated-domains': ['webcredentials:training.lsu.stacksjs.com', 'webcredentials:hq.training'] })).toThrow('associated domains')
+  const domains = { 'com.apple.developer.associated-domains': ['webcredentials:training.lsu.stacksjs.com'] }
+  expect(() => check(domains)).not.toThrow()
+  expect(() => check({ ...domains, 'get-task-allow': true })).toThrow('distribution identity')
+  expect(() => check({ ...domains, 'application-identifier': 'OTHERTEAM.com.lastsoulultra.app' })).toThrow('distribution identity')
+  expect(() => check({ ...domains, 'beta-reports-active': false })).toThrow('distribution identity')
 })

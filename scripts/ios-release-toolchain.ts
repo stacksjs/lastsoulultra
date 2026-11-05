@@ -14,3 +14,14 @@ export function assertSigningProfile(profile: { uuid: string, team: string, appl
     || profile.team !== team || profile.application !== `${team}.${bundle}`)
     throw new Error('The provisioning profile does not belong to this LSU application and signing team')
 }
+
+/** Audit the exported app, including the installation's own passkey relying-party domain. */
+export function assertAppStoreEntitlements(entitlements: Record<string, unknown>, bundle: string, team: string, origin: string): void {
+  if (entitlements['application-identifier'] !== `${team}.${bundle}` || entitlements['beta-reports-active'] !== true || entitlements['get-task-allow'] === true)
+    throw new Error('IPA has no matching App Store distribution identity')
+  const host = new URL(origin).hostname
+  const domains = entitlements['com.apple.developer.associated-domains']
+  if (!Array.isArray(domains) || !domains.includes(`webcredentials:${host}`)
+    || domains.some(domain => domain !== `webcredentials:${host}` && domain !== `applinks:${host}`))
+    throw new Error('IPA must retain only this installation’s associated domains, including webcredentials')
+}

@@ -7,7 +7,7 @@ import product from '../native/product.json'
 import deployment from '../enterprise/deployment.json'
 import source from '../native/hq-source.json'
 import { nativeBuildEnvironment, root, output, sourceRoot } from './native-source'
-import { assertReleaseXcode } from './ios-release-toolchain'
+import { assertAppStoreEntitlements, assertReleaseXcode } from './ios-release-toolchain'
 
 assertReleaseXcode(execFileSync('xcodebuild', ['-version'], { encoding: 'utf8' }))
 
@@ -41,15 +41,16 @@ else await run([process.execPath, 'run', 'native:ios'], root)
 await run([process.execPath, 'run', 'native:verify-ios'])
 const ios = join(output, 'ios')
 const scheme = 'LastSoulUltra'
-const appProfile = process.env.IOS_APP_PROFILE || 'Last Soul Ultra App Store'
-const activityProfile = process.env.IOS_ACTIVITY_PROFILE || 'Last Soul Ultra Live Activity App Store'
+// Xcode refreshes provisioning for the app's current capabilities using the existing CI API key.
+// https://help.apple.com/xcode/mac/current/en.lproj/devff5ececf8.html
+const provisioning = ['-allowProvisioningUpdates', '-authenticationKeyPath', keyPath, '-authenticationKeyID', keyId, '-authenticationKeyIssuerID', issuerId]
 const yamlPath = join(ios, 'project.yml')
 let yaml = readFileSync(yamlPath, 'utf8')
 yaml = yaml.replace(/^ {6}(?:CODE_SIGN_STYLE|CODE_SIGN_IDENTITY|PROVISIONING_PROFILE_SPECIFIER):[^\n]*\n/gm, '')
-for (const [bundle, profile] of [[product.bundleId, appProfile], [`${product.bundleId}.liveactivity`, activityProfile]]) {
+for (const bundle of [product.bundleId, `${product.bundleId}.liveactivity`]) {
   const line = `      PRODUCT_BUNDLE_IDENTIFIER: ${bundle}\n`
   if (!yaml.includes(line)) throw new Error(`Generated project is missing ${bundle}`)
-  yaml = yaml.replace(line, `${line}      CODE_SIGN_STYLE: Manual\n      CODE_SIGN_IDENTITY: "Apple Distribution"\n      PROVISIONING_PROFILE_SPECIFIER: ${JSON.stringify(profile)}\n`)
+  yaml = yaml.replace(line, `${line}      CODE_SIGN_STYLE: Automatic\n`)
 }
 writeFileSync(yamlPath, yaml)
 const require = createRequire(join(sourceRoot, 'package.json'))
@@ -58,16 +59,15 @@ tools.generateXcodeProject(await tools.resolveXcodegen(sourceRoot), ios)
 const releaseDir = join(root, 'storage/native/release', `${product.version}-${product.build}`)
 mkdirSync(releaseDir, { recursive: true })
 const archive = join(releaseDir, `${scheme}.xcarchive`)
-await run(['xcodebuild', '-project', join(ios, `${scheme}.xcodeproj`), '-scheme', scheme, '-configuration', 'Release', '-destination', 'generic/platform=iOS', '-archivePath', archive, 'archive'], ios)
+await run(['xcodebuild', '-project', join(ios, `${scheme}.xcodeproj`), '-scheme', scheme, '-configuration', 'Release', '-destination', 'generic/platform=iOS', '-archivePath', archive, ...provisioning, 'archive'], ios)
 const infoPath = join(archive, 'Products/Applications', `${scheme}.app/Info.plist`)
 const info = JSON.parse(execFileSync('plutil', ['-convert', 'json', '-o', '-', infoPath], { encoding: 'utf8' }))
 if (info.CFBundleIdentifier !== product.bundleId || info.CFBundleVersion !== String(product.build) || info.CFBundleShortVersionString !== product.version)
   throw new Error('Archived identity does not match the LSU release')
-const xml = (value: string) => value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
 const options = join(releaseDir, 'ExportOptions.plist')
-writeFileSync(options, `<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"><plist version="1.0"><dict><key>method</key><string>app-store-connect</string><key>destination</key><string>export</string><key>signingStyle</key><string>manual</string><key>teamID</key><string>${product.teamId}</string><key>manageAppVersionAndBuildNumber</key><false/><key>provisioningProfiles</key><dict><key>${product.bundleId}</key><string>${xml(appProfile)}</string><key>${product.bundleId}.liveactivity</key><string>${xml(activityProfile)}</string></dict></dict></plist>`)
+writeFileSync(options, `<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"><plist version="1.0"><dict><key>method</key><string>app-store-connect</string><key>destination</key><string>export</string><key>signingStyle</key><string>automatic</string><key>teamID</key><string>${product.teamId}</string><key>manageAppVersionAndBuildNumber</key><false/></dict></plist>`)
 const exported = join(releaseDir, 'export')
-await run(['xcodebuild', '-exportArchive', '-archivePath', archive, '-exportOptionsPlist', options, '-exportPath', exported], ios)
+await run(['xcodebuild', '-exportArchive', '-archivePath', archive, '-exportOptionsPlist', options, '-exportPath', exported, ...provisioning], ios)
 const ipas = readdirSync(exported).filter(name => name.endsWith('.ipa'))
 if (ipas.length !== 1) throw new Error('Expected one exported LSU IPA')
 const ipa = join(exported, ipas[0]!)
@@ -77,7 +77,10 @@ await run(['unzip', '-q', '-o', ipa, '-d', auditDir])
 const app = join(auditDir, 'Payload', `${scheme}.app`)
 await run(['codesign', '--verify', '--deep', '--strict', app])
 const content = execFileSync('codesign', ['-d', '--entitlements', ':-', app], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] })
-if (!content.includes(`${product.teamId}.${product.bundleId}`) || !content.includes('beta-reports-active')) throw new Error('IPA has no LSU App Store distribution identity')
+const entitlementsPath = join(auditDir, 'app-entitlements.plist')
+writeFileSync(entitlementsPath, content)
+const entitlements = JSON.parse(execFileSync('plutil', ['-convert', 'json', '-o', '-', entitlementsPath], { encoding: 'utf8' }))
+assertAppStoreEntitlements(entitlements, product.bundleId, product.teamId, product.site)
 if (process.argv.includes('--archive-only')) {
   process.stdout.write(`Signed LSU archive and IPA are ready at ${ipa}. No upload requested.\n`)
   process.exit(0)
