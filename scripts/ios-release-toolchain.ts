@@ -15,6 +15,15 @@ export function assertSigningProfile(profile: { uuid: string, team: string, appl
     throw new Error('The provisioning profile does not belong to this LSU application and signing team')
 }
 
+/** An intermediate archive signature must never be delivered as the exported IPA. */
+export function assertAppStoreSignature(details: string, team: string): void {
+  if (/^Signature=adhoc$/m.test(details)
+    || !/^Authority=(?:Apple Distribution|iPhone Distribution): .+$/m.test(details)
+    || !/^Authority=Apple Root CA(?: - G\d+)?$/m.test(details)
+    || /^TeamIdentifier=(.+)$/m.exec(details)?.[1] !== team)
+    throw new Error('Exported IPA must have an Apple distribution certificate for the configured team')
+}
+
 /** Audit the exported app, including the installation's own passkey relying-party domain. */
 export function assertAppStoreEntitlements(entitlements: Record<string, unknown>, bundle: string, team: string, origin: string): void {
   if (entitlements['application-identifier'] !== `${team}.${bundle}` || entitlements['beta-reports-active'] !== true || entitlements['get-task-allow'] === true)

@@ -7,7 +7,7 @@ import product from '../native/product.json'
 import deployment from '../enterprise/deployment.json'
 import source from '../native/hq-source.json'
 import { nativeBuildEnvironment, root, output, sourceRoot } from './native-source'
-import { assertAppStoreEntitlements, assertReleaseXcode } from './ios-release-toolchain'
+import { assertAppStoreEntitlements, assertAppStoreSignature, assertReleaseXcode } from './ios-release-toolchain'
 
 assertReleaseXcode(execFileSync('xcodebuild', ['-version'], { encoding: 'utf8' }))
 
@@ -41,7 +41,7 @@ else await run([process.execPath, 'run', 'native:ios'], root)
 await run([process.execPath, 'run', 'native:verify-ios'])
 const ios = join(output, 'ios')
 const scheme = 'LastSoulUltra'
-// Xcode refreshes provisioning for the app's current capabilities using the existing CI API key.
+// Xcode refreshes distribution provisioning at export using the existing CI API key.
 // https://help.apple.com/xcode/mac/current/en.lproj/devff5ececf8.html
 const provisioning = ['-allowProvisioningUpdates', '-authenticationKeyPath', keyPath, '-authenticationKeyID', keyId, '-authenticationKeyIssuerID', issuerId]
 const yamlPath = join(ios, 'project.yml')
@@ -59,13 +59,16 @@ tools.generateXcodeProject(await tools.resolveXcodegen(sourceRoot), ios)
 const releaseDir = join(root, 'storage/native/release', `${product.version}-${product.build}`)
 mkdirSync(releaseDir, { recursive: true })
 const archive = join(releaseDir, `${scheme}.xcarchive`)
-await run(['xcodebuild', '-project', join(ios, `${scheme}.xcodeproj`), '-scheme', scheme, '-configuration', 'Release', '-destination', 'generic/platform=iOS', '-archivePath', archive, ...provisioning, 'archive'], ios)
+// Like Xcode Cloud, stage an ad-hoc signed archive without creating development identities.
+// Export below must replace this signature with the existing distribution identity.
+// https://developer.apple.com/forums/thread/756119
+await run(['xcodebuild', '-project', join(ios, `${scheme}.xcodeproj`), '-scheme', scheme, '-configuration', 'Release', '-destination', 'generic/platform=iOS', '-archivePath', archive, 'CODE_SIGN_IDENTITY=-', 'AD_HOC_CODE_SIGNING_ALLOWED=YES', 'archive'], ios)
 const infoPath = join(archive, 'Products/Applications', `${scheme}.app/Info.plist`)
 const info = JSON.parse(execFileSync('plutil', ['-convert', 'json', '-o', '-', infoPath], { encoding: 'utf8' }))
 if (info.CFBundleIdentifier !== product.bundleId || info.CFBundleVersion !== String(product.build) || info.CFBundleShortVersionString !== product.version)
   throw new Error('Archived identity does not match the LSU release')
 const options = join(releaseDir, 'ExportOptions.plist')
-writeFileSync(options, `<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"><plist version="1.0"><dict><key>method</key><string>app-store-connect</string><key>destination</key><string>export</string><key>signingStyle</key><string>automatic</string><key>teamID</key><string>${product.teamId}</string><key>manageAppVersionAndBuildNumber</key><false/></dict></plist>`)
+writeFileSync(options, `<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"><plist version="1.0"><dict><key>method</key><string>app-store-connect</string><key>destination</key><string>export</string><key>signingStyle</key><string>automatic</string><key>signingCertificate</key><string>Apple Distribution</string><key>teamID</key><string>${product.teamId}</string><key>manageAppVersionAndBuildNumber</key><false/></dict></plist>`)
 const exported = join(releaseDir, 'export')
 await run(['xcodebuild', '-exportArchive', '-archivePath', archive, '-exportOptionsPlist', options, '-exportPath', exported, ...provisioning], ios)
 const ipas = readdirSync(exported).filter(name => name.endsWith('.ipa'))
@@ -76,6 +79,9 @@ mkdirSync(auditDir, { recursive: true })
 await run(['unzip', '-q', '-o', ipa, '-d', auditDir])
 const app = join(auditDir, 'Payload', `${scheme}.app`)
 await run(['codesign', '--verify', '--deep', '--strict', app])
+const signature = Bun.spawnSync(['codesign', '-dv', '--verbose=4', app], { stdout: 'pipe', stderr: 'pipe' })
+if (signature.exitCode !== 0) throw new Error('Could not inspect the exported distribution signature')
+assertAppStoreSignature(signature.stderr.toString(), product.teamId)
 const content = execFileSync('codesign', ['-d', '--entitlements', ':-', app], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] })
 const entitlementsPath = join(auditDir, 'app-entitlements.plist')
 writeFileSync(entitlementsPath, content)

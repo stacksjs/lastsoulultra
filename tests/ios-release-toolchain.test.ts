@@ -1,5 +1,5 @@
 import { expect, it } from 'bun:test'
-import { assertAppStoreEntitlements, assertReleaseXcode, assertSigningProfile } from '../scripts/ios-release-toolchain'
+import { assertAppStoreEntitlements, assertAppStoreSignature, assertReleaseXcode, assertSigningProfile } from '../scripts/ios-release-toolchain'
 
 it('rejects the beta SDK Apple refused before starting another release archive', () => {
   expect(() => assertReleaseXcode('Xcode 27.0\nBuild version 27A5218g\n')).toThrow('released toolchain')
@@ -27,4 +27,14 @@ it('requires distribution signing and the installation’s own passkey domain in
   expect(() => check({ ...domains, 'get-task-allow': true })).toThrow('distribution identity')
   expect(() => check({ ...domains, 'application-identifier': 'OTHERTEAM.com.lastsoulultra.app' })).toThrow('distribution identity')
   expect(() => check({ ...domains, 'beta-reports-active': false })).toThrow('distribution identity')
+})
+
+it('refuses an ad-hoc or development signature even when the app carries distribution entitlements', () => {
+  const signature = 'Authority=Apple Distribution: Example (3JJRNQW6B7)\nAuthority=Apple Worldwide Developer Relations Certification Authority\nAuthority=Apple Root CA\nTeamIdentifier=3JJRNQW6B7\n'
+  expect(() => assertAppStoreSignature(signature, '3JJRNQW6B7')).not.toThrow()
+  expect(() => assertAppStoreSignature(signature.replace('Apple Root CA', 'Apple Root CA - G3'), '3JJRNQW6B7')).not.toThrow()
+  expect(() => assertAppStoreSignature('Signature=adhoc\nTeamIdentifier=3JJRNQW6B7\n', '3JJRNQW6B7')).toThrow('distribution certificate')
+  expect(() => assertAppStoreSignature(signature.replace('Apple Distribution:', 'Apple Development:'), '3JJRNQW6B7')).toThrow()
+  expect(() => assertAppStoreSignature(signature, 'OTHERTEAM1')).toThrow()
+  expect(() => assertAppStoreSignature(signature.replace('Authority=Apple Root CA\n', ''), '3JJRNQW6B7')).toThrow()
 })
