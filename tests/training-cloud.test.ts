@@ -72,3 +72,14 @@ it('reads every queue a kit names, and leaves HQ its own', () => {
   // A queue the kit adds and no daemon works is reported; HQ's relay queue is not.
   expect(undrainedQueues(kitQueues(app))).toEqual(['brand-new'])
 })
+
+it('requires the HQ proxy protocol before starting the API and drains platform work separately', () => {
+  const sites = trainingSites()
+  expect(sites.training.env?.HQ_PLATFORM_DATA_MODE).toBe('proxy')
+  expect(sites['training-api'].env?.HQ_PLATFORM_DATA_MODE).toBe('proxy')
+  expect(sites['training-api'].preStart).toContain('bun scripts/enterprise-preflight.ts --platform')
+  const daemons = sites['training-api'].daemons || []
+  const platform = daemons.find(daemon => daemon.name === 'hq-platform')!
+  expect(platform.command).toContain('--queue=platform-history')
+  expect(daemons.find(daemon => daemon.name === 'connection-sync')!.command).not.toContain('platform-history')
+})

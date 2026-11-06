@@ -21,7 +21,7 @@ export function trainingSites(): NonNullable<CloudConfig['sites']> {
     // Provider sign-ins return here, and to this origin's pages, not HQ's defaults.
     OAUTH_REDIRECT_BASE: deployment.origin, FRONTEND_URL: deployment.origin,
     // HQ platform: Continue with HQ, and devices connected through HQ's provider apps.
-    HQ_PLATFORM_ISSUER: 'https://hq.training', HQ_PLATFORM_CLIENT_ID: secrets.LSU_HQ_PLATFORM_CLIENT_ID || '',
+    HQ_PLATFORM_ISSUER: 'https://hq.training', HQ_PLATFORM_DATA_MODE: 'proxy', HQ_PLATFORM_CLIENT_ID: secrets.LSU_HQ_PLATFORM_CLIENT_ID || '',
     HQ_PLATFORM_CLIENT_SECRET: secrets.LSU_HQ_PLATFORM_CLIENT_SECRET || '', HQ_PLATFORM_RELAY_SECRET: secrets.LSU_HQ_PLATFORM_RELAY_SECRET || '',
     APNS_TEAM_ID: secrets.LSU_APNS_TEAM_ID || '', APNS_KEY_ID: secrets.LSU_APNS_KEY_ID || '', APNS_PRIVATE_KEY: secrets.LSU_APNS_PRIVATE_KEY || '',
     APNS_TOPIC: 'com.lastsoulultra.app', APNS_ENVIRONMENT: 'production',
@@ -62,15 +62,17 @@ export function trainingSites(): NonNullable<CloudConfig['sites']> {
       backgroundBun: `.hq-runtime/pantry/bun.com/v${source.bun}/bin/bun`,
       env: { ...runtime, LSU_DEMO_ACCOUNTS_JSON: secrets.LSU_DEMO_ACCOUNTS_JSON || '', LSU_SEED_DATABASE: deployment.database.name, LSU_SEED_CONFIRM: 'last-soul-ultra' },
       healthCheck: { path: '/api/deployment' },
-      preStart: [...install, './buddy migrate --no-generate --auth', './buddy queue:table', 'mkdir -p storage/framework/runtime/production', 'bun scripts/build-production.ts api', 'bun deployment/lsu/seed-review.ts', './buddy installation:admins', 'sh scripts/ensure-speech-runtime.sh'],
+      preStart: [...install, './buddy migrate --no-generate --auth', './buddy queue:table', 'bun scripts/enterprise-preflight.ts --platform', 'mkdir -p storage/framework/runtime/production', 'bun scripts/build-production.ts api', 'bun deployment/lsu/seed-review.ts', './buddy installation:admins', 'sh scripts/ensure-speech-runtime.sh'],
       scheduler: true,
       daemons: [
         // The catch-all queue, and a gym's webhook deliveries, as HQ's own deploy runs them.
         {name:'coaching-jobs',command:`${launcher} node_modules/@stacksjs/ts-cloud/dist/bin/stacks-queue-worker.js --queue=default,webhooks --concurrency=1`},
         // Wind-down reminders, in-app pushes and notification deliveries, and emails: the queues HQ's own deploy gives a worker.
         {name:'notifications',command:`${launcher} node_modules/@stacksjs/ts-cloud/dist/bin/stacks-queue-worker.js --queue=notifications,emails --concurrency=1`},
-        // Device syncs, provider events HQ relays, and HQ history imports.
-        {name:'connection-sync',command:`${launcher} node_modules/@stacksjs/ts-cloud/dist/bin/stacks-queue-worker.js --queue=connection-sync,connection-events,platform-history --concurrency=1`},
+        // Device syncs and provider events HQ relays.
+        {name:'connection-sync',command:`${launcher} node_modules/@stacksjs/ts-cloud/dist/bin/stacks-queue-worker.js --queue=connection-sync,connection-events --concurrency=1`},
+        // HQ profile, history, relay receipts and cleanup stay responsive during long device syncs.
+        {name:'hq-platform',command:`${launcher} node_modules/@stacksjs/ts-cloud/dist/bin/stacks-queue-worker.js --queue=platform-history --concurrency=1`},
         {name:'garmin-sync',command:`${launcher} node_modules/@stacksjs/ts-cloud/dist/bin/stacks-queue-worker.js --queue=garmin-direct --concurrency=1`},
         {name:'exercise-media',command:`${launcher} node_modules/@stacksjs/ts-cloud/dist/bin/stacks-queue-worker.js --queue=exercise-media --concurrency=1`},
         {name:'local-speech',command:`/usr/bin/env COACHING_SPEECH_RUNTIME_DIR=${runtime.COACHING_SPEECH_RUNTIME_DIR} ${launcher} --local-speech`,restart:'on-failure'},
