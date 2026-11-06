@@ -6,11 +6,11 @@
       "name": "last-soul-ultra",
       "dependencies": {
         "@stacksjs/bunpress": "0.2.30",
-        "@stacksjs/components": "0.2.811",
-        "@stacksjs/stx": "0.2.811",
+        "@stacksjs/components": "0.2.814",
+        "@stacksjs/stx": "0.2.814",
         "@stacksjs/ts-cloud": "0.16.94",
         "@ts-maps/stx": "0.5.7",
-        "bun-plugin-stx": "0.2.811",
+        "bun-plugin-stx": "0.2.814",
         "stacks": "0.75.484",
         "ts-images": "0.2.33",
         "ts-maps": "0.5.7"
@@ -36,12 +36,12 @@
     }
   },
   "packages": {
-    "@hq/platform@1.0.3915": {
+    "@hq/platform@1.0.3934": {
       "name": "@hq/platform",
-      "version": "1.0.3915",
+      "version": "1.0.3934",
       "source": "npm",
-      "resolved": "registry:@hq/platform@1.0.3915",
-      "integrity": "sha256:1a71f8b34be8316ccb2fcbfc9b0c889007c6cdb0ebad86449248ce965650ec5b"
+      "resolved": "registry:@hq/platform@1.0.3934",
+      "integrity": "sha256:456d2d23148a96b8ea2d95f11a20e8c1b59ba327f5c7b74fdfe7c9992bdb38aa"
     },
     "bun.sh@1.4.4": {
       "name": "bun.sh",

@@ -21,8 +21,9 @@ jobs:
           fetch-depth: 0
 
       - name: Setup Pantry
-        uses: pantry-pm/pantry/packages/action@ee7f116a5363bfe2667b2d76f8f1f567f68148ef # v0.11.144 + the socket-hang-up retry fix
+        uses: pantry-pm/pantry/packages/action@16b6ea5109422a64883837831d436f914545e6df
         with:
+          version: '0.11.174'
           install: 'false'
 
       - name: Use Cached node_modules

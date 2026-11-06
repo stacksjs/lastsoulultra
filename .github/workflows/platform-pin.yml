@@ -40,11 +40,10 @@ jobs:
           persist-credentials: false
 
       - name: Setup Pantry
-        uses: pantry-pm/pantry/packages/action@ee7f116a5363bfe2667b2d76f8f1f567f68148ef
+        uses: pantry-pm/pantry/packages/action@16b6ea5109422a64883837831d436f914545e6df
         with:
-          # 0.11.148 is the first Pantry that keeps @hq to its pinned registry
-          # (pantry.json "scopes"); an older one could look for the kit on npm.
-          version: '0.11.148'
+          # Qualified release with scoped registry integrity and verified retries.
+          version: '0.11.174'
           install: 'false'
 
       - name: Setup the pinned Bun runtime
@@ -63,16 +62,12 @@ jobs:
       - name: Install the frozen application dependencies
         run: bun install --frozen-lockfile
 
-      # A pantry install also provisions the dev database and runs the
-      # postDatabaseSetup commands in config/deps.ts, the second of which
-      # (`./buddy seed`) fails on three commerce seeders that have drifted from
-      # the schema. That has nothing to do with the pin but is fatal to the
-      # install, so the exit code is reported and the three steps below decide:
-      # the lock entry, the kit's own platform.json, and a frozen install.
+      # Resolve with the qualified installer. Installation failures remain
+      # failures; the following checks also verify integrity and provenance.
       - name: Resolve the kit and refresh the lock
         env:
           PANTRY_REGISTRY_TOKEN: ${{ secrets.PANTRY_REGISTRY_TOKEN }}
-        run: pantry install --ignore-scripts || echo "::warning::pantry install exited $?; the checks below decide whether the pin is good"
+        run: pantry install --ignore-scripts
 
       - name: Check the lock pins the requested kit, with its integrity hash
         env:
