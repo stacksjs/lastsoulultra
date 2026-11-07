@@ -8,7 +8,7 @@
         "@stacksjs/bunpress": "0.2.30",
         "@stacksjs/components": "0.2.818",
         "@stacksjs/stx": "0.2.818",
-        "@stacksjs/ts-cloud": "0.16.108",
+        "@stacksjs/ts-cloud": "0.16.109",
         "@ts-maps/stx": "0.5.7",
         "bun-plugin-stx": "0.2.818",
         "stacks": "0.75.497",
