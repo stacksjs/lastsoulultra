@@ -30,7 +30,8 @@ export function trainingSites(): NonNullable<CloudConfig['sites']> {
     DB_DATABASE: deployment.database.name, DB_USERNAME: deployment.database.user, DB_PASSWORD: secrets.LSU_TRAINING_DB_PASSWORD || '',
     STORAGE_DRIVER: 'bun', STORAGE_ROOT: shared, STORAGE_PUBLIC_URL: deployment.origin,
     PATH: `${shared}/media/pantry/.bin:/opt/pantry/pantry/.bin:/usr/local/bin:/usr/bin:/bin`,
-    QUEUE_DRIVER: 'database', HQ_SCHEDULER: 'off', HQ_PAGE_WARMUP: 'off', TYPESENSE_ENABLED: 'false', SEED_DEMO_DATA: 'false',
+    QUEUE_DRIVER: 'database', HQ_SCHEDULER: 'off', HQ_PAGE_WARMUP: 'off', TYPESENSE_ENABLED: 'true', SEED_DEMO_DATA: 'false',
+    TYPESENSE_HOST: '127.0.0.1', TYPESENSE_PORT: '8108', TYPESENSE_PROTOCOL: 'http', TYPESENSE_API_KEY: secrets.LSU_TYPESENSE_API_KEY || '',
     MAIL_MAILER: 'smtp', MAIL_DOMAIN: new URL(deployment.origin).hostname,
     MAIL_HOST: `mail.${new URL(deployment.origin).hostname}`, MAIL_PORT: '587', MAIL_ENCRYPTION: 'tls',
     MAIL_USERNAME: `hello@${new URL(deployment.origin).hostname}`, MAIL_PASSWORD: secrets.LSU_MAIL_PASSWORD || '',
@@ -47,14 +48,8 @@ export function trainingSites(): NonNullable<CloudConfig['sites']> {
     sharedPaths: [{ path: 'storage/app', target: `${shared}/storage/app` }, { path: 'enterprise-data', target: shared }],
   }
 
+  // The API owns migrations and index readiness; promote it before the web process.
   return {
-    training: {
-      ...common, domain: new URL(deployment.origin).hostname, path: '/', port: deployment.ports.web,
-      aliases: [`mail.${new URL(deployment.origin).hostname}`],
-      start: `${launcher} storage/framework/runtime/production/serve.js`,
-      healthCheck: { path: '/login' }, env: runtime,
-      preStart: [...install, 'mkdir -p storage/framework/runtime/production', 'bun scripts/build-production.ts web'],
-    },
     'training-api': {
       ...common, port: deployment.ports.api,
       start: `${launcher} storage/framework/runtime/production/api.js`,
@@ -62,7 +57,7 @@ export function trainingSites(): NonNullable<CloudConfig['sites']> {
       backgroundBun: `.hq-runtime/pantry/bun.com/v${source.bun}/bin/bun`,
       env: { ...runtime, LSU_DEMO_ACCOUNTS_JSON: secrets.LSU_DEMO_ACCOUNTS_JSON || '', LSU_SEED_DATABASE: deployment.database.name, LSU_SEED_CONFIRM: 'last-soul-ultra' },
       healthCheck: { path: '/api/deployment' },
-      preStart: [...install, './buddy migrate --no-generate --auth', './buddy queue:table', 'bun scripts/enterprise-preflight.ts --platform', 'mkdir -p storage/framework/runtime/production', 'bun scripts/build-production.ts api', 'bun deployment/lsu/seed-review.ts', './buddy installation:admins', 'sh scripts/ensure-speech-runtime.sh'],
+      preStart: [...install, './buddy migrate --no-generate --auth', './buddy queue:table', 'bun scripts/enterprise-preflight.ts --platform', 'bun scripts/reindex-public-profiles.ts', 'mkdir -p storage/framework/runtime/production', 'bun scripts/build-production.ts api', 'bun deployment/lsu/seed-review.ts', './buddy installation:admins', 'sh scripts/ensure-speech-runtime.sh'],
       scheduler: true,
       daemons: [
         // The catch-all queue, and a gym's webhook deliveries, as HQ's own deploy runs them.
@@ -75,8 +70,17 @@ export function trainingSites(): NonNullable<CloudConfig['sites']> {
         {name:'hq-platform',command:`${launcher} node_modules/@stacksjs/ts-cloud/dist/bin/stacks-queue-worker.js --queue=platform-history --concurrency=1`},
         {name:'garmin-sync',command:`${launcher} node_modules/@stacksjs/ts-cloud/dist/bin/stacks-queue-worker.js --queue=garmin-direct --concurrency=1`},
         {name:'exercise-media',command:`${launcher} node_modules/@stacksjs/ts-cloud/dist/bin/stacks-queue-worker.js --queue=exercise-media --concurrency=1`},
+        // The kit's bounded profile-index rebuilds and request-retention batches.
+        {name:'search-maintenance',command:`${launcher} node_modules/@stacksjs/ts-cloud/dist/bin/stacks-queue-worker.js --queue=search,maintenance --concurrency=1`},
         {name:'local-speech',command:`/usr/bin/env COACHING_SPEECH_RUNTIME_DIR=${runtime.COACHING_SPEECH_RUNTIME_DIR} ${launcher} --local-speech`,restart:'on-failure'},
       ],
+    },
+    training: {
+      ...common, domain: new URL(deployment.origin).hostname, path: '/', port: deployment.ports.web,
+      aliases: [`mail.${new URL(deployment.origin).hostname}`],
+      start: `${launcher} storage/framework/runtime/production/serve.js`,
+      healthCheck: { path: '/login' }, env: runtime,
+      preStart: [...install, 'mkdir -p storage/framework/runtime/production', 'bun scripts/build-production.ts web'],
     },
   }
 }

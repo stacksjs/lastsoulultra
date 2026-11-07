@@ -31,6 +31,11 @@ const envSchema = defineEnv({
     default: '',
   },
 
+  LSU_TYPESENSE_API_KEY: {
+    validation: schema.string(),
+    default: '',
+  },
+
   APP_NAME: {
     validation: schema.string(),
     default: 'Stacks',

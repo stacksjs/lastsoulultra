@@ -70,6 +70,7 @@ export const tsCloud: TsCloudConfig = {
       reverseDns: `mail.${new URL(deployment.origin).hostname}`,
       managedServices: {
         postgres: true,
+        typesense: { version: '30.2', apiKey: env.LSU_TYPESENSE_API_KEY || '', bindAddress: '127.0.0.1' },
         mail: {
           mode: 'server', version: '0.3.26', hostname: `mail.${new URL(deployment.origin).hostname}`,
           domains: [new URL(deployment.origin).hostname], delivery: 'direct', webmail: false,
@@ -109,9 +110,13 @@ export const tsCloud: TsCloudConfig = {
     docs: {
       deploy: 'server',
       root: 'dist/docs/.bunpress',
+      inheritEnv: false,
+      isolation: true,
       path: '/docs',
       domain: APP_DOMAIN,
       build: './buddy build --docs',
+      // Static documentation needs none of the managed services' credentials.
+      env: { TYPESENSE_API_KEY: '', DB_PASSWORD: '', MAIL_PASSWORD: '' },
       pathRewriteStyle: 'directory',
       ...(env.SITE_AUTH_USER && env.SITE_AUTH_PASSWORD
         ? { auth: { username: env.SITE_AUTH_USER, password: env.SITE_AUTH_PASSWORD, realm: 'Last Soul Ultra preview' } }
@@ -176,6 +181,7 @@ export const tsCloud: TsCloudConfig = {
         HQ_ORIGIN: deployment.origin, HQ_BRAND_SLUG: 'last-soul-ultra',
         PORT_API: String(PORT_API),
         API_URL: `http://127.0.0.1:${PORT_API}`,
+        TYPESENSE_API_KEY: '',
         DB_CONNECTION: 'sqlite', DB_DATABASE: 'stacks', DB_USERNAME: '', DB_PASSWORD: '',
         DB_DATABASE_PATH: `${WEBSITE_STORAGE}/database/preview.sqlite`,
       },
@@ -201,6 +207,7 @@ export const tsCloud: TsCloudConfig = {
         NODE_ENV: 'production',
         APP_URL: `https://${APP_DOMAIN}`,
         HQ_ORIGIN: deployment.origin, HQ_BRAND_SLUG: 'last-soul-ultra',
+        TYPESENSE_API_KEY: '',
         DB_CONNECTION: 'sqlite', DB_DATABASE: 'stacks', DB_USERNAME: '', DB_PASSWORD: '',
         DB_DATABASE_PATH: `${WEBSITE_STORAGE}/database/preview.sqlite`,
       },

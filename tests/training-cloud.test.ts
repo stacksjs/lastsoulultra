@@ -11,6 +11,10 @@ it('keeps the enterprise installation off a shared host and pins provider placem
   expect(tsCloud.cloud?.attachTo).toBeUndefined()
   expect(tsCloud.cloud?.provider).toBe('hetzner')
   expect(tsCloud.hetzner?.location).toBe(deployment.residency.location)
+  expect(tsCloud.infrastructure?.compute?.managedServices?.typesense).toMatchObject({ version: '30.2', bindAddress: '127.0.0.1' })
+  for (const name of ['main', 'api', 'docs']) expect(tsCloud.sites?.[name]?.env?.TYPESENSE_API_KEY).toBe('')
+  expect(tsCloud.sites?.docs?.env?.DB_PASSWORD).toBe('')
+  expect(tsCloud.sites?.docs?.env?.MAIL_PASSWORD).toBe('')
   expect(tsCloud.cloud?.residency?.countries).toEqual([deployment.residency.country])
   expect(tsCloud.infrastructure?.appDatabase?.requireLocalPasswordAuth).toBe(true)
   expect(tsCloud.sites?.main?.env?.DB_DATABASE_PATH).toBe('/var/www/lastsoulultra-shared/website/database/preview.sqlite')
@@ -25,16 +29,17 @@ it('keeps the enterprise installation off a shared host and pins provider placem
   // queues kit 1.0.3874 used; the deploy checks the installed kit itself (scripts/check-queues.ts).
   const queues = existsSync(kitAppRoot) ? kitQueues() : ['connection-events', 'connection-sync', 'default', 'exercise-media', 'garmin-direct', 'notifications', 'platform-history', 'platform-relay', 'webhooks']
   expect(undrainedQueues(queues)).toEqual([])
-  for (const name of ['training', 'training-api', 'main', 'api']) {
+  for (const name of ['training', 'training-api', 'main', 'api', 'docs']) {
     expect(tsCloud.sites?.[name]?.inheritEnv).toBe(false)
     expect(tsCloud.sites?.[name]?.isolation).toBe(true)
     expect(tsCloud.sites?.[name]?.env?.CLOUDFLARE_API_TOKEN).toBeUndefined()
     expect(tsCloud.sites?.[name]?.env?.HCLOUD_TOKEN).toBeUndefined()
+    expect(tsCloud.sites?.[name]?.env?.LSU_TYPESENSE_API_KEY).toBeUndefined()
   }
 })
 
 it('resolves isolated runtime secrets again after Buddy switches to production', () => {
-  const keys = ['LSU_TRAINING_APP_KEY', 'LSU_TRAINING_DB_PASSWORD', 'LSU_DEMO_ACCOUNTS_JSON'] as const
+  const keys = ['LSU_TRAINING_APP_KEY', 'LSU_TRAINING_DB_PASSWORD', 'LSU_DEMO_ACCOUNTS_JSON', 'LSU_TYPESENSE_API_KEY'] as const
   const previous = Object.fromEntries(keys.map(key => [key, process.env[key]]))
   try {
     process.env.LSU_TRAINING_APP_KEY = 'development-sentinel'
@@ -42,11 +47,14 @@ it('resolves isolated runtime secrets again after Buddy switches to production',
     process.env.LSU_TRAINING_APP_KEY = 'production-sentinel'
     process.env.LSU_TRAINING_DB_PASSWORD = 'own-database-sentinel'
     process.env.LSU_DEMO_ACCOUNTS_JSON = 'private-review-sentinel'
+    process.env.LSU_TYPESENSE_API_KEY = 'private-typesense-sentinel-0123456789'
     const sites = trainingSites()
     for (const name of ['training', 'training-api']) {
       expect(sites[name].inheritEnv).toBe(false)
       expect(sites[name].isolation).toBe(true)
       expect(sites[name].env?.APP_KEY).toBe('production-sentinel')
+      expect(sites[name].env?.TYPESENSE_API_KEY).toBe('private-typesense-sentinel-0123456789')
+      expect(sites[name].env?.TYPESENSE_ENABLED).toBe('true')
       expect(sites[name].env?.DB_PASSWORD).toBe('own-database-sentinel')
       expect(sites[name].env?.DB_DATABASE).toBe('lsu_training')
       expect(sites[name].env?.PATH).toContain('/lastsoulultra-shared/training/media/pantry/.bin')
@@ -75,11 +83,16 @@ it('reads every queue a kit names, and leaves HQ its own', () => {
 
 it('requires the HQ proxy protocol before starting the API and drains platform work separately', () => {
   const sites = trainingSites()
+  expect(Object.keys(sites)).toEqual(['training-api', 'training'])
   expect(sites.training.env?.HQ_PLATFORM_DATA_MODE).toBe('proxy')
   expect(sites['training-api'].env?.HQ_PLATFORM_DATA_MODE).toBe('proxy')
   expect(sites['training-api'].preStart).toContain('bun scripts/enterprise-preflight.ts --platform')
   const daemons = sites['training-api'].daemons || []
   const platform = daemons.find(daemon => daemon.name === 'hq-platform')!
   expect(platform.command).toContain('--queue=platform-history')
+  expect(daemons.find(daemon => daemon.name === 'search-maintenance')!.command).toContain('--queue=search,maintenance')
+  const preStart = sites['training-api'].preStart || []
+  expect(preStart.indexOf('bun scripts/reindex-public-profiles.ts')).toBeGreaterThan(preStart.indexOf('./buddy migrate --no-generate --auth'))
+  expect(preStart.indexOf('bun scripts/reindex-public-profiles.ts')).toBeLessThan(preStart.indexOf('bun scripts/build-production.ts api'))
   expect(daemons.find(daemon => daemon.name === 'connection-sync')!.command).not.toContain('platform-history')
 })
