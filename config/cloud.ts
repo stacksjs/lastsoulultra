@@ -98,7 +98,7 @@ export const tsCloud: TsCloudConfig = {
       // deploy prints "App deployed", writes no route, and the domain never
       // resolves to anything.
       webServer: 'rpx',
-      proxy: { engine: 'rpx', onDemandTls: true },
+      proxy: { engine: 'rpx', onDemandTls: true, http2: true },
     },
 
     // Cloudflare is authoritative for stacksjs.com. Buddy reconciles every
