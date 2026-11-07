@@ -177,6 +177,17 @@ describe('classes the markup uses and no stylesheet defines', () => {
     expect(findings.map(finding => finding.detail)).toEqual(['made-up-class'])
   })
 
+  it('counts page-local style rules without defining them on other pages', () => {
+    const page = '<style media="screen">.workspace-frame{display:block}a.workspace-fallback{padding:12px}</style><iframe class="workspace-frame"></iframe><a class="workspace-fallback missing-style">Help</a>'
+    expect(unstyledClasses('/workspace', page, defined).map(finding => finding.detail)).toEqual(['missing-style'])
+    expect(unstyledClasses('/other', '<p class="workspace-frame">Other</p>', defined).map(finding => finding.detail)).toEqual(['workspace-frame'])
+  })
+
+  it('does not count style markup inside scripts or HTML comments', () => {
+    const page = `<script>const sample = '<style>.script-only{color:red}</style>'</script><!-- <style>.comment-only{color:red}</style> --><p class="script-only comment-only">Text</p>`
+    expect(unstyledClasses('/t', page, defined).map(finding => finding.detail)).toEqual(['script-only', 'comment-only'])
+  })
+
   it('names it once however often it appears', () => {
     const html = '<p class="made-up-class"></p><p class="made-up-class"></p>'
     expect(unstyledClasses('/t', html, defined)).toHaveLength(1)

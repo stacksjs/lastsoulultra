@@ -46,12 +46,16 @@ export function urlOf(file: string): string {
   return path === '/index' ? '/' : path
 }
 
-/** Strip comments, script and style so their contents are not read as markup. */
-function visible(html: string): string {
+/** Ignore inactive markup in comments and executable script contents. */
+function markup(html: string): string {
   return html
     .replace(/<!--[\s\S]*?-->/g, '')
     .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, '')
-    .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, '')
+}
+
+/** Strip styles too when checking visible elements rather than CSS rules. */
+function visible(html: string): string {
+  return markup(html).replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, '')
 }
 
 function attr(tag: string, name: string): string | null {
@@ -293,25 +297,33 @@ const UNSTYLED_ALLOWED = new Set([
   'bg-black/25', 'dark:bg-black/50',
 ])
 
-/** Every class name any shipped stylesheet keys a rule on. */
+function addDefinedClasses(css: string, names: Set<string>): void {
+  for (const [, name] of css.matchAll(/\.(-?[_a-zA-Z][\w-]*)/g))
+    names.add(name!)
+}
+
+/** Every class name any shipped external stylesheet keys a rule on. */
 export function definedClasses(files: string[]): Set<string> {
   const names = new Set<string>()
-  for (const file of files) {
-    for (const [, name] of readFileSync(file, 'utf8').matchAll(/\.(-?[_a-zA-Z][\w-]*)/g))
-      names.add(name!)
-  }
+  for (const file of files)
+    addDefinedClasses(readFileSync(file, 'utf8'), names)
   return names
 }
 
 export function unstyledClasses(page: string, raw: string, defined: Set<string>): Finding[] {
   const findings: Finding[] = []
+  // A layout may ship its rules inline. Keep those definitions local to this
+  // page so one workspace cannot hide missing styles on another route.
+  const pageDefined = new Set(defined)
+  for (const [, css] of markup(raw).matchAll(/<style\b[^>]*>([\s\S]*?)<\/style>/gi))
+    addDefinedClasses(css!, pageDefined)
   const body = visible(raw)
   const seen = new Set<string>()
   for (const [, value] of body.matchAll(/\sclass="([^"]+)"/g)) {
     for (const name of value!.split(/\s+/)) {
       // stx writes a scope class per render and a wrapper id per component.
       if (!name || name.startsWith('lsu-sz') || name.startsWith('stx_')) continue
-      if (defined.has(name) || UNSTYLED_ALLOWED.has(name) || seen.has(name)) continue
+      if (pageDefined.has(name) || UNSTYLED_ALLOWED.has(name) || seen.has(name)) continue
       seen.add(name)
       findings.push({ page, rule: 'unstyled-class', detail: name })
     }
