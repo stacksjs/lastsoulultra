@@ -87,7 +87,7 @@
     "@stacksjs/ts-cloud": "0.16.116",
     "@ts-maps/stx": "0.5.7",
     "bun-plugin-stx": "0.2.818",
-    "stacks": "0.75.525",
+    "stacks": "0.75.528",
     "ts-images": "0.2.33",
     "ts-maps": "0.5.7"
   },
