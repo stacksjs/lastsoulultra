@@ -15,13 +15,14 @@ The iPhone app is distributed through TestFlight to invited testers. Ask whoever
 
 ## Sign in
 
-You can sign in three ways:
+On the website, signing in asks one thing at a time. The first page asks only for your email address. Choose **Continue**:
 
-- **Email and password.** The supplied demo accounts all use this.
-- **Continue with HQ.** If you already train with HQ, use that account instead of making a new one. HQ asks which parts of your profile, devices and training history to share with Last Soul Ultra. Your account here stays Last Soul Ultra's own record. The sign-in page also accepts your HQ email and password directly.
-- **Sign in with Apple**, in the iPhone app. Google sign-in is not set up for Last Soul Ultra.
+- If that address belongs to an HQ account, the next page offers **Continue with HQ**. HQ asks you to sign in there and which parts of your profile, devices and training history to share with Last Soul Ultra, then sends you straight back. Your account here stays Last Soul Ultra's own record. If your Last Soul Ultra account also has a password of its own, choose **Sign in with a password instead**.
+- Any other address goes straight to your **Password**. The supplied demo accounts all sign in this way.
 
-Creating an account starts with your email address alone. If that address already belongs to an HQ account, the next screen offers **Continue with HQ** or a separate Last Soul Ultra account with its own password.
+**Change email** takes you back to the first page. In the iPhone app you can also use **Sign in with Apple**. Google sign-in is not set up for Last Soul Ultra.
+
+Creating an account works the same way: your email address first. If it already belongs to an HQ account, the next screen offers **Continue with HQ** or a separate Last Soul Ultra account with its own password.
 
 ## The first sign-in
 

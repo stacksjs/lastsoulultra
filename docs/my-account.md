@@ -7,7 +7,7 @@ description: Understand preview access, training sign-in, linking an HQ account,
 
 ## Two sign-ins in the preview
 
-The browser's preview password unlocks the race site and this guide. Your training account is separate: you sign into it with your email and password, with **Continue with HQ**, or with Apple in the iPhone app. Passing the preview gate does not sign you into an athlete, coach or administrator account. See [Getting started](/getting-started#sign-in) for each sign-in method.
+The browser's preview password unlocks the race site and this guide. Your training account is separate: you sign into it with your email and password or with **Continue with HQ** (the website asks for your email first and offers HQ when the address is an HQ account), or with Apple in the iPhone app. Passing the preview gate does not sign you into an athlete, coach or administrator account. See [Getting started](/getting-started#sign-in) for each sign-in method.
 
 ## Signing in with an HQ account
 
