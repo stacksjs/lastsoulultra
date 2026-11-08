@@ -69,7 +69,11 @@ export const tsCloud: TsCloudConfig = {
       runtimeVersion: source.bun,
       reverseDns: `mail.${new URL(deployment.origin).hostname}`,
       managedServices: {
-        postgres: true,
+        // Every release, daemon and scheduler holds a pool. A release whose
+        // pools never close filled max_connections (97 of 100 on 2026-11-07)
+        // until the next deploy could not get a slot to migrate; ts-cloud
+        // writes this on every deploy and ends sessions already idle past it.
+        postgres: { settings: { idle_session_timeout: '15min' } },
         typesense: { version: '30.2', apiKey: env.LSU_TYPESENSE_API_KEY || '', bindAddress: '127.0.0.1' },
         mail: {
           mode: 'server', version: '0.3.26', hostname: `mail.${new URL(deployment.origin).hostname}`,
