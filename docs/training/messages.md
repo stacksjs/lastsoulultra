@@ -7,7 +7,7 @@ description: Open account conversations and distinguish messages from training f
 
 ## Your inbox
 
-Open [Messages](https://lsu.stacksjs.com/coaching/messages) while signed in. Select a conversation to read its messages and confirm the recipient before replying. The inbox belongs to your account; it is not automatically a race-support channel.
+Open [Messages](https://lsu.stacksjs.com/coaching/messages) while signed in. In the iPhone app, Messages is the speech bubble beside the tabs; it shows how many messages are unread. Select a conversation to read its messages and confirm the recipient before replying. The inbox belongs to your account; it is not automatically a race-support channel.
 
 ## Messages and feedback have different jobs
 

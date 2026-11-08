@@ -1,27 +1,47 @@
 ---
 title: Getting started
-description: Unlock the preview, sign into training and choose the right review account.
+description: Unlock the preview, sign into training and find your way around the website and the iPhone app.
 ---
 
 # Getting started
 
 ## Enter the private preview
 
-Open [Last Soul Ultra](https://lsu.stacksjs.com). Your browser first asks for the shared preview username and password. This protects the entire site, including this guide. It is separate from your personal app account.
+Open [Last Soul Ultra](https://lsu.stacksjs.com). Your browser first asks for the shared preview username and password. This protects the race site and this guide. It is separate from your personal training account.
 
-Open **Coaching**, then **Open your training**. Sign in with your personal account when prompted. For a demonstration, use the account supplied for the role you want to review. See [Roles and plan access](/roles) for the account differences and the [demo walkthrough](/demo) for a suggested review.
+Training itself runs at [training.lsu.stacksjs.com](https://training.lsu.stacksjs.com), which is not behind the preview password. The race site's **Coaching** pages show that training app inside them, and the iPhone app connects to it directly. Open **Coaching**, then sign in with your personal account when prompted. For a demonstration, use the account supplied for the role you want to review. See [Roles and plan access](/roles) for the account differences and the [demo walkthrough](/demo) for a suggested review.
 
-The first time you sign into the iOS app it asks you to agree to LSU's terms, LSU's privacy policy and the training platform's Health & Safety information before anything else. The terms and privacy policy are LSU's own documents. The LSU app has no guided tour, by design: the platform's own tour walks through the platform's screens rather than LSU's, so its absence here is intended rather than missing.
+The iPhone app is distributed through TestFlight to invited testers. Ask whoever sent you this guide for an invitation.
+
+## Sign in
+
+You can sign in three ways:
+
+- **Email and password.** The supplied demo accounts all use this.
+- **Continue with HQ.** If you already train with HQ, use that account instead of making a new one. HQ asks which parts of your profile, devices and training history to share with Last Soul Ultra. Your account here stays Last Soul Ultra's own record. The sign-in page also accepts your HQ email and password directly.
+- **Sign in with Apple**, in the iPhone app. Google sign-in is not set up for Last Soul Ultra.
+
+Creating an account starts with your email address alone. If that address already belongs to an HQ account, the next screen offers **Continue with HQ** or a separate Last Soul Ultra account with its own password.
+
+## The first sign-in
+
+The first time you sign in, the app asks you to agree to Last Soul Ultra's terms, its privacy policy and the Health & Safety information before anything else. The terms and privacy policy are Last Soul Ultra's own documents.
+
+A short welcome tour follows. It walks through the main screens, asks a few setup questions and offers to connect a watch or health service. Choose **Skip** to go straight to the app. You can take it again at any time from **Settings**, under **Take the tour again** (**Tour erneut starten** in German).
 
 ## Find your way around
 
-The race site's header has Home, Format, World Series, Soul Races, Sponsorship, Coaching, **Contact & FAQ** and Profile, plus a **Request a race entry** button. Results are not in the header: they are in the footer, under **Results overview**. Coaching leads to the training tiers, workouts, feedback, progress, method library, health, messages and account screens.
+The race site's header has Home, Format, World Series, Soul Races, Sponsorship, Coaching, **Contact & FAQ** and Profile, plus a **Request a race entry** button. Results are not in the header: they are in the footer, under **Results overview**. Coaching leads to the training sections: **Store**, **Workouts**, **Say how it felt**, **Progress**, **The method**, **Health**, **Messages** and **Me**.
 
-The app has five tabs: **Store**, **Workouts**, **Health**, **Messages** and **Me**. Feedback, Progress and your method library do not get a tab of their own. Open them from the buttons above the content, labelled **Training feedback**, **Training progress** and **Your methods**. Those are the app's own words: the website calls the same three Say how it felt, Progress and The method, so a step that says "open Say how it felt" means **Training feedback** once you are in the app. Progress also leads the **Health** tab. A section appears only once LSU has published it and your account has an active plan.
+The iPhone app is the complete training app in Last Soul Ultra's colors and typefaces:
 
-The app follows the brand's language. In German the same five tabs read **Store**, **Training**, **Gesundheit**, **Nachrichten** and **Ich**, so the tab this guide calls Workouts is labelled Training there.
+- Five tabs along the bottom: **Today**, **Workouts**, **Progress**, **Health** and **Me**. In German they read **Heute**, **Workouts**, **Fortschritt**, **Gesundheit** and **Ich**.
+- **Store** and **Calendar** at the top left, **Sharing** and **Discover** at the top right.
+- A **Messages** bubble beside the tabs, showing how many messages are unread, and an add button next to it.
 
-On the website, phone navigation keeps the first five destinations at the bottom and the remaining destinations above the content; desktop navigation sits at the side. The iOS app shows the same screens but navigates differently: its five tabs are built in, and there is no second row above the content.
+Your Last Soul Ultra subscription has a screen of its own. Open **Me**, choose **Coaching accounts**, then the subscription. That screen has buttons for each training section. Three of them use different words from the website: **Training feedback** is the website's Say how it felt, **Training progress** is its Progress, and **Your methods** is The method. A step in this guide that says "open Say how it felt" means **Training feedback** in the app.
+
+A section appears only once Last Soul Ultra has published it, and most need an active plan.
 
 ## Check your account
 
@@ -31,4 +51,4 @@ Use your own account for private training and messages. Sign out before trying a
 
 ## If a screen is empty
 
-Check that you signed into the intended account, that its subscription grants access and that the module has been published. A visitor without a subscription can browse offers but does not receive a subscriber's workouts. See [Troubleshooting](/troubleshooting).
+Check that you signed into the intended account, that its subscription grants access and that the section has been published. A visitor without a subscription can browse offers but does not receive a subscriber's workouts. See [Troubleshooting](/troubleshooting).

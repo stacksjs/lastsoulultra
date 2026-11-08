@@ -9,11 +9,11 @@ Last Soul Ultra brings race information and your training into one place. Use th
 
 ## Read this first
 
-This guide covers the Last Soul Ultra private preview. The whole site, including this guide, sits behind one shared username and password. Your own app email and password are separate from it.
+This guide covers the Last Soul Ultra private preview. The race site, including this guide, sits behind one shared username and password. Your training account, on the website and in the iPhone app, is separate from it.
 
 Three steps, in order:
 
-1. [Getting started](/getting-started) takes you past the preview password and into the app.
+1. [Getting started](/getting-started) takes you past the preview password, through signing in and around the app.
 2. [Demo walkthrough](/demo) holds the review accounts, their passwords and a suggested route through the app.
 3. [Roles and plan access](/roles) explains which account can do what.
 
@@ -29,7 +29,7 @@ Three steps, in order:
 | Review completed training | [Progress](/training/progress) |
 | Review health summaries and connected sources | [Health](/training/health) |
 | Read account conversations | [Messages](/training/messages) |
-| Check your own account, sign-out and billing | [Your account](/my-account) |
+| Sign in with an HQ account, sign out or manage billing | [Your account](/my-account) |
 | Understand who can see what | [Privacy and account boundaries](/privacy) |
 | Review LSU typefaces, colors and interface examples | [Style Guide](/style-guide/) |
 | Review every supplied workout figure | [Illustrations and SVG animations](/style-guide/illustrations) |

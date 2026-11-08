@@ -7,9 +7,9 @@ description: Open planned sessions, record completed training and understand cal
 
 ## Open your sessions
 
-Open [Workouts](https://lsu.stacksjs.com/coaching/calendar). Sign in as a subscriber. Select a session to inspect its title, sport, date, planned duration, distance and instructions. Read any warm-up, main effort and cool-down steps before recording a result.
+Open [Workouts](https://lsu.stacksjs.com/coaching/calendar) on the website. In the iPhone app, **Today** shows the day's session and **Calendar**, at the top left, shows the weeks around it. The **Workouts** tab is where you record a workout of your own and keep saved workouts. Sign in as a subscriber. Select a session to inspect its title, sport, date, planned duration, distance and instructions. Read any warm-up, main effort and cool-down steps before recording a result.
 
-Only sessions from the plan you are signed up to appear in the LSU app. An account with no plan can have an empty calendar.
+The calendar shows the training on your account: sessions from the plans you are signed up to, workouts you record or import, and any history you brought across with **Continue with HQ**. An account with no plan and no recorded training has an empty calendar.
 
 ## Exercise demonstrations
 
@@ -25,7 +25,7 @@ Use the notes or [feedback screen](/training/feedback) to explain missed or chan
 
 Move through the displayed calendar range or load more sessions when offered. Dates use your account's time zone. [Progress](/training/progress) counts training across every plan you are signed up to, and can include completed sessions outside the calendar's current window.
 
-The iOS app keeps your coming sessions and their exercise videos on the phone, so **Workouts** still opens where there is no signal and sends what you recorded once you are back online. If the app closes during a session, it reopens that session where the clock had reached. Where notifications are on, the app refreshes your calendar when your plan is synced. Turning on airplane mode and opening Workouts is the quickest way to check this.
+The iPhone app keeps your coming sessions and their exercise videos on the phone, so **Today** and **Calendar** still open where there is no signal, and the app sends what you recorded once you are back online. If the app closes during a session, it reopens that session where the clock had reached. Where notifications are on, the app refreshes your calendar when your plan is synced. Turning on airplane mode and opening Calendar is the quickest way to check this.
 
 ## Changes to a plan
 
