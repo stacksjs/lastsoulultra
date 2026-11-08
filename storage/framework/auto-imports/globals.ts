@@ -10,6 +10,9 @@ Object.assign(globalThis, autoImports)
 
 // TypeScript declarations
 declare global {
+  const storedConsent: typeof autoImports.storedConsent
+  const rememberConsent: typeof autoImports.rememberConsent
+  const loadAnalytics: typeof autoImports.loadAnalytics
   const parseBrand: typeof autoImports.parseBrand
   const formatPrice: typeof autoImports.formatPrice
   const formatTrial: typeof autoImports.formatTrial
@@ -31,8 +34,28 @@ declare global {
   const toggleDark: typeof autoImports.toggleDark
   const isDark: typeof autoImports.isDark
   const preferredDark: typeof autoImports.preferredDark
+  const entryTasks: typeof autoImports.entryTasks
+  const entryFee: typeof autoImports.entryFee
+  const entryDeadline: typeof autoImports.entryDeadline
+  const placeToConfirm: typeof autoImports.placeToConfirm
+  const profileReturnUrl: typeof autoImports.profileReturnUrl
+  const openCheckout: typeof autoImports.openCheckout
+  const LOGISTICS_FIELDS: typeof autoImports.LOGISTICS_FIELDS
+  const SIZES: typeof autoImports.SIZES
+  const wait: typeof autoImports.wait
   const raceAccount: typeof autoImports.raceAccount
   const formValues: typeof autoImports.formValues
+  const duelCaption: typeof autoImports.duelCaption
+  const raceTimeline: typeof autoImports.raceTimeline
+  const raceAt: typeof autoImports.raceAt
+  const raceMs: typeof autoImports.raceMs
+  const raceReadout: typeof autoImports.raceReadout
+  const hoursForSouls: typeof autoImports.hoursForSouls
+  const soulsAtPointer: typeof autoImports.soulsAtPointer
+  const drawAttrition: typeof autoImports.drawAttrition
+  const RACE_YARDS: typeof autoImports.RACE_YARDS
+  const RACE_STARTERS: typeof autoImports.RACE_STARTERS
+  const raceCards: typeof autoImports.raceCards
   const moveGallery: typeof autoImports.moveGallery
   const galleryPosition: typeof autoImports.galleryPosition
   const nextLoop: typeof autoImports.nextLoop

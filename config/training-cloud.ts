@@ -10,6 +10,11 @@ export function trainingSites(): NonNullable<CloudConfig['sites']> {
   const secrets = process.env
   const mediaLauncher = readFileSync(new URL('../enterprise/start-training.sh', import.meta.url), 'utf8').trimEnd()
   const launcher = `/bin/sh ${shared}/media/start-training.sh`
+  // A queue worker runs one job at a time and needs a connection or two, not
+  // the ten a web process may. Ten long-lived processes at ten each filled
+  // Postgres' 100 slots and locked the deploy out of its own database, so the
+  // workers cap their pools (honoured by @stacksjs/database 0.75.525 and later).
+  const worker = `/usr/bin/env DB_POOL_MAX=2 ${launcher}`
   const runtime = {
     HOST: '127.0.0.1', APP_ENV: 'production', NODE_ENV: 'production',
     APP_NAME: 'Last Soul Ultra', APP_URL: deployment.origin, APP_DOMAIN: new URL(deployment.origin).hostname,
@@ -61,17 +66,17 @@ export function trainingSites(): NonNullable<CloudConfig['sites']> {
       scheduler: true,
       daemons: [
         // The catch-all queue, and a gym's webhook deliveries, as HQ's own deploy runs them.
-        {name:'coaching-jobs',command:`${launcher} node_modules/@stacksjs/ts-cloud/dist/bin/stacks-queue-worker.js --queue=default,webhooks --concurrency=1`},
+        {name:'coaching-jobs',command:`${worker} node_modules/@stacksjs/ts-cloud/dist/bin/stacks-queue-worker.js --queue=default,webhooks --concurrency=1`},
         // Wind-down reminders, in-app pushes and notification deliveries, and emails: the queues HQ's own deploy gives a worker.
-        {name:'notifications',command:`${launcher} node_modules/@stacksjs/ts-cloud/dist/bin/stacks-queue-worker.js --queue=notifications,emails --concurrency=1`},
+        {name:'notifications',command:`${worker} node_modules/@stacksjs/ts-cloud/dist/bin/stacks-queue-worker.js --queue=notifications,emails --concurrency=1`},
         // Device syncs and provider events HQ relays.
-        {name:'connection-sync',command:`${launcher} node_modules/@stacksjs/ts-cloud/dist/bin/stacks-queue-worker.js --queue=connection-sync,connection-events --concurrency=1`},
+        {name:'connection-sync',command:`${worker} node_modules/@stacksjs/ts-cloud/dist/bin/stacks-queue-worker.js --queue=connection-sync,connection-events --concurrency=1`},
         // HQ profile, history, relay receipts and cleanup stay responsive during long device syncs.
-        {name:'hq-platform',command:`${launcher} node_modules/@stacksjs/ts-cloud/dist/bin/stacks-queue-worker.js --queue=platform-history --concurrency=1`},
-        {name:'garmin-sync',command:`${launcher} node_modules/@stacksjs/ts-cloud/dist/bin/stacks-queue-worker.js --queue=garmin-direct --concurrency=1`},
-        {name:'exercise-media',command:`${launcher} node_modules/@stacksjs/ts-cloud/dist/bin/stacks-queue-worker.js --queue=exercise-media --concurrency=1`},
+        {name:'hq-platform',command:`${worker} node_modules/@stacksjs/ts-cloud/dist/bin/stacks-queue-worker.js --queue=platform-history --concurrency=1`},
+        {name:'garmin-sync',command:`${worker} node_modules/@stacksjs/ts-cloud/dist/bin/stacks-queue-worker.js --queue=garmin-direct --concurrency=1`},
+        {name:'exercise-media',command:`${worker} node_modules/@stacksjs/ts-cloud/dist/bin/stacks-queue-worker.js --queue=exercise-media --concurrency=1`},
         // The kit's bounded profile-index rebuilds and request-retention batches.
-        {name:'search-maintenance',command:`${launcher} node_modules/@stacksjs/ts-cloud/dist/bin/stacks-queue-worker.js --queue=search,maintenance --concurrency=1`},
+        {name:'search-maintenance',command:`${worker} node_modules/@stacksjs/ts-cloud/dist/bin/stacks-queue-worker.js --queue=search,maintenance --concurrency=1`},
         {name:'local-speech',command:`/usr/bin/env COACHING_SPEECH_RUNTIME_DIR=${runtime.COACHING_SPEECH_RUNTIME_DIR} ${launcher} --local-speech`,restart:'on-failure'},
       ],
     },
