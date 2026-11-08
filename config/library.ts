@@ -15,7 +15,8 @@ export default {
   author: 'Chris Breuer',
   contributors: ['Chris Breuer <chris@stacksjs.com>'],
   defaultLanguage: 'en',
-  releaseable: true,
+  // The race site is an application, not a published library: the release must not build entry points for the template's hello-world package.
+  releaseable: false,
 
   webComponents: {
     name: 'hello-world-elements',
