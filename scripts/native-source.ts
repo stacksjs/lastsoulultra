@@ -34,10 +34,13 @@ export function assertInstalledKit(directory = kitRoot): void {
 /**
  * The first-run tour's phones show LSU's own screens, photographed from LSU's
  * branded build (native/onboarding, written by HQ's scripts/onboarding-screens.ts
- * with PRODUCT=last-soul-ultra), in place of HQ's. They must describe every
- * screen the kit's tour shows, at the kit's size: a pin that adds a tour page
- * fails here until it is photographed, rather than showing HQ's picture.
+ * with PRODUCT=last-soul-ultra), in place of HQ's. LSU serves athletes and
+ * coaches, so it photographs their tours (and breathwork, which athletes
+ * see), not the gym, member and staff ones. Every screen of those tours must
+ * be there, at the kit's size: a pin that adds a page to them fails here
+ * until it is photographed, rather than showing HQ's picture.
  */
+export const LSU_TOUR_SCREENS = /^(?:athlete|coach|breathwork)\./
 export function installOnboardingScreens(ours = join(root, 'native/onboarding'), target = sourceRoot): void {
   const kitManifest = join(target, 'resources/functions/onboarding-screens.json')
   if (!existsSync(kitManifest)) throw new Error('This HQ kit has no onboarding-screens.json; pin a kit that reads tour screens from it')
@@ -46,7 +49,7 @@ export function installOnboardingScreens(ours = join(root, 'native/onboarding'),
   if (lsu.product !== product.identity.slug) throw new Error(`native/onboarding was photographed from ${lsu.product ?? 'HQ'}, not ${product.identity.slug}`)
   if (lsu.viewport?.width !== kit.viewport?.width || lsu.viewport?.height !== kit.viewport?.height)
     throw new Error(`native/onboarding is ${lsu.viewport?.width}x${lsu.viewport?.height}; the kit's tour draws ${kit.viewport?.width}x${kit.viewport?.height}`)
-  const missing = Object.keys(kit.screens ?? {}).filter(id => !lsu.screens?.[id])
+  const missing = Object.keys(kit.screens ?? {}).filter(id => LSU_TOUR_SCREENS.test(id) && !lsu.screens?.[id])
   if (missing.length) throw new Error(`native/onboarding is missing tour screens: ${missing.join(', ')}; photograph them (HQ scripts/onboarding-screens.ts)`)
   const pictures = join(target, 'public/assets/images/onboarding')
   mkdirSync(pictures, { recursive: true })

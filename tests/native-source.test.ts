@@ -124,6 +124,10 @@ it('shows LSU\'s own screens in the tour, and refuses a kit tour page LSU has no
     // A kit whose tour gained a page fails until LSU photographs it.
     writeFileSync(join(kit, 'resources/functions/onboarding-screens.json'), JSON.stringify({ product: null, viewport, screens: { 'coach.roster': screen('coach-roster'), 'coach.atp': screen('coach-atp') } }))
     expect(() => installOnboardingScreens(ours, kit)).toThrow('missing tour screens: coach.atp')
+    // LSU serves athletes and coaches: the gym, member and staff tours are not its to photograph.
+    writeFileSync(join(kit, 'resources/functions/onboarding-screens.json'), JSON.stringify({ product: null, viewport, screens: { 'coach.roster': screen('coach-roster'), 'gym.today': screen('gym-today'), 'member.classes': screen('member-classes') } }))
+    expect(() => installOnboardingScreens(ours, kit)).not.toThrow()
+    expect(Object.keys(JSON.parse(readFileSync(join(kit, 'resources/functions/onboarding-screens.json'), 'utf8')).screens)).toEqual(['coach.roster'])
     // HQ's own pictures, or another size, are not LSU's.
     writeFileSync(join(kit, 'resources/functions/onboarding-screens.json'), JSON.stringify({ product: null, viewport: { width: 390, height: 844 }, screens: { 'coach.roster': screen('coach-roster') } }))
     expect(() => installOnboardingScreens(ours, kit)).toThrow('the kit\'s tour draws 390x844')
