@@ -234,6 +234,7 @@ const wave = [28, 46, 70, 52, 88, 64, 40, 76, 96, 58, 34, 62, 84, 48, 72, 100, 6
       <a class="btn btn-lg" href="{{ appStoreUrl }}">App Store</a>
       <a class="btn btn-lg" href="{{ playStoreUrl }}">Google Play</a>
     </div>
+    <a class="app-textlink" href="/coaching/calendar">Already training? Sign in on the web <span aria-hidden="true">→</span></a>
   </div>
   <div class="app-door">
     <h2>Coaching<br><span class="accent">runners?</span></h2>

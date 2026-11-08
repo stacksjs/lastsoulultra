@@ -479,12 +479,11 @@ const rrYardCount = derived(() => rrSource.results.filter(row => Number(row.yard
 </div>
 </div>
 </details>
-<details class="ls-e ls-win" data-y="67" data-r="2" data-c="m" data-n="ello elosrouti" data-b="93" data-s="2400,45,3104,64,2690,704,917,1200,45,596,1,172128,57776" data-l="3004,2843,2900,2686,2934,2786,2916,2500,2766,2836,2821,2570,2595,2842,2484,2686,2636,2678,2641,2510,2685,2622,2534,2462,2520,2679,2702,2697,2817,2765,2563,2689,2751,2818,2672,2667,2429,2626,2634,2760,2737,2636,2750,2589,2400,2491,2506,2480,2561,2667,2707,2742,2792,2691,2633,2662,2744,2876,2842,2943,2574,2440,2835,3104" :show="rrMatch(&quot;ello elosrouti&quot;, &quot;93&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;ello elosrouti&quot;, &quot;93&quot;, &quot;2&quot;)">
-<summary class="ls-row" style="--w:100.00%" aria-label="Rank 2, Ello Elosrouti, 67 yards, 449.3 kilometres, DE, Last soul">
+<details class="ls-e" data-y="67" data-r="2" data-c="m" data-n="ello elosrouti" data-b="93" data-s="2400,45,3104,64,2690,704,917,1200,45,596,1,172128,57776" data-l="3004,2843,2900,2686,2934,2786,2916,2500,2766,2836,2821,2570,2595,2842,2484,2686,2636,2678,2641,2510,2685,2622,2534,2462,2520,2679,2702,2697,2817,2765,2563,2689,2751,2818,2672,2667,2429,2626,2634,2760,2737,2636,2750,2589,2400,2491,2506,2480,2561,2667,2707,2742,2792,2691,2633,2662,2744,2876,2842,2943,2574,2440,2835,3104" :show="rrMatch(&quot;ello elosrouti&quot;, &quot;93&quot;, &quot;m&quot;)" :style="'order:' + rrOrder(&quot;ello elosrouti&quot;, &quot;93&quot;, &quot;2&quot;)">
+<summary class="ls-row" style="--w:100.00%" aria-label="Rank 2, Ello Elosrouti, 67 yards, 449.3 kilometres, DE">
 <span class="ls-rk">
 <i>00</i>2</span>
-<span class="ls-nm">Ello Elosrouti<b class="ls-tag ls-tag-win">Last soul</b>
-</span>
+<span class="ls-nm">Ello Elosrouti</span>
 <span class="ls-yd">67</span>
 <span class="ls-km">449.3</span>
 <span class="ls-nat">DE</span>
@@ -493,9 +492,9 @@ const rrYardCount = derived(() => rrSource.results.filter(row => Number(row.yard
 </summary>
 <div class="ls-pnl">
 <div class="ls-pnl-in">
-<p class="ls-pnl-line">Bib 93 · DE · Men · DNF · final yard at Mon 06:00</p>
+<p class="ls-pnl-line">Bib 93 · DE · Men · DNF · out at Mon 07:00</p>
 <p class="ls-pnl-note">Matched Gottwald lap for lap, then withdrew with an inflamed Achilles tendon. Came back in 2026 and ran 93.</p>
-<p class="ls-pnl-said">67 yards inside a 11:44 spread.</p>
+<p class="ls-pnl-said">Lost 6:35 between yard 62 and yard 63.</p>
 </div>
 </div>
 </details>

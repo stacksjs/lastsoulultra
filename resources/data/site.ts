@@ -31,7 +31,7 @@ export function absolute(path: string): string {
 export const indexablePaths: string[] = [
   '/', '/format', '/world-series', '/soul-races', '/sponsorship', '/contact',
   '/lottery', '/results', '/results/last-soul-ultra-2026', '/results/last-soul-ultra-2025',
-  '/imprint', '/privacy', '/terms', '/coaching', '/app', '/app/coaches',
+  '/imprint', '/privacy', '/terms', '/coaching', '/app', '/app/coaches', '/press',
   // /faq is served, and stays served: it is a URL the previous site published
   // and other people's links still point at. It is not listed, because it
   // renders the contact page and canonicalises to /contact - advertising a
@@ -59,3 +59,10 @@ export function daysUntilRace(): number | null {
   const days = Math.ceil((start - Date.now()) / 86400000)
   return days > 0 ? days : null
 }
+
+/**
+ * The Google Analytics 4 property this site reports to. It only ever loads
+ * after a reader accepts the consent banner (resources/functions/analytics.ts).
+ * Set GA_MEASUREMENT_ID to an empty string to turn analytics and the banner off.
+ */
+export const analyticsId: string = process.env.GA_MEASUREMENT_ID ?? 'G-0MMFR4S2T0'

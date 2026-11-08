@@ -1,0 +1,61 @@
+/* /press, the press kit: logos, rules, colour, photos and the boilerplate.
+   Ported from the published site and scoped to .press-page, because several
+   of its class names (.label, .rule, .about) are generic. */
+.press-page .press-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px}
+.press-page .press-lead{max-width:640px;color:var(--lsu-dim-1);font-size:17px;line-height:1.6;margin:18px 0 40px}
+.press-page .pad-top{padding-top:var(--lsu-head-gap)}
+.press-page .logo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:1px;background:var(--lsu-line);border:1px solid var(--lsu-line)}
+.press-page .logo-tile{margin:0;display:flex;flex-direction:column;background:var(--lsu-black)}
+.press-page .logo-tile>img,.press-page .tile-box{flex:1;aspect-ratio:16 / 10;width:100%;object-fit:contain;padding:18% 16%;box-sizing:border-box}
+.press-page .logo-tile.light{background:#fff}
+.press-page .tile-box{display:grid;place-items:center;padding:10%}
+.press-page .tile-box img{width:70%;aspect-ratio:1;object-fit:contain;background:#000;padding:0 12%;box-sizing:border-box;outline:1px solid var(--lsu-line)}
+.press-page .logo-tile figcaption{margin-top:auto;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:16px 20px;border-top:1px solid var(--lsu-line);background:var(--lsu-black);font-size:14px;color:var(--lsu-dim-1)}
+.press-page .dl{display:flex;gap:14px;font-family:var(--lsu-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase}
+.press-page .dl a:hover{color:var(--lsu-red)}
+.press-page .usage-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(380px,100%),1fr));gap:40px;margin:40px 0 72px}
+.press-page .rule p{color:var(--lsu-dim-1);max-width:480px;line-height:1.6;margin-top:12px}
+.press-page .rule h3{margin-top:24px}
+.press-page .clear-demo,.press-page .min-demo{height:260px;display:grid;place-items:center;border:1px solid var(--lsu-line);background:var(--lsu-black)}
+.press-page .clear-box{--h: 44px;padding:var(--h);outline:1px dashed rgba(221,15,21,.8);background:repeating-linear-gradient(45deg,transparent 0 8px,rgba(221,15,21,.08) 8px 9px)}
+.press-page .clear-box img{height:var(--h);display:block;outline:1px solid var(--lsu-line)}
+.press-page .min-demo{gap:14px;align-content:center}
+.press-page .min-demo img{width:120px}
+.press-page .donts-head{margin-bottom:24px}
+.press-page .donts{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr));gap:1px;background:var(--lsu-line);border:1px solid var(--lsu-line)}
+.press-page .donts li{background:var(--lsu-black);display:flex;flex-direction:column;font-size:14px;color:var(--lsu-dim-1)}
+.press-page .donts li>span{padding:14px 18px;border-top:2px solid var(--lsu-red)}
+.press-page .dont-demo{height:150px;display:grid;place-items:center;overflow:hidden}
+.press-page .dont-demo img{width:60%}
+.press-page .stretch img{transform:scaleX(1.5) scaleY(.7)}
+.press-page .rotate img{transform:rotate(-14deg)}
+.press-page .recolour img{filter:brightness(0) saturate(100%) invert(14%) sepia(97%) saturate(6000%) hue-rotate(355deg)}
+.press-page .shadow img{filter:drop-shadow(4px 6px 0 #dd0f15) drop-shadow(0 0 10px #fff)}
+.press-page .bright{background:url(/assets/lsu/images/recap-05-540.webp) center / cover}
+.press-page .bright img{filter:none}
+.press-page .swatches{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr));gap:24px}
+.press-page .chip{aspect-ratio:3 / 2;border:1px solid var(--lsu-line);margin-bottom:12px}
+.press-page .hex{font-family:var(--lsu-mono);font-size:15px;margin-top:4px}
+.press-page .type-grid{margin-top:56px;border-top:1px solid var(--lsu-line)}
+.press-page .type-row{display:grid;grid-template-columns:220px 1fr;gap:24px;align-items:baseline;padding:24px 0;border-bottom:1px solid var(--lsu-line-faint)}
+.press-page .spec-anton{font-family:var(--lsu-display);font-size:clamp(34px,5vw,64px);text-transform:uppercase;line-height:1.05}
+.press-page .spec-barlow{font-size:22px}
+.press-page .spec-mono{font-family:var(--lsu-mono);font-size:22px;letter-spacing:.14em}
+@media(max-width:700px){.press-page .type-row{grid-template-columns:1fr;gap:8px}
+}
+.press-page .photo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));gap:16px}
+.press-page .photo-grid figure{margin:0}
+.press-page .photo-grid img{width:100%;aspect-ratio:4 / 5;object-fit:cover;filter:grayscale(1);display:block}
+.press-page .photo-grid figcaption{display:flex;justify-content:space-between;padding-top:10px;font-size:13px}
+.press-page .photo-grid a{font-family:var(--lsu-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase}
+.press-page .about{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:56px}
+.press-page .about .label{margin-top:16px}
+@media(max-width:900px){.press-page .about{grid-template-columns:1fr;gap:24px}
+}
+.press-page .boiler{margin:0;padding:0 0 0 24px;border-left:2px solid var(--lsu-red);font-size:18px;line-height:1.7;max-width:760px}
+.press-page .press-contact{display:flex;flex-wrap:wrap;gap:48px;margin-top:40px}
+.press-page .press-contact a{font-size:20px;text-decoration:underline;text-underline-offset:3px}
+.press-page .press-contact a:hover{color:var(--lsu-red)}
+.press-page .label{color:var(--lsu-dim-2)}
+.press-page .tint{background:var(--lsu-band);border-top:1px solid var(--lsu-line-faint);border-bottom:1px solid var(--lsu-line-faint)}
+.press-page .accent{color:var(--lsu-red)}

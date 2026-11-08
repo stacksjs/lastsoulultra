@@ -8,5 +8,6 @@
     <main id="main" tabindex="-1">@slot('content')</main>
     <SiteFooter current="{{ typeof canonicalPath !== 'undefined' ? canonicalPath : '' }}" />
   </div>
+  <SiteConsent />
 </body>
 </html>

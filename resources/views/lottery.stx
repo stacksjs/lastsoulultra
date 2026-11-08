@@ -42,7 +42,7 @@ onMount(() => { lsuReadEntries() })
 <div class="lsu-scope-lottery phero-copy">
 <div class="kicker lsu-scope-lottery" :text="lsuEntryKicker()"></div>
 <h1 class="lsu-scope-lottery">Request a race entry</h1>
-<p class="lsu-scope-lottery">Submit an entry request for an open event. Sending a request does not guarantee a place. Places are allocated through a combination of LSU team selection and a random draw. We will email you with the next steps if you are selected. Know <a href="/format">what a backyard ultra asks of you</a> before you do.</p>
+<p class="lsu-scope-lottery">Submit an entry request for an open event. Sending a request does not guarantee a place. Places are selected by the LSU team. We will email you with the next steps if you are selected. Know <a href="/format">what a backyard ultra asks of you</a> before you do.</p>
 </div>
 </section>
 <section id="form" class="entry lsu-scope-lottery">
@@ -79,28 +79,28 @@ onMount(() => { lsuReadEntries() })
 <div class="lsu-scope-lottery step-n">02</div>
 <div class="lsu-scope-lottery step-copy">
 <div class="lsu-scope-lottery step-title">Wait for the close</div>
-<div class="lsu-scope-lottery step-body">Entry requests close on a deadline that is published once it is confirmed.</div>
+<div class="lsu-scope-lottery step-body">Each event shows its closing date on the entry form, in your own time zone.</div>
 </div>
 </div>
 <div class="lsu-scope-lottery step">
 <div class="lsu-scope-lottery step-n">03</div>
 <div class="lsu-scope-lottery step-copy">
 <div class="lsu-scope-lottery step-title">Athletes are selected</div>
-<div class="lsu-scope-lottery step-body">Places are allocated through a combination of LSU team selection and a random draw. If you are selected, we email you with the next steps.</div>
+<div class="lsu-scope-lottery step-body">Places are selected by the LSU team. If you are selected, we email you with the next steps.</div>
 </div>
 </div>
 <div class="lsu-scope-lottery step">
 <div class="lsu-scope-lottery step-n">04</div>
 <div class="lsu-scope-lottery step-copy">
 <div class="lsu-scope-lottery step-title">Confirm your place</div>
-<div class="lsu-scope-lottery step-body">Using your code, complete the entry within the confirmation window shown for your event.</div>
+<div class="lsu-scope-lottery step-body">Within seven days, on your profile: sign the participant agreement and pay the entry fee. A free place only needs the signature.</div>
 </div>
 </div>
 <div class="lsu-scope-lottery step">
 <div class="lsu-scope-lottery step-n">05</div>
 <div class="lsu-scope-lottery step-copy">
 <div class="lsu-scope-lottery step-title">Confirmation email</div>
-<div class="lsu-scope-lottery step-body">Once your payment is confirmed you receive a final confirmation email.</div>
+<div class="lsu-scope-lottery step-body">Once your place is confirmed you receive a confirmation email.</div>
 </div>
 </div>
 <div class="lsu-scope-lottery step">
@@ -120,7 +120,7 @@ onMount(() => { lsuReadEntries() })
 </div>
 <div class="band-copy lsu-scope-lottery" data-px="-0.1">
 <p class="lsu-scope-lottery"> One request per person. <span class="accent lsu-scope-lottery">No guarantee of a place.</span>
-<br class="lsu-scope-lottery">Selection is by LSU team and a random draw. </p>
+<br class="lsu-scope-lottery">Places are selected by the LSU team. </p>
 </div>
 </section>
 @endsection

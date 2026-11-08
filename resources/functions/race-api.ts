@@ -32,7 +32,7 @@ export function raceAccount() {
         applications.set([])
       }
       const detail = result?.error || result
-      throw new Error(detail?.message || `The request could not be completed (${response.status})`)
+      throw Object.assign(new Error(detail?.message || `The request could not be completed (${response.status})`), { status: response.status })
     }
     return result
   }

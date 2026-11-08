@@ -1,0 +1,27 @@
+/* Confirming a selected race place on the profile: three tasks, a progress
+   bar of three segments, and the agreement text in a scrollable box. */
+.confirm-place{margin:0 0 40px;padding:clamp(20px,3vw,32px);border:1px solid rgba(221,15,21,.62);background:#0b0203}
+.confirm-place.is-confirmed{border-color:rgba(255,255,255,.3);background:var(--lsu-card)}
+.confirm-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:8px 20px}
+.confirm-head h3{margin:0;font:400 clamp(22px,2.4vw,32px)/1.1 var(--lsu-display);text-transform:uppercase}
+.confirm-count{margin:0;font:13px var(--lsu-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--lsu-dim-2)}
+.confirm-bar{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin:18px 0}
+.confirm-bar span{height:4px;background:rgba(255,255,255,.14)}
+.confirm-bar span.on{background:var(--lsu-red)}
+.confirm-place.is-confirmed .confirm-bar span.on{background:var(--lsu-white)}
+.confirm-lead{margin:0 0 18px;color:var(--lsu-dim-1);line-height:1.6}
+.confirm-place .tasks{margin:0;padding:0;list-style:none;border-top:1px solid var(--lsu-line-soft)}
+.confirm-place .task{border-bottom:1px solid var(--lsu-line-soft)}
+.confirm-place .task summary{display:flex;justify-content:space-between;gap:16px;padding:16px 0;cursor:pointer;list-style:none}
+.confirm-place .task summary::-webkit-details-marker{display:none}
+.confirm-place .task-title{font-weight:600}
+.confirm-place .task-state{font:13px var(--lsu-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--lsu-dim-2)}
+.confirm-place .task.is-done .task-state{color:var(--lsu-white)}
+.confirm-place .task.is-todo .task-state{color:var(--lsu-seg-red)}
+.confirm-place .confirm-form{display:flex;flex-direction:column;gap:14px;padding:0 0 22px}
+.confirm-place .waiver-text{max-height:280px;overflow:auto;padding:16px;border:1px solid var(--lsu-line);background:#000;white-space:pre-wrap;font-size:14px;line-height:1.6;color:var(--lsu-dim-1)}
+.confirm-place .step-done,.confirm-place .step-note{margin:0 0 18px;color:var(--lsu-dim-1);line-height:1.6}
+.confirm-place .step-link{margin-left:8px;padding:0;border:0;background:none;color:var(--lsu-red);font:inherit;text-decoration:underline;cursor:pointer}
+.confirm-place .form-sub{margin:8px 0 0;font:13px var(--lsu-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--lsu-dim-2)}
+.confirm-place .form-message.error{color:#ff6065}
+.confirm-place .form-message.success{color:var(--lsu-white)}

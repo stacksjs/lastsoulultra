@@ -1,5 +1,6 @@
 <script client>
 import { raceAccount, formValues } from '../functions/race-api'
+import { SIZES, entryDeadline, entryFee, entryTasks, openCheckout, placeToConfirm, profileReturnUrl, wait } from '../functions/entry-confirm'
 const rp = raceAccount()
 const rpUser = rp.user
 const rpApplications = rp.applications
@@ -98,9 +99,92 @@ async function rpWithdraw(slug) {
   catch (error) { rpError.set(error.message || 'Could not withdraw') }
   finally { rpBusy.set(false) }
 }
+/* Confirming a selected place: the agreement, the race details and the fee. */
+const rpPlace = derived(() => placeToConfirm(rpApplications()))
+const rpTasks = derived(() => entryTasks(rpPlace()?.entry))
+const rpPlaceConfirmed = derived(() => rpPlace()?.entry?.status === 'confirmed')
+const rpPayStatus = derived(() => rpPlace()?.entry?.payment?.status || 'unpaid')
+const rpFee = derived(() => entryFee(rpPlace()?.entry?.payment))
+const rpWaiver = state(null)
+const rpWaiverState = state('idle')
+const rpSigner = state('')
+const rpAccept = state(false)
+const rpMedical = state(false)
+const rpEditDetails = state(false)
+const rpConfirmNote = state('')
+const rpConfirmBad = state(false)
+function rpNote(text, bad = false) { rpConfirmNote.set(text); rpConfirmBad.set(bad) }
+async function rpLoadWaiver() {
+  const entry = rpPlace()?.entry
+  if (!entry || rpTasks().signed || rpPlaceConfirmed()) return
+  rpWaiverState.set('loading')
+  try {
+    rpWaiver.set(await rp.request('/entries/' + encodeURIComponent(entry.id) + '/waiver'))
+    rpWaiverState.set('ready')
+  }
+  catch (error) { rpWaiverState.set(error.status === 404 ? 'missing' : 'failed') }
+}
+async function rpRefresh(done) {
+  const before = rpPlace()?.entry?.status
+  await rp.load()
+  if (done) rpNote(before === 'selected' && rpPlace()?.entry?.status === 'confirmed' ? done + ' That was the last one: your place is confirmed.' : done)
+}
+async function rpSign() {
+  const entry = rpPlace()?.entry
+  if (!entry || !rpWaiver() || rpBusy()) return
+  rpBusy.set(true)
+  try {
+    await rp.request('/entries/' + encodeURIComponent(entry.id) + '/waiver/sign', 'POST', { waiver_version_id: rpWaiver().id, signer_name: rpSigner().trim(), accepted: rpAccept(), medical_attested: rpMedical() })
+    await rpRefresh('Agreement signed.')
+  }
+  catch (error) { rpNote(error.message || 'The agreement could not be signed', true) }
+  finally { rpBusy.set(false) }
+}
+async function rpSaveDetails(event) {
+  const entry = rpPlace()?.entry
+  if (!entry || rpBusy()) return
+  rpBusy.set(true)
+  try {
+    const values = formValues(event)
+    const body = Object.fromEntries(Object.entries(values).map(([key, value]) => [key, String(value).trim() || null]))
+    await rp.request('/entries/' + encodeURIComponent(entry.id) + '/logistics', 'PUT', body)
+    rpEditDetails.set(false)
+    await rpRefresh('Your details are saved.')
+  }
+  catch (error) { rpNote(error.message || 'Your details could not be saved', true) }
+  finally { rpBusy.set(false) }
+}
+async function rpPay() {
+  const entry = rpPlace()?.entry
+  if (!entry || rpBusy()) return
+  rpBusy.set(true)
+  try {
+    const checkout = await rp.request('/entries/' + encodeURIComponent(entry.id) + '/payment/checkout', 'POST', { return_url: profileReturnUrl() })
+    if (!openCheckout(checkout?.url)) throw new Error('The payment page could not be opened. Please try again.')
+  }
+  catch (error) { rpNote(error.message || 'The payment page could not be opened', true); rpBusy.set(false) }
+}
+async function rpAfterPayment(result) {
+  if (result === 'cancelled') { rpNote('Payment cancelled. Nothing was charged; you can pay whenever you are ready.', true); return }
+  if (result !== 'success' || !rpPlace()) return
+  if (rpPayStatus() === 'paid') { rpNote('Payment received. Thank you.'); return }
+  rpNote('Thank you. Confirming your payment…')
+  for (let attempt = 0; attempt < 10; attempt++) {
+    await wait(2000)
+    await rp.load()
+    if (rpPayStatus() === 'paid') { rpNote('Payment received.'); return }
+  }
+  rpNote('Your payment is still being confirmed. We will email you when it lands.')
+}
+watch(() => rpPlace()?.entry?.id, () => {
+  rpSigner.set([rpUser()?.first_name, rpUser()?.last_name].filter(Boolean).join(' '))
+  rpLoadWaiver()
+})
+
 onMount(async () => {
   await rp.load()
   const query = useRoute().query || {}
+  if (query.payment) rpAfterPayment(String(query.payment))
   if (['create', 'login', 'forgot', 'verify', 'reset'].includes(query.auth)) rpMode.set(query.auth === 'create' ? 'register' : query.auth)
   rpEventSlug.set(String(query.event || rpEvents().find(item => item.phase === 'open')?.slug || ''))
   rpChoose()
@@ -124,7 +208,50 @@ onDestroy(() => rpAutosave.stop())
   </template>
   <template :if="rpSigned && rpUser">
     <h2 :text="'Hello, ' + rpUser.first_name"></h2><button type="button" class="btn btn-outline" @click="rp.logout()">Sign out</button>
-    <section><h3>Your entries</h3><p :if="!rpApplications.length">You have not requested a race entry yet.</p><article :for="item in rpApplications"><h4 :text="item.event.name"></h4><p :text="item.application.display_status || item.application.status"></p><p :if="item.entry?.deadline_at" :text="'Confirmation deadline: ' + item.entry.deadline_at"></p><details :if="item.event.phase === 'open' && item.application.status !== 'withdrawn'"><summary>Withdraw this application</summary><p>This removes your application from this event.</p><button type="button" class="btn btn-outline" :disabled="rpBusy" @click="rpWithdraw(item.event.slug)">Withdraw my application</button></details></article></section>
+    <section :if="rpPlace" class="confirm-place" :class="rpPlaceConfirmed ? 'is-confirmed' : ''" aria-labelledby="confirm-title">
+      <div class="confirm-head"><h3 id="confirm-title" :text="(rpPlaceConfirmed ? 'Your place is confirmed' : 'Confirm your place') + ': ' + rpPlace.event.name"></h3><p class="confirm-count" :text="rpTasks.done + ' of 3 done'"></p></div>
+      <div class="confirm-bar" role="progressbar" aria-label="Tasks done" aria-valuemin="0" aria-valuemax="3" :aria-valuenow="rpTasks.done"><span :class="rpTasks.done > 0 ? 'on' : ''"></span><span :class="rpTasks.done > 1 ? 'on' : ''"></span><span :class="rpTasks.done > 2 ? 'on' : ''"></span></div>
+      <p class="confirm-lead" :text="rpPlaceConfirmed ? 'Agreement signed, details saved, fee settled. See you on the start line.' : (rpPlace.entry.deadline_at ? 'Three things to do by ' + entryDeadline(rpPlace.entry.deadline_at) : 'Three things to do') + ', in any order. Your place confirms itself the moment the last one is done.'"></p>
+      <p :if="rpConfirmNote" class="form-message" :class="rpConfirmBad ? 'error' : 'success'" :text="rpConfirmNote" role="status"></p>
+      <ol class="tasks">
+        <li class="task" :class="rpTasks.signed ? 'is-done' : 'is-todo'"><details :open="!rpTasks.signed"><summary><span class="task-title">1. Participant agreement</span><span class="task-state" :text="rpTasks.signed ? 'Signed' : rpWaiverState === 'missing' ? 'Not published yet' : 'To do'"></span></summary>
+          <p :if="rpTasks.signed" class="step-done">Signed, with your medical self-attestation.</p>
+          <p :if="!rpTasks.signed && rpWaiverState === 'missing'" class="step-done">The agreement for this race is not published yet. We will email you when it is. Your details and the fee can be done now.</p>
+          <p :if="!rpTasks.signed && rpWaiverState === 'failed'" class="step-done">The agreement could not be loaded. Reload the page to try again.</p>
+          <form :if="!rpTasks.signed && rpWaiverState !== 'missing' && rpWaiverState !== 'failed'" class="confirm-form" @submit.prevent="rpSign()">
+            <div class="waiver-text" tabindex="0" :text="rpWaiver ? (rpWaiver.title || 'Participant agreement') + '\n\n' + (rpWaiver.body_markdown || '') : 'Loading the agreement…'"></div>
+            <label>Full name, as your signature<input x-model="rpSigner" autocomplete="name" minlength="2" maxlength="200" required></label>
+            <label class="check"><input type="checkbox" x-model="rpAccept" required>I have read the participant agreement and I accept it.</label>
+            <label class="check"><input type="checkbox" x-model="rpMedical" required>Medical self-attestation: I am fit to take part in a race of this kind and know of no condition that makes it unsafe for me.</label>
+            <button type="submit" class="btn" :disabled="rpBusy || !rpWaiver || !rpAccept || !rpMedical">Sign the agreement</button>
+          </form>
+        </details></li>
+        <li class="task" :class="rpTasks.details ? 'is-done' : 'is-todo'"><details :open="rpTasks.signed && !rpTasks.details"><summary><span class="task-title">2. Your race details</span><span class="task-state" :text="rpTasks.details ? 'Saved' : 'To do'"></span></summary>
+          <p :if="rpTasks.details && !rpEditDetails" class="step-done">Address, sizes and emergency contact saved. <button type="button" class="step-link" @click="rpEditDetails.set(true)">Change them</button></p>
+          <form :if="!rpTasks.details || rpEditDetails" class="confirm-form" @submit.prevent="rpSaveDetails($event)">
+            <label>Address<input name="address_line1" maxlength="200" autocomplete="address-line1" :value="rpPlace.entry.logistics?.address_line1 || ''" required></label>
+            <label>Address line 2 (optional)<input name="address_line2" maxlength="200" autocomplete="address-line2" :value="rpPlace.entry.logistics?.address_line2 || ''"></label>
+            <div class="field-row"><label>Town or city<input name="city" maxlength="200" autocomplete="address-level2" :value="rpPlace.entry.logistics?.city || ''" required></label><label>Postcode<input name="postcode" maxlength="200" autocomplete="postal-code" :value="rpPlace.entry.logistics?.postcode || ''" required></label></div>
+            <div class="field-row"><label>Country, three-letter code<input name="country" minlength="3" maxlength="3" placeholder="DEU" :value="rpPlace.entry.logistics?.country || ''" required></label><label>Phone<input name="phone" type="tel" maxlength="200" autocomplete="tel" :value="rpPlace.entry.logistics?.phone || ''" required></label></div>
+            <div class="field-row"><label>Top size<select name="top_size" :value="rpPlace.entry.logistics?.top_size || ''" required><option value="">Choose…</option><option :for="size in SIZES" :value="size" :text="size"></option></select></label><label>Bottom size<select name="bottom_size" :value="rpPlace.entry.logistics?.bottom_size || ''" required><option value="">Choose…</option><option :for="size in SIZES" :value="size" :text="size"></option></select></label></div>
+            <p class="form-sub">Emergency contact</p>
+            <div class="field-row"><label>Name<input name="emergency_name" maxlength="200" :value="rpPlace.entry.logistics?.emergency_name || ''" required></label><label>Phone<input name="emergency_phone" type="tel" maxlength="200" :value="rpPlace.entry.logistics?.emergency_phone || ''" required></label></div>
+            <label>Relationship<input name="emergency_relationship" maxlength="200" placeholder="Partner, parent, friend…" :value="rpPlace.entry.logistics?.emergency_relationship || ''" required></label>
+            <button type="submit" class="btn" :disabled="rpBusy">Save my details</button>
+          </form>
+        </details></li>
+        <li class="task" :class="rpTasks.paid ? 'is-done' : 'is-todo'"><details :open="rpTasks.signed && rpTasks.details && !rpTasks.paid"><summary><span class="task-title">3. Entry fee</span><span class="task-state" :text="rpPayStatus === 'paid' ? 'Settled' : rpPayStatus === 'pending' ? 'Being confirmed' : rpPayStatus === 'failed' ? 'Did not go through' : rpFee + ' to pay'"></span></summary>
+          <p :if="rpPayStatus === 'paid'" class="step-done">Settled. Nothing more to pay.</p>
+          <p :if="rpPayStatus === 'pending'" class="step-done">Your payment is being confirmed. This page updates when it lands.</p>
+          <template :if="rpPayStatus !== 'paid' && rpPayStatus !== 'pending'">
+            <p :if="rpPayStatus === 'failed'" class="error form-message">The last payment did not go through. You can try again.</p>
+            <button type="button" class="btn" :disabled="rpBusy" @click="rpPay()" :text="'Pay ' + rpFee"></button>
+            <p class="step-note">You will pay on a secure card page and come back here.</p>
+          </template>
+        </details></li>
+      </ol>
+    </section>
+    <section><h3>Your entries</h3><p :if="!rpApplications.length">You have not requested a race entry yet.</p><article :for="item in rpApplications"><h4 :text="item.event.name"></h4><p :text="item.application.display_status || item.application.status"></p><p :if="item.entry?.deadline_at" :text="'Confirm by ' + entryDeadline(item.entry.deadline_at)"></p><details :if="item.event.phase === 'open' && item.application.status !== 'withdrawn'"><summary>Withdraw this application</summary><p>This removes your application from this event.</p><button type="button" class="btn btn-outline" :disabled="rpBusy" @click="rpWithdraw(item.event.slug)">Withdraw my application</button></details></article></section>
     <label>Event<select x-model="rpEventSlug" @change="rpChoose()"><option value="">Choose a race</option><option :for="event in rpEvents" :value="event.slug" :text="event.name"></option></select></label>
     <p :if="rpEvent && rpEvent.phase !== 'open'">This event is not accepting direct entry requests. <a href="/world-series#qualify">View the entry and qualification rules.</a></p>
     <template :if="rpEvent && rpEvent.phase === 'open'">

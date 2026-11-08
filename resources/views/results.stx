@@ -9,7 +9,7 @@ const canonicalPath = "/results"
 <div class="phero-copy">
 <div class="kicker">Every edition · every yard</div>
 <h1>Results</h1>
-<p>Every edition, every runner, every yard, straight from the race database. Season 3 is 2027: <a href="/world-series">request a race entry</a> for an open event. Places are allocated through a combination of LSU team selection and a random draw.</p>
+<p>Every edition, every runner, every yard, straight from the race database. Season 3 is 2027: <a href="/world-series">request a race entry</a> for an open event. Places are selected by the LSU team.</p>
 </div>
 </section>
 <LiveBoard archived="2025,2026" />
@@ -54,7 +54,7 @@ const canonicalPath = "/results"
 <div class="card-name">Ayyoub El Osrouti</div>
 <div class="card-num">93<span> yards</span>
 </div>
-<div class="card-body">≈623.7 km</div>
+<div class="card-body">Stopped with Achilles inflammation. Runner-up at the first edition too.</div>
 </div>
 <div class="card">
 <div class="card-kicker">Third</div>
@@ -69,7 +69,7 @@ const canonicalPath = "/results"
 <dl class="event-meta">
 <div>
 <dt>Location</dt>
-<dd>Bornheim, Germany</dd>
+<dd>Fürstenau, Germany</dd>
 </div>
 <div>
 <dt>Hourly loop</dt>

@@ -1,0 +1,139 @@
+@extends('layouts/LSU')
+@section('content')
+<script server>
+import { productionPages } from '~/resources/data/production-pages'
+const currentPage = productionPages["/press"]
+const canonicalPath = "/press"
+const logo = '/assets/lsu/images/lsu-logo.svg'
+const donts = [
+  { kind: 'stretch', label: 'Stretch or squash it' },
+  { kind: 'rotate', label: 'Rotate it' },
+  { kind: 'recolour', label: 'Recolour it' },
+  { kind: 'shadow', label: 'Add outlines or shadows' },
+  { kind: 'bright', label: 'Put it on a bright photo without a scrim' },
+]
+const photos = [
+  { preview: 'recap-02', file: 'lsu-photo-01.jpg', alt: 'A black-and-white portrait of a runner in a bandana and face covering, arms crossed.' },
+  { preview: 'recap-05', file: 'lsu-photo-02.jpg', alt: 'A group of runners with their arms round each other in the sun, bags at their feet.' },
+  { preview: 'recap-08', file: 'lsu-photo-03.jpg', alt: 'A smiling runner under the start arch, in black and white.' },
+  { preview: 'recap-11', file: 'lsu-photo-04.jpg', alt: 'A runner seen from behind under the red LOOP 88 clock.' },
+]
+</script>
+<div class="press-page">
+
+<section class="phero">
+  <div class="phero-copy">
+    <h1><span class="kicker">Press and media</span>Press kit</h1>
+    <p>Logos, photos and the facts, ready to use. Follow the rules below and you will not need to ask us first.</p>
+    <div class="press-actions">
+      <a href="/press/last-soul-ultra-press-kit.zip" class="btn" download>Download the full kit (zip)</a>
+      <a href="mailto:mail@lastsoulultra.com?subject=Press%20enquiry" class="btn-outline">Contact press</a>
+    </div>
+  </div>
+</section>
+
+<section class="pad-top">
+  <div class="shell statgrid">
+    <div><div class="stat-v">6.706</div><div class="stat-l">km every hour, on the hour</div></div>
+    <div><div class="accent stat-v">94</div><div class="stat-l">yards, the 2026 winning distance</div></div>
+    <div><div class="stat-v">2025</div><div class="stat-l">first edition, Germany</div></div>
+    <div><div class="stat-v">3+1</div><div class="stat-l">World Series: three qualifiers, one final</div></div>
+  </div>
+</section>
+
+<section class="section" id="logo">
+  <div class="shell">
+    <h2 class="h2">The logo</h2>
+    <p class="press-lead">The italic LSU is our only mark. There is no separate wordmark. Use white on dark, black on light.</p>
+    <div class="logo-grid">
+      <figure class="dark logo-tile">
+        <img src="/press/logo/lsu-logo-white.svg" alt="Last Soul Ultra logo in white" width="877" height="177">
+        <figcaption><span>White · for black and dark photos</span><span class="dl"><a href="/press/logo/lsu-logo-white.svg" download>SVG</a><a href="/press/logo/lsu-logo-white.png" download>PNG 2400px</a></span></figcaption>
+      </figure>
+      <figure class="light logo-tile">
+        <img src="/press/logo/lsu-logo-black.svg" alt="Last Soul Ultra logo in black" width="877" height="177">
+        <figcaption><span>Black · for white and light surfaces</span><span class="dl"><a href="/press/logo/lsu-logo-black.svg" download>SVG</a><a href="/press/logo/lsu-logo-black.png" download>PNG 2400px</a></span></figcaption>
+      </figure>
+      <figure class="logo-tile square">
+        <div class="tile-box"><img src="{{ logo }}" alt="Last Soul Ultra square avatar" width="877" height="177"></div>
+        <figcaption><span>Square tile · social avatar</span><span class="dl"><a href="/press/logo/lsu-logo-tile.png" download>PNG 1024px</a></span></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="section tint" id="usage">
+  <div class="shell">
+    <h2 class="h2">Using the logo</h2>
+    <div class="usage-grid">
+      <div class="rule">
+        <div class="clear-demo" aria-hidden="true"><div class="clear-box"><img src="{{ logo }}" alt="" width="877" height="177"></div></div>
+        <h3 class="h2-sm">Clear space</h3>
+        <p>Leave at least the mark's own height clear on every side. Nothing else sits inside that box.</p>
+      </div>
+      <div class="rule">
+        <div class="min-demo" aria-hidden="true"><img src="{{ logo }}" alt="" width="877" height="177"><span class="label">120 px · 30 mm</span></div>
+        <h3 class="h2-sm">Minimum size</h3>
+        <p>Never narrower than 120 px on screen or 30 mm in print. The SVG scales to any size above that.</p>
+      </div>
+    </div>
+    <h3 class="donts-head h2-sm">Don't</h3>
+    <ul class="donts">
+      @foreach(donts as dont)
+      <li><div class="dont-demo {{ dont.kind }}" aria-hidden="true"><img src="{{ logo }}" alt="" width="877" height="177"></div><span>{{ dont.label }}</span></li>
+      @endforeach
+    </ul>
+  </div>
+</section>
+
+<section class="section" id="colour">
+  <div class="shell">
+    <h2 class="h2">Colour and type</h2>
+    <p class="press-lead">Black page, white type, one red. Red marks one thing per view.</p>
+    <div class="swatches">
+      <div class="swatch"><div class="chip" style="background:#000"></div><div class="label">Black</div><div class="hex">#000000</div></div>
+      <div class="swatch"><div class="chip" style="background:#fff"></div><div class="label">White</div><div class="hex">#FFFFFF</div></div>
+      <div class="swatch"><div class="chip" style="background:#dd0f15"></div><div class="label">Brand red</div><div class="hex">#DD0F15</div></div>
+      <div class="swatch"><div class="chip" style="background:#0d0d0f"></div><div class="label">Card</div><div class="hex">#0D0D0F</div></div>
+    </div>
+    <div class="type-grid">
+      <div class="type-row"><span class="label">Anton · titles</span><span class="spec-anton">Last soul standing</span></div>
+      <div class="type-row"><span class="label">Barlow · copy</span><span class="spec-barlow">One loop every hour, until one runner is left.</span></div>
+      <div class="type-row"><span class="label">Share Tech Mono · data</span><span class="spec-mono">YARD 94 · 630.4 KM</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section tint" id="photos">
+  <div class="shell">
+    <h2 class="h2">Photos</h2>
+    <p class="press-lead">Free for editorial use. Ask us before using one in advertising.</p>
+    <div class="photo-grid">
+      @foreach(photos as photo)
+      <figure>
+        <img src="/assets/lsu/images/{{ photo.preview }}-810.webp" alt="{{ photo.alt }}" width="810" height="1080" loading="lazy" decoding="async">
+        <figcaption><span class="label">JPEG · 1080 × 1440</span><a href="/press/photos/{{ photo.file }}" download>Download</a></figcaption>
+      </figure>
+      @endforeach
+    </div>
+  </div>
+</section>
+
+<section class="section" id="about">
+  <div class="about shell">
+    <div>
+      <h2 class="h2">About Last Soul Ultra</h2>
+      <p class="label">Boilerplate · copy as written</p>
+    </div>
+    <div>
+      <blockquote class="boiler">Last Soul Ultra is a backyard ultramarathon founded by Kim Gottwald. Runners complete a 6.706 km loop every hour, on the hour, until one is left. The 2026 edition was won by Mark Dowdle at 94 yards, the furthest a backyard ultra has gone on German soil. The Last Soul Ultra World Series runs qualifiers in the USA, the UK and Australia, leading to one final in Germany.</blockquote>
+      <div class="press-contact">
+        <div><div class="label">Press contact</div><a href="mailto:mail@lastsoulultra.com?subject=Press%20enquiry">mail@lastsoulultra.com</a></div>
+        <div><div class="label">Instagram</div><a href="https://www.instagram.com/lastsoulultra">@lastsoulultra</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>
+@endsection

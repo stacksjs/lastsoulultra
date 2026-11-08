@@ -10,15 +10,17 @@ export const productionPages: Record<string, { title: string, description: strin
     "description": "Your Last Soul Ultra account in one place: entry requests, confirmed places and past entries, signed in with the same account you use in the race app.",
     "styles": [
       "/assets/styles/production/base.css",
-      "/assets/styles/production/profile.css"
+      "/assets/styles/production/profile.css",
+      "/assets/styles/production/confirm-place.css"
     ]
   },
   "/lottery": {
     "title": "Request a backyard ultra race entry - Last Soul Ultra",
-    "description": "Request an entry to an open Last Soul Ultra event. One request per person. Places are allocated through a combination of LSU team selection and a random draw.",
+    "description": "Request an entry to an open Last Soul Ultra event. One request per person. Places are selected by the LSU team.",
     "styles": [
       "/assets/styles/production/base.css",
-      "/assets/styles/production/race-entry.css"
+      "/assets/styles/production/race-entry.css",
+      "/assets/styles/production/confirm-place.css"
     ]
   },
   "/format": {
@@ -37,6 +39,14 @@ export const productionPages: Record<string, { title: string, description: strin
       "/assets/styles/production/base.css",
       "/assets/styles/production/home.css",
       "/assets/styles/production/next-loop.css"
+    ]
+  },
+  "/press": {
+    "title": "Press and media - Last Soul Ultra",
+    "description": "Logos, brand rules, photos, facts and the press contact for Last Soul Ultra.",
+    "styles": [
+      "/assets/styles/production/base.css",
+      "/assets/styles/production/press.css"
     ]
   },
   "/app": {

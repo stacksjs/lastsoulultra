@@ -25,7 +25,7 @@ const rrYardCount = derived(() => rrSource.results.filter(row => Number(row.yard
 <span>Last Soul Ultra</span>
 <span>Official classification</span>
 <span>Season 2 · 14 August 2026 · 160 starters</span>
-<span>Bornheim, Germany</span>
+<span>Fürstenau, Germany</span>
 </div>
 <h1>Last Soul Ultra<span class="ls-yr">
 <span data-tpl="heroH1.1">Season 2</span> · 2026</span>
@@ -121,6 +121,7 @@ const rrYardCount = derived(() => rrSource.results.filter(row => Number(row.yard
 <div>
 <div class="ls-p3-kick">Assist · second</div>
 <div class="ls-p3-name">Ayyoub El Osrouti</div>
+<p class="ls-p3-note">Stopped with Achilles inflammation. Runner-up at the first edition too.</p>
 <div class="ls-p3-meta">Bib 98 · DE · Average 48:29 · Time on feet 75.2 h</div>
 </div>
 <div class="ls-p3-num">
@@ -484,7 +485,7 @@ const rrYardCount = derived(() => rrSource.results.filter(row => Number(row.yard
 <dl class="ls-meta" data-block="event-details">
 <div>
 <dt>Location</dt>
-<dd>Bornheim, Germany</dd>
+<dd>Fürstenau, Germany</dd>
 </div>
 <div>
 <dt>Hourly loop</dt>
@@ -3546,7 +3547,7 @@ const rrYardCount = derived(() => rrSource.results.filter(row => Number(row.yard
 </div>
 <div>
 <h3 class="ls-lg-t">One final solo lap</h3>
-<p class="ls-lg-b">El Osrouti does not start yard 94. Dowdle runs it alone on Tuesday morning and the race is over.</p>
+<p class="ls-lg-b">El Osrouti starts yard 94 and does not make it back. Dowdle finishes it alone on Tuesday morning and the race is over.</p>
 </div>
 </div>
 </div>

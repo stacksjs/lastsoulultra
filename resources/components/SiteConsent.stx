@@ -1,0 +1,29 @@
+<script server>
+import { analyticsId } from '~/resources/data/site'
+const gaId = analyticsId
+</script>
+<script client>
+import { loadAnalytics, rememberConsent, storedConsent } from '../functions/analytics'
+const lsuConsentBox = useRef('lsuConsentBox')
+const lsuConsentOpen = state(false)
+function lsuConsentId() { return lsuConsentBox.current?.dataset.ga || '' }
+function lsuConsent(answer) {
+  rememberConsent(answer)
+  lsuConsentOpen.set(false)
+  if (answer === 'granted') loadAnalytics(lsuConsentId())
+}
+onMount(() => {
+  const answer = storedConsent()
+  if (answer === 'granted') loadAnalytics(lsuConsentId())
+  else if (!answer && lsuConsentId()) lsuConsentOpen.set(true)
+})
+</script>
+@if(gaId)
+<div id="consent" x-ref="lsuConsentBox" data-ga="{{ gaId }}" class="consent lsu-ruz5wv6z" role="dialog" aria-live="polite" aria-label="Analytics consent" hidden :hidden="!lsuConsentOpen">
+<p class="consent-copy lsu-ruz5wv6z">We use Google Analytics to count visits and see which pages are read. It only runs if you accept it, and we load nothing else from anyone else. <a href="/privacy" class="lsu-ruz5wv6z">Privacy notice</a></p>
+<div class="consent-acts lsu-ruz5wv6z">
+<button type="button" class="consent-btn lsu-ruz5wv6z" @click="lsuConsent('denied')">Decline</button>
+<button type="button" class="consent-btn consent-btn-yes lsu-ruz5wv6z" @click="lsuConsent('granted')">Accept</button>
+</div>
+</div>
+@endif

@@ -21,7 +21,7 @@ onDestroy(() => lsuLoopClock.pause())
 <span class="kicker lsu-scope-format">What a backyard ultra is</span>One loop.<br class="lsu-scope-format">Every hour.<br class="lsu-scope-format">
 <span class="accent lsu-scope-format">One last soul.</span>
 </h1>
-<p class="lsu-scope-format">The simplest format in ultrarunning and the hardest to survive. There is no distance to reach and no overall time limit, only the next bell, and then the one after that. Places are allocated through a combination of LSU team selection and a random draw: <a href="/world-series">request a race entry</a> for an open event.</p>
+<p class="lsu-scope-format">The simplest format in ultrarunning and the hardest to survive. There is no distance to reach and no overall time limit, only the next bell, and then the one after that. The LSU team selects every place: <a href="/world-series">request a race entry</a> for an open event.</p>
 </div>
 </section>
 <section class="lsu-scope-format pad-top">
