@@ -11,7 +11,7 @@
         "@stacksjs/ts-cloud": "0.16.109",
         "@ts-maps/stx": "0.5.7",
         "bun-plugin-stx": "0.2.818",
-        "stacks": "0.75.497",
+        "stacks": "0.75.522",
         "ts-images": "0.2.33",
         "ts-maps": "0.5.7"
       },
@@ -31,7 +31,7 @@
       "name": "hello-world-fx",
       "version": "0.72.94",
       "devDependencies": {
-        "stacks": "^0.75.345"
+        "stacks": "^0.75.522"
       }
     }
   },
