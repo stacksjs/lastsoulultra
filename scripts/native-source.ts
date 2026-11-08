@@ -31,6 +31,35 @@ export function assertInstalledKit(directory = kitRoot): void {
     throw new Error(`The installed HQ platform kit (${kit.package}@${kit.version}, ${kit.revision?.slice(0, 9)}) is not the one native/hq-source.json pins; run pantry ci`)
 }
 
+/**
+ * The first-run tour's phones show LSU's own screens, photographed from LSU's
+ * branded build (native/onboarding, written by HQ's scripts/onboarding-screens.ts
+ * with PRODUCT=last-soul-ultra), in place of HQ's. They must describe every
+ * screen the kit's tour shows, at the kit's size: a pin that adds a tour page
+ * fails here until it is photographed, rather than showing HQ's picture.
+ */
+export function installOnboardingScreens(ours = join(root, 'native/onboarding'), target = sourceRoot): void {
+  const kitManifest = join(target, 'resources/functions/onboarding-screens.json')
+  if (!existsSync(kitManifest)) throw new Error('This HQ kit has no onboarding-screens.json; pin a kit that reads tour screens from it')
+  const kit = JSON.parse(readFileSync(kitManifest, 'utf8'))
+  const lsu = JSON.parse(readFileSync(join(ours, 'onboarding-screens.json'), 'utf8'))
+  if (lsu.product !== product.identity.slug) throw new Error(`native/onboarding was photographed from ${lsu.product ?? 'HQ'}, not ${product.identity.slug}`)
+  if (lsu.viewport?.width !== kit.viewport?.width || lsu.viewport?.height !== kit.viewport?.height)
+    throw new Error(`native/onboarding is ${lsu.viewport?.width}x${lsu.viewport?.height}; the kit's tour draws ${kit.viewport?.width}x${kit.viewport?.height}`)
+  const missing = Object.keys(kit.screens ?? {}).filter(id => !lsu.screens?.[id])
+  if (missing.length) throw new Error(`native/onboarding is missing tour screens: ${missing.join(', ')}; photograph them (HQ scripts/onboarding-screens.ts)`)
+  const pictures = join(target, 'public/assets/images/onboarding')
+  mkdirSync(pictures, { recursive: true })
+  for (const screen of Object.values(lsu.screens) as Array<{ light: string, dark: string }>) {
+    for (const url of [screen.light, screen.dark]) {
+      const file = url.split('?')[0]!.split('/').pop()!
+      if (!/^[a-z0-9-]+\.webp$/.test(file)) throw new Error(`Unexpected tour picture ${url}`)
+      copyFileSync(join(ours, file), join(pictures, file))
+    }
+  }
+  copyFileSync(join(ours, 'onboarding-screens.json'), kitManifest)
+}
+
 export async function prepareNativeSource(): Promise<void> {
   assertSourceLock(source)
   assertInstalledKit()
@@ -45,6 +74,7 @@ export async function prepareNativeSource(): Promise<void> {
   const installEnv = { ...process.env, PATH: `${dirname(process.execPath)}${delimiter}${process.env.PATH || ''}` }
   const install = Bun.spawn([process.execPath, 'install', '--frozen-lockfile'], { cwd: sourceRoot, env: installEnv, stdout: 'inherit', stderr: 'inherit' })
   if (await install.exited !== 0) throw new Error('HQ frozen dependency install failed')
+  installOnboardingScreens()
   const assets = join(sourceRoot, 'public/assets/native-product')
   mkdirSync(assets, { recursive: true })
   copyFileSync(join(root, 'public/assets/lsu/images/lsu-logo.svg'), join(assets, 'lsu-logo.svg'))

@@ -103,3 +103,40 @@ it('draws the launch splash with ts-images’ preset from the wordmark, on the b
   }
   finally { rmSync(directory, { recursive: true, force: true }) }
 })
+
+it('shows LSU\'s own screens in the tour, and refuses a kit tour page LSU has not photographed', async () => {
+  const { installOnboardingScreens } = await import('../scripts/native-source')
+  const directory = mkdtempSync(join(tmpdir(), 'lsu-tour-'))
+  const ours = join(directory, 'ours')
+  const kit = join(directory, 'kit')
+  const viewport = { width: 390, height: 790 }
+  const screen = (id: string) => ({ light: `/assets/images/onboarding/${id}-light.webp?v=1`, dark: `/assets/images/onboarding/${id}-dark.webp?v=1` })
+  try {
+    mkdirSync(ours, { recursive: true })
+    mkdirSync(join(kit, 'resources/functions'), { recursive: true })
+    for (const file of ['coach-roster-light.webp', 'coach-roster-dark.webp']) writeFileSync(join(ours, file), `lsu ${file}`)
+    writeFileSync(join(kit, 'resources/functions/onboarding-screens.json'), JSON.stringify({ product: null, viewport, screens: { 'coach.roster': screen('coach-roster') } }))
+    writeFileSync(join(ours, 'onboarding-screens.json'), JSON.stringify({ product: product.identity.slug, viewport, screens: { 'coach.roster': screen('coach-roster') } }))
+    installOnboardingScreens(ours, kit)
+    expect(readFileSync(join(kit, 'public/assets/images/onboarding/coach-roster-dark.webp'), 'utf8')).toBe('lsu coach-roster-dark.webp')
+    expect(JSON.parse(readFileSync(join(kit, 'resources/functions/onboarding-screens.json'), 'utf8')).product).toBe(product.identity.slug)
+
+    // A kit whose tour gained a page fails until LSU photographs it.
+    writeFileSync(join(kit, 'resources/functions/onboarding-screens.json'), JSON.stringify({ product: null, viewport, screens: { 'coach.roster': screen('coach-roster'), 'coach.atp': screen('coach-atp') } }))
+    expect(() => installOnboardingScreens(ours, kit)).toThrow('missing tour screens: coach.atp')
+    // HQ's own pictures, or another size, are not LSU's.
+    writeFileSync(join(kit, 'resources/functions/onboarding-screens.json'), JSON.stringify({ product: null, viewport: { width: 390, height: 844 }, screens: { 'coach.roster': screen('coach-roster') } }))
+    expect(() => installOnboardingScreens(ours, kit)).toThrow('the kit\'s tour draws 390x844')
+    writeFileSync(join(ours, 'onboarding-screens.json'), JSON.stringify({ product: null, viewport, screens: { 'coach.roster': screen('coach-roster') } }))
+    expect(() => installOnboardingScreens(ours, kit)).toThrow('photographed from HQ')
+  }
+  finally { rmSync(directory, { recursive: true, force: true }) }
+})
+
+it('ships a photographed screen for every picture its tour manifest names', () => {
+  const manifest = JSON.parse(readFileSync(join(root, 'native/onboarding/onboarding-screens.json'), 'utf8'))
+  expect(manifest.product).toBe(product.identity.slug)
+  for (const shot of Object.values(manifest.screens) as Array<{ light: string, dark: string }>) {
+    for (const url of [shot.light, shot.dark]) expect(existsSync(join(root, 'native/onboarding', url.split('?')[0]!.split('/').pop()!))).toBe(true)
+  }
+})

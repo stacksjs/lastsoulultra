@@ -1,0 +1,389 @@
+{
+  "product": "last-soul-ultra",
+  "viewport": {
+    "width": 390,
+    "height": 790
+  },
+  "screens": {
+    "athlete.calendar": {
+      "light": "/assets/images/onboarding/athlete-calendar-light.webp?v=2f0a61a894",
+      "dark": "/assets/images/onboarding/athlete-calendar-dark.webp?v=022612c688",
+      "top": {
+        "light": "#f2f2f7",
+        "dark": "#000000"
+      },
+      "ring": {
+        "x": 0.041,
+        "y": 0.582,
+        "w": 0.918,
+        "h": 0.231
+      }
+    },
+    "athlete.coach": {
+      "light": "/assets/images/onboarding/athlete-coach-light.webp?v=1a54d4e0c5",
+      "dark": "/assets/images/onboarding/athlete-coach-dark.webp?v=bc4b62d8b2",
+      "top": {
+        "light": "#f2f2f7",
+        "dark": "#000000"
+      },
+      "ring": {
+        "x": 0.064,
+        "y": 0.401,
+        "w": 0.869,
+        "h": 0.109
+      }
+    },
+    "athlete.heartrate": {
+      "light": "/assets/images/onboarding/athlete-heartrate-light.webp?v=387f908129",
+      "dark": "/assets/images/onboarding/athlete-heartrate-dark.webp?v=6a26b2bec9",
+      "top": {
+        "light": "#f2f2f7",
+        "dark": "#000000"
+      },
+      "ring": {
+        "x": 0.095,
+        "y": 0.428,
+        "w": 0.728,
+        "h": 0.243
+      }
+    },
+    "athlete.plans": {
+      "light": "/assets/images/onboarding/athlete-plans-light.webp?v=ceaf1e99b1",
+      "dark": "/assets/images/onboarding/athlete-plans-dark.webp?v=cde6f257b8",
+      "top": {
+        "light": "#f2f2f7",
+        "dark": "#000000"
+      },
+      "ring": {
+        "x": 0.351,
+        "y": 0.554,
+        "w": 0.298,
+        "h": 0.063
+      }
+    },
+    "athlete.player": {
+      "light": "/assets/images/onboarding/athlete-player-light.webp?v=9f1f0ddac1",
+      "dark": "/assets/images/onboarding/athlete-player-dark.webp?v=f745d9fb17",
+      "top": {
+        "light": "#f2f2f7",
+        "dark": "#000000"
+      },
+      "ring": {
+        "x": 0.041,
+        "y": 0.333,
+        "w": 0.918,
+        "h": 0.108
+      }
+    },
+    "athlete.progress": {
+      "light": "/assets/images/onboarding/athlete-progress-light.webp?v=66d29ab83b",
+      "dark": "/assets/images/onboarding/athlete-progress-dark.webp?v=8b63b2458a",
+      "top": {
+        "light": "#f2f2f7",
+        "dark": "#000000"
+      },
+      "ring": {
+        "x": 0.041,
+        "y": 0.265,
+        "w": 0.918,
+        "h": 0.496
+      }
+    },
+    "athlete.today": {
+      "light": "/assets/images/onboarding/athlete-today-light.webp?v=70bd15ab49",
+      "dark": "/assets/images/onboarding/athlete-today-dark.webp?v=29f2534abc",
+      "top": {
+        "light": "#f2f2f7",
+        "dark": "#000000"
+      },
+      "ring": {
+        "x": 0.082,
+        "y": 0.673,
+        "w": 0.836,
+        "h": 0.061
+      }
+    },
+    "athlete.wearables": {
+      "light": "/assets/images/onboarding/athlete-wearables-light.webp?v=fc03850ec4",
+      "dark": "/assets/images/onboarding/athlete-wearables-dark.webp?v=64b16718f8",
+      "top": {
+        "light": "#f5f5f7",
+        "dark": "#000000"
+      },
+      "ring": {
+        "x": 0.743,
+        "y": 0.626,
+        "w": 0.175,
+        "h": 0.03
+      }
+    },
+    "breathwork.plan": {
+      "light": "/assets/images/onboarding/breathwork-plan-light.webp?v=5bddbd109f",
+      "dark": "/assets/images/onboarding/breathwork-plan-dark.webp?v=622422b651",
+      "top": {
+        "light": "#f2f2f7",
+        "dark": "#000000"
+      },
+      "ring": {
+        "x": 0.092,
+        "y": 0.47,
+        "w": 0.358,
+        "h": 0.061
+      }
+    },
+    "coach.atp": {
+      "light": "/assets/images/onboarding/coach-atp-light.webp?v=5152a149ee",
+      "dark": "/assets/images/onboarding/coach-atp-dark.webp?v=56ba015e4b",
+      "top": {
+        "light": "#f2f2f7",
+        "dark": "#000000"
+      }
+    },
+    "coach.builder": {
+      "light": "/assets/images/onboarding/coach-builder-light.webp?v=911edb5e63",
+      "dark": "/assets/images/onboarding/coach-builder-dark.webp?v=f2f5bfc662",
+      "top": {
+        "light": "#f2f2f7",
+        "dark": "#000000"
+      },
+      "ring": {
+        "x": 0.095,
+        "y": 0.442,
+        "w": 0.398,
+        "h": 0.046
+      }
+    },
+    "coach.calendar": {
+      "light": "/assets/images/onboarding/coach-calendar-light.webp?v=f8a705ffea",
+      "dark": "/assets/images/onboarding/coach-calendar-dark.webp?v=007b4c33c8",
+      "top": {
+        "light": "#f2f2f7",
+        "dark": "#000000"
+      },
+      "ring": {
+        "x": 0.389,
+        "y": 0.168,
+        "w": 0.337,
+        "h": 0.046
+      }
+    },
+    "coach.plans": {
+      "light": "/assets/images/onboarding/coach-plans-light.webp?v=eeea1e732d",
+      "dark": "/assets/images/onboarding/coach-plans-dark.webp?v=30999a81e9",
+      "top": {
+        "light": "#f2f2f7",
+        "dark": "#000000"
+      },
+      "ring": {
+        "x": 0.398,
+        "y": 0.32,
+        "w": 0.285,
+        "h": 0.046
+      }
+    },
+    "coach.roster": {
+      "light": "/assets/images/onboarding/coach-roster-light.webp?v=ab7323805c",
+      "dark": "/assets/images/onboarding/coach-roster-dark.webp?v=1789450a84",
+      "top": {
+        "light": "#f2f2f7",
+        "dark": "#000000"
+      },
+      "ring": {
+        "x": 0.095,
+        "y": 0.372,
+        "w": 0.344,
+        "h": 0.046
+      }
+    },
+    "coach.store": {
+      "light": "/assets/images/onboarding/coach-store-light.webp?v=ca979cc60c",
+      "dark": "/assets/images/onboarding/coach-store-dark.webp?v=a38a72eb24",
+      "top": {
+        "light": "#f2f2f7",
+        "dark": "#000000"
+      },
+      "ring": {
+        "x": 0.041,
+        "y": 0.361,
+        "w": 0.343,
+        "h": 0.046
+      }
+    },
+    "gym.broadcasts": {
+      "light": "/assets/images/onboarding/gym-broadcasts-light.webp?v=aa29a03738",
+      "dark": "/assets/images/onboarding/gym-broadcasts-dark.webp?v=4e3dd2f4c0",
+      "top": {
+        "light": "#f2f2f7",
+        "dark": "#000000"
+      }
+    },
+    "gym.business": {
+      "light": "/assets/images/onboarding/gym-business-light.webp?v=89787d467f",
+      "dark": "/assets/images/onboarding/gym-business-dark.webp?v=3d87840e3a",
+      "top": {
+        "light": "#f2f2f7",
+        "dark": "#000000"
+      },
+      "ring": {
+        "x": 0.044,
+        "y": 0.312,
+        "w": 0.455,
+        "h": 0.137
+      }
+    },
+    "gym.members": {
+      "light": "/assets/images/onboarding/gym-members-light.webp?v=2f1360a280",
+      "dark": "/assets/images/onboarding/gym-members-dark.webp?v=d75568ec97",
+      "top": {
+        "light": "#f2f2f7",
+        "dark": "#000000"
+      },
+      "ring": {
+        "x": 0.041,
+        "y": 0.254,
+        "w": 0.918,
+        "h": 0.053
+      }
+    },
+    "gym.pos": {
+      "light": "/assets/images/onboarding/gym-pos-light.webp?v=f62ef8b6b1",
+      "dark": "/assets/images/onboarding/gym-pos-dark.webp?v=8e45b1d6ef",
+      "top": {
+        "light": "#f2f2f7",
+        "dark": "#000000"
+      },
+      "ring": {
+        "x": 0.095,
+        "y": 0.441,
+        "w": 0.392,
+        "h": 0.242
+      }
+    },
+    "gym.shifts": {
+      "light": "/assets/images/onboarding/gym-shifts-light.webp?v=0a963f754a",
+      "dark": "/assets/images/onboarding/gym-shifts-dark.webp?v=73a3b0f60b",
+      "top": {
+        "light": "#f2f2f7",
+        "dark": "#000000"
+      },
+      "ring": {
+        "x": 0.095,
+        "y": 0.372,
+        "w": 0.265,
+        "h": 0.046
+      }
+    },
+    "gym.timetable": {
+      "light": "/assets/images/onboarding/gym-timetable-light.webp?v=fa09f47c4d",
+      "dark": "/assets/images/onboarding/gym-timetable-dark.webp?v=7544366dcb",
+      "top": {
+        "light": "#f2f2f7",
+        "dark": "#000000"
+      },
+      "ring": {
+        "x": 0.095,
+        "y": 0.475,
+        "w": 0.81,
+        "h": 0.051
+      }
+    },
+    "gym.today": {
+      "light": "/assets/images/onboarding/gym-today-light.webp?v=f598fa33cc",
+      "dark": "/assets/images/onboarding/gym-today-dark.webp?v=36236165cd",
+      "top": {
+        "light": "#f2f2f7",
+        "dark": "#000000"
+      },
+      "ring": {
+        "x": 0.041,
+        "y": 0.25,
+        "w": 0.275,
+        "h": 0.056
+      }
+    },
+    "member.billing": {
+      "light": "/assets/images/onboarding/member-billing-light.webp?v=9128c7131e",
+      "dark": "/assets/images/onboarding/member-billing-dark.webp?v=f020a3fb56",
+      "top": {
+        "light": "#f2f2f7",
+        "dark": "#000000"
+      },
+      "ring": {
+        "x": 0.095,
+        "y": 0.684,
+        "w": 0.381,
+        "h": 0.046
+      }
+    },
+    "member.classes": {
+      "light": "/assets/images/onboarding/member-classes-light.webp?v=03649fe4da",
+      "dark": "/assets/images/onboarding/member-classes-dark.webp?v=6addf6ef33",
+      "top": {
+        "light": "#f2f2f7",
+        "dark": "#000000"
+      },
+      "ring": {
+        "x": 0.784,
+        "y": 0.482,
+        "w": 0.131,
+        "h": 0.035
+      }
+    },
+    "member.store": {
+      "light": "/assets/images/onboarding/member-store-light.webp?v=8ffb5f38e8",
+      "dark": "/assets/images/onboarding/member-store-dark.webp?v=b7836140b5",
+      "top": {
+        "light": "#ffffff",
+        "dark": "#000000"
+      },
+      "ring": {
+        "x": 0.041,
+        "y": 0.414,
+        "w": 0.718,
+        "h": 0.287
+      }
+    },
+    "staff.classes": {
+      "light": "/assets/images/onboarding/staff-classes-light.webp?v=e3a20a810c",
+      "dark": "/assets/images/onboarding/staff-classes-dark.webp?v=cf6fed32d8",
+      "top": {
+        "light": "#f2f2f7",
+        "dark": "#000000"
+      },
+      "ring": {
+        "x": 0.68,
+        "y": 0.688,
+        "w": 0.225,
+        "h": 0.041
+      }
+    },
+    "staff.desk": {
+      "light": "/assets/images/onboarding/staff-desk-light.webp?v=d547925378",
+      "dark": "/assets/images/onboarding/staff-desk-dark.webp?v=dc7b74e538",
+      "top": {
+        "light": "#f2f2f7",
+        "dark": "#000000"
+      },
+      "ring": {
+        "x": 0.041,
+        "y": 0.25,
+        "w": 0.275,
+        "h": 0.056
+      }
+    },
+    "staff.shifts": {
+      "light": "/assets/images/onboarding/staff-shifts-light.webp?v=f4f0ada727",
+      "dark": "/assets/images/onboarding/staff-shifts-dark.webp?v=90e8d55d4a",
+      "top": {
+        "light": "#f2f2f7",
+        "dark": "#000000"
+      },
+      "ring": {
+        "x": 0.769,
+        "y": 0.677,
+        "w": 0.136,
+        "h": 0.043
+      }
+    }
+  }
+}
