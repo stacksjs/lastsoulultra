@@ -1,9 +1,11 @@
+import { hiddenModelColumns } from '../../../../resources/functions/dashboard/model-columns'
 import type { RequestInstance } from '@stacksjs/types'
 import { Action } from '@stacksjs/actions/runtime'
 import { response as routerResponse } from '@stacksjs/router'
 import { safeGet } from '../../../../resources/functions/dashboard/data'
 import { resolveDashboardModel } from '../../../../resources/functions/dashboard/model-access'
 import { dashboardOperationalError } from '../dashboard-response'
+import { isUnmigratedTable } from './model-migration'
 import { isValidModelSlug, type ModelCreateField, type ModelWriteCapabilities, modelCreateFields, modelSchemaColumns, modelWritableColumns, modelWriteCapabilities, slugToPascal } from './model-write'
 
 /**
@@ -55,6 +57,8 @@ interface ResponseShape {
   writeCapabilities: ModelWriteCapabilities
   createFields: ModelCreateField[]
   updateColumns: string[]
+  /** False when the model's table does not exist yet: `./buddy migrate` creates it. */
+  migrated: boolean
   error: string | null
 }
 
@@ -83,17 +87,6 @@ function humanize(column: string): string {
 // dropped from the response body AND from the sort/filter allowlist: a
 // column you cannot see is still an enumeration oracle if you can sort or
 // filter by it.
-const HIDDEN_COLUMNS = new Set(['password', 'remember_token', 'api_token', 'access_token', 'refresh_token', 'secret', 'two_factor_secret'])
-
-function hiddenModelColumns(Model: any): Set<string> {
-  const hidden = new Set(HIDDEN_COLUMNS)
-  for (const [name, definition] of Object.entries(Model?.attributes ?? {})) {
-    if ((definition as { hidden?: boolean })?.hidden)
-      hidden.add(pascalToSnake(name))
-  }
-  return hidden
-}
-
 /**
  * Column identifiers reach the query builder as raw, unquoted SQL, so only
  * valid identifiers from the table's own column list may ever be used.
@@ -116,6 +109,22 @@ function typeForColumn(column: string, values: unknown[]): ColumnMeta['type'] {
   if (column.endsWith('_at') || column.endsWith('_date')) return 'date'
   if (column.startsWith('is_') || column.startsWith('has_')) return 'boolean'
   return inferType(values)
+}
+
+/**
+ * The columns a global search matches with LIKE: the ones the page is told
+ * are text, by the same rule.
+ *
+ * It used to take every column whose sampled value was a string. PostgreSQL
+ * answers BIGINT as a string, so `id` and every `*_id` qualified, and the
+ * search failed with `operator does not exist: bigint ~~ unknown` on any
+ * table with a row in it: `/models/team?q=PrimeSoft` answered 503.
+ */
+export function searchColumnsFor(columns: Iterable<string>, sample: unknown): string[] {
+  return [...columns].filter((column) => {
+    const value = safeGet(sample, column, null)
+    return typeof value === 'string' && typeForColumn(column, [value]) === 'text'
+  })
 }
 
 function queryValue(request: RequestInstance, key: string, fallback = ''): string {
@@ -208,6 +217,7 @@ export default new Action({
       writeCapabilities: { create: false, update: false, destroy: false },
       createFields: [],
       updateColumns: [],
+      migrated: true,
       error: null,
     }
 
@@ -244,7 +254,7 @@ export default new Action({
         ? requestedSort
         : (allowed.has('id') ? 'id' : (response.columns[0] ?? ''))
       response.sort = sort
-      const searchColumns = [...allowed].filter(c => typeof safeGet(first, c, null) === 'string')
+      const searchColumns = searchColumnsFor(allowed, first)
 
       const build = () => {
         let chain = Model.query() as any
@@ -253,11 +263,17 @@ export default new Action({
           chain = chain.where(column, value)
         }
         if (q && searchColumns.length > 0) {
+          // Lowercased on both sides, so the search ignores case on every
+          // dialect. A model query's whereLike is a plain LIKE, which is
+          // case-sensitive on PostgreSQL: "donald" did not find "Donald"
+          // there (stacksjs/stacks#3202). The column is one of the model's
+          // own (isSafeColumn), and the term is bound.
           chain = chain.whereGroup((group: any) => {
             for (const [index, column] of searchColumns.entries()) {
+              const match = `LOWER(${column}) LIKE LOWER(?)`
               group = index === 0
-                ? group.whereLike(column, `%${q}%`)
-                : group.orWhereLike(column, `%${q}%`)
+                ? group.whereRaw(match, `%${q}%`)
+                : group.orWhereRaw(match, `%${q}%`)
             }
             return group
           })
@@ -284,6 +300,10 @@ export default new Action({
       })
     }
     catch (error) {
+      // Not an error to report: the table simply has not been created yet, and
+      // the page says so and names the command that creates it.
+      if (await isUnmigratedTable(response.tableName))
+        return { ...response, columns: [], rows: [], migrated: false }
       return dashboardOperationalError(error, `${modelName} records could not be loaded.`, 'ModelShowAction.query')
     }
 

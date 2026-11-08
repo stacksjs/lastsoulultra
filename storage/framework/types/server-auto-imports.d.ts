@@ -94,6 +94,7 @@ declare global {
   const PaymentTransaction: typeof import('@stacksjs/defaults/app/Models/PaymentTransaction.ts')['default']
   const PersonalAccessToken: typeof import('@stacksjs/defaults/app/Models/PersonalAccessToken.ts')['default']
   const QueryLog: typeof import('@stacksjs/defaults/app/Models/QueryLog.ts')['default']
+  const QueueWorker: typeof import('@stacksjs/defaults/app/Models/QueueWorker.ts')['default']
   const Referral: typeof import('@stacksjs/defaults/app/Models/Referral.ts')['default']
   const ReferralCode: typeof import('@stacksjs/defaults/app/Models/ReferralCode.ts')['default']
   const Release: typeof import('@stacksjs/defaults/app/Models/Release.ts')['default']

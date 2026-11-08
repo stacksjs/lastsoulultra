@@ -1,4 +1,5 @@
 import { resolveApiBaseUrl } from '../api-url'
+import { dashboardApi } from '../dashboard-api'
 import { useStorage } from '@stacksjs/browser/composables/useStorage'
 
 export interface GroupedError {
@@ -10,7 +11,24 @@ export interface GroupedError {
   count: number
   first_seen: string
   last_seen: string
-  error_ids: number[]
+}
+
+/** What a page of groups asks for; every field may be left out. */
+export interface ErrorGroupQuery {
+  page?: number
+  perPage?: number
+  search?: string
+  status?: string
+  type?: string
+  sort?: string
+  direction?: 'asc' | 'desc'
+}
+
+/** The page the groups are, and what the pager and the type filter need. */
+export interface ErrorGroupPageInfo {
+  total: number
+  page: number
+  types: string[]
 }
 
 export interface ErrorRecord {
@@ -40,6 +58,10 @@ export interface ErrorTimelinePoint {
 
 // Create persistent storage for errors data
 const groupedErrors = useStorage<GroupedError[]>('grouped-errors', [])
+// Only the newest page request may land: typing, paging and filtering can
+// each start one while another is still out.
+let groupRequestId = 0
+const groupedErrorsPage = useStorage<ErrorGroupPageInfo>('grouped-errors-page', { total: 0, page: 1, types: [] })
 const errorStats = useStorage<ErrorStats | null>('error-stats', null)
 const errorTimeline = useStorage<ErrorTimelinePoint[]>('error-timeline', [])
 
@@ -49,23 +71,54 @@ export function errorGroupParams(type: string, message: string): URLSearchParams
   return new URLSearchParams({ type, message })
 }
 
+/** The page query as URL parameters, leaving out what is empty. */
+export function errorGroupPageParams(query: ErrorGroupQuery): URLSearchParams {
+  const params = new URLSearchParams()
+  if (query.page)
+    params.set('page', String(query.page))
+  if (query.perPage)
+    params.set('per_page', String(query.perPage))
+  if (query.search)
+    params.set('search', query.search)
+  if (query.status)
+    params.set('status', query.status)
+  if (query.type)
+    params.set('type', query.type)
+  if (query.sort) {
+    params.set('sort', query.sort)
+    params.set('direction', query.direction ?? 'asc')
+  }
+  return params
+}
+
 /**
- * Fetch all grouped errors
+ * Fetch one page of grouped errors. The server searches, filters, sorts and
+ * pages them (stacksjs/stacks#3195); this keeps the page and what the pager
+ * and the type filter need.
  */
-async function fetchGroupedErrors(): Promise<GroupedError[]> {
+async function fetchGroupedErrors(query: ErrorGroupQuery = {}): Promise<GroupedError[]> {
+  const requestId = ++groupRequestId
   try {
-    const response = await fetch(`${baseURL}/errors`)
+    const params = errorGroupPageParams(query).toString()
+    const response = await fetch(`${baseURL}/errors${params ? `?${params}` : ''}`)
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`)
     }
-    const { data } = await response.json() as { data: GroupedError[] }
+    const { data } = await response.json() as { data: { groups?: GroupedError[], total?: number, page?: number, types?: string[] } }
+    if (requestId !== groupRequestId)
+      return groupedErrors.value
 
-    if (Array.isArray(data)) {
-      groupedErrors.value = data
-      return data
+    if (data && Array.isArray(data.groups)) {
+      groupedErrors.value = data.groups
+      groupedErrorsPage.value = {
+        total: Number(data.total || 0),
+        page: Number(data.page || 1),
+        types: Array.isArray(data.types) ? data.types.map(String) : [],
+      }
+      return data.groups
     }
     else {
-      console.error('Expected array of errors but received:', typeof data)
+      console.error('Expected a page of error groups but received:', typeof data)
       return []
     }
   }
@@ -154,17 +207,10 @@ async function fetchErrorTimeline(): Promise<ErrorTimelinePoint[]> {
  */
 async function resolveErrorGroup(type: string, message: string): Promise<boolean> {
   try {
-    const response = await fetch(`${baseURL}/errors/resolve`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ type, message }),
-    })
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`)
-    }
+    // Through dashboardApi, which sends the CSRF token: a bare fetch was
+    // refused with 403, so every resolve from this page did nothing
+    // (stacksjs/stacks#3194).
+    await dashboardApi(`${baseURL}/errors/resolve`, { method: 'PATCH', body: { type, message } })
 
     // Update local state
     const group = groupedErrors.value.find(
@@ -186,17 +232,10 @@ async function resolveErrorGroup(type: string, message: string): Promise<boolean
  */
 async function ignoreErrorGroup(type: string, message: string): Promise<boolean> {
   try {
-    const response = await fetch(`${baseURL}/errors/ignore`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ type, message }),
-    })
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`)
-    }
+    // Through dashboardApi, which sends the CSRF token: a bare fetch was
+    // refused with 403, so every ignore from this page did nothing
+    // (stacksjs/stacks#3194).
+    await dashboardApi(`${baseURL}/errors/ignore`, { method: 'PATCH', body: { type, message } })
 
     // Update local state
     const group = groupedErrors.value.find(
@@ -218,17 +257,10 @@ async function ignoreErrorGroup(type: string, message: string): Promise<boolean>
  */
 async function unresolveErrorGroup(type: string, message: string): Promise<boolean> {
   try {
-    const response = await fetch(`${baseURL}/errors/unresolve`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ type, message }),
-    })
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`)
-    }
+    // Through dashboardApi, which sends the CSRF token: a bare fetch was
+    // refused with 403, so every unresolve from this page did nothing
+    // (stacksjs/stacks#3194).
+    await dashboardApi(`${baseURL}/errors/unresolve`, { method: 'PATCH', body: { type, message } })
 
     // Update local state
     const group = groupedErrors.value.find(
@@ -250,13 +282,8 @@ async function unresolveErrorGroup(type: string, message: string): Promise<boole
  */
 async function deleteErrorGroup(type: string, message: string): Promise<boolean> {
   try {
-    const response = await fetch(`${baseURL}/errors?${errorGroupParams(type, message)}`, {
-      method: 'DELETE',
-    })
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`)
-    }
+    // Through dashboardApi for the CSRF token, as the triage writes above.
+    await dashboardApi(`${baseURL}/errors?${errorGroupParams(type, message)}`, { method: 'DELETE' })
 
     // Update local state
     groupedErrors.value = groupedErrors.value.filter(
@@ -274,6 +301,7 @@ async function deleteErrorGroup(type: string, message: string): Promise<boolean>
 export function useErrors() {
   return {
     groupedErrors,
+    groupedErrorsPage,
     errorStats,
     errorTimeline,
     fetchGroupedErrors,

@@ -112,6 +112,9 @@ is rejected because multiplexed application actions can handle it as a write.
 `requestImpersonation()` exposes trusted actor/subject metadata; ORM trails
 attribute writes to the original actor. `Auth.endImpersonation(credential)`
 requires the original actor request without the support header.
+Ordinary bearer lookups may be cached within a request. Viewed identities are
+never stored in that cache: each support-view resolution rechecks live authority
+and clears previously trusted support context before authenticating again.
 
 Store viewing state independently from the actor's login and cached profile,
 show a persistent disclosure and Exit control, disable offline persistence,
@@ -345,6 +348,17 @@ interface PermissionRecord { id, name, guard_name, description?, created_at?, up
 interface RbacStore { findRoleByName, createRole, deleteRole, getAllRoles, findPermissionByName, createPermission, ... }
 ```
 
+### Configured administrators (admins.ts)
+List operator emails in `config/auth.ts` and run `./buddy seed:admins` (alias `admins:seed`; safe in a deploy's preStart):
+```typescript
+admins: ['ops@example.com', 'founder@example.com'],
+adminRole: { name: 'admin', guard: 'web' }, // default; false = accounts only
+```
+- A missing account is created with a verified email and a random password nobody knows; first sign-in is a password reset or a social sign-in linking the verified address.
+- Grants only: removing an address never revokes. A malformed or repeated address throws.
+- `provisionAdmins({ emails?, role?, accounts?: { findUserId, createUser }, afterEach? })` for app-specific authority (an organization membership): `afterEach({ userId, email, created })` returns `true` when it changed something. Results: `{ email, userId, outcome: 'created' | 'granted' | 'unchanged' }`.
+- `adminEmails(list)` normalizes/validates; `nameFromEmail('ada.lovelace@x')` → `Ada Lovelace`.
+
 ## Session Auth (session-auth.ts)
 
 - `SessionAuth.login(email, password): Promise<{ user, sessionId }>`
@@ -354,6 +368,63 @@ interface RbacStore { findRoleByName, createRole, deleteRole, getAllRoles, findP
 - `SessionAuth.refresh(sessionId, ttlMs?): Promise<boolean>`, rejects non-positive or non-finite TTLs without changing the session
 
 Internal: database-backed `sessions` rows with expiry, optional IP/User-Agent fingerprint checks, transactional logout and refresh, and timing-safe password comparison with a dummy bcrypt hash. Sessions survive process restarts and are shared by workers through the configured database.
+
+## Durable database browser sessions
+
+Keep browser authority separate from short-lived API bearer credentials. After
+completed password/MFA, registration or verified SSO/social sign-in, a server
+adapter can exchange its freshly issued, ordinary full-scope sign-in token:
+
+```typescript
+const session = await startBrowserSession(issued.token, {
+  previousSession: request.cookie('session_id'),
+})
+if (!session) throw new Error('Sign-in is no longer valid')
+headers.append('Set-Cookie', browserSessionCookie(session))
+```
+
+This helper belongs inside the completed server sign-in path. Do not expose a
+public bearer-to-browser-session exchange endpoint. Limited/delegated tokens
+cannot acquire full browser authority. The exchange locks the credential owner,
+revalidates the token, saves the browser session, revokes the consumed access and
+refresh pair and retires an offered previous browser credential atomically.
+Keep an API client's ordinary JSON token/refresh response unchanged instead.
+
+Configure `auth.session.lifetime` in milliseconds (default 24 hours), independently
+of `auth.tokenExpiry`. For example, a database browser session lasting 30 days does not
+extend a one-hour API bearer. The auth migrator creates `auth_browser_sessions`; apply the normal
+`buddy migrate --auth` path before adopting this transport, not local table DDL.
+
+The HttpOnly, SameSite cookie is `session_id`; Secure follows the canonical app
+URL policy. Only a hash-backed identifier is stored in SQL. `Auth.user`, auth
+middleware and `SessionAuth` read this credential, preserving primary reads,
+absolute/idle expiry and configured fingerprint checks. Normal reads neither
+rotate cookies nor extend absolute expiry, so concurrent tabs cannot overwrite
+one another's renewed credentials. There is no browser-readable refresh secret
+or public cookie-renewal endpoint. Keep normal CSRF protection on sign-in,
+logout and session-management mutations.
+
+- `browserSessions(userId, currentCredential?)` returns owner-scoped metadata
+  and safe identifiers, never credentials. It includes existing ordinary full-scope sign-ins during migration; delegated and limited API tokens keep their own management contract. A listed identifier cannot be
+  replayed as a cookie or bearer.
+- `revokeBrowserSession(userId, identifier)` revokes only that owner's session.
+- `SessionAuth.logout(credential)` and `clearedBrowserSessionCookie()` end the
+  active browser session. Clear the old access-token cookie when changing
+  transports so it cannot mask the new identity.
+- `revokeAccountCredentials` includes database sessions. Its `exceptSessionId`
+  can preserve the current cookie credential or its server-side identifier.
+  Account deprovisioning must use the shared revocation primitive and also
+  revoke any application-owned credentials.
+
+Retain application provisioning, audit and new-device hooks. Password/MFA,
+registration and SSO/social adapters must all use the same transport. A JSON
+sign-in which issues an access-cookie for another account must retire/clear an
+old database browser cookie, so it cannot later restore the earlier identity.
+
+Real HTTP/database evidence: `auth/tests/browser-session-store.test.ts`, including
+service restart, real short bearer expiry, safe metadata identifiers, concurrent
+one-use exchange, owner isolation, failed-revocation rollback, account replacement,
+CSRF, logout races, current-session preservation, idle and absolute expiry.
 
 ## Email Verification (email-verification.ts)
 
@@ -733,3 +804,40 @@ not authenticate them. OAuth resource endpoints must explicitly use
 `authorizeOAuthDelegatedToken` with the exact resource, audience, workspace and
 required scopes. Ordinary refresh also refuses delegated refresh credentials;
 use the OAuth token endpoint and the registered client's protocol authentication.
+
+### Userinfo and pairwise subjects
+
+The provider has no id_token. A relying party that signs people in with this
+provider reads `oauthUserInfoResponse(request, { scopes, resource, audience,
+workspaceId, isSubjectEligible, pairwiseSecret, claims })`: the same delegated
+token checks as any protected resource, then `{ ...claims, sub }`. `sub` comes
+from `pairwiseOAuthSubject(secret, clientId, subject)`, an HMAC that differs per
+client so two relying parties cannot join records on it; keep its secret apart
+from rotating app keys. `claims({ sub, subject, clientId, scopes })` releases
+only what the granted scopes cover, and null answers 401. The socials
+`StacksIssuerProvider` is the matching client.
+
+## Token-only recovery endpoints
+
+For high-entropy reset credentials, `mintPasswordResetToken()` returns `{ token, digest }`.
+Store the digest in `password_resets.token`, never the plaintext.
+Prefer `issuePasswordResetToken(email, { throttleMs?, expiresAt?, eligible? })` when
+issuing for an existing account. It locks that account before checking its current
+email, the synchronous application eligibility predicate and the saved throttle.
+It considers all supported legacy email-case variants when throttling, and retires
+them together when replacing the credential. `throttleMs: 0` disables throttling.
+It atomically replaces the digest and returns `{ issued: true, token, userId, email }`
+or `{ issued: false }`. The latter deliberately combines unknown, ineligible and
+throttled accounts; recovery endpoints must keep their public response generic.
+Only send the returned credential after issuance commits.
+Treat its value as opaque. It is bound to the issuing account, so reassigning an
+email address cannot let an old recovery reset the address's new account.
+`consumePasswordResetToken(token, async claim => { ... })` locks the owner and token,
+checks the stored expiry and consumes it in the same transaction as callback writes.
+`claim` is `{ userId, email, hasExplicitExpiry }`; result is `{ consumed: false }` or
+`{ consumed: true, value }`. Failures roll back the credential and account changes.
+Use database work only in the callback, and send notifications after commit.
+The credential is consumed before the callback, so it composes with
+`revokeAccountCredentials(claim.userId)`. That sweep also removes any pending
+password-reset links; changing a password must retire recovery credentials too.
+The existing `passwordResets(email)` flow supports email-addressed bcrypt tokens.

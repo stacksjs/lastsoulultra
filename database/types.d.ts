@@ -355,8 +355,8 @@ declare module '@stacksjs/database' {
     categorizable_models: {
       // columns
       id: number
-      category_id: number
       categorizable_id: number
+      category_id: number
       categorizable_type: string
       created_at: string
       updated_at: string | null
@@ -1361,6 +1361,12 @@ declare module '@stacksjs/database' {
       paused_at: string | null
       resume_at: string | null
     }
+    queue_workers: {
+      // columns
+      worker_id: string
+      snapshot: string
+      heartbeat_at: number | bigint
+    }
     receipts: {
       // columns
       id: number
@@ -1426,7 +1432,7 @@ declare module '@stacksjs/database' {
       created_at: string
       updated_at: string | null
       deleted_at: string | null
-      method: "GET" | "POST" | "PUT" | "PATCH" | "DELETE" | "OPTIONS" | "HEAD"
+      method: string
       path: string
       status_code: number
       duration_ms: number

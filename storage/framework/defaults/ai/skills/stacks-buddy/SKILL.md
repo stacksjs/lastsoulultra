@@ -129,6 +129,7 @@ buddy dev -i/--interactive   # interactive server selection menu
 buddy dev -l/--with-localhost # include localhost URL in output
 buddy dev --browser          # open the browser app instead of a configured native window
 buddy dev --site             # open the marketing site instead of the detected app entry
+buddy dev --detach           # outlive the shell: nohup ./buddy dev --frontend --detach &
 buddy dev -p/--project [name]
 buddy dev --verbose
 ```
@@ -573,7 +574,7 @@ buddy outdated               # check outdated deps
 buddy add                    # add dependency
 
 buddy upgrade                # upgrade Stacks framework (alias: update)
-  -v/--version <version>     # install specific version (e.g., 0.70.23)
+  -V/--version <version>     # install specific version (e.g., 0.70.23)
   --canary                   # upgrade to canary build
   --stable                   # switch to stable release
   -f/--force                 # force re-download

@@ -3,6 +3,7 @@ import { dashboardApi } from '../../../../functions/dashboard-api'
 
 interface ModelRow {
   name: string
+  icon: string
   table: string
   href: string
   count: number | null
@@ -11,6 +12,7 @@ interface ModelRow {
   source: 'userland' | 'framework'
   apiUri: string
   apiRoutes: string[]
+  migrated?: boolean
   error: string | null
 }
 
@@ -26,6 +28,7 @@ interface ModelsResponse {
   totalRecords: number
   userlandCount: number
   unavailableModels: number
+  unmigratedModels?: number
   categoryGroups: ModelGroup[]
 }
 
@@ -35,6 +38,7 @@ const totalModels = state(0)
 const totalRecords = state(0)
 const userlandCount = state(0)
 const unavailableModels = state(0)
+const unmigratedModels = state(0)
 const categoryGroups = state<ModelGroup[]>([])
 const loading = state(true)
 const loadError = state('')
@@ -78,6 +82,7 @@ async function loadModels(): Promise<void> {
     totalRecords.set(response.totalRecords || 0)
     userlandCount.set(response.userlandCount || 0)
     unavailableModels.set(response.unavailableModels || 0)
+    unmigratedModels.set(response.unmigratedModels || 0)
     categoryGroups.set(response.categoryGroups || [])
   }
   catch (error) {
@@ -85,6 +90,7 @@ async function loadModels(): Promise<void> {
     totalRecords.set(0)
     userlandCount.set(0)
     unavailableModels.set(0)
+    unmigratedModels.set(0)
     categoryGroups.set([])
     loadError.set(error instanceof Error ? error.message : 'Models could not be loaded.')
   }
@@ -98,7 +104,7 @@ onMount(() => {
 })
 </script>
 
-<div class="space-y-6">
+<div class="flex flex-col gap-6">
   <header class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
     <div>
       <h1 class="font-semibold text-2xl text-neutral-900 tracking-tight dark:text-white">{{ title() }}</h1>
@@ -132,6 +138,11 @@ onMount(() => {
     <span>{{ unavailableModels() }} model {{ unavailableModels() === 1 ? 'count is' : 'counts are' }} unavailable. Affected cards remain unavailable instead of reporting zero records.</span>
   </div>
 
+  <div :if="!loadError() && unmigratedModels() > 0" role="status" class="flex gap-3 items-start px-4 py-3 text-neutral-700 text-sm dark:text-neutral-200 bg-neutral-50 dark:bg-neutral-800/60 border border-neutral-200 rounded-lg dark:border-neutral-700">
+    <span aria-hidden="true" class="flex-none mt-0.5 h-4 w-4 i-hugeicons-database-sync-01"></span>
+    <span>{{ unmigratedModels() }} {{ unmigratedModels() === 1 ? 'model has' : 'models have' }} no table yet. Run <code>./buddy migrate</code> to create {{ unmigratedModels() === 1 ? 'it' : 'them' }}.</span>
+  </div>
+
   <Card padding="none">
     <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between p-5 border-b border-neutral-200 dark:border-neutral-700">
       <div>
@@ -141,7 +152,7 @@ onMount(() => {
       <div class="flex flex-col gap-2 sm:flex-row w-full sm:w-auto">
         <label class="block relative w-full sm:w-64">
           <span class="sr-only">Search models</span>
-          <span class="flex absolute inset-y-0 left-0 items-center pl-3 text-neutral-400 i-hugeicons-search-01"></span>
+          <span aria-hidden="true" class="absolute left-3 top-1/2 h-4 w-4 text-neutral-400 pointer-events-none -translate-y-1/2 i-hugeicons-search-01"></span>
           <input x-model="search" type="search" placeholder="Search models" class="block pl-9 pr-3 py-2 w-full text-neutral-900 text-sm dark:text-white bg-white dark:bg-neutral-900 border border-neutral-300 rounded-lg dark:border-neutral-700 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20">
         </label>
         <label>
@@ -178,7 +189,7 @@ onMount(() => {
           <StxLink :for="model in group.models" :to="model.href" class="block p-5 bg-white dark:bg-neutral-900 border border-neutral-200 rounded-xl dark:border-neutral-700 hover:border-blue-300 dark:hover:border-blue-700 hover:shadow-sm transition-colors group">
             <div class="flex gap-3 items-start justify-between">
               <div class="flex gap-3 items-center min-w-0">
-                <span class="flex flex-none items-center justify-center h-9 w-9 text-neutral-500 dark:text-neutral-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 bg-neutral-100 dark:bg-neutral-800 rounded-lg i-hugeicons-database-01"></span>
+                <span class="flex flex-none items-center justify-center h-9 w-9 text-neutral-500 dark:text-neutral-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 bg-neutral-100 dark:bg-neutral-800 rounded-lg"><span aria-hidden="true" :class="model.icon" class="h-5 w-5"></span></span>
                 <div class="min-w-0">
                   <h4 class="font-medium text-neutral-900 truncate dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400">{{ model.name }}</h4>
                   <p class="font-mono text-neutral-500 text-xs truncate dark:text-neutral-400">{{ model.table }}</p>
@@ -191,7 +202,8 @@ onMount(() => {
               <div>
                 <dt class="text-neutral-500 text-xs dark:text-neutral-400">Records</dt>
                 <dd :if="model.count !== null" class="mt-1 font-medium text-neutral-900 text-sm dark:text-white">{{ model.count.toLocaleString() }}</dd>
-                <dd :if="model.count === null" class="mt-1 font-medium text-amber-700 text-sm dark:text-amber-300">Unavailable</dd>
+                <dd :if="model.count === null && model.migrated !== false" class="mt-1 font-medium text-amber-700 text-sm dark:text-amber-300">Unavailable</dd>
+                <dd :if="model.migrated === false" class="mt-1 font-medium text-neutral-500 text-sm dark:text-neutral-400">Not migrated</dd>
               </div>
               <div>
                 <dt class="text-neutral-500 text-xs dark:text-neutral-400">Attributes</dt>
