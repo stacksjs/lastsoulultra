@@ -1,6 +1,7 @@
 @extends('layouts/LSU')
 @section('content')
 <script server>
+import { coachShare } from '~/resources/data/app-stores'
 import { productionPages } from '~/resources/data/production-pages'
 const currentPage = productionPages["/app/coaches"]
 const canonicalPath = "/app/coaches"
@@ -11,7 +12,7 @@ const canonicalPath = "/app/coaches"
   <div class="app-hero-copy">
     <span class="kicker">The Last Soul Ultra app / For coaches</span>
     <h1>Your method.<br><span class="accent">Their next week.</span></h1>
-    <p>Write how you coach. The app builds and adjusts each runner's weeks from it, and you share in what it earns.</p>
+    <p>Write how you coach. The app builds and adjusts each runner's weeks from it, and you keep {{ coachShare }} of what it earns.</p>
     <div class="app-actions">
       <a class="btn btn-lg" href="mailto:mail@lastsoulultra.com?subject=My%20coaching%20method">Talk to us</a>
     </div>
@@ -116,8 +117,8 @@ const canonicalPath = "/app/coaches"
     </div>
     <div class="app-terms">
       <div>
-        <p>Runners pay monthly through Stripe, and you earn a share of every subscription to a tier built on your method. Runners who want one-to-one coaching come to you directly, not to us.</p>
-        <p>The terms are not set yet. Tell us how you coach at <a class="accent" href="mailto:mail@lastsoulultra.com?subject=My%20coaching%20method">mail@lastsoulultra.com</a> and we will work them out with you.</p>
+        <p>Runners pay monthly through Stripe, and you keep {{ coachShare }} of every subscription to a tier built on your method. Every payout is recorded in your workspace. Runners who want one-to-one coaching come to you directly, not to us.</p>
+        <p>To bring your method in, tell us how you coach at <a class="accent" href="mailto:mail@lastsoulultra.com?subject=My%20coaching%20method">mail@lastsoulultra.com</a> and we will set up your workspace.</p>
       </div>
     </div>
   </div>

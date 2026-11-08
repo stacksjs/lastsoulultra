@@ -1,6 +1,7 @@
 @extends('layouts/LSU')
 @section('content')
 <script server>
+import { appStoreUrl, appTiers, playStoreUrl } from '~/resources/data/app-stores'
 import { productionPages } from '~/resources/data/production-pages'
 const currentPage = productionPages["/app"]
 const canonicalPath = "/app"
@@ -16,8 +17,8 @@ const wave = [28, 46, 70, 52, 88, 64, 40, 76, 96, 58, 34, 62, 84, 48, 72, 100, 6
     <h1>Train for<br><span class="accent">the next start.</span></h1>
     <p>Running and strength from a coach's method. Tell it how a session felt and next week changes.</p>
     <div class="app-actions">
-      <a class="btn btn-lg" href="/coaching#training">Start training</a>
-      <a class="btn-outline" href="#coaches">For coaches</a>
+      <a class="btn btn-lg" href="{{ appStoreUrl }}">Download on the App Store</a>
+      <a class="btn-outline" href="{{ playStoreUrl }}">Get it on Google Play</a>
     </div>
   </div>
   <figure class="app-hero-shot">
@@ -131,6 +132,28 @@ const wave = [28, 46, 70, 52, 88, 64, 40, 76, 96, 58, 34, 62, 84, 48, 72, 100, 6
   </div>
 </section>
 
+<section id="tiers" class="app-section">
+  <div class="app-shell">
+    <div class="app-head">
+      <h2 class="h2-sm">Two tiers.<br><span class="accent">One method behind both.</span></h2>
+      <p>Paid monthly, tax included. Subscribe in the app or on the coaching page, and cancel or resume from the Me tab whenever you like.</p>
+    </div>
+    <div class="app-tiers">
+      @foreach(appTiers as tier)
+      <article class="app-tier">
+        <h3>{{ tier.name }}</h3>
+        <p class="app-tier-price" aria-label="{{ tier.price }} a month"><i aria-hidden="true">€</i><b aria-hidden="true">{{ tier.price.slice(1) }}</b> <span aria-hidden="true">a month</span></p>
+        <p>{{ tier.includes }}</p>
+      </article>
+      @endforeach
+    </div>
+    <div class="app-actions app-tier-actions">
+      <a class="btn" href="/coaching#training">Subscribe on the web</a>
+      <a class="app-textlink" href="#download">Or in the app <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</section>
+
 <section id="coaches" class="app-section">
   <div class="app-coach app-shell">
     <div>
@@ -162,9 +185,9 @@ const wave = [28, 46, 70, 52, 88, 64, 40, 76, 96, 58, 34, 62, 84, 48, 72, 100, 6
       <h2 class="h2-sm">Where it runs<br><span class="accent">and what it keeps.</span></h2>
     </div>
     <dl class="app-spec">
-      <div><dt>iPhone</dt><dd>A native app, in testing now. The App Store release follows.</dd></div>
+      <div><dt>iPhone</dt><dd>On the <a href="{{ appStoreUrl }}" class="accent">App Store</a>, with the session on your Lock Screen while you run.</dd></div>
+      <div><dt>Android</dt><dd>On <a href="{{ playStoreUrl }}" class="accent">Google Play</a>, with Health Connect for your recovery data.</dd></div>
       <div><dt>Web</dt><dd>The full app in any current browser, and the training panels on <a href="/coaching" class="accent">lastsoulultra.com/coaching</a>.</dd></div>
-      <div><dt>Android</dt><dd>Use the web app on your phone for now.</dd></div>
       <div><dt>Languages</dt><dd>English and German.</dd></div>
       <div><dt>Sign-in</dt><dd>Email and password or Sign in with Apple, with passkeys and authenticator-app codes for extra protection.</dd></div>
       <div><dt>Your data</dt><dd>Training records are stored in Germany. Export everything or delete your account whenever you like.</dd></div>
@@ -185,7 +208,7 @@ const wave = [28, 46, 70, 52, 88, 64, 40, 76, 96, 58, 34, 62, 84, 48, 72, 100, 6
       </details>
       <details>
         <summary>What does it cost?</summary>
-        <p>There are two tiers, Running and Running + Strength, both paid monthly with tax included. The open tiers and their prices are on the <a href="/coaching#training">coaching page</a>. You can cancel or resume from the Me tab.</p>
+        <p>LSU Running is €19.99 a month and LSU Running + Strength is €29.99 a month, tax included. Subscribe in the app or on the <a href="/coaching#training">coaching page</a>, and cancel or resume from the Me tab.</p>
       </details>
       <details>
         <summary>Which sessions can it change?</summary>
@@ -203,11 +226,14 @@ const wave = [28, 46, 70, 52, 88, 64, 40, 76, 96, 58, 34, 62, 84, 48, 72, 100, 6
   </div>
 </section>
 
-<section class="app-doors">
+<section id="download" class="app-doors">
   <div class="app-door">
     <h2>Running the<br><span class="accent">next block?</span></h2>
-    <p>Pick a tier, get your first week and send your first voice note after the first session.</p>
-    <a class="btn btn-lg" href="/coaching#training">See open tiers</a>
+    <p>Download the app, pick a tier and send your first voice note after your first session.</p>
+    <div class="app-actions">
+      <a class="btn btn-lg" href="{{ appStoreUrl }}">App Store</a>
+      <a class="btn btn-lg" href="{{ playStoreUrl }}">Google Play</a>
+    </div>
   </div>
   <div class="app-door">
     <h2>Coaching<br><span class="accent">runners?</span></h2>

@@ -1,6 +1,7 @@
 @extends('layouts/LSU')
 @section('content')
 <script server>
+import { coachShare } from '~/resources/data/app-stores'
 import { coachingHubStyles } from '~/resources/data/coaching'
 import { coachingOrigin, loadBrand } from '~/resources/functions/coaching-source'
 
@@ -125,8 +126,9 @@ const canonicalPath = '/coaching'
       <p>Runners who want one-to-one come to you, not to us. The app is how they find your work in the first place.</p>
     </div>
     <div class="coaching-coaches-panel">
-      <p>Terms are not set. If this interests you, say so and we will work them out with you.</p>
-      <a class="btn-outline" href="mailto:mail@lastsoulultra.com">mail@lastsoulultra.com</a>
+      <p>You keep {{ coachShare }} of every subscription to your tier. Tell us how you coach and we will set up your workspace.</p>
+      <a class="btn-outline" href="mailto:mail@lastsoulultra.com?subject=My%20coaching%20method">mail@lastsoulultra.com</a>
+      <a class="coaching-app-link" href="/app/coaches">See the coach tools <span aria-hidden="true">→</span></a>
     </div>
   </section>
 </div>

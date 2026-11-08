@@ -69,6 +69,6 @@ function lsuCloseMenu() { lsuMenu.set(false) }
 <a href="/world-series" class="drawer-cta lsu-scope-nav" data-apply data-view-href="/profile" data-view-label="View entry">Request a race entry</a>
 <div class="drawer-social lsu-scope-nav">
 <a href="https://www.instagram.com/lastsoulultra" class="lsu-scope-nav">Instagram</a>
-<a href="https://www.instagram.com/lastsoulultra" class="lsu-scope-nav">Live · coming soon</a>
+<a href="https://www.instagram.com/lastsoulultra" class="lsu-scope-nav">Live · @lastsoulultra</a>
 </div>
 </aside>

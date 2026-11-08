@@ -93,6 +93,7 @@
 .coaching-page .coaching-coaches p{margin:22px 0 0;max-width:56ch;color:#ffffffa6;font-size:16px;line-height:1.7}
 .coaching-page .coaching-coaches-panel{padding:clamp(22px,3vw,32px);border:1px solid var(--lsu-line);background:var(--lsu-card-alt)}
 .coaching-page .coaching-coaches-panel p{margin:0 0 24px;max-width:38ch}
+.coaching-page .coaching-app-link{display:block;margin-top:20px;font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase}
 
 /* Tactile feedback on this page's buttons; the global .btn stays instant. */
 .coaching-page .btn,.coaching-page .btn-outline{transition:background-color .2s,border-color .2s,color .2s,transform .12s}
