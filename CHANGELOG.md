@@ -1,5 +1,136 @@
 # Stacks Changelog
 
+[Compare changes](https://github.com/stacksjs/lastsoulultra/compare/v1.0.0-build.3...v0.70.53)
+
+## ✨ Features
+
+- **native**: release TestFlight build 12 on HQ platform kit 1.0.4016 ([ec4d5b3](https://github.com/stacksjs/lastsoulultra/commit/ec4d5b3)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- **onboarding**: show Last Soul Ultra's own screens in the welcome tour ([05ce389](https://github.com/stacksjs/lastsoulultra/commit/05ce389)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- present the LSU app as launched and clear pre-launch copy ([cd6d077](https://github.com/stacksjs/lastsoulultra/commit/cd6d077)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- add the LSU app pages and restore the animated race board ([89d9f2e](https://github.com/stacksjs/lastsoulultra/commit/89d9f2e)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- enable HTTP/2 for the dedicated LSU gateway ([84db1c8](https://github.com/stacksjs/lastsoulultra/commit/84db1c8)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- **platform**: adopt accepted HQ kit with managed private search ([fbdf885](https://github.com/stacksjs/lastsoulultra/commit/fbdf885)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- **native**: release TestFlight build 11 on HQ platform kit 1.0.3887 ([c975199](https://github.com/stacksjs/lastsoulultra/commit/c975199)) _(by glennmichael123 <gtorregosa@gmail.com>)_
+- **seed**: stock the store with six demo plans under Pawel's coach profile ([761bc88](https://github.com/stacksjs/lastsoulultra/commit/761bc88)) _(by glennmichael123 <gtorregosa@gmail.com>)_
+- **native**: ship shared account security from HQ platform 3857 ([400b6b4](https://github.com/stacksjs/lastsoulultra/commit/400b6b4)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- **native**: release email-first HQ signup in TestFlight build 10 ([ce0b4cf](https://github.com/stacksjs/lastsoulultra/commit/ce0b4cf)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- **platform**: make Chris and Pawel admins, listed in deployment.json ([ffb7669](https://github.com/stacksjs/lastsoulultra/commit/ffb7669)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- **platform**: give the training install its HQ platform keys and a connection worker ([97bdf45](https://github.com/stacksjs/lastsoulultra/commit/97bdf45)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- **native**: draw the launch splash with the ts-images splash preset ([c37f170](https://github.com/stacksjs/lastsoulultra/commit/c37f170)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- **enterprise**: package LSU's brand and coaching tiers as installation presets ([f8951d9](https://github.com/stacksjs/lastsoulultra/commit/f8951d9)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- **native**: build and deploy from the HQ platform kit, not HQ's repository ([eb25bc7](https://github.com/stacksjs/lastsoulultra/commit/eb25bc7)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- **seed**: print the account roster, so the secret can be rebuilt ([54d3310](https://github.com/stacksjs/lastsoulultra/commit/54d3310)) _(by glennmichael123 <gtorregosa@gmail.com>)_
+
+## 🐛 Bug Fixes
+
+- **deps**: name the workspace root in bun.lock after this app ([2e1c72b](https://github.com/stacksjs/lastsoulultra/commit/2e1c72b)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- **release**: this app publishes no library ([dda8ddb](https://github.com/stacksjs/lastsoulultra/commit/dda8ddb)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- **release**: drop the framework-only docs scripts the app cannot run ([2fb4037](https://github.com/stacksjs/lastsoulultra/commit/2fb4037)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- **deps**: record ts-cloud 0.16.116 in pantry.lock ([be77b77](https://github.com/stacksjs/lastsoulultra/commit/be77b77)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- **deploy**: reclaim idle PostgreSQL sessions so deploys can migrate ([e277450](https://github.com/stacksjs/lastsoulultra/commit/e277450)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- ship the press kit download ([386ea5b](https://github.com/stacksjs/lastsoulultra/commit/386ea5b)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- upgrade to stacks 0.75.525 and cap queue worker pools ([19fc685](https://github.com/stacksjs/lastsoulultra/commit/19fc685)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- **deps**: record stacks 0.75.522 in pantry.lock ([2db6791](https://github.com/stacksjs/lastsoulultra/commit/2db6791)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- match the published site's content and race entry flow ([16cc369](https://github.com/stacksjs/lastsoulultra/commit/16cc369)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- account for page-local styles in the HTML audit ([9ca99cb](https://github.com/stacksjs/lastsoulultra/commit/9ca99cb)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- **deploy**: use the published active-instance liveness selector ([0248d5a](https://github.com/stacksjs/lastsoulultra/commit/0248d5a)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- **deploy**: reconcile private search on the existing LSU host ([cd95eac](https://github.com/stacksjs/lastsoulultra/commit/cd95eac)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- **platform**: adopt the accepted enterprise platform kit ([7e18524](https://github.com/stacksjs/lastsoulultra/commit/7e18524)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- **platform**: align LSU with the qualified renderer release ([16fe643](https://github.com/stacksjs/lastsoulultra/commit/16fe643)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- **platform**: adopt durable HQ history and proxy lifecycle ([67daf4f](https://github.com/stacksjs/lastsoulultra/commit/67daf4f)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- **ios**: verify TestFlight provenance from the upload receipt ([508a0ae](https://github.com/stacksjs/lastsoulultra/commit/508a0ae)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- **deploy**: check every kit queue has a worker, and drain webhooks ([e18f16e](https://github.com/stacksjs/lastsoulultra/commit/e18f16e)) _(by glennmichael123 <gtorregosa@gmail.com>)_
+- **deploy**: give the notifications queue a worker ([b9f0a3a](https://github.com/stacksjs/lastsoulultra/commit/b9f0a3a)) _(by glennmichael123 <gtorregosa@gmail.com>)_
+- **ios**: validate Apple profile wildcard domain permissions ([fb09dcd](https://github.com/stacksjs/lastsoulultra/commit/fb09dcd)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- **ios**: omit unsupported capability relationship limits ([0998a1c](https://github.com/stacksjs/lastsoulultra/commit/0998a1c)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- **ios**: refresh App Store profiles for the existing distribution key ([20a9282](https://github.com/stacksjs/lastsoulultra/commit/20a9282)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- **ios**: sign distribution export without a development identity ([72923d1](https://github.com/stacksjs/lastsoulultra/commit/72923d1)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- **ios**: refresh provisioning for passkey associated domains ([b918dae](https://github.com/stacksjs/lastsoulultra/commit/b918dae)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- **deploy**: consume initialized installation admin runtime ([04c297b](https://github.com/stacksjs/lastsoulultra/commit/04c297b)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- keep LSU public metadata on one configured origin ([98620a2](https://github.com/stacksjs/lastsoulultra/commit/98620a2)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- **native**: consume released HQ kit and enforce parity lifecycle checks ([13a6c12](https://github.com/stacksjs/lastsoulultra/commit/13a6c12)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- **database**: generate the migrations for the sport-fix seeders ([6d91b01](https://github.com/stacksjs/lastsoulultra/commit/6d91b01)) _(by glennmichael123 <gtorregosa@gmail.com>)_ ([#13](https://github.com/stacksjs/lastsoulultra/issues/13))
+- **native**: give the launch screen a splash asset with a size ([b324ad9](https://github.com/stacksjs/lastsoulultra/commit/b324ad9)) _(by glennmichael123 <gtorregosa@gmail.com>)_
+- **seed**: give the demo conversation the id messaging derives ([9338511](https://github.com/stacksjs/lastsoulultra/commit/9338511)) _(by glennmichael123 <gtorregosa@gmail.com>)_
+- **deploy**: seed from the same accounts blob the docs publish ([2b012f4](https://github.com/stacksjs/lastsoulultra/commit/2b012f4)) _(by glennmichael123 <gtorregosa@gmail.com>)_
+- **seed**: ask the running service, from inside the box ([d61f065](https://github.com/stacksjs/lastsoulultra/commit/d61f065)) _(by glennmichael123 <gtorregosa@gmail.com>)_ ([#1](https://github.com/stacksjs/lastsoulultra/issues/1))
+- **seed**: mint a token in the probe, and report whether APP_KEY exists ([07884c1](https://github.com/stacksjs/lastsoulultra/commit/07884c1)) _(by glennmichael123 <gtorregosa@gmail.com>)_
+- **seed**: probe the whole sign-in path, not just the password ([afb739d](https://github.com/stacksjs/lastsoulultra/commit/afb739d)) _(by glennmichael123 <gtorregosa@gmail.com>)_ ([#1](https://github.com/stacksjs/lastsoulultra/issues/1))
+- **seed**: make the seeder prove the credentials it publishes ([a4269ac](https://github.com/stacksjs/lastsoulultra/commit/a4269ac)) _(by glennmichael123 <gtorregosa@gmail.com>)_ ([#1](https://github.com/stacksjs/lastsoulultra/issues/1))
+- **seed**: enforce the published demo password, and let the seeder be heard ([1ac916f](https://github.com/stacksjs/lastsoulultra/commit/1ac916f)) _(by glennmichael123 <gtorregosa@gmail.com>)_
+- **seed**: let the review seeder adopt LSU's own organization ([c6a7b73](https://github.com/stacksjs/lastsoulultra/commit/c6a7b73)) _(by glennmichael123 <gtorregosa@gmail.com>)_
+- **coaching**: size the embed to the viewport instead of a flat 1100px ([95cc48a](https://github.com/stacksjs/lastsoulultra/commit/95cc48a)) _(by glennmichael123 <gtorregosa@gmail.com>)_
+- adopt HQ's native font inheritance and final brand colours ([582f8ac](https://github.com/stacksjs/lastsoulultra/commit/582f8ac)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- adopt HQ's enterprise sign-in layout fix ([43c06d0](https://github.com/stacksjs/lastsoulultra/commit/43c06d0)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- adopt HQ's branded enterprise web and app surfaces ([03fb964](https://github.com/stacksjs/lastsoulultra/commit/03fb964)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+
+## 📝 Documentation
+
+- describe the email-first sign-in on the training website ([7a50177](https://github.com/stacksjs/lastsoulultra/commit/7a50177)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- name the installation admins and the demo plans in the store ([27c5871](https://github.com/stacksjs/lastsoulultra/commit/27c5871)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- describe the full iPhone app, its tour and Continue with HQ ([69e5881](https://github.com/stacksjs/lastsoulultra/commit/69e5881)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- **legal**: describe Continue with HQ and connections through HQ.training ([bcfd335](https://github.com/stacksjs/lastsoulultra/commit/bcfd335)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- **enterprise**: keep LSU's onboarding and acceptance history in this repository ([fdcaf52](https://github.com/stacksjs/lastsoulultra/commit/fdcaf52)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+
+## 💚 Continuous Integration
+
+- **platform**: decide the pin on its own checks, not on the installer's exit ([82ff510](https://github.com/stacksjs/lastsoulultra/commit/82ff510)) _(by glennmichael123 <gtorregosa@gmail.com>)_
+- **platform**: refresh the kit pin where the registry grant lives ([ca90ab4](https://github.com/stacksjs/lastsoulultra/commit/ca90ab4)) _(by glennmichael123 <gtorregosa@gmail.com>)_
+- install the HQ kit with pantry ci, without the local setup hooks ([b428593](https://github.com/stacksjs/lastsoulultra/commit/b428593)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- refuse to deploy the training sites with an empty APP_KEY ([0c87c7b](https://github.com/stacksjs/lastsoulultra/commit/0c87c7b)) _(by glennmichael123 <gtorregosa@gmail.com>)_
+
+## 🔧 Chores
+
+- upgrade to stacks 0.75.528 ([533cf7e](https://github.com/stacksjs/lastsoulultra/commit/533cf7e)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- **platform**: adopt HQ kit 1.0.4030 ([23c824d](https://github.com/stacksjs/lastsoulultra/commit/23c824d)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- **platform**: adopt HQ kit 1.0.4016 on stacks 0.75.525 ([832d7a2](https://github.com/stacksjs/lastsoulultra/commit/832d7a2)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- upgrade to stacks 0.75.522 ([1f1fccf](https://github.com/stacksjs/lastsoulultra/commit/1f1fccf)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- **ci**: use the qualified native-lock installer ([f0141fa](https://github.com/stacksjs/lastsoulultra/commit/f0141fa)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- **platform**: adopt accepted HQ kit 1.0.3937 ([e673806](https://github.com/stacksjs/lastsoulultra/commit/e673806)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- **platform**: adopt verified HQ SDK3934 ([09d164f](https://github.com/stacksjs/lastsoulultra/commit/09d164f)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- **platform**: adopt the verified TestFlight 166 enterprise kit ([cd795ca](https://github.com/stacksjs/lastsoulultra/commit/cd795ca)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- **platform**: adopt the verified TestFlight 165 enterprise kit ([6ec21fa](https://github.com/stacksjs/lastsoulultra/commit/6ec21fa)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- **native**: align LSU tooling with its qualified HQ kit ([6a73f73](https://github.com/stacksjs/lastsoulultra/commit/6a73f73)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- **native**: pin HQ platform kit 1.0.3889 with the native sign-in handoff fix ([b89c90f](https://github.com/stacksjs/lastsoulultra/commit/b89c90f)) _(by glennmichael123 <gtorregosa@gmail.com>)_
+- **native**: pin HQ platform kit 1.0.3887 ([1adbd3c](https://github.com/stacksjs/lastsoulultra/commit/1adbd3c)) _(by glennmichael123 <gtorregosa@gmail.com>)_
+- **native**: pin HQ platform kit 1.0.3883 with the HQ-password sign-up ([1a16041](https://github.com/stacksjs/lastsoulultra/commit/1a16041)) _(by glennmichael123 <gtorregosa@gmail.com>)_ ([#446](https://github.com/stacksjs/lastsoulultra/issues/446), [#448](https://github.com/stacksjs/lastsoulultra/issues/448))
+- **sdk**: adopt verified HQ platform kit 1.0.3874 ([bbf18f1](https://github.com/stacksjs/lastsoulultra/commit/bbf18f1)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- **native**: align LSU on the published STX 806 runtime ([ae82cee](https://github.com/stacksjs/lastsoulultra/commit/ae82cee)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- **native**: consume the HQ build 160 platform kit ([5c2ea51](https://github.com/stacksjs/lastsoulultra/commit/5c2ea51)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- **native**: pin HQ platform kit 1.0.3818 with the notifications card fix ([5076dab](https://github.com/stacksjs/lastsoulultra/commit/5076dab)) _(by glennmichael123 <gtorregosa@gmail.com>)_ ([#20](https://github.com/stacksjs/lastsoulultra/issues/20))
+- **native**: pin HQ platform kit 1.0.3812, red wordmark, TestFlight build 9 ([761f77f](https://github.com/stacksjs/lastsoulultra/commit/761f77f)) _(by glennmichael123 <gtorregosa@gmail.com>)_ ([#411](https://github.com/stacksjs/lastsoulultra/issues/411), [#420](https://github.com/stacksjs/lastsoulultra/issues/420))
+- **native**: pin HQ platform kit 1.0.3804 with the reconciled sport list ([6cacc8b](https://github.com/stacksjs/lastsoulultra/commit/6cacc8b)) _(by glennmichael123 <gtorregosa@gmail.com>)_ ([#26](https://github.com/stacksjs/lastsoulultra/issues/26))
+- **native**: pin HQ platform kit 1.0.3786 with the public-page app nav ([d9bd5c0](https://github.com/stacksjs/lastsoulultra/commit/d9bd5c0)) _(by glennmichael123 <gtorregosa@gmail.com>)_ ([#21](https://github.com/stacksjs/lastsoulultra/issues/21))
+- **native**: pin HQ platform kit 1.0.3784 with the date and time glyphs ([3d57ba0](https://github.com/stacksjs/lastsoulultra/commit/3d57ba0)) _(by glennmichael123 <gtorregosa@gmail.com>)_ ([#23](https://github.com/stacksjs/lastsoulultra/issues/23))
+- **native**: TestFlight build 8 ([70b4b8e](https://github.com/stacksjs/lastsoulultra/commit/70b4b8e)) _(by glennmichael123 <gtorregosa@gmail.com>)_
+- **native**: HQ platform kit 1.0.3763, TestFlight build 7 ([039e699](https://github.com/stacksjs/lastsoulultra/commit/039e699)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- **native**: pin HQ platform kit 1.0.3759 with Continue with HQ ([db10d1b](https://github.com/stacksjs/lastsoulultra/commit/db10d1b)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- **native**: sync HQ platform kit to 1.0.3729 ([bb5aebb](https://github.com/stacksjs/lastsoulultra/commit/bb5aebb)) _(by glennmichael123 <gtorregosa@gmail.com>)_
+- **native**: pin @hq/platform to 1.0.3723 in pantry.json ([ecef4c2](https://github.com/stacksjs/lastsoulultra/commit/ecef4c2)) _(by glennmichael123 <gtorregosa@gmail.com>)_
+- **native**: sync HQ platform kit to 1.0.3723, TestFlight build 6 ([d2508f1](https://github.com/stacksjs/lastsoulultra/commit/d2508f1)) _(by glennmichael123 <gtorregosa@gmail.com>)_
+- **native**: HQ platform kit 1.0.3504, TestFlight build 5 ([537ed4f](https://github.com/stacksjs/lastsoulultra/commit/537ed4f)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- **native**: pin HQ platform kit 1.0.3464 ([0182eb7](https://github.com/stacksjs/lastsoulultra/commit/0182eb7)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- **native**: pin HQ platform kit 1.0.3463 ([0536f4e](https://github.com/stacksjs/lastsoulultra/commit/0536f4e)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- **native**: TestFlight build 4 ([9581722](https://github.com/stacksjs/lastsoulultra/commit/9581722)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- **native**: pin HQ platform kit 1.0.3462 ([beb0185](https://github.com/stacksjs/lastsoulultra/commit/beb0185)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- **native**: bump the HQ pin to ae9b6a7b ([b741518](https://github.com/stacksjs/lastsoulultra/commit/b741518)) _(by glennmichael123 <gtorregosa@gmail.com>)_
+- **native**: bump the HQ pin to today's main ([69ddf6a](https://github.com/stacksjs/lastsoulultra/commit/69ddf6a)) _(by glennmichael123 <gtorregosa@gmail.com>)_
+- sync the vendored framework defaults to the pinned 0.75.374 ([a618c22](https://github.com/stacksjs/lastsoulultra/commit/a618c22)) _(by glennmichael123 <gtorregosa@gmail.com>)_
+
+## 🎉 Miscellaneous
+
+- Merge branch 'fix-splash-size' ([2ed5867](https://github.com/stacksjs/lastsoulultra/commit/2ed5867)) _(by glennmichael123 <gtorregosa@gmail.com>)_
+- Merge branch 'fix-demo-thread-id' ([055d80d](https://github.com/stacksjs/lastsoulultra/commit/055d80d)) _(by glennmichael123 <gtorregosa@gmail.com>)_
+- Merge branch 'bump-hq-pin-ae9b6a7b' ([e9bb6cf](https://github.com/stacksjs/lastsoulultra/commit/e9bb6cf)) _(by glennmichael123 <gtorregosa@gmail.com>)_
+- Merge branch 'bump-hq-pin-fb6f4717' ([e5815a9](https://github.com/stacksjs/lastsoulultra/commit/e5815a9)) _(by glennmichael123 <gtorregosa@gmail.com>)_
+- Revert "ci: refuse to deploy the training sites with an empty APP_KEY" ([2fee9b0](https://github.com/stacksjs/lastsoulultra/commit/2fee9b0)) _(by glennmichael123 <gtorregosa@gmail.com>)_
+- Merge remote-tracking branch 'origin/main' into work ([cd23c8a](https://github.com/stacksjs/lastsoulultra/commit/cd23c8a)) _(by glennmichael123 <gtorregosa@gmail.com>)_
+
+## Contributors
+
+- _Chris Breuer <chrisbreuer93@gmail.com>_
+- _glennmichael123 <gtorregosa@gmail.com>_
+
 [Compare changes](https://github.com/stacksjs/stacks/compare/v0.72.93...v0.72.94)
 
 ## 🐛 Bug Fixes
