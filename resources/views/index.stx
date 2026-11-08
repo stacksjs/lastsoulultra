@@ -7,25 +7,82 @@ const canonicalPath = "/"
 </script>
 <script client>
 import { moveGallery, galleryPosition, seekRaceVideo, storyProgress } from '../functions/site-interactions'
+import { drawAttrition, duelCaption, hoursForSouls, raceAt, raceCards, raceMs, raceReadout, raceTimeline, soulsAtPointer } from '../functions/race-board'
 import raceStory from '../data/race-story.json'
 import { useScroll } from '@stacksjs/composables/useScroll'
 import { useMediaQuery } from '@stacksjs/composables/useMediaQuery'
+import { useRafFn } from '@stacksjs/composables/useRafFn'
+import { useIntersectionObserver } from '@stacksjs/composables/useIntersectionObserver'
 const lsuYardVideo = useRef('lsuYardVideo')
 const lsuScroll = useScroll(undefined, { throttle: 32 })
 const lsuReducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)')
-const lsuBoardSection = useRef('lsuBoardSection')
 const lsuDuelSection = useRef('lsuDuelSection')
-const lsuLap = state(94)
 const lsuDuel = state(94)
 const lsuFirstYards = derived(() => Math.min(raceStory['2025'].maxYards, lsuDuel()))
-const lsuSouls = derived(() => raceStory['2026'].startersByYard[Math.max(0, lsuLap() - 1)] || 1)
+const lsuDuelText = derived(() => duelCaption(lsuDuel()))
 function lsuSeekVideo() {
   if (lsuReducedMotion.value) return
   seekRaceVideo(lsuYardVideo.current)
-  lsuLap.set(Math.max(1, Math.round(storyProgress(lsuBoardSection.current) * raceStory['2026'].maxYards)))
   lsuDuel.set(Math.max(1, Math.round(storyProgress(lsuDuelSection.current) * raceStory['2026'].maxYards)))
 }
 watch(() => lsuScroll.y.value, lsuSeekVideo)
+
+/* The race board plays Season 2 through once each time it comes into view,
+   and the tick strip under it scrubs. Server markup is the start line and the
+   format explained; a reader who asked for less motion gets the finished race. */
+const lsuBoard = useRef('lsuBoard')
+const lsuAttr = useRef('lsuAttr')
+const lsuTimeline = raceTimeline()
+const lsuStart = raceReadout(0)
+const lsuLap = state(lsuStart.lap)
+const lsuClock = state(lsuStart.clock)
+const lsuSouls = state(lsuStart.soulsText)
+const lsuKm = state(lsuStart.km)
+const lsuCard = state(-1)
+const lsuCardIn = state(true)
+const lsuGlow = state(false)
+let lsuPlayMs = 0
+let lsuInView = false
+let lsuScrubbing = false
+const lsuCardNow = derived(() => lsuCard() < 0 ? null : raceCards[lsuCard()])
+const lsuCardTime = derived(() => lsuCardNow() ? lsuCardNow().time : 'hour 1')
+const lsuCardHead = derived(() => lsuCardNow() ? lsuCardNow().heading : ['The corral', 'opens'])
+const lsuCardBody = derived(() => lsuCardNow() ? lsuCardNow().body : 'Complete the 6.706 km loop before the hour is up. Whatever time remains is yours to eat, rest and get ready. At the start of the next hour, everyone still in the race goes again.\n\nMiss the next start or fail to finish a loop within the hour, and your race is over.')
+function lsuShow(hours, card) {
+  const readout = raceReadout(hours)
+  lsuLap.set(readout.lap)
+  lsuClock.set(readout.clock)
+  lsuSouls.set(readout.soulsText)
+  lsuKm.set(readout.km)
+  drawAttrition(lsuAttr.current, readout.souls)
+  if (card === lsuCard()) return
+  lsuCard.set(card)
+  lsuCardIn.set(false)
+  if (card >= 0) lsuGlow.set(true)
+  setTimeout(() => { lsuCardIn.set(true); lsuGlow.set(false) }, 40)
+}
+const lsuPlayer = useRafFn(({ delta }) => {
+  if (!lsuInView || lsuScrubbing || lsuPlayMs >= lsuTimeline.total) return
+  lsuPlayMs = Math.min(lsuTimeline.total, lsuPlayMs + Math.min(100, delta))
+  const at = raceAt(lsuTimeline, lsuPlayMs)
+  lsuShow(at.hours, at.card)
+}, { immediate: false })
+function lsuScrub(event) {
+  lsuScrubbing = true
+  lsuPlayMs = raceMs(lsuTimeline, hoursForSouls(soulsAtPointer(lsuAttr.current, event.clientX)))
+  const at = raceAt(lsuTimeline, lsuPlayMs)
+  lsuShow(at.hours, at.card)
+}
+function lsuScrubEnd() { lsuScrubbing = false }
+function lsuBoardSeen(entries) {
+  const visible = entries[0]?.isIntersecting ?? false
+  if (visible && !lsuInView && !lsuReducedMotion.value && lsuPlayMs >= lsuTimeline.total) {
+    lsuPlayMs = 0
+    lsuShow(0, -1)
+  }
+  lsuInView = visible
+}
+
 const lsuGallery = useRef('lsuGallery')
 const lsuGalleryCount = state(1)
 const lsuGalleryPrevious = state(false)
@@ -37,7 +94,19 @@ function lsuGalleryChanged() {
   lsuGalleryNext.set(position.next)
 }
 function lsuGalleryMove(direction) { moveGallery(lsuGallery.current, direction) }
-onMount(() => { lsuGalleryChanged(); lsuSeekVideo() })
+onMount(() => {
+  lsuGalleryChanged()
+  lsuSeekVideo()
+  if (lsuReducedMotion.value) {
+    lsuPlayMs = lsuTimeline.total
+    lsuShow(94, raceCards.length - 1)
+    return
+  }
+  drawAttrition(lsuAttr.current, 160)
+  if (lsuBoard.current) useIntersectionObserver(lsuBoard.current, lsuBoardSeen, { threshold: 0.15 })
+  else lsuInView = true
+  lsuPlayer.resume()
+})
 </script>
 
 <script client>
@@ -70,7 +139,7 @@ onDestroy(() => lsuLoopClock.pause())
 <div class="hero-live lsu-scope-home">
 <span class="hero-dot lsu-scope-home">
 </span>
-<span class="lsu-scope-home">Season 3 / USA entries open</span>
+<span class="lsu-scope-home">Season 3 / 2027 entries open</span>
 </div>
 <h1 class="lsu-scope-home">
 <span class="hero-kicker kicker lsu-scope-home">Last Soul Ultra · the backyard ultra World Series</span> There is no finish line</h1>
@@ -163,7 +232,7 @@ onDestroy(() => lsuLoopClock.pause())
 </div>
 </div>
 </section>
-<section id="format" x-ref="lsuBoardSection" class="lapscroll lsu-scope-home">
+<section id="format" class="lapscroll lsu-scope-home">
 <div class="lap-inner lsu-scope-home">
 <div class="lap-photo lsu-scope-home">
 </div>
@@ -172,19 +241,19 @@ onDestroy(() => lsuLoopClock.pause())
 <div class="lap-grid lsu-scope-home shell" data-cols>
 <div class="lsu-scope-home">
 <div class="kicker lap-kicker lsu-scope-home">What is a backyard ultra</div>
-<div class="lsu-scope-home race-board" data-raceboard aria-hidden="true">
+<div class="lsu-scope-home race-board" data-raceboard x-ref="lsuBoard">
 <div class="lap-readouts lsu-scope-home">
 <div class="lsu-scope-home">
 <div class="lsu-scope-home seg-label seg-label-red">lap</div>
 <div class="lsu-scope-home seg">
 <div class="lsu-scope-home seg-ghost seg-ghost-red seg-lap" aria-hidden="true">88</div>
-<div class="lsu-scope-home seg-lap seg-live seg-live-red" data-lapnum :text="lsuLap">94</div>
+<div class="lsu-scope-home seg-lap seg-live seg-live-red" data-lapnum :text="lsuLap" :style="lsuGlow() ? 'text-shadow:0 0 34px rgba(255,42,26,1),0 0 110px rgba(255,42,26,.6)' : 'transition:text-shadow .7s ease'" aria-hidden="true">00</div>
 </div>
 <div class="lap-elapsed lsu-scope-home">
 <span class="lsu-scope-home seg-label seg-label-red">elapsed</span>
 <span class="lsu-scope-home seg">
 <span class="lsu-scope-home seg-clock seg-ghost seg-ghost-red" aria-hidden="true">88:88:88</span>
-<span class="lsu-scope-home seg-clock seg-live seg-live-red" data-lapclock :text="String(lsuLap).padStart(2, '0') + ':00:00'">94:00:00</span>
+<span class="lsu-scope-home seg-clock seg-live seg-live-red" data-lapclock :text="lsuClock" aria-hidden="true">00:00:00</span>
 </span>
 </div>
 </div>
@@ -193,19 +262,19 @@ onDestroy(() => lsuLoopClock.pause())
 <div class="lsu-scope-home seg-label">souls still in</div>
 <div class="lsu-scope-home seg">
 <div class="lsu-scope-home seg-ghost seg-souls" aria-hidden="true">888</div>
-<div class="lsu-scope-home seg-live seg-souls" data-lapsouls :text="lsuSouls">1</div>
+<div class="lsu-scope-home seg-live seg-souls" data-lapsouls :text="lsuSouls" aria-hidden="true">160</div>
 </div>
 </div>
 <div class="lsu-scope-home">
 <div class="lsu-scope-home seg-label">distance</div>
 <div class="lsu-scope-home seg">
 <div class="lsu-scope-home seg-ghost seg-km" aria-hidden="true">888.8</div>
-<div class="lsu-scope-home seg-km seg-live" data-lapkm><span :text="(lsuLap * raceStory['2026'].loopMetres / 1000).toFixed(1)">630.4</span> <span class="lsu-scope-home seg-unit">KM</span>
+<div class="lsu-scope-home seg-km seg-live" data-lapkm aria-hidden="true"><span :text="lsuKm">000.0</span> <span class="lsu-scope-home seg-unit">KM</span>
 </div>
 </div>
 </div>
 <div class="lap-meta lsu-scope-home">
-<span data-laptime class="lap-meta-live lsu-scope-home" :text="'hour ' + lsuLap">hour 94</span>
+<span data-laptime class="lap-meta-live lsu-scope-home" :text="lsuCardTime">hour 1</span>
 <span class="lsu-scope-home">6.7 km loop</span>
 </div>
 </div>
@@ -215,13 +284,13 @@ onDestroy(() => lsuLoopClock.pause())
 <span class="lsu-scope-home">souls remaining</span>
 <span class="lsu-scope-home">169 entered, 160 started</span>
 </div>
-<svg class="lsu-scope-home" style="width:100%;height:auto" viewBox="0 0 1100 220" role="img" aria-label="Season 2: 160 starters, one last soul after 94 yards"><path d="M10 200 H1090" stroke="#444"/><polyline points="10.0,20.0 21.6,20.0 33.2,21.1 44.8,22.2 56.5,27.9 68.1,31.2 79.7,38.0 91.3,42.5 102.9,47.0 114.5,51.5 126.1,59.4 137.7,61.6 149.4,70.6 161.0,77.4 172.6,80.8 184.2,101.0 195.8,112.2 207.4,116.8 219.0,119.0 230.6,122.4 242.3,126.9 253.9,129.1 265.5,134.8 277.1,135.9 288.7,139.2 300.3,143.8 311.9,147.1 323.5,151.6 335.2,153.9 346.8,157.2 358.4,160.6 370.0,162.9 381.6,165.1 393.2,167.4 404.8,169.6 416.5,171.9 428.1,173.0 439.7,175.2 451.3,176.4 462.9,177.5 474.5,178.6 486.1,179.8 497.7,180.9 509.4,182.0 521.0,182.0 532.6,183.1 544.2,184.2 555.8,185.4 567.4,185.4 579.0,186.5 590.6,187.6 602.3,187.6 613.9,188.8 625.5,188.8 637.1,189.9 648.7,189.9 660.3,191.0 671.9,191.0 683.5,191.0 695.2,192.1 706.8,192.1 718.4,192.1 730.0,193.2 741.6,193.2 753.2,193.2 764.8,194.4 776.5,194.4 788.1,194.4 799.7,194.4 811.3,195.5 822.9,195.5 834.5,195.5 846.1,196.6 857.7,196.6 869.4,196.6 881.0,196.6 892.6,196.6 904.2,196.6 915.8,196.6 927.4,196.6 939.0,197.8 950.6,197.8 962.3,197.8 973.9,197.8 985.5,197.8 997.1,197.8 1008.7,197.8 1020.3,197.8 1031.9,197.8 1043.5,197.8 1055.2,197.8 1066.8,197.8 1078.4,197.8 1090.0,198.9" fill="none" stroke="#dd0f15" stroke-width="3"/><text x="10" y="218" fill="#aaa" font-size="12">YARD 1</text><text x="1015" y="218" fill="#aaa" font-size="12">YARD 94</text></svg>
+<canvas class="lsu-scope-home" x-ref="lsuAttr" data-lapattr width="650" height="44" role="img" aria-label="Season 2 field: 160 starters, one last soul after 94 yards. Drag across to scrub the race." @pointerdown="lsuScrub(event)" @pointermove="lsuScrub(event)" @pointerleave="lsuScrubEnd()" @pointerup="lsuScrubEnd()"></canvas>
 </div>
 </div>
 </div>
 <div class="lap-copy lsu-scope-home">
-<h2 data-lapheading class="lsu-scope-home">The corral<br>opens</h2>
-<p data-lapbody class="lsu-scope-home">Complete the 6.706 km loop before the hour is up. Whatever time remains is yours to eat, rest and get ready. At the start of the next hour, everyone still in the race goes again.
+<h2 data-lapheading class="lap-swap lsu-scope-home" :class="lsuCardIn() ? '' : 'is-out'" aria-live="polite"><span :text="lsuCardHead()[0]">The corral</span><br><span :text="lsuCardHead()[1]">opens</span></h2>
+<p data-lapbody class="lap-swap lsu-scope-home" :class="lsuCardIn() ? '' : 'is-out'" :text="lsuCardBody">Complete the 6.706 km loop before the hour is up. Whatever time remains is yours to eat, rest and get ready. At the start of the next hour, everyone still in the race goes again.
 
 Miss the next start or fail to finish a loop within the hour, and your race is over.</p>
 <a href="/format" class="btn lap-link lsu-scope-home">Understand the format</a>
@@ -327,10 +396,10 @@ Miss the next start or fail to finish a loop within the hour, and your race is o
 <span class="duel-unit lsu-scope-home"> km</span>
 </span>
 </span>
-<span class="duel-note lsu-scope-home" data-duelnote1>Kim Gottwald · won at 67 yards</span>
+<span class="duel-note lsu-scope-home" data-duelnote1 :style="'color:' + (lsuDuel() > 67 ? 'rgba(255,42,26,.8)' : 'rgba(255,255,255,.4)')">Kim Gottwald · won at 67 yards</span>
 </div>
 <div class="duel-track lsu-scope-home">
-<div class="duel-fill duel-fill-1 lsu-scope-home" data-duelbar1 :style="'animation:none;transform:none;width:' + (lsuFirstYards / 94 * 100) + '%'">
+<div class="duel-fill duel-fill-1 lsu-scope-home" data-duelbar1 :style="'animation:none;transform:none;width:' + (lsuFirstYards / 94 * 100) + '%;opacity:' + (lsuDuel() > 67 ? '.35' : '1')">
 </div>
 <div class="duel-yard duel-yard-1 lsu-scope-home" data-duelyard1 :text="lsuFirstYards">67</div>
 </div>
@@ -355,7 +424,7 @@ Miss the next start or fail to finish a loop within the hour, and your race is o
 <div class="duel-mark lsu-scope-home">
 <div class="duel-mark-label lsu-scope-home">90 · german-soil mark until Season 2</div>
 </div>
-<p class="duel-text lsu-scope-home" data-dueltext>Scroll. Both fields set off together, hour by hour.</p>
+<p class="duel-text lsu-scope-home" data-dueltext :text="lsuDuelText">Scroll. Both fields set off together, hour by hour.</p>
 </div>
 </div>
 </div>
@@ -369,6 +438,27 @@ Miss the next start or fail to finish a loop within the hour, and your race is o
 <p class="attr-copy lsu-scope-home"> Nobody knows how long this takes.<br class="lsu-scope-home">
 <span class="accent lsu-scope-home">That is the point.</span>
 </p>
+</div>
+</section>
+<section id="app" class="app-teaser lsu-scope-home">
+<div class="app-teaser-shell lsu-scope-home">
+<figure class="app-teaser-shot lsu-scope-home">
+<img src="/assets/lsu/images/recap-07-810.webp" srcset="/assets/lsu/images/recap-07-540.webp 540w, /assets/lsu/images/recap-07-810.webp 810w, /assets/lsu/images/recap-07-1080.webp 1080w" sizes="(min-width: 900px) 40vw, 100vw" alt="A runner in a cap and sunglasses holds a bottle, in black and white." width="1080" height="1440" loading="lazy" decoding="async" class="lsu-scope-home">
+</figure>
+<div class="app-teaser-copy lsu-scope-home">
+<div class="kicker lsu-scope-home">The Last Soul Ultra app</div>
+<h2 class="h2 lsu-scope-home">Say how it felt.<br><span class="accent lsu-scope-home">The plan changes.</span></h2>
+<p class="lsu-scope-home">Running and strength from a coach's method, on your phone. Send a voice note after a session and the app rewrites the sessions you have not done yet.</p>
+<ul class="app-teaser-list lsu-scope-home">
+<li class="lsu-scope-home">Voice notes that reshape next week</li>
+<li class="lsu-scope-home">A workout player with GPS and heart rate</li>
+<li class="lsu-scope-home">Progress, recovery and offline training</li>
+</ul>
+<div class="app-teaser-actions lsu-scope-home">
+<a href="/app" class="btn lsu-scope-home">Explore the app</a>
+<a href="/app/coaches" class="app-teaser-link lsu-scope-home">For coaches <span class="lsu-scope-home" aria-hidden="true">→</span></a>
+</div>
+</div>
 </div>
 </section>
 <section id="enter" class="enter lsu-scope-next-loop">

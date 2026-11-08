@@ -39,6 +39,22 @@ export const productionPages: Record<string, { title: string, description: strin
       "/assets/styles/production/next-loop.css"
     ]
   },
+  "/app": {
+    "title": "The Last Soul Ultra app - adaptive ultra training for runners and coaches",
+    "description": "Running and strength from a coach's method. Send a voice note after a session and next week changes. Workout player, progress, recovery and offline training.",
+    "styles": [
+      "/assets/styles/production/base.css",
+      "/assets/styles/production/app.css"
+    ]
+  },
+  "/app/coaches": {
+    "title": "Coach with the Last Soul Ultra app - your method, your runners",
+    "description": "Turn your coaching method into adaptive training weeks for every runner on your tier. Plan and workout builders, a 184-exercise library, and a share of what it earns.",
+    "styles": [
+      "/assets/styles/production/base.css",
+      "/assets/styles/production/app.css"
+    ]
+  },
   "/soul-races": {
     "title": "Soul Races - backyard ultras around the world | Last Soul Ultra",
     "description": "Soul Races are independent backyard ultras that run the Last Soul format. Find one near you and enter on the organiser’s own site.",

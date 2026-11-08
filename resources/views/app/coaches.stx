@@ -1,0 +1,140 @@
+@extends('layouts/LSU')
+@section('content')
+<script server>
+import { productionPages } from '~/resources/data/production-pages'
+const currentPage = productionPages["/app/coaches"]
+const canonicalPath = "/app/coaches"
+</script>
+<div class="app-page">
+
+<section class="app-hero">
+  <div class="app-hero-copy">
+    <span class="kicker">The Last Soul Ultra app / For coaches</span>
+    <h1>Your method.<br><span class="accent">Their next week.</span></h1>
+    <p>Write how you coach. The app builds and adjusts each runner's weeks from it, and you share in what it earns.</p>
+    <div class="app-actions">
+      <a class="btn btn-lg" href="mailto:mail@lastsoulultra.com?subject=My%20coaching%20method">Talk to us</a>
+    </div>
+  </div>
+  <figure class="app-hero-shot">
+    <img src="/assets/lsu/images/recap-09-1080.webp" srcset="/assets/lsu/images/recap-09-540.webp 540w, /assets/lsu/images/recap-09-810.webp 810w, /assets/lsu/images/recap-09-1080.webp 1080w" sizes="(min-width: 900px) 48vw, 100vw" alt="Two men in head torches talk close together in blue light." width="1080" height="1440" loading="eager" fetchpriority="high" decoding="async">
+  </figure>
+</section>
+
+<section id="method" class="app-section">
+  <div class="app-shell">
+    <div class="app-head">
+      <h2 class="h2-sm">From how you coach<br><span class="accent">to a runner's Tuesday.</span></h2>
+      <p>A method is your whole approach, named after you. Runners subscribe to a tier built on it, and the weeks they train come out of it.</p>
+    </div>
+    <ol class="app-flow">
+      <li>
+        <h3>Write it</h3>
+        <p>A public summary that runners read before they subscribe, and a private methodology that only the AI reads. Every edit is saved as a version.</p>
+      </li>
+      <li>
+        <h3>Back it up</h3>
+        <p>Add up to 20 private sources per method, such as your notes, your session rules and your taper. The AI quotes them when it adjusts a plan.</p>
+      </li>
+      <li>
+        <h3>Publish a tier</h3>
+        <p>Running, strength or both. Runners subscribe in the app and on the coaching page of this site, and pay monthly.</p>
+      </li>
+      <li>
+        <h3>Let it adapt</h3>
+        <p>After each session a runner can send a voice note. The AI changes their unfinished sessions inside your rules, and they can undo any change.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section id="workspace" class="app-section">
+  <div class="app-shell">
+    <div class="app-head">
+      <h2 class="h2-sm">A workspace<br><span class="accent">for the actual work.</span></h2>
+      <p>Everything you need to build sessions and plans, in the browser, with your roster on your phone too.</p>
+    </div>
+    <div class="app-bento">
+      <article class="app-cell app-cell-photo">
+        <img src="/assets/lsu/images/recap-05-810.webp" srcset="/assets/lsu/images/recap-05-540.webp 540w, /assets/lsu/images/recap-05-810.webp 810w, /assets/lsu/images/recap-05-1080.webp 1080w" sizes="(min-width: 1080px) 46vw, (min-width: 640px) 92vw, 100vw" alt="A group of runners with their arms round each other in the sun, bags at their feet." width="1080" height="1440" loading="lazy" decoding="async">
+        <h3>Plans for one runner</h3>
+        <p>Assign an individual plan to any subscriber and write down why. With their permission you see eight weeks of their training and fourteen days of recovery data.</p>
+      </article>
+      <article class="app-cell app-cell-card app-cell-wide">
+        <h3>AI plan builder</h3>
+        <p>Describe the runner, the race and the weeks available. It drafts a plan in your method for you to edit, keep or throw away.</p>
+      </article>
+      <article class="app-cell">
+        <h3>Plan library</h3>
+        <p>Keep the plans you sell and the plans you reuse in one place, ready to publish or assign.</p>
+      </article>
+      <article class="app-cell">
+        <h3>Workout builder</h3>
+        <p>Build runs step by step and strength as sets and reps. The workout player reads the steps out to the runner.</p>
+      </article>
+      <article class="app-cell app-cell-red">
+        <h3>Opt-in only</h3>
+        <p>Runners share their fitness data with you only when they turn it on. It is off until they do.</p>
+      </article>
+      <article class="app-cell">
+        <h3>Your roster on the phone</h3>
+        <p>See who is training on your tiers from the same app your runners use.</p>
+      </article>
+      <article class="app-cell">
+        <h3>Messages</h3>
+        <p>Questions about your method arrive in one inbox, and every session has its own comment thread.</p>
+      </article>
+      <article class="app-cell">
+        <h3>Store editor</h3>
+        <p>Write what each tier includes and choose which ones are open. The coaching page shows them as you publish them.</p>
+      </article>
+    </div>
+    <div class="app-library" aria-label="The exercise library">
+      <div><b>86</b><span>Strength</span></div>
+      <div><b>37</b><span>Core</span></div>
+      <div><b>33</b><span>Mobility</span></div>
+      <div><b>11</b><span>Plyometric</span></div>
+      <div><b>9</b><span>Cardio</span></div>
+      <div><b>8</b><span>Drills</span></div>
+    </div>
+    <p class="app-caption">184 exercises ship with the library. Add your own and they sit alongside them.</p>
+  </div>
+</section>
+
+<section class="app-band band">
+  <div class="band-bg" style="background-image:url('/assets/lsu/images/rappid-46.webp')"></div>
+  <div class="band-scrim"></div>
+  <div class="band-copy">
+    <p>Runners who want more<br><span class="accent">come to you.</span></p>
+  </div>
+</section>
+
+<section id="terms" class="app-section">
+  <div class="app-shell">
+    <div class="app-head">
+      <h2 class="h2-sm">How you<br><span class="accent">get paid.</span></h2>
+    </div>
+    <div class="app-terms">
+      <div>
+        <p>Runners pay monthly through Stripe, and you earn a share of every subscription to a tier built on your method. Runners who want one-to-one coaching come to you directly, not to us.</p>
+        <p>The terms are not set yet. Tell us how you coach at <a class="accent" href="mailto:mail@lastsoulultra.com?subject=My%20coaching%20method">mail@lastsoulultra.com</a> and we will work them out with you.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="app-doors">
+  <div class="app-door">
+    <h2>See it as<br><span class="accent">a runner does.</span></h2>
+    <p>The athlete side of the app: voice notes, the workout player, progress and recovery.</p>
+    <a class="btn-outline" href="/app">The app for athletes</a>
+  </div>
+  <div class="app-door">
+    <h2>Ready to<br><span class="accent">bring it?</span></h2>
+    <p>Send us a few lines about how you coach and who you coach.</p>
+    <a class="btn btn-lg" href="mailto:mail@lastsoulultra.com?subject=My%20coaching%20method">Talk to us</a>
+  </div>
+</section>
+
+</div>
+@endsection

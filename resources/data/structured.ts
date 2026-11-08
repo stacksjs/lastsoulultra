@@ -69,6 +69,7 @@ export function website(): Record<string, unknown> {
 const SECTIONS: Record<string, string> = {
   results: 'Results',
   coaching: 'Coaching',
+  app: 'The app',
 }
 
 /** The label for the last crumb, which is the page itself. */

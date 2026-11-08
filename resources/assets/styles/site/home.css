@@ -10,3 +10,24 @@
    before they approach the viewport. Unsupported browsers render normally. */
 .lapscroll.lsu-scope-home,.duelscroll.lsu-scope-home{content-visibility:auto;contain-intrinsic-block-size:auto 100svh}
 .attr-band.lsu-scope-home{content-visibility:auto}
+
+/* The race board's copy swaps at each Season 2 moment: the new card rises in
+   from 10px below, the same easing the original board used. */
+.lap-swap.lsu-scope-home{transition:opacity .45s ease,transform .45s ease}
+.lap-swap.lsu-scope-home.is-out{opacity:0;transform:translateY(10px);transition:none}
+@media(prefers-reduced-motion:reduce){.lap-swap.lsu-scope-home{transition:none}}
+
+/* The app, introduced between the statement band and the next-loop call to
+   enter: a real photograph beside the copy, then the way to the app pages. */
+.app-teaser.lsu-scope-home{padding:var(--lsu-pad-y) var(--lsu-pad-x);background:radial-gradient(ellipse 60% 70% at 85% 50%,#140306,#000 70%);border-top:1px solid var(--lsu-line-soft)}
+.app-teaser-shell.lsu-scope-home{max-width:var(--lsu-max);margin:0 auto;display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(32px,6vw,96px);align-items:center}
+.app-teaser-shot.lsu-scope-home{margin:0;aspect-ratio:4/5;overflow:hidden;border:1px solid var(--lsu-line)}
+.app-teaser-shot.lsu-scope-home img.lsu-scope-home{width:100%;height:100%;object-fit:cover;display:block}
+.app-teaser-copy.lsu-scope-home{display:flex;flex-direction:column;align-items:flex-start;gap:24px}
+.app-teaser-copy.lsu-scope-home p.lsu-scope-home{margin:0;max-width:48ch;font-size:18px;line-height:1.6;color:var(--lsu-dim-1)}
+.app-teaser-list.lsu-scope-home{margin:0;padding:0;list-style:none;width:100%;max-width:560px}
+.app-teaser-list.lsu-scope-home li.lsu-scope-home{position:relative;padding:14px 0 14px 28px;border-top:1px solid var(--lsu-line-faint);font-size:16px;color:var(--lsu-white)}
+.app-teaser-list.lsu-scope-home li.lsu-scope-home:before{content:"";position:absolute;left:0;top:24px;width:12px;height:2px;background:var(--lsu-red)}
+.app-teaser-actions.lsu-scope-home{display:flex;flex-wrap:wrap;align-items:center;gap:28px}
+.app-teaser-link.lsu-scope-home{font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+@media(max-width:900px){.app-teaser-shell.lsu-scope-home{grid-template-columns:1fr}.app-teaser-shot.lsu-scope-home{aspect-ratio:4/3}}
