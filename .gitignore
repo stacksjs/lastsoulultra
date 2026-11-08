@@ -190,3 +190,6 @@ storage/framework/core/defaults/*
 *.ipa
 *.p12
 *.mobileprovision
+
+# The press kit download is a real asset, despite a global *.zip ignore.
+!public/press/last-soul-ultra-press-kit.zip
