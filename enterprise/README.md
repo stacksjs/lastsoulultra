@@ -63,7 +63,12 @@ backend uses `lsu_training` and its own key. Authenticated APIs enforce the same
 application authorization logic as HQ over LSU's independent data. Standard
 public authentication and catalog endpoints remain available for the app.
 The documented fake training is seeded idempotently only into the explicit LSU
-database; passwords and edits are preserved. Provider-backed payments and real
+database; passwords and edits are preserved. After the seed, the API deploy runs
+`buddy installation:admins`, which makes every address in `admins` in
+`deployment.json` an active administrator of the `last-soul-ultra`
+organization. A missing account is created verified with no usable password, so
+that person's first sign-in is Continue with HQ. The list only grants: removing
+an address does not revoke the role. Provider-backed payments and real
 athlete records are not manufactured or imported.
 
 LSU's brand preset and coaching tiers (`enterprise/presets.json`), its

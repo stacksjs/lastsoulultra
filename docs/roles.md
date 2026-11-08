@@ -22,10 +22,9 @@ For the stored relationships behind these distinctions, see the [data model and 
 | Owner | The organization owner | LSU ownership, settings and member administration |
 | Administrator | An administrator within LSU | Organization settings, members and the published Experience |
 | Manager | Day to day operations staff | Members, plans, scheduling, refunds, reports, staff and the access system. Cannot change organization settings, cannot set up or change payment accounts, and cannot make anyone an administrator |
-| Front desk | A desk staff member | Permitted member and front-desk operations |
-| Trainer | A training staff member | Permitted training and staff areas |
+| Front desk | A desk staff member | Member and front-desk operations |
+| Trainer | A training staff member | Training and staff areas their role allows |
 | Member | An LSU organization member | Their own account and member-facing access |
-
 
 Manager is the role for someone who runs LSU day to day without holding the organization itself or its money. It sits between front desk, which cannot change a schedule, issue a refund or see reports, and administrator, which can do everything an owner can except delete the organization. For LSU specifically the role adds nothing a reviewer will see, because everything it grants over front desk covers point of sale, door access, class scheduling, ranks and payroll, and none of those are among the sections LSU has switched on.
 
@@ -34,6 +33,12 @@ Owner and administrator accounts can manage the LSU **Experience**. The other su
 The demo visitor has no organization membership. “Visitor” describes its browsing access, not a staff role.
 
 Sam and Pawel are **LSU organization administrators**. Their access applies to the Last Soul Ultra workspace and does not grant administration over other organizations.
+
+## Installation administrators
+
+Two real people run the organization: Chris Breuer and Pawel Dregan, each with their own account. They are listed in the installation's deployment settings, and every deploy makes each listed address an active administrator of Last Soul Ultra. An account that does not exist yet is created with a verified email and no usable password, so its first sign-in is **Continue with HQ**. See [Administration](/administration#who-runs-the-organization).
+
+Pawel Dregan's own account is not the `pawel@lsu-demo.test` review login. It also holds a coach profile, and the six demo training plans in the store sit under it. See [Plans and subscriptions](/training/plans#demo-plans-in-the-store).
 
 ## Private review accounts
 
@@ -58,8 +63,8 @@ The trainer and coach accounts have coach profiles; the published sample belongs
 
 ## Start with the right workspace
 
-For training, open [Workouts](https://lsu.stacksjs.com/coaching/calendar) with Alex or Jamie. Compare a run with **Strength A** or **Strength B**, then inspect Progress, Library and Health. The sample club conversation is attached to Alex and the general demo administrator.
+For training, open [Workouts](https://lsu.stacksjs.com/coaching/calendar) with Alex or Jamie. Compare a run with **Strength A** or **Strength B**, then inspect Progress, The method and Health. The sample club conversation is attached to Alex and the general demo administrator.
 
 For authoring, use the demo coach and open the [coach workspace](https://lsu.stacksjs.com/coach) or [coach exercise library](https://lsu.stacksjs.com/coach/exercises). For management, use Sam or Pawel and open [Administration](https://lsu.stacksjs.com/admin), which opens the LSU Experience directly. Use the workspace menu for team, member and organization settings. Complete your own policy choices if prompted.
 
-Use sign-out or a separate browser profile when changing accounts. Private windows in one browser can share the same session. The shared preview password unlocks the website and docs; the email and personal password select your app account. See the [demo walkthrough](/demo) and [Your account](/my-account#switch-roles-safely).
+Use sign-out or a separate browser profile when changing accounts. Private windows in one browser can share the same session. The shared preview password unlocks the race site and docs; the email and personal password select your training account. See the [demo walkthrough](/demo) and [Your account](/my-account#switch-roles-safely).

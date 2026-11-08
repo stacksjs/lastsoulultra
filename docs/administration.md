@@ -13,6 +13,14 @@ The Sam and Pawel review accounts are organization administrators. Inside Last S
 
 For the full account map and the difference between permissions and training subscriptions, see [Roles and plan access](/roles).
 
+In the iPhone app, an owner, administrator or manager reaches the same tools from **Me** → **Manage Last Soul Ultra**.
+
+## Who runs the organization
+
+The installation's deployment settings list its administrators by email. Today the list holds the HQ account addresses of Chris Breuer and Pawel Dregan. Every deploy runs `buddy installation:admins`, which makes each listed address an active administrator of Last Soul Ultra. An address with no account gets one, created with a verified email and no usable password. That person's first sign-in is **Continue with HQ**, which links the account to their HQ account and brings across their profile and, once they approve it on HQ, their training history.
+
+To add an administrator, add their email to `admins` in `enterprise/deployment.json` and deploy. The list only grants: it never turns the owner into an administrator, and removing an address does not take the role away. Change or remove a role in the staff screen, under the rules in [Manage access](#manage-access).
+
 ## Roles and permissions
 
 | Role | Purpose |
@@ -35,6 +43,8 @@ Open the **Experience** area in the staff workspace. This is the published LSU a
 ## Manage offers and methods
 
 An offer only appears once every part of it lines up: the method is published and belongs to LSU, its author holds an active LSU membership as owner, administrator, manager or trainer, the product belongs to that same author, is active, carries the intended training plan, is a self-coaching product rather than one that includes personal coaching, and bills monthly. Any listed contributor must also be a coach with an active LSU membership. If one of these is wrong the offer is left out of the published app silently, with no error shown, so check the published page after saving. These checks run again on every read, so an offer can disappear later if its author's membership or role changes. Review recurring terms, currency and price before making an offer available. Do not connect real payment credentials to the seeded demonstration records.
+
+A standalone training plan is simpler: it is a one-off product in the store, owned by a coach in the organization, with no method behind it. The six demo plans are of this kind. None of the paid ones can be bought until payments are set up for Last Soul Ultra; see [Plans and subscriptions](/training/plans#demo-plans-in-the-store).
 
 ## Manage access
 

@@ -5,7 +5,7 @@ description: Review the private preview as a visitor, runner, coach and administ
 
 # Demo walkthrough
 
-This walkthrough and all demo credentials are protected by the same preview login as the website. All seeded training and conversations are fictional demonstration content.
+This walkthrough and all demo credentials are protected by the same preview login as the race site. All seeded training and conversations are fictional demonstration content.
 
 The [roles page](/roles) maps all twelve accounts and explains organization permissions versus training entitlements.
 
@@ -15,7 +15,9 @@ Use [Training](https://lsu.stacksjs.com/coaching/calendar) for athlete and brows
 
 <DemoCredentials :accounts="data.demoAccounts" />
 
-These are shared review accounts. Their `.test` addresses do not receive email. Use the listed passwords rather than email recovery, and keep real personal or payment information out of them. Complete your own policy choices when a workspace asks.
+These are shared review accounts. Their `.test` addresses do not receive email. Use the listed passwords rather than email recovery, and keep real personal or payment information out of them. Complete your own policy choices when a workspace asks. If the welcome tour opens on first sign-in, choose **Skip**; it stays available from **Settings**.
+
+The two real administrators, Chris Breuer and Pawel Dregan, sign in with their own accounts. Those are not review accounts and are not listed here. See [Roles and plan access](/roles#installation-administrators).
 
 ## 1. Check the preview gate
 
@@ -25,17 +27,21 @@ Open the site in a private browser window. Confirm that it asks for the shared p
 
 Sign in with the visitor account. Open Coaching and inspect the published offer. Confirm that private subscriber workouts are not available to a visitor without an enrollment.
 
+Then open the training app's [store](https://training.lsu.stacksjs.com/store). Next to the demo tier it lists six demo training plans under Pawel Dregan's coach profile. Read them, but do not buy or take one on a shared account: a plan you take lands on that account's calendar for every other reviewer. See [Plans and subscriptions](/training/plans#demo-plans-in-the-store).
+
 ## 3. Review an enrolled athlete
 
-Use Alex or Jamie. Both accounts use the same Run + Strength tier with complimentary review access (see [Plans and subscriptions](/training/plans)). Open Workouts, inspect a completed session and a future session, then check Progress and the method Library. Each enrolled athlete starts with 48 sessions: 32 running and 16 strength, with 21 sessions completed at setup. Each also has 21 days of sample health metrics. The sample dates include recent history and upcoming sessions. Counts can change as reviewers complete or edit training.
+Use Alex or Jamie. Both accounts use the same Run + Strength tier with complimentary review access (see [Plans and subscriptions](/training/plans)). Open Workouts, inspect a completed session and a future session, then check Progress and The method. Each enrolled athlete starts with 48 sessions: 32 running and 16 strength, with 21 sessions completed at setup. Each also has 21 days of sample health metrics. The sample dates include recent history and upcoming sessions. Counts can change as reviewers complete or edit training.
 
 Open a **Strength A** or **Strength B** session. Inspect its illustrated exercises, blocks and sets, and try ticking off a set. Compare it with a running session and its timed steps. The two disciplines belong to the same plan.
 
-Open **Say how it felt**, select the combined method, and send a fictional training note. Wait for its AI response. Then record a short voice note or upload an audio file, transcribe it, review and correct the text, and send it. Both enrolled demo athletes can use these flows. See [Feedback](/training/feedback).
+Open **Say how it felt**, select the combined method, and send a fictional training note. Wait for its AI response; if none arrives, see [Troubleshooting](/troubleshooting#feedback-sends-but-no-reply-arrives). Then record a short voice note or upload an audio file, transcribe it, review and correct the text, and send it. Both enrolled demo athletes can use these flows. See [Feedback](/training/feedback).
 
 Open Health and Messages to inspect any supplied sample records. Avoid connecting real devices or entering personal information.
 
 Open the [Style Guide](/style-guide/) to review the typefaces, colors and interface specimens alongside the workout figures.
+
+If you have the iPhone app, sign in there as Alex too. Check the five tabs, then open **Me** → **Coaching accounts** and confirm that **Running and strength, demo** is listed. Its screen holds **Training feedback**, **Training progress** and **Your methods**.
 
 ## 4. Review the coach
 
@@ -71,4 +77,4 @@ Record the account role, page and observed behavior. Send feedback to the person
 
 ## Admin and coach workspaces
 
-[Administration](https://lsu.stacksjs.com/admin) opens LSU’s Experience settings directly for Sam and Pawel. [Coach workspace](https://lsu.stacksjs.com/coach) opens methods, with [Exercises](https://lsu.stacksjs.com/coach/exercises) and [Subscribers](https://lsu.stacksjs.com/coach/subscribers) in the workspace navigation. Both workspaces use the native app’s controls and grouped layouts, with LSU’s black surfaces, red actions, Anton headings and Barlow text. On a phone, open **Workspace menu** to reach the other tools and sign out. Links and saved changes stay in the LSU organization. The website password also protects these entry pages.
+[Administration](https://lsu.stacksjs.com/admin) opens LSU’s Experience settings directly for Sam and Pawel. [Coach workspace](https://lsu.stacksjs.com/coach) opens methods, with [Exercises](https://lsu.stacksjs.com/coach/exercises) and [Subscribers](https://lsu.stacksjs.com/coach/subscribers) in the workspace navigation. Both workspaces use the app’s controls and grouped layouts, with LSU’s black surfaces, red actions, Anton headings and Barlow text. On a phone, open **Workspace menu** to reach the other tools and sign out. Links and saved changes stay in the LSU organization. The preview password also protects these entry pages.
