@@ -17,6 +17,8 @@
  */
 
 const SOURCE_URL = 'https://api.lastsoulultra.com/v1/events'
+/** How the server names itself to the events API. tests/race-events.test.ts holds it to a form the API accepts. */
+export const EVENTS_USER_AGENT = 'LastSoulUltra/1.0 (+https://www.lastsoulultra.com)'
 const FRESH_MS = 300_000
 const STALE_LIMIT_MS = 6 * 3600_000
 const FETCH_TIMEOUT_MS = 6000
@@ -108,7 +110,9 @@ let lastError: string | null = null
 
 async function read(): Promise<CacheEntry> {
   const response = await fetch(SOURCE_URL, {
-    headers: { 'accept': 'application/json', 'user-agent': 'lastsoulultra.com (entry pages)' },
+    // The API's Cloudflare answers 403 to some agents ("lastsoulultra.com
+    // (entry pages)" among them), which left every event status a placeholder.
+    headers: { 'accept': 'application/json', 'user-agent': EVENTS_USER_AGENT },
     signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
   })
   if (!response.ok) throw new Error(`events responded ${response.status}`)

@@ -189,3 +189,13 @@ describe('keying the four World Series stops', () => {
     expect(entryRowsByStop(down, NOW)).toEqual({})
   })
 })
+
+describe('how the server asks the events API', () => {
+  it('names itself in a form the API accepts', async () => {
+    const { EVENTS_USER_AGENT } = await import('../resources/data/race-events')
+    // The API's Cloudflare answered 403 to "lastsoulultra.com (entry pages)",
+    // so every World Series card fell back to "How to qualify".
+    expect(EVENTS_USER_AGENT).not.toContain('(entry pages)')
+    expect(EVENTS_USER_AGENT).toMatch(/^LastSoulUltra\/\d+\.\d+ \(\+https:\/\/[^)]+\)$/)
+  })
+})

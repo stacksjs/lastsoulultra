@@ -107,6 +107,10 @@ export default {
     '/legal/imprint': '/imprint',
     '/legal/privacy': '/privacy',
     '/legal/terms': '/terms',
+    // The published site had German pages; lastsoulultra.com now sends their
+    // old links to the English page of the same name, and so does this site.
+    '/de': '/',
+    '/de/*': '/',
   },
 
   /**

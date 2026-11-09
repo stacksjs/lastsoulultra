@@ -6,7 +6,7 @@ import server from '../config/server'
 import { coachingPage } from '../resources/data/coaching'
 import { productionPages } from '../resources/data/production-pages'
 import { indexablePaths } from '../resources/data/site'
-import { publishedOrigin, robotsTxt, sitemapXml } from '../scripts/seo'
+import { llmsTxt, publishedOrigin, robotsTxt, sitemapXml } from '../scripts/seo'
 
 /**
  * The sitemap and robots.txt are committed static files, because the views
@@ -24,6 +24,13 @@ describe('seo artefacts', () => {
   it('the committed robots.txt matches what the generator produces', async () => {
     const committed = await Bun.file('public/robots.txt').text()
     expect(committed).toBe(robotsTxt(publishedOrigin))
+  })
+
+  it('publishes llms.txt as lastsoulultra.com does, on this origin', async () => {
+    const committed = await Bun.file('public/llms.txt').text()
+    expect(committed).toBe(llmsTxt(publishedOrigin))
+    expect(committed).toContain(`[World Series](${publishedOrigin}/world-series)`)
+    expect(committed).not.toMatch(/[—–]/)
   })
 
   /** Every view on disk, as the path the site serves it at. */
