@@ -89,7 +89,7 @@ function signIn(account: Account) {
   // would create a second entry screen in a different tab's retained stack.
   // Sign-in asks for the email first; an account of this installation's own
   // is then asked for its password (an HQ account would be offered HQ sign-in).
-  steps.push({ command: 'expectid', text: 'login-email', seconds: 30 }, { command: 'absentid', text: 'login-password' }, { command: 'typeid', id: 'login-email', text: account.email }, { command: 'tapid', text: 'login-submit' }, { command: 'expectid', text: 'login-password', seconds: 30 }, { command: 'typeid', id: 'login-password', text: account.password }, { command: 'return' }, { command: 'wait', seconds: 2 }, { command: 'shot', name: 'lsu-after-sign-in' }, { command: 'tree', name: 'lsu-after-sign-in' })
+  steps.push({ command: 'expectid', text: 'login-email', seconds: 30 }, { command: 'absentid', text: 'login-password' }, { command: 'typeid', id: 'login-email', text: account.email }, { command: 'tapid', text: 'login-submit' }, { command: 'wait', seconds: 3 }, { command: 'shot', name: `lsu-after-email-${account.key}` }, { command: 'tree', name: `lsu-after-email-${account.key}` }, { command: 'expectid', text: 'login-password', seconds: 30 }, { command: 'typeid', id: 'login-password', text: account.password }, { command: 'return' }, { command: 'wait', seconds: 2 }, { command: 'shot', name: 'lsu-after-sign-in' }, { command: 'tree', name: 'lsu-after-sign-in' })
   if (firstRun.policies) {
     steps.push({ command: 'expectid', text: 'agree-submit', seconds: 40 }, ...declineOptionalPrompts())
     for (const id of ['agree-health', 'agree-data']) steps.push({ command: 'scrollto', text: id }, { command: 'tapid', text: id })
