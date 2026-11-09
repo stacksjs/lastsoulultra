@@ -87,9 +87,11 @@ function signIn(account: Account) {
   const firstRun = firstRuns.get(account.key)!
   // Launch and sign-out already present Login. Opening another deep link here
   // would create a second entry screen in a different tab's retained stack.
-  // Sign-in asks for the email first; an account of this installation's own
-  // is then asked for its password (an HQ account would be offered HQ sign-in).
-  steps.push({ command: 'expectid', text: 'login-email', seconds: 30 }, { command: 'absentid', text: 'login-password' }, { command: 'typeid', id: 'login-email', text: account.email }, { command: 'tapid', text: 'login-submit' }, { command: 'wait', seconds: 3 }, { command: 'shot', name: `lsu-after-email-${account.key}` }, { command: 'tree', name: `lsu-after-email-${account.key}` }, { command: 'expectid', text: 'login-password', seconds: 30 }, { command: 'typeid', id: 'login-password', text: account.password }, { command: 'return' }, { command: 'wait', seconds: 2 }, { command: 'shot', name: 'lsu-after-sign-in' }, { command: 'tree', name: 'lsu-after-sign-in' })
+  // Sign-in asks for the email first. The address is then looked up on HQ:
+  // the demo accounts also exist there, so HQ sign-in is offered beside "Sign
+  // in with a password instead"; an address HQ does not know goes straight to
+  // the password. Both steps show the address with Change email.
+  steps.push({ command: 'expectid', text: 'login-email', seconds: 30 }, { command: 'absentid', text: 'login-password' }, { command: 'typeid', id: 'login-email', text: account.email }, { command: 'tapid', text: 'login-submit' }, { command: 'expectid', text: 'login-change-email', seconds: 40 }, { command: 'ifid', id: 'login-use-password', step: { command: 'tapid', text: 'login-use-password' } }, { command: 'expectid', text: 'login-password', seconds: 10 }, { command: 'typeid', id: 'login-password', text: account.password }, { command: 'return' }, { command: 'wait', seconds: 2 }, { command: 'shot', name: 'lsu-after-sign-in' }, { command: 'tree', name: 'lsu-after-sign-in' })
   if (firstRun.policies) {
     steps.push({ command: 'expectid', text: 'agree-submit', seconds: 40 }, ...declineOptionalPrompts())
     for (const id of ['agree-health', 'agree-data']) steps.push({ command: 'scrollto', text: id }, { command: 'tapid', text: id })
