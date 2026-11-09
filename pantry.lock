@@ -36,12 +36,12 @@
     }
   },
   "packages": {
-    "@hq/platform@1.0.4059": {
+    "@hq/platform@1.0.4060": {
       "name": "@hq/platform",
-      "version": "1.0.4059",
+      "version": "1.0.4060",
       "source": "npm",
-      "resolved": "registry:@hq/platform@1.0.4059",
-      "integrity": "sha256:6566035f7a97bd01b6fddd6a95630eac59401c97cd650b161971037c16dbf150"
+      "resolved": "registry:@hq/platform@1.0.4060",
+      "integrity": "sha256:9e4940423c90abb54401617bccb2db656697ee1ded7c440a4ce0d45a39c771e4"
     },
     "bun.sh@1.4.4": {
       "name": "bun.sh",

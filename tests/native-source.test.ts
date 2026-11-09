@@ -48,6 +48,8 @@ it('builds with LSU identity and removes local native overrides from the release
     expect(env.NODE_ENV).toBe('production')
     expect(product.bundleId).toBe('com.lastsoulultra.app')
     expect(product.identity.scheme).toBe('lastsoulultra')
+    // LSU serves coaches and athletes only: the kit drops gym wording for it.
+    expect((product.identity as { audience?: string }).audience).toBe('coaching')
     expect(product.site).toBe('https://training.lsu.stacksjs.com')
     expect(env.STX_PUBLIC_API_URL).toBe('https://training.lsu.stacksjs.com/api')
     expect(env.LSU_TRAINING_DB_PASSWORD).toBeUndefined()

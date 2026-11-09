@@ -21,7 +21,8 @@
       "font": "barlow",
       "heading_font": "anton"
     },
-    "apiOrigin": "https://training.lsu.stacksjs.com"
+    "apiOrigin": "https://training.lsu.stacksjs.com",
+    "audience": "coaching"
   },
   "bundleId": "com.lastsoulultra.app",
   "teamId": "3JJRNQW6B7",
