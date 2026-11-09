@@ -1,7 +1,15 @@
 <script client>
 import { raceAccount, formValues } from '../functions/race-api'
 import { SIZES, entryDeadline, entryFee, entryTasks, openCheckout, placeToConfirm, profileReturnUrl, wait } from '../functions/entry-confirm'
+import { closeDialog, dialogAround, onEntryLinks, showDialog } from '../functions/entry-dialog'
 const rp = raceAccount()
+const rpRoot = useRef('rpRoot')
+/* In the race-entry window (RaceEntryDialog) the portal is one race's
+   request, opened from a link, rather than the account page it is on
+   /lottery and /profile. */
+const rpInDialog = state(false)
+let rpLoaded = false
+let rpStopLinks = () => {}
 const rpUser = rp.user
 const rpApplications = rp.applications
 const rpEvents = rp.events
@@ -19,6 +27,12 @@ const rpEventSlug = state('')
 const rpEvent = derived(() => rpEvents().find(item => item.slug === rpEventSlug()) || null)
 const rpEntry = derived(() => rpApplications().find(item => item.event.slug === rpEventSlug()) || null)
 const rpStage = state(1)
+/* Past editing: submitted in this window, or a request the team has moved on
+   (in selection, selected, not selected). An entered request stays editable
+   while its event is open, as on the published site. */
+const rpDone = derived(() => rpStage() >= 4 || !['', 'not_entered', 'entered', 'draft', 'withdrawn'].includes(String(rpEntry()?.application?.display_status || rpEntry()?.application?.status || '')))
+/* The window's three stages: sign in, request, complete. */
+const rpOuterStage = derived(() => !rpSigned() ? 1 : rpDone() ? 3 : 2)
 const rpReason = state('')
 const rpNoPb = state(true)
 const rpPbYards = state('')
@@ -181,7 +195,26 @@ watch(() => rpPlace()?.entry?.id, () => {
   rpLoadWaiver()
 })
 
+/* Open the window for the race a link names, or the open one. The account is
+   fetched on the first open, not on every page that carries the window. */
+async function rpOpen(query) {
+  const auth = query.get('auth')
+  if (['create', 'login', 'forgot', 'verify', 'reset'].includes(auth)) rpMode.set(auth === 'create' ? 'register' : auth)
+  rpMessage.set('')
+  showDialog(dialogAround(rpRoot.current))
+  if (!rpLoaded) { rpLoaded = true; await rp.load() }
+  const wanted = String(query.get('event') || '')
+  rpEventSlug.set(rpEvents().some(item => item.slug === wanted) ? wanted : rpEvents().find(item => item.phase === 'open')?.slug || '')
+  rpChoose()
+}
+function rpClose() { closeDialog(dialogAround(rpRoot.current)) }
+
 onMount(async () => {
+  if (dialogAround(rpRoot.current)) {
+    rpInDialog.set(true)
+    rpStopLinks = onEntryLinks(query => { rpOpen(query) })
+    return
+  }
   await rp.load()
   const query = useRoute().query || {}
   if (query.payment) rpAfterPayment(String(query.payment))
@@ -189,14 +222,23 @@ onMount(async () => {
   rpEventSlug.set(String(query.event || rpEvents().find(item => item.phase === 'open')?.slug || ''))
   rpChoose()
 })
-onDestroy(() => rpAutosave.stop())
+onDestroy(() => { rpAutosave.stop(); rpStopLinks() })
 </script>
-<div class="race-portal">
+<div class="race-portal" x-ref="rpRoot">
+  <div :if="rpInDialog" class="entry-dialog-bar">
+    <ol class="entry-dialog-stages" aria-label="Steps to request an entry">
+      <li :class="rpOuterStage > 1 ? 'done' : ''" :aria-current="rpOuterStage === 1 ? 'step' : undefined"><span class="entry-dialog-n">Stage 1</span><span class="entry-dialog-label">Sign in</span></li>
+      <li :class="rpOuterStage > 2 ? 'done' : ''" :aria-current="rpOuterStage === 2 ? 'step' : undefined"><span class="entry-dialog-n">Stage 2</span><span class="entry-dialog-label">Request</span></li>
+      <li :aria-current="rpOuterStage === 3 ? 'step' : undefined"><span class="entry-dialog-n">Stage 3</span><span class="entry-dialog-label">Complete</span></li>
+    </ol>
+    <button type="button" class="entry-dialog-close" aria-label="Close" @click="rpClose()"><span aria-hidden="true">×</span></button>
+  </div>
+  <p :if="rpInDialog && rpEvent" class="entry-dialog-race" :text="(rpEvent.country_name || rpEvent.name) + (rpEvent.season ? ' · Season ' + rpEvent.season : '')"></p>
   <p :if="rpError" :text="rpError" role="alert"></p><p :if="rpMessage" :text="rpMessage" role="status"></p>
   <template :if="!rpSigned">
-    <h2 :text="rpMode === 'register' ? 'Create account' : rpMode === 'login' ? 'Sign in' : rpMode === 'forgot' ? 'Reset your password' : 'Check your email'"></h2>
-    <p>Use your race-entry account. For your training subscription, <a href="/coaching/calendar">sign in to Training</a>.</p>
-    <div class="race-tabs"><button type="button" @click="rpMode.set('login')" :aria-selected="rpMode === 'login'">Sign in</button><button type="button" @click="rpMode.set('register')" :aria-selected="rpMode === 'register'">Create account</button><button type="button" @click="rpMode.set('forgot')">Forgot password?</button></div>
+    <h2 :text="rpMode === 'register' ? 'Create account' : rpMode === 'login' ? (rpInDialog ? 'Sign in to request an entry' : 'Sign in') : rpMode === 'forgot' ? 'Reset your password' : 'Check your email'"></h2>
+    <p :if="!rpInDialog">Use your race-entry account. For your training subscription, <a href="/coaching/calendar">sign in to Training</a>.</p>
+    <div :if="!rpInDialog" class="race-tabs"><button type="button" @click="rpMode.set('login')" :aria-selected="rpMode === 'login'">Sign in</button><button type="button" @click="rpMode.set('register')" :aria-selected="rpMode === 'register'">Create account</button><button type="button" @click="rpMode.set('forgot')">Forgot password?</button></div>
     <form @submit.prevent="rpAuth()">
       <div :if="rpMode === 'register'" class="field-row"><label>First name<input x-model="rpFirst" autocomplete="given-name" required></label><label>Last name<input x-model="rpLast" autocomplete="family-name" required></label></div>
       <label>Email<input type="email" x-model="rpEmail" autocomplete="email" required></label>
@@ -205,10 +247,15 @@ onDestroy(() => rpAutosave.stop())
       <p :if="rpMode === 'register'">By creating an account you agree to the <a href="/terms">terms</a>. Read our <a href="/privacy">privacy policy</a>.</p>
       <button type="submit" class="btn" :disabled="rpBusy" :text="rpBusy ? 'Please wait…' : rpMode === 'register' ? 'Create account' : rpMode === 'forgot' ? 'Send reset code' : rpMode === 'login' ? 'Sign in' : 'Continue'"></button>
     </form>
+    <p :if="rpInDialog" class="entry-dialog-links">
+      <button :if="rpMode !== 'login'" type="button" @click="rpMode.set('login')">Sign in</button>
+      <button :if="rpMode !== 'register'" type="button" @click="rpMode.set('register')">Create account</button>
+      <button :if="rpMode === 'login'" type="button" @click="rpMode.set('forgot')">Forgot password?</button>
+    </p>
   </template>
   <template :if="rpSigned && rpUser">
     <h2 :text="'Hello, ' + rpUser.first_name"></h2><button type="button" class="btn btn-outline" @click="rp.logout()">Sign out</button>
-    <section :if="rpPlace" class="confirm-place" :class="rpPlaceConfirmed ? 'is-confirmed' : ''" aria-labelledby="confirm-title">
+    <section :if="rpPlace && !rpInDialog" class="confirm-place" :class="rpPlaceConfirmed ? 'is-confirmed' : ''" aria-labelledby="confirm-title">
       <div class="confirm-head"><h3 id="confirm-title" :text="(rpPlaceConfirmed ? 'Your place is confirmed' : 'Confirm your place') + ': ' + rpPlace.event.name"></h3><p class="confirm-count" :text="rpTasks.done + ' of 3 done'"></p></div>
       <div class="confirm-bar" role="progressbar" aria-label="Tasks done" aria-valuemin="0" aria-valuemax="3" :aria-valuenow="rpTasks.done"><span :class="rpTasks.done > 0 ? 'on' : ''"></span><span :class="rpTasks.done > 1 ? 'on' : ''"></span><span :class="rpTasks.done > 2 ? 'on' : ''"></span></div>
       <p class="confirm-lead" :text="rpPlaceConfirmed ? 'Agreement signed, details saved, fee settled. See you on the start line.' : (rpPlace.entry.deadline_at ? 'Three things to do by ' + entryDeadline(rpPlace.entry.deadline_at) : 'Three things to do') + ', in any order. Your place confirms itself the moment the last one is done.'"></p>
@@ -251,11 +298,17 @@ onDestroy(() => rpAutosave.stop())
         </details></li>
       </ol>
     </section>
-    <section><h3>Your entries</h3><p :if="!rpApplications.length">You have not requested a race entry yet.</p><article :for="item in rpApplications"><h4 :text="item.event.name"></h4><p :text="item.application.display_status || item.application.status"></p><p :if="item.entry?.deadline_at" :text="'Confirm by ' + entryDeadline(item.entry.deadline_at)"></p><details :if="item.event.phase === 'open' && item.application.status !== 'withdrawn'"><summary>Withdraw this application</summary><p>This removes your application from this event.</p><button type="button" class="btn btn-outline" :disabled="rpBusy" @click="rpWithdraw(item.event.slug)">Withdraw my application</button></details></article></section>
-    <label>Event<select x-model="rpEventSlug" @change="rpChoose()"><option value="">Choose a race</option><option :for="event in rpEvents" :value="event.slug" :text="event.name"></option></select></label>
+    <section :if="!rpInDialog"><h3>Your entries</h3><p :if="!rpApplications.length">You have not requested a race entry yet.</p><article :for="item in rpApplications"><h4 :text="item.event.name"></h4><p :text="item.application.display_status || item.application.status"></p><p :if="item.entry?.deadline_at" :text="'Confirm by ' + entryDeadline(item.entry.deadline_at)"></p><details :if="item.event.phase === 'open' && item.application.status !== 'withdrawn'"><summary>Withdraw this application</summary><p>This removes your application from this event.</p><button type="button" class="btn btn-outline" :disabled="rpBusy" @click="rpWithdraw(item.event.slug)">Withdraw my application</button></details></article></section>
+    <label :if="!rpInDialog">Event<select x-model="rpEventSlug" @change="rpChoose()"><option value="">Choose a race</option><option :for="event in rpEvents" :value="event.slug" :text="event.name"></option></select></label>
     <p :if="rpEvent && rpEvent.phase !== 'open'">This event is not accepting direct entry requests. <a href="/world-series#qualify">View the entry and qualification rules.</a></p>
-    <template :if="rpEvent && rpEvent.phase === 'open'">
-      <p :text="'Stage ' + Math.min(rpStage, 3) + ' of 3'"></p>
+    <p :if="rpInDialog && !rpEvent">No race is taking entry requests right now. <a href="/world-series">See the World Series dates.</a></p>
+    <div :if="rpInDialog && rpDone" class="entry-dialog-done">
+      <p class="entry-dialog-status" :text="rpStage >= 4 ? 'Request sent' : (rpEntry?.application?.display_status || rpEntry?.application?.status || '').replace(/_/g, ' ')"></p>
+      <p>Places are selected by the LSU team. If you are selected, we email you with the next steps.</p>
+      <a class="btn" href="/profile">View your entry</a>
+    </div>
+    <template :if="rpEvent && rpEvent.phase === 'open' && !(rpInDialog && rpDone)">
+      <p :text="(rpInDialog ? 'Step ' : 'Stage ') + Math.min(rpStage, 3) + ' of 3'"></p>
       <form :if="rpStage === 1" @submit.prevent="rpSaveProfile($event)">
         <h3>Personal details</h3><div class="field-row"><label>First name<input name="first_name" :value="rpUser.first_name" autocomplete="given-name" required></label><label>Last name<input name="last_name" :value="rpUser.last_name" autocomplete="family-name" required></label></div>
         <label>Date of birth<input name="date_of_birth" type="date" :value="rpUser.date_of_birth" required></label><label>Gender<select name="gender" :value="rpUser.gender" required><option value="female">Female</option><option value="male">Male</option><option value="non_binary">Non-binary</option></select></label><label>Country of residence, three-letter code<input name="country_of_residence" :value="rpUser.country_of_residence" minlength="3" maxlength="3" placeholder="DEU" required></label><label>Nationality, three-letter code<input name="nationality" :value="rpUser.nationality" minlength="3" maxlength="3" placeholder="DEU" required></label><label>Town or city<input name="town" :value="rpUser.town"></label><label>Instagram<input name="instagram" :value="rpUser.instagram"></label><label>Strava<input name="strava" :value="rpUser.strava"></label>
@@ -264,6 +317,6 @@ onDestroy(() => rpAutosave.stop())
       <form :if="rpStage === 2" @submit.prevent="rpSaveDraft(true)"><h3>Your request</h3><label>Why do you want to take part?<textarea x-model="rpReason" rows="5" required maxlength="4000"></textarea></label><label><input type="checkbox" x-model="rpNoPb">I have not run a backyard ultra before</label><div :if="!rpNoPb"><label>Personal best, yards<input type="number" min="1" x-model="rpPbYards" required></label><label>Event<input x-model="rpPbEvent" required></label><label>Date<input type="date" x-model="rpPbDate"></label><label>Proof link<input type="url" x-model="rpPbProof"></label></div><label>Other social links<input x-model="rpSocial"></label><p :text="rpSaved" role="status"></p><button type="button" class="btn btn-outline" @click="rpStage.set(1)">Back</button><button type="submit" class="btn" :disabled="rpBusy">Review request</button></form>
       <form :if="rpStage === 3" @submit.prevent="rpSubmit()"><h3>Review your request</h3><p :text="rpReason"></p><label><input type="checkbox" x-model="rpAccurate" required>I confirm that the information I provided is accurate.</label><label><input type="checkbox" x-model="rpRules" required>I accept the <a href="/format">race rules</a> and <a href="/terms">terms</a>.</label><button type="button" class="btn btn-outline" @click="rpStage.set(2)">Back</button><button type="submit" class="btn" :disabled="rpBusy || !rpAccurate || !rpRules">Submit race entry request</button></form>
     </template>
-    <p>Looking for your training subscription? <a href="/coaching#training">Open LSU coaching.</a></p>
+    <p :if="!rpInDialog">Looking for your training subscription? <a href="/coaching#training">Open LSU coaching.</a></p>
   </template>
 </div>

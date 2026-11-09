@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-GB" class="lsu-scope-site">
-<head>@include('head')</head>
+<head>@include('head')<link rel="stylesheet" href="/assets/styles/production/entry-dialog.css"></head>
 <body class="lsu-scope-site">
   <a class="lsu-skip" href="#main">Skip to content</a>
   <div class="lsu-scope-site page">
@@ -8,6 +8,7 @@
     <main id="main" tabindex="-1">@slot('content')</main>
     <SiteFooter current="{{ typeof canonicalPath !== 'undefined' ? canonicalPath : '' }}" />
   </div>
+  <RaceEntryDialog current="{{ typeof canonicalPath !== 'undefined' ? canonicalPath : '' }}" />
   <SiteConsent />
 </body>
 </html>

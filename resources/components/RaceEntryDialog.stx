@@ -1,0 +1,24 @@
+<script>
+interface Props {
+  /** The canonical path of the page this window is rendering on. */
+  current?: string
+}
+const { current = '' } = defineProps<Props>()
+</script>
+<script server>
+/*
+ * The entry page and the profile carry the portal in the page itself, and one
+ * portal per page is all the page's script scope can hold, so the window
+ * stays off those two. A link to the entry page there just goes to it.
+ */
+const edShown = current !== '/lottery' && current !== '/profile'
+</script>
+<script client>
+import { closeDialog, onBackdrop } from '../functions/entry-dialog'
+function edBackdrop(event) { if (onBackdrop(event)) closeDialog(event.currentTarget) }
+</script>
+@if(edShown)
+<dialog class="entry-dialog" aria-label="Request a race entry" @click="edBackdrop($event)">
+  <RacePortal />
+</dialog>
+@endif

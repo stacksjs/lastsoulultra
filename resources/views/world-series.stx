@@ -62,7 +62,7 @@ onMount(() => { wsReadEvents() })
 <span class="lsu-scope-world-series ws-country">USA</span>
 <span class="lsu-scope-world-series ws-sub">Qualifier 01</span>
 </a>
-<a :if="wsOpen('usa')" class="ws-cta" href="/lottery" data-apply data-view-href="/profile">Request a race entry</a>
+<a :if="wsOpen('usa')" class="ws-cta" href="/lottery" :href="'/lottery?event=' + (wsRow('usa')?.slug || '')" data-apply data-view-href="/profile">Request a race entry</a>
 <a :if="wsFinal('usa')" class="ws-how" href="#qualify">How to qualify</a>
 <span :if="!wsOpen('usa') && !wsFinal('usa') && wsLabel('usa')" class="ws-tag" :text="wsLabel('usa')"></span>
 </li>
@@ -72,7 +72,7 @@ onMount(() => { wsReadEvents() })
 <span class="lsu-scope-world-series ws-country">United Kingdom</span>
 <span class="lsu-scope-world-series ws-sub">Qualifier 02</span>
 </a>
-<a :if="wsOpen('uk')" class="ws-cta" href="/lottery" data-apply data-view-href="/profile">Request a race entry</a>
+<a :if="wsOpen('uk')" class="ws-cta" href="/lottery" :href="'/lottery?event=' + (wsRow('uk')?.slug || '')" data-apply data-view-href="/profile">Request a race entry</a>
 <a :if="wsFinal('uk')" class="ws-how" href="#qualify">How to qualify</a>
 <span :if="!wsOpen('uk') && !wsFinal('uk') && wsLabel('uk')" class="ws-tag" :text="wsLabel('uk')"></span>
 </li>
@@ -82,7 +82,7 @@ onMount(() => { wsReadEvents() })
 <span class="lsu-scope-world-series ws-country">AUSTRALIA x DCG</span>
 <span class="lsu-scope-world-series ws-sub">Qualifier 03</span>
 </a>
-<a :if="wsOpen('aus')" class="ws-cta" href="/lottery" data-apply data-view-href="/profile">Request a race entry</a>
+<a :if="wsOpen('aus')" class="ws-cta" href="/lottery" :href="'/lottery?event=' + (wsRow('aus')?.slug || '')" data-apply data-view-href="/profile">Request a race entry</a>
 <a :if="wsFinal('aus')" class="ws-how" href="#qualify">How to qualify</a>
 <span :if="!wsOpen('aus') && !wsFinal('aus') && wsLabel('aus')" class="ws-tag" :text="wsLabel('aus')"></span>
 </li>
@@ -92,7 +92,7 @@ onMount(() => { wsReadEvents() })
 <span class="lsu-scope-world-series ws-country">Germany</span>
 <span class="lsu-scope-world-series ws-sub">The Finals</span>
 </a>
-<a :if="wsOpen('ger')" class="ws-cta" href="/lottery" data-apply data-view-href="/profile">Request a race entry</a>
+<a :if="wsOpen('ger')" class="ws-cta" href="/lottery" :href="'/lottery?event=' + (wsRow('ger')?.slug || '')" data-apply data-view-href="/profile">Request a race entry</a>
 <a :if="wsFinal('ger')" class="ws-how" href="#qualify">How to qualify</a>
 <span :if="!wsOpen('ger') && !wsFinal('ger') && wsLabel('ger')" class="ws-tag" :text="wsLabel('ger')"></span>
 </li>
