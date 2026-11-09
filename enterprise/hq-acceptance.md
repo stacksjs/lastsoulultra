@@ -17,6 +17,15 @@ HQ offers the presets only to the `last-soul-ultra` organization:
   and the **Last Soul Ultra monthly tiers**, each linking to `/coaches/store?preset=<key>`.
 - `POST /api/coach/store/products` with `preset` creates the tier as a draft in
   the LSU organization; publishing still needs a coach's real plan and method.
+- Both tiers set `training_blocks: { "length_days": 14, "review": "coach" }`:
+  HQ drafts each subscriber's next two weeks from the tier's plan and their
+  responses to the block before (done and skipped sessions, effort, feeling,
+  comments), held to the tier's sports, and nothing reaches their calendar
+  until an LSU coach approves the block under **Block reviews**
+  (`/coaches/block-reviews`). `scripts/native-source.ts` refuses any other
+  review value. It takes effect once the pinned HQ kit includes training
+  blocks, and for tiers created from the preset after that; a tier created
+  earlier is switched on in its Store editor.
 
 The `experience` block lists only what differs from HQ's default experience;
 HQ merges it and validates it as a saved experience. It carries LSU's full

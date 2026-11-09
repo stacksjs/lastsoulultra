@@ -136,6 +136,12 @@ export function installationPresets(value: typeof presets = presets, slug: strin
     || value.products.some(item => !/^[a-z0-9-]+$/.test(item.key) || !Number.isSafeInteger(item.price_cents) || item.price_cents <= 0 || !/^[A-Z]{3}$/.test(item.currency) || item.type !== 'coaching')
     || new Set(value.products.map(item => item.key)).size !== value.products.length)
     throw new Error('enterprise/presets.json must belong to the packaged product and list unique, priced coaching tiers')
+  // HQ assigns a tier's training in blocks only as `{ length_days, review: 'coach' }`: a block never reaches a subscriber unreviewed.
+  if (value.products.some(item => item.training_blocks != null && (![7, 14, 21, 28].includes(item.training_blocks.length_days) || item.training_blocks.review !== 'coach')))
+    throw new Error('enterprise/presets.json training_blocks run 7, 14, 21 or 28 days and are reviewed by a coach')
+  // LSU's coaches set the training, so the AI coach explains an athlete's data and never builds or changes workouts.
+  if (value.assistant?.mode !== 'insights')
+    throw new Error('enterprise/presets.json must keep the AI coach to insights: LSU coaches assign the training')
   return value
 }
 

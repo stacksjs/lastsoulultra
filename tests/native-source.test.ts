@@ -74,12 +74,19 @@ it('packages LSU’s brand and approved coaching tiers as the installation’s o
     ['lsu-running', 1999, 'EUR', 'month', false, ['Run']],
     ['lsu-running-strength', 2999, 'EUR', 'month', false, ['Run', 'Strength']],
   ])
+  // Both tiers assign training automatically, two weeks at a time, and a coach approves every block.
+  expect(presets.products.map(item => item.training_blocks)).toEqual([{ length_days: 14, review: 'coach' }, { length_days: 14, review: 'coach' }])
+  // The AI coach reads and explains; it has no way to create a workout.
+  expect(presets.assistant).toEqual({ mode: 'insights' })
+  expect(() => installationPresets({ ...presets, assistant: { mode: 'coach' } })).toThrow('keep the AI coach to insights')
   expect(presets.experience.navigation.map(item => item.label)).toEqual(['Store', 'Workouts', 'Health', 'Messages', 'Me'])
   expect(presets.experience.show_powered_by).toBe(false)
   expect(presets.experience.theme).toMatchObject({ accent: product.identity.theme.accent, background: product.identity.theme.background, font: 'barlow', heading_font: 'anton' })
   expect(() => installationPresets({ ...presets, organization: 'another-brand' })).toThrow('must belong to the packaged product')
   expect(() => installationPresets({ ...presets, products: [presets.products[0]!, presets.products[0]!] })).toThrow('unique, priced coaching tiers')
   expect(() => installationPresets({ ...presets, products: [{ ...presets.products[0]!, price_cents: 0 }] })).toThrow('unique, priced coaching tiers')
+  expect(() => installationPresets({ ...presets, products: [{ ...presets.products[0]!, training_blocks: { length_days: 14, review: 'none' as 'coach' } }] })).toThrow('reviewed by a coach')
+  expect(() => installationPresets({ ...presets, products: [{ ...presets.products[0]!, training_blocks: { length_days: 10, review: 'coach' } }] })).toThrow('reviewed by a coach')
 })
 
 it('draws the launch splash with ts-images’ preset from the wordmark, on the black the app opens on', async () => {
