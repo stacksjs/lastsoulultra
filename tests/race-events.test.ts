@@ -1,6 +1,6 @@
 import type { EventsPayload, RaceEvent } from '../resources/data/race-events'
 import { afterEach, beforeEach, describe, expect, it } from 'bun:test'
-import { entryHeading, entryKicker, entryRows, entryRowsByStop, entryStatus, eventWhen, forgetEvents, parseEvent, raceEvents } from '../resources/data/race-events'
+import { entryHeading, entryKicker, entryRows, entryRowsByStop, entryStatus, entryWindow, eventWhen, forgetEvents, parseEvent, raceEvents } from '../resources/data/race-events'
 
 /**
  * The entry windows.
@@ -65,14 +65,10 @@ describe('what to say under an event', () => {
     expect(entryStatus(event({ phase: 'open' }), NOW + 400 * 86400_000).open).toBe(true)
   })
 
-  it('names the day a window opens, in the host country time', () => {
-    // Australia opens 10:00 on 1 December in Sydney, which is 30 November in
-    // UTC - formatting in UTC tells an Australian the wrong day.
+  it('says "Coming soon" before a window opens, as lastsoulultra.com does', () => {
+    // The date lives on the World Series page's entry-request windows.
     const aus = event({ name: 'AUSTRALIA x DCG', timezone: 'Australia/Sydney', opensAt: Date.UTC(2026, 10, 30, 23, 0, 0) })
-    expect(entryStatus(aus, NOW).label).toBe('Entries open 1 December')
-
-    const uk = event({ timezone: 'Europe/London' })
-    expect(entryStatus(uk, NOW).label).toBe('Entries open 31 October')
+    expect(entryStatus(aus, NOW).label).toBe('Coming soon')
   })
 
   it('falls back when the service sets no window', () => {
@@ -88,20 +84,41 @@ describe('what to say under an event', () => {
   })
 
   it('covers the other phases', () => {
-    expect(entryStatus(event({ phase: 'closed' }), NOW).label).toBe('Entries closed')
+    expect(entryStatus(event({ phase: 'closed' }), NOW).label).toBe('Entry requests closed')
     expect(entryStatus(event({ phase: 'final' }), NOW).label).toBe('Finished')
   })
 
   it('survives a timezone the service invents', () => {
-    const odd = event({ timezone: 'Mars/Olympus' })
-    expect(entryStatus(odd, NOW).label).toContain('Entries open')
+    const odd = event({ timezone: 'Mars/Olympus', closesAt: Date.UTC(2027, 0, 1, 22, 59, 59) })
+    expect(entryWindow(odd, NOW)?.top).toBe('Opens 1 Nov 2026')
+  })
+})
+
+describe('the entry-request windows', () => {
+  // Australia opens 10:00 on 1 December in Sydney, which is 30 November in
+  // UTC - formatting in UTC tells an Australian the wrong day.
+  const aus = event({ slug: 'lsu-2027-aus', name: 'AUSTRALIA x DCG', timezone: 'Australia/Sydney', opensAt: Date.UTC(2026, 10, 30, 23, 0, 0), closesAt: Date.UTC(2027, 1, 1, 12, 0, 0) })
+
+  it('dates a window that has not opened, in the host country time', () => {
+    expect(entryWindow(aus, NOW)).toEqual({ top: 'Opens 1 Dec 2026', fine: 'Closes 1 Feb 2027', href: null })
+  })
+
+  it('says "Open until" once a window opens, and links only while it is open', () => {
+    const uk = event({ phase: 'open', opensAt: NOW - 86400_000, closesAt: Date.UTC(2027, 0, 1, 22, 59, 59) })
+    expect(entryWindow(uk, NOW)).toEqual({ top: 'Open until', fine: '1 Jan 2027', href: '/lottery?event=lsu-2027-uk' })
+    expect(entryWindow({ ...uk, phase: 'closed' }, NOW)?.href).toBeNull()
+  })
+
+  it('gives the final and an undated event no window', () => {
+    expect(entryWindow(event({ isFinal: true, closesAt: NOW }), NOW)).toBeNull()
+    expect(entryWindow(event({ opensAt: null }), NOW)).toBeNull()
   })
 })
 
 describe('the page copy', () => {
   it('dates an event, or gives the year alone', () => {
     expect(eventWhen(event())).toBe('April 2027')
-    expect(eventWhen(event({ plannedMonth: null }))).toBe('2027')
+    expect(eventWhen(event({ plannedMonth: null }))).toBe('Month to be announced')
     expect(eventWhen(event({ plannedYear: null }))).toBe('')
   })
 
@@ -112,7 +129,7 @@ describe('the page copy', () => {
 
   it('names the open event in the kicker', () => {
     const open = event({ name: 'USA', phase: 'open' })
-    expect(entryKicker(payload([open, event()]), NOW)).toBe('Season 3 / USA entries open')
+    expect(entryKicker(payload([open, event()]), NOW)).toBe('Season 3 / 2027 entries open')
   })
 
   it('names the next one when none is open yet', () => {
@@ -175,7 +192,7 @@ describe('keying the four World Series stops', () => {
     expect(Object.keys(stops).sort()).toEqual(['aus', 'ger', 'uk', 'usa'])
     expect(stops.usa!.open).toBe(true)
     expect(stops.ger!.isFinal).toBe(true)
-    expect(stops.uk!.label).toBe('Entries open 31 October')
+    expect(stops.uk!.label).toBe('Coming soon')
   })
 
   it('leaves out a country the page has no stop for', () => {
@@ -197,5 +214,15 @@ describe('how the server asks the events API', () => {
     // so every World Series card fell back to "How to qualify".
     expect(EVENTS_USER_AGENT).not.toContain('(entry pages)')
     expect(EVENTS_USER_AGENT).toMatch(/^LastSoulUltra\/\d+\.\d+ \(\+https:\/\/[^)]+\)$/)
+  })
+})
+
+describe('the order events are listed in', () => {
+  it('follows the series, USA to the final, whatever order the service sends', () => {
+    const germany = event({ slug: 'lsu-2027-germany', name: 'Germany', country: 'GER', isFinal: true })
+    const usa = event({ slug: 'lsu-2027-tennessee', name: 'USA', country: 'USA' })
+    const aus = event({ slug: 'lsu-2027-aus', name: 'AUSTRALIA x DCG', country: 'AUS' })
+    const uk = event()
+    expect(entryRows(payload([uk, aus, germany, usa]), NOW).map(row => row.name)).toEqual(['USA', 'United Kingdom', 'AUSTRALIA x DCG', 'Germany'])
   })
 })

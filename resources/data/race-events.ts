@@ -173,13 +173,19 @@ export function forgetEvents(): void {
   lastError = null
 }
 
+/** The organiser's own zone, which the published site dates its windows in. */
+const ORGANISER_ZONE = 'Europe/Berlin'
+
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
-/** "February 2027", or "2027" when only the year is known. */
+/**
+ * "February 2027", or "Month to be announced" when only the year is known,
+ * as lastsoulultra.com words it.
+ */
 export function eventWhen(event: RaceEvent): string {
   if (!event.plannedYear) return ''
   const month = event.plannedMonth ? MONTHS[event.plannedMonth - 1] : null
-  return month ? `${month} ${event.plannedYear}` : String(event.plannedYear)
+  return month ? `${month} ${event.plannedYear}` : 'Month to be announced'
 }
 
 /**
@@ -190,13 +196,47 @@ export function eventWhen(event: RaceEvent): string {
  * wrong day for their own race.
  */
 function openingDay(event: RaceEvent): string {
-  const when = new Date(event.opensAt!)
+  return eventDay(event, event.opensAt!, 'long')
+}
+
+/**
+ * "1 December" in the host country's own zone, or a window date such as
+ * "1 Dec 2026" in German time, which is how lastsoulultra.com dates its
+ * entry-request windows: Australia's closes 09:59 on 2 February in Sydney,
+ * which it prints as 1 Feb.
+ */
+function eventDay(event: RaceEvent, at: number, style: 'long' | 'dated'): string {
+  const options: Intl.DateTimeFormatOptions = style === 'long' ? { day: 'numeric', month: 'long' } : { day: 'numeric', month: 'short', year: 'numeric' }
+  const when = new Date(at)
+  let text: string
   try {
-    return new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'long', timeZone: event.timezone ?? 'UTC' }).format(when)
+    text = new Intl.DateTimeFormat('en-GB', { ...options, timeZone: style === 'dated' ? ORGANISER_ZONE : event.timezone ?? 'UTC' }).format(when)
   }
   catch {
     // An unknown zone from the service is not a reason to print nothing.
-    return new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'long', timeZone: 'UTC' }).format(when)
+    text = new Intl.DateTimeFormat('en-GB', { ...options, timeZone: 'UTC' }).format(when)
+  }
+  // en-GB abbreviates September as "Sept"; the published site writes "Sep".
+  return text.replace('Sept ', 'Sep ')
+}
+
+export interface EntryWindow {
+  /** "Open until" once the window has opened, else "Opens 1 Dec 2026". */
+  top: string
+  /** The closing day once open, else "Closes 1 Feb 2027". */
+  fine: string
+  /** Only an open window links to the entry window. */
+  href: string | null
+}
+
+/** The entry-request window line the World Series page prints for a qualifier. */
+export function entryWindow(event: RaceEvent, now: number = Date.now()): EntryWindow | null {
+  if (event.isFinal || !event.opensAt || !event.closesAt) return null
+  const opened = event.opensAt <= now
+  return {
+    top: opened ? 'Open until' : `Opens ${eventDay(event, event.opensAt, 'dated')}`,
+    fine: opened ? eventDay(event, event.closesAt, 'dated') : `Closes ${eventDay(event, event.closesAt, 'dated')}`,
+    href: entryStatus(event, now).open ? `/lottery?event=${encodeURIComponent(event.slug)}` : null,
   }
 }
 
@@ -212,7 +252,11 @@ export interface EntryStatus {
  * The final is the one case the phase alone does not cover: it is reached by
  * qualifying through the other three, so "entries closed" would be wrong
  * about why.
+ *
+ * `now` is kept for callers that pass the page clock; the wording no longer
+ * depends on it, since "Coming soon" carries no date.
  */
+// eslint-disable-next-line pickier/no-unused-vars
 export function entryStatus(event: RaceEvent, now: number = Date.now()): EntryStatus {
   if (event.isFinal) return { label: 'Qualification only', open: false }
 
@@ -220,11 +264,11 @@ export function entryStatus(event: RaceEvent, now: number = Date.now()): EntrySt
     case 'open':
       return { label: 'Entry requests open', open: true }
     case 'upcoming':
-      if (event.opensAt && event.opensAt > now)
-        return { label: `Entries open ${openingDay(event)}`, open: false }
+      // lastsoulultra.com says "Coming soon" whatever the opening date; the
+      // date is on the World Series page's entry-request windows instead.
       return { label: 'Coming soon', open: false }
     case 'closed':
-      return { label: 'Entries closed', open: false }
+      return { label: 'Entry requests closed', open: false }
     case 'final':
       return { label: 'Finished', open: false }
   }
@@ -240,6 +284,7 @@ export interface EntryRow {
   label: string
   open: boolean
   isFinal: boolean
+  window: EntryWindow | null
 }
 
 /**
@@ -250,12 +295,15 @@ export interface EntryRow {
  * livePayload exists for the scoreboard.
  */
 export function entryRows(payload: EventsPayload, now: number = Date.now()): EntryRow[] {
-  return payload.upcoming.map(event => ({
+  // In series order (USA, UK, Australia, the final), as lastsoulultra.com lists them.
+  const order = (event: RaceEvent) => { const at = SERIES_ORDER.indexOf(event.country); return at === -1 ? SERIES_ORDER.length : at }
+  return [...payload.upcoming].sort((a, b) => order(a) - order(b)).map(event => ({
     slug: event.slug,
     name: event.name,
     country: event.country,
     when: eventWhen(event),
     isFinal: event.isFinal,
+    window: entryWindow(event, now),
     ...entryStatus(event, now),
   }))
 }
@@ -279,17 +327,16 @@ export function entryKicker(payload: EventsPayload, now: number = Date.now()): s
   const season = payload.upcoming.find(event => event.season)?.season
   const prefix = season ? `Season ${season}` : ''
 
+  // "Season 3 / 2027 entries open", as lastsoulultra.com puts it.
   const open = payload.upcoming.find(event => entryStatus(event, now).open)
-  if (open) return prefix ? `${prefix} / ${open.name} entries open` : `${open.name} entries open`
+  const year = payload.upcoming.find(event => event.plannedYear)?.plannedYear
+  if (open) return prefix && year ? `${prefix} / ${year} entries open` : prefix ? `${prefix} / ${open.name} entries open` : `${open.name} entries open`
 
   const next = payload.upcoming
     .filter(event => !event.isFinal && event.opensAt && event.opensAt > now)
     .sort((a, b) => a.opensAt! - b.opensAt!)[0]
   if (next) {
-    // Only the leading word is lowered, or "31 October" comes out as a month
-    // nobody writes that way.
-    const label = entryStatus(next, now).label
-    const joined = `${next.name} ${label.charAt(0).toLowerCase()}${label.slice(1)}`
+    const joined = `${next.name} entries open ${openingDay(next)}`
     return prefix ? `${prefix} / ${joined}` : joined
   }
 
@@ -302,6 +349,7 @@ export function entryKicker(payload: EventsPayload, now: number = Date.now()): s
  * them here keeps that coupling in one place rather than in the template.
  */
 const STOPS: Record<string, string> = { USA: 'usa', GBR: 'uk', AUS: 'aus', GER: 'ger' }
+const SERIES_ORDER = Object.keys(STOPS)
 
 export function entryRowsByStop(payload: EventsPayload, now: number = Date.now()): Record<string, EntryRow> {
   const byStop: Record<string, EntryRow> = {}

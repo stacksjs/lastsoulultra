@@ -26,6 +26,8 @@ const wsFinal = stop => Boolean(wsRow(stop)?.isFinal)
    pin and simply says nothing about entering, rather than guessing. */
 const wsLabel = stop => wsRow(stop)?.label || ''
 const wsWhen = stop => wsRow(stop)?.when || ''
+/* The entry-request window under "Two ways in": dated, and linked only while open. */
+const wsWindow = stop => wsRow(stop)?.window || null
 const wsClass = stop => wsOpen(stop) ? 'ws-apply' : wsFinal(stop) ? 'ws-final' : 'ws-soon'
 
 async function wsReadEvents() {
@@ -128,26 +130,26 @@ onMount(() => { wsReadEvents() })
 <div class="lsu-scope-world-series ws-race-label">Entry request windows</div>
 <ul class="lsu-scope-world-series ws-races" aria-label="Entry request windows">
 <li class="lsu-scope-world-series ws-race">
-<a class="lsu-scope-world-series ws-window" data-window="lsu-2027-tennessee" href="/lottery?event=lsu-2027-tennessee">
-<span class="lsu-scope-world-series ws-date">Open until</span>
+<a class="lsu-scope-world-series ws-window" data-window="lsu-2027-tennessee" :href="wsWindow('usa')?.href || undefined">
+<span class="lsu-scope-world-series ws-date" :text="wsWindow('usa')?.top || 'Open until'">Open until</span>
 <h3 class="lsu-scope-world-series">USA</h3>
-<span class="lsu-scope-world-series ws-fine">1 Nov 2026</span>
+<span class="lsu-scope-world-series ws-fine" :text="wsWindow('usa')?.fine || '1 Nov 2026'">1 Nov 2026</span>
 <span class="lsu-scope-world-series ws-window-cta">Request a race entry →</span>
 </a>
 </li>
 <li class="lsu-scope-world-series ws-race">
-<a class="lsu-scope-world-series ws-window" data-window="lsu-2027-uk">
-<span class="lsu-scope-world-series ws-date">Opens 1 Nov 2026</span>
+<a class="lsu-scope-world-series ws-window" data-window="lsu-2027-uk" :href="wsWindow('uk')?.href || undefined">
+<span class="lsu-scope-world-series ws-date" :text="wsWindow('uk')?.top || 'Open until'">Open until</span>
 <h3 class="lsu-scope-world-series">United Kingdom</h3>
-<span class="lsu-scope-world-series ws-fine">Closes 1 Jan 2027</span>
+<span class="lsu-scope-world-series ws-fine" :text="wsWindow('uk')?.fine || '1 Jan 2027'">1 Jan 2027</span>
 <span class="lsu-scope-world-series ws-window-cta">Request a race entry →</span>
 </a>
 </li>
 <li class="lsu-scope-world-series ws-race">
-<a class="lsu-scope-world-series ws-window" data-window="lsu-2027-aus">
-<span class="lsu-scope-world-series ws-date">Opens 1 Dec 2026</span>
+<a class="lsu-scope-world-series ws-window" data-window="lsu-2027-aus" :href="wsWindow('aus')?.href || undefined">
+<span class="lsu-scope-world-series ws-date" :text="wsWindow('aus')?.top || 'Opens 1 Dec 2026'">Opens 1 Dec 2026</span>
 <h3 class="lsu-scope-world-series">AUSTRALIA x DCG</h3>
-<span class="lsu-scope-world-series ws-fine">Closes 1 Feb 2027</span>
+<span class="lsu-scope-world-series ws-fine" :text="wsWindow('aus')?.fine || 'Closes 1 Feb 2027'">Closes 1 Feb 2027</span>
 <span class="lsu-scope-world-series ws-window-cta">Request a race entry →</span>
 </a>
 </li>
