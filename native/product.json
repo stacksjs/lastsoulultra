@@ -28,7 +28,7 @@
   "teamId": "3JJRNQW6B7",
   "site": "https://training.lsu.stacksjs.com",
   "version": "1.0.0",
-  "build": 19,
+  "build": 20,
   "assets": {
     "icon": "assets/icon.png",
     "splash": { "logo": "../public/assets/lsu/images/lsu-logo.svg" },

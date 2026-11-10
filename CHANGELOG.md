@@ -1,5 +1,31 @@
 # Stacks Changelog
 
+[Compare changes](https://github.com/stacksjs/lastsoulultra/compare/v1.0.0-build.19...v1.0.0-build.20)
+
+## ✨ Features
+
+- **site**: show the app's own calendar and session screens on the app page ([2809a83](https://github.com/stacksjs/lastsoulultra/commit/2809a83)) _(by Chris Breuer)_
+
+## 🐛 Bug Fixes
+
+- **release**: pin bumpx 0.2.34, so release notes keep their headings and leave out the release commit ([bfb8038](https://github.com/stacksjs/lastsoulultra/commit/bfb8038)) _(by Chris Breuer)_
+- **site**: keep a page's styles and the nav's current link when a link is followed ([f06928e](https://github.com/stacksjs/lastsoulultra/commit/f06928e)) _(by Chris Breuer)_
+- **training**: pin HQ platform kit 1.0.4135 for a running-only home and tidier training panels ([55c85bd](https://github.com/stacksjs/lastsoulultra/commit/55c85bd)) _(by Chris Breuer)_
+- **release**: leave email addresses out of release notes ([6578a7d](https://github.com/stacksjs/lastsoulultra/commit/6578a7d)) _(by Chris Breuer)_
+- **release**: let bumpx make the release, so its changelog reaches the GitHub release ([a73d907](https://github.com/stacksjs/lastsoulultra/commit/a73d907)) _(by Chris Breuer)_
+- **site**: list Soul Races as lastsoulultra.com does, with dates, hosts, status and map pins ([63ecd54](https://github.com/stacksjs/lastsoulultra/commit/63ecd54)) _(by Chris Breuer)_
+- **release**: re-check a slow TestFlight upload instead of failing the release ([f4f7192](https://github.com/stacksjs/lastsoulultra/commit/f4f7192)) _(by Chris Breuer)_
+- **site**: describe LSU sign-in without the removed HQ option ([cde54d1](https://github.com/stacksjs/lastsoulultra/commit/cde54d1)) _(by glennmichael123)_
+
+## 🔧 Chores
+
+- **changelog**: remove email addresses from the public changelog ([8d6a323](https://github.com/stacksjs/lastsoulultra/commit/8d6a323)) _(by Chris Breuer)_
+
+## Contributors
+
+- _Chris Breuer_
+- _glennmichael123_
+
 [Compare changes](https://github.com/stacksjs/lastsoulultra/compare/v0.70.53...v1.0.0-build.19)
 
 ## ✨ Features
