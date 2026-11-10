@@ -58,8 +58,8 @@ bun run release:build --notes "Try the new calendar header"
 It runs from a clean `main` and does the rest: takes the next build number (one
 more than the highest in `product.json` and the release tags; Apple never takes a
 number twice), writes What to Test from the conventional commits since the
-previous release (logsmith's grouping, so a `feat:` or `fix:` subject is what
-testers read and `chore:` is not) into `native/TestFlight/`, and hands the
+last build that reached TestFlight (logsmith's grouping, so a `feat:` or `fix:`
+subject is what testers read and `chore:` is not) into `native/TestFlight/`, and hands the
 release itself to bumpx, as every Stacks package does: bumpx moves the release
 version in `package.json` (`1.0.0-build.N`, the release `product.json` is at),
 has logsmith add that release's section to `CHANGELOG.md`, commits
@@ -73,6 +73,31 @@ workflow creates the tag's GitHub release from its section of `CHANGELOG.md`.
 
 It stops before anything is committed when the backend is not yet running the
 pinned kit, because the workflow would refuse that build forty minutes later.
+It also stops when the newest acceptance run on the pinned kit failed, and names
+that run; when none has finished yet it says so and goes on.
+
+The notes start from the last build testers were actually given, which the
+command asks GitHub (`gh`): the newest TestFlight run whose last step, Apple's
+processing and What to Test, succeeded. A release whose upload was refused told
+testers nothing, so its changes are carried into the next build's notes. When
+GitHub cannot answer, the command warns and starts from the commit that last
+moved the build number.
+
+A new kit can change how the app behaves under the acceptance script
+(`scripts/test-native-ios.ts`). So a push to `main` that changes the pin
+(`hq-source.json`), that script or the TestFlight workflow gets the build and
+its acceptance without an upload, once Deploy has finished: the Native
+acceptance workflow starts the TestFlight workflow with `upload` off, and the
+run is named "Native acceptance, no upload". Run it by hand the same way:
+
+```sh
+gh workflow run testflight.yml --ref main -f upload=false
+```
+
+A deploy that moves the backend to another kit waits while a TestFlight build
+that could still upload is queued or running (`scripts/hold-kit-deploy.ts`),
+because that build is refused once the backend has left its kit. Acceptance-only
+runs and re-checks hold nothing.
 `--notes`, `--notes-file`, `RELEASE_NOTES` or `release.notes` in `product.json`
 replace the generated notes; `release.locales` names the TestFlight languages
 (default `en-US` and `de-DE`).
@@ -87,7 +112,8 @@ bun run native:ios && bun run native:verify-ios
 `native:pin` installs the kit and writes `pantry.json`, `pantry.lock`,
 `hq-source.json` (the HQ commit and Bun version the kit declares) and the Craft
 override in `package.json` (the version the kit locks). Commit that saying what
-people will notice, push, and release once Deploy has finished. Without a
+people will notice, push, and release once Deploy has finished and the
+acceptance run that follows it has passed. Without a
 registry grant on this machine, the Platform pin workflow resolves the lock on
 GitHub instead.
 
