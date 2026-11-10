@@ -1,0 +1,13 @@
+<script server>
+/* The page's own stylesheets, again, inside the content the router swaps.
+
+   A click on a link fetches only what sits inside <main> and leaves <head>
+   alone, so a sheet named only in <head> never arrives: /app reached from the
+   home page rendered with the home page's styles and none of its own. Printed
+   here they travel with the content. On a full load the browser already has
+   each one from <head>, so this costs no request. */
+const swapSheets = typeof currentPage !== 'undefined' && currentPage && Array.isArray(currentPage.styles) ? currentPage.styles : []
+</script>
+@foreach(swapSheets as sheet)
+<link rel="stylesheet" href="{{ sheet }}">
+@endforeach

@@ -9,7 +9,7 @@
       <span>Training</span><a class="coach-up" href="/coaching" aria-current="location">Coaching</a>
       <a href="/docs" class="training-guide">Guide</a>
     </header>
-    <main id="main" tabindex="-1">@slot('content')</main>
+    <main id="main" tabindex="-1">@include('page-styles')@slot('content')</main>
   </div>
 </body>
 </html>
