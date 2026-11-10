@@ -4,52 +4,52 @@
 
 ## ✨ Features
 
-- **release**: release the app with one command, as HQ does ([348590a](https://github.com/stacksjs/lastsoulultra/commit/348590a)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
-- **native**: release TestFlight build 18 on HQ platform kit 1.0.4122 ([3be33b7](https://github.com/stacksjs/lastsoulultra/commit/3be33b7)) _(by glennmichael123 <gtorregosa@gmail.com>)_
-- **native**: release TestFlight build 18 on HQ platform kit 1.0.4119 without HQ sign-in ([9046599](https://github.com/stacksjs/lastsoulultra/commit/9046599)) _(by glennmichael123 <gtorregosa@gmail.com>)_
-- **native**: release TestFlight build 17 on HQ platform kit 1.0.4116 ([fec9a10](https://github.com/stacksjs/lastsoulultra/commit/fec9a10)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
-- **native**: release TestFlight build 16 on HQ platform kit 1.0.4114 and Craft 0.0.490 ([251487d](https://github.com/stacksjs/lastsoulultra/commit/251487d)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
-- **ai**: give LSU coaches the installation's own AI key ([0580fcc](https://github.com/stacksjs/lastsoulultra/commit/0580fcc)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
-- **coaching**: coach-approved two-week blocks and an insights-only AI coach ([52ada1d](https://github.com/stacksjs/lastsoulultra/commit/52ada1d)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
-- **native**: release TestFlight build 15 on HQ platform kit 1.0.4065 and Craft 0.0.487 ([4a9efed](https://github.com/stacksjs/lastsoulultra/commit/4a9efed)) _(by glennmichael123 <gtorregosa@gmail.com>)_
-- **native**: release TestFlight build 14 on HQ platform kit 1.0.4059 ([9a60ac8](https://github.com/stacksjs/lastsoulultra/commit/9a60ac8)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
-- **entry**: open race entry as the published site's three-step window ([6256c29](https://github.com/stacksjs/lastsoulultra/commit/6256c29)) _(by glennmichael123 <gtorregosa@gmail.com>)_
-- **onboarding**: show only the athlete and coach tours' screens ([3130363](https://github.com/stacksjs/lastsoulultra/commit/3130363)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
-- **native**: release TestFlight build 13 on HQ platform kit 1.0.4052 ([fc72d13](https://github.com/stacksjs/lastsoulultra/commit/fc72d13)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- **release**: release the app with one command, as HQ does ([348590a](https://github.com/stacksjs/lastsoulultra/commit/348590a)) _(by Chris Breuer)_
+- **native**: release TestFlight build 18 on HQ platform kit 1.0.4122 ([3be33b7](https://github.com/stacksjs/lastsoulultra/commit/3be33b7)) _(by glennmichael123)_
+- **native**: release TestFlight build 18 on HQ platform kit 1.0.4119 without HQ sign-in ([9046599](https://github.com/stacksjs/lastsoulultra/commit/9046599)) _(by glennmichael123)_
+- **native**: release TestFlight build 17 on HQ platform kit 1.0.4116 ([fec9a10](https://github.com/stacksjs/lastsoulultra/commit/fec9a10)) _(by Chris Breuer)_
+- **native**: release TestFlight build 16 on HQ platform kit 1.0.4114 and Craft 0.0.490 ([251487d](https://github.com/stacksjs/lastsoulultra/commit/251487d)) _(by Chris Breuer)_
+- **ai**: give LSU coaches the installation's own AI key ([0580fcc](https://github.com/stacksjs/lastsoulultra/commit/0580fcc)) _(by Chris Breuer)_
+- **coaching**: coach-approved two-week blocks and an insights-only AI coach ([52ada1d](https://github.com/stacksjs/lastsoulultra/commit/52ada1d)) _(by Chris Breuer)_
+- **native**: release TestFlight build 15 on HQ platform kit 1.0.4065 and Craft 0.0.487 ([4a9efed](https://github.com/stacksjs/lastsoulultra/commit/4a9efed)) _(by glennmichael123)_
+- **native**: release TestFlight build 14 on HQ platform kit 1.0.4059 ([9a60ac8](https://github.com/stacksjs/lastsoulultra/commit/9a60ac8)) _(by Chris Breuer)_
+- **entry**: open race entry as the published site's three-step window ([6256c29](https://github.com/stacksjs/lastsoulultra/commit/6256c29)) _(by glennmichael123)_
+- **onboarding**: show only the athlete and coach tours' screens ([3130363](https://github.com/stacksjs/lastsoulultra/commit/3130363)) _(by Chris Breuer)_
+- **native**: release TestFlight build 13 on HQ platform kit 1.0.4052 ([fc72d13](https://github.com/stacksjs/lastsoulultra/commit/fc72d13)) _(by Chris Breuer)_
 
 ## 🐛 Bug Fixes
 
-- **deps**: record the trimmed dependency list in pantry.lock ([5df57d1](https://github.com/stacksjs/lastsoulultra/commit/5df57d1)) _(by glennmichael123 <gtorregosa@gmail.com>)_
-- **site**: keep the example block's footer on one line on a phone ([8192c58](https://github.com/stacksjs/lastsoulultra/commit/8192c58)) _(by glennmichael123 <gtorregosa@gmail.com>)_
-- **site**: describe the app as LSU runs it, coach-approved blocks and an AI coach that explains ([10ed454](https://github.com/stacksjs/lastsoulultra/commit/10ed454)) _(by glennmichael123 <gtorregosa@gmail.com>)_
-- **ai**: pass the installation's AI key to the training services ([03d0f19](https://github.com/stacksjs/lastsoulultra/commit/03d0f19)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
-- **site**: word World Series and the entry page as lastsoulultra.com does ([0f60f19](https://github.com/stacksjs/lastsoulultra/commit/0f60f19)) _(by glennmichael123 <gtorregosa@gmail.com>)_
-- **site**: load race status again, and match the published site's /de links and llms.txt ([762d68d](https://github.com/stacksjs/lastsoulultra/commit/762d68d)) _(by glennmichael123 <gtorregosa@gmail.com>)_
-- **site**: restore the published site's line height and bold headings ([9087dd6](https://github.com/stacksjs/lastsoulultra/commit/9087dd6)) _(by glennmichael123 <gtorregosa@gmail.com>)_
+- **deps**: record the trimmed dependency list in pantry.lock ([5df57d1](https://github.com/stacksjs/lastsoulultra/commit/5df57d1)) _(by glennmichael123)_
+- **site**: keep the example block's footer on one line on a phone ([8192c58](https://github.com/stacksjs/lastsoulultra/commit/8192c58)) _(by glennmichael123)_
+- **site**: describe the app as LSU runs it, coach-approved blocks and an AI coach that explains ([10ed454](https://github.com/stacksjs/lastsoulultra/commit/10ed454)) _(by glennmichael123)_
+- **ai**: pass the installation's AI key to the training services ([03d0f19](https://github.com/stacksjs/lastsoulultra/commit/03d0f19)) _(by Chris Breuer)_
+- **site**: word World Series and the entry page as lastsoulultra.com does ([0f60f19](https://github.com/stacksjs/lastsoulultra/commit/0f60f19)) _(by glennmichael123)_
+- **site**: load race status again, and match the published site's /de links and llms.txt ([762d68d](https://github.com/stacksjs/lastsoulultra/commit/762d68d)) _(by glennmichael123)_
+- **site**: restore the published site's line height and bold headings ([9087dd6](https://github.com/stacksjs/lastsoulultra/commit/9087dd6)) _(by glennmichael123)_
 
 ## 📝 Documentation
 
-- describe the app's email-first sign-in and AI for method feedback ([8ffce84](https://github.com/stacksjs/lastsoulultra/commit/8ffce84)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- describe the app's email-first sign-in and AI for method feedback ([8ffce84](https://github.com/stacksjs/lastsoulultra/commit/8ffce84)) _(by Chris Breuer)_
 
 ## ✅ Tests
 
-- **native**: sign in through the combined email and password form ([17dd4bd](https://github.com/stacksjs/lastsoulultra/commit/17dd4bd)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
-- **native**: take the password path when HQ knows the demo address ([58aa5d7](https://github.com/stacksjs/lastsoulultra/commit/58aa5d7)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
-- **native**: record the screen after the sign-in email step ([6c132ed](https://github.com/stacksjs/lastsoulultra/commit/6c132ed)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
-- **native**: sign in email first in the downloaded-app acceptance ([eb7912b](https://github.com/stacksjs/lastsoulultra/commit/eb7912b)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
+- **native**: sign in through the combined email and password form ([17dd4bd](https://github.com/stacksjs/lastsoulultra/commit/17dd4bd)) _(by Chris Breuer)_
+- **native**: take the password path when HQ knows the demo address ([58aa5d7](https://github.com/stacksjs/lastsoulultra/commit/58aa5d7)) _(by Chris Breuer)_
+- **native**: record the screen after the sign-in email step ([6c132ed](https://github.com/stacksjs/lastsoulultra/commit/6c132ed)) _(by Chris Breuer)_
+- **native**: sign in email first in the downloaded-app acceptance ([eb7912b](https://github.com/stacksjs/lastsoulultra/commit/eb7912b)) _(by Chris Breuer)_
 
 ## 🔧 Chores
 
-- **release**: v1.0.0-build.19 ([c6c68a7](https://github.com/stacksjs/lastsoulultra/commit/c6c68a7)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
-- **deps**: declare only stacks and @ts-maps/stx ([4e66af4](https://github.com/stacksjs/lastsoulultra/commit/4e66af4)) _(by glennmichael123 <gtorregosa@gmail.com>)_
-- **native**: pin HQ platform kit 1.0.4114 and Craft 0.0.490 ([de01f8e](https://github.com/stacksjs/lastsoulultra/commit/de01f8e)) _(by Chris Breuer <chrisbreuer93@gmail.com>)_
-- **native**: pin HQ platform kit 1.0.4064 ([2fc5a3e](https://github.com/stacksjs/lastsoulultra/commit/2fc5a3e)) _(by glennmichael123 <gtorregosa@gmail.com>)_
-- **native**: pin HQ platform kit 1.0.4060 and serve coaches and athletes only ([1de0b73](https://github.com/stacksjs/lastsoulultra/commit/1de0b73)) _(by glennmichael123 <gtorregosa@gmail.com>)_
+- **release**: v1.0.0-build.19 ([c6c68a7](https://github.com/stacksjs/lastsoulultra/commit/c6c68a7)) _(by Chris Breuer)_
+- **deps**: declare only stacks and @ts-maps/stx ([4e66af4](https://github.com/stacksjs/lastsoulultra/commit/4e66af4)) _(by glennmichael123)_
+- **native**: pin HQ platform kit 1.0.4114 and Craft 0.0.490 ([de01f8e](https://github.com/stacksjs/lastsoulultra/commit/de01f8e)) _(by Chris Breuer)_
+- **native**: pin HQ platform kit 1.0.4064 ([2fc5a3e](https://github.com/stacksjs/lastsoulultra/commit/2fc5a3e)) _(by glennmichael123)_
+- **native**: pin HQ platform kit 1.0.4060 and serve coaches and athletes only ([1de0b73](https://github.com/stacksjs/lastsoulultra/commit/1de0b73)) _(by glennmichael123)_
 
 ## Contributors
 
-- _Chris Breuer <chrisbreuer93@gmail.com>_
-- _glennmichael123 <gtorregosa@gmail.com>_
+- _Chris Breuer_
+- _glennmichael123_
 
 [Compare changes](https://github.com/stacksjs/lastsoulultra/compare/v1.0.0-build.3...v0.70.53)
 
