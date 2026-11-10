@@ -2,7 +2,7 @@
 @section('content')
 <script server>
 import { coachShare } from '~/resources/data/app-stores'
-import { coachingHubStyles } from '~/resources/data/coaching'
+import { coachingHubStyles, moduleHref } from '~/resources/data/coaching'
 import { coachingOrigin, loadBrand } from '~/resources/functions/coaching-source'
 
 // The home, race-entry and next-loop sheets are each suffixed with their own
@@ -19,6 +19,16 @@ const hubBrand = await loadBrand()
 const hubLive = (hubBrand?.modules.length ?? 0) > 0
 const currentPage = { title: 'Coaching - Last Soul Ultra', description: 'Training from a coach\'s method, two weeks at a time. How your sessions went shapes the next block, and an LSU coach approves every one.', styles: coachingHubStyles, ...(hubLive ? { preconnect: [coachingOrigin()] } : {}) }
 const canonicalPath = '/coaching'
+const hubTraining = moduleHref('calendar', coachingOrigin())
+</script>
+<script client>
+import { publicCheckoutReceipt } from '../functions/coaching-return'
+/* The training app sends a runner back to this page after checkout, with a
+   receipt in the address. Only then is its panel drawn here, to confirm the
+   purchase. Without a receipt the panel would be the storefront a second time,
+   a page inside the page repeating the tiers printed just above it. */
+const hubSearch = useSearchParams()
+const hubReturn = memo(() => Boolean(publicCheckoutReceipt(hubSearch.get('hq_order')) || publicCheckoutReceipt(hubSearch.get('hq_subscription'))))
 </script>
 <div class="coaching-page">
 
@@ -111,10 +121,16 @@ const canonicalPath = '/coaching'
     </div>
     <div class="coaching-surface">
       <CoachingOffers />
+      @if(hubLive)
+      <div class="coaching-doors">
+        <a class="btn" href="/coaching/plans">Choose a tier</a>
+        <a class="btn-outline" href="{{ hubTraining }}">Open your training</a>
+      </div>
+      @endif
       <CoachingIndex />
     </div>
     @if(hubLive)
-    <div class="coaching-portal"><CoachingPortal /></div>
+    <div class="coaching-portal" :if="hubReturn()"><CoachingPortal /></div>
     @endif
   </section>
 

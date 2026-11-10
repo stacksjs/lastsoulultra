@@ -109,6 +109,55 @@ export function modulePath(slug: string): string {
 }
 
 /**
+ * Where each account-only module lives in the training app itself.
+ *
+ * This site serves the storefront and nothing behind it. A page that needs an
+ * account belongs to the application that holds the account: it knows who is
+ * signed in, and sends anyone who is not to its own sign-in page and back.
+ * This site cannot know either, so it does not draw those pages at all.
+ */
+const APP_SCREENS: Record<string, string> = {
+  calendar: '/workouts',
+  feedback: '/hq-coach',
+  progress: '/performance',
+  // The subscription and the method behind it. The app's library is a public
+  // page, and this has to be a screen that asks who you are.
+  library: '/coaching',
+  health: '/metrics',
+  messages: '/messages',
+  account: '/me',
+}
+
+/** The coach and staff workspaces, which are the training app's own screens too. */
+const WORKSPACE_SCREENS: Record<string, string> = {
+  '/coach': '/coaches/methods',
+  '/coach/exercises': '/coaches/exercises',
+  '/coach/subscribers': '/coaches/subscribers',
+  '/admin': '/staff/experience',
+}
+
+/** Where a link to a module goes: this site for the storefront, the training app for the rest. */
+export function moduleHref(slug: string, origin: string): string {
+  const screen = APP_SCREENS[slug]
+  return screen ? `${origin.replace(/\/$/, '')}${screen}` : modulePath(slug)
+}
+
+/**
+ * The redirect rules for every account-only URL on this site, each to its
+ * screen in the training app. 302, because where it leads depends on who asks:
+ * the app shows the screen to its owner and its sign-in page to everyone else.
+ */
+export function accountOnlyRedirects(origin: string): Record<string, { to: string, status: number, preserveQuery: boolean }> {
+  const base = origin.replace(/\/$/, '')
+  const rules: Record<string, { to: string, status: number, preserveQuery: boolean }> = {}
+  for (const [slug, screen] of Object.entries(APP_SCREENS))
+    rules[modulePath(slug)] = { to: `${base}${screen}`, status: 302, preserveQuery: false }
+  for (const [path, screen] of Object.entries(WORKSPACE_SCREENS))
+    rules[path] = { to: `${base}${screen}`, status: 302, preserveQuery: false }
+  return rules
+}
+
+/**
  * The modules to show, in this site's order, limited to what the published
  * brand enables. An unreachable brand means the storefront only: linking a
  * runner to a panel that cannot load is worse than not offering it.

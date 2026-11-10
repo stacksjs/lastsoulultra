@@ -114,3 +114,5 @@
 .coaching-page .btn,.coaching-page .btn-outline{transition:none}
 .coaching-page .btn:active,.coaching-page .btn-outline:active{transform:none}
 }
+/* The two ways on from the tiers: subscribe, or open the training you have. */
+.coaching-page .coaching-doors{display:flex;flex-wrap:wrap;gap:12px;margin:clamp(24px,3vw,36px) 0 clamp(36px,4.5vw,60px)}

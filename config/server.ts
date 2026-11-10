@@ -1,4 +1,5 @@
 import type { ServerConfig } from '@stacksjs/types'
+import { accountOnlyRedirects } from '../resources/data/coaching'
 import coaching from './coaching'
 
 /**
@@ -111,6 +112,9 @@ export default {
     // old links to the English page of the same name, and so does this site.
     '/de': '/',
     '/de/*': '/',
+    // Every page that needs an account is the training app's own, where
+    // signing in is enforced. Nothing behind a sign-in is drawn on this site.
+    ...accountOnlyRedirects(coaching.origin),
   },
 
   /**

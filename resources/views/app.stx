@@ -2,9 +2,12 @@
 @section('content')
 <script server>
 import { appStoreUrl, appTiers } from '~/resources/data/app-stores'
+import { moduleHref } from '~/resources/data/coaching'
+import { coachingOrigin } from '~/resources/functions/coaching-source'
 import { productionPages } from '~/resources/data/production-pages'
 const currentPage = productionPages["/app"]
 const canonicalPath = "/app"
+const appOnWeb = moduleHref('calendar', coachingOrigin())
 </script>
 <div class="app-page">
 
@@ -15,7 +18,7 @@ const canonicalPath = "/app"
     <p>Running and strength from a coach's method, two weeks at a time. How your sessions went shapes the next block, and an LSU coach approves every one.</p>
     <div class="app-actions">
       <a class="btn btn-lg" href="{{ appStoreUrl }}">Download on the App Store</a>
-      <a class="btn-outline" href="/coaching/calendar">Open it on the web</a>
+      <a class="btn-outline" href="{{ appOnWeb }}">Open it on the web</a>
     </div>
   </div>
   <figure class="app-hero-shot">
@@ -277,7 +280,7 @@ const canonicalPath = "/app"
     <div class="app-actions">
       <a class="btn btn-lg" href="{{ appStoreUrl }}">App Store</a>
     </div>
-    <a class="app-textlink" href="/coaching/calendar">Already training? Sign in on the web <span aria-hidden="true">→</span></a>
+    <a class="app-textlink" href="{{ appOnWeb }}">Already training? Sign in on the web <span aria-hidden="true">→</span></a>
   </div>
   <div class="app-door">
     <h2>Coaching<br><span class="accent">runners?</span></h2>

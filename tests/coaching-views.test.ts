@@ -77,7 +77,9 @@ describe('a module route, with a brand published', () => {
   })
 
   it('highlights its own tab, once', async () => {
-    for (const module of coachingModules) {
+    // Only the storefront is served here. Every other module's link leaves
+    // for the training app, so it is never the page a visitor is on.
+    for (const module of coachingModules.filter(item => item.scope === 'public')) {
       const html = await render(module.slug)
       const current = [...html.matchAll(/href="\/coaching\/([a-z]+)"\s+aria-current="page"/g)].map(match => match[1])
 
