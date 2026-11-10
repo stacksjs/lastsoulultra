@@ -1,8 +1,5 @@
-Features
-- Show the app's own calendar and session screens on the app page (site)
-
 Fixes
-- Keep a page's styles and the nav's current link when a link is followed (site)
-- Pin HQ platform kit 1.0.4135 for a running-only home and tidier training panels (training)
-- List Soul Races as lastsoulultra.com does, with dates, hosts, status and map pins (site)
-- Describe LSU sign-in without the removed HQ option (site)
+- Size the store panel to its tiers, without the long gap under them (site)
+- Pin HQ platform kit 1.0.4155 for evenly spaced sign-in buttons and one-form sign-up (training)
+- Line the app page's closing panels up with the page edge (site)
+- Send every page that needs an account to the training app, and stop repeating the storefront on the coaching page (site)

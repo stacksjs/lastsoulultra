@@ -1,5 +1,27 @@
 # Stacks Changelog
 
+[Compare changes](https://github.com/stacksjs/lastsoulultra/compare/v1.0.0-build.20...v1.0.0-build.21)
+
+## 🐛 Bug Fixes
+
+- **site**: size the store panel to its tiers, without the long gap under them ([28de4ff](https://github.com/stacksjs/lastsoulultra/commit/28de4ff)) _(by Chris Breuer)_
+- **training**: pin HQ platform kit 1.0.4155 for evenly spaced sign-in buttons and one-form sign-up ([33e8198](https://github.com/stacksjs/lastsoulultra/commit/33e8198)) _(by Chris Breuer)_
+- **site**: line the app page's closing panels up with the page edge ([bb53aeb](https://github.com/stacksjs/lastsoulultra/commit/bb53aeb)) _(by Chris Breuer)_
+- **site**: send every page that needs an account to the training app, and stop repeating the storefront on the coaching page ([6ffa475](https://github.com/stacksjs/lastsoulultra/commit/6ffa475)) _(by Chris Breuer)_
+
+## 📝 Documentation
+
+- **coaching**: LSU provides all of the AI, so nobody adds a key ([88688f1](https://github.com/stacksjs/lastsoulultra/commit/88688f1)) _(by Chris Breuer)_
+
+## ✅ Tests
+
+- **native**: drive sign-up as the one form HQ kit 1.0.4155 shows ([23acbb1](https://github.com/stacksjs/lastsoulultra/commit/23acbb1)) _(by Chris Breuer)_
+- **native**: expect no membership-card row on Me, as HQ kit 1.0.4135 removed it for coach-and-athlete installations ([ca4a443](https://github.com/stacksjs/lastsoulultra/commit/ca4a443)) _(by Chris Breuer)_
+
+## Contributors
+
+- _Chris Breuer_
+
 [Compare changes](https://github.com/stacksjs/lastsoulultra/compare/v1.0.0-build.19...v1.0.0-build.20)
 
 ## ✨ Features
