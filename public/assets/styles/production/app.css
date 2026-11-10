@@ -162,3 +162,24 @@
 .app-page .app-textlink{font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase}
 @media(max-width:760px){.app-page .app-tiers{grid-template-columns:1fr}}
 .app-page .app-tier-price i{align-self:flex-start;font:400 clamp(22px,2.2vw,30px)/1 var(--lsu-display);font-style:normal;color:var(--lsu-seg-red);margin-right:-4px}
+
+/* The app's own screens: two of them, the second set lower so the pair reads
+   as a sequence and not a row of matching cards. Square, hairlined and lit
+   from below in red, like every other panel on the site. */
+.app-page .app-screens{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(36px,5vw,80px);align-items:start}
+.app-page .app-screens .app-head{position:sticky;top:110px;margin-bottom:0}
+.app-page .app-phones{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(16px,2.4vw,36px);align-items:start}
+.app-page .app-phone{margin:0}
+.app-page .app-phone+.app-phone{margin-top:clamp(40px,7vw,104px)}
+.app-page .app-phone img{display:block;width:100%;height:auto;border:1px solid rgba(255,255,255,.16);border-top:2px solid var(--lsu-red);background:#000;box-shadow:0 30px 80px rgba(221,15,21,.14)}
+.app-page .app-phone figcaption{margin-top:16px;max-width:34ch;font-size:15.5px;line-height:1.55;color:var(--lsu-dim-1)}
+.app-page .app-phone figcaption b{display:block;margin-bottom:4px;font:400 clamp(20px,1.8vw,24px)/1.1 var(--lsu-display);letter-spacing:.02em;text-transform:uppercase;color:var(--lsu-white)}
+@media(max-width:900px){
+  .app-page .app-screens{grid-template-columns:1fr}
+  .app-page .app-screens .app-head{position:static;margin-bottom:var(--lsu-head-gap)}
+}
+@media(max-width:480px){
+  .app-page .app-phones{gap:12px}
+  .app-page .app-phone+.app-phone{margin-top:40px}
+  .app-page .app-phone figcaption{font-size:14.5px}
+}

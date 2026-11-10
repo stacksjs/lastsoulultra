@@ -23,6 +23,25 @@ const canonicalPath = "/app"
   </figure>
 </section>
 
+<section id="screens" class="app-section">
+  <div class="app-screens app-shell">
+    <div class="app-head">
+      <h2 class="h2-sm">What you open<br><span class="accent">before you run.</span></h2>
+      <p>Two screens do most of the work: the week you are in, and the session in front of you. These are the app's own, on a phone.</p>
+    </div>
+    <div class="app-phones">
+      <figure class="app-phone">
+        <img src="/assets/lsu/images/app/calendar.webp" alt="The app's calendar: a week with 4 h 49 min of 7 h 07 min done, and Monday's tempo run with what it asks for." width="780" height="1580" loading="lazy" decoding="async">
+        <figcaption><b>The week against the plan.</b> Time, load and distance so far, and what every session is for.</figcaption>
+      </figure>
+      <figure class="app-phone">
+        <img src="/assets/lsu/images/app/player.webp" alt="A long run in the app: a start button, then the steps, a warm up, six hard and easy intervals and a cool down." width="780" height="1580" loading="lazy" decoding="async">
+        <figcaption><b>The session, step by step.</b> Press start and it calls every interval, with your phone in your pocket.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
 <section id="feel" class="app-section">
   <div class="app-feel app-shell">
     <div>

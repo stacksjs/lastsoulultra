@@ -23,14 +23,17 @@ const srLoadFailed = state(false)
 const srActive = state('')
 const srFromMap = state(false)
 const srWide = useMediaQuery('(min-width: 1001px)')
+const srNarrow = useMediaQuery('(max-width: 700px)')
 const srFiltered = derived(() => soulRaceRows(srRaces(), { region: srRegion(), status: srStatus(), qualifierOnly: srQual() === 'only', query: srQuery() }))
 const srCounts = derived(() => soulRaceCounts(srRaces()))
 const srTotal = derived(() => soulRaceTotal(srFiltered().length))
 /* Past editions are drawn first so a live race's pin sits on top of them. */
 const srPins = derived(() => [...srFiltered()].sort((a, b) => Number(b.past) - Number(a.past)))
-/* The card under the map: only for a pin picked on a screen where the list
-   sits below the map, where the matching card may be a long scroll away. */
-const srTip = derived(() => (srFromMap() && !srWide.value ? srFiltered().find(race => race.slug === srActive()) : null) || null)
+/* The card beside a pin: only on a mid-width screen, where the list has dropped
+   below a map tall enough to hide it. Beside the map the list is already in
+   view, and on a phone the matching card sits right under the map, so there a
+   pin lights its card rather than covering it with a copy. */
+const srTip = derived(() => (srFromMap() && !srWide.value && !srNarrow.value ? srFiltered().find(race => race.slug === srActive()) : null) || null)
 const srTipStyle = derived(() => {
   const race = srTip()
   return race ? `left:clamp(8px, calc(${(race.x / 10).toFixed(2)}% + 18px), calc(100% - 348px));top:calc(${(race.y / 5.25).toFixed(2)}% + 18px)` : ''
