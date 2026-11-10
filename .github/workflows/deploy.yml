@@ -71,6 +71,36 @@ jobs:
           # The exact commit CI approved, not whatever main points at now.
           ref: ${{ github.event.workflow_run.head_sha || github.ref }}
 
+      # A TestFlight build is uploaded only while the backend runs the HQ kit the
+      # app was built from (scripts/release-native-ios.ts). A deploy that moves
+      # the backend to another kit while a build is in flight makes that build
+      # unreleasable an hour into its run; builds 20 and 21 were both lost that
+      # way. So a kit change waits for the build, and every other deploy does not.
+      - name: Hold a kit change while a TestFlight build is in flight
+        if: steps.check.outputs.configured == 'true' && (github.event.inputs.environment || 'production') == 'production'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          pinned=$(jq -r .revision native/hq-source.json)
+          site=$(jq -r .site native/product.json)
+          live=$(curl -fsS --max-time 15 "$site/api/deployment" | jq -r .source || true)
+          if [ -z "$live" ] || [ "$pinned" = "$live" ]; then
+            echo "The backend already runs this kit, or cannot say which it runs; nothing to hold."
+            exit 0
+          fi
+          for attempt in $(seq 1 150); do
+            busy=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow testflight.yml --limit 20 --json status --jq '[.[] | select(.status == "in_progress")] | length' || echo unknown)
+            if [ "$busy" = "0" ]; then exit 0; fi
+            if [ "$busy" = "unknown" ]; then
+              echo "::warning::Could not read TestFlight runs; deploying the kit change without waiting."
+              exit 0
+            fi
+            echo "A TestFlight build is in flight; holding the move to kit $pinned (check $attempt)."
+            sleep 30
+          done
+          echo "::error::A TestFlight build was still running after 75 minutes; the kit change was not deployed. Re-run this deploy once it finishes."
+          exit 1
+
       - name: Setup Bun
         if: steps.check.outputs.configured == 'true'
         uses: oven-sh/setup-bun@v2

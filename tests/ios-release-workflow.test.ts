@@ -52,3 +52,17 @@ it('re-checks an earlier upload without building or uploading again', () => {
   expect(job.steps.find((step: any) => step.uses?.startsWith('actions/download-artifact@')).with['run-id']).toBe('${{ inputs.verify_run }}')
   expect(job.steps.at(-1)).toMatchObject({ run: 'bun scripts/ios-ci-signing.ts cleanup', if: 'always()' })
 })
+
+it('holds a deploy that changes the HQ kit while a TestFlight build is in flight', () => {
+  // The upload step refuses an app whose kit the backend no longer runs, so a
+  // kit moved mid-build costs the whole build (20 and 21 were lost that way).
+  const deploy = readFileSync(new URL('../.github/workflows/deploy.yml', import.meta.url), 'utf8')
+  const hold = deploy.indexOf('Hold a kit change while a TestFlight build is in flight')
+  expect(hold).toBeGreaterThan(deploy.indexOf('- name: Checkout'))
+  expect(hold).toBeLessThan(deploy.indexOf('- name: Setup Bun'))
+  const step = deploy.slice(hold, deploy.indexOf('- name: Setup Bun'))
+  expect(step).toContain('native/hq-source.json')
+  expect(step).toContain('--workflow testflight.yml')
+  // Only a kit change waits: a deploy on the kit already live goes straight through.
+  expect(step).toContain('[ "$pinned" = "$live" ]')
+})
