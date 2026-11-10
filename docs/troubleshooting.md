@@ -41,7 +41,7 @@ Use HTTPS, allow the microphone for the page and use a supported browser. Check 
 
 ## Feedback sends but no reply arrives
 
-The written reply and any plan change come from the AI that LSU provides, or from the coach's own key if they added one under **Settings → AI Keys**. If the AI is unavailable, the feedback screen says so before you write. Transcription does not depend on it. If your message appears but no reply follows after a minute or two, refresh once, then report it with the time; do not send the same feedback again.
+The written reply and any plan change come from the AI that LSU provides; nobody adds a key of their own. If the AI is unavailable, the feedback screen says so before you write. Transcription does not depend on it. If your message appears but no reply follows after a minute or two, refresh once, then report it with the time; do not send the same feedback again.
 
 ## Billing actions are unavailable for a demo
 
