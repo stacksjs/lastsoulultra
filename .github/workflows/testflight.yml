@@ -1,6 +1,18 @@
 name: TestFlight
 
+# A release is one command, `bun run release:build` (scripts/release-native.ts):
+# it pushes a `chore(release): v<version>-build.<n>` commit and its tag. CI runs
+# on that push, Deploy follows CI, and this follows Deploy, so the app is only
+# ever built once the backend it talks to is live on the same HQ kit. Any other
+# commit deploys without uploading an app.
 on:
+  workflow_run:
+    workflows: [Deploy]
+    types: [completed]
+    branches: [main]
+
+  # By hand: rerun an upload that failed for a reason outside the commit, or
+  # exercise acceptance without uploading.
   workflow_dispatch:
     inputs:
       upload:
@@ -17,7 +29,14 @@ concurrency:
 
 jobs:
   release:
-    if: github.ref == 'refs/heads/main'
+    # Both events run on main: the signing environment admits no other branch.
+    if: >-
+      github.ref == 'refs/heads/main' && (
+        github.event_name == 'workflow_dispatch' || (
+          github.event.workflow_run.conclusion == 'success' &&
+          startsWith(github.event.workflow_run.head_commit.message, 'chore(release): v')
+        )
+      )
     runs-on: xcode-27
     timeout-minutes: 90
     environment: ios-testflight
@@ -25,6 +44,8 @@ jobs:
       - name: Checkout the requested main revision
         uses: actions/checkout@v7
         with:
+          # The commit Deploy just put live, not whatever main has moved to since.
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
           persist-credentials: false
 
       - name: Setup Pantry
@@ -93,7 +114,7 @@ jobs:
             storage/native/acceptance/*/result.json
 
       - name: Prepare temporary signing material
-        if: inputs.upload
+        if: inputs.upload || github.event_name == 'workflow_run'
         env:
           LSU_IOS_DISTRIBUTION_P12_BASE64: ${{ secrets.LSU_IOS_DISTRIBUTION_P12_BASE64 }}
           LSU_IOS_DISTRIBUTION_PASSWORD: ${{ secrets.LSU_IOS_DISTRIBUTION_PASSWORD }}
@@ -103,11 +124,11 @@ jobs:
         run: bun scripts/ios-ci-signing.ts stage
 
       - name: Verify, sign and upload the prepared application
-        if: inputs.upload
+        if: inputs.upload || github.event_name == 'workflow_run'
         run: bun run native:testflight --prepared
 
       - name: Verify TestFlight processing and internal availability
-        if: inputs.upload
+        if: inputs.upload || github.event_name == 'workflow_run'
         run: bun scripts/verify-native-testflight.ts
 
       - name: Remove signing files and temporary keychain

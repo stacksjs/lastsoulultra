@@ -44,11 +44,52 @@ the slug and scheme in `native-product.json` and, from its manifest
 Android push stays disabled until this package has its own Firebase client.
 HQ's Firebase file and app-link ownership are never inherited by a new app.
 
-## TestFlight
+## Releasing
 
-The first release keeps marketing version `1.0.0`. Increase `build` in
-`product.json` for every subsequent upload; commit and push the inputs first.
-Install Xcode and HQ's Pantry-pinned iOS tools, and install the App Store
+One command releases the app to TestFlight, as `bun run release:build` does in HQ:
+
+```sh
+bun run release:build              # the next build of the current version
+bun run release:build --dry-run    # the tag and the tester notes, changing nothing
+bun run release:minor              # 1.0.0 -> 1.1.0 (bumpx), still the next build number
+bun run release:build --notes "Try the new calendar header"
+```
+
+It runs from a clean `main` and does the rest: takes the next build number (one
+more than the highest in `product.json` and the release tags; Apple never takes a
+number twice), writes What to Test from the conventional commits since the
+previous release (logsmith's grouping, so a `feat:` or `fix:` subject is what
+testers read and `chore:` is not), commits `chore(release): v1.0.0-build.N` with
+the notes in `native/TestFlight/`, tags it and pushes both. CI runs on the push,
+Deploy follows CI, and the TestFlight workflow follows Deploy for a release
+commit, so nothing waits on a laptop. The command stays to watch that run and
+reports how it ended; `--no-wait` leaves once the push is out. The tag's GitHub
+release is created by the Release workflow.
+
+It stops before anything is committed when the backend is not yet running the
+pinned kit, because the workflow would refuse that build forty minutes later.
+`--notes`, `--notes-file`, `RELEASE_NOTES` or `release.notes` in `product.json`
+replace the generated notes; `release.locales` names the TestFlight languages
+(default `en-US` and `de-DE`).
+
+To adopt an HQ update, name the kit and let it say the rest about itself:
+
+```sh
+bun run native:pin 1.0.4122
+bun run native:ios && bun run native:verify-ios
+```
+
+`native:pin` installs the kit and writes `pantry.json`, `pantry.lock`,
+`hq-source.json` (the HQ commit and Bun version the kit declares) and the Craft
+override in `package.json` (the version the kit locks). Commit that saying what
+people will notice, push, and release once Deploy has finished. Without a
+registry grant on this machine, the Platform pin workflow resolves the lock on
+GitHub instead.
+
+## Uploading by hand
+
+The TestFlight workflow is the release path. To archive and upload from a Mac
+instead, install Xcode and HQ's Pantry-pinned iOS tools, and install the App Store
 provisioning profiles and Apple Distribution identity in your local keychain.
 No signing keys or profiles belong in Git.
 
@@ -64,14 +105,15 @@ residency contract. It builds from the pin, archives and exports with App Store 
 checks the bundle/version and distribution entitlements, and uploads the IPA.
 `IOS_APP_PROFILE` and `IOS_ACTIVITY_PROFILE` can select alternative installed
 profile names. Evidence is kept under ignored `storage/native/release/`.
-Upload success is not TestFlight availability: verify Apple's processing state
-and assign the processed build to an internal testing group in App Store Connect.
+Upload success is not TestFlight availability: `bun scripts/verify-native-testflight.ts`
+waits for Apple's processing, assigns the build to the internal groups and sets
+What to Test from the notes the release commit carries.
 
 After `native:ios` has already generated this release, `native:testflight --prepared`
 can reuse it. The release checks its receipt, product and frozen-lock hashes,
 and rejects native input changes since generation; it still verifies the live
 backend and bundled screen before archiving and uploading.
 
-To adopt an HQ update, change the full commit SHA in `hq-source.json`, build
-both targets, run lint/type checks/tests and review the native screens. The pin
-makes each release reproducible; it deliberately does not float with HQ main.
+The pin makes each release reproducible; it deliberately does not float with HQ
+main. After moving it, build both targets, run lint, type checks and tests, and
+review the native screens.

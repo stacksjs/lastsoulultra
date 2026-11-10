@@ -4,10 +4,18 @@ import { readFileSync } from 'node:fs'
 it('keeps the native build free of signing and production credentials', () => {
   const text = readFileSync(new URL('../.github/workflows/testflight.yml', import.meta.url), 'utf8')
   const workflow = Bun.YAML.parse(text) as any
-  expect(Object.keys(workflow.on)).toEqual(['workflow_dispatch'])
+  // A release commit uploads on its own, after the backend it talks to is live.
+  expect(Object.keys(workflow.on)).toEqual(['workflow_run', 'workflow_dispatch'])
+  expect(workflow.on.workflow_run).toEqual({ workflows: ['Deploy'], types: ['completed'], branches: ['main'] })
   expect(workflow.permissions).toEqual({ contents: 'read' })
   const job = workflow.jobs.release
-  expect(job.if).toBe("github.ref == 'refs/heads/main'")
+  expect(job.if).toContain("github.ref == 'refs/heads/main' && (")
+  expect(job.if).toContain("github.event.workflow_run.conclusion == 'success'")
+  expect(job.if).toContain("startsWith(github.event.workflow_run.head_commit.message, 'chore(release): v')")
+  expect(job.steps[0].with.ref).toBe('${{ github.event.workflow_run.head_sha || github.sha }}')
+  // Nothing signs or uploads on a manual acceptance-only run.
+  for (const step of job.steps.filter((step: any) => /signing.ts stage|native:testflight|verify-native-testflight/.test(step.run || '')))
+    expect(step.if).toBe("inputs.upload || github.event_name == 'workflow_run'")
   expect(job.environment).toBe('ios-testflight')
   expect(job.env).toBeUndefined()
   const build = job.steps.findIndex((step: any) => step.run === 'bun run native:ios')
