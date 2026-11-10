@@ -1,0 +1,50 @@
+name: Native acceptance
+
+# A new HQ kit can change how the app behaves under the acceptance script, and a
+# release finds that half an hour into its build, with the build number spent.
+# So when a push to main changes the kit pin (native/hq-source.json), the
+# acceptance script (scripts/test-native-ios.ts) or the workflow that runs them,
+# this starts the TestFlight workflow's build and acceptance with the upload off,
+# once Deploy has the backend on that kit. `bun run release:build` reads how the
+# newest of those runs ended before it releases.
+#
+# It decides and starts; the build itself is the TestFlight workflow's. Every
+# other push ends here in a few seconds, and a release commit is left to the
+# TestFlight workflow, which accepts the app before uploading it.
+on:
+  workflow_run:
+    workflows: [Deploy]
+    types: [completed]
+    branches: [main]
+
+permissions:
+  contents: read
+  # To start the TestFlight workflow, and for nothing else.
+  actions: write
+
+jobs:
+  start:
+    if: >-
+      github.event.workflow_run.conclusion == 'success' &&
+      !startsWith(github.event.workflow_run.head_commit.message, 'chore(release): v')
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout the deployed commit
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+
+      # The script imports only what Bun ships, but Bun preloads the framework
+      # from node_modules for every script here (bunfig.toml).
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Start acceptance without an upload when the kit or its script changed
+        env:
+          GH_TOKEN: ${{ github.token }}
+          DEPLOYED: ${{ github.event.workflow_run.head_sha }}
+        run: bun scripts/native-acceptance.ts "$DEPLOYED"

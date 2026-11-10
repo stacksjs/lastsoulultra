@@ -29,7 +29,7 @@ import process from 'node:process'
 import { commitsBetween, fitNotes, NO_VISIBLE_CHANGES, resolveNotes, TESTFLIGHT_NOTES_LIMIT, testerNotes, writeWhatToTest } from '@stacksjs/actions/release-notes'
 import { versionBump } from '@stacksjs/bumpx'
 import { bumpedVersion, DEFAULT_NOTES_LOCALES, lastDelivered, nextBuild, NOTES_PROJECT_DIR, RELEASE_COMMIT_PREFIX, releaseTag, withRelease } from './native-release'
-import { RUN_FIELDS, type RunStep, TESTFLIGHT_WORKFLOW, type TestFlightRun } from './testflight-runs'
+import { RUN_FIELDS, RUN_TITLES, type RunStep, TESTFLIGHT_WORKFLOW, type TestFlightRun } from './testflight-runs'
 
 const root = resolve(import.meta.dir, '..')
 const args = process.argv.slice(2)
@@ -217,8 +217,9 @@ if (!upload) {
   let url = ''
   while (!url && Date.now() < startedBy) {
     await Bun.sleep(15_000)
-    const rows = JSON.parse(gh('run', 'list', '--workflow', 'testflight.yml', '--event', 'workflow_dispatch', '--limit', '1', '--json', 'databaseId,status,url,createdAt')) as Array<{ databaseId: number, status: string, url: string, createdAt: string }>
-    if (rows[0] && rows[0].status !== 'completed') url = rows[0].url
+    // By name: an acceptance-only run can be started by hand at the same moment.
+    const rows = JSON.parse(gh('run', 'list', '--workflow', TESTFLIGHT_WORKFLOW, '--event', 'workflow_dispatch', '--limit', '5', '--json', RUN_FIELDS)) as TestFlightRun[]
+    url = rows.find(row => row.status !== 'completed' && row.displayTitle === RUN_TITLES.upload)?.url ?? ''
   }
   if (!url) throw new Error('The TestFlight workflow could not be started; run `gh workflow run testflight.yml --ref main`')
   say(`testflight.yml: ${url}`)

@@ -1,10 +1,19 @@
 name: TestFlight
 
+# What a run is for, where the run list shows it. The release command, the
+# deploy's kit hold and the acceptance starter read these names
+# (scripts/testflight-runs.ts), so a run that cannot upload is known as one.
+run-name: ${{ github.event_name != 'workflow_dispatch' && 'TestFlight' || inputs.verify_run != '' && format('TestFlight re-check of run {0}', inputs.verify_run) || inputs.upload && 'TestFlight upload by hand' || 'Native acceptance, no upload' }}
+
 # A release is one command, `bun run release:build` (scripts/release-native.ts):
 # it pushes a `chore(release): v<version>-build.<n>` commit and its tag. CI runs
 # on that push, Deploy follows CI, and this follows Deploy, so the app is only
 # ever built once the backend it talks to is live on the same HQ kit. Any other
 # commit deploys without uploading an app.
+#
+# A push that changes the HQ kit pin or the acceptance script gets the build and
+# its acceptance without an upload: the Native acceptance workflow starts this
+# one by hand's route, with `upload` off (scripts/native-acceptance.ts).
 on:
   workflow_run:
     workflows: [Deploy]
@@ -27,12 +36,15 @@ on:
 permissions:
   contents: read
 
-concurrency:
-  group: lsu-testflight
-  cancel-in-progress: false
-
 jobs:
   release:
+    # One build at a time, on the jobs rather than the workflow: this workflow
+    # also starts after every other commit's Deploy and skips its job, and a
+    # run that is only going to skip must not take the place of a release
+    # waiting its turn (GitHub keeps one waiting run per group).
+    concurrency:
+      group: lsu-testflight
+      cancel-in-progress: false
     # Both events run on main: the signing environment admits no other branch.
     if: >-
       github.ref == 'refs/heads/main' && (
@@ -160,6 +172,9 @@ jobs:
   # receipt and finishes what that run could not (processing, the internal
   # groups, What to Test).
   verify:
+    concurrency:
+      group: lsu-testflight
+      cancel-in-progress: false
     if: github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch' && inputs.verify_run != ''
     runs-on: xcode-27
     timeout-minutes: 75

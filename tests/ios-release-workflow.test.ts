@@ -1,5 +1,6 @@
 import { expect, it } from 'bun:test'
 import { readFileSync } from 'node:fs'
+import { ACCEPTANCE_STEP, AVAILABILITY_STEP, RUN_TITLES } from '../scripts/testflight-runs'
 
 it('keeps the native build free of signing and production credentials', () => {
   const text = readFileSync(new URL('../.github/workflows/testflight.yml', import.meta.url), 'utf8')
@@ -75,4 +76,50 @@ it('holds a deploy that changes the HQ kit while a TestFlight build is in flight
     env: { GH_TOKEN: '${{ github.token }}' },
     run: 'bun scripts/hold-kit-deploy.ts',
   })
+})
+
+it('names each TestFlight run for what it does, as the scripts that read the run list expect', () => {
+  const workflow = Bun.YAML.parse(readFileSync(new URL('../.github/workflows/testflight.yml', import.meta.url), 'utf8')) as any
+  const name = workflow['run-name'] as string
+  expect(name.startsWith('${{ ') && name.endsWith(' }}') && !name.includes('\n')).toBe(true)
+  // After Deploy it is a release; by hand it is a re-check, an upload, or acceptance alone.
+  expect(name).toBe(`\${{ github.event_name != 'workflow_dispatch' && '${RUN_TITLES.release}' || inputs.verify_run != '' && format('${RUN_TITLES.recheck}{0}', inputs.verify_run) || inputs.upload && '${RUN_TITLES.upload}' || '${RUN_TITLES.acceptance}' }}`)
+  // The steps the release command asks GitHub about exist under those names.
+  const names = workflow.jobs.release.steps.map((step: any) => step.name)
+  expect(names).toContain(ACCEPTANCE_STEP)
+  expect(names).toContain(AVAILABILITY_STEP)
+  expect(workflow.jobs.verify.steps.map((step: any) => step.name)).toContain(AVAILABILITY_STEP)
+  // One build at a time, per job: a run that only skips its job must not
+  // displace a release that is waiting its turn.
+  expect(workflow.concurrency).toBeUndefined()
+  for (const job of [workflow.jobs.release, workflow.jobs.verify]) expect(job.concurrency).toEqual({ 'group': 'lsu-testflight', 'cancel-in-progress': false })
+})
+
+it('accepts a new kit or acceptance script without uploading, once it is deployed', () => {
+  const text = readFileSync(new URL('../.github/workflows/native-acceptance.yml', import.meta.url), 'utf8')
+  const workflow = Bun.YAML.parse(text) as any
+  expect(workflow.on).toEqual({ workflow_run: { workflows: ['Deploy'], types: ['completed'], branches: ['main'] } })
+  // It may start a workflow and read the repository; it holds no secret.
+  expect(workflow.permissions).toEqual({ contents: 'read', actions: 'write' })
+  expect(text).not.toContain('secrets.')
+  const job = workflow.jobs.start
+  expect(job.environment).toBeUndefined()
+  expect(job.if).toContain("github.event.workflow_run.conclusion == 'success'")
+  // A release commit is the TestFlight workflow's, which accepts before it uploads.
+  expect(job.if).toContain("!startsWith(github.event.workflow_run.head_commit.message, 'chore(release): v')")
+  expect(job.steps[0].with.ref).toBe('${{ github.event.workflow_run.head_sha }}')
+  expect(job.steps.at(-1).run).toBe('bun scripts/native-acceptance.ts "$DEPLOYED"')
+  // The only way it starts the TestFlight workflow is with the upload off, and
+  // that workflow signs and uploads on nothing but `upload` or a release commit.
+  const script = readFileSync(new URL('../scripts/native-acceptance.ts', import.meta.url), 'utf8')
+  const starts = script.split('\n').filter(line => line.includes('\'workflow\', \'run\''))
+  expect(starts).toHaveLength(1)
+  expect(starts[0]).toContain('\'-f\', \'upload=false\')')
+  expect(script).not.toContain('upload=true')
+  const testflight = Bun.YAML.parse(readFileSync(new URL('../.github/workflows/testflight.yml', import.meta.url), 'utf8')) as any
+  const release = testflight.jobs.release
+  expect(release.if.replace(/\s+/g, ' ')).toBe("github.ref == 'refs/heads/main' && ( (github.event_name == 'workflow_dispatch' && inputs.verify_run == '') || ( github.event.workflow_run.conclusion == 'success' && startsWith(github.event.workflow_run.head_commit.message, 'chore(release): v') ) )")
+  const gated = release.steps.filter((step: any) => step.if === "inputs.upload || github.event_name == 'workflow_run'").map((step: any) => step.run)
+  expect(gated).toEqual(['bun scripts/ios-ci-signing.ts stage', 'bun run native:testflight --prepared', 'bun scripts/verify-native-testflight.ts'])
+  expect(testflight.on.workflow_dispatch.inputs.upload.type).toBe('boolean')
 })
