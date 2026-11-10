@@ -41,3 +41,8 @@ jobs:
         uses: stacksjs/action-releaser@v1.2.11
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          # The release commit carries its own section of the changelog, written
+          # by logsmith when bumpx made the release (scripts/release-native.ts).
+          # Without this the release is created with an empty description.
+          changelog: CHANGELOG.md

@@ -1,7 +1,7 @@
 {
   "name": "last-soul-ultra",
   "type": "module",
-  "version": "0.70.53",
+  "version": "1.0.0-build.19",
   "private": true,
   "description": "Last Soul Ultra World Series and coaching",
   "contributors": [
@@ -112,6 +112,7 @@
     "@craft-native/ios": "0.0.490",
     "@craft-native/android": "0.0.490",
     "bun-query-builder": "0.3.38",
+    "@stacksjs/bumpx": "0.2.33",
     "@stacksjs/ts-cloud": "0.16.116"
   }
 }

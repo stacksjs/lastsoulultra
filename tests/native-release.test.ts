@@ -84,3 +84,24 @@ it('offers the release as HQ does: one command, a build by default', () => {
   expect(scripts['release:patch']).toBe(scripts['release:build'])
   expect(Object.values(scripts).join('\n')).not.toContain('buddy release')
 })
+
+it('keeps package.json at the release product.json is at, for bumpx to find the previous tag', () => {
+  const pkg = JSON.parse(readFileSync(new URL('../package.json', import.meta.url), 'utf8'))
+  const product = JSON.parse(readFileSync(new URL('../native/product.json', import.meta.url), 'utf8'))
+  expect(pkg.version).toBe(`${product.version}-build.${product.build}`)
+  // The fix for a doubled changelog and a tag carrying another release's notes.
+  const [, minor, patch] = pkg.overrides['@stacksjs/bumpx'].split('.').map(Number)
+  expect(minor * 1000 + patch).toBeGreaterThanOrEqual(2033)
+})
+
+it('gives the tag\'s GitHub release its section of the changelog', () => {
+  const workflow = Bun.YAML.parse(readFileSync(new URL('../.github/workflows/release.yml', import.meta.url), 'utf8')) as any
+  const step = workflow.jobs.release.steps.find((candidate: any) => candidate.uses?.startsWith('stacksjs/action-releaser@'))
+  expect(step.with).toEqual({ changelog: 'CHANGELOG.md' })
+  expect(workflow.jobs.release.steps[0].with['fetch-depth']).toBe(0)
+  // Every release in the changelog opens with the line the releaser looks for.
+  const changelog = readFileSync(new URL('../CHANGELOG.md', import.meta.url), 'utf8')
+  const product = JSON.parse(readFileSync(new URL('../native/product.json', import.meta.url), 'utf8'))
+  expect(changelog.split('\n').some(line => line.startsWith('[Compare changes]') && line.includes(`...v${product.version}-build.${product.build})`))).toBe(true)
+  expect(changelog.match(/^# /gm)).toHaveLength(1)
+})

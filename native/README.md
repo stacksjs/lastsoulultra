@@ -59,12 +59,17 @@ It runs from a clean `main` and does the rest: takes the next build number (one
 more than the highest in `product.json` and the release tags; Apple never takes a
 number twice), writes What to Test from the conventional commits since the
 previous release (logsmith's grouping, so a `feat:` or `fix:` subject is what
-testers read and `chore:` is not), commits `chore(release): v1.0.0-build.N` with
-the notes in `native/TestFlight/`, tags it and pushes both. CI runs on the push,
+testers read and `chore:` is not) into `native/TestFlight/`, and hands the
+release itself to bumpx, as every Stacks package does: bumpx moves the release
+version in `package.json` (`1.0.0-build.N`, the release `product.json` is at),
+has logsmith add that release's section to `CHANGELOG.md`, commits
+`chore(release): v1.0.0-build.N` and creates the annotated tag carrying the
+section. Commit and tag are pushed together. CI runs on the push,
 Deploy follows CI, and the TestFlight workflow follows Deploy for a release
 commit, so nothing waits on a laptop. The command stays to watch that run and
-reports how it ended; `--no-wait` leaves once the push is out. The tag's GitHub
-release is created by the Release workflow.
+reports how it ended; `--no-wait` leaves once the push is out, and `--no-push`
+stops after the local commit and tag so they can be looked at first. The Release
+workflow creates the tag's GitHub release from its section of `CHANGELOG.md`.
 
 It stops before anything is committed when the backend is not yet running the
 pinned kit, because the workflow would refuse that build forty minutes later.
