@@ -79,6 +79,11 @@ it('packages LSU’s brand and approved coaching tiers as the installation’s o
   // The AI coach reads and explains; it has no way to create a workout.
   expect(presets.assistant).toEqual({ mode: 'insights' })
   expect(() => installationPresets({ ...presets, assistant: { mode: 'coach' } })).toThrow('keep the AI coach to insights')
+  // LSU's sign-in offers no "Continue with HQ": the switch has to be an explicit false, since HQ defaults to offering it.
+  expect(presets.sign_in).toEqual({ hq: false })
+  expect(() => installationPresets({ ...presets, sign_in: { hq: true } })).toThrow('must turn off HQ sign-in')
+  const { sign_in: _unset, ...withoutSignIn } = presets
+  expect(() => installationPresets(withoutSignIn as typeof presets)).toThrow('must turn off HQ sign-in')
   expect(presets.experience.navigation.map(item => item.label)).toEqual(['Store', 'Workouts', 'Health', 'Messages', 'Me'])
   expect(presets.experience.show_powered_by).toBe(false)
   expect(presets.experience.theme).toMatchObject({ accent: product.identity.theme.accent, background: product.identity.theme.background, font: 'barlow', heading_font: 'anton' })

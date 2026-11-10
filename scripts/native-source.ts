@@ -142,6 +142,9 @@ export function installationPresets(value: typeof presets = presets, slug: strin
   // LSU's coaches set the training, so the AI coach explains an athlete's data and never builds or changes workouts.
   if (value.assistant?.mode !== 'insights')
     throw new Error('enterprise/presets.json must keep the AI coach to insights: LSU coaches assign the training')
+  // LSU accounts are LSU's own: its sign-in offers no "Continue with HQ" (HQ kit 1.0.4119 and later honour this).
+  if (value.sign_in?.hq !== false)
+    throw new Error('enterprise/presets.json must turn off HQ sign-in: LSU accounts sign in with LSU')
   return value
 }
 
