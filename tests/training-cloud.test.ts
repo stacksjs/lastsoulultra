@@ -35,11 +35,12 @@ it('keeps the enterprise installation off a shared host and pins provider placem
     expect(tsCloud.sites?.[name]?.env?.CLOUDFLARE_API_TOKEN).toBeUndefined()
     expect(tsCloud.sites?.[name]?.env?.HCLOUD_TOKEN).toBeUndefined()
     expect(tsCloud.sites?.[name]?.env?.LSU_TYPESENSE_API_KEY).toBeUndefined()
+    expect(tsCloud.sites?.[name]?.env?.LSU_ANTHROPIC_API_KEY).toBeUndefined()
   }
 })
 
 it('resolves isolated runtime secrets again after Buddy switches to production', () => {
-  const keys = ['LSU_TRAINING_APP_KEY', 'LSU_TRAINING_DB_PASSWORD', 'LSU_DEMO_ACCOUNTS_JSON', 'LSU_TYPESENSE_API_KEY'] as const
+  const keys = ['LSU_TRAINING_APP_KEY', 'LSU_TRAINING_DB_PASSWORD', 'LSU_DEMO_ACCOUNTS_JSON', 'LSU_TYPESENSE_API_KEY', 'LSU_ANTHROPIC_API_KEY'] as const
   const previous = Object.fromEntries(keys.map(key => [key, process.env[key]]))
   try {
     process.env.LSU_TRAINING_APP_KEY = 'development-sentinel'
@@ -48,6 +49,7 @@ it('resolves isolated runtime secrets again after Buddy switches to production',
     process.env.LSU_TRAINING_DB_PASSWORD = 'own-database-sentinel'
     process.env.LSU_DEMO_ACCOUNTS_JSON = 'private-review-sentinel'
     process.env.LSU_TYPESENSE_API_KEY = 'private-typesense-sentinel-0123456789'
+    process.env.LSU_ANTHROPIC_API_KEY = 'installation-ai-sentinel'
     const sites = trainingSites()
     for (const name of ['training', 'training-api']) {
       expect(sites[name].inheritEnv).toBe(false)
@@ -55,6 +57,8 @@ it('resolves isolated runtime secrets again after Buddy switches to production',
       expect(sites[name].env?.APP_KEY).toBe('production-sentinel')
       expect(sites[name].env?.TYPESENSE_API_KEY).toBe('private-typesense-sentinel-0123456789')
       expect(sites[name].env?.TYPESENSE_ENABLED).toBe('true')
+      // Coaches' method feedback runs on the installation's own AI key.
+      expect(sites[name].env?.ANTHROPIC_API_KEY).toBe('installation-ai-sentinel')
       expect(sites[name].env?.DB_PASSWORD).toBe('own-database-sentinel')
       expect(sites[name].env?.DB_DATABASE).toBe('lsu_training')
       expect(sites[name].env?.PATH).toContain('/lastsoulultra-shared/training/media/pantry/.bin')

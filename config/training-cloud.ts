@@ -41,6 +41,8 @@ export function trainingSites(): NonNullable<CloudConfig['sites']> {
     MAIL_HOST: `mail.${new URL(deployment.origin).hostname}`, MAIL_PORT: '587', MAIL_ENCRYPTION: 'tls',
     MAIL_USERNAME: `hello@${new URL(deployment.origin).hostname}`, MAIL_PASSWORD: secrets.LSU_MAIL_PASSWORD || '',
     MAIL_FROM_NAME: 'Last Soul Ultra', MAIL_FROM_ADDRESS: `hello@${new URL(deployment.origin).hostname}`,
+    // The installation's own AI key: every coach's method feedback runs on it (HQ's key for now).
+    ANTHROPIC_API_KEY: secrets.LSU_ANTHROPIC_API_KEY || '',
     COACHING_SPEECH_PROVIDER: 'local', COACHING_SPEECH_PORT: String(deployment.ports.speech),
     COACHING_SPEECH_RUNTIME_DIR: `${shared}/speech`, COACHING_SPEECH_TOKEN_FILE: `${shared}/speech/token`,
     COACHING_SPEECH_URL: `http://127.0.0.1:${deployment.ports.speech}/v1`, COACHING_SPEECH_MODEL: 'whisper-1',
