@@ -25,7 +25,7 @@ If recording is unavailable, use text feedback. A denied microphone permission, 
 
 ## Review the response
 
-Replies come from AI working inside the coach's method, on the coach's own AI key. Until the coach has added one, the feedback screen says the method cannot answer yet and **Send feedback** stays off; message your coach in the meantime.
+Replies come from AI working inside the coach's method, which LSU provides. If the AI is unavailable, the feedback screen says the method cannot answer yet and **Send feedback** stays off; message your coach in the meantime.
 
 AI interprets feedback inside the coach's method. This is not a private session with a human coach, and a voice message does not imply that someone listened to the recording. The method answers with the change it made and the reason for it. There is no approval step: the change is already in your plan when you read the reply. Check the affected future sessions in [Workouts](/training/workouts).
 

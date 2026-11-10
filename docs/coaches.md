@@ -15,7 +15,7 @@ Use [Exercise library](https://lsu.stacksjs.com/coach/exercises) to inspect buil
 
 Open the coaching methods area. Give the method a clear name and a useful public summary. Keep the private instructions precise about training structure, permitted adaptations and the information needed from a runner. Draft changes before publishing.
 
-Runners' feedback is answered by AI working inside your method, on your own AI key. Add an OpenAI or Anthropic key under **Settings → AI Keys**; until you do, the methods page reminds you and runners are told the method cannot answer yet.
+Runners' feedback is answered by AI working inside your method. LSU provides the AI for every coach, so there is nothing to set up. If you would rather it ran on your own OpenAI or Anthropic account, add a key under **Settings → AI Keys**; while that key is active, your method's replies use it and your provider bills you.
 
 A method is the author's approach, not a promise that every runner receives the same week. Do not present demonstration instructions as an approved LSU coach's method.
 
