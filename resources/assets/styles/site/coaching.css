@@ -148,3 +148,7 @@
 
 .training-top .coach-up{color:#b6b6bd;font:600 14px Barlow,system-ui,sans-serif;text-underline-offset:4px}
 @media(max-width:759px){.training-top>span{display:none}}
+/* The storefront is a few tiers and a sign-in card, not a screen of training:
+   the frame takes about a window's height, where its default of 1100px left
+   a long black gap under the last tier. A longer list scrolls inside it. */
+.coaching-surface .coach-panel hq-coaching {--hq-coaching-height:clamp(520px,72svh,720px)}
