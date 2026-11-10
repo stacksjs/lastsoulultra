@@ -56,13 +56,23 @@ it('re-checks an earlier upload without building or uploading again', () => {
 it('holds a deploy that changes the HQ kit while a TestFlight build is in flight', () => {
   // The upload step refuses an app whose kit the backend no longer runs, so a
   // kit moved mid-build costs the whole build (20 and 21 were lost that way).
-  const deploy = readFileSync(new URL('../.github/workflows/deploy.yml', import.meta.url), 'utf8')
-  const hold = deploy.indexOf('Hold a kit change while a TestFlight build is in flight')
-  expect(hold).toBeGreaterThan(deploy.indexOf('- name: Checkout'))
-  expect(hold).toBeLessThan(deploy.indexOf('- name: Setup Bun'))
-  const step = deploy.slice(hold, deploy.indexOf('- name: Setup Bun'))
-  expect(step).toContain('native/hq-source.json')
-  expect(step).toContain('--workflow testflight.yml')
-  // Only a kit change waits: a deploy on the kit already live goes straight through.
-  expect(step).toContain('[ "$pinned" = "$live" ]')
+  // The decision itself is scripts/hold-kit-deploy.ts (tests/hold-kit-deploy.test.ts).
+  const steps = (Bun.YAML.parse(readFileSync(new URL('../.github/workflows/deploy.yml', import.meta.url), 'utf8')) as any).jobs.deploy.steps as any[]
+  const at = (name: string) => steps.findIndex(step => step.name === name)
+  const hold = at('Hold a kit change while a TestFlight build is in flight')
+  expect(hold).toBeGreaterThan(at('Checkout'))
+  // Bun preloads the framework from node_modules (bunfig.toml), so the script
+  // cannot run on a bare checkout.
+  expect(hold).toBeGreaterThan(at('Setup Bun'))
+  expect(hold).toBeGreaterThan(at('Install dependencies'))
+  // Before the kit is installed and long before anything is deployed.
+  expect(hold).toBeLessThan(at('Install the pinned HQ platform kit'))
+  expect(hold).toBeLessThan(at('Deploy'))
+  expect(steps[hold]).toEqual({
+    name: 'Hold a kit change while a TestFlight build is in flight',
+    // Only production runs the backend the app talks to.
+    if: "steps.check.outputs.configured == 'true' && (github.event.inputs.environment || 'production') == 'production'",
+    env: { GH_TOKEN: '${{ github.token }}' },
+    run: 'bun scripts/hold-kit-deploy.ts',
+  })
 })
