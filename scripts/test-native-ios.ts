@@ -102,23 +102,27 @@ function signIn(account: Account) {
   steps.push(...Array.from({ length: 4 }, declineOptionalPrompts).flat(), { command: 'expectid', text: 'today-screen', seconds: 40 }, { command: 'tapif', text: 'Not Now' })
 }
 steps.push({ command: 'launch' }, { command: 'openurl', url: `${product.identity.scheme}:///m/login` }, { command: 'expectid', text: 'login-logo', seconds: 30 }, { command: 'shot', name: 'lsu-sign-in' }, { command: 'tree', name: 'lsu-sign-in' })
-// Verify the released signup against this installation and HQ's real account
-// discovery, without creating a test person or granting any of Chris's data.
+// LSU declines HQ sign-in (enterprise/presets.json sign_in.hq), so neither
+// screen offers "Continue with HQ", and an address that is an HQ account
+// signs up here like any other: straight to a name and an LSU password.
+// Nothing is submitted, so no test person is created and none of Chris's
+// data is touched.
 steps.push(
+  { command: 'absentid', text: 'social-hq' },
   { command: 'tapid', text: 'login-signup' },
   { command: 'expectid', text: 'signup-email', seconds: 30 },
   { command: 'absentid', text: 'signup-name' },
   { command: 'absentid', text: 'signup-password' },
   { command: 'absentid', text: 'signup-role' },
+  { command: 'absentid', text: 'social-hq' },
   { command: 'shot', name: 'lsu-signup-email' },
   { command: 'typeid', id: 'signup-email', text: 'chris@hq.training' },
   { command: 'return' },
-  { command: 'expectid', text: 'social-hq', seconds: 40 },
-  { command: 'absentid', text: 'signup-password' },
-  { command: 'shot', name: 'lsu-signup-hq' },
-  { command: 'tapid', text: 'signup-hq-separate' },
-  { command: 'expectid', text: 'signup-name', seconds: 10 },
+  { command: 'expectid', text: 'signup-name', seconds: 40 },
   { command: 'expectid', text: 'signup-password', seconds: 10 },
+  { command: 'absentid', text: 'signup-hq-title' },
+  { command: 'absentid', text: 'social-hq' },
+  { command: 'shot', name: 'lsu-signup-hq-address' },
   { command: 'tapid', text: 'signup-edit-email' },
   { command: 'expectid', text: 'signup-email', seconds: 10 },
   { command: 'absentid', text: 'signup-password' },
@@ -204,7 +208,7 @@ try {
   const args = ['xcodebuild', '-project', `${projectName}.xcodeproj`, '-scheme', projectName, '-configuration', 'Debug', '-destination', `platform=iOS Simulator,id=${simulator}`, '-derivedDataPath', join(evidence, 'DriverDerivedData'), '-parallel-testing-enabled', 'NO', '-jobs', '2']
   await run([...args, 'build-for-testing'], driver.output)
   await run([...args, '-resultBundlePath', join(evidence, `Acceptance-${Date.now()}.xcresult`), '-collect-test-diagnostics', 'never', 'test-without-building'], driver.output)
-  writeFileSync(join(evidence, 'result.json'), JSON.stringify({ passed: true, version: product.version, build: product.build, hqSource: source.revision, bundle: product.bundleId, artifactSha256, scenarios: ['email-first-signup', 'hq-account-discovery', 'local-account-alternative', 'sign-in', 'five-tabs', 'branded-membership-card', 'calendar', 'hq-places', 'security-setup-and-cancel', 'native-passkey-availability', 'owned-coaching', 'account-switch', 'sign-out'] }, null, 2))
+  writeFileSync(join(evidence, 'result.json'), JSON.stringify({ passed: true, version: product.version, build: product.build, hqSource: source.revision, bundle: product.bundleId, artifactSha256, scenarios: ['email-first-signup', 'no-hq-sign-in', 'hq-address-signs-up-locally', 'sign-in', 'five-tabs', 'branded-membership-card', 'calendar', 'hq-places', 'security-setup-and-cancel', 'native-passkey-availability', 'owned-coaching', 'account-switch', 'sign-out'] }, null, 2))
 }
 catch (error) {
   if (simulator) {
