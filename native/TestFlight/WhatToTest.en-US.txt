@@ -1,0 +1,1 @@
+Same app as build 18, on HQ kit 1.0.4122. This build checks LSU's new one-command release flow; there is nothing new to test.
