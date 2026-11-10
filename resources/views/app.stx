@@ -210,7 +210,7 @@ const canonicalPath = "/app"
       <div><dt>iPhone</dt><dd>On the <a href="{{ appStoreUrl }}" class="accent">App Store</a>, with the session on your Lock Screen while you run.</dd></div>
       <div><dt>Web</dt><dd>The full app in any current browser, and the training panels on <a href="/coaching" class="accent">lastsoulultra.com/coaching</a>.</dd></div>
       <div><dt>Languages</dt><dd>English and German.</dd></div>
-      <div><dt>Sign-in</dt><dd>Email and password, or Continue with HQ if you already train on HQ. Passkeys and authenticator-app codes for extra protection.</dd></div>
+      <div><dt>Sign-in</dt><dd>Your own LSU account, with email and password or a passkey. Add authenticator-app codes for extra protection.</dd></div>
       <div><dt>Your data</dt><dd>Training records are stored in Germany. Download your data as CSV and GPX files, or delete your account, whenever you like.</dd></div>
       <div><dt>Medical</dt><dd>The app gives training information. It is not a medical service.</dd></div>
     </dl>
