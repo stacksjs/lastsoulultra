@@ -12,6 +12,7 @@
 import { existsSync, readdirSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { incrementVersion } from '@stacksjs/bumpx'
+import { AVAILABILITY_STEP, type RunStep, type TestFlightRun } from './testflight-runs'
 
 /** Where the notes ride in the release commit, as Stacks lays them out beside an iOS project. */
 export const NOTES_PROJECT_DIR = 'native'
@@ -105,4 +106,29 @@ export function withPinnedKit(source: string, version: string, bun: string): str
 export function withCraft(source: string, craft: string): string {
   if (!/^\d+\.\d+\.\d+$/.test(craft)) throw new Error(`The kit locks no exact Craft version: "${craft}"`)
   return source.replace(/("(?:craft-native|@craft-native\/ios|@craft-native\/android)": )"\d+\.\d+\.\d+"/g, `$1"${craft}"`)
+}
+
+/**
+ * The newest run that left its build with TestFlight's testers, among the
+ * workflow's runs as GitHub lists them (newest first), or null when none of the
+ * runs looked at did.
+ *
+ * A release commit is not a delivered build: builds 20 and 21 were committed,
+ * tagged and built, and their uploads were refused. Only a run whose last
+ * upload step succeeded (Apple processed the build, the internal groups have
+ * it, What to Test is set) put anything in front of a tester. That is a release
+ * run, an upload started by hand, or a later re-check of a slow upload; a
+ * successful acceptance-only run uploads nothing and is passed over.
+ *
+ * `stepsOf` costs a request to GitHub per run, so only successful runs are
+ * asked about and no more than `lookups` of them.
+ */
+export function lastDelivered<Run extends Pick<TestFlightRun, 'status' | 'conclusion'>>(runs: Run[], stepsOf: (run: Run) => RunStep[], lookups = 6): Run | null {
+  let asked = 0
+  for (const run of runs) {
+    if (run.status !== 'completed' || run.conclusion !== 'success') continue
+    if (asked++ >= lookups) return null
+    if (stepsOf(run).some(step => step.name === AVAILABILITY_STEP && step.conclusion === 'success')) return run
+  }
+  return null
 }

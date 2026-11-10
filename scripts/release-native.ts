@@ -6,8 +6,9 @@
  *   bun run release:minor | release:major | bun scripts/release-native.ts --bump 1.2.0
  *
  * It takes the next build number and writes the tester notes from the
- * conventional commits since the previous release (logsmith's grouping, through
- * Stacks' release notes). bumpx then makes the release itself, as it does for
+ * conventional commits since the last build that reached TestFlight (logsmith's
+ * grouping, through Stacks' release notes). A build whose upload was refused
+ * told testers nothing, so its changes stay in the next notes. bumpx then makes the release itself, as it does for
  * every Stacks package: it moves the release version in package.json
  * (`<version>-build.<n>`), has logsmith write that release's section of
  * CHANGELOG.md, commits `chore(release): v<version>-build.<n>` with it, and
@@ -27,7 +28,8 @@ import { join, resolve } from 'node:path'
 import process from 'node:process'
 import { commitsBetween, fitNotes, NO_VISIBLE_CHANGES, resolveNotes, TESTFLIGHT_NOTES_LIMIT, testerNotes, writeWhatToTest } from '@stacksjs/actions/release-notes'
 import { versionBump } from '@stacksjs/bumpx'
-import { bumpedVersion, DEFAULT_NOTES_LOCALES, nextBuild, NOTES_PROJECT_DIR, RELEASE_COMMIT_PREFIX, releaseTag, withRelease } from './native-release'
+import { bumpedVersion, DEFAULT_NOTES_LOCALES, lastDelivered, nextBuild, NOTES_PROJECT_DIR, RELEASE_COMMIT_PREFIX, releaseTag, withRelease } from './native-release'
+import { RUN_FIELDS, type RunStep, TESTFLIGHT_WORKFLOW, type TestFlightRun } from './testflight-runs'
 
 const root = resolve(import.meta.dir, '..')
 const args = process.argv.slice(2)
@@ -38,7 +40,7 @@ const option = (name: string) => {
   return value
 }
 if (args.includes('--help')) {
-  process.stdout.write('bun run release:build [--dry-run] [--notes "What to test" | --notes-file path] [--no-wait] [--no-push]\nbun scripts/release-native.ts --bump build|patch|minor|major|x.y.z\n\nTester notes are generated from the conventional commits since the previous release unless --notes, --notes-file, RELEASE_NOTES or release.notes in native/product.json says otherwise.\n')
+  process.stdout.write('bun run release:build [--dry-run] [--notes "What to test" | --notes-file path] [--no-wait] [--no-push]\nbun scripts/release-native.ts --bump build|patch|minor|major|x.y.z\n\nTester notes are generated from the conventional commits since the last build that reached TestFlight unless --notes, --notes-file, RELEASE_NOTES or release.notes in native/product.json says otherwise.\n')
   process.exit(0)
 }
 const dryRun = args.includes('--dry-run')
@@ -79,16 +81,52 @@ if (backend.source !== source.revision) {
   throw new Error(`The backend runs HQ ${String(backend.source).slice(0, 9)}, and this app is pinned to kit ${source.version} (${source.revision.slice(0, 9)}). ${pending}, then release.`)
 }
 
-// What testers are told: the commits since the previous release, unless a
-// person said it themselves. The previous release is the commit that last
-// moved the build number, whether this command or a hand made it.
-const previous = git('log', '-1', '--format=%H', '-G', '"build":', '--', 'native/product.json') || undefined
+// What GitHub knows about the TestFlight workflow's runs. One request lists
+// them; a run's steps cost one more, so they are asked for once and only for
+// the few runs a question turns on. Null when gh cannot answer.
+let runs: TestFlightRun[] | null = null
+try { runs = JSON.parse(gh('run', 'list', '--workflow', TESTFLIGHT_WORKFLOW, '--limit', '100', '--json', RUN_FIELDS)) as TestFlightRun[] }
+catch { runs = null }
+const steps = new Map<number, RunStep[]>()
+function stepsOf(run: TestFlightRun): RunStep[] {
+  if (!steps.has(run.databaseId)) steps.set(run.databaseId, JSON.parse(gh('api', `repos/{owner}/{repo}/actions/runs/${run.databaseId}/jobs`, '--jq', '[.jobs[].steps[] | {name, conclusion}]')) as RunStep[])
+  return steps.get(run.databaseId)!
+}
+const known = (sha: string) => {
+  try { return git('cat-file', '-t', sha) === 'commit' }
+  catch { return false }
+}
+/** The commit that last moved the build number, as of a commit: the release that commit belongs to. */
+const releaseAt = (sha: string) => git('log', '-1', '--format=%H', '-G', '"build":', sha, '--', 'native/product.json') || undefined
+// What testers are told: the commits since the last build they were given,
+// unless a person said it themselves. That is not the previous release commit:
+// a build can be committed, tagged and built and still never reach TestFlight
+// (20 and 21 did not), and its notes went nowhere. So the baseline is the
+// build of the newest run that really delivered one. When GitHub cannot say,
+// it is the commit that last moved the build number, whether this command or a
+// hand made it.
+const moved = releaseAt('HEAD')
+let previous = moved
+let baseline = previous ? `${previous.slice(0, 9)}, where the build number last moved` : 'the first commit'
+try {
+  const delivered = runs && lastDelivered(runs.filter(run => known(run.headSha)), stepsOf)
+  const commit = delivered ? releaseAt(delivered.headSha) : undefined
+  if (!delivered || !commit) throw new Error('no run that reached TestFlight')
+  git('merge-base', '--is-ancestor', commit, 'HEAD')
+  const reached = (JSON.parse(git('show', `${commit}:native/product.json`)) as { build: number }).build
+  previous = commit
+  baseline = `build ${reached} (${commit.slice(0, 9)}), the last build that reached TestFlight: ${delivered.url}`
+  if (commit !== moved) say(`Build ${reached} is the last one testers were given; later builds did not reach TestFlight, so their changes are in these notes too.`)
+}
+catch {
+  say(`Warning: GitHub did not say which build last reached TestFlight; writing the notes from the commits since ${baseline}. If that build never reached testers, say what they missed with --notes.`)
+}
 const commits = commitsBetween(root, previous, 'HEAD')
 const config = product.release ?? {}
 const notes = resolveNotes({ cwd: root, flags: { notes: option('--notes'), notesFile: option('--notes-file') }, env: process.env, config, generate: () => testerNotes(commits, { types: config.noteTypes, excludeScopes: config.excludeScopes }) })
 const text = fitNotes(notes.text || NO_VISIBLE_CHANGES, TESTFLIGHT_NOTES_LIMIT)
 const locales = config.locales?.length ? config.locales : DEFAULT_NOTES_LOCALES
-const origin = notes.source === 'generated' ? `${commits.length} commits since ${previous ? previous.slice(0, 9) : 'the first commit'}` : ({ flag: '--notes', env: 'RELEASE_NOTES', config: 'native/product.json release.notes' } as const)[notes.source]
+const origin = notes.source === 'generated' ? `${commits.length} commits since ${baseline}` : ({ flag: '--notes', env: 'RELEASE_NOTES', config: 'native/product.json release.notes' } as const)[notes.source]
 
 say(`Releasing ${tag}${version === product.version ? '' : ` (version ${product.version} → ${version})`} on HQ kit ${source.version}`)
 say(`\nWhat to Test (${origin}):\n\n${text}\n`)

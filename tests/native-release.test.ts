@@ -2,7 +2,8 @@ import { expect, it } from 'bun:test'
 import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
-import { bumpedVersion, committedNotes, nextBuild, pinFromKit, releaseOf, releaseTag, withCraft, withPinnedKit, withRelease } from '../scripts/native-release'
+import { bumpedVersion, committedNotes, lastDelivered, nextBuild, pinFromKit, releaseOf, releaseTag, withCraft, withPinnedKit, withRelease } from '../scripts/native-release'
+import { ACCEPTANCE_STEP, AVAILABILITY_STEP, mayUpload, RUN_TITLES, type RunStep, uploadsInFlight } from '../scripts/testflight-runs'
 
 it('keeps the marketing version for a build and moves it through bumpx otherwise', () => {
   expect(bumpedVersion('1.0.0', 'build')).toBe('1.0.0')
@@ -104,4 +105,76 @@ it('gives the tag\'s GitHub release its section of the changelog', () => {
   const product = JSON.parse(readFileSync(new URL('../native/product.json', import.meta.url), 'utf8'))
   expect(changelog.split('\n').some(line => line.startsWith('[Compare changes]') && line.includes(`...v${product.version}-build.${product.build})`))).toBe(true)
   expect(changelog.match(/^# /gm)).toHaveLength(1)
+})
+
+// The TestFlight workflow's runs on 2026-11-10, newest first, as GitHub listed
+// them and with the steps it reported: builds 20 and 21 were released and
+// built and never uploaded, 19 arrived through a re-check of a slow upload.
+const UPLOAD_STEP = 'Verify, sign and upload the prepared application'
+const steps = (acceptance: string | null, upload: string | null, availability: string | null): RunStep[] => [
+  { name: 'Build the complete native app from the HQ platform kit', conclusion: 'success' },
+  { name: ACCEPTANCE_STEP, conclusion: acceptance },
+  { name: UPLOAD_STEP, conclusion: upload },
+  { name: AVAILABILITY_STEP, conclusion: availability },
+]
+const history = [
+  { id: 'site', build: 22, event: 'workflow_run', status: 'completed', conclusion: 'skipped', steps: [] },
+  { id: 'release 22', build: 22, event: 'workflow_run', status: 'completed', conclusion: 'success', steps: steps('success', 'success', 'success') },
+  { id: 'hold', build: 21, event: 'workflow_run', status: 'completed', conclusion: 'skipped', steps: [] },
+  // Accepted, then refused at upload: the backend had moved to another kit.
+  { id: 'release 21', build: 21, event: 'workflow_run', status: 'completed', conclusion: 'failure', steps: steps('success', 'failure', 'skipped') },
+  { id: 'waiting', build: 20, event: 'workflow_run', status: 'completed', conclusion: 'cancelled', steps: [] },
+  { id: 'by hand 20', build: 20, event: 'workflow_dispatch', status: 'completed', conclusion: 'failure', steps: steps('success', 'failure', 'skipped') },
+  // The kit had removed a row the acceptance script tapped.
+  { id: 'release 20', build: 20, event: 'workflow_run', status: 'completed', conclusion: 'failure', steps: steps('failure', 'skipped', 'skipped') },
+  { id: 're-check 19', build: 19, event: 'workflow_dispatch', status: 'completed', conclusion: 'success', steps: [{ name: 'Fetch the earlier run\'s upload receipt', conclusion: 'success' }, { name: AVAILABILITY_STEP, conclusion: 'success' }] },
+  // Uploaded, and Apple was slower than the run waited.
+  { id: 'release 19', build: 19, event: 'workflow_run', status: 'completed', conclusion: 'failure', steps: steps('success', 'success', 'failure') },
+  { id: 'by hand 18', build: 18, event: 'workflow_dispatch', status: 'completed', conclusion: 'success', steps: steps('success', 'success', 'success') },
+]
+type Past = typeof history[number]
+const stepsOf = (run: Past) => run.steps
+
+it('takes the last build testers were given, not the last one released', () => {
+  expect(lastDelivered(history, stepsOf)?.id).toBe('release 22')
+  // As build 22 was being released: 20 and 21 had reached nobody, so its notes
+  // belonged on top of 19, which a re-check had delivered.
+  expect(lastDelivered(history.slice(2), stepsOf)?.id).toBe('re-check 19')
+  // Before that re-check, 19 was with Apple and its notes were not set.
+  expect(lastDelivered(history.slice(8), stepsOf)?.id).toBe('by hand 18')
+  expect(lastDelivered([], stepsOf)).toBeNull()
+})
+
+it('passes over a successful run that uploaded nothing', () => {
+  const acceptanceOnly = { id: 'acceptance', build: 22, event: 'workflow_dispatch', status: 'completed', conclusion: 'success', steps: steps('success', 'skipped', 'skipped') }
+  const running = { id: 'running', build: 23, event: 'workflow_run', status: 'in_progress', conclusion: '', steps: [] }
+  expect(lastDelivered([running, acceptanceOnly, ...history.slice(2)], stepsOf)?.id).toBe('re-check 19')
+})
+
+it('asks GitHub about successful runs only, and about few of them', () => {
+  const asked: string[] = []
+  const counting = (run: Past) => {
+    asked.push(run.id)
+    return run.steps
+  }
+  expect(lastDelivered(history.slice(2), counting)?.id).toBe('re-check 19')
+  expect(asked).toEqual(['re-check 19'])
+  // Nothing found within the allowance is "cannot tell", never a guess.
+  const acceptanceOnly = { ...history[1]!, steps: steps('success', 'skipped', 'skipped') }
+  asked.length = 0
+  expect(lastDelivered([acceptanceOnly, acceptanceOnly, acceptanceOnly, ...history], counting, 2)).toBeNull()
+  expect(asked).toHaveLength(2)
+})
+
+it('knows which runs can still upload a build', () => {
+  expect(mayUpload({ displayTitle: RUN_TITLES.release })).toBe(true)
+  expect(mayUpload({ displayTitle: RUN_TITLES.upload })).toBe(true)
+  expect(mayUpload({ displayTitle: RUN_TITLES.acceptance })).toBe(false)
+  expect(mayUpload({ displayTitle: `${RUN_TITLES.recheck}42860894504` })).toBe(false)
+  const runs = [
+    { status: 'in_progress', displayTitle: RUN_TITLES.acceptance },
+    { status: 'queued', displayTitle: RUN_TITLES.release },
+    { status: 'completed', displayTitle: RUN_TITLES.upload },
+  ]
+  expect(uploadsInFlight(runs)).toEqual([runs[1]!])
 })
