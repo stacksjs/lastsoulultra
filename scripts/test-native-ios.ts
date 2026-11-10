@@ -155,7 +155,8 @@ steps.splice(securityShot + 1, 0,
   { command: 'absentid', text: 'security-factor-secret' }, { command: 'expectid', text: 'security-passkey-add', seconds: 30 },
   { command: 'shot', name: 'lsu-security' })
 const meShot = steps.findIndex(step => step.command === 'shot' && step.name === 'lsu-me')
-steps.splice(meShot + 1, 0, { command: 'scrollto', text: 'me-membership-card' }, { command: 'tapid', text: 'me-membership-card' }, { command: 'expectid', text: 'membership-card-id', seconds: 30 }, { command: 'expect', text: 'LSU-' }, { command: 'expect', text: runner.name }, { command: 'shot', name: 'lsu-membership-card' }, { command: 'back' })
+// LSU serves coaches and athletes only, so from HQ kit 1.0.4135 Me has no gym or membership-card row.
+steps.splice(meShot + 1, 0, { command: 'absentid', text: 'me-membership-card' })
 const coachingOpen = steps.findIndex(step => step.command === 'tapid' && step.text === 'me-coaching-accounts')
 steps.splice(coachingOpen + 1, 0, { command: 'shot', name: 'lsu-coaching-opened' }, { command: 'tree', name: 'lsu-coaching-opened' })
 const coachingReady = steps.findIndex(step => step.command === 'expectid' && step.text === 'coaching-accounts')
@@ -208,7 +209,7 @@ try {
   const args = ['xcodebuild', '-project', `${projectName}.xcodeproj`, '-scheme', projectName, '-configuration', 'Debug', '-destination', `platform=iOS Simulator,id=${simulator}`, '-derivedDataPath', join(evidence, 'DriverDerivedData'), '-parallel-testing-enabled', 'NO', '-jobs', '2']
   await run([...args, 'build-for-testing'], driver.output)
   await run([...args, '-resultBundlePath', join(evidence, `Acceptance-${Date.now()}.xcresult`), '-collect-test-diagnostics', 'never', 'test-without-building'], driver.output)
-  writeFileSync(join(evidence, 'result.json'), JSON.stringify({ passed: true, version: product.version, build: product.build, hqSource: source.revision, bundle: product.bundleId, artifactSha256, scenarios: ['email-first-signup', 'no-hq-sign-in', 'hq-address-signs-up-locally', 'sign-in', 'five-tabs', 'branded-membership-card', 'calendar', 'hq-places', 'security-setup-and-cancel', 'native-passkey-availability', 'owned-coaching', 'account-switch', 'sign-out'] }, null, 2))
+  writeFileSync(join(evidence, 'result.json'), JSON.stringify({ passed: true, version: product.version, build: product.build, hqSource: source.revision, bundle: product.bundleId, artifactSha256, scenarios: ['email-first-signup', 'no-hq-sign-in', 'hq-address-signs-up-locally', 'sign-in', 'five-tabs', 'no-membership-card-row', 'calendar', 'hq-places', 'security-setup-and-cancel', 'native-passkey-availability', 'owned-coaching', 'account-switch', 'sign-out'] }, null, 2))
 }
 catch (error) {
   if (simulator) {
