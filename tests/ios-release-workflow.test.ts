@@ -38,3 +38,17 @@ it('keeps the native build free of signing and production credentials', () => {
   expect(artifacts).not.toContain('.p8')
   expect(artifacts).not.toContain('.p12')
 })
+
+it('re-checks an earlier upload without building or uploading again', () => {
+  const workflow = Bun.YAML.parse(readFileSync(new URL('../.github/workflows/testflight.yml', import.meta.url), 'utf8')) as any
+  expect(workflow.jobs.release.if).toContain("github.event_name == 'workflow_dispatch' && inputs.verify_run == ''")
+  const job = workflow.jobs.verify
+  expect(job.if).toBe("github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch' && inputs.verify_run != ''")
+  expect(job.environment).toBe('ios-testflight')
+  expect(job.permissions).toEqual({ contents: 'read', actions: 'read' })
+  const runs = job.steps.map((step: any) => step.run || '')
+  expect(runs.some((run: string) => /native:ios|native:testflight|build-native-simulator/.test(run))).toBe(false)
+  expect(runs).toContain('bun scripts/verify-native-testflight.ts --receipts storage/native/verify-download')
+  expect(job.steps.find((step: any) => step.uses?.startsWith('actions/download-artifact@')).with['run-id']).toBe('${{ inputs.verify_run }}')
+  expect(job.steps.at(-1)).toMatchObject({ run: 'bun scripts/ios-ci-signing.ts cleanup', if: 'always()' })
+})

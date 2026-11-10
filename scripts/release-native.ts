@@ -155,5 +155,5 @@ if (!upload) {
     await Bun.sleep(30_000)
   }
 }
-if (upload!.conclusion !== 'success') throw new Error(`TestFlight ended ${upload!.conclusion} for ${tag}: ${upload!.url}. The build number is taken; fix the cause on main and rerun the workflow, or release the next build.`)
+if (upload!.conclusion !== 'success') throw new Error(`TestFlight ended ${upload!.conclusion} for ${tag}: ${upload!.url}. If the upload itself succeeded and only Apple's processing was slow, re-check it without uploading again: \`gh workflow run testflight.yml --ref main -f verify_run=${upload!.url.split('/').at(-1)}\`. Otherwise the build number is taken: fix the cause on main and release the next build.`)
 say(`${tag} is on TestFlight and available to its internal testers: ${upload!.url}`)

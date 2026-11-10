@@ -19,6 +19,10 @@ on:
         description: Upload to TestFlight after downloaded-app acceptance passes
         type: boolean
         default: true
+      verify_run:
+        description: Only re-check TestFlight for the upload of this earlier run (its run id); nothing is built or uploaded
+        type: string
+        default: ''
 
 permissions:
   contents: read
@@ -32,7 +36,7 @@ jobs:
     # Both events run on main: the signing environment admits no other branch.
     if: >-
       github.ref == 'refs/heads/main' && (
-        github.event_name == 'workflow_dispatch' || (
+        (github.event_name == 'workflow_dispatch' && inputs.verify_run == '') || (
           github.event.workflow_run.conclusion == 'success' &&
           startsWith(github.event.workflow_run.head_commit.message, 'chore(release): v')
         )
@@ -148,3 +152,71 @@ jobs:
             storage/native/release/*/testflight.json
             storage/framework/mobile/ios/lsu-source.json
             storage/native/bundled-login-report.json
+
+  # Apple accepts an upload and lists the build when it has processed it, which
+  # is usually minutes and sometimes longer than the release run waits. The
+  # binary is with Apple by then and its build number is spent, so the answer is
+  # to ask again, never to upload again: this takes the earlier run's upload
+  # receipt and finishes what that run could not (processing, the internal
+  # groups, What to Test).
+  verify:
+    if: github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch' && inputs.verify_run != ''
+    runs-on: xcode-27
+    timeout-minutes: 75
+    environment: ios-testflight
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Setup Pantry
+        uses: pantry-pm/pantry/packages/action@624cd6674f8c5c2d4e4204c11ece62a00d7fac0a
+        with:
+          version: '0.11.184'
+          install: 'false'
+
+      - name: Setup the pinned Bun runtime
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: '1.4.4'
+
+      - name: Install the frozen application dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Install the pinned HQ platform kit
+        env:
+          PANTRY_REGISTRY_TOKEN: ${{ secrets.PANTRY_REGISTRY_TOKEN }}
+        run: pantry ci
+
+      # The App Store Connect client is the kit's own; nothing is compiled.
+      - name: Prepare the kit's tools
+        run: bun run native:prepare
+
+      - name: Fetch the earlier run's upload receipt
+        uses: actions/download-artifact@v7
+        with:
+          run-id: ${{ inputs.verify_run }}
+          github-token: ${{ github.token }}
+          pattern: lsu-ios-*
+          merge-multiple: true
+          path: storage/native/verify-download
+
+      - name: Prepare the App Store Connect credential
+        env:
+          LSU_IOS_DISTRIBUTION_P12_BASE64: ${{ secrets.LSU_IOS_DISTRIBUTION_P12_BASE64 }}
+          LSU_IOS_DISTRIBUTION_PASSWORD: ${{ secrets.LSU_IOS_DISTRIBUTION_PASSWORD }}
+          LSU_ASC_PRIVATE_KEY_BASE64: ${{ secrets.LSU_ASC_PRIVATE_KEY_BASE64 }}
+          LSU_ASC_KEY_ID: ${{ secrets.LSU_ASC_KEY_ID }}
+          LSU_ASC_ISSUER_ID: ${{ secrets.LSU_ASC_ISSUER_ID }}
+        run: bun scripts/ios-ci-signing.ts stage
+
+      - name: Verify TestFlight processing and internal availability
+        run: bun scripts/verify-native-testflight.ts --receipts storage/native/verify-download
+
+      - name: Remove signing files and temporary keychain
+        if: always()
+        run: bun scripts/ios-ci-signing.ts cleanup

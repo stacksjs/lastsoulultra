@@ -1,18 +1,34 @@
 /** Confirm Apple's processing result using the release runner's existing upload credential. */
+import { existsSync, mkdirSync, readdirSync } from 'node:fs'
 import { createRequire } from 'node:module'
-import { join } from 'node:path'
+import { join, resolve } from 'node:path'
 import { pathToFileURL } from 'node:url'
 import product from '../native/product.json'
 import { readIosUploadReceipt } from './ios-release-provenance'
 import { committedNotes } from './native-release'
 import { root, sourceRoot } from './native-source'
 
+/** `<release>/upload.json` anywhere under an unpacked artifact. */
+function findReceipt(folder: string, release: string): string | null {
+  if (!existsSync(folder)) return null
+  for (const entry of readdirSync(folder, { recursive: true }) as string[]) {
+    if (entry.replaceAll('\\', '/').endsWith(`${release}/upload.json`)) return join(folder, entry)
+  }
+  return null
+}
+
 const require = createRequire(join(sourceRoot, 'package.json'))
 const { AppStoreConnect, appStoreConnectCredentials } = await import(pathToFileURL(require.resolve('@stacksjs/buddy/app-store-connect')).href)
 const credentials = appStoreConnectCredentials()
 if (!credentials) throw new Error('TestFlight verification requires the existing App Store Connect upload credential')
 const directory = join(root, 'storage/native/release', `${product.version}-${product.build}`)
-const upload = readIosUploadReceipt(await Bun.file(join(directory, 'upload.json')).json())
+// A later run re-checking an earlier upload (`--receipts <folder>`) reads that
+// run's saved receipt, wherever its artifact unpacked it.
+const receipts = process.argv.indexOf('--receipts')
+const receiptPath = receipts === -1 ? join(directory, 'upload.json') : findReceipt(resolve(root, process.argv[receipts + 1] || ''), `${product.version}-${product.build}`)
+if (!receiptPath) throw new Error(`That run saved no upload receipt for ${product.version} (${product.build}); it did not upload this release`)
+mkdirSync(directory, { recursive: true })
+const upload = readIosUploadReceipt(await Bun.file(receiptPath).json())
 if (upload.app !== product.bundleId || upload.version !== product.version || upload.build !== product.build)
   throw new Error('The upload receipt does not match this release')
 const notes = committedNotes(root)
@@ -20,7 +36,8 @@ const api = await AppStoreConnect.connect(credentials)
 const app = await api.appId(product.bundleId)
 const groupNames = (product as { testFlightGroups?: string[] }).testFlightGroups ?? []
 const groups = await api.internalTestFlightGroups(app, groupNames)
-const deadline = Date.now() + 20 * 60_000
+// Apple usually lists a build within minutes; 20 was not always enough.
+const deadline = Date.now() + 40 * 60_000
 let previous = ''
 let appliedBuild = ''
 while (Date.now() < deadline) {
@@ -50,4 +67,4 @@ while (Date.now() < deadline) {
   previous = state
   await Bun.sleep(15_000)
 }
-throw new Error('Apple has not made this build ready for TestFlight yet; rerun verification without uploading another binary')
+throw new Error('Apple has not made this build ready for TestFlight yet. The upload is with Apple, so do not upload again: re-check it with `gh workflow run testflight.yml --ref main -f verify_run=<this run id>`')
