@@ -1,5 +1,3 @@
 Fixes
-- Size the store panel to its tiers, without the long gap under them (site)
-- Pin HQ platform kit 1.0.4155 for evenly spaced sign-in buttons and one-form sign-up (training)
-- Line the app page's closing panels up with the page edge (site)
-- Send every page that needs an account to the training app, and stop repeating the storefront on the coaching page (site)
+- Hold a kit change while a TestFlight build is in flight, so the build can still upload (deploy)
+- Pin HQ platform kit 1.0.4157 for a store that shows its tiers first, with their icons (training)

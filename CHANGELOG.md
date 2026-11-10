@@ -1,5 +1,16 @@
 # Stacks Changelog
 
+[Compare changes](https://github.com/stacksjs/lastsoulultra/compare/v1.0.0-build.21...v1.0.0-build.22)
+
+## 🐛 Bug Fixes
+
+- **deploy**: hold a kit change while a TestFlight build is in flight, so the build can still upload ([200d804](https://github.com/stacksjs/lastsoulultra/commit/200d804)) _(by Chris Breuer)_
+- **training**: pin HQ platform kit 1.0.4157 for a store that shows its tiers first, with their icons ([44162e1](https://github.com/stacksjs/lastsoulultra/commit/44162e1)) _(by Chris Breuer)_
+
+## Contributors
+
+- _Chris Breuer_
+
 [Compare changes](https://github.com/stacksjs/lastsoulultra/compare/v1.0.0-build.20...v1.0.0-build.21)
 
 ## 🐛 Bug Fixes
