@@ -60,7 +60,7 @@ const canonicalPath = "/app"
           <div><dt>THU</dt><dd><del>Hill repeats, 10 × 60 s</del><ins>Easy run, 40 min</ins></dd></div>
           <div><dt>SAT</dt><dd><del>Long run, 28 km</del><ins>Long run, 25 km</ins></dd></div>
         </dl>
-        <div class="app-note-foot" aria-hidden="true"><span><b>2</b> of 9 skipped, load eased</span><span>Coach approved</span></div>
+        <div class="app-note-foot" aria-hidden="true"><span><b>2</b> of 9 skipped</span><span>Coach approved</span></div>
       </div>
       <figcaption class="app-caption">An example of the kind of change a block brings. The coach has the last word on every one.</figcaption>
     </figure>
