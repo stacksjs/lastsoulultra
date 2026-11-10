@@ -57,7 +57,7 @@ export const coachingModules: CoachingModule[] = [
     slug: 'feedback',
     label: 'Say how it felt',
     title: 'Say how it felt',
-    summary: 'Record a voice message after a session. You read the transcript back and send it yourself; next week moves inside the method.',
+    summary: 'Talk or type about a session. You read the transcript back before you send it, and the AI coach explains what your data shows.',
     scope: 'athlete',
   },
   {

@@ -1,13 +1,10 @@
 @extends('layouts/LSU')
 @section('content')
 <script server>
-import { appStoreUrl, appTiers, playStoreUrl } from '~/resources/data/app-stores'
+import { appStoreUrl, appTiers } from '~/resources/data/app-stores'
 import { productionPages } from '~/resources/data/production-pages'
 const currentPage = productionPages["/app"]
 const canonicalPath = "/app"
-// The voice note's waveform: fixed heights, so the example renders the same
-// for everyone and costs no script.
-const wave = [28, 46, 70, 52, 88, 64, 40, 76, 96, 58, 34, 62, 84, 48, 72, 100, 66, 38, 54, 80, 60, 30, 44, 68, 90, 56, 36, 50, 74, 42, 24, 58, 82, 46, 32, 20]
 </script>
 <div class="app-page">
 
@@ -15,10 +12,10 @@ const wave = [28, 46, 70, 52, 88, 64, 40, 76, 96, 58, 34, 62, 84, 48, 72, 100, 6
   <div class="app-hero-copy">
     <span class="kicker">The Last Soul Ultra app</span>
     <h1>Train for<br><span class="accent">the next start.</span></h1>
-    <p>Running and strength from a coach's method. Tell it how a session felt and next week changes.</p>
+    <p>Running and strength from a coach's method, two weeks at a time. How your sessions went shapes the next block, and an LSU coach approves every one.</p>
     <div class="app-actions">
       <a class="btn btn-lg" href="{{ appStoreUrl }}">Download on the App Store</a>
-      <a class="btn-outline" href="{{ playStoreUrl }}">Get it on Google Play</a>
+      <a class="btn-outline" href="/coaching/calendar">Open it on the web</a>
     </div>
   </div>
   <figure class="app-hero-shot">
@@ -30,48 +27,72 @@ const wave = [28, 46, 70, 52, 88, 64, 40, 76, 96, 58, 34, 62, 84, 48, 72, 100, 6
   <div class="app-feel app-shell">
     <div>
       <div class="app-head">
-        <h2 class="h2-sm">Say how it felt.<br><span class="accent">The plan changes.</span></h2>
-        <p>After a session, talk for up to five minutes. You check what it heard, then the app rewrites the sessions you have not done yet, inside the coach's rules.</p>
+        <h2 class="h2-sm">How it went<br><span class="accent">shapes the next block.</span></h2>
+        <p>Your training arrives two weeks at a time. What you log in this block decides the next one, and a coach reads it before anything reaches your calendar.</p>
       </div>
       <ol class="app-steps">
         <li>
           <div>
-            <h3>Record</h3>
-            <p>Say it the way you would say it to a friend: heavy legs, a bad night, a week that fell apart. The note is transcribed on our own server in Germany and the audio is not kept.</p>
+            <h3>Train</h3>
+            <p>Two weeks of sessions from the method your tier is built on. Today opens first, and the calendar shows the block you are in and the weeks behind it.</p>
           </div>
         </li>
         <li>
           <div>
-            <h3>Check</h3>
-            <p>The transcript comes back to you first. Fix anything it misheard, then send it. Nothing changes until you do, and an unsent transcript is deleted after 24 hours.</p>
+            <h3>Log</h3>
+            <p>Mark each session done or skipped, rate the effort out of ten and how it felt, and leave a note on it: heavy legs, a bad night, a week that fell apart.</p>
           </div>
         </li>
         <li>
           <div>
-            <h3>Adapt</h3>
-            <p>The AI reads your note alongside your calendar, zones, races and training load, plus sleep, resting heart rate and HRV if you share them. It only touches sessions you have not done, and every change can be undone.</p>
+            <h3>Next block</h3>
+            <p>The app drafts your next two weeks from the plan and from how the last two went. Skipped sessions and hard weeks ease the load, an easy block builds on it. An LSU coach reads the draft, changes what they want and approves it.</p>
           </div>
         </li>
       </ol>
     </div>
     <figure class="app-note-wrap" style="margin:0">
-      <div class="app-note" role="img" aria-label="Example: a runner's voice note about heavy legs and a busy week, and the three changes it makes to next week's sessions.">
-        <div class="app-note-head" aria-hidden="true"><span>Voice note · 0:42</span><span>Sent</span></div>
-        <div class="app-wave" aria-hidden="true">
-          @foreach(wave as height)
-          <i style="height:{{ height }}%"></i>
-          @endforeach
-        </div>
-        <blockquote aria-hidden="true">"Legs were heavy from the first kilometre. Work is mad this week, I've only really got Tuesday evening and Saturday."</blockquote>
+      <div class="app-note" role="img" aria-label="Example: a runner's note on a session about heavy legs and a busy fortnight, and the changes it brings to the next block.">
+        <div class="app-note-head" aria-hidden="true"><span>Next block · 14 days</span><span>Approved</span></div>
+        <blockquote aria-hidden="true">"Legs were heavy from the first kilometre. Work is mad this fortnight, I've only really got Tuesday evening and Saturday."</blockquote>
         <dl class="app-diff" aria-hidden="true">
-          <div><dt>TUE</dt><dd><del>Intervals, 6 × 800 m</del><ins>Easy run, 50 min</ins></dd></div>
-          <div><dt>THU</dt><dd><del>Hill repeats, 10 × 60 s</del><ins>Rest day</ins></dd></div>
-          <div><dt>SAT</dt><dd><del>Long run, 28 km</del><ins>Long run, 24 km, last 5 km steady</ins></dd></div>
+          <div><dt>TUE</dt><dd><del>Intervals, 6 × 800 m</del><ins>Intervals, 5 × 800 m</ins></dd></div>
+          <div><dt>THU</dt><dd><del>Hill repeats, 10 × 60 s</del><ins>Easy run, 40 min</ins></dd></div>
+          <div><dt>SAT</dt><dd><del>Long run, 28 km</del><ins>Long run, 25 km</ins></dd></div>
         </dl>
-        <div class="app-note-foot" aria-hidden="true"><span><b>3</b> sessions changed</span><span>Undo</span></div>
+        <div class="app-note-foot" aria-hidden="true"><span><b>2</b> of 9 skipped, load eased</span><span>Coach approved</span></div>
       </div>
-      <figcaption class="app-caption">An example of the kind of change it makes. Every change stays inside the method the coach wrote.</figcaption>
+      <figcaption class="app-caption">An example of the kind of change a block brings. The coach has the last word on every one.</figcaption>
     </figure>
+  </div>
+</section>
+
+<section id="ai-coach" class="app-section">
+  <div class="app-shell">
+    <div class="app-head">
+      <h2 class="h2-sm">An AI coach<br><span class="accent">that explains.</span></h2>
+      <p>Ask it about a session, a bad week or a night of poor sleep, by typing or by talking. It reads your training and tells you what it sees. Your coach decides the training.</p>
+    </div>
+    <ol class="app-steps">
+      <li>
+        <div>
+          <h3>Talk</h3>
+          <p>Speak for up to five minutes. The note is transcribed on our own server in Germany and the audio is not kept.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <h3>Check</h3>
+          <p>The transcript comes back to you first. Fix anything it misheard, then send it. An unsent transcript is deleted after 24 hours.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <h3>Understand</h3>
+          <p>It reads your sessions, effort and training load, plus sleep, resting heart rate and HRV if you share them, and explains the patterns. It cannot add or change sessions. That stays with your coach.</p>
+        </div>
+      </li>
+    </ol>
   </div>
 </section>
 
@@ -79,13 +100,13 @@ const wave = [28, 46, 70, 52, 88, 64, 40, 76, 96, 58, 34, 62, 84, 48, 72, 100, 6
   <div class="app-shell">
     <div class="app-head">
       <h2 class="h2-sm">The whole week<br><span class="accent">in one place.</span></h2>
-      <p>Sessions, recording, recovery and the numbers that show whether it is working, on your phone and in the browser.</p>
+      <p>Sessions, recording, recovery and the numbers that show whether it is working, on your iPhone and in the browser.</p>
     </div>
     <div class="app-bento">
       <article class="app-cell app-cell-photo">
         <img src="/assets/lsu/images/recap-12-810.webp" srcset="/assets/lsu/images/recap-12-540.webp 540w, /assets/lsu/images/recap-12-810.webp 810w, /assets/lsu/images/recap-12-1080.webp 1080w" sizes="(min-width: 1080px) 46vw, (min-width: 640px) 92vw, 100vw" alt="A runner in a green hi-vis vest and head torch, lit blue." width="1080" height="1440" loading="lazy" decoding="async">
         <h3>A workout player that keeps up</h3>
-        <p>Voice cues for every step. It records your GPS route with the screen locked, reads a Bluetooth heart-rate strap and shows the session on your iPhone Lock Screen.</p>
+        <p>Voice cues for every step and what is up next. It records your GPS route with the screen locked, reads a Bluetooth heart-rate strap and shows the session on your iPhone Lock Screen.</p>
       </article>
       <article class="app-cell app-cell-card app-cell-wide">
         <div class="app-readouts" aria-hidden="true">
@@ -98,23 +119,23 @@ const wave = [28, 46, 70, 52, 88, 64, 40, 76, 96, 58, 34, 62, 84, 48, 72, 100, 6
       </article>
       <article class="app-cell">
         <h3>Today and the calendar</h3>
-        <p>Today's sessions open first. The calendar shows twelve weeks back and twelve ahead, so you always see the block you are in.</p>
+        <p>Today opens with the day's sessions and a recovery card from whatever you wear. The calendar shows the block you are in, and every session says who put it there.</p>
       </article>
       <article class="app-cell">
-        <h3>Strength that sticks</h3>
-        <p>Tick off sets as you go, with a video for every exercise. Strength sits in the same week as your running.</p>
+        <h3>Strength and breath</h3>
+        <p>Tick off sets as you go, with a video for every exercise. Breathwork sessions come with a pacer that breathes with you.</p>
       </article>
       <article class="app-cell app-cell-red">
         <h3>Works offline</h3>
-        <p>Upcoming sessions and exercise videos are saved on your phone. Train with no signal and your results sync when you are back.</p>
+        <p>Upcoming sessions are saved on your phone. Train with no signal and your results sync when you are back.</p>
       </article>
       <article class="app-cell">
         <h3>Health and recovery</h3>
-        <p>Apple Health, Health Connect and Garmin bring in sleep, resting heart rate and HRV, when you choose to share them.</p>
+        <p>Apple Health and Garmin bring in sleep, resting heart rate and HRV, when you choose to share them.</p>
       </article>
       <article class="app-cell">
-        <h3>Messages</h3>
-        <p>Send questions about the method to its coach, and talk through any single session in its own thread.</p>
+        <h3>A note on every session</h3>
+        <p>Every session has its own thread. What you write there goes to your coach with your next block.</p>
       </article>
       <article class="app-cell">
         <h3>A link for your crew</h3>
@@ -160,9 +181,10 @@ const wave = [28, 46, 70, 52, 88, 64, 40, 76, 96, 58, 34, 62, 84, 48, 72, 100, 6
       <div class="app-head">
         <span class="kicker">For coaches</span>
         <h2 class="h2-sm">Your method,<br><span class="accent">under your name.</span></h2>
-        <p>Write down how you coach once. The app turns it into weeks for every runner on your tier and keeps adjusting them, using your rules and nobody else's.</p>
+        <p>Write down how you coach once. The app drafts every runner's next two weeks from it and from how their last two went, and nothing reaches them until you approve it.</p>
       </div>
       <ul class="app-list">
+        <li><b>Block reviews.</b> See how a runner's last block went, session by session, then edit, approve or send back the next one.</li>
         <li><b>Methods with history.</b> A public summary runners see, a private methodology only the AI reads, and every edit kept as a version.</li>
         <li><b>Tiers you set.</b> Running, strength or both, published to the app and to the coaching page on this site.</li>
         <li><b>Builders for the work.</b> A plan library, a workout builder and an AI plan builder that drafts a plan from a brief for you to edit.</li>
@@ -186,11 +208,10 @@ const wave = [28, 46, 70, 52, 88, 64, 40, 76, 96, 58, 34, 62, 84, 48, 72, 100, 6
     </div>
     <dl class="app-spec">
       <div><dt>iPhone</dt><dd>On the <a href="{{ appStoreUrl }}" class="accent">App Store</a>, with the session on your Lock Screen while you run.</dd></div>
-      <div><dt>Android</dt><dd>On <a href="{{ playStoreUrl }}" class="accent">Google Play</a>, with Health Connect for your recovery data.</dd></div>
       <div><dt>Web</dt><dd>The full app in any current browser, and the training panels on <a href="/coaching" class="accent">lastsoulultra.com/coaching</a>.</dd></div>
       <div><dt>Languages</dt><dd>English and German.</dd></div>
-      <div><dt>Sign-in</dt><dd>Email and password or Sign in with Apple, with passkeys and authenticator-app codes for extra protection.</dd></div>
-      <div><dt>Your data</dt><dd>Training records are stored in Germany. Export everything or delete your account whenever you like.</dd></div>
+      <div><dt>Sign-in</dt><dd>Email and password, or Continue with HQ if you already train on HQ. Passkeys and authenticator-app codes for extra protection.</dd></div>
+      <div><dt>Your data</dt><dd>Training records are stored in Germany. Download your data as CSV and GPX files, or delete your account, whenever you like.</dd></div>
       <div><dt>Medical</dt><dd>The app gives training information. It is not a medical service.</dd></div>
     </dl>
   </div>
@@ -203,16 +224,20 @@ const wave = [28, 46, 70, 52, 88, 64, 40, 76, 96, 58, 34, 62, 84, 48, 72, 100, 6
     </div>
     <div class="app-faq">
       <details>
-        <summary>Does a coach listen to my voice notes?</summary>
-        <p>Nobody listens to them. An AI adapts your plan inside rules a coach wrote. If you want one-to-one coaching, contact the coach directly.</p>
+        <summary>Does a coach see what I log?</summary>
+        <p>Yes. Whether you did each session, your effort, how it felt and your notes on it go to the LSU coach who reviews your next block. Your conversations with the AI coach stay between you and it. For one-to-one coaching, contact a coach directly.</p>
       </details>
       <details>
         <summary>What does it cost?</summary>
         <p>LSU Running is €19.99 a month and LSU Running + Strength is €29.99 a month, tax included. Subscribe in the app or on the <a href="/coaching#training">coaching page</a>, and cancel or resume from the Me tab.</p>
       </details>
       <details>
-        <summary>Which sessions can it change?</summary>
-        <p>Only sessions you have not done yet, in the subscription you sent the note from. Finished sessions and your history stay as they are, and every change has an undo.</p>
+        <summary>How often does my training change?</summary>
+        <p>Every two weeks. The next block is drafted from your plan and how the last one went, and it reaches your calendar once a coach approves it. Sessions you have done and your history stay as they are.</p>
+      </details>
+      <details>
+        <summary>Can the AI coach change my plan?</summary>
+        <p>No. It reads your sessions and, if you share them, your sleep and heart data, and explains what they show. Only your coach changes your training.</p>
       </details>
       <details>
         <summary>Do I need a watch?</summary>
@@ -229,16 +254,15 @@ const wave = [28, 46, 70, 52, 88, 64, 40, 76, 96, 58, 34, 62, 84, 48, 72, 100, 6
 <section id="download" class="app-doors">
   <div class="app-door">
     <h2>Running the<br><span class="accent">next block?</span></h2>
-    <p>Download the app, pick a tier and send your first voice note after your first session.</p>
+    <p>Download the app and pick a tier. Your first two weeks arrive once a coach has approved them.</p>
     <div class="app-actions">
       <a class="btn btn-lg" href="{{ appStoreUrl }}">App Store</a>
-      <a class="btn btn-lg" href="{{ playStoreUrl }}">Google Play</a>
     </div>
     <a class="app-textlink" href="/coaching/calendar">Already training? Sign in on the web <span aria-hidden="true">→</span></a>
   </div>
   <div class="app-door">
     <h2>Coaching<br><span class="accent">runners?</span></h2>
-    <p>Bring your method to the app and earn from every runner who trains with it.</p>
+    <p>Bring your method to the app, approve every runner's blocks and earn from each one who trains with it.</p>
     <a class="btn-outline" href="/app/coaches">Bring your method</a>
   </div>
 </section>

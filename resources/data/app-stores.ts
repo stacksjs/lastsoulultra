@@ -24,7 +24,7 @@ export const playStoreUrl = listing(process.env.LSU_PLAY_STORE_URL, `https://pla
 
 /** The tiers a runner can subscribe to, as published in the app's store. */
 export const appTiers = [
-  { name: 'LSU Running', price: '€19.99', includes: 'Running sessions from the method, voice-note adaptation, the workout player, progress and recovery.' },
+  { name: 'LSU Running', price: '€19.99', includes: 'Running sessions from the method in coach-approved two-week blocks, the AI coach, the workout player, progress and recovery.' },
   { name: 'LSU Running + Strength', price: '€29.99', includes: 'Everything in Running, plus strength sessions with a video for every exercise, planned into the same week.' },
 ] as const
 

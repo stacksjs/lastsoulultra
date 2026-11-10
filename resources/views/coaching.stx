@@ -17,7 +17,7 @@ import { coachingOrigin, loadBrand } from '~/resources/functions/coaching-source
    and no reason to load a remote script to frame a 404. */
 const hubBrand = await loadBrand()
 const hubLive = (hubBrand?.modules.length ?? 0) > 0
-const currentPage = { title: 'Coaching - Last Soul Ultra', description: 'Send a voice message after your run and an AI rebuilds next week around what you said, inside a coach\'s method.', styles: coachingHubStyles, ...(hubLive ? { preconnect: [coachingOrigin()] } : {}) }
+const currentPage = { title: 'Coaching - Last Soul Ultra', description: 'Training from a coach\'s method, two weeks at a time. How your sessions went shapes the next block, and an LSU coach approves every one.', styles: coachingHubStyles, ...(hubLive ? { preconnect: [coachingOrigin()] } : {}) }
 const canonicalPath = '/coaching'
 </script>
 <div class="coaching-page">
@@ -25,8 +25,8 @@ const canonicalPath = '/coaching'
 <section class="coaching-hero">
   <div class="coaching-hero-copy">
     <span class="kicker">Last Soul Ultra / Coaching</span>
-    <h1>Say how it felt.<br><span class="accent">The plan changes.</span></h1>
-    <p>Send a voice message after your run. An AI rebuilds next week around what you said, inside a coach's method.</p>
+    <h1>Say how it went.<br><span class="accent">The next block follows.</span></h1>
+    <p>Log each session and say how it felt. Your next two weeks are drafted from it, inside a coach's method, and an LSU coach approves them.</p>
     @if(hubLive)
     <a class="btn btn-lg" href="#training">Open the portal</a>
     @else
@@ -41,28 +41,28 @@ const canonicalPath = '/coaching'
 <div class="coaching-body">
   <section id="how">
     <div class="coaching-head">
-      <h2 class="h2-sm">A plan you talk to.<br><span class="accent">Not one you print.</span></h2>
-      <p>A finished twelve-week plan is done the day you buy it. This one gets rewritten every week by what you tell it.</p>
+      <h2 class="h2-sm">A plan that listens.<br><span class="accent">Not one you print.</span></h2>
+      <p>A finished twelve-week plan is done the day you buy it. This one is written two weeks at a time, from how the last two went.</p>
     </div>
     <div class="coaching-loop">
       <article>
         <h3>Train</h3>
-        <p>You get a week of sessions from a coach's method, sized to the days you actually have. Not a generic block for everyone.</p>
+        <p>You get two weeks of sessions from a coach's method. Not a generic block for everyone.</p>
       </article>
       <article>
-        <h3>Talk</h3>
-        <p>After a session, send a voice message. Legs heavy, work got busy, that hill broke you. Talking says more than a score out of ten.</p>
+        <h3>Log</h3>
+        <p>Mark it done or skipped, rate the effort and how it felt, and leave a note. Legs heavy, work got busy, that hill broke you.</p>
       </article>
       <article>
         <h3>Adapt</h3>
-        <p>An AI reads your messages and your completed sessions, then changes next week inside the method's rules. No one is waiting on the other end.</p>
+        <p>Your next two weeks are drafted from how the last two went, inside the method's rules. An LSU coach reads the draft, changes what they want and approves it.</p>
       </article>
     </div>
   </section>
 
   <aside class="coaching-note">
-    <h2>You coach yourself.<br><span class="accent">A coach wrote the method.</span></h2>
-    <p>Nobody in the app listens to your voice messages. There is no one-to-one coaching here. An AI does the adapting, inside rules a coach set.</p>
+    <h2>You train.<br><span class="accent">A coach signs off.</span></h2>
+    <p>Every block is approved by an LSU coach before it reaches you. An AI coach answers questions about your data, and cannot change your training. There is no one-to-one coaching here.</p>
     <p>That gets most runners most of the way. For the last stretch, you go straight to a coach and work with them one to one.</p>
   </aside>
 </div>

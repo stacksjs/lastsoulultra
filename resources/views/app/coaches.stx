@@ -12,7 +12,7 @@ const canonicalPath = "/app/coaches"
   <div class="app-hero-copy">
     <span class="kicker">The Last Soul Ultra app / For coaches</span>
     <h1>Your method.<br><span class="accent">Their next week.</span></h1>
-    <p>Write how you coach. The app builds and adjusts each runner's weeks from it, and you keep {{ coachShare }} of what it earns.</p>
+    <p>Write how you coach. The app drafts each runner's next two weeks from it, you approve every block, and you keep {{ coachShare }} of what it earns.</p>
     <div class="app-actions">
       <a class="btn btn-lg" href="mailto:mail@lastsoulultra.com?subject=My%20coaching%20method">Talk to us</a>
     </div>
@@ -35,15 +35,15 @@ const canonicalPath = "/app/coaches"
       </li>
       <li>
         <h3>Back it up</h3>
-        <p>Add up to 20 private sources per method, such as your notes, your session rules and your taper. The AI quotes them when it adjusts a plan.</p>
+        <p>Add up to 20 private sources per method, such as your notes, your session rules and your taper. The AI draws on them when it drafts a block or a plan.</p>
       </li>
       <li>
         <h3>Publish a tier</h3>
-        <p>Running, strength or both. Runners subscribe in the app and on the coaching page of this site, and pay monthly.</p>
+        <p>Running, strength or both. Runners subscribe in the app and on the coaching page of this site, pay monthly and train two weeks at a time.</p>
       </li>
       <li>
-        <h3>Let it adapt</h3>
-        <p>After each session a runner can send a voice note. The AI changes their unfinished sessions inside your rules, and they can undo any change.</p>
+        <h3>Approve every block</h3>
+        <p>Every two weeks the app drafts a runner's next block from your plan and how the last one went. Edit it, approve it or send it back with a note. Nothing reaches their calendar until you approve.</p>
       </li>
     </ol>
   </div>
@@ -53,7 +53,7 @@ const canonicalPath = "/app/coaches"
   <div class="app-shell">
     <div class="app-head">
       <h2 class="h2-sm">A workspace<br><span class="accent">for the actual work.</span></h2>
-      <p>Everything you need to build sessions and plans, in the browser, with your roster on your phone too.</p>
+      <p>Everything you need to review blocks and build sessions and plans, in the browser.</p>
     </div>
     <div class="app-bento">
       <article class="app-cell app-cell-photo">
@@ -62,6 +62,10 @@ const canonicalPath = "/app/coaches"
         <p>Assign an individual plan to any subscriber and write down why. With their permission you see eight weeks of their training and fourteen days of recovery data.</p>
       </article>
       <article class="app-cell app-cell-card app-cell-wide">
+        <h3>Block reviews</h3>
+        <p>One queue of the blocks waiting for you, with the ones starting soon marked. Each shows how the last two weeks went, session by session: done or skipped, effort, feeling and the runner's notes. Rename, resize, remove or add sessions, then approve or ask for a redraft.</p>
+      </article>
+      <article class="app-cell">
         <h3>AI plan builder</h3>
         <p>Describe the runner, the race and the weeks available. It drafts a plan in your method for you to edit, keep or throw away.</p>
       </article>
@@ -75,15 +79,11 @@ const canonicalPath = "/app/coaches"
       </article>
       <article class="app-cell app-cell-red">
         <h3>Opt-in only</h3>
-        <p>Runners share their fitness data with you only when they turn it on. It is off until they do.</p>
+        <p>Fitness and recovery data reach you only when a runner turns sharing on. Their notes, effort and feeling on your sessions come with every block.</p>
       </article>
       <article class="app-cell">
-        <h3>Your roster on the phone</h3>
-        <p>See who is training on your tiers from the same app your runners use.</p>
-      </article>
-      <article class="app-cell">
-        <h3>Messages</h3>
-        <p>Questions about your method arrive in one inbox, and every session has its own comment thread.</p>
+        <h3>Session threads</h3>
+        <p>Every session has its own comment thread, and what runners write there comes to you with their next block.</p>
       </article>
       <article class="app-cell">
         <h3>Store editor</h3>
@@ -127,7 +127,7 @@ const canonicalPath = "/app/coaches"
 <section class="app-doors">
   <div class="app-door">
     <h2>See it as<br><span class="accent">a runner does.</span></h2>
-    <p>The athlete side of the app: voice notes, the workout player, progress and recovery.</p>
+    <p>The athlete side of the app: two-week blocks, the AI coach, the workout player, progress and recovery.</p>
     <a class="btn-outline" href="/app">The app for athletes</a>
   </div>
   <div class="app-door">

@@ -50,8 +50,8 @@ export const productionPages: Record<string, { title: string, description: strin
     ]
   },
   "/app": {
-    "title": "The Last Soul Ultra app - adaptive ultra training for runners and coaches",
-    "description": "Running and strength from a coach's method. Send a voice note after a session and next week changes. On iPhone, Android and the web.",
+    "title": "The Last Soul Ultra app - coach-approved ultra training for runners",
+    "description": "Running and strength from a coach's method, two weeks at a time. How your sessions went shapes the next block, and an LSU coach approves every one. On iPhone and the web.",
     "styles": [
       "/assets/styles/production/base.css",
       "/assets/styles/production/app.css"
@@ -59,7 +59,7 @@ export const productionPages: Record<string, { title: string, description: strin
   },
   "/app/coaches": {
     "title": "Coach with the Last Soul Ultra app - your method, your runners",
-    "description": "Turn your coaching method into adaptive training weeks for every runner on your tier. Plan and workout builders, a 184-exercise library, and 80% of what it earns.",
+    "description": "Turn your coaching method into two-week training blocks you approve for every runner on your tier. Plan and workout builders, a 184-exercise library, and 80% of what it earns.",
     "styles": [
       "/assets/styles/production/base.css",
       "/assets/styles/production/app.css"
