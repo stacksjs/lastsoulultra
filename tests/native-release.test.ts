@@ -2,7 +2,7 @@ import { expect, it } from 'bun:test'
 import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
-import { bumpedVersion, committedNotes, lastDelivered, nextBuild, pinFromKit, releaseOf, releaseTag, withCraft, withPinnedKit, withRelease } from '../scripts/native-release'
+import { acceptanceOutcome, bumpedVersion, committedNotes, kitAcceptance, lastDelivered, nextBuild, pinFromKit, releaseOf, releaseTag, withCraft, withPinnedKit, withRelease } from '../scripts/native-release'
 import { ACCEPTANCE_STEP, AVAILABILITY_STEP, mayUpload, RUN_TITLES, type RunStep, uploadsInFlight } from '../scripts/testflight-runs'
 
 it('keeps the marketing version for a build and moves it through bumpx otherwise', () => {
@@ -164,6 +164,36 @@ it('asks GitHub about successful runs only, and about few of them', () => {
   asked.length = 0
   expect(lastDelivered([acceptanceOnly, acceptanceOnly, acceptanceOnly, ...history], counting, 2)).toBeNull()
   expect(asked).toHaveLength(2)
+})
+
+it('reads how acceptance ended from a run\'s steps', () => {
+  const outcome = (id: string) => acceptanceOutcome(history.find(run => run.id === id)!, history.find(run => run.id === id)!.steps)
+  expect(outcome('release 22')).toBe('passed')
+  // Refused at upload is not a verdict on the kit: acceptance had passed.
+  expect(outcome('release 21')).toBe('passed')
+  expect(outcome('release 20')).toBe('failed')
+  // A re-check drives no app, and a cancelled run finished nothing.
+  expect(outcome('re-check 19')).toBe('none')
+  expect(outcome('waiting')).toBe('none')
+  expect(acceptanceOutcome({ status: 'completed', conclusion: 'cancelled' }, steps('cancelled', 'skipped', 'skipped'))).toBe('none')
+  expect(acceptanceOutcome({ status: 'in_progress', conclusion: '' }, [])).toBe('unfinished')
+  // The app did not build, so acceptance never ran: a release stops there too.
+  expect(acceptanceOutcome({ status: 'completed', conclusion: 'failure' }, [{ name: 'Build the complete native app from the HQ platform kit', conclusion: 'failure' }, { name: ACCEPTANCE_STEP, conclusion: 'skipped' }])).toBe('failed')
+})
+
+it('answers for a kit with its newest finished acceptance', () => {
+  const kit4135 = history.filter(run => run.build === 20)
+  // Failed on the release, passed once the script followed the kit.
+  expect(kitAcceptance(kit4135, stepsOf)).toEqual({ state: 'passed', run: kit4135[1]!, running: undefined })
+  expect(kitAcceptance(kit4135.slice(2), stepsOf)).toEqual({ state: 'failed', run: kit4135[2]!, running: undefined })
+  // No run on the kit, or none that says anything yet.
+  expect(kitAcceptance([], stepsOf)).toEqual({ state: 'none', running: undefined })
+  expect(kitAcceptance([history[0]!, history[4]!], stepsOf)).toEqual({ state: 'none', running: undefined })
+  const running = { ...history[1]!, id: 'running', status: 'in_progress', conclusion: '' }
+  expect(kitAcceptance([running], stepsOf)).toEqual({ state: 'none', running })
+  // A run still going does not excuse the failure before it.
+  expect(kitAcceptance([running, ...kit4135.slice(2)], stepsOf)).toEqual({ state: 'failed', run: kit4135[2]!, running })
+  expect(kitAcceptance([running, ...kit4135], stepsOf)).toEqual({ state: 'passed', run: kit4135[1]!, running })
 })
 
 it('knows which runs can still upload a build', () => {

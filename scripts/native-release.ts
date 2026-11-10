@@ -12,7 +12,7 @@
 import { existsSync, readdirSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { incrementVersion } from '@stacksjs/bumpx'
-import { AVAILABILITY_STEP, type RunStep, type TestFlightRun } from './testflight-runs'
+import { ACCEPTANCE_STEP, AVAILABILITY_STEP, type RunStep, type TestFlightRun } from './testflight-runs'
 
 /** Where the notes ride in the release commit, as Stacks lays them out beside an iOS project. */
 export const NOTES_PROJECT_DIR = 'native'
@@ -131,4 +131,51 @@ export function lastDelivered<Run extends Pick<TestFlightRun, 'status' | 'conclu
     if (stepsOf(run).some(step => step.name === AVAILABILITY_STEP && step.conclusion === 'success')) return run
   }
   return null
+}
+
+/**
+ * How the acceptance of one run ended: `passed`, `failed` (in the acceptance
+ * itself, or building the app it would have driven), `unfinished`, or `none`
+ * for a run that says nothing about acceptance (a re-check, a cancelled run).
+ */
+export function acceptanceOutcome(run: Pick<TestFlightRun, 'status' | 'conclusion'>, steps: RunStep[]): 'passed' | 'failed' | 'unfinished' | 'none' {
+  if (run.status !== 'completed') return 'unfinished'
+  const acceptance = steps.find(step => step.name === ACCEPTANCE_STEP)
+  if (!acceptance) return 'none'
+  if (acceptance.conclusion === 'success') return 'passed'
+  // A failed run that never reached acceptance failed building the app; a
+  // release on the same kit stops at the same place.
+  return acceptance.conclusion === 'failure' || run.conclusion === 'failure' ? 'failed' : 'none'
+}
+
+export interface KitAcceptance<Run> {
+  /** The newest finished answer for the kit, or `none` when there is none yet. */
+  state: 'passed' | 'failed' | 'none'
+  /** The run that gave the answer. */
+  run?: Run
+  /** A newer run for the same kit that has not finished. */
+  running?: Run
+}
+
+/**
+ * What acceptance last said about a kit, from the runs made on it (newest
+ * first; the caller keeps only runs whose commit pins the kit in question).
+ * Every run that built and drove the app counts, whether or not it went on to
+ * upload: a release, an upload by hand, and the acceptance-only runs started
+ * when the pin or the acceptance script changes.
+ */
+export function kitAcceptance<Run extends Pick<TestFlightRun, 'status' | 'conclusion'>>(runs: Run[], stepsOf: (run: Run) => RunStep[], lookups = 4): KitAcceptance<Run> {
+  let running: Run | undefined
+  let asked = 0
+  for (const run of runs) {
+    if (run.conclusion === 'skipped') continue
+    if (run.status !== 'completed') {
+      running ??= run
+      continue
+    }
+    if (asked++ >= lookups) break
+    const outcome = acceptanceOutcome(run, stepsOf(run))
+    if (outcome === 'passed' || outcome === 'failed') return { state: outcome, run, running }
+  }
+  return { state: 'none', running }
 }

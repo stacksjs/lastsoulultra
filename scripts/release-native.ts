@@ -19,6 +19,10 @@
  * (.github/workflows/testflight.yml). The command stays to watch that run and
  * says how it ended; `--no-wait` leaves once the push is out.
  *
+ * Before anything is committed it asks GitHub how native acceptance last went
+ * on the pinned kit, and refuses to spend a build number on a kit whose newest
+ * acceptance run failed.
+ *
  * Moving the HQ kit is a separate, earlier step (`bun run native:pin <version>`),
  * because the backend has to be running a kit before an app built on it ships.
  */
@@ -28,7 +32,7 @@ import { join, resolve } from 'node:path'
 import process from 'node:process'
 import { commitsBetween, fitNotes, NO_VISIBLE_CHANGES, resolveNotes, TESTFLIGHT_NOTES_LIMIT, testerNotes, writeWhatToTest } from '@stacksjs/actions/release-notes'
 import { versionBump } from '@stacksjs/bumpx'
-import { bumpedVersion, DEFAULT_NOTES_LOCALES, lastDelivered, nextBuild, NOTES_PROJECT_DIR, RELEASE_COMMIT_PREFIX, releaseTag, withRelease } from './native-release'
+import { bumpedVersion, DEFAULT_NOTES_LOCALES, kitAcceptance, lastDelivered, nextBuild, NOTES_PROJECT_DIR, RELEASE_COMMIT_PREFIX, releaseTag, withRelease } from './native-release'
 import { RUN_FIELDS, RUN_TITLES, type RunStep, TESTFLIGHT_WORKFLOW, type TestFlightRun } from './testflight-runs'
 
 const root = resolve(import.meta.dir, '..')
@@ -40,7 +44,7 @@ const option = (name: string) => {
   return value
 }
 if (args.includes('--help')) {
-  process.stdout.write('bun run release:build [--dry-run] [--notes "What to test" | --notes-file path] [--no-wait] [--no-push]\nbun scripts/release-native.ts --bump build|patch|minor|major|x.y.z\n\nTester notes are generated from the conventional commits since the last build that reached TestFlight unless --notes, --notes-file, RELEASE_NOTES or release.notes in native/product.json says otherwise.\n')
+  process.stdout.write('bun run release:build [--dry-run] [--notes "What to test" | --notes-file path] [--no-wait] [--no-push] [--ignore-acceptance]\nbun scripts/release-native.ts --bump build|patch|minor|major|x.y.z\n\nIt refuses when the newest acceptance run on the pinned HQ kit failed; --ignore-acceptance releases regardless.\nTester notes are generated from the conventional commits since the last build that reached TestFlight unless --notes, --notes-file, RELEASE_NOTES or release.notes in native/product.json says otherwise.\n')
   process.exit(0)
 }
 const dryRun = args.includes('--dry-run')
@@ -98,6 +102,39 @@ const known = (sha: string) => {
 }
 /** The commit that last moved the build number, as of a commit: the release that commit belongs to. */
 const releaseAt = (sha: string) => git('log', '-1', '--format=%H', '-G', '"build":', sha, '--', 'native/product.json') || undefined
+// A run started by hand builds the commit it names. A run that followed Deploy
+// names wherever main was when Deploy finished, and builds the release commit
+// Deploy was for: the release main was at.
+const built = (run: TestFlightRun) => (run.event === 'workflow_run' ? releaseAt(run.headSha) : undefined) ?? run.headSha
+const kits = new Map<string, string>()
+/** The HQ revision a commit pins, or nothing for a commit from before there was a pin. */
+function kitAt(sha: string): string {
+  if (!kits.has(sha)) {
+    try { kits.set(sha, (JSON.parse(git('show', `${sha}:native/hq-source.json`)) as { revision: string }).revision) }
+    catch { kits.set(sha, '') }
+  }
+  return kits.get(sha)!
+}
+
+// A kit can change how the app behaves under the acceptance script, and the
+// release run finds that half an hour in, with the build number spent. The
+// answer is usually already there: acceptance runs without an upload whenever
+// the pin or the script changes (scripts/native-acceptance.ts).
+let accepted: ReturnType<typeof kitAcceptance<TestFlightRun>> | null = null
+try {
+  if (runs) accepted = kitAcceptance(runs.filter(run => run.conclusion !== 'skipped' && known(run.headSha) && kitAt(built(run)) === source.revision), stepsOf)
+}
+catch { accepted = null }
+if (accepted?.state === 'failed' && args.includes('--ignore-acceptance')) {
+  say(`Warning: native acceptance failed on kit ${source.version} (${accepted.run!.url}); releasing anyway, as --ignore-acceptance asks.`)
+}
+else if (accepted?.state === 'failed') {
+  throw new Error(`Native acceptance failed on kit ${source.version}: ${accepted.run!.url}\nA release now would spend build ${build} and stop at the same place. ${accepted.running ? `A newer run is still going (${accepted.running.url}); release once it has passed.` : `Fix what it found (usually scripts/test-native-ios.ts following the kit) and push: acceptance runs again after Deploy. To run it again as it is: \`gh workflow run ${TESTFLIGHT_WORKFLOW} --ref main -f upload=false\`.`} If the failure was not the app's, --ignore-acceptance releases regardless.`)
+}
+else if (!accepted) say('Warning: GitHub did not say how native acceptance went on this kit (is `gh` installed and signed in?). Releasing without that check.')
+else if (accepted.state === 'none') say(`Warning: no acceptance run has finished on kit ${source.version} yet${accepted.running ? ` (one is running: ${accepted.running.url})` : ''}. If the kit changed how the app behaves, this release finds out half an hour in, with build ${build} spent.`)
+else say(`Native acceptance passed on kit ${source.version}: ${accepted.run!.url}${accepted.running ? `\nWarning: a newer acceptance run on this kit has not finished: ${accepted.running.url}` : ''}`)
+
 // What testers are told: the commits since the last build they were given,
 // unless a person said it themselves. That is not the previous release commit:
 // a build can be committed, tagged and built and still never reach TestFlight
