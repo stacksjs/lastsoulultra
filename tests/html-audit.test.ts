@@ -50,7 +50,7 @@ describe('every page the site serves', () => {
 
   it('checks every view, not a handful', () => {
     expect(views.length).toBeGreaterThanOrEqual(23)
-    expect(views.map(view => view.url)).toContain('/coaching/feedback')
+    expect(views.map(view => view.url)).toContain('/coaching/plans')
   })
 })
 

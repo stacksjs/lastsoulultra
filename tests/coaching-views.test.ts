@@ -6,13 +6,17 @@ import { absolute } from '../resources/data/site'
 import { coachingOrigin, forgetBrand } from '../resources/functions/coaching-source'
 
 /**
- * The eight module routes, rendered the way the site renders them.
+ * The module routes this site serves, rendered the way the site renders them.
  *
- * Each view is four lines that name a slug three times, so the failure these
- * guard against is a copied file that still says 'calendar' somewhere: a page
- * whose nav highlights the wrong tab, whose canonical points at its neighbour,
- * or which quietly loses its noindex.
+ * Only the storefront is a page here. Every module that needs an account is
+ * the training app's own screen, reached by a redirect (config/server.ts,
+ * tests/account-only.test.ts), so it has no view to render and none may be
+ * added: a page behind a sign-in that this site cannot check is a page anyone
+ * can open.
  */
+
+/** The modules with a page on this site. */
+const served = coachingModules.filter(module => module.scope === 'public')
 
 const payload = await Bun.file('tests/fixtures/brand-last-soul-ultra.json').json()
 const realFetch = globalThis.fetch
@@ -44,13 +48,13 @@ afterEach(() => { globalThis.fetch = realFetch })
 describe('a module route, with a brand published', () => {
   beforeEach(() => stubHq())
 
-  it('has a view on disk for every registered module', async () => {
+  it('has a view on disk for the storefront, and for nothing that needs an account', async () => {
     for (const module of coachingModules)
-      expect(await Bun.file(`resources/views/coaching/${module.slug}.stx`).exists()).toBe(true)
+      expect(await Bun.file(`resources/views/coaching/${module.slug}.stx`).exists()).toBe(module.scope === 'public')
   })
 
   it('titles, describes and canonicalises itself from the registry', async () => {
-    for (const module of coachingModules) {
+    for (const module of served) {
       const html = await render(module.slug)
 
       expect(html).toContain(`<title>${module.label} - Last Soul Ultra coaching</title>`)
@@ -64,7 +68,7 @@ describe('a module route, with a brand published', () => {
   // heading keeps LSU's own sentence. Collapsing either into the other is the
   // change this guards against.
   it('puts the nav word in the tab and the site voice in the heading', async () => {
-    for (const module of coachingModules) {
+    for (const module of served) {
       const html = await render(module.slug)
 
       expect(html).toContain(`<title>${module.label} - Last Soul Ultra coaching</title>`)
@@ -88,14 +92,14 @@ describe('a module route, with a brand published', () => {
   })
 
   it('links out to the section it is standing in for', async () => {
-    for (const module of coachingModules) {
+    for (const module of served) {
       const html = await render(module.slug)
       expect(html).toContain(`/brands/last-soul-ultra?section=${module.slug}`)
     }
   })
 
   it('keeps the modules that need an account out of search results', async () => {
-    for (const module of coachingModules) {
+    for (const module of served) {
       const html = await render(module.slug)
       const noindex = html.includes('name="robots" content="noindex,nofollow"')
 
@@ -103,11 +107,8 @@ describe('a module route, with a brand published', () => {
     }
   })
 
-  it('says which scope a panel is before the click', async () => {
+  it('puts no account notice on the storefront', async () => {
     expect(await render('plans')).not.toContain('coach-scope')
-    expect(await render('calendar')).toContain('Your training account')
-    expect(await render('health')).toContain('Only you see this')
-    expect(await render('messages')).toContain('Only you see this')
   })
 
   it('renders the storefront on the storefront, and nowhere else', async () => {
@@ -115,11 +116,10 @@ describe('a module route, with a brand published', () => {
 
     expect(plans).toContain('coach-offers')
     expect(plans).toContain('€19.99 a month')
-    expect(await render('calendar')).not.toContain('coach-offers')
   })
 
   it('frames the panel on every published module', async () => {
-    for (const module of coachingModules) {
+    for (const module of served) {
       const html = await render(module.slug)
       expect(html).toContain(`<hq-coaching brand="last-soul-ultra"`)
       expect(html).not.toContain('Not open yet')
@@ -144,25 +144,11 @@ describe('a module route, with nothing published', () => {
     expect(plans).not.toContain('/coaching/calendar')
   })
 
-  it('still renders the page it was asked for', async () => {
-    const calendar = await render('calendar')
+  it('frames no panel, and loads no remote script, when nobody has published', async () => {
+    const plans = await render('plans')
 
-    expect(calendar).toContain('<title>Workouts - Last Soul Ultra coaching</title>')
-    expect(calendar).toContain('Not open yet')
-  })
-
-  it('frames no panel, and loads no remote script, for a module nobody published', async () => {
-    const calendar = await render('calendar')
-
-    expect(calendar).not.toContain('<hq-coaching')
-    expect(calendar).not.toContain('hq-coaching.js')
-  })
-
-  it('drops the notice that promised an account would open the panel', async () => {
-    // With nothing to sign in to, "needs a training account" is an excuse,
-    // not an explanation.
-    expect(await render('calendar')).not.toContain('Your training account')
-    expect(await render('health')).not.toContain('Only you see this')
+    expect(plans).not.toContain('<hq-coaching')
+    expect(plans).not.toContain('hq-coaching.js')
   })
 
   it('leaves the storefront one empty state, not two', async () => {
@@ -176,7 +162,7 @@ describe('a module route, with nothing published', () => {
 describe('getting back out of a module', () => {
   it('links to the hub from every module, published or not', async () => {
     stubHq(null)
-    for (const module of coachingModules)
+    for (const module of served)
       expect(await render(module.slug)).toMatch(/<a class="[^"]*coach-up[^"]*" href="\/coaching"[^>]*>Coaching<\/a>/)
   })
 
@@ -193,7 +179,7 @@ describe('getting back out of a module', () => {
 describe('warming the connection to HQ', () => {
   it('promises it on a module the brand publishes', async () => {
     stubHq()
-    const html = await render('calendar')
+    const html = await render('plans')
 
     expect(html).toContain(`<link rel="preconnect" href="${coachingOrigin()}" crossorigin>`)
     expect(html).toContain(`<link rel="dns-prefetch" href="${coachingOrigin()}">`)
@@ -203,7 +189,7 @@ describe('warming the connection to HQ', () => {
     // With nothing published the module frames nothing, so a held-open
     // socket would be a connection made for no request.
     stubHq(null)
-    const html = await render('calendar')
+    const html = await render('plans')
 
     expect(html).not.toContain('rel="preconnect"')
     expect(html).not.toContain('rel="dns-prefetch"')
@@ -211,7 +197,7 @@ describe('warming the connection to HQ', () => {
 
   it('warms it before the element that needs it', async () => {
     stubHq()
-    const html = await render('calendar')
+    const html = await render('plans')
 
     expect(html.indexOf('rel="preconnect"')).toBeLessThan(html.indexOf('hq-coaching.js'))
   })

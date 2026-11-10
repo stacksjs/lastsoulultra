@@ -97,7 +97,9 @@ describe('seo artefacts', () => {
   it('keeps the modules that need an account out of the sitemap', () => {
     const modules = viewPaths().filter(path => path.startsWith('/coaching/'))
 
-    expect(modules).toHaveLength(8)
+    // The storefront is the only module with a page here; the rest redirect to
+    // the training app and have no view to list.
+    expect(modules).toEqual(['/coaching/plans'])
     for (const path of modules) {
       if (noindex(path))
         expect(indexablePaths).not.toContain(path)

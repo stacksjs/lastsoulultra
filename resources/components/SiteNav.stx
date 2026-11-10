@@ -9,7 +9,7 @@ const { current = '' } = defineProps<Props>()
 /**
  * Which link is the page you are on.
  *
- * A section marks its own subtree, so /coaching/calendar lights Coaching,
+ * A section marks its own subtree, so /coaching/plans lights Coaching,
  * and /faq canonicalises to /contact so Contact & FAQ is already right.
  */
 function here(href) {

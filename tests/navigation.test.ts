@@ -37,7 +37,7 @@ describe('knowing which page you are on', () => {
   })
 
   it('marks the section a nested page belongs to', async () => {
-    expect(await marked('coaching/calendar')).toContain('/coaching')
+    expect(await marked('coaching/plans')).toContain('/coaching')
     expect(await marked('results/last-soul-ultra-2026')).toContain('/results')
   })
 
