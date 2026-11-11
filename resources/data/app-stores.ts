@@ -20,6 +20,18 @@ function listing(value: string | undefined, fallback: string): string {
 }
 
 export const appStoreUrl = listing(process.env.LSU_APP_STORE_URL, 'https://apps.apple.com/search?term=Last%20Soul%20Ultra')
+
+/**
+ * Whether the app has an App Store listing to send people to.
+ *
+ * Until LSU_APP_STORE_URL names one, the only address this site has is a
+ * search for the app's name, and a "Download" button that opens a search with
+ * nothing in it is a promise the page cannot keep. The page offers the web
+ * app instead and says the iPhone app is still in testing.
+ */
+export function appStoreListed(value: string | undefined = process.env.LSU_APP_STORE_URL): boolean {
+  return Boolean(value?.trim())
+}
 export const playStoreUrl = listing(process.env.LSU_PLAY_STORE_URL, `https://play.google.com/store/apps/details?id=${ANDROID_PACKAGE}`)
 
 /** The tiers a runner can subscribe to, as published in the app's store. */

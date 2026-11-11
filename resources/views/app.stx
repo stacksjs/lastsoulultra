@@ -1,12 +1,13 @@
 @extends('layouts/LSU')
 @section('content')
 <script server>
-import { appStoreUrl, appTiers } from '~/resources/data/app-stores'
+import { appStoreListed, appStoreUrl, appTiers } from '~/resources/data/app-stores'
 import { moduleHref } from '~/resources/data/coaching'
 import { coachingOrigin } from '~/resources/functions/coaching-source'
 import { productionPages } from '~/resources/data/production-pages'
 const currentPage = productionPages["/app"]
 const canonicalPath = "/app"
+const appListed = appStoreListed()
 const appOnWeb = moduleHref('calendar', coachingOrigin())
 </script>
 <div class="app-page">
@@ -17,8 +18,12 @@ const appOnWeb = moduleHref('calendar', coachingOrigin())
     <h1>Train for<br><span class="accent">the next start.</span></h1>
     <p>Running and strength from a coach's method, two weeks at a time. How your sessions went shapes the next block, and an LSU coach approves every one.</p>
     <div class="app-actions">
+      @if(appListed)
       <a class="btn btn-lg" href="{{ appStoreUrl }}">Download on the App Store</a>
       <a class="btn-outline" href="{{ appOnWeb }}">Open it on the web</a>
+      @else
+      <a class="btn btn-lg" href="{{ appOnWeb }}">Open it on the web</a>
+      @endif
     </div>
   </div>
   <figure class="app-hero-shot">
@@ -192,7 +197,9 @@ const appOnWeb = moduleHref('calendar', coachingOrigin())
     </div>
     <div class="app-actions app-tier-actions">
       <a class="btn" href="/coaching#training">Subscribe on the web</a>
+      @if(appListed)
       <a class="app-textlink" href="#download">Or in the app <span aria-hidden="true">→</span></a>
+      @endif
     </div>
   </div>
 </section>
@@ -229,7 +236,7 @@ const appOnWeb = moduleHref('calendar', coachingOrigin())
       <h2 class="h2-sm">Where it runs<br><span class="accent">and what it keeps.</span></h2>
     </div>
     <dl class="app-spec">
-      <div><dt>iPhone</dt><dd>On the <a href="{{ appStoreUrl }}" class="accent">App Store</a>, with the session on your Lock Screen while you run.</dd></div>
+      <div><dt>iPhone</dt><dd>@if(appListed)On the <a href="{{ appStoreUrl }}" class="accent">App Store</a>, with the session on your Lock Screen while you run.@else In testing on TestFlight, ahead of the App Store. The session shows on your Lock Screen while you run.@endif</dd></div>
       <div><dt>Web</dt><dd>The full app in any current browser, and the training panels on <a href="/coaching" class="accent">lastsoulultra.com/coaching</a>.</dd></div>
       <div><dt>Languages</dt><dd>English and German.</dd></div>
       <div><dt>Sign-in</dt><dd>Your own LSU account, with email and password or a passkey. Add authenticator-app codes for extra protection.</dd></div>
@@ -276,11 +283,19 @@ const appOnWeb = moduleHref('calendar', coachingOrigin())
 <section id="download" class="app-doors">
   <div class="app-door">
     <h2>Running the<br><span class="accent">next block?</span></h2>
+    @if(appListed)
     <p>Download the app and pick a tier. Your first two weeks arrive once a coach has approved them.</p>
     <div class="app-actions">
       <a class="btn btn-lg" href="{{ appStoreUrl }}">App Store</a>
     </div>
     <a class="app-textlink" href="{{ appOnWeb }}">Already training? Sign in on the web <span aria-hidden="true">→</span></a>
+    @else
+    <p>Pick a tier and train in your browser. Your first two weeks arrive once a coach has approved them.</p>
+    <div class="app-actions">
+      <a class="btn btn-lg" href="/coaching/plans">Choose a tier</a>
+    </div>
+    <a class="app-textlink" href="{{ appOnWeb }}">Already training? Sign in <span aria-hidden="true">→</span></a>
+    @endif
   </div>
   <div class="app-door">
     <h2>Coaching<br><span class="accent">runners?</span></h2>
