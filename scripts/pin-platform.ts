@@ -53,7 +53,12 @@ try {
     writeFileSync(join(root, 'package.json'), pkg)
     run(process.execPath, ['install'])
   }
-  process.stdout.write(`\nPinned HQ platform kit ${pin.version} (${pin.revision.slice(0, 9)}), Bun ${pin.bun}, Craft ${craft}.\nNext: bun run native:ios && bun run native:verify-ios, commit saying what people will notice, push, then bun run release:build once Deploy finishes.\n`)
+  // The component guide is generated from the kit's components, and CI refuses a
+  // stale one (kit 1.0.4165's pin failed lint on it, so it was never deployed
+  // by its own push). The pin stands if this fails; the guide can be redone.
+  try { run(join(root, 'buddy'), ['docs:style-guide']) }
+  catch { process.stderr.write('The component guide was not regenerated. Run `bun run docs:style-guide` and commit what it writes with the pin, or CI fails.\n') }
+  process.stdout.write(`\nPinned HQ platform kit ${pin.version} (${pin.revision.slice(0, 9)}), Bun ${pin.bun}, Craft ${craft}.\nNext: bun run native:ios && bun run native:verify-ios, commit the pin with the regenerated docs saying what people will notice, push, then bun run release:build once Deploy and the acceptance run it starts have finished.\n`)
 }
 catch (error) {
   // A half-moved pin is what `pantry ci` rejects on the next deploy; leave none behind.

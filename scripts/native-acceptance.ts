@@ -33,6 +33,22 @@ export function pushBefore(pushes: Array<{ before?: string, after?: string }>, s
   return before && /^[a-f0-9]{40}$/.test(before) && !/^0+$/.test(before) ? before : null
 }
 
+/**
+ * The commit the backend was on before this deploy: the newest earlier Deploy
+ * run that succeeded. Kit 1.0.4165's pin failed CI, so its Deploy was skipped,
+ * and the next push deployed it; measured from that push alone the pin had not
+ * changed, and no acceptance ran on it. What a deploy changed is everything
+ * since the last one that happened.
+ */
+export function deployedBefore(deploys: Array<{ headSha?: string, conclusion?: string | null, createdAt?: string }>, sha: string): string | null {
+  const mine = deploys.find(deploy => deploy.headSha === sha)?.createdAt
+  const earlier = deploys
+    .filter(deploy => deploy.conclusion === 'success' && deploy.headSha !== sha && /^[a-f0-9]{40}$/.test(deploy.headSha ?? ''))
+    .filter(deploy => !mine || !deploy.createdAt || deploy.createdAt < mine)
+    .sort((a, b) => (b.createdAt ?? '').localeCompare(a.createdAt ?? ''))
+  return earlier[0]?.headSha ?? null
+}
+
 if (import.meta.main) {
   const root = resolve(import.meta.dir, '..')
   const run = (command: string, ...values: string[]) => execFileSync(command, values, { cwd: root, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }).trim()
@@ -47,10 +63,16 @@ if (import.meta.main) {
     catch { return false }
   }
 
-  // A push can carry several commits, and Deploy runs once for its last one, so
-  // the question is what the whole push changed.
+  // The question is what this deploy changed: everything since the last deploy
+  // that succeeded, which can be several pushes when one of them failed CI.
+  // Where GitHub cannot say, what the push itself changed.
   let before: string | null = null
   try {
+    before = deployedBefore(JSON.parse(run('gh', 'run', 'list', '--repo', repository, '--workflow', 'deploy.yml', '--branch', 'main', '--limit', '30', '--json', 'headSha,conclusion,createdAt')), sha)
+    if (before && !has(before)) run('git', 'fetch', '--quiet', '--depth=1', 'origin', before)
+  }
+  catch { before = null }
+  if (!before) try {
     before = pushBefore(JSON.parse(run('gh', 'api', `repos/${repository}/activity?ref=refs/heads/main&activity_type=push&per_page=50`)), sha)
     if (before && !has(before)) run('git', 'fetch', '--quiet', '--depth=1', 'origin', before)
   }
@@ -62,10 +84,10 @@ if (import.meta.main) {
   }
   const inputs = acceptanceInputs(run('git', 'diff', '--name-only', before, sha).split('\n'))
   if (!inputs.length) {
-    say('This push changed neither the HQ kit pin nor the acceptance script; nothing to accept.')
+    say('This deploy changed neither the HQ kit pin nor the acceptance script; nothing to accept.')
     process.exit(0)
   }
   // Never an upload: `upload=false` is the whole difference from a release.
   run('gh', 'workflow', 'run', TESTFLIGHT_WORKFLOW, '--repo', repository, '--ref', 'main', '-f', 'upload=false')
-  say(`::notice::Started native acceptance without an upload, because this push changed ${inputs.join(', ')}. Follow it with \`gh run list --workflow ${TESTFLIGHT_WORKFLOW}\`.`)
+  say(`::notice::Started native acceptance without an upload, because this deploy changed ${inputs.join(', ')}. Follow it with \`gh run list --workflow ${TESTFLIGHT_WORKFLOW}\`.`)
 }
