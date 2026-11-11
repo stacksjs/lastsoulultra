@@ -114,7 +114,7 @@
     "@craft-native/ios": "0.0.491",
     "@craft-native/android": "0.0.491",
     "bun-query-builder": "0.3.38",
-    "@stacksjs/bumpx": "0.2.34",
+    "@stacksjs/bumpx": "0.2.35",
     "@stacksjs/ts-cloud": "0.16.116"
   }
 }
