@@ -71,10 +71,10 @@ for (const path of ['/', '/format', '/world-series', '/soul-races', '/app', '/co
   check(`serves ${path}`, page.status === 200, `answered ${page.status}`)
 }
 
-// A page reached by a link gets its styles from inside the swapped content.
-const hub = await (await get(`${site}/coaching`, gate)).text()
-const main = hub.slice(hub.indexOf('<main'))
-check('the coaching page carries its own stylesheet inside the content a link swaps', /<link rel="stylesheet" href="[^"]*coaching-page\.css">/.test(main))
+// A page reached by a link is fetched as a fragment, and the fragment has to
+// name the page's own stylesheets for the router to add them (stx 0.2.847).
+const fragment = await (await get(`${site}/coaching`, { ...gate, 'X-STX-Router': 'true', 'X-STX-Fragment': 'true' })).text()
+check('a page fetched by a link click names its own stylesheets', /<template data-stx-page-css="1">[^]*?coaching-page\.css/.test(fragment))
 
 // Nothing that needs an account is drawn here: each path leaves for the app.
 for (const [path, rule] of Object.entries(accountOnlyRedirects(coaching.origin))) {

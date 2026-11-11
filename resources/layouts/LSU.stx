@@ -5,7 +5,7 @@
   <a class="lsu-skip" href="#main">Skip to content</a>
   <div class="lsu-scope-site page">
     <SiteNav current="{{ typeof canonicalPath !== 'undefined' ? canonicalPath : '' }}" />
-    <main id="main" tabindex="-1">@include('page-styles')@slot('content')</main>
+    <main id="main" tabindex="-1">@slot('content')</main>
     <SiteFooter current="{{ typeof canonicalPath !== 'undefined' ? canonicalPath : '' }}" />
   </div>
   <RaceEntryDialog current="{{ typeof canonicalPath !== 'undefined' ? canonicalPath : '' }}" />

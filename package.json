@@ -106,10 +106,10 @@
     "buddy-bot": "0.10.5"
   },
   "overrides": {
-    "@stacksjs/stx": "0.2.842",
-    "@stacksjs/components": "0.2.842",
-    "bun-plugin-stx": "0.2.842",
-    "stx-router": "0.2.842",
+    "@stacksjs/stx": "0.2.847",
+    "@stacksjs/components": "0.2.847",
+    "bun-plugin-stx": "0.2.847",
+    "stx-router": "0.2.847",
     "craft-native": "0.0.492",
     "@craft-native/ios": "0.0.492",
     "@craft-native/android": "0.0.492",
