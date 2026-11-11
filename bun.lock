@@ -26,15 +26,15 @@
     },
   },
   "overrides": {
-    "@craft-native/android": "0.0.491",
-    "@craft-native/ios": "0.0.491",
+    "@craft-native/android": "0.0.490",
+    "@craft-native/ios": "0.0.490",
     "@stacksjs/bumpx": "0.2.35",
     "@stacksjs/components": "0.2.842",
     "@stacksjs/stx": "0.2.842",
     "@stacksjs/ts-cloud": "0.16.116",
     "bun-plugin-stx": "0.2.842",
     "bun-query-builder": "0.3.38",
-    "craft-native": "0.0.491",
+    "craft-native": "0.0.490",
     "stx-router": "0.2.842",
   },
   "packages": {
@@ -384,7 +384,7 @@
 
     "clone": ["clone@2.1.2", "", {}, "sha512-3Pe/CF1Nn94hyhIYpjtiLhdCoEoz0DqQ+988E9gmeEdQZlojxnOb74wctFyuwWQHzqyf9X7C7MG8juUpqBJT8w=="],
 
-    "craft-native": ["craft-native@0.0.491", "", { "bin": { "craft-sdk": "dist/cli.js" } }, "sha512-PwwBkfrqbK2sjIRWFJewjTCMC0gW85aFHBGHp0/+TW5lgz0it7OoE1NqHFg/g/9UPYnT5oJ+C5fif9NWoDcJuA=="],
+    "craft-native": ["craft-native@0.0.490", "", { "bin": { "craft-sdk": "dist/cli.js" } }, "sha512-ov63lhaZzI4uBW9RG21Kl5GNyegQ9T6H6PR1m6NKq3TI6W6eeBJDaLVPQcuOJ0tvNFaXBdlKJFP3rXQDMwiKzw=="],
 
     "cz-git": ["cz-git@1.14.0", "", {}, "sha512-QjwlXZrGWsXQkyregBHhA2qNNGB2TCuf0ovkW1Q5OLgdJDs9Tq1yahfKpSMLyqOBjVRuv1iHBTDP83zJDBlJdg=="],
 
