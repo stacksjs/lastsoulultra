@@ -7,7 +7,7 @@
 import { createHash } from 'node:crypto'
 import { resolve } from 'node:path'
 import { pathToFileURL } from 'node:url'
-import { combinedRunKey, demoPlan, demoStrengthDescription, demoTier } from './lsu-demo-plan'
+import { combinedRunKey, demoPlan, demoRunningPlan, demoRunningTier, demoStrengthDescription, demoTier } from './lsu-demo-plan'
 import { CATALOG, CATALOG_COACH_EMAIL, catalogDescription } from './lsu-demo-catalog'
 
 interface DemoAccount { key: string, name: string, email: string, password: string, membership?: string, coach?: boolean, athlete?: boolean, subscriber?: boolean }
@@ -166,7 +166,23 @@ await transaction(async () => {
   if (!product) product = await db.insertInto('products').values({ ...productValues, organization_id: organizationId, coach_id: Number(coach.id), slug: 'lsu-private-demo-running', type: 'coaching', created_at: now }).returningAll().executeTakeFirstOrThrow()
   else await db.updateTable('products').set(productValues).where('id', '=', Number(product.id)).execute()
   const offer = { product_id: Number(product.id), method_id: Number(method.id), label: demoTier.name }
-  await saveExperience(organizationId, existingSettings ? { ...existingSettings, offers: existingSettings.offers.map((item: any) => Number(item.product_id) === Number(product.id) ? offer : item) } : { ...lsuExperience(), home_url: `${origin}/coaching`, logo_url: `${applicationOrigin}/assets/native-product/lsu-logo.svg`, support_url: `${origin}/contact`, privacy_url: `${applicationOrigin}/legal/lsu/privacy`, terms_url: `${applicationOrigin}/legal/lsu/terms`, embed_origins: [origin], show_powered_by: false, offers: [offer] }, existingBrand?.status || 'published')
+  // The running tier, at LSU's running price, on the same method. It has no
+  // review subscribers: it is there so the store shows both tiers LSU sells.
+  const runningTemplate = normalizePlan(demoRunningPlan(), true)
+  if (!runningTemplate.plan) throw new Error(runningTemplate.error)
+  let runningProduct = await db.selectFrom('products').selectAll().where('slug', '=', 'lsu-private-demo-running-only').executeTakeFirst()
+  if (runningProduct && (Number(runningProduct.organization_id) !== organizationId || Number(runningProduct.coach_id) !== Number(coach.id))) throw new Error('The running demo product is owned by another organization or coach.')
+  const runningPlanValues = { name: 'LSU demo: eight weeks of running', description: runningTemplate.plan.summary, sport: 'Run', weeks: 8, plan: JSON.stringify(runningTemplate.plan), updated_at: now }
+  const runningPrevious = runningProduct?.training_plan_id ? await db.selectFrom('training_plans').selectAll().where('id', '=', Number(runningProduct.training_plan_id)).executeTakeFirst() : null
+  if (runningPrevious && Number(runningPrevious.coach_id) !== Number(coach.id)) throw new Error('The running demo plan belongs to another coach.')
+  const runningPlan = runningPrevious || await db.insertInto('training_plans').values({ ...runningPlanValues, coach_id: Number(coach.id), created_at: now }).returning(['id']).executeTakeFirstOrThrow()
+  if (runningPrevious) await db.updateTable('training_plans').set(runningPlanValues).where('id', '=', Number(runningPlan.id)).execute()
+  const runningValues = { name: demoRunningTier.name, description: `Private review sample. ${new Intl.NumberFormat('en', { style: 'currency', currency: demoRunningTier.currency }).format(demoRunningTier.price_cents / 100)} monthly Running tier, tax included. No payment account is connected.`, price_cents: demoRunningTier.price_cents, currency: demoRunningTier.currency, billing_interval: demoRunningTier.billing_interval, allowed_training_sports: JSON.stringify(demoRunningTier.sports), includes_coaching: false, training_plan_id: Number(runningPlan.id), status: 'active', updated_at: now }
+  if (!runningProduct) runningProduct = await db.insertInto('products').values({ ...runningValues, organization_id: organizationId, coach_id: Number(coach.id), slug: 'lsu-private-demo-running-only', type: 'coaching', created_at: now }).returningAll().executeTakeFirstOrThrow()
+  else await db.updateTable('products').set(runningValues).where('id', '=', Number(runningProduct.id)).execute()
+  // Running first, then Running + Strength: the order the store lists them in.
+  const tierOffers = [{ product_id: Number(runningProduct.id), method_id: Number(method.id), label: demoRunningTier.name }, offer]
+  await saveExperience(organizationId, existingSettings ? { ...existingSettings, offers: [...tierOffers, ...existingSettings.offers.filter((item: any) => !tierOffers.some(tier => tier.product_id === Number(item.product_id)))] } : { ...lsuExperience(), home_url: `${origin}/coaching`, logo_url: `${applicationOrigin}/assets/native-product/lsu-logo.svg`, support_url: `${origin}/contact`, privacy_url: `${applicationOrigin}/legal/lsu/privacy`, terms_url: `${applicationOrigin}/legal/lsu/terms`, embed_origins: [origin], show_powered_by: false, offers: tierOffers }, existingBrand?.status || 'published')
   const brand = await db.selectFrom('brand_experiences').select('id').where('organization_id', '=', organizationId).executeTakeFirstOrThrow()
   for (const account of accounts.filter(account => account.subscriber)) {
     const athlete = await db.selectFrom('athletes').select('id').where('user_id', '=', ids[account.key]).executeTakeFirstOrThrow()

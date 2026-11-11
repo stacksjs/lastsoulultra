@@ -11,9 +11,9 @@ Open **Coaching**, then **Store**, on the race site to see the published monthly
 
 LSU launch pricing is **€19.99 per month for Running** and **€29.99 per month for Running + Strength**, including applicable tax. Coach-authored training plans can also be sold separately, as one-off purchases under their own published terms.
 
-## The €29.99 Run + Strength review tier
+## The two review tiers
 
-The private preview includes **Running and strength, demo**, priced at **€29.99 per month, tax included**. It includes both running and strength in one enrollment. Both Alex and Jamie use this same tier; their historical runner email names do not restrict them to running.
+The private preview lists two tiers. **LSU Running** is **€19.99 per month, tax included**, and covers the running sessions. **LSU Running + Strength** is **€29.99 per month, tax included**, and includes both running and strength in one enrollment. Both Alex and Jamie are on Running + Strength; their historical runner email names do not restrict them to running.
 
 The fictional eight-week plan has four running sessions and two structured strength sessions per week, with exercise illustrations, sets and repetitions or timed efforts. Open a strength session to review its blocks and set controls. This sample illustrates the app and is not an approved LSU training prescription. Personal one-to-one coaching and Mind training are not included in this demo offer.
 

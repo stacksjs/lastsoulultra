@@ -41,7 +41,7 @@ Open Health and Messages to inspect any supplied sample records. Avoid connectin
 
 Open the [Style Guide](/style-guide/) to review the typefaces, colors and interface specimens alongside the workout figures.
 
-If you have the iPhone app, sign in there as Alex too. Check the five tabs, then open **Me** → **Coaching accounts** and confirm that **Running and strength, demo** is listed. Its screen holds **Training feedback**, **Training progress** and **Your methods**.
+If you have the iPhone app, sign in there as Alex too. Check the five tabs, then open **Me** → **Coaching accounts** and confirm that **LSU Running + Strength** is listed. Its screen holds **Training feedback**, **Training progress** and **Your methods**.
 
 ## 4. Review the coach
 

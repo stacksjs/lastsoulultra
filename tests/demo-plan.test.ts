@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'bun:test'
-import { combinedRunKey, demoPlan, demoTier } from '../scripts/lsu-demo-plan'
+import { combinedRunKey, demoPlan, demoRunningPlan, demoRunningTier, demoTier } from '../scripts/lsu-demo-plan'
 
 describe('LSU review plan', () => {
   it('includes running and structured strength in the approved EUR 29.99 monthly tier', () => {
@@ -19,6 +19,20 @@ describe('LSU review plan', () => {
     // Editing one review session must not mutate subsequent weeks.
     plan.weeks[0]!.workouts[0]!.title = 'Edited'
     expect(plan.weeks[1]!.workouts[0]!.title).toBe('Easy aerobic run')
+  })
+
+  it('sells running alone at EUR 19.99, as the same weeks without the strength sessions', () => {
+    expect(demoRunningTier).toMatchObject({ name: 'LSU Running', price_cents: 1999, currency: 'EUR', billing_interval: 'month', sports: ['Run'] })
+    expect(demoTier.name).toBe('LSU Running + Strength')
+    const plan = demoRunningPlan()
+    expect(plan.weeks).toHaveLength(8)
+    for (const week of plan.weeks) {
+      expect(week.workouts.map(workout => workout.sport)).toEqual(['Run', 'Run', 'Run', 'Run'])
+      expect(week.workouts.map(workout => workout.day)).toEqual([1, 3, 5, 6])
+      expect(week.planned_hours).toBe(3.5)
+    }
+    // The combined plan is not changed by deriving the running one from it.
+    expect(demoPlan().weeks[0]!.workouts).toHaveLength(6)
   })
 
   it('preserves the four running slots when inserting two strength sessions', () => {
