@@ -9,6 +9,8 @@ Use this reference to review how Last Soul Ultra looks across race information, 
 
 ## Explore the visual system
 
+The [generated component guide](/style-guide/generated/) indexes every website component, the installed shared training components and the shared UI library. Its [foundations](/style-guide/generated/foundations) read the active production stylesheet, including LSU red, black surfaces and the shipped font files. Isolated examples cover actions, forms, status, race cards and typography. Reference-only components are documented without executing account-connected screens.
+
 | Review | Open |
 | --- | --- |
 | Display type, reading text, labels and race-clock digits | [Typography](/style-guide/typography) |
@@ -28,7 +30,7 @@ Use this reference to review how Last Soul Ultra looks across race information, 
 </div>
 </div>
 
-This is a visual specimen. The links open real pages; the sample session text is fictional. The surrounding documentation keeps its own reading layout so the guide stays easy to use.
+This is a visual specimen. The links open real pages; the sample session text is fictional. The surrounding BunPress pages use the same production logo, black surfaces, red action palette and typefaces, while keeping a reading layout suited to documentation.
 
 ## Review artwork in context
 

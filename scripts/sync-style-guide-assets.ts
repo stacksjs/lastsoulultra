@@ -20,6 +20,9 @@ for (const face of faces) {
 expected.set(join(target, 'fonts.css'), `${faces.join('\n').replaceAll('/assets/lsu/fonts/', '/docs/style-guide/fonts/')}\n`)
 expected.set(join(target, 'tokens.css'), `.lsu-guide{${tokens}}\n`)
 expected.set(join(target, 'lsu-logo.svg'), await readFile('public/assets/lsu/images/lsu-logo.svg'))
+expected.set(join(target, 'lsu-social-card.png'), await readFile('public/press/logo/lsu-logo-tile.png'))
+expected.set('docs/public/favicon.png', await readFile('public/assets/lsu/images/favicon.png'))
+expected.set('docs/public/apple-touch-icon.png', await readFile('public/assets/lsu/images/apple-touch-icon.png'))
 if (!check) await mkdir(join(target, 'fonts'), { recursive: true })
 for (const [path, content] of expected) {
   if (check) {

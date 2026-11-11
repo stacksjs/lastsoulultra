@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en" class=""><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline' 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; img-src 'self' data:; font-src 'self' data:; connect-src 'none'; form-action 'none'; base-uri 'none'"><title>Last Soul Ultra: Website navigation, World Series section, Default</title><link rel="stylesheet" href="./components.css"><style>:root{color-scheme:light dark}*{box-sizing:border-box}body{margin:0;padding:24px;background:#000000;color:#ffffff;font-family:"Barlow", system-ui, sans-serif}body>main{max-width:1100px;margin:auto}button,input,select,textarea{font:inherit}@media(max-width:480px){body{padding:16px}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}</style></head><body class=""><main aria-label="Website navigation, World Series section, Default">
+<div class="pt-[150px] min-h-[300px]">
+      <div data-stx-scope="stx_site_nav_1_3lz744" data-stx-props="{&quot;current&quot;:&quot;/world-series&quot;}" data-stx-component-wrapper>
+
+
+<nav class="lsu-scope-nav nav">
+<a href="/" class="lsu-scope-nav nav-logo">
+<img src="./assets/9e9a0e12f5cf-lsu-logo.svg" alt="Last Soul Ultra" width="877" height="177" class="lsu-scope-nav">
+</a>
+<div class="lsu-scope-nav nav-links">
+<a href="/" class="lsu-scope-nav" data-stx-link >Home</a>
+<a href="/format" class="lsu-scope-nav" data-stx-link >Format</a>
+<a href="/world-series" class="lsu-scope-nav" data-stx-link  aria-current="page" >World Series</a>
+<a href="/soul-races" class="lsu-scope-nav" data-stx-link >Soul Races</a>
+<a href="/sponsorship" class="lsu-scope-nav" data-stx-link >Sponsorship</a>
+<a href="/app" class="lsu-scope-nav" data-stx-link >App</a>
+<a href="/coaching" class="lsu-scope-nav" data-stx-link >Coaching</a>
+<a href="/contact" class="lsu-scope-nav" data-stx-link >Contact &amp; FAQ</a>
+</div>
+<div class="lsu-scope-nav nav-end">
+<a href="/profile" class="lsu-scope-nav nav-profile" data-stx-link >Profile</a>
+<a href="/world-series" class="lsu-scope-nav nav-cta" data-apply data-view-href="/profile" data-view-label="View entry">Request a race entry</a>
+<button class="burger lsu-scope-nav" data-burger aria-label="Menu" :aria-expanded="lsuMenu" @click="lsuToggleMenu()" aria-controls="nav-drawer">
+<span class="lsu-scope-nav">
+</span>
+<span class="lsu-scope-nav">
+</span>
+<span class="lsu-scope-nav">
+</span>
+</button>
+</div>
+</nav>
+<a href="/world-series" class="lsu-scope-nav mobile-cta" data-apply data-view-href="/profile" data-view-label="View entry"> Request a race entry </a>
+<div @click="lsuCloseMenu()" :data-open="lsuMenu ? '' : null" class="lsu-scope-nav scrim" data-scrim :hidden="!lsuMenu">
+</div>
+<aside :data-open="lsuMenu ? '' : null" :inert="!lsuMenu" @keydown.escape="lsuCloseMenu()" class="drawer lsu-scope-nav" id="nav-drawer" data-drawer :aria-hidden="!lsuMenu">
+<div class="drawer-kicker lsu-scope-nav">Last Soul Ultra events</div>
+<div class="drawer-links lsu-scope-nav">
+<a href="/" class="lsu-scope-nav" data-stx-link >Home</a>
+<a href="/format" class="lsu-scope-nav" data-stx-link >Format</a>
+<a href="/world-series" class="lsu-scope-nav" data-stx-link  aria-current="page" >World Series</a>
+<a href="/soul-races" class="lsu-scope-nav" data-stx-link >Soul Races</a>
+<a href="/sponsorship" class="lsu-scope-nav" data-stx-link >Sponsorship</a>
+<a href="/app" class="lsu-scope-nav" data-stx-link >App</a>
+<a href="/coaching" class="lsu-scope-nav" data-stx-link >Coaching</a>
+<a href="/contact" class="lsu-scope-nav" data-stx-link >Contact &amp; FAQ</a>
+<a href="/profile" class="lsu-scope-nav" data-stx-link >Profile</a>
+</div>
+<a href="/world-series" class="drawer-cta lsu-scope-nav" data-apply data-view-href="/profile" data-view-label="View entry">Request a race entry</a>
+<div class="drawer-social lsu-scope-nav">
+<a href="https://www.instagram.com/lastsoulultra" class="lsu-scope-nav">Instagram</a>
+<a href="https://www.instagram.com/lastsoulultra" class="lsu-scope-nav">Live · @lastsoulultra</a>
+</div>
+</aside>
+</div>
+<script data-stx-scoped data-stx-runtime src="./runtime-c7a778626ef2.js"></script>
+<script data-stx-scoped data-stx-run="always" data-stx-composables>;(function(){
+var __bundles = window.__stxComposableBundles || (window.__stxComposableBundles = {});
+if (__bundles["6c6e1cbb36c6"]) return;
+__bundles["6c6e1cbb36c6"] = true;
+var __published = window.__stxComposableGlobals || (window.__stxComposableGlobals = {});
+window.__composables = window.__composables || {};
+var __c = window.__composables;
+var __stx = window.stx || {};
+var state = __stx["state"];
+var useDark = __stx["useDark"];
+var usePreferredDark = __stx["usePreferredDark"];
+// Composable: counter
+const count = state(0);
+function increment() {
+  count.update((n) => n + 1);
+}
+function decrement() {
+  count.update((n) => n - 1);
+}
+function reset() {
+  count.set(0);
+}
+
+// Composable: dark
+const isDark = useDark();
+const preferredDark = usePreferredDark();
+function toggleDark() {
+  isDark.set(!isDark());
+}
+  try { if (!("count" in __c)) __c["count"] = count; } catch (e) {}
+  try { if (!("decrement" in __c)) __c["decrement"] = decrement; } catch (e) {}
+  try { if (!("increment" in __c)) __c["increment"] = increment; } catch (e) {}
+  try { if (!("reset" in __c)) __c["reset"] = reset; } catch (e) {}
+  try { if (!("isDark" in __c)) __c["isDark"] = isDark; } catch (e) {}
+  try { if (!("preferredDark" in __c)) __c["preferredDark"] = preferredDark; } catch (e) {}
+  try { if (!("toggleDark" in __c)) __c["toggleDark"] = toggleDark; } catch (e) {}
+  var __names = ["count","decrement","increment","reset","isDark","preferredDark","toggleDark"];
+  for (var __i = 0; __i < __names.length; __i++) {
+    var __n = __names[__i];
+    if (!(__n in __c) || __published[__n]) continue;
+    var __takenByBuiltin = !!(window.stx && __n in window.stx);
+    if (__takenByBuiltin || __n in window) {
+      console.warn('[stx] composable "' + __n + '" is not available as a bare identifier: '
+        + (__takenByBuiltin ? 'a built-in of that name already exists' : 'window already defines that property')
+        + '. Rename it, or use: import { ' + __n + ' } from "@composables"');
+      continue;
+    }
+    window[__n] = __c[__n];
+    __published[__n] = true;
+  }
+})();</script>
+<script data-stx-scoped data-stx-run="always" data-stx-owner="stx_site_nav_1_3lz744">(function(__scopeId) {
+  const { defineProps } = window.stx;
+  const __scope = window.stx._scopes = window.stx._scopes || {};
+  const __scopeVars = __scope[__scopeId] = __scope[__scopeId] || {};
+  __scopeVars.$refs = __scopeVars.$refs || {};
+  const __previousCurrentElement = window.__STX_CURRENT_ELEMENT__;
+  const __previousCurrentProps = window.__STX_CURRENT_PROPS__;
+  // A clone the runtime is setting up may not be in the document yet (rows
+  // a loop builds inside a closed :if), where a lookup cannot see it, so the
+  // runtime hands its root over in __STX_SETUP_ROOT__ (signals.ts).
+  const __setupRoot = window.__STX_SETUP_ROOT__;
+  const __componentElement = (__setupRoot && __setupRoot.getAttribute('data-stx-scope') === __scopeId && __setupRoot) || document.querySelector('[data-stx-scope="' + __scopeId + '"]');
+  __scopeVars.$slots = Object.create(null);
+  if (__componentElement) {
+    try { Object.assign(__scopeVars.$slots, JSON.parse(__componentElement.getAttribute('data-stx-slots') || '{}')); }
+    catch {}
+  }
+  window.__STX_CURRENT_ELEMENT__ = __componentElement;
+  let __componentProps = __componentElement && __componentElement.__stx_props;
+  if (!__componentProps && __componentElement) {
+    try { __componentProps = JSON.parse(__componentElement.getAttribute('data-stx-props') || '{}'); }
+    catch { __componentProps = {}; }
+  }
+  window.__STX_CURRENT_PROPS__ = __componentProps && typeof __componentProps === 'object' && !Array.isArray(__componentProps) ? __componentProps : {};
+  const __scopeProps = window.__STX_CURRENT_PROPS__;
+  Object.defineProperty(__scopeVars, '$props', { configurable: true, enumerable: true, get: function() {
+    return (__componentElement && __componentElement.__stx_props) || __scopeProps;
+  } });
+
+  // Scope-specific lifecycle callbacks. The queues drain as they run; the
+  // hook lists keep what setup registered, because a component behind an :if
+  // unmounts at each hide and mounts again at each show (signals.ts,
+  // suspendSubtreeScopes).
+  if (__scopeVars.__suspended && !__scopeVars.__mounted) {
+    // Set up again after an :if hid it -- a <template :if> clones the
+    // component afresh on every show, and the clone's script runs. This run's
+    // hooks close over this run's state, so they replace the ones the hide
+    // kept for a re-show rather than queueing beside them.
+    __scopeVars.__mountCallbacks = [];
+    __scopeVars.__destroyCallbacks = [];
+    __scopeVars.__mountHooks = [];
+    __scopeVars.__destroyHooks = [];
+    // So do its effects: the last run's watched a clone that is gone.
+    if (typeof __scopeVars.__disposeEffects === 'function') __scopeVars.__disposeEffects();
+    __scopeVars.__disposeEffects = null;
+  }
+  __scopeVars.__mountCallbacks = __scopeVars.__mountCallbacks || [];
+  __scopeVars.__destroyCallbacks = __scopeVars.__destroyCallbacks || [];
+  __scopeVars.__mountHooks = __scopeVars.__mountHooks || [];
+  __scopeVars.__destroyHooks = __scopeVars.__destroyHooks || [];
+  let __registeringSetupHooks = true;
+  const onMount = (fn) => { __scopeVars.__mountCallbacks.push(fn); __scopeVars.__mountHooks.push(fn); };
+  const onDestroy = (fn) => {
+    __scopeVars.__destroyCallbacks.push(fn);
+    // A teardown registered inside onMount belongs to this mount alone.
+    // Replaying it AND registering the next mount's teardown doubles cleanup.
+    if (__registeringSetupHooks) __scopeVars.__destroyHooks.push(fn);
+  };
+  // The effects this setup makes (effect, watch) belong to the scope and are
+  // disposed with it (disposeSubtreeScopes in the runtime), as its bindings
+  // are. Untracked, one reading a store kept running for a component the
+  // router had long swapped out.
+  const __endEffects = window.stx._beginEffects ? window.stx._beginEffects() : null;
+
+try {
+const { current = "" } = defineProps();
+
+
+  // Register all defined signals and functions in this scope
+  const __localVars = {};
+  try {
+    
+  }
+catch (e) {}
+  Object.defineProperties(__scopeVars, Object.getOwnPropertyDescriptors(__localVars));
+  if (typeof __stxLiveBindings !== 'undefined') Object.defineProperties(__scopeVars, Object.getOwnPropertyDescriptors(__stxLiveBindings));
+}
+finally {
+  __registeringSetupHooks = false;
+  if (__endEffects) {
+    const __previousDispose = __scopeVars.__disposeEffects;
+    const __disposeSetup = __endEffects();
+    __scopeVars.__disposeEffects = typeof __previousDispose === 'function'
+      ? function() { __previousDispose(); __disposeSetup(); }
+      : __disposeSetup;
+  }
+  window.__STX_CURRENT_ELEMENT__ = __previousCurrentElement;
+  window.__STX_CURRENT_PROPS__ = __previousCurrentProps;
+}
+})("stx_site_nav_1_3lz744");</script>
+<script data-stx-scoped data-stx-run="always" data-stx-owner="stx_site_nav_1_3lz744" client>(function(__scopeId) {
+  const { state } = window.stx;
+  const __scope = window.stx._scopes = window.stx._scopes || {};
+  const __scopeVars = __scope[__scopeId] = __scope[__scopeId] || {};
+  __scopeVars.$refs = __scopeVars.$refs || {};
+  const __previousCurrentElement = window.__STX_CURRENT_ELEMENT__;
+  const __previousCurrentProps = window.__STX_CURRENT_PROPS__;
+  // A clone the runtime is setting up may not be in the document yet (rows
+  // a loop builds inside a closed :if), where a lookup cannot see it, so the
+  // runtime hands its root over in __STX_SETUP_ROOT__ (signals.ts).
+  const __setupRoot = window.__STX_SETUP_ROOT__;
+  const __componentElement = (__setupRoot && __setupRoot.getAttribute('data-stx-scope') === __scopeId && __setupRoot) || document.querySelector('[data-stx-scope="' + __scopeId + '"]');
+  __scopeVars.$slots = Object.create(null);
+  if (__componentElement) {
+    try { Object.assign(__scopeVars.$slots, JSON.parse(__componentElement.getAttribute('data-stx-slots') || '{}')); }
+    catch {}
+  }
+  window.__STX_CURRENT_ELEMENT__ = __componentElement;
+  let __componentProps = __componentElement && __componentElement.__stx_props;
+  if (!__componentProps && __componentElement) {
+    try { __componentProps = JSON.parse(__componentElement.getAttribute('data-stx-props') || '{}'); }
+    catch { __componentProps = {}; }
+  }
+  window.__STX_CURRENT_PROPS__ = __componentProps && typeof __componentProps === 'object' && !Array.isArray(__componentProps) ? __componentProps : {};
+  const __scopeProps = window.__STX_CURRENT_PROPS__;
+  Object.defineProperty(__scopeVars, '$props', { configurable: true, enumerable: true, get: function() {
+    return (__componentElement && __componentElement.__stx_props) || __scopeProps;
+  } });
+
+  // Scope-specific lifecycle callbacks. The queues drain as they run; the
+  // hook lists keep what setup registered, because a component behind an :if
+  // unmounts at each hide and mounts again at each show (signals.ts,
+  // suspendSubtreeScopes).
+  if (__scopeVars.__suspended && !__scopeVars.__mounted) {
+    // Set up again after an :if hid it -- a <template :if> clones the
+    // component afresh on every show, and the clone's script runs. This run's
+    // hooks close over this run's state, so they replace the ones the hide
+    // kept for a re-show rather than queueing beside them.
+    __scopeVars.__mountCallbacks = [];
+    __scopeVars.__destroyCallbacks = [];
+    __scopeVars.__mountHooks = [];
+    __scopeVars.__destroyHooks = [];
+    // So do its effects: the last run's watched a clone that is gone.
+    if (typeof __scopeVars.__disposeEffects === 'function') __scopeVars.__disposeEffects();
+    __scopeVars.__disposeEffects = null;
+  }
+  __scopeVars.__mountCallbacks = __scopeVars.__mountCallbacks || [];
+  __scopeVars.__destroyCallbacks = __scopeVars.__destroyCallbacks || [];
+  __scopeVars.__mountHooks = __scopeVars.__mountHooks || [];
+  __scopeVars.__destroyHooks = __scopeVars.__destroyHooks || [];
+  let __registeringSetupHooks = true;
+  const onMount = (fn) => { __scopeVars.__mountCallbacks.push(fn); __scopeVars.__mountHooks.push(fn); };
+  const onDestroy = (fn) => {
+    __scopeVars.__destroyCallbacks.push(fn);
+    // A teardown registered inside onMount belongs to this mount alone.
+    // Replaying it AND registering the next mount's teardown doubles cleanup.
+    if (__registeringSetupHooks) __scopeVars.__destroyHooks.push(fn);
+  };
+  // The effects this setup makes (effect, watch) belong to the scope and are
+  // disposed with it (disposeSubtreeScopes in the runtime), as its bindings
+  // are. Untracked, one reading a store kept running for a component the
+  // router had long swapped out.
+  const __endEffects = window.stx._beginEffects ? window.stx._beginEffects() : null;
+
+try {
+const lsuMenu = state(false);
+function lsuToggleMenu() {
+  lsuMenu.update((value) => !value);
+}
+function lsuCloseMenu() {
+  lsuMenu.set(false);
+}
+
+
+  // Register all defined signals and functions in this scope
+  const __localVars = {};
+  try {
+    if (typeof lsuMenu !== 'undefined') __localVars['lsuMenu'] = lsuMenu;
+    if (typeof lsuToggleMenu !== 'undefined') __localVars['lsuToggleMenu'] = lsuToggleMenu;
+    if (typeof lsuCloseMenu !== 'undefined') __localVars['lsuCloseMenu'] = lsuCloseMenu;
+  }
+catch (e) {}
+  Object.defineProperties(__scopeVars, Object.getOwnPropertyDescriptors(__localVars));
+  if (typeof __stxLiveBindings !== 'undefined') Object.defineProperties(__scopeVars, Object.getOwnPropertyDescriptors(__stxLiveBindings));
+}
+finally {
+  __registeringSetupHooks = false;
+  if (__endEffects) {
+    const __previousDispose = __scopeVars.__disposeEffects;
+    const __disposeSetup = __endEffects();
+    __scopeVars.__disposeEffects = typeof __previousDispose === 'function'
+      ? function() { __previousDispose(); __disposeSetup(); }
+      : __disposeSetup;
+  }
+  window.__STX_CURRENT_ELEMENT__ = __previousCurrentElement;
+  window.__STX_CURRENT_PROPS__ = __previousCurrentProps;
+}
+})("stx_site_nav_1_3lz744");</script>
+      <p>The production navigation marks the current section. On a narrow viewport, use Menu to open the drawer and Escape to dismiss it.</p>
+    </div>
+</main></body></html>

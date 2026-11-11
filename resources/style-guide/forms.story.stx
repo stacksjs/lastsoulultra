@@ -1,0 +1,27 @@
+<script client>
+const guideName = state('Sample runner')
+const guideSaved = state(false)
+</script>
+<Story title="Forms and account feedback" group="Inputs">
+  <Variant title="Profile form">
+    <section class="lsu-scope-profile profile-page">
+      <div class="login-card">
+        <h2 class="font-[family-name:var(--lsu-display)]">RUNNER DETAILS</h2>
+        <form class="space-y-4 profile-form" @submit.prevent="guideSaved.set(true)">
+          <label class="block" for="guide-runner">Runner name<input class="block w-full" id="guide-runner" :model="guideName" autocomplete="off"></label>
+          <label class="block" for="guide-country">Country<select class="block w-full" id="guide-country"><option>Philippines</option><option>United Kingdom</option><option>United States</option></select></label>
+          <button class="btn" type="submit">Save example</button>
+          <p role="status" :text="guideSaved ? 'Example profile saved locally.' : 'This form uses fictional local data.'"></p>
+        </form>
+      </div>
+    </section>
+  </Variant>
+  <Variant title="Error and locked field">
+    <section class="lsu-scope-profile profile-page"><div class="login-card"><form class="space-y-4 profile-form" @submit.prevent="guideSaved.set(false)">
+      <label class="block" for="guide-email">Email address<input class="block w-full" id="guide-email" value="runner" aria-invalid="true" aria-describedby="guide-email-error"></label>
+      <p id="guide-email-error" class="error form-message" role="alert">Enter a complete email address.</p>
+      <label class="block" for="guide-bib">Bib number<input class="block w-full" id="guide-bib" value="Assigned after confirmation" disabled></label>
+      <button type="submit" class="btn">Review details</button>
+    </form></div></section>
+  </Variant>
+</Story>

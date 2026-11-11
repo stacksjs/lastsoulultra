@@ -1,0 +1,12 @@
+<!--
+@description The production website navigation with an active section and an accessible mobile menu.
+@prop {string} current Canonical path used to mark the current section.
+-->
+<Story title="Website navigation" group="Navigation" component="site/SiteNav">
+  <Variant title="World Series section">
+    <div class="pt-[150px] min-h-[300px]">
+      <SiteNav current="/world-series" />
+      <p>The production navigation marks the current section. On a narrow viewport, use Menu to open the drawer and Escape to dismiss it.</p>
+    </div>
+  </Variant>
+</Story>

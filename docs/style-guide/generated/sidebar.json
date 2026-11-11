@@ -1,0 +1,1250 @@
+[
+  {
+    "text": "Component guide",
+    "link": "/style-guide/generated/"
+  },
+  {
+    "text": "Foundations",
+    "link": "/style-guide/generated/foundations"
+  },
+  {
+    "text": "Actions and entry controls",
+    "link": "/style-guide/generated/patterns/stories-0-actions-c522a646"
+  },
+  {
+    "text": "Race cards, numbers and empty states",
+    "link": "/style-guide/generated/patterns/stories-0-cards-960b960b"
+  },
+  {
+    "text": "Forms and account feedback",
+    "link": "/style-guide/generated/patterns/stories-0-forms-c300c5c8"
+  },
+  {
+    "text": "Website navigation",
+    "link": "/style-guide/generated/patterns/stories-0-navigation-4b24178d"
+  },
+  {
+    "text": "Brand typography and surfaces",
+    "link": "/style-guide/generated/patterns/stories-0-typography-b74e0ea0"
+  },
+  {
+    "text": "Website: CoachingIndex",
+    "link": "/style-guide/generated/components/site/CoachingIndex"
+  },
+  {
+    "text": "Website: CoachingModule",
+    "link": "/style-guide/generated/components/site/CoachingModule"
+  },
+  {
+    "text": "Website: CoachingNav",
+    "link": "/style-guide/generated/components/site/CoachingNav"
+  },
+  {
+    "text": "Website: CoachingOffers",
+    "link": "/style-guide/generated/components/site/CoachingOffers"
+  },
+  {
+    "text": "Website: CoachingPortal",
+    "link": "/style-guide/generated/components/site/CoachingPortal"
+  },
+  {
+    "text": "Website: LiveBoard",
+    "link": "/style-guide/generated/components/site/LiveBoard"
+  },
+  {
+    "text": "Website: RaceEntryDialog",
+    "link": "/style-guide/generated/components/site/RaceEntryDialog"
+  },
+  {
+    "text": "Website: RacePortal",
+    "link": "/style-guide/generated/components/site/RacePortal"
+  },
+  {
+    "text": "Website: SiteConsent",
+    "link": "/style-guide/generated/components/site/SiteConsent"
+  },
+  {
+    "text": "Website: SiteFooter",
+    "link": "/style-guide/generated/components/site/SiteFooter"
+  },
+  {
+    "text": "Website: SiteNav",
+    "link": "/style-guide/generated/components/site/SiteNav"
+  },
+  {
+    "text": "Website: TrainingNav",
+    "link": "/style-guide/generated/components/site/TrainingNav"
+  },
+  {
+    "text": "Website: WorkspacePortal",
+    "link": "/style-guide/generated/components/site/WorkspacePortal"
+  },
+  {
+    "text": "Shared training: AccountAction",
+    "link": "/style-guide/generated/components/training/AccountAction"
+  },
+  {
+    "text": "Shared training: AccountHome",
+    "link": "/style-guide/generated/components/training/AccountHome"
+  },
+  {
+    "text": "Shared training: ActivityReview",
+    "link": "/style-guide/generated/components/training/ActivityReview"
+  },
+  {
+    "text": "Shared training: ActivityReviewCard",
+    "link": "/style-guide/generated/components/training/ActivityReviewCard"
+  },
+  {
+    "text": "Shared training: ActivityRouteMap",
+    "link": "/style-guide/generated/components/training/ActivityRouteMap"
+  },
+  {
+    "text": "Shared training: AiKeysPane",
+    "link": "/style-guide/generated/components/training/AiKeysPane"
+  },
+  {
+    "text": "Shared training: app-brand-styles",
+    "link": "/style-guide/generated/components/training/app-brand-styles"
+  },
+  {
+    "text": "Shared training: app-nav",
+    "link": "/style-guide/generated/components/training/app-nav"
+  },
+  {
+    "text": "Shared training: AssignedChip",
+    "link": "/style-guide/generated/components/training/AssignedChip"
+  },
+  {
+    "text": "Shared training: athlete-library",
+    "link": "/style-guide/generated/components/training/athlete-library"
+  },
+  {
+    "text": "Shared training: athlete-profile",
+    "link": "/style-guide/generated/components/training/athlete-profile"
+  },
+  {
+    "text": "Shared training: auth-guard",
+    "link": "/style-guide/generated/components/training/auth-guard"
+  },
+  {
+    "text": "Shared training: BreathClassWebsite",
+    "link": "/style-guide/generated/components/training/BreathClassWebsite"
+  },
+  {
+    "text": "Shared training: BreathingGuide",
+    "link": "/style-guide/generated/components/training/BreathingGuide"
+  },
+  {
+    "text": "Shared training: BreathPacer",
+    "link": "/style-guide/generated/components/training/BreathPacer"
+  },
+  {
+    "text": "Shared training: breathwork-scenes",
+    "link": "/style-guide/generated/components/training/breathwork-scenes"
+  },
+  {
+    "text": "Shared training: BreathworkBolt",
+    "link": "/style-guide/generated/components/training/BreathworkBolt"
+  },
+  {
+    "text": "Shared training: BreathworkConsent",
+    "link": "/style-guide/generated/components/training/BreathworkConsent"
+  },
+  {
+    "text": "Shared training: BreathworkPlanBuilder",
+    "link": "/style-guide/generated/components/training/BreathworkPlanBuilder"
+  },
+  {
+    "text": "Shared training: BreathworkPlayer",
+    "link": "/style-guide/generated/components/training/BreathworkPlayer"
+  },
+  {
+    "text": "Shared training: BreathworkStudio",
+    "link": "/style-guide/generated/components/training/BreathworkStudio"
+  },
+  {
+    "text": "Shared training: button",
+    "link": "/style-guide/generated/components/training/button"
+  },
+  {
+    "text": "Shared training: calendar-grid",
+    "link": "/style-guide/generated/components/training/calendar-grid"
+  },
+  {
+    "text": "Shared training: ChartInspector",
+    "link": "/style-guide/generated/components/training/ChartInspector"
+  },
+  {
+    "text": "Shared training: chat-button",
+    "link": "/style-guide/generated/components/training/chat-button"
+  },
+  {
+    "text": "Shared training: CheckoutHandBack",
+    "link": "/style-guide/generated/components/training/CheckoutHandBack"
+  },
+  {
+    "text": "Shared training: coach-library",
+    "link": "/style-guide/generated/components/training/coach-library"
+  },
+  {
+    "text": "Shared training: CoachAssistantWebsite",
+    "link": "/style-guide/generated/components/training/CoachAssistantWebsite"
+  },
+  {
+    "text": "Shared training: CoachAthleteBrowser",
+    "link": "/style-guide/generated/components/training/CoachAthleteBrowser"
+  },
+  {
+    "text": "Shared training: CoachAthletesWebsite",
+    "link": "/style-guide/generated/components/training/CoachAthletesWebsite"
+  },
+  {
+    "text": "Shared training: CoachBodyClock",
+    "link": "/style-guide/generated/components/training/CoachBodyClock"
+  },
+  {
+    "text": "Shared training: CoachBreathwork",
+    "link": "/style-guide/generated/components/training/CoachBreathwork"
+  },
+  {
+    "text": "Shared training: CoachGlucose",
+    "link": "/style-guide/generated/components/training/CoachGlucose"
+  },
+  {
+    "text": "Shared training: CoachHabits",
+    "link": "/style-guide/generated/components/training/CoachHabits"
+  },
+  {
+    "text": "Shared training: HQCoachingAccount",
+    "link": "/style-guide/generated/components/training/coaching/HQCoachingAccount"
+  },
+  {
+    "text": "Shared training: HQCoachingApp",
+    "link": "/style-guide/generated/components/training/coaching/HQCoachingApp"
+  },
+  {
+    "text": "Shared training: HQCoachingCalendar",
+    "link": "/style-guide/generated/components/training/coaching/HQCoachingCalendar"
+  },
+  {
+    "text": "Shared training: HQCoachingFeedback",
+    "link": "/style-guide/generated/components/training/coaching/HQCoachingFeedback"
+  },
+  {
+    "text": "Shared training: HQCoachingHealth",
+    "link": "/style-guide/generated/components/training/coaching/HQCoachingHealth"
+  },
+  {
+    "text": "Shared training: HQCoachingLibrary",
+    "link": "/style-guide/generated/components/training/coaching/HQCoachingLibrary"
+  },
+  {
+    "text": "Shared training: HQCoachingMessages",
+    "link": "/style-guide/generated/components/training/coaching/HQCoachingMessages"
+  },
+  {
+    "text": "Shared training: HQCoachingPlans",
+    "link": "/style-guide/generated/components/training/coaching/HQCoachingPlans"
+  },
+  {
+    "text": "Shared training: HQCoachingProgress",
+    "link": "/style-guide/generated/components/training/coaching/HQCoachingProgress"
+  },
+  {
+    "text": "Shared training: HQCoachingStatus",
+    "link": "/style-guide/generated/components/training/coaching/HQCoachingStatus"
+  },
+  {
+    "text": "Shared training: HQCoachingSurface",
+    "link": "/style-guide/generated/components/training/coaching/HQCoachingSurface"
+  },
+  {
+    "text": "Shared training: HQCoachingWorkout",
+    "link": "/style-guide/generated/components/training/coaching/HQCoachingWorkout"
+  },
+  {
+    "text": "Shared training: NativeCoaching",
+    "link": "/style-guide/generated/components/training/coaching/NativeCoaching"
+  },
+  {
+    "text": "Shared training: NativeCoachingAuth",
+    "link": "/style-guide/generated/components/training/coaching/NativeCoachingAuth"
+  },
+  {
+    "text": "Shared training: NativeCoachingForgotPassword",
+    "link": "/style-guide/generated/components/training/coaching/NativeCoachingForgotPassword"
+  },
+  {
+    "text": "Shared training: NativeCoachingLogin",
+    "link": "/style-guide/generated/components/training/coaching/NativeCoachingLogin"
+  },
+  {
+    "text": "Shared training: NativeCoachingResetPassword",
+    "link": "/style-guide/generated/components/training/coaching/NativeCoachingResetPassword"
+  },
+  {
+    "text": "Shared training: NativeCoachingSignup",
+    "link": "/style-guide/generated/components/training/coaching/NativeCoachingSignup"
+  },
+  {
+    "text": "Shared training: CoachingSubscriptionChoice",
+    "link": "/style-guide/generated/components/training/CoachingSubscriptionChoice"
+  },
+  {
+    "text": "Shared training: confirmation",
+    "link": "/style-guide/generated/components/training/confirmation"
+  },
+  {
+    "text": "Shared training: ConfirmSheet",
+    "link": "/style-guide/generated/components/training/ConfirmSheet"
+  },
+  {
+    "text": "Shared training: ConsentStep",
+    "link": "/style-guide/generated/components/training/ConsentStep"
+  },
+  {
+    "text": "Shared training: DevelopersPane",
+    "link": "/style-guide/generated/components/training/DevelopersPane"
+  },
+  {
+    "text": "Shared training: DoorAccessPane",
+    "link": "/style-guide/generated/components/training/DoorAccessPane"
+  },
+  {
+    "text": "Shared training: DoorCheckIn",
+    "link": "/style-guide/generated/components/training/DoorCheckIn"
+  },
+  {
+    "text": "Shared training: EightSleepPanel",
+    "link": "/style-guide/generated/components/training/EightSleepPanel"
+  },
+  {
+    "text": "Shared training: EnduranceScore",
+    "link": "/style-guide/generated/components/training/EnduranceScore"
+  },
+  {
+    "text": "Shared training: enterprise-site-footer",
+    "link": "/style-guide/generated/components/training/enterprise-site-footer"
+  },
+  {
+    "text": "Shared training: enterprise-site-nav",
+    "link": "/style-guide/generated/components/training/enterprise-site-nav"
+  },
+  {
+    "text": "Shared training: ExerciseArt",
+    "link": "/style-guide/generated/components/training/ExerciseArt"
+  },
+  {
+    "text": "Shared training: ExerciseBank",
+    "link": "/style-guide/generated/components/training/ExerciseBank"
+  },
+  {
+    "text": "Shared training: ExerciseVideoEditor",
+    "link": "/style-guide/generated/components/training/ExerciseVideoEditor"
+  },
+  {
+    "text": "Shared training: FitnessBenchmarks",
+    "link": "/style-guide/generated/components/training/FitnessBenchmarks"
+  },
+  {
+    "text": "Shared training: FitnessHistoryChart",
+    "link": "/style-guide/generated/components/training/FitnessHistoryChart"
+  },
+  {
+    "text": "Shared training: FitnessTrendChart",
+    "link": "/style-guide/generated/components/training/FitnessTrendChart"
+  },
+  {
+    "text": "Shared training: footer",
+    "link": "/style-guide/generated/components/training/footer"
+  },
+  {
+    "text": "Shared training: GarminTrainingSummary",
+    "link": "/style-guide/generated/components/training/GarminTrainingSummary"
+  },
+  {
+    "text": "Shared training: GlucoseCard",
+    "link": "/style-guide/generated/components/training/GlucoseCard"
+  },
+  {
+    "text": "Shared training: GlucoseDetail",
+    "link": "/style-guide/generated/components/training/GlucoseDetail"
+  },
+  {
+    "text": "Shared training: GlucoseOffer",
+    "link": "/style-guide/generated/components/training/GlucoseOffer"
+  },
+  {
+    "text": "Shared training: HealthData",
+    "link": "/style-guide/generated/components/training/HealthData"
+  },
+  {
+    "text": "Shared training: HeartRateCard",
+    "link": "/style-guide/generated/components/training/HeartRateCard"
+  },
+  {
+    "text": "Shared training: HeartRateChart",
+    "link": "/style-guide/generated/components/training/HeartRateChart"
+  },
+  {
+    "text": "Shared training: HeartRateDetail",
+    "link": "/style-guide/generated/components/training/HeartRateDetail"
+  },
+  {
+    "text": "Shared training: HqCoachWebsite",
+    "link": "/style-guide/generated/components/training/HqCoachWebsite"
+  },
+  {
+    "text": "Shared training: HQLogo",
+    "link": "/style-guide/generated/components/training/HQLogo"
+  },
+  {
+    "text": "Shared training: HydrationCard",
+    "link": "/style-guide/generated/components/training/HydrationCard"
+  },
+  {
+    "text": "Shared training: HydrationChart",
+    "link": "/style-guide/generated/components/training/HydrationChart"
+  },
+  {
+    "text": "Shared training: LanguageSwitch",
+    "link": "/style-guide/generated/components/training/LanguageSwitch"
+  },
+  {
+    "text": "Shared training: LeadForm",
+    "link": "/style-guide/generated/components/training/LeadForm"
+  },
+  {
+    "text": "Shared training: LinkedApps",
+    "link": "/style-guide/generated/components/training/LinkedApps"
+  },
+  {
+    "text": "Shared training: LocationMap",
+    "link": "/style-guide/generated/components/training/LocationMap"
+  },
+  {
+    "text": "Shared training: LocationSwitch",
+    "link": "/style-guide/generated/components/training/LocationSwitch"
+  },
+  {
+    "text": "Shared training: marketing-app-qr",
+    "link": "/style-guide/generated/components/training/marketing-app-qr"
+  },
+  {
+    "text": "Shared training: marketing-compare",
+    "link": "/style-guide/generated/components/training/marketing-compare"
+  },
+  {
+    "text": "Shared training: marketing-cta",
+    "link": "/style-guide/generated/components/training/marketing-cta"
+  },
+  {
+    "text": "Shared training: marketing-detail",
+    "link": "/style-guide/generated/components/training/marketing-detail"
+  },
+  {
+    "text": "Shared training: marketing-footer",
+    "link": "/style-guide/generated/components/training/marketing-footer"
+  },
+  {
+    "text": "Shared training: marketing-nav",
+    "link": "/style-guide/generated/components/training/marketing-nav"
+  },
+  {
+    "text": "Shared training: marketing-styles",
+    "link": "/style-guide/generated/components/training/marketing-styles"
+  },
+  {
+    "text": "Shared training: MCPConnect",
+    "link": "/style-guide/generated/components/training/MCPConnect"
+  },
+  {
+    "text": "Shared training: meter",
+    "link": "/style-guide/generated/components/training/meter"
+  },
+  {
+    "text": "Shared training: MetricHelp",
+    "link": "/style-guide/generated/components/training/MetricHelp"
+  },
+  {
+    "text": "Shared training: MindfulMinutes",
+    "link": "/style-guide/generated/components/training/MindfulMinutes"
+  },
+  {
+    "text": "Shared training: MindfulPractice",
+    "link": "/style-guide/generated/components/training/MindfulPractice"
+  },
+  {
+    "text": "Shared training: modal",
+    "link": "/style-guide/generated/components/training/modal"
+  },
+  {
+    "text": "Shared training: MuscleFocus",
+    "link": "/style-guide/generated/components/training/MuscleFocus"
+  },
+  {
+    "text": "Shared training: NativeActiveWorkout",
+    "link": "/style-guide/generated/components/training/NativeActiveWorkout"
+  },
+  {
+    "text": "Shared training: NativeActiveWorkoutPill",
+    "link": "/style-guide/generated/components/training/NativeActiveWorkoutPill"
+  },
+  {
+    "text": "Shared training: NativeProfileShare",
+    "link": "/style-guide/generated/components/training/NativeProfileShare"
+  },
+  {
+    "text": "Shared training: NativeSheet",
+    "link": "/style-guide/generated/components/training/NativeSheet"
+  },
+  {
+    "text": "Shared training: NeedsConnection",
+    "link": "/style-guide/generated/components/training/NeedsConnection"
+  },
+  {
+    "text": "Shared training: notification-bell",
+    "link": "/style-guide/generated/components/training/notification-bell"
+  },
+  {
+    "text": "Shared training: NowPlayingBar",
+    "link": "/style-guide/generated/components/training/NowPlayingBar"
+  },
+  {
+    "text": "Shared training: NutritionToday",
+    "link": "/style-guide/generated/components/training/NutritionToday"
+  },
+  {
+    "text": "Shared training: NutritionWebsite",
+    "link": "/style-guide/generated/components/training/NutritionWebsite"
+  },
+  {
+    "text": "Shared training: OfflineBanner",
+    "link": "/style-guide/generated/components/training/OfflineBanner"
+  },
+  {
+    "text": "Shared training: Onboarding",
+    "link": "/style-guide/generated/components/training/Onboarding"
+  },
+  {
+    "text": "Shared training: org-profile",
+    "link": "/style-guide/generated/components/training/org-profile"
+  },
+  {
+    "text": "Shared training: OuraRecovery",
+    "link": "/style-guide/generated/components/training/OuraRecovery"
+  },
+  {
+    "text": "Shared training: PageFreshness",
+    "link": "/style-guide/generated/components/training/PageFreshness"
+  },
+  {
+    "text": "Shared training: PasskeySettings",
+    "link": "/style-guide/generated/components/training/PasskeySettings"
+  },
+  {
+    "text": "Shared training: PasskeySignIn",
+    "link": "/style-guide/generated/components/training/PasskeySignIn"
+  },
+  {
+    "text": "Shared training: PeakCurves",
+    "link": "/style-guide/generated/components/training/PeakCurves"
+  },
+  {
+    "text": "Shared training: PhoneHealthSettings",
+    "link": "/style-guide/generated/components/training/PhoneHealthSettings"
+  },
+  {
+    "text": "Shared training: PhonePushSwitch",
+    "link": "/style-guide/generated/components/training/PhonePushSwitch"
+  },
+  {
+    "text": "Shared training: PhoneTabs",
+    "link": "/style-guide/generated/components/training/PhoneTabs"
+  },
+  {
+    "text": "Shared training: plan-builder",
+    "link": "/style-guide/generated/components/training/plan-builder"
+  },
+  {
+    "text": "Shared training: plan-library",
+    "link": "/style-guide/generated/components/training/plan-library"
+  },
+  {
+    "text": "Shared training: PlanGate",
+    "link": "/style-guide/generated/components/training/PlanGate"
+  },
+  {
+    "text": "Shared training: PolicyAgreement",
+    "link": "/style-guide/generated/components/training/PolicyAgreement"
+  },
+  {
+    "text": "Shared training: ProfileShare",
+    "link": "/style-guide/generated/components/training/ProfileShare"
+  },
+  {
+    "text": "Shared training: ProfileShortcut",
+    "link": "/style-guide/generated/components/training/ProfileShortcut"
+  },
+  {
+    "text": "Shared training: public-shell-nav",
+    "link": "/style-guide/generated/components/training/public-shell-nav"
+  },
+  {
+    "text": "Shared training: RankBelt",
+    "link": "/style-guide/generated/components/training/RankBelt"
+  },
+  {
+    "text": "Shared training: RelaxStudio",
+    "link": "/style-guide/generated/components/training/RelaxStudio"
+  },
+  {
+    "text": "Shared training: RunSharing",
+    "link": "/style-guide/generated/components/training/RunSharing"
+  },
+  {
+    "text": "Shared training: SessionCardBody",
+    "link": "/style-guide/generated/components/training/SessionCardBody"
+  },
+  {
+    "text": "Shared training: SettingsSidebar",
+    "link": "/style-guide/generated/components/training/SettingsSidebar"
+  },
+  {
+    "text": "Shared training: SettingsWebsite",
+    "link": "/style-guide/generated/components/training/SettingsWebsite"
+  },
+  {
+    "text": "Shared training: SharedActivity",
+    "link": "/style-guide/generated/components/training/SharedActivity"
+  },
+  {
+    "text": "Shared training: skeleton",
+    "link": "/style-guide/generated/components/training/skeleton"
+  },
+  {
+    "text": "Shared training: SocialSignIn",
+    "link": "/style-guide/generated/components/training/SocialSignIn"
+  },
+  {
+    "text": "Shared training: SocialVerifyOffer",
+    "link": "/style-guide/generated/components/training/SocialVerifyOffer"
+  },
+  {
+    "text": "Shared training: store-editor",
+    "link": "/style-guide/generated/components/training/store-editor"
+  },
+  {
+    "text": "Shared training: store-offer-preview",
+    "link": "/style-guide/generated/components/training/store-offer-preview"
+  },
+  {
+    "text": "Shared training: StrengthActualEntry",
+    "link": "/style-guide/generated/components/training/StrengthActualEntry"
+  },
+  {
+    "text": "Shared training: StrengthEditor",
+    "link": "/style-guide/generated/components/training/StrengthEditor"
+  },
+  {
+    "text": "Shared training: styles",
+    "link": "/style-guide/generated/components/training/styles"
+  },
+  {
+    "text": "Shared training: SupportViewBanner",
+    "link": "/style-guide/generated/components/training/SupportViewBanner"
+  },
+  {
+    "text": "Shared training: theme",
+    "link": "/style-guide/generated/components/training/theme"
+  },
+  {
+    "text": "Shared training: ThemeSwitch",
+    "link": "/style-guide/generated/components/training/ThemeSwitch"
+  },
+  {
+    "text": "Shared training: TillPane",
+    "link": "/style-guide/generated/components/training/TillPane"
+  },
+  {
+    "text": "Shared training: TimeClock",
+    "link": "/style-guide/generated/components/training/TimeClock"
+  },
+  {
+    "text": "Shared training: TodayAddMenu",
+    "link": "/style-guide/generated/components/training/TodayAddMenu"
+  },
+  {
+    "text": "Shared training: TourHome",
+    "link": "/style-guide/generated/components/training/TourHome"
+  },
+  {
+    "text": "Shared training: TwoFactorSettings",
+    "link": "/style-guide/generated/components/training/TwoFactorSettings"
+  },
+  {
+    "text": "Shared training: unit-preference",
+    "link": "/style-guide/generated/components/training/unit-preference"
+  },
+  {
+    "text": "Shared training: VideoModal",
+    "link": "/style-guide/generated/components/training/VideoModal"
+  },
+  {
+    "text": "Shared training: WeightHistory",
+    "link": "/style-guide/generated/components/training/WeightHistory"
+  },
+  {
+    "text": "Shared training: WhiteboardDay",
+    "link": "/style-guide/generated/components/training/WhiteboardDay"
+  },
+  {
+    "text": "Shared training: WindDownCard",
+    "link": "/style-guide/generated/components/training/WindDownCard"
+  },
+  {
+    "text": "Shared training: workout-panel",
+    "link": "/style-guide/generated/components/training/workout-panel"
+  },
+  {
+    "text": "Shared training: WorkoutHeartSummary",
+    "link": "/style-guide/generated/components/training/WorkoutHeartSummary"
+  },
+  {
+    "text": "Shared training: WorkoutNotes",
+    "link": "/style-guide/generated/components/training/WorkoutNotes"
+  },
+  {
+    "text": "Shared training: WorkoutStructureChart",
+    "link": "/style-guide/generated/components/training/WorkoutStructureChart"
+  },
+  {
+    "text": "Shared training: WorkoutTrackCharts",
+    "link": "/style-guide/generated/components/training/WorkoutTrackCharts"
+  },
+  {
+    "text": "Shared training: WorkoutTrackDetail",
+    "link": "/style-guide/generated/components/training/WorkoutTrackDetail"
+  },
+  {
+    "text": "Shared training: workspace-brand",
+    "link": "/style-guide/generated/components/training/workspace-brand"
+  },
+  {
+    "text": "Shared training: workspace-footer",
+    "link": "/style-guide/generated/components/training/workspace-footer"
+  },
+  {
+    "text": "Shared training: workspace-nav",
+    "link": "/style-guide/generated/components/training/workspace-nav"
+  },
+  {
+    "text": "Shared training: zone-table",
+    "link": "/style-guide/generated/components/training/zone-table"
+  },
+  {
+    "text": "Shared UI: Accordion",
+    "link": "/style-guide/generated/components/ui/accordion/Accordion"
+  },
+  {
+    "text": "Shared UI: AccordionItem",
+    "link": "/style-guide/generated/components/ui/accordion/AccordionItem"
+  },
+  {
+    "text": "Shared UI: AddressField",
+    "link": "/style-guide/generated/components/ui/app-frame/AddressField"
+  },
+  {
+    "text": "Shared UI: CommandBar",
+    "link": "/style-guide/generated/components/ui/app-frame/CommandBar"
+  },
+  {
+    "text": "Shared UI: ContentCard",
+    "link": "/style-guide/generated/components/ui/app-frame/ContentCard"
+  },
+  {
+    "text": "Shared UI: FloatingPanel",
+    "link": "/style-guide/generated/components/ui/app-frame/FloatingPanel"
+  },
+  {
+    "text": "Shared UI: SidebarDivider",
+    "link": "/style-guide/generated/components/ui/app-frame/SidebarDivider"
+  },
+  {
+    "text": "Shared UI: SidebarRow",
+    "link": "/style-guide/generated/components/ui/app-frame/SidebarRow"
+  },
+  {
+    "text": "Shared UI: SpaceSwitcher",
+    "link": "/style-guide/generated/components/ui/app-frame/SpaceSwitcher"
+  },
+  {
+    "text": "Shared UI: TileGrid",
+    "link": "/style-guide/generated/components/ui/app-frame/TileGrid"
+  },
+  {
+    "text": "Shared UI: Audio",
+    "link": "/style-guide/generated/components/ui/audio/Audio"
+  },
+  {
+    "text": "Shared UI: Login",
+    "link": "/style-guide/generated/components/ui/auth/Login"
+  },
+  {
+    "text": "Shared UI: Signup",
+    "link": "/style-guide/generated/components/ui/auth/Signup"
+  },
+  {
+    "text": "Shared UI: TwoFactorChallenge",
+    "link": "/style-guide/generated/components/ui/auth/TwoFactorChallenge"
+  },
+  {
+    "text": "Shared UI: Avatar",
+    "link": "/style-guide/generated/components/ui/avatar/Avatar"
+  },
+  {
+    "text": "Shared UI: Badge",
+    "link": "/style-guide/generated/components/ui/badge/Badge"
+  },
+  {
+    "text": "Shared UI: Breadcrumb",
+    "link": "/style-guide/generated/components/ui/breadcrumb/Breadcrumb"
+  },
+  {
+    "text": "Shared UI: Button",
+    "link": "/style-guide/generated/components/ui/button/Button"
+  },
+  {
+    "text": "Shared UI: Calendar",
+    "link": "/style-guide/generated/components/ui/calendar/Calendar"
+  },
+  {
+    "text": "Shared UI: Card",
+    "link": "/style-guide/generated/components/ui/card/Card"
+  },
+  {
+    "text": "Shared UI: ChatInbox",
+    "link": "/style-guide/generated/components/ui/chat/ChatInbox"
+  },
+  {
+    "text": "Shared UI: ChatLauncher",
+    "link": "/style-guide/generated/components/ui/chat/ChatLauncher"
+  },
+  {
+    "text": "Shared UI: ChatMessage",
+    "link": "/style-guide/generated/components/ui/chat/ChatMessage"
+  },
+  {
+    "text": "Shared UI: ChatUnreadBadge",
+    "link": "/style-guide/generated/components/ui/chat/ChatUnreadBadge"
+  },
+  {
+    "text": "Shared UI: ConversationListItem",
+    "link": "/style-guide/generated/components/ui/chat/ConversationListItem"
+  },
+  {
+    "text": "Shared UI: MessageBubble",
+    "link": "/style-guide/generated/components/ui/chat/MessageBubble"
+  },
+  {
+    "text": "Shared UI: Checkbox",
+    "link": "/style-guide/generated/components/ui/checkbox/Checkbox"
+  },
+  {
+    "text": "Shared UI: ChoiceChips",
+    "link": "/style-guide/generated/components/ui/choice-chips/ChoiceChips"
+  },
+  {
+    "text": "Shared UI: Combobox",
+    "link": "/style-guide/generated/components/ui/combobox/Combobox"
+  },
+  {
+    "text": "Shared UI: ComboboxButton",
+    "link": "/style-guide/generated/components/ui/combobox/ComboboxButton"
+  },
+  {
+    "text": "Shared UI: ComboboxInput",
+    "link": "/style-guide/generated/components/ui/combobox/ComboboxInput"
+  },
+  {
+    "text": "Shared UI: ComboboxOption",
+    "link": "/style-guide/generated/components/ui/combobox/ComboboxOption"
+  },
+  {
+    "text": "Shared UI: ComboboxOptions",
+    "link": "/style-guide/generated/components/ui/combobox/ComboboxOptions"
+  },
+  {
+    "text": "Shared UI: CommandPalette",
+    "link": "/style-guide/generated/components/ui/command-palette/CommandPalette"
+  },
+  {
+    "text": "Shared UI: CommandPaletteItem",
+    "link": "/style-guide/generated/components/ui/command-palette/CommandPaletteItem"
+  },
+  {
+    "text": "Shared UI: DateRangePicker",
+    "link": "/style-guide/generated/components/ui/date-range-picker/DateRangePicker"
+  },
+  {
+    "text": "Shared UI: Dialog",
+    "link": "/style-guide/generated/components/ui/dialog/Dialog"
+  },
+  {
+    "text": "Shared UI: DialogBackdrop",
+    "link": "/style-guide/generated/components/ui/dialog/DialogBackdrop"
+  },
+  {
+    "text": "Shared UI: DialogDescription",
+    "link": "/style-guide/generated/components/ui/dialog/DialogDescription"
+  },
+  {
+    "text": "Shared UI: DialogPanel",
+    "link": "/style-guide/generated/components/ui/dialog/DialogPanel"
+  },
+  {
+    "text": "Shared UI: DialogTitle",
+    "link": "/style-guide/generated/components/ui/dialog/DialogTitle"
+  },
+  {
+    "text": "Shared UI: Drawer",
+    "link": "/style-guide/generated/components/ui/drawer/Drawer"
+  },
+  {
+    "text": "Shared UI: Dropdown",
+    "link": "/style-guide/generated/components/ui/dropdown/Dropdown"
+  },
+  {
+    "text": "Shared UI: DropdownButton",
+    "link": "/style-guide/generated/components/ui/dropdown/DropdownButton"
+  },
+  {
+    "text": "Shared UI: DropdownItem",
+    "link": "/style-guide/generated/components/ui/dropdown/DropdownItem"
+  },
+  {
+    "text": "Shared UI: DropdownItems",
+    "link": "/style-guide/generated/components/ui/dropdown/DropdownItems"
+  },
+  {
+    "text": "Shared UI: EmptyState",
+    "link": "/style-guide/generated/components/ui/empty-state/EmptyState"
+  },
+  {
+    "text": "Shared UI: ErrorState",
+    "link": "/style-guide/generated/components/ui/error-state/ErrorState"
+  },
+  {
+    "text": "Shared UI: Form",
+    "link": "/style-guide/generated/components/ui/form/Form"
+  },
+  {
+    "text": "Shared UI: GroupedList",
+    "link": "/style-guide/generated/components/ui/grouped-list/GroupedList"
+  },
+  {
+    "text": "Shared UI: GroupedListRow",
+    "link": "/style-guide/generated/components/ui/grouped-list/GroupedListRow"
+  },
+  {
+    "text": "Shared UI: Heatmap",
+    "link": "/style-guide/generated/components/ui/heatmap/Heatmap"
+  },
+  {
+    "text": "Shared UI: Image",
+    "link": "/style-guide/generated/components/ui/image/Image"
+  },
+  {
+    "text": "Shared UI: EmailInput",
+    "link": "/style-guide/generated/components/ui/input/EmailInput"
+  },
+  {
+    "text": "Shared UI: NumberInput",
+    "link": "/style-guide/generated/components/ui/input/NumberInput"
+  },
+  {
+    "text": "Shared UI: PasswordInput",
+    "link": "/style-guide/generated/components/ui/input/PasswordInput"
+  },
+  {
+    "text": "Shared UI: SearchInput",
+    "link": "/style-guide/generated/components/ui/input/SearchInput"
+  },
+  {
+    "text": "Shared UI: TextInput",
+    "link": "/style-guide/generated/components/ui/input/TextInput"
+  },
+  {
+    "text": "Shared UI: List",
+    "link": "/style-guide/generated/components/ui/list/List"
+  },
+  {
+    "text": "Shared UI: Listbox",
+    "link": "/style-guide/generated/components/ui/listbox/Listbox"
+  },
+  {
+    "text": "Shared UI: ListboxButton",
+    "link": "/style-guide/generated/components/ui/listbox/ListboxButton"
+  },
+  {
+    "text": "Shared UI: ListboxLabel",
+    "link": "/style-guide/generated/components/ui/listbox/ListboxLabel"
+  },
+  {
+    "text": "Shared UI: ListboxOption",
+    "link": "/style-guide/generated/components/ui/listbox/ListboxOption"
+  },
+  {
+    "text": "Shared UI: ListboxOptions",
+    "link": "/style-guide/generated/components/ui/listbox/ListboxOptions"
+  },
+  {
+    "text": "Shared UI: FilterChip",
+    "link": "/style-guide/generated/components/ui/mobile/FilterChip"
+  },
+  {
+    "text": "Shared UI: FilterChips",
+    "link": "/style-guide/generated/components/ui/mobile/FilterChips"
+  },
+  {
+    "text": "Shared UI: ListRow",
+    "link": "/style-guide/generated/components/ui/mobile/ListRow"
+  },
+  {
+    "text": "Shared UI: NavBar",
+    "link": "/style-guide/generated/components/ui/mobile/NavBar"
+  },
+  {
+    "text": "Shared UI: SectionCard",
+    "link": "/style-guide/generated/components/ui/mobile/SectionCard"
+  },
+  {
+    "text": "Shared UI: TabBar",
+    "link": "/style-guide/generated/components/ui/mobile/TabBar"
+  },
+  {
+    "text": "Shared UI: TabBarItem",
+    "link": "/style-guide/generated/components/ui/mobile/TabBarItem"
+  },
+  {
+    "text": "Shared UI: Navigator",
+    "link": "/style-guide/generated/components/ui/navigator/Navigator"
+  },
+  {
+    "text": "Shared UI: Notification",
+    "link": "/style-guide/generated/components/ui/notification/Notification"
+  },
+  {
+    "text": "Shared UI: Pager",
+    "link": "/style-guide/generated/components/ui/pager/Pager"
+  },
+  {
+    "text": "Shared UI: PagerDots",
+    "link": "/style-guide/generated/components/ui/pager/PagerDots"
+  },
+  {
+    "text": "Shared UI: Pagination",
+    "link": "/style-guide/generated/components/ui/pagination/Pagination"
+  },
+  {
+    "text": "Shared UI: Checkout",
+    "link": "/style-guide/generated/components/ui/payment/Checkout"
+  },
+  {
+    "text": "Shared UI: DefaultPaymentMethod",
+    "link": "/style-guide/generated/components/ui/payment/DefaultPaymentMethod"
+  },
+  {
+    "text": "Shared UI: PaymentMethods",
+    "link": "/style-guide/generated/components/ui/payment/PaymentMethods"
+  },
+  {
+    "text": "Shared UI: SubscriptionCheckout",
+    "link": "/style-guide/generated/components/ui/payment/SubscriptionCheckout"
+  },
+  {
+    "text": "Shared UI: Popover",
+    "link": "/style-guide/generated/components/ui/popover/Popover"
+  },
+  {
+    "text": "Shared UI: PopoverButton",
+    "link": "/style-guide/generated/components/ui/popover/PopoverButton"
+  },
+  {
+    "text": "Shared UI: PopoverPanel",
+    "link": "/style-guide/generated/components/ui/popover/PopoverPanel"
+  },
+  {
+    "text": "Shared UI: Portal",
+    "link": "/style-guide/generated/components/ui/portal/Portal"
+  },
+  {
+    "text": "Shared UI: Progress",
+    "link": "/style-guide/generated/components/ui/progress/Progress"
+  },
+  {
+    "text": "Shared UI: RadioGroup",
+    "link": "/style-guide/generated/components/ui/radio-group/RadioGroup"
+  },
+  {
+    "text": "Shared UI: RadioGroupDescription",
+    "link": "/style-guide/generated/components/ui/radio-group/RadioGroupDescription"
+  },
+  {
+    "text": "Shared UI: RadioGroupLabel",
+    "link": "/style-guide/generated/components/ui/radio-group/RadioGroupLabel"
+  },
+  {
+    "text": "Shared UI: RadioGroupOption",
+    "link": "/style-guide/generated/components/ui/radio-group/RadioGroupOption"
+  },
+  {
+    "text": "Shared UI: Radio",
+    "link": "/style-guide/generated/components/ui/radio/Radio"
+  },
+  {
+    "text": "Shared UI: SegmentedControl",
+    "link": "/style-guide/generated/components/ui/segmented-control/SegmentedControl"
+  },
+  {
+    "text": "Shared UI: Select",
+    "link": "/style-guide/generated/components/ui/select/Select"
+  },
+  {
+    "text": "Shared UI: Sidebar",
+    "link": "/style-guide/generated/components/ui/sidebar/Sidebar"
+  },
+  {
+    "text": "Shared UI: SidebarFooter",
+    "link": "/style-guide/generated/components/ui/sidebar/SidebarFooter"
+  },
+  {
+    "text": "Shared UI: SidebarHeader",
+    "link": "/style-guide/generated/components/ui/sidebar/SidebarHeader"
+  },
+  {
+    "text": "Shared UI: SidebarItem",
+    "link": "/style-guide/generated/components/ui/sidebar/SidebarItem"
+  },
+  {
+    "text": "Shared UI: SidebarPinned",
+    "link": "/style-guide/generated/components/ui/sidebar/SidebarPinned"
+  },
+  {
+    "text": "Shared UI: SidebarSection",
+    "link": "/style-guide/generated/components/ui/sidebar/SidebarSection"
+  },
+  {
+    "text": "Shared UI: SidebarSections",
+    "link": "/style-guide/generated/components/ui/sidebar/SidebarSections"
+  },
+  {
+    "text": "Shared UI: SidebarSpace",
+    "link": "/style-guide/generated/components/ui/sidebar/SidebarSpace"
+  },
+  {
+    "text": "Shared UI: SidebarSpaces",
+    "link": "/style-guide/generated/components/ui/sidebar/SidebarSpaces"
+  },
+  {
+    "text": "Shared UI: SidebarSpaceSwitcher",
+    "link": "/style-guide/generated/components/ui/sidebar/SidebarSpaceSwitcher"
+  },
+  {
+    "text": "Shared UI: Skeleton",
+    "link": "/style-guide/generated/components/ui/skeleton/Skeleton"
+  },
+  {
+    "text": "Shared UI: Spinner",
+    "link": "/style-guide/generated/components/ui/spinner/Spinner"
+  },
+  {
+    "text": "Shared UI: Stepper",
+    "link": "/style-guide/generated/components/ui/stepper/Stepper"
+  },
+  {
+    "text": "Shared UI: StepperStep",
+    "link": "/style-guide/generated/components/ui/stepper/StepperStep"
+  },
+  {
+    "text": "Shared UI: Switch",
+    "link": "/style-guide/generated/components/ui/switch/Switch"
+  },
+  {
+    "text": "Shared UI: Table",
+    "link": "/style-guide/generated/components/ui/table/Table"
+  },
+  {
+    "text": "Shared UI: TableBody",
+    "link": "/style-guide/generated/components/ui/table/TableBody"
+  },
+  {
+    "text": "Shared UI: TableCell",
+    "link": "/style-guide/generated/components/ui/table/TableCell"
+  },
+  {
+    "text": "Shared UI: TableHead",
+    "link": "/style-guide/generated/components/ui/table/TableHead"
+  },
+  {
+    "text": "Shared UI: TableHeader",
+    "link": "/style-guide/generated/components/ui/table/TableHeader"
+  },
+  {
+    "text": "Shared UI: TableRow",
+    "link": "/style-guide/generated/components/ui/table/TableRow"
+  },
+  {
+    "text": "Shared UI: Tab",
+    "link": "/style-guide/generated/components/ui/tabs/Tab"
+  },
+  {
+    "text": "Shared UI: TabList",
+    "link": "/style-guide/generated/components/ui/tabs/TabList"
+  },
+  {
+    "text": "Shared UI: TabPanel",
+    "link": "/style-guide/generated/components/ui/tabs/TabPanel"
+  },
+  {
+    "text": "Shared UI: Tabs",
+    "link": "/style-guide/generated/components/ui/tabs/Tabs"
+  },
+  {
+    "text": "Shared UI: Teleport",
+    "link": "/style-guide/generated/components/ui/teleport/Teleport"
+  },
+  {
+    "text": "Shared UI: AiTextarea",
+    "link": "/style-guide/generated/components/ui/textarea/AiTextarea"
+  },
+  {
+    "text": "Shared UI: Textarea",
+    "link": "/style-guide/generated/components/ui/textarea/Textarea"
+  },
+  {
+    "text": "Shared UI: ThemeToggle",
+    "link": "/style-guide/generated/components/ui/theme-toggle/ThemeToggle"
+  },
+  {
+    "text": "Shared UI: Tooltip",
+    "link": "/style-guide/generated/components/ui/tooltip/Tooltip"
+  },
+  {
+    "text": "Shared UI: Transition",
+    "link": "/style-guide/generated/components/ui/transition/Transition"
+  },
+  {
+    "text": "Shared UI: Video",
+    "link": "/style-guide/generated/components/ui/video/Video"
+  },
+  {
+    "text": "Shared UI: VirtualList",
+    "link": "/style-guide/generated/components/ui/virtual-list/VirtualList"
+  },
+  {
+    "text": "Shared UI: VirtualTable",
+    "link": "/style-guide/generated/components/ui/virtual-table/VirtualTable"
+  }
+]

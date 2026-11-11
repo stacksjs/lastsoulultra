@@ -86,6 +86,9 @@ const config: PickierOptions = {
     '**/storage/framework/server/storage/**',
     '**/.bunpress/**',
     '**/docs/deps/**',
+    // Generated Markdown and compiled previews have an ownership/freshness check.
+    '**/docs/public/style-guide/generated/**',
+    '**/docs/style-guide/generated/**',
     // Generated scaffolds copied into pantry — out of project control
     '**/pantry/**',
   ],

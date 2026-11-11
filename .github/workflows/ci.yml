@@ -44,7 +44,7 @@ jobs:
             node-modules-
 
       - name: Install Dependencies
-        run: bun install
+        run: bun install --frozen-lockfile
 
       - name: Lint
         run: bun buddy lint
@@ -61,6 +61,15 @@ jobs:
             git --no-pager diff --stat
             exit 1
           fi
+
+      - name: Install the pinned training component sources
+        env:
+          PANTRY_REGISTRY_TOKEN: ${{ secrets.PANTRY_REGISTRY_TOKEN }}
+          PANTRY_ENV_DEPS: '0'
+        run: pantry install --frozen-lockfile --ignore-scripts --quiet
+
+      - name: Generated component style guide is current
+        run: bun run docs:style-guide:check
 
       - name: Build and verify the LSU user guide
         run: ./buddy build --docs && bun run audit:docs
@@ -92,7 +101,7 @@ jobs:
             node-modules-
 
       - name: Install dependencies
-        run: bun install
+        run: bun install --frozen-lockfile
 
       - name: Set Application Key
         run: bun buddy key:generate
@@ -127,7 +136,7 @@ jobs:
             node-modules-
 
       - name: Install Dependencies
-        run: bun install
+        run: bun install --frozen-lockfile
 
       - name: Set Application Key
         run: bun buddy key:generate

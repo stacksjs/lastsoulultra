@@ -1,0 +1,11 @@
+<Story title="Brand typography and surfaces" group="Foundations">
+  <Variant title="Type specimen">
+    <section class="space-y-5">
+      <p class="kicker">Last Soul Ultra World Series</p>
+      <h1 class="leading-[1.05] text-[clamp(36px,7vw,72px)] font-[family-name:var(--lsu-display)]">THE NEXT YARD IS YOURS</h1>
+      <p class="max-w-[60ch] text-lg font-[family-name:var(--lsu-body)]">Barlow carries the details that a runner needs to read: race information, entry instructions and coaching feedback.</p>
+      <p class="text-xl font-[family-name:var(--lsu-mono)]">YARD 024 / 160.9 KM</p>
+      <p class="text-4xl font-[family-name:var(--lsu-seg)]" aria-label="Example clock, 45 minutes">00:45:00</p>
+    </section>
+  </Variant>
+</Story>

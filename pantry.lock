@@ -6,7 +6,7 @@
       "name": "last-soul-ultra",
       "dependencies": {
         "@ts-maps/stx": "0.5.7",
-        "stacks": "0.75.528"
+        "stacks": "0.75.537"
       },
       "devDependencies": {
         "better-dx": "^0.2.38",

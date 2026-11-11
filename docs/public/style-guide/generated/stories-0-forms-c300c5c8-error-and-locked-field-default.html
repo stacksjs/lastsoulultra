@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en" class=""><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline' 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; img-src 'self' data:; font-src 'self' data:; connect-src 'none'; form-action 'none'; base-uri 'none'"><title>Last Soul Ultra: Forms and account feedback, Error and locked field, Default</title><link rel="stylesheet" href="./components.css"><style>:root{color-scheme:light dark}*{box-sizing:border-box}body{margin:0;padding:24px;background:#000000;color:#ffffff;font-family:"Barlow", system-ui, sans-serif}body>main{max-width:1100px;margin:auto}button,input,select,textarea{font:inherit}@media(max-width:480px){body{padding:16px}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}</style></head><body class=""><main aria-label="Forms and account feedback, Error and locked field, Default"><script data-stx-scoped data-stx-runtime src="./runtime-c7a778626ef2.js"></script>
+<script data-stx-scoped data-stx-run="always" data-stx-composables>;(function(){
+var __bundles = window.__stxComposableBundles || (window.__stxComposableBundles = {});
+if (__bundles["6c6e1cbb36c6"]) return;
+__bundles["6c6e1cbb36c6"] = true;
+var __published = window.__stxComposableGlobals || (window.__stxComposableGlobals = {});
+window.__composables = window.__composables || {};
+var __c = window.__composables;
+var __stx = window.stx || {};
+var state = __stx["state"];
+var useDark = __stx["useDark"];
+var usePreferredDark = __stx["usePreferredDark"];
+// Composable: counter
+const count = state(0);
+function increment() {
+  count.update((n) => n + 1);
+}
+function decrement() {
+  count.update((n) => n - 1);
+}
+function reset() {
+  count.set(0);
+}
+
+// Composable: dark
+const isDark = useDark();
+const preferredDark = usePreferredDark();
+function toggleDark() {
+  isDark.set(!isDark());
+}
+  try { if (!("count" in __c)) __c["count"] = count; } catch (e) {}
+  try { if (!("decrement" in __c)) __c["decrement"] = decrement; } catch (e) {}
+  try { if (!("increment" in __c)) __c["increment"] = increment; } catch (e) {}
+  try { if (!("reset" in __c)) __c["reset"] = reset; } catch (e) {}
+  try { if (!("isDark" in __c)) __c["isDark"] = isDark; } catch (e) {}
+  try { if (!("preferredDark" in __c)) __c["preferredDark"] = preferredDark; } catch (e) {}
+  try { if (!("toggleDark" in __c)) __c["toggleDark"] = toggleDark; } catch (e) {}
+  var __names = ["count","decrement","increment","reset","isDark","preferredDark","toggleDark"];
+  for (var __i = 0; __i < __names.length; __i++) {
+    var __n = __names[__i];
+    if (!(__n in __c) || __published[__n]) continue;
+    var __takenByBuiltin = !!(window.stx && __n in window.stx);
+    if (__takenByBuiltin || __n in window) {
+      console.warn('[stx] composable "' + __n + '" is not available as a bare identifier: '
+        + (__takenByBuiltin ? 'a built-in of that name already exists' : 'window already defines that property')
+        + '. Rename it, or use: import { ' + __n + ' } from "@composables"');
+      continue;
+    }
+    window[__n] = __c[__n];
+    __published[__n] = true;
+  }
+})();</script>
+
+<section class="lsu-scope-profile profile-page" data-stx="__stx_setup_3k4yoo741u"><div class="login-card"><form class="space-y-4 profile-form" @submit.prevent="guideSaved.set(false)">
+      <label class="block" for="guide-email">Email address<input class="block w-full" id="guide-email" value="runner" aria-invalid="true" aria-describedby="guide-email-error"></label>
+      <p id="guide-email-error" class="error form-message" role="alert">Enter a complete email address.</p>
+      <label class="block" for="guide-bib">Bib number<input class="block w-full" id="guide-bib" value="Assigned after confirmation" disabled></label>
+      <button type="submit" class="btn">Review details</button>
+    </form></div></section>
+
+
+<script data-stx-scoped>
+function __stx_setup_3k4yoo741u() {
+  const { batch, cachedQuery, clearServerData, computed, configureFetch, defineEmits, defineExpose, definePageMeta, defineProps, defineSlots, defineStore, derived, effect, flushKeptState, forgetKeptState, goBack, goForward, inject, invalidateRoute, isDerived, isSignal, keptState, memo, navigate, nextTick, onBeforeMount, onBeforeUnmount, onDestroy, onMount, onMounted, onUnmounted, peek, provide, reactive, ref, refDebounced, refresh, registerStoresClient, setKeptScope, setRouteParams, sharedRequest, state, untrack, useAsync, useBroadcastStream, useClickOutside, useColorMode, useCookie, useCounter, useDark, useDebounce, useDebounceFn, useDebouncedValue, useDocumentVisibility, useEventListener, useFetch, useFocus, useHead, useId, useInterval, useLocalStorage, useMediaQuery, useModel, useMutation, useNativeDesktop, useOptimistic, usePreferredContrast, usePreferredDark, usePreferredLight, usePreferredReducedMotion, useQuery, useReactiveProp, useRef, useRoute, useRouteParam, useRouteParams, useScrollLock, useSearchParams, useSeoMeta, useSessionStorage, useSlots, useStore, useThrottle, useThrottleFn, useTimeout, useTimeoutFn, useToggle, useWebSocket, watch, watchEffect, watchMultiple, withDefaults } = window.stx;
+// ── merged signal script #1 ──
+const guideName = state("Sample runner");
+const guideSaved = state(false);
+
+  return { guideName, guideSaved };
+}
+window.__stx_latestSetup=__stx_setup_3k4yoo741u;
+if(window.stx)window.stx._latestSetup=__stx_setup_3k4yoo741u;
+</script></main></body></html>
