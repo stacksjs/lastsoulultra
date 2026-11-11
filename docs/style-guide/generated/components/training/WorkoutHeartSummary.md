@@ -20,6 +20,7 @@ Reference only. Add an isolated .story.stx fixture before enabling a preview; th
 | Name | Type | Contract |
 | --- | --- | --- |
 | data | Not declared | Read by the implementation; see source for defaults and accepted values. |
+| flush | Not declared | Read by the implementation; see source for defaults and accepted values. |
 | showZones | Not declared | Read by the implementation; see source for defaults and accepted values. |
 
 ## Slots

@@ -9,7 +9,7 @@ description: "Last Soul Ultra component guide. Production component reference fo
 
 Production components and interface patterns for the World Series, race entries and training portal.
 
-305 components, 5 isolated stories and 8 variants. Generated from production sources, with Last Soul Ultra branding.
+306 components, 5 isolated stories and 8 variants. Generated from production sources, with Last Soul Ultra branding.
 
 [Foundations, tokens and branding](/style-guide/generated/foundations)
 
@@ -54,6 +54,7 @@ Every configured component is indexed. Reference-only entries do not claim teste
 | [auth-guard](/style-guide/generated/components/training/auth-guard) | Shared training | Reference only |
 | [BreathClassWebsite](/style-guide/generated/components/training/BreathClassWebsite) | Shared training | Reference only |
 | [BreathingGuide](/style-guide/generated/components/training/BreathingGuide) | Shared training | Reference only |
+| [BreathLane](/style-guide/generated/components/training/BreathLane) | Shared training | Reference only |
 | [BreathPacer](/style-guide/generated/components/training/BreathPacer) | Shared training | Reference only |
 | [breathwork-scenes](/style-guide/generated/components/training/breathwork-scenes) | Shared training | Reference only |
 | [BreathworkBolt](/style-guide/generated/components/training/BreathworkBolt) | Shared training | Reference only |

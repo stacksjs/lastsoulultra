@@ -14,19 +14,25 @@ Source: `resources/style-guide/forms.story.stx`. Group: Inputs. Local demonstrat
 
 <a href="/docs/style-guide/generated/stories-0-forms-c300c5c8-profile-form-default.html">Open Profile form preview (Default)</a>
 
-<iframe title="Forms and account feedback: Profile form, Default" src="/docs/style-guide/generated/stories-0-forms-c300c5c8-profile-form-default.html" loading="lazy" sandbox="allow-scripts" style="width:100%;height:440px;border:1px solid #8884;border-radius:8px"></iframe>
+<iframe title="Forms and account feedback: Profile form, Default" src="/docs/style-guide/generated/stories-0-forms-c300c5c8-profile-form-default.html" loading="lazy" sandbox="allow-scripts allow-forms" style="width:100%;height:440px;border:1px solid #8884;border-radius:8px"></iframe>
 
 
 ```stx
 <script client>
 const guideName = state('Sample runner')
 const guideSaved = state(false)
+function guideSaveProfile() {
+  guideSaved.set(true)
+}
+function guideReviewProfile() {
+  guideSaved.set(false)
+}
 </script>
 
 <section class="lsu-scope-profile profile-page">
       <div class="login-card">
         <h2 class="font-[family-name:var(--lsu-display)]">RUNNER DETAILS</h2>
-        <form class="space-y-4 profile-form" @submit.prevent="guideSaved.set(true)">
+        <form class="space-y-4 profile-form" @submit.prevent="guideSaveProfile()">
           <label class="block" for="guide-runner">Runner name<input class="block w-full" id="guide-runner" :model="guideName" autocomplete="off"></label>
           <label class="block" for="guide-country">Country<select class="block w-full" id="guide-country"><option>Philippines</option><option>United Kingdom</option><option>United States</option></select></label>
           <button class="btn" type="submit">Save example</button>
@@ -41,16 +47,22 @@ const guideSaved = state(false)
 
 <a href="/docs/style-guide/generated/stories-0-forms-c300c5c8-error-and-locked-field-default.html">Open Error and locked field preview (Default)</a>
 
-<iframe title="Forms and account feedback: Error and locked field, Default" src="/docs/style-guide/generated/stories-0-forms-c300c5c8-error-and-locked-field-default.html" loading="lazy" sandbox="allow-scripts" style="width:100%;height:440px;border:1px solid #8884;border-radius:8px"></iframe>
+<iframe title="Forms and account feedback: Error and locked field, Default" src="/docs/style-guide/generated/stories-0-forms-c300c5c8-error-and-locked-field-default.html" loading="lazy" sandbox="allow-scripts allow-forms" style="width:100%;height:440px;border:1px solid #8884;border-radius:8px"></iframe>
 
 
 ```stx
 <script client>
 const guideName = state('Sample runner')
 const guideSaved = state(false)
+function guideSaveProfile() {
+  guideSaved.set(true)
+}
+function guideReviewProfile() {
+  guideSaved.set(false)
+}
 </script>
 
-<section class="lsu-scope-profile profile-page"><div class="login-card"><form class="space-y-4 profile-form" @submit.prevent="guideSaved.set(false)">
+<section class="lsu-scope-profile profile-page"><div class="login-card"><form class="space-y-4 profile-form" @submit.prevent="guideReviewProfile()">
       <label class="block" for="guide-email">Email address<input class="block w-full" id="guide-email" value="runner" aria-invalid="true" aria-describedby="guide-email-error"></label>
       <p id="guide-email-error" class="error form-message" role="alert">Enter a complete email address.</p>
       <label class="block" for="guide-bib">Bib number<input class="block w-full" id="guide-bib" value="Assigned after confirmation" disabled></label>

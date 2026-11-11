@@ -14,7 +14,7 @@ Source: `resources/style-guide/actions.story.stx`. Group: Actions. Local demonst
 
 <a href="/docs/style-guide/generated/stories-0-actions-c522a646-primary-and-secondary-default.html">Open Primary and secondary preview (Default)</a>
 
-<iframe title="Actions and entry controls: Primary and secondary, Default" src="/docs/style-guide/generated/stories-0-actions-c522a646-primary-and-secondary-default.html" loading="lazy" sandbox="allow-scripts" style="width:100%;height:440px;border:1px solid #8884;border-radius:8px"></iframe>
+<iframe title="Actions and entry controls: Primary and secondary, Default" src="/docs/style-guide/generated/stories-0-actions-c522a646-primary-and-secondary-default.html" loading="lazy" sandbox="allow-scripts allow-forms" style="width:100%;height:440px;border:1px solid #8884;border-radius:8px"></iframe>
 
 
 ```stx
@@ -35,7 +35,7 @@ const guideSaved = state(false)
 
 <a href="/docs/style-guide/generated/stories-0-actions-c522a646-long-labels-and-disabled-actions-default.html">Open Long labels and disabled actions preview (Default)</a>
 
-<iframe title="Actions and entry controls: Long labels and disabled actions, Default" src="/docs/style-guide/generated/stories-0-actions-c522a646-long-labels-and-disabled-actions-default.html" loading="lazy" sandbox="allow-scripts" style="width:100%;height:440px;border:1px solid #8884;border-radius:8px"></iframe>
+<iframe title="Actions and entry controls: Long labels and disabled actions, Default" src="/docs/style-guide/generated/stories-0-actions-c522a646-long-labels-and-disabled-actions-default.html" loading="lazy" sandbox="allow-scripts allow-forms" style="width:100%;height:440px;border:1px solid #8884;border-radius:8px"></iframe>
 
 
 ```stx

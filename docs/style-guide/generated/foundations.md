@@ -65,4 +65,4 @@ Read tokens and styles from the production theme in config/style-guide.ts. Keep 
 
 <a href="/docs/style-guide/generated/foundations.html">Open branded color and typography specimens</a>
 
-<iframe title="Last Soul Ultra foundations" src="/docs/style-guide/generated/foundations.html" loading="lazy" sandbox="allow-scripts" style="width:100%;height:600px;border:1px solid #8884;border-radius:8px"></iframe>
+<iframe title="Last Soul Ultra foundations" src="/docs/style-guide/generated/foundations.html" loading="lazy" sandbox="allow-scripts allow-forms" style="width:100%;height:600px;border:1px solid #8884;border-radius:8px"></iframe>

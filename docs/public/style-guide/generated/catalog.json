@@ -587,8 +587,23 @@
       "description": "",
       "props": [
         {
-          "name": "length",
-          "type": "6 }, (_, index) => {",
+          "name": "0",
+          "type": "Math.min(1.1, Math.max(0, (now - bgSeenAt) / 1000))))",
+          "description": "Required."
+        },
+        {
+          "name": "breath",
+          "type": "a slow wave to rest the eyes on. */",
+          "description": "Required."
+        },
+        {
+          "name": "kind",
+          "type": "'breathe', seconds: 10 }]",
+          "description": "Required."
+        },
+        {
+          "name": "motion",
+          "type": "the lane stands still through a phase and moves on at the next. */",
           "description": "Required."
         },
         {
@@ -610,11 +625,56 @@
           "name": "phaseTest",
           "type": "Not declared",
           "description": "Read by the implementation; see source for defaults and accepted values."
+        }
+      ],
+      "slots": [],
+      "events": [],
+      "dependencies": [
+        "BreathLane"
+      ],
+      "stories": []
+    },
+    {
+      "id": "training/BreathLane",
+      "name": "BreathLane",
+      "source": "pantry/@hq/platform/source/resources/components/BreathLane.stx",
+      "library": "Shared training",
+      "description": "",
+      "props": [
+        {
+          "name": "count",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
         },
         {
-          "name": "x",
-          "type": "150 + Math.cos(angle) * reach, y: 150 + Math.sin(angle) * reach, radius: 57 * bgScale() }",
-          "description": "Required."
+          "name": "countTest",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "frame",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "label",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "labelTest",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "laneTest",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "paused",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
         }
       ],
       "slots": [],
@@ -731,6 +791,7 @@
       "slots": [],
       "events": [],
       "dependencies": [
+        "BreathLane",
         "StxLink"
       ],
       "stories": []
@@ -2639,6 +2700,11 @@
       "description": "",
       "props": [
         {
+          "name": "flush",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
           "name": "workout",
           "type": "Not declared",
           "description": "Read by the implementation; see source for defaults and accepted values."
@@ -3872,6 +3938,11 @@
       "props": [
         {
           "name": "data",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "flush",
           "type": "Not declared",
           "description": "Read by the implementation; see source for defaults and accepted values."
         },
@@ -10404,12 +10475,12 @@
         {
           "id": "profile-form",
           "title": "Profile form",
-          "source": "<section class=\"lsu-scope-profile profile-page\">\n      <div class=\"login-card\">\n        <h2 class=\"font-[family-name:var(--lsu-display)]\">RUNNER DETAILS</h2>\n        <form class=\"space-y-4 profile-form\" @submit.prevent=\"guideSaved.set(true)\">\n          <label class=\"block\" for=\"guide-runner\">Runner name<input class=\"block w-full\" id=\"guide-runner\" :model=\"guideName\" autocomplete=\"off\"></label>\n          <label class=\"block\" for=\"guide-country\">Country<select class=\"block w-full\" id=\"guide-country\"><option>Philippines</option><option>United Kingdom</option><option>United States</option></select></label>\n          <button class=\"btn\" type=\"submit\">Save example</button>\n          <p role=\"status\" :text=\"guideSaved ? 'Example profile saved locally.' : 'This form uses fictional local data.'\"></p>\n        </form>\n      </div>\n    </section>"
+          "source": "<section class=\"lsu-scope-profile profile-page\">\n      <div class=\"login-card\">\n        <h2 class=\"font-[family-name:var(--lsu-display)]\">RUNNER DETAILS</h2>\n        <form class=\"space-y-4 profile-form\" @submit.prevent=\"guideSaveProfile()\">\n          <label class=\"block\" for=\"guide-runner\">Runner name<input class=\"block w-full\" id=\"guide-runner\" :model=\"guideName\" autocomplete=\"off\"></label>\n          <label class=\"block\" for=\"guide-country\">Country<select class=\"block w-full\" id=\"guide-country\"><option>Philippines</option><option>United Kingdom</option><option>United States</option></select></label>\n          <button class=\"btn\" type=\"submit\">Save example</button>\n          <p role=\"status\" :text=\"guideSaved ? 'Example profile saved locally.' : 'This form uses fictional local data.'\"></p>\n        </form>\n      </div>\n    </section>"
         },
         {
           "id": "error-and-locked-field",
           "title": "Error and locked field",
-          "source": "<section class=\"lsu-scope-profile profile-page\"><div class=\"login-card\"><form class=\"space-y-4 profile-form\" @submit.prevent=\"guideSaved.set(false)\">\n      <label class=\"block\" for=\"guide-email\">Email address<input class=\"block w-full\" id=\"guide-email\" value=\"runner\" aria-invalid=\"true\" aria-describedby=\"guide-email-error\"></label>\n      <p id=\"guide-email-error\" class=\"error form-message\" role=\"alert\">Enter a complete email address.</p>\n      <label class=\"block\" for=\"guide-bib\">Bib number<input class=\"block w-full\" id=\"guide-bib\" value=\"Assigned after confirmation\" disabled></label>\n      <button type=\"submit\" class=\"btn\">Review details</button>\n    </form></div></section>"
+          "source": "<section class=\"lsu-scope-profile profile-page\"><div class=\"login-card\"><form class=\"space-y-4 profile-form\" @submit.prevent=\"guideReviewProfile()\">\n      <label class=\"block\" for=\"guide-email\">Email address<input class=\"block w-full\" id=\"guide-email\" value=\"runner\" aria-invalid=\"true\" aria-describedby=\"guide-email-error\"></label>\n      <p id=\"guide-email-error\" class=\"error form-message\" role=\"alert\">Enter a complete email address.</p>\n      <label class=\"block\" for=\"guide-bib\">Bib number<input class=\"block w-full\" id=\"guide-bib\" value=\"Assigned after confirmation\" disabled></label>\n      <button type=\"submit\" class=\"btn\">Review details</button>\n    </form></div></section>"
         }
       ]
     },

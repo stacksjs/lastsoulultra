@@ -19,12 +19,14 @@ Reference only. Add an isolated .story.stx fixture before enabling a preview; th
 
 | Name | Type | Contract |
 | --- | --- | --- |
-| length | 6 }, (_, index) =&gt; { | Required. |
+| 0 | Math.min(1.1, Math.max(0, (now - bgSeenAt) / 1000)))) | Required. |
+| breath | a slow wave to rest the eyes on. */ | Required. |
+| kind | &#39;breathe&#39;, seconds: 10 }] | Required. |
+| motion | the lane stands still through a phase and moves on at the next. */ | Required. |
 | paused | Not declared | Read by the implementation; see source for defaults and accepted values. |
 | phase | any, paused?: boolean, phases?: any[], phaseTest?: string } | Optional. |
 | phases | Not declared | Read by the implementation; see source for defaults and accepted values. |
 | phaseTest | Not declared | Read by the implementation; see source for defaults and accepted values. |
-| x | 150 + Math.cos(angle) * reach, y: 150 + Math.sin(angle) * reach, radius: 57 * bgScale() } | Required. |
 
 ## Slots
 
@@ -36,5 +38,5 @@ No explicit @event contract documented. DOM bindings and internal event handlers
 
 ## Composition
 
-No child component tags detected.
+- `BreathLane`
 

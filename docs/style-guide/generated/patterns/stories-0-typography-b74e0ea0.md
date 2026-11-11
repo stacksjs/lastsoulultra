@@ -14,7 +14,7 @@ Source: `resources/style-guide/typography.story.stx`. Group: Foundations. Local 
 
 <a href="/docs/style-guide/generated/stories-0-typography-b74e0ea0-type-specimen-default.html">Open Type specimen preview (Default)</a>
 
-<iframe title="Brand typography and surfaces: Type specimen, Default" src="/docs/style-guide/generated/stories-0-typography-b74e0ea0-type-specimen-default.html" loading="lazy" sandbox="allow-scripts" style="width:100%;height:440px;border:1px solid #8884;border-radius:8px"></iframe>
+<iframe title="Brand typography and surfaces: Type specimen, Default" src="/docs/style-guide/generated/stories-0-typography-b74e0ea0-type-specimen-default.html" loading="lazy" sandbox="allow-scripts allow-forms" style="width:100%;height:440px;border:1px solid #8884;border-radius:8px"></iframe>
 
 
 ```stx

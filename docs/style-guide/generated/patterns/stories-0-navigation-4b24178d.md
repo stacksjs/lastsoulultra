@@ -14,7 +14,7 @@ Source: `resources/style-guide/navigation.story.stx`. Group: Navigation. Local d
 
 <a href="/docs/style-guide/generated/stories-0-navigation-4b24178d-world-series-section-default.html">Open World Series section preview (Default)</a>
 
-<iframe title="Website navigation: World Series section, Default" src="/docs/style-guide/generated/stories-0-navigation-4b24178d-world-series-section-default.html" loading="lazy" sandbox="allow-scripts" style="width:100%;height:440px;border:1px solid #8884;border-radius:8px"></iframe>
+<iframe title="Website navigation: World Series section, Default" src="/docs/style-guide/generated/stories-0-navigation-4b24178d-world-series-section-default.html" loading="lazy" sandbox="allow-scripts allow-forms" style="width:100%;height:440px;border:1px solid #8884;border-radius:8px"></iframe>
 
 
 ```stx

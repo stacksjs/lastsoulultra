@@ -14,7 +14,7 @@ Source: `resources/style-guide/cards.story.stx`. Group: Data presentation. Local
 
 <a href="/docs/style-guide/generated/stories-0-cards-960b960b-race-summary-default.html">Open Race summary preview (Default)</a>
 
-<iframe title="Race cards, numbers and empty states: Race summary, Default" src="/docs/style-guide/generated/stories-0-cards-960b960b-race-summary-default.html" loading="lazy" sandbox="allow-scripts" style="width:100%;height:440px;border:1px solid #8884;border-radius:8px"></iframe>
+<iframe title="Race cards, numbers and empty states: Race summary, Default" src="/docs/style-guide/generated/stories-0-cards-960b960b-race-summary-default.html" loading="lazy" sandbox="allow-scripts allow-forms" style="width:100%;height:440px;border:1px solid #8884;border-radius:8px"></iframe>
 
 
 ```stx
@@ -30,7 +30,7 @@ Source: `resources/style-guide/cards.story.stx`. Group: Data presentation. Local
 
 <a href="/docs/style-guide/generated/stories-0-cards-960b960b-empty-and-error-states-default.html">Open Empty and error states preview (Default)</a>
 
-<iframe title="Race cards, numbers and empty states: Empty and error states, Default" src="/docs/style-guide/generated/stories-0-cards-960b960b-empty-and-error-states-default.html" loading="lazy" sandbox="allow-scripts" style="width:100%;height:440px;border:1px solid #8884;border-radius:8px"></iframe>
+<iframe title="Race cards, numbers and empty states: Empty and error states, Default" src="/docs/style-guide/generated/stories-0-cards-960b960b-empty-and-error-states-default.html" loading="lazy" sandbox="allow-scripts allow-forms" style="width:100%;height:440px;border:1px solid #8884;border-radius:8px"></iframe>
 
 
 ```stx
