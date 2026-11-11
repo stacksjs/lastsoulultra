@@ -147,6 +147,10 @@ if (!httpOnly) {
     await navigate(cdp, `${site}/coaching/calendar`, { timeoutMs: 60_000 }).catch(() => false)
     const landed = await waitFor(() => cdp.evaluate(`location.origin === ${JSON.stringify(app)} && location.pathname === "/login"`), 45_000).catch(() => false)
     check('a signed-out visitor is sent to the sign-in page', Boolean(landed), String(await cdp.evaluate('location.href')))
+    // This browser has chosen no appearance and its device is in light mode,
+    // so what it sees is the app's own default: LSU's black, not a white app.
+    const mode = String(await cdp.evaluate('document.documentElement.getAttribute("data-color-mode") || ""'))
+    check('the app opens in the brand\'s black before anyone chooses', mode === 'dark', `opens ${mode || 'light'}`)
 
     // Signed in, the runner's home is a running app.
     if (session) {
