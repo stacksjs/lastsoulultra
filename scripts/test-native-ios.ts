@@ -99,7 +99,10 @@ function signIn(account: Account) {
   if (firstRun.welcome) steps.push({ command: 'expectid', text: 'welcome-skip', seconds: 40 }, ...declineOptionalPrompts(), { command: 'tapid', text: 'welcome-skip' })
   // iOS offers to save the password, and the app offers notifications, on
   // their own schedules after signing in; either can land on the other.
-  steps.push(...Array.from({ length: 4 }, declineOptionalPrompts).flat(), { command: 'expectid', text: 'today-screen', seconds: 40 }, { command: 'tapif', text: 'Not Now' })
+  // The notification offer can arrive as the last round looks for it, and a
+  // bar button tapped while its screen is still sliding in does nothing: the
+  // question then stays in front of Today. One more look once it has settled.
+  steps.push(...Array.from({ length: 4 }, declineOptionalPrompts).flat(), { command: 'wait', seconds: 2 }, { command: 'ifid', id: 'nav-not-now', step: { command: 'tapid', text: 'nav-not-now' } }, { command: 'expectid', text: 'today-screen', seconds: 40 }, { command: 'tapif', text: 'Not Now' })
 }
 steps.push({ command: 'launch' }, { command: 'openurl', url: `${product.identity.scheme}:///m/login` }, { command: 'expectid', text: 'login-logo', seconds: 30 }, { command: 'shot', name: 'lsu-sign-in' }, { command: 'tree', name: 'lsu-sign-in' })
 // LSU declines HQ sign-in (enterprise/presets.json sign_in.hq), so neither
@@ -145,7 +148,11 @@ steps.splice(securityShot + 1, 0,
   { command: 'expectid', text: 'security-factor-qr', seconds: 30 }, { command: 'expectid', text: 'security-factor-secret', seconds: 30 },
   { command: 'scrollto', text: 'security-factor-cancel' }, { command: 'tapid', text: 'security-factor-cancel' },
   { command: 'absentid', text: 'security-factor-secret' }, { command: 'expectid', text: 'security-passkey-add', seconds: 30 },
-  { command: 'shot', name: 'lsu-security' })
+  { command: 'shot', name: 'lsu-security' },
+  // From HQ kit 1.0.4230 Security opens in a sheet over Settings. Going back
+  // leaves a sheet where it is, and it then covers every screen after it, so
+  // it is closed by its own control before the tour moves on.
+  { command: 'tapid', text: 'settings-security-close' }, { command: 'absentid', text: 'security-passkey-add' })
 const meShot = steps.findIndex(step => step.command === 'shot' && step.name === 'lsu-me')
 // LSU serves coaches and athletes only, so from HQ kit 1.0.4135 Me has no gym or membership-card row.
 steps.splice(meShot + 1, 0, { command: 'absentid', text: 'me-membership-card' })
