@@ -1,6 +1,6 @@
 {
   "package": "@hq/platform",
-  "version": "1.0.4179",
-  "revision": "03fb36fdbfb9b19569966f0ab70e4cb4e92a6e07",
+  "version": "1.0.4230",
+  "revision": "d057da0732fc06cab9f149d82b60ed53c0d5c15c",
   "bun": "1.4.4"
 }

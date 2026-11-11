@@ -3546,6 +3546,20 @@
       "stories": []
     },
     {
+      "id": "training/SourceRecovery",
+      "name": "SourceRecovery",
+      "source": "pantry/@hq/platform/source/resources/components/SourceRecovery.stx",
+      "library": "Shared training",
+      "description": "",
+      "props": [],
+      "slots": [],
+      "events": [],
+      "dependencies": [
+        "StxLink"
+      ],
+      "stories": []
+    },
+    {
       "id": "training/store-editor",
       "name": "store-editor",
       "source": "pantry/@hq/platform/source/resources/components/store-editor.stx",

@@ -632,6 +632,10 @@
     "link": "/style-guide/generated/components/training/SocialVerifyOffer"
   },
   {
+    "text": "Shared training: SourceRecovery",
+    "link": "/style-guide/generated/components/training/SourceRecovery"
+  },
+  {
     "text": "Shared training: store-editor",
     "link": "/style-guide/generated/components/training/store-editor"
   },

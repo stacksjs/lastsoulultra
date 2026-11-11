@@ -67,7 +67,7 @@ export function installOnboardingScreens(ours = join(root, 'native/onboarding'),
  * The faces the app's theme draws with, packaged from the kit's own files:
  * Anton for headings, and Inter's regular and bold for everything else (the
  * design is set in Inter; a phone asks the family for its bold face, so both
- * ship). The kit must carry them: Inter arrived in 1.0.4222.
+ * ship). The kit must carry them: Inter arrived in 1.0.4230.
  */
 export const NATIVE_FONTS = ['Anton-Regular', 'Inter-Regular', 'Inter-Bold'] as const
 

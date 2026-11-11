@@ -62,7 +62,7 @@ dated 2026-11-10) is the wireframe the app follows. What HQ already does well
 stays: Health, Progress, Messages, the profile and the account screens are
 restyled, not removed.
 
-Adopted on 2026-11-11, with HQ platform kit 1.0.4222 or later:
+Adopted on 2026-11-11, with HQ platform kit 1.0.4230 or later:
 
 - **Look.** `native/product.json` `identity.theme`: page `#0b0b0c`, cards
   `#17171a` with a `#2a2a2e` hairline and 14pt corners, fills in `#d71f28`,
