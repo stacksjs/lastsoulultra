@@ -31,6 +31,11 @@ export function trainingSites(): NonNullable<CloudConfig['sites']> {
     APNS_TEAM_ID: secrets.LSU_APNS_TEAM_ID || '', APNS_KEY_ID: secrets.LSU_APNS_KEY_ID || '', APNS_PRIVATE_KEY: secrets.LSU_APNS_PRIVATE_KEY || '',
     APNS_TOPIC: 'com.lastsoulultra.app', APNS_ENVIRONMENT: 'production',
     APPLE_TEAM_ID: secrets.LSU_APPLE_TEAM_ID || '', APPLE_KEY_ID: secrets.LSU_APPLE_KEY_ID || '', APPLE_PRIVATE_KEY: secrets.LSU_APPLE_PRIVATE_KEY || '',
+    // Sign in with Apple and Google in a browser. The app draws both buttons;
+    // each works once its values are set: Apple's Services ID beside the key
+    // above, and a Google web OAuth client. Empty leaves that provider off.
+    APPLE_CLIENT_ID: secrets.LSU_APPLE_CLIENT_ID || '',
+    GOOGLE_CLIENT_ID: secrets.LSU_GOOGLE_CLIENT_ID || '', GOOGLE_CLIENT_SECRET: secrets.LSU_GOOGLE_CLIENT_SECRET || '',
     DB_CONNECTION: 'postgres', DB_HOST: deployment.database.host, DB_PORT: String(deployment.database.port),
     DB_DATABASE: deployment.database.name, DB_USERNAME: deployment.database.user, DB_PASSWORD: secrets.LSU_TRAINING_DB_PASSWORD || '',
     STORAGE_DRIVER: 'bun', STORAGE_ROOT: shared, STORAGE_PUBLIC_URL: deployment.origin,

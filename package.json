@@ -110,9 +110,9 @@
     "@stacksjs/components": "0.2.842",
     "bun-plugin-stx": "0.2.842",
     "stx-router": "0.2.842",
-    "craft-native": "0.0.490",
-    "@craft-native/ios": "0.0.490",
-    "@craft-native/android": "0.0.490",
+    "craft-native": "0.0.492",
+    "@craft-native/ios": "0.0.492",
+    "@craft-native/android": "0.0.492",
     "bun-query-builder": "0.3.38",
     "@stacksjs/bumpx": "0.2.35",
     "@stacksjs/ts-cloud": "0.16.116"

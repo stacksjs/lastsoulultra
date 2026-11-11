@@ -100,3 +100,24 @@ it('requires the HQ proxy protocol before starting the API and drains platform w
   expect(preStart.indexOf('bun scripts/reindex-public-profiles.ts')).toBeLessThan(preStart.indexOf('bun scripts/build-production.ts api'))
   expect(daemons.find(daemon => daemon.name === 'connection-sync')!.command).not.toContain('platform-history')
 })
+
+it('hands the training app each sign-in provider from this installation\'s own secrets', () => {
+  const names = { APPLE_CLIENT_ID: 'LSU_APPLE_CLIENT_ID', GOOGLE_CLIENT_ID: 'LSU_GOOGLE_CLIENT_ID', GOOGLE_CLIENT_SECRET: 'LSU_GOOGLE_CLIENT_SECRET' }
+  const before = Object.fromEntries(Object.values(names).map(name => [name, process.env[name]]))
+  try {
+    for (const name of Object.values(names)) process.env[name] = `value-of-${name}`
+    const env = trainingSites()['training-api'].env ?? {}
+    for (const [key, name] of Object.entries(names)) expect(env[key]).toBe(`value-of-${name}`)
+    // Unset, a provider is switched off rather than half configured.
+    for (const name of Object.values(names)) delete process.env[name]
+    const off = trainingSites()['training-api'].env ?? {}
+    for (const key of Object.keys(names)) expect(off[key]).toBe('')
+  }
+  finally {
+    for (const [name, value] of Object.entries(before)) {
+      if (value === undefined) delete process.env[name]
+      else process.env[name] = value
+    }
+  }
+})
+
