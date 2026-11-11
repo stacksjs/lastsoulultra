@@ -50,3 +50,14 @@ export function mayUpload(run: Pick<TestFlightRun, 'displayTitle'>): boolean {
 export function uploadsInFlight<Run extends Pick<TestFlightRun, 'status' | 'displayTitle'>>(runs: Run[]): Run[] {
   return runs.filter(run => run.status !== 'completed' && mayUpload(run))
 }
+
+/**
+ * Whether a Deploy run began after a release was pushed, so main as it deployed
+ * holds the release commit. A deploy that began before the push, however
+ * shortly, was for an earlier commit and never counts.
+ */
+export function deployedAfter(deployCreatedAt: string, pushedAt: string): boolean {
+  const deploy = Date.parse(deployCreatedAt)
+  const push = Date.parse(pushedAt)
+  return Number.isFinite(deploy) && Number.isFinite(push) && deploy > push
+}

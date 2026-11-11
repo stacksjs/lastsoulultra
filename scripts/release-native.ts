@@ -33,7 +33,7 @@ import process from 'node:process'
 import { commitsBetween, fitNotes, NO_VISIBLE_CHANGES, resolveNotes, TESTFLIGHT_NOTES_LIMIT, testerNotes, writeWhatToTest } from '@stacksjs/actions/release-notes'
 import { versionBump } from '@stacksjs/bumpx'
 import { bumpedVersion, DEFAULT_NOTES_LOCALES, kitAcceptance, lastDelivered, nextBuild, NOTES_PROJECT_DIR, RELEASE_COMMIT_PREFIX, releaseTag, withRelease } from './native-release'
-import { RUN_FIELDS, RUN_TITLES, type RunStep, TESTFLIGHT_WORKFLOW, type TestFlightRun } from './testflight-runs'
+import { deployedAfter, RUN_FIELDS, RUN_TITLES, type RunStep, TESTFLIGHT_WORKFLOW, type TestFlightRun } from './testflight-runs'
 
 const root = resolve(import.meta.dir, '..')
 const args = process.argv.slice(2)
@@ -203,6 +203,7 @@ if (!push) {
   process.exit(0)
 }
 // Together or not at all: a tag without its commit on main names a release nobody can build.
+const pushedAt = new Date().toISOString()
 git('push', '--atomic', 'origin', 'main', tag)
 const sha = git('rev-parse', 'HEAD')
 say(`Pushed ${tag} (${sha.slice(0, 9)}). CI, then Deploy, then TestFlight run from here on their own.`)
@@ -239,14 +240,42 @@ async function finished(workflow: string, appearMinutes: number, finishMinutes: 
 try { gh('--version') }
 catch { throw new Error(`${tag} is pushed and will release on its own; install GitHub's \`gh\` to watch it from here`) }
 
+/**
+ * Wait for a deploy of main that started after the release was pushed and
+ * succeeded. Build 23 needed it: another commit reached main seconds after the
+ * release commit, GitHub listed both Deploy runs under that newer commit, and
+ * the release's own stopped because main had moved. A later deploy of main
+ * carries the release commit all the same.
+ */
+async function laterDeploy(minutes: number): Promise<string | null> {
+  const deadline = Date.now() + minutes * 60_000
+  for (;;) {
+    const rows = JSON.parse(gh('run', 'list', '--workflow', 'deploy.yml', '--branch', 'main', '--limit', '20', '--json', 'conclusion,createdAt,url')) as Array<{ conclusion: string, createdAt: string, url: string }>
+    const done = rows.find(row => row.conclusion === 'success' && deployedAfter(row.createdAt, pushedAt))
+    if (done) return done.url
+    if (Date.now() > deadline) return null
+    await Bun.sleep(60_000)
+  }
+}
+
+let superseded = false
 for (const workflow of ['ci.yml', 'deploy.yml']) {
   const run = await finished(workflow, 10, 30)
+  if (workflow === 'deploy.yml' && run?.conclusion !== 'success') {
+    // Its own deploy did not happen. Before giving up, see whether main was deployed anyway.
+    say(`Deploy did not finish for ${tag} itself${run ? ` (${run.conclusion}: ${run.url})` : ''}; waiting for a deploy of main that carries it.`)
+    const url = await laterDeploy(40)
+    if (!url) throw new Error(`${tag} is pushed, but main has not deployed since. Fix what stops Deploy on main, then start the upload with \`gh workflow run testflight.yml --ref main\`; the build number is already taken.`)
+    say(`deploy.yml: ${url}`)
+    superseded = true
+    continue
+  }
   if (!run) throw new Error(`${tag} is pushed, but no ${workflow} run appeared for it. Check the repository's Actions.`)
   if (run.conclusion !== 'success') throw new Error(`${workflow} ended ${run.conclusion} for ${tag}, so TestFlight did not start: ${run.url}. Fix it on main and start the upload with \`gh workflow run testflight.yml --ref main\`; the build number is already taken.`)
 }
 // The workflow starts itself after Deploy. If another commit reached main in
 // between, Deploy ran for that one and the chain did not see a release commit.
-let upload = await finished('testflight.yml', 5, 90)
+let upload = superseded ? null : await finished('testflight.yml', 5, 90)
 if (!upload) {
   say('TestFlight did not start on its own (a newer commit reached main first); starting it for main.')
   gh('workflow', 'run', 'testflight.yml', '--ref', 'main', '-f', 'upload=true')

@@ -208,3 +208,13 @@ it('knows which runs can still upload a build', () => {
   ]
   expect(uploadsInFlight(runs)).toEqual([runs[1]!])
 })
+
+it('counts only a deploy that began after the release was pushed', async () => {
+  const { deployedAfter } = await import('../scripts/testflight-runs')
+  // Build 23: pushed 02:58:04, its own deploy stopped, main deployed again at 03:10:20.
+  expect(deployedAfter('2026-11-11T03:10:20Z', '2026-11-11T02:58:04.000Z')).toBe(true)
+  expect(deployedAfter('2026-11-11T02:51:45Z', '2026-11-11T02:58:04.000Z')).toBe(false)
+  expect(deployedAfter('2026-11-11T02:58:04Z', '2026-11-11T02:58:04.000Z')).toBe(false)
+  expect(deployedAfter('', '2026-11-11T02:58:04.000Z')).toBe(false)
+  expect(deployedAfter('2026-11-11T03:10:20Z', 'soon')).toBe(false)
+})
