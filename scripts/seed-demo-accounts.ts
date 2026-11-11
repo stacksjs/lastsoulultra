@@ -182,7 +182,11 @@ await transaction(async () => {
   else await db.updateTable('products').set(runningValues).where('id', '=', Number(runningProduct.id)).execute()
   // Running first, then Running + Strength: the order the store lists them in.
   const tierOffers = [{ product_id: Number(runningProduct.id), method_id: Number(method.id), label: demoRunningTier.name }, offer]
-  await saveExperience(organizationId, existingSettings ? { ...existingSettings, offers: [...tierOffers, ...existingSettings.offers.filter((item: any) => !tierOffers.some(tier => tier.product_id === Number(item.product_id)))] } : { ...lsuExperience(), home_url: `${origin}/coaching`, logo_url: `${applicationOrigin}/assets/native-product/lsu-logo.svg`, support_url: `${origin}/contact`, privacy_url: `${applicationOrigin}/legal/lsu/privacy`, terms_url: `${applicationOrigin}/legal/lsu/terms`, embed_origins: [origin], show_powered_by: false, offers: tierOffers }, existingBrand?.status || 'published')
+  // The saved experience keeps what LSU's staff edited (its words, its modules),
+  // but its theme is the packaged one: the coaching portal and the coaching
+  // section inside the app are drawn from it, and they must look like the app
+  // around them (native/product.json), not like the theme of an earlier build.
+  await saveExperience(organizationId, existingSettings ? { ...existingSettings, theme: lsuExperience().theme, offers: [...tierOffers, ...existingSettings.offers.filter((item: any) => !tierOffers.some(tier => tier.product_id === Number(item.product_id)))] } : { ...lsuExperience(), home_url: `${origin}/coaching`, logo_url: `${applicationOrigin}/assets/native-product/lsu-logo.svg`, support_url: `${origin}/contact`, privacy_url: `${applicationOrigin}/legal/lsu/privacy`, terms_url: `${applicationOrigin}/legal/lsu/terms`, embed_origins: [origin], show_powered_by: false, offers: tierOffers }, existingBrand?.status || 'published')
   const brand = await db.selectFrom('brand_experiences').select('id').where('organization_id', '=', organizationId).executeTakeFirstOrThrow()
   for (const account of accounts.filter(account => account.subscriber)) {
     const athlete = await db.selectFrom('athletes').select('id').where('user_id', '=', ids[account.key]).executeTakeFirstOrThrow()
