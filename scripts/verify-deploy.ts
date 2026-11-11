@@ -116,14 +116,26 @@ if (!httpOnly) {
   // A hosted runner's Chrome cannot start its sandbox without privileges the job does not have.
   const browser = await launch({ viewport: { width: 1280, height: 900 }, args: process.env.CI ? ['--no-sandbox', '--disable-dev-shm-usage'] : [] })
   const { cdp } = browser
+  let at = 'starting the browser'
   try {
-    // Credentials in the first address: the browser keeps them for the origin,
-    // so the pages and fragments it fetches afterwards pass the gate too.
-    const entry = gated ? site.replace('://', `://${encodeURIComponent(user)}:${encodeURIComponent(password)}@`) : site
-    await navigate(cdp, `${entry}/app`, { timeoutMs: 60_000 })
-    await waitFor(() => cdp.evaluate('Boolean(document.querySelector(".app-hero"))'), 30_000)
+    // The gate is answered for this site's own requests and for nothing else:
+    // a header set on every request would hand the preview's password to
+    // whatever other origin the page talks to.
+    if (gated) {
+      await cdp.send('Fetch.enable', { handleAuthRequests: true, patterns: [{ urlPattern: `${site}/*` }] })
+      cdp.on('Fetch.requestPaused', ({ requestId }: any) => { cdp.send('Fetch.continueRequest', { requestId }).catch(() => {}) })
+      cdp.on('Fetch.authRequired', ({ requestId, authChallenge }: any) => {
+        const ours = String(authChallenge?.origin || '').replace(/\/$/, '') === site
+        cdp.send('Fetch.continueWithAuth', { requestId, authChallengeResponse: ours ? { response: 'ProvideCredentials', username: user, password } : { response: 'CancelAuth' } }).catch(() => {})
+      })
+    }
+
+    at = 'opening /app'
+    await navigate(cdp, `${site}/app`, { timeoutMs: 60_000 }).catch(() => false)
+    await waitFor(() => cdp.evaluate('Boolean(document.querySelector(".app-hero"))'), 45_000, { label: 'the app page' })
+    at = 'following the Coaching link'
     await cdp.evaluate('document.querySelector(\'.nav-links a[href="/coaching"]\').click()')
-    await waitFor(() => cdp.evaluate('location.pathname === "/coaching" && Boolean(document.querySelector(".coaching-hero"))'), 30_000)
+    await waitFor(() => cdp.evaluate('location.pathname === "/coaching" && Boolean(document.querySelector(".coaching-hero"))'), 45_000, { label: 'the coaching page after a link click' })
     // Give the page's stylesheet the moment it needs to arrive and apply.
     const styled = await waitFor(() => cdp.evaluate('getComputedStyle(document.querySelector(".coaching-hero")).display === "grid"'), 15_000).catch(() => false)
     check('a page reached by a link has its own styles', Boolean(styled))
@@ -131,12 +143,14 @@ if (!httpOnly) {
     check('the nav marks the page a link led to', current === 'Coaching', `marks "${current}"`)
 
     // Signed out, a page that needs an account ends on the app's sign-in page.
-    await navigate(cdp, `${entry}/coaching/calendar`, { timeoutMs: 60_000 }).catch(() => false)
+    at = 'opening a page that needs an account, signed out'
+    await navigate(cdp, `${site}/coaching/calendar`, { timeoutMs: 60_000 }).catch(() => false)
     const landed = await waitFor(() => cdp.evaluate(`location.origin === ${JSON.stringify(app)} && location.pathname === "/login"`), 45_000).catch(() => false)
     check('a signed-out visitor is sent to the sign-in page', Boolean(landed), String(await cdp.evaluate('location.href')))
 
     // Signed in, the runner's home is a running app.
     if (session) {
+      at = 'opening the runner\'s home, signed in'
       await cdp.send('Page.addScriptToEvaluateOnNewDocument', { source: `if (location.origin === ${JSON.stringify(app)}) { localStorage.setItem('auth_token', ${JSON.stringify(session.token)}); localStorage.setItem('auth_user', ${JSON.stringify(JSON.stringify(session.user))}); }` })
       await navigate(cdp, `${app}/home`, { timeoutMs: 90_000 }).catch(() => false)
       const home = await waitFor(() => cdp.evaluate('location.pathname === "/home" && Boolean(document.querySelector("main h1"))'), 45_000).catch(() => false)
@@ -146,7 +160,8 @@ if (!httpOnly) {
     }
   }
   catch (error) {
-    check('the browser checks ran to the end', false, error instanceof Error ? error.message.slice(0, 200) : String(error))
+    const where = await cdp.evaluate('location.href + " | " + document.title').catch(() => 'no page')
+    check('the browser checks ran to the end', false, `while ${at}: ${error instanceof Error ? error.message.slice(0, 160) : String(error)}; page was ${where}`)
   }
   finally { await browser.close() }
 }
