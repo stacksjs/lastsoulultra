@@ -191,3 +191,16 @@ jobs:
           # macOS resource forks in a tarball built on a developer machine make
           # the extraction on the server noisy and occasionally fatal.
           COPYFILE_DISABLE: '1'
+
+      # The release is live at this point. Ask the servers, and a browser,
+      # whether it can still do what the site is for: serve its pages, keep a
+      # page's styles when a link is followed, send every page that needs an
+      # account to the training app's sign-in, and sign a runner in. A deploy
+      # that cannot is a broken site, and this is where that gets said.
+      - name: Check the deployed site
+        if: steps.check.outputs.configured == 'true' && (github.event.inputs.environment || 'production') == 'production'
+        run: bun scripts/verify-deploy.ts
+        env:
+          SITE_AUTH_USER: ${{ secrets.SITE_AUTH_USER }}
+          SITE_AUTH_PASSWORD: ${{ secrets.SITE_AUTH_PASSWORD }}
+          LSU_DEMO_ACCOUNTS_JSON: ${{ secrets.LSU_DEMO_ACCOUNTS_JSON }}
