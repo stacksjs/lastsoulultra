@@ -299,29 +299,6 @@
       "stories": []
     },
     {
-      "id": "site/WorkspacePortal",
-      "name": "WorkspacePortal",
-      "source": "resources/components/WorkspacePortal.stx",
-      "library": "Website",
-      "description": "",
-      "props": [
-        {
-          "name": "label",
-          "type": "Not declared",
-          "description": "Read by the implementation; see source for defaults and accepted values."
-        },
-        {
-          "name": "path",
-          "type": "Not declared",
-          "description": "Read by the implementation; see source for defaults and accepted values."
-        }
-      ],
-      "slots": [],
-      "events": [],
-      "dependencies": [],
-      "stories": []
-    },
-    {
       "id": "training/AccountAction",
       "name": "AccountAction",
       "source": "pantry/@hq/platform/source/resources/components/AccountAction.stx",

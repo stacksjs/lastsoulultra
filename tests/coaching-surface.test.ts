@@ -198,32 +198,13 @@ describe('where the portal is', () => {
   })
 })
 
-describe('the microphone the feedback module needs', () => {
-  /** Exactly how @stacksjs/server matches config.server.headers. */
-  function headersFor(pathname: string): Record<string, string> {
-    const matched: Record<string, string> = {}
-    for (const [pattern, headers] of Object.entries(server.headers ?? {})) {
-      const hit = pattern.endsWith('/*') ? pathname.startsWith(pattern.slice(0, -1)) : pathname === pattern
-      if (hit) Object.assign(matched, headers)
-    }
-    return matched
-  }
-
-  it('is delegated on the two routes that frame it', () => {
-    for (const path of ['/coaching', '/coaching/feedback']) {
-      expect(headersFor(path)['Permissions-Policy']).toBe(`microphone=(self "${new URL(coaching.origin).origin}")`)
-    }
-  })
-
-  it('names the origin the panel is actually framed from', () => {
-    // A policy naming a different host than the iframe src grants nothing.
-    const policy = headersFor('/coaching/feedback')['Permissions-Policy'] ?? ''
-    expect(policy).toContain(new URL(portalUrl('feedback')).origin)
-  })
-
-  it('is not handed to a route with no microphone in it', () => {
-    for (const path of ['/', '/format', '/coaching/calendar', '/coaching/account'])
-      expect(headersFor(path)['Permissions-Policy']).toBeUndefined()
+describe('the microphone', () => {
+  it('is delegated to no frame, because no page here records anything', () => {
+    // Recording how a session felt happens in the training app, which the
+    // account-only paths redirect to. A header left behind for a redirected
+    // path would grant a permission to a page that no longer exists.
+    for (const headers of Object.values(server.headers ?? {}))
+      expect((headers as Record<string, string>)['Permissions-Policy']).toBeUndefined()
   })
 })
 

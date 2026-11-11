@@ -9,7 +9,7 @@ description: "Last Soul Ultra component guide. Production component reference fo
 
 Production components and interface patterns for the World Series, race entries and training portal.
 
-306 components, 5 isolated stories and 8 variants. Generated from production sources, with Last Soul Ultra branding.
+305 components, 5 isolated stories and 8 variants. Generated from production sources, with Last Soul Ultra branding.
 
 [Foundations, tokens and branding](/style-guide/generated/foundations)
 
@@ -39,7 +39,6 @@ Every configured component is indexed. Reference-only entries do not claim teste
 | [SiteFooter](/style-guide/generated/components/site/SiteFooter) | Website | Reference only |
 | [SiteNav](/style-guide/generated/components/site/SiteNav) | Website | 1 fixture(s) |
 | [TrainingNav](/style-guide/generated/components/site/TrainingNav) | Website | Reference only |
-| [WorkspacePortal](/style-guide/generated/components/site/WorkspacePortal) | Website | Reference only |
 | [AccountAction](/style-guide/generated/components/training/AccountAction) | Shared training | Reference only |
 | [AccountHome](/style-guide/generated/components/training/AccountHome) | Shared training | Reference only |
 | [ActivityReview](/style-guide/generated/components/training/ActivityReview) | Shared training | Reference only |

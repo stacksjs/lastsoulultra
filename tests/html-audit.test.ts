@@ -49,7 +49,7 @@ describe('every page the site serves', () => {
   }, 120_000)
 
   it('checks every view, not a handful', () => {
-    expect(views.length).toBeGreaterThanOrEqual(23)
+    expect(views.length).toBeGreaterThanOrEqual(19)
     expect(views.map(view => view.url)).toContain('/coaching/plans')
   })
 })
