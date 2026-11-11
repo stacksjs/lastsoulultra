@@ -1,3 +1,7 @@
+Features
+- List LSU Running at 19.99 beside LSU Running + Strength at 29.99 (store)
+
 Fixes
-- Hold a kit change while a TestFlight build is in flight, so the build can still upload (deploy)
-- Pin HQ platform kit 1.0.4157 for a store that shows its tiers first, with their icons (training)
+- Offer the App Store only once the app is listed there (site)
+- Start acceptance for everything a deploy carries and regenerate the component guide with a kit pin (native)
+- Pin HQ platform kit 1.0.4165 for buttons at their own width, an uncrowded coach header and classes that were never generated (training)

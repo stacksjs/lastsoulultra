@@ -1,5 +1,38 @@
 # Stacks Changelog
 
+[Compare changes](https://github.com/stacksjs/lastsoulultra/compare/v1.0.0-build.22...v1.0.0-build.23)
+
+## ✨ Features
+
+- **store**: list LSU Running at 19.99 beside LSU Running + Strength at 29.99 ([dee7175](https://github.com/stacksjs/lastsoulultra/commit/dee7175)) _(by Chris Breuer)_
+- **docs**: generate the LSU-branded component guide ([ec26458](https://github.com/stacksjs/lastsoulultra/commit/ec26458)) _(by Chris Breuer)_
+- **release**: run the build and its acceptance without an upload when the kit pin or acceptance script changes ([2efda3a](https://github.com/stacksjs/lastsoulultra/commit/2efda3a)) _(by Chris Breuer)_
+
+## 🐛 Bug Fixes
+
+- **site**: offer the App Store only once the app is listed there ([a3e1b98](https://github.com/stacksjs/lastsoulultra/commit/a3e1b98)) _(by Chris Breuer)_
+- **native**: start acceptance for everything a deploy carries and regenerate the component guide with a kit pin ([85ff3d2](https://github.com/stacksjs/lastsoulultra/commit/85ff3d2)) _(by Chris Breuer)_
+- **docs**: preserve local form events in isolated previews ([3f01c62](https://github.com/stacksjs/lastsoulultra/commit/3f01c62)) _(by Chris Breuer)_
+- **training**: pin HQ platform kit 1.0.4165 for buttons at their own width, an uncrowded coach header and classes that were never generated ([9d2068f](https://github.com/stacksjs/lastsoulultra/commit/9d2068f)) _(by Chris Breuer)_
+- **release**: pin bumpx 0.2.35, which leaves author email addresses out of release notes by default ([ee35acd](https://github.com/stacksjs/lastsoulultra/commit/ee35acd)) _(by Chris Breuer)_
+- **release**: refuse a release when native acceptance last failed on the pinned kit ([59ca310](https://github.com/stacksjs/lastsoulultra/commit/59ca310)) _(by Chris Breuer)_
+- **release**: decide the kit hold in a tested script, and hold for a build that is queued too ([7d8de35](https://github.com/stacksjs/lastsoulultra/commit/7d8de35)) _(by Chris Breuer)_
+- **release**: write What to Test from the last build that reached TestFlight ([f92cbf6](https://github.com/stacksjs/lastsoulultra/commit/f92cbf6)) _(by Chris Breuer)_
+
+## 📝 Documentation
+
+- **native**: describe the tester notes baseline, acceptance without an upload and the kit hold ([001201d](https://github.com/stacksjs/lastsoulultra/commit/001201d)) _(by Chris Breuer)_
+
+## 🔧 Chores
+
+- **deploy**: rotate the preview password ([19f3382](https://github.com/stacksjs/lastsoulultra/commit/19f3382)) _(by Chris Breuer)_
+- **site**: remove the workspace pages and microphone rules the redirects replaced ([8a0a4d2](https://github.com/stacksjs/lastsoulultra/commit/8a0a4d2)) _(by Chris Breuer)_
+- **site**: remove the seven account-only page templates the redirects replaced ([878a059](https://github.com/stacksjs/lastsoulultra/commit/878a059)) _(by Chris Breuer)_
+
+## Contributors
+
+- _Chris Breuer_
+
 [Compare changes](https://github.com/stacksjs/lastsoulultra/compare/v1.0.0-build.21...v1.0.0-build.22)
 
 ## 🐛 Bug Fixes
