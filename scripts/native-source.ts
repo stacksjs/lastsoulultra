@@ -63,6 +63,38 @@ export function installOnboardingScreens(ours = join(root, 'native/onboarding'),
   copyFileSync(join(ours, 'onboarding-screens.json'), kitManifest)
 }
 
+/**
+ * The faces the app's theme draws with, packaged from the kit's own files:
+ * Anton for headings, and Inter's regular and bold for everything else (the
+ * design is set in Inter; a phone asks the family for its bold face, so both
+ * ship). The kit must carry them: Inter arrived in 1.0.4222.
+ */
+export const NATIVE_FONTS = ['Anton-Regular', 'Inter-Regular', 'Inter-Bold'] as const
+
+/**
+ * LSU's photographs, by the screen they head (`identity.imagery`), copied
+ * from the site's own image set into the application the installation serves.
+ * Every place the identity names must have its file in `assets.imagery`, and
+ * the identity must point at exactly where that file is served, so the app
+ * never asks for a picture that was not shipped.
+ */
+export function installImagery(target: string, identity: Record<string, { src: string }> = product.identity.imagery, files: Record<string, string> = product.assets.imagery): string[] {
+  const places = Object.keys(identity)
+  const unshipped = places.filter(place => !files[place])
+  if (unshipped.length) throw new Error(`native/product.json names a photograph for ${unshipped.join(', ')} with no file in assets.imagery`)
+  const unused = Object.keys(files).filter(place => !identity[place])
+  if (unused.length) throw new Error(`native/product.json ships a photograph for ${unused.join(', ')} that no screen is given in identity.imagery`)
+  mkdirSync(join(target, 'imagery'), { recursive: true })
+  for (const place of places) {
+    const served = `/assets/native-product/imagery/${place}.webp`
+    if (identity[place]!.src !== served) throw new Error(`identity.imagery.${place}.src must be ${served}, where the file is served`)
+    const file = resolve(root, 'native', files[place]!)
+    if (!file.endsWith('.webp') || !existsSync(file)) throw new Error(`assets.imagery.${place} is not a WebP file in this repository: ${files[place]}`)
+    copyFileSync(file, join(target, 'imagery', `${place}.webp`))
+  }
+  return places
+}
+
 export async function prepareNativeSource(): Promise<void> {
   assertSourceLock(source)
   assertInstalledKit()
@@ -82,13 +114,14 @@ export async function prepareNativeSource(): Promise<void> {
   mkdirSync(assets, { recursive: true })
   copyFileSync(join(root, 'public/assets/lsu/images/lsu-logo.svg'), join(assets, 'lsu-logo.svg'))
   copyFileSync(resolve(root, 'native', product.assets.icon), join(sourceRoot, 'public/apple-touch-icon.png'))
+  installImagery(assets)
   const logo = `data:image/png;base64,${readFileSync(resolve(root, 'native', product.assets.wordmark)).toString('base64')}`
   writeFileSync(join(sourceRoot, 'resources/functions/native-product.json'), `${JSON.stringify({ product: { ...product.identity, logo } }, null, 2)}\n`)
   writeFileSync(join(sourceRoot, 'resources/functions/brand-assets.json'), `${JSON.stringify({ wordmarkLight: logo, wordmarkDark: logo, favicon: product.identity.logo }, null, 2)}\n`)
   // LSU's brand and coaching tiers as the installation's presets: HQ offers them to
   // this organization only, and ships none of its own (docs/developers/native-product-builds.md).
   writeFileSync(join(sourceRoot, 'resources/functions/installation-presets.json'), `${JSON.stringify({ presets: installationPresets() }, null, 2)}\n`)
-  const fonts = Object.fromEntries(['Anton-Regular', 'Barlow-Regular'].map(name => [name, { src: join(sourceRoot, `public/assets/brands/${name}.ttf`), license: join(sourceRoot, `public/assets/brands/${name.split('-')[0]}-OFL.txt`) }]))
+  const fonts = Object.fromEntries(NATIVE_FONTS.map(name => [name, { src: join(sourceRoot, `public/assets/brands/${name}.ttf`), license: join(sourceRoot, `public/assets/brands/${name.split('-')[0]}-OFL.txt`) }]))
   mkdirSync(join(root, 'storage/native'), { recursive: true })
   const splash = await generateNativeSplash()
   // HQ reads `splash` as the launch image; `LaunchLogo.png` has its @2x/@3x

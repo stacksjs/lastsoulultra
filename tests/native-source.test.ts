@@ -1,13 +1,23 @@
 import { expect, it } from 'bun:test'
 import product from '../native/product.json'
 import source from '../native/hq-source.json'
-import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs'
 import { getMetadata } from 'ts-images'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import pantry from '../pantry.json'
 import presets from '../enterprise/presets.json'
-import { assertInstalledKit, assertSourceLock, generateNativeSplash, installationPresets, manifestPath, nativeBuildEnvironment, root, splashOptions, splashPreset } from '../scripts/native-source'
+import { assertInstalledKit, assertSourceLock, generateNativeSplash, installationPresets, installImagery, manifestPath, NATIVE_FONTS, nativeBuildEnvironment, root, splashOptions, splashPreset } from '../scripts/native-source'
+
+/** WCAG contrast ratio between two `#rrggbb` colours. */
+function contrast(a: string, b: string): number {
+  const luminance = (hex: string) => {
+    const [red, green, blue] = [1, 3, 5].map(i => Number.parseInt(hex.slice(i, i + 2), 16) / 255).map(value => value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4)
+    return red! * 0.2126 + green! * 0.7152 + blue! * 0.0722
+  }
+  const [light, dark] = [luminance(a), luminance(b)].sort((x, y) => y - x)
+  return (light! + 0.05) / (dark! + 0.05)
+}
 
 it('requires an exact HQ platform release, its commit and the pinned Bun runtime', () => {
   expect(() => assertSourceLock(source)).not.toThrow()
@@ -86,7 +96,7 @@ it('packages LSU’s brand and approved coaching tiers as the installation’s o
   expect(() => installationPresets(withoutSignIn as typeof presets)).toThrow('must turn off HQ sign-in')
   expect(presets.experience.navigation.map(item => item.label)).toEqual(['Store', 'Workouts', 'Health', 'Messages', 'Me'])
   expect(presets.experience.show_powered_by).toBe(false)
-  expect(presets.experience.theme).toMatchObject({ accent: product.identity.theme.accent, background: product.identity.theme.background, font: 'barlow', heading_font: 'anton' })
+  expect(presets.experience.theme).toMatchObject({ accent: product.identity.theme.accent, background: product.identity.theme.background, font: 'inter', heading_font: 'anton', radius: product.identity.theme.radius })
   expect(() => installationPresets({ ...presets, organization: 'another-brand' })).toThrow('must belong to the packaged product')
   expect(() => installationPresets({ ...presets, products: [presets.products[0]!, presets.products[0]!] })).toThrow('unique, priced coaching tiers')
   expect(() => installationPresets({ ...presets, products: [{ ...presets.products[0]!, price_cents: 0 }] })).toThrow('unique, priced coaching tiers')
@@ -94,9 +104,65 @@ it('packages LSU’s brand and approved coaching tiers as the installation’s o
   expect(() => installationPresets({ ...presets, products: [{ ...presets.products[0]!, training_blocks: { length_days: 10, review: 'coach' } }] })).toThrow('reviewed by a coach')
 })
 
-it('draws the launch splash with ts-images’ preset from the wordmark, on the black the app opens on', async () => {
-  expect(splashPreset()).toEqual({ logo: join(root, 'public/assets/lsu/images/lsu-logo.svg'), accent: '#dd0f15' })
-  expect(splashOptions()).toEqual({ logo: join(root, 'public/assets/lsu/images/lsu-logo.svg'), light: { background: '#000000' }, dark: false, accent: '#dd0f15', shape: 'none' })
+it('draws the app in the coaching design: near-black, LSU red, Inter under Anton, rounded cards', () => {
+  const theme = product.identity.theme
+  // "LSU Coaching App - Entwurf v2" (2026-11-10): the palette, faces and corners of its ten screens.
+  expect(theme).toEqual({
+    background: '#0b0b0c', surface: '#17171a', text: '#f4f4f5', muted: '#a1a1aa',
+    accent: '#d71f28', accent_ink: '#ff4d55', accent_text: '#ffffff', border: '#2a2a2e',
+    radius: 14, card_radius: 14, card_border: true,
+    font: 'inter', heading_font: 'anton', heading_uppercase: true,
+  })
+  // Every ink reads on what it is drawn on (WCAG 4.5:1), the red links on a card included.
+  for (const [ink, surface] of [[theme.text, theme.background], [theme.text, theme.surface], [theme.muted, theme.background], [theme.muted, theme.surface], [theme.accent_ink, theme.background], [theme.accent_ink, theme.surface], [theme.accent_text, theme.accent]] as const)
+    expect(contrast(ink, surface), `${ink} on ${surface}`).toBeGreaterThanOrEqual(4.5)
+  // The phone packages the faces the theme names, Inter's bold with its regular.
+  expect([...NATIVE_FONTS]).toEqual(['Anton-Regular', 'Inter-Regular', 'Inter-Bold'])
+})
+
+it('ships the design\'s photographs from LSU\'s own image set, one per screen that is given one', () => {
+  const places = Object.keys(product.identity.imagery)
+  expect(places).toEqual(['start', 'signIn', 'today', 'plans', 'library', 'feedback', 'simulation'])
+  for (const [place, image] of Object.entries(product.identity.imagery)) {
+    expect(image.src).toBe(`/assets/native-product/imagery/${place}.webp`)
+    expect(image.focus).toBeGreaterThanOrEqual(0)
+    expect(image.focus).toBeLessThanOrEqual(100)
+    // Described in both languages, with no dash a reader would stumble on.
+    for (const alt of [image.alt.de, image.alt.en]) expect(alt).toMatch(/^[^\u2013\u2014]{10,160}$/)
+  }
+  const directory = mkdtempSync(join(tmpdir(), 'lsu-imagery-'))
+  try {
+    expect(installImagery(directory)).toEqual(places)
+    for (const place of places) expect(statSync(join(directory, 'imagery', `${place}.webp`)).size).toBeGreaterThan(20_000)
+    const imagery = product.identity.imagery
+    const files = product.assets.imagery
+    expect(() => installImagery(directory, imagery, { ...files, today: undefined as unknown as string })).toThrow('names a photograph for today with no file')
+    expect(() => installImagery(directory, { start: imagery.start }, files)).toThrow('ships a photograph for signIn')
+    expect(() => installImagery(directory, { ...imagery, start: { src: 'https://elsewhere.example/a.webp' } }, files)).toThrow('identity.imagery.start.src must be /assets/native-product/imagery/start.webp')
+    expect(() => installImagery(directory, imagery, { ...files, start: '../public/assets/lsu/images/missing.webp' })).toThrow('is not a WebP file in this repository')
+  }
+  finally { rmSync(directory, { recursive: true, force: true }) }
+})
+
+it('opens the app on LSU\'s start screen, in German and in English', () => {
+  const { de, en } = product.identity.start
+  expect([de.headline, de.accent]).toEqual(['Dein Plan bis zur', 'letzten Runde.'])
+  expect([en.headline, en.accent]).toEqual(['Your plan to the', 'last loop.'])
+  expect(de.text).toBe('Laufen, Kraft, Mobility und Kopf. Woche für Woche, angepasst an dein Feedback per Sprachnachricht.')
+  expect(de.tags).toEqual(['Backyard', 'Trail', 'Marathon', 'Halbmarathon', '10 km'])
+  expect(en.tags).toEqual(['Backyard', 'Trail', 'Marathon', 'Half marathon', '10 km'])
+  for (const copy of [de, en]) {
+    expect(copy.eyebrow).toBe('Coaching')
+    expect(copy.cards.map(card => card.title)).toEqual(['the rappid team', 'lastsoulultra.com'])
+    expect(copy.cards[1]!.url).toBe('https://www.lastsoulultra.com')
+    // No promise the tiers do not keep: the presets add no trial, so no "free month" here.
+    expect(JSON.stringify(copy)).not.toMatch(/kostenlos|gratis|free month|[\u2013\u2014]/i)
+  }
+})
+
+it('draws the launch splash with ts-images’ preset from the wordmark, on the near-black the app opens on', async () => {
+  expect(splashPreset()).toEqual({ logo: join(root, 'public/assets/lsu/images/lsu-logo.svg'), accent: '#d71f28' })
+  expect(splashOptions()).toEqual({ logo: join(root, 'public/assets/lsu/images/lsu-logo.svg'), light: { background: '#0b0b0c' }, dark: false, accent: '#d71f28', shape: 'none' })
   expect(() => splashPreset('../public/assets/lsu/images/lsu-splash.svg')).toThrow('must be a splash preset')
   expect(() => splashPreset({ logo: 'x.svg', accent: 'red' })).toThrow('must be a splash preset')
   const directory = mkdtempSync(join(tmpdir(), 'lsu-splash-'))

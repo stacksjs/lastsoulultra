@@ -55,6 +55,55 @@ HQ's commercial model deducts no third-party website share. LSU's own briefing p
 
 The allocation ledger is a contractual contributor statement, not a mirror of Stripe’s available balance. Dispute movements and actual application-fee refunds require provider reconciliation before live coach settlements, tracked in [issue #347](https://github.com/stacksjs/hq.training/issues/347). Cross-border tax setup remains tracked in [issue #242](https://github.com/stacksjs/hq.training/issues/242).
 
+## Coaching app design, draft v2 (2026-11-10)
+
+LSU's "LSU Coaching App - Entwurf v2" (ten phone screens by the rappid team,
+dated 2026-11-10) is the wireframe the app follows. What HQ already does well
+stays: Health, Progress, Messages, the profile and the account screens are
+restyled, not removed.
+
+Adopted on 2026-11-11, with HQ platform kit 1.0.4222 or later:
+
+- **Look.** `native/product.json` `identity.theme`: page `#0b0b0c`, cards
+  `#17171a` with a `#2a2a2e` hairline and 14pt corners, fills in `#d71f28`,
+  words in the accent in `#ff4d55`, muted text `#a1a1aa`, Inter for body text
+  under Anton page titles in capitals. `enterprise/presets.json` carries the
+  same palette for the coaching portal.
+- **Photographs.** The seven pictures the draft uses are LSU's own 2026
+  pictures from lastsoulultra.com, already in `public/assets/lsu/images`.
+  `assets.imagery` names the file for each screen and `identity.imagery` says
+  where the installation serves it; `scripts/native-source.ts` copies them
+  into the application and refuses a place without a file.
+- **Start screen.** A signed-out person meets screen 1 of the draft before
+  sign-in (`identity.start`, German and English): the night runner, "Dein Plan
+  bis zur letzten Runde.", the five goals, the two cards and the ways in.
+- **Today.** The date and greeting sit over the Today photograph.
+
+Not adopted yet, and why:
+
+- **RUN 19,99 and SOUL 39,99, terms of 3, 6 or 12 months, first month free.**
+  The draft's own note says the conditions are still to be settled with Kim,
+  and the tiers approved on 2026-10-28 are EUR 19.99 and EUR 29.99 with no
+  trial. The start screen therefore says "Jetzt starten", not "1 Monat
+  kostenlos starten", and the tiers keep their names and prices until LSU
+  confirms. HQ products support a trial (`trial_days`); a minimum term is not
+  built.
+- **"Mit deinem LSU-Konto anmelden", Soul number, code by email.** The race
+  account on lastsoulultra.com is a separate service that signs in with an
+  email and a password, has no Soul number, and offers no code sign-in. The
+  app keeps HQ's sign-in (passkey, Apple, Google, email and password) until
+  the two accounts are linked.
+- **Tab bar of Heute, Woche, Übungen, Backyard.** The app keeps Today,
+  Workouts, Progress, Health and Me, so nothing HQ offers is lost; the week
+  is the calendar behind Today's calendar button.
+- **Level and goal, race countdown, weekly voice feedback that unlocks the
+  next week, monthly drop, Backyard simulation.** HQ has parts of each (the
+  first-run questions, goal events, training blocks reviewed by a coach,
+  voice feedback with a transcript, the workout library, the workout
+  player); the draft's screens for them are not built.
+- **The tour's phone pictures** (`native/onboarding`) still show the previous
+  look and need photographing again from the new build.
+
 ## Preview and acceptance history
 
 Moved from HQ's former `docs/developers/lsu-preview.md`. HQ's generic

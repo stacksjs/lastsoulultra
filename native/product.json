@@ -9,17 +9,58 @@
     "privacyUrl": "https://training.lsu.stacksjs.com/legal/lsu/privacy",
     "termsUrl": "https://training.lsu.stacksjs.com/legal/lsu/terms",
     "policyVersions": { "terms": "2026-10-29", "privacy": "2026-10-29", "healthSafety": "2026-10-29" },
+    "imagery": {
+      "start": { "src": "/assets/native-product/imagery/start.webp", "focus": 30, "alt": { "de": "Läuferin bei Nacht beim Last Soul Ultra 2026", "en": "A runner at night at Last Soul Ultra 2026" } },
+      "signIn": { "src": "/assets/native-product/imagery/signIn.webp", "focus": 50, "alt": { "de": "Last Soul Ultra Schriftzug mit Rundenanzeige", "en": "The Last Soul Ultra lettering above the lap clock" } },
+      "today": { "src": "/assets/native-product/imagery/today.webp", "focus": 25, "alt": { "de": "Läufer mit Stirnlampe trinkt in der Nacht beim Last Soul Ultra", "en": "A runner with a head torch drinks at night at Last Soul Ultra" } },
+      "plans": { "src": "/assets/native-product/imagery/plans.webp", "focus": 60, "alt": { "de": "Zeltlager beim Last Soul Ultra bei Nacht", "en": "The tent camp at Last Soul Ultra at night" } },
+      "library": { "src": "/assets/native-product/imagery/library.webp", "focus": 25, "alt": { "de": "Läuferin am Start- und Zielbogen des Last Soul Ultra", "en": "A runner under the start and finish arch at Last Soul Ultra" } },
+      "feedback": { "src": "/assets/native-product/imagery/feedback.webp", "focus": 30, "alt": { "de": "Crew umarmt einen Läufer mit Stirnlampe", "en": "Crew hugging a runner who wears a head torch" } },
+      "simulation": { "src": "/assets/native-product/imagery/simulation.webp", "focus": 20, "alt": { "de": "Läufer vor der roten Rundenuhr des Last Soul Ultra", "en": "A runner in front of the red lap clock at Last Soul Ultra" } }
+    },
+    "start": {
+      "de": {
+        "eyebrow": "Coaching",
+        "headline": "Dein Plan bis zur",
+        "accent": "letzten Runde.",
+        "text": "Laufen, Kraft, Mobility und Kopf. Woche für Woche, angepasst an dein Feedback per Sprachnachricht.",
+        "tags": ["Backyard", "Trail", "Marathon", "Halbmarathon", "10 km"],
+        "cards": [
+          { "label": "Created by", "title": "the rappid team", "text": "Coaches und Läufer aus dem LSU-Umfeld" },
+          { "label": "Rennen & Live", "title": "lastsoulultra.com", "text": "Webseite öffnen", "url": "https://www.lastsoulultra.com" }
+        ],
+        "primary": "Jetzt starten",
+        "secondary": "Pläne vergleichen"
+      },
+      "en": {
+        "eyebrow": "Coaching",
+        "headline": "Your plan to the",
+        "accent": "last loop.",
+        "text": "Running, strength, mobility and mindset. Week by week, adapted to your voice feedback.",
+        "tags": ["Backyard", "Trail", "Marathon", "Half marathon", "10 km"],
+        "cards": [
+          { "label": "Created by", "title": "the rappid team", "text": "Coaches and runners from the LSU world" },
+          { "label": "Races & live", "title": "lastsoulultra.com", "text": "Open website", "url": "https://www.lastsoulultra.com" }
+        ],
+        "primary": "Get started",
+        "secondary": "Compare plans"
+      }
+    },
     "theme": {
-      "background": "#000000",
-      "surface": "#0d0d0f",
-      "text": "#ffffff",
-      "muted": "#b6b6bd",
-      "accent": "#dd0f15",
+      "background": "#0b0b0c",
+      "surface": "#17171a",
+      "text": "#f4f4f5",
+      "muted": "#a1a1aa",
+      "accent": "#d71f28",
+      "accent_ink": "#ff4d55",
       "accent_text": "#ffffff",
-      "border": "#333338",
-      "radius": 0,
-      "font": "barlow",
-      "heading_font": "anton"
+      "border": "#2a2a2e",
+      "radius": 14,
+      "card_radius": 14,
+      "card_border": true,
+      "font": "inter",
+      "heading_font": "anton",
+      "heading_uppercase": true
     },
     "apiOrigin": "https://training.lsu.stacksjs.com",
     "audience": "coaching"
@@ -32,7 +73,16 @@
   "assets": {
     "icon": "assets/icon.png",
     "splash": { "logo": "../public/assets/lsu/images/lsu-logo.svg" },
-    "wordmark": "assets/wordmark.png"
+    "wordmark": "assets/wordmark.png",
+    "imagery": {
+      "start": "../public/assets/lsu/images/recap-01-1080.webp",
+      "signIn": "../public/assets/lsu/images/hero-mobile.webp",
+      "today": "../public/assets/lsu/images/recap-10-1080.webp",
+      "plans": "../public/assets/lsu/images/recap-03-1080.webp",
+      "library": "../public/assets/lsu/images/recap-08-1080.webp",
+      "feedback": "../public/assets/lsu/images/recap-09-1080.webp",
+      "simulation": "../public/assets/lsu/images/recap-11-1080.webp"
+    }
   },
   "output": "../storage/framework/mobile",
   "push": {

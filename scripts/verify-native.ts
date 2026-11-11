@@ -21,7 +21,7 @@ try {
  const logos=nodes.filter((n:any)=>n.props.source === wordmark)
  const report={text,button:button?.style,logos:logos.map((n:any)=>({type:n.type,embeddedBytes:Buffer.from(n.props.source.split(',')[1], 'base64').length})),input:nodes.find((n:any)=>n.props.testID==='login-email')?.style,route:'views-login',source:pin.revision}
  writeFileSync('storage/native/bundled-login-report.json',JSON.stringify(report,null,2))
- if(!button||button.style.backgroundColor!=='#dd0f15')throw new Error('The shipped sign-in action does not use LSU red')
+ if(!button||button.style.backgroundColor!==product.identity.theme.accent)throw new Error('The shipped sign-in action does not use LSU red')
  if(!logos.length)throw new Error('The shipped sign-in screen has no offline LSU wordmark')
  if(text.some((value:string)=>/HQ\.training/.test(value)))throw new Error('The shipped sign-in screen still names HQ.training')
  process.stdout.write(JSON.stringify(report,null,2)+'\n')
