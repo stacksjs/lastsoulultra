@@ -145,8 +145,8 @@ const appOnWeb = moduleHref('calendar', coachingOrigin())
         <p>Fitness, fatigue and form from every session you log, with weekly load, consistency and how many planned sessions you finished.</p>
       </article>
       <article class="app-cell">
-        <h3>Today and the calendar</h3>
-        <p>Today opens with the day's sessions and a recovery card from whatever you wear. The calendar shows the block you are in, and every session says who put it there.</p>
+        <h3>Today and the week</h3>
+        <p>Today opens with the day's sessions, how much of the day is done and a recovery card from whatever you wear. Week lays out all seven days, and every session says who put it there.</p>
       </article>
       <article class="app-cell">
         <h3>Strength and breath</h3>
@@ -167,6 +167,22 @@ const appOnWeb = moduleHref('calendar', coachingOrigin())
       <article class="app-cell">
         <h3>A link for your crew</h3>
         <p>Share a run while it is happening, privately or publicly, so the people in your corner can follow from home.</p>
+      </article>
+      <article class="app-cell app-cell-card app-cell-wide">
+        <div class="app-readouts" aria-hidden="true">
+          <div class="app-readout is-red"><span>Bell in</span><b>60:00</b></div>
+          <div class="app-readout"><span>Rounds</span><b>12</b></div>
+        </div>
+        <h3>Backyard practice</h3>
+        <p>Rehearse the format before race day. Pick 3, 6 or 12 rounds on the hour and the clock counts down to the next bell. Aim for about 50 minutes a round, then walk, eat and drink in what is left.</p>
+      </article>
+      <article class="app-cell">
+        <h3>Say how today went</h3>
+        <p>Today has a microphone. Talk for about thirty seconds about the day's training, with nothing to type.</p>
+      </article>
+      <article class="app-cell">
+        <h3>Level and goal</h3>
+        <p>Say where you stand, what you are training for and when your race is. Today then counts the days to the start.</p>
       </article>
     </div>
   </div>
