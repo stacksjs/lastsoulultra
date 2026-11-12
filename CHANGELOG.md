@@ -1,5 +1,16 @@
 # Stacks Changelog
 
+[Compare changes](https://github.com/stacksjs/lastsoulultra/compare/v1.0.0-build.24...v1.0.0-build.25)
+
+## ✨ Features
+
+- **native**: take HQ platform kit 1.0.4245, and arrange the app as the coaching design does ([edc9f91](https://github.com/stacksjs/lastsoulultra/commit/edc9f91)) _(by Chris Breuer)_
+- **native**: take HQ platform kit 1.0.4240, and start the journey on the start screen ([1d28fd4](https://github.com/stacksjs/lastsoulultra/commit/1d28fd4)) _(by Chris Breuer)_
+
+## Contributors
+
+- _Chris Breuer_
+
 [Compare changes](https://github.com/stacksjs/lastsoulultra/compare/v1.0.0-build.23...v1.0.0-build.24)
 
 ## ✨ Features
