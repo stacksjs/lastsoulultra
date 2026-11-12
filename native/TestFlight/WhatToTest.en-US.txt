@@ -1,7 +1,6 @@
 Features
-- Take HQ platform kit 1.0.4268, so sign-in offers only what LSU has, and a coach's tip of the week reaches Today (native)
-- Give LSU's trainers the Coach plan on every deploy (training)
+- Take HQ platform kit 1.0.4283, so the app follows LSU's palette and sessions read in minutes (native)
+- Take HQ platform kit 1.0.4273, so a sent check-in reads as sent and the website's phone layout floats Add over Messages in one capsule like the app (native)
 
 Fixes
-- Photograph the tour's screens in light as well as dark (onboarding)
-- Draw the app in LSU's black and deep red again (app)
+- Photograph the tour's screens again with Add and Messages in one floating capsule (onboarding)

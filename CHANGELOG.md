@@ -1,5 +1,21 @@
 # Stacks Changelog
 
+[Compare changes](https://github.com/stacksjs/lastsoulultra/compare/v1.0.0-build.27...v1.0.0-build.28)
+
+## ✨ Features
+
+- **native**: take HQ platform kit 1.0.4283, so the app follows LSU's palette and sessions read in minutes ([a7157c0](https://github.com/stacksjs/lastsoulultra/commit/a7157c0)) _(by glennmichael123)_
+- **native**: take HQ platform kit 1.0.4273, so a sent check-in reads as sent and the website's phone layout floats Add over Messages in one capsule like the app ([5542f52](https://github.com/stacksjs/lastsoulultra/commit/5542f52)) _(by Chris Breuer)_
+
+## 🐛 Bug Fixes
+
+- **onboarding**: photograph the tour's screens again with Add and Messages in one floating capsule ([f56467d](https://github.com/stacksjs/lastsoulultra/commit/f56467d)) _(by Chris Breuer)_
+
+## Contributors
+
+- _Chris Breuer_
+- _glennmichael123_
+
 [Compare changes](https://github.com/stacksjs/lastsoulultra/compare/v1.0.0-build.26...v1.0.0-build.27)
 
 ## ✨ Features
