@@ -69,7 +69,7 @@ export function trainingSites(): NonNullable<CloudConfig['sites']> {
       backgroundBun: `.hq-runtime/pantry/bun.com/v${source.bun}/bin/bun`,
       env: { ...runtime, LSU_DEMO_ACCOUNTS_JSON: secrets.LSU_DEMO_ACCOUNTS_JSON || '', LSU_SEED_DATABASE: deployment.database.name, LSU_SEED_CONFIRM: 'last-soul-ultra' },
       healthCheck: { path: '/api/deployment' },
-      preStart: [...install, './buddy migrate --no-generate --auth', './buddy queue:table', 'bun scripts/enterprise-preflight.ts --platform', 'bun scripts/reindex-public-profiles.ts', 'mkdir -p storage/framework/runtime/production', 'bun scripts/build-production.ts api', 'bun deployment/lsu/seed-review.ts', './buddy installation:admins', 'sh scripts/ensure-speech-runtime.sh'],
+      preStart: [...install, './buddy migrate --no-generate --auth', './buddy queue:table', 'bun scripts/enterprise-preflight.ts --platform', 'bun scripts/reindex-public-profiles.ts', 'mkdir -p storage/framework/runtime/production', 'bun scripts/build-production.ts api', 'bun deployment/lsu/seed-review.ts', './buddy installation:admins', 'bun deployment/lsu/grant-trainer-plans.ts', 'sh scripts/ensure-speech-runtime.sh'],
       scheduler: true,
       daemons: [
         // The catch-all queue, and a gym's webhook deliveries, as HQ's own deploy runs them.
