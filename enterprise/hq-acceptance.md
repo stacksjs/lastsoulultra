@@ -108,9 +108,15 @@ Adopted on 2026-11-11, with HQ platform kit 1.0.4230 or later:
   runner's head is in the frame. The acceptance journey visits every new tab,
   the heart and the menu.
 - **The tour's phone pictures (2026-11-12).** `native/onboarding` was
-  photographed again from kit 1.0.4264 running as this installation with HQ's
+  photographed again from kit 1.0.4273 running as this installation with HQ's
   demo gym: the fifteen athlete and coach screens with the new tab bar, each
-  with its ring, once in dark and once in light. The app opens dark, and a
+  with its ring, once in dark and once in light. The athlete screens now show
+  the phone layout's floating capsule above the right end of the tab bar: Add
+  over Messages in one glass capsule on Today, Messages alone on the other
+  pages, with neutral icons except on the Messages page itself. Today's ring
+  stays on the recovery card, because Start sits below the photograph. The
+  coach's pages have no capsule and keep their pictures from kit 1.0.4264.
+  The app opens dark, and a
   member who picks light in the theme switch gets light, so the light pictures
   are taken with that choice stored (`stx-color-mode`), not by telling the
   browser the device is light. HQ's `scripts/onboarding-screens.ts` drove

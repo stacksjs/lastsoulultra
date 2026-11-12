@@ -6,8 +6,8 @@
   },
   "screens": {
     "athlete.calendar": {
-      "light": "/assets/images/onboarding/athlete-calendar-light.webp?v=d787824607",
-      "dark": "/assets/images/onboarding/athlete-calendar-dark.webp?v=bbe4c55114",
+      "light": "/assets/images/onboarding/athlete-calendar-light.webp?v=d5e12787c7",
+      "dark": "/assets/images/onboarding/athlete-calendar-dark.webp?v=8961b7329e",
       "top": {
         "light": "#f5f5f7",
         "dark": "#000000"
@@ -20,8 +20,8 @@
       }
     },
     "athlete.coach": {
-      "light": "/assets/images/onboarding/athlete-coach-light.webp?v=02d9114b8f",
-      "dark": "/assets/images/onboarding/athlete-coach-dark.webp?v=af5a6221fc",
+      "light": "/assets/images/onboarding/athlete-coach-light.webp?v=71f74b2303",
+      "dark": "/assets/images/onboarding/athlete-coach-dark.webp?v=5a6eb37025",
       "top": {
         "light": "#f5f5f7",
         "dark": "#000000"
@@ -34,8 +34,8 @@
       }
     },
     "athlete.heartrate": {
-      "light": "/assets/images/onboarding/athlete-heartrate-light.webp?v=7f1da1f0f6",
-      "dark": "/assets/images/onboarding/athlete-heartrate-dark.webp?v=914c9a58e4",
+      "light": "/assets/images/onboarding/athlete-heartrate-light.webp?v=2358ba505d",
+      "dark": "/assets/images/onboarding/athlete-heartrate-dark.webp?v=78cd32e1e3",
       "top": {
         "light": "#f5f5f7",
         "dark": "#000000"
@@ -48,8 +48,8 @@
       }
     },
     "athlete.plans": {
-      "light": "/assets/images/onboarding/athlete-plans-light.webp?v=bde6de473f",
-      "dark": "/assets/images/onboarding/athlete-plans-dark.webp?v=f245979138",
+      "light": "/assets/images/onboarding/athlete-plans-light.webp?v=de27483f80",
+      "dark": "/assets/images/onboarding/athlete-plans-dark.webp?v=80b61a2987",
       "top": {
         "light": "#f5f5f7",
         "dark": "#000000"
@@ -62,8 +62,8 @@
       }
     },
     "athlete.player": {
-      "light": "/assets/images/onboarding/athlete-player-light.webp?v=7a9ceb58ca",
-      "dark": "/assets/images/onboarding/athlete-player-dark.webp?v=4d66c346b4",
+      "light": "/assets/images/onboarding/athlete-player-light.webp?v=60c13aea53",
+      "dark": "/assets/images/onboarding/athlete-player-dark.webp?v=c38c0bf540",
       "top": {
         "light": "#f5f5f7",
         "dark": "#000000"
@@ -76,8 +76,8 @@
       }
     },
     "athlete.progress": {
-      "light": "/assets/images/onboarding/athlete-progress-light.webp?v=08315c57e6",
-      "dark": "/assets/images/onboarding/athlete-progress-dark.webp?v=3423270831",
+      "light": "/assets/images/onboarding/athlete-progress-light.webp?v=df24754cbb",
+      "dark": "/assets/images/onboarding/athlete-progress-dark.webp?v=d4907b26cc",
       "top": {
         "light": "#f5f5f7",
         "dark": "#000000"
@@ -90,8 +90,8 @@
       }
     },
     "athlete.today": {
-      "light": "/assets/images/onboarding/athlete-today-light.webp?v=948fc80a28",
-      "dark": "/assets/images/onboarding/athlete-today-dark.webp?v=f93ea634d9",
+      "light": "/assets/images/onboarding/athlete-today-light.webp?v=46cdd4b715",
+      "dark": "/assets/images/onboarding/athlete-today-dark.webp?v=96dbd2fb07",
       "top": {
         "light": "#f5f5f7",
         "dark": "#000000"
@@ -104,8 +104,8 @@
       }
     },
     "athlete.wearables": {
-      "light": "/assets/images/onboarding/athlete-wearables-light.webp?v=6933515da3",
-      "dark": "/assets/images/onboarding/athlete-wearables-dark.webp?v=0f51bc730a",
+      "light": "/assets/images/onboarding/athlete-wearables-light.webp?v=e7bb573a3f",
+      "dark": "/assets/images/onboarding/athlete-wearables-dark.webp?v=af92e60f4a",
       "top": {
         "light": "#f5f5f7",
         "dark": "#000000"
@@ -118,8 +118,8 @@
       }
     },
     "breathwork.plan": {
-      "light": "/assets/images/onboarding/breathwork-plan-light.webp?v=d4079a6e2f",
-      "dark": "/assets/images/onboarding/breathwork-plan-dark.webp?v=37c5cead6a",
+      "light": "/assets/images/onboarding/breathwork-plan-light.webp?v=db6557d5bc",
+      "dark": "/assets/images/onboarding/breathwork-plan-dark.webp?v=03b31e2bf2",
       "top": {
         "light": "#f5f5f7",
         "dark": "#000000"
