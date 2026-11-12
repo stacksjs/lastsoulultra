@@ -6,213 +6,213 @@
   },
   "screens": {
     "athlete.calendar": {
-      "light": "/assets/images/onboarding/athlete-calendar-light.webp?v=2f0a61a894",
-      "dark": "/assets/images/onboarding/athlete-calendar-dark.webp?v=022612c688",
+      "light": "/assets/images/onboarding/athlete-calendar-light.webp?v=0aaa9acc4a",
+      "dark": "/assets/images/onboarding/athlete-calendar-dark.webp?v=0aaa9acc4a",
       "top": {
-        "light": "#f2f2f7",
-        "dark": "#000000"
+        "light": "#0b0b0c",
+        "dark": "#0b0b0c"
       },
       "ring": {
-        "x": 0.041,
-        "y": 0.582,
-        "w": 0.918,
-        "h": 0.231
+        "x": 0.044,
+        "y": 0.585,
+        "w": 0.897,
+        "h": 0.259
       }
     },
     "athlete.coach": {
-      "light": "/assets/images/onboarding/athlete-coach-light.webp?v=1a54d4e0c5",
-      "dark": "/assets/images/onboarding/athlete-coach-dark.webp?v=bc4b62d8b2",
+      "light": "/assets/images/onboarding/athlete-coach-light.webp?v=ad95020285",
+      "dark": "/assets/images/onboarding/athlete-coach-dark.webp?v=ad95020285",
       "top": {
-        "light": "#f2f2f7",
-        "dark": "#000000"
+        "light": "#0b0b0c",
+        "dark": "#0b0b0c"
       },
       "ring": {
         "x": 0.064,
-        "y": 0.401,
-        "w": 0.869,
+        "y": 0.427,
+        "w": 0.854,
         "h": 0.109
       }
     },
     "athlete.heartrate": {
-      "light": "/assets/images/onboarding/athlete-heartrate-light.webp?v=387f908129",
-      "dark": "/assets/images/onboarding/athlete-heartrate-dark.webp?v=6a26b2bec9",
+      "light": "/assets/images/onboarding/athlete-heartrate-light.webp?v=4810c56ae7",
+      "dark": "/assets/images/onboarding/athlete-heartrate-dark.webp?v=4810c56ae7",
       "top": {
-        "light": "#f2f2f7",
-        "dark": "#000000"
+        "light": "#0b0b0c",
+        "dark": "#0b0b0c"
       },
       "ring": {
         "x": 0.095,
-        "y": 0.428,
-        "w": 0.728,
+        "y": 0.504,
+        "w": 0.713,
         "h": 0.243
       }
     },
     "athlete.plans": {
-      "light": "/assets/images/onboarding/athlete-plans-light.webp?v=ceaf1e99b1",
-      "dark": "/assets/images/onboarding/athlete-plans-dark.webp?v=cde6f257b8",
+      "light": "/assets/images/onboarding/athlete-plans-light.webp?v=25decfc05b",
+      "dark": "/assets/images/onboarding/athlete-plans-dark.webp?v=25decfc05b",
       "top": {
-        "light": "#f2f2f7",
-        "dark": "#000000"
+        "light": "#0b0b0c",
+        "dark": "#0b0b0c"
       },
       "ring": {
-        "x": 0.351,
-        "y": 0.554,
-        "w": 0.298,
+        "x": 0.333,
+        "y": 0.555,
+        "w": 0.319,
         "h": 0.063
       }
     },
     "athlete.player": {
-      "light": "/assets/images/onboarding/athlete-player-light.webp?v=9f1f0ddac1",
-      "dark": "/assets/images/onboarding/athlete-player-dark.webp?v=f745d9fb17",
+      "light": "/assets/images/onboarding/athlete-player-light.webp?v=f23665e98c",
+      "dark": "/assets/images/onboarding/athlete-player-dark.webp?v=f23665e98c",
       "top": {
-        "light": "#f2f2f7",
-        "dark": "#000000"
+        "light": "#0b0b0c",
+        "dark": "#0b0b0c"
       },
       "ring": {
         "x": 0.041,
         "y": 0.333,
-        "w": 0.918,
+        "w": 0.903,
         "h": 0.108
       }
     },
     "athlete.progress": {
-      "light": "/assets/images/onboarding/athlete-progress-light.webp?v=66d29ab83b",
-      "dark": "/assets/images/onboarding/athlete-progress-dark.webp?v=8b63b2458a",
+      "light": "/assets/images/onboarding/athlete-progress-light.webp?v=4769874c0b",
+      "dark": "/assets/images/onboarding/athlete-progress-dark.webp?v=4769874c0b",
       "top": {
-        "light": "#f2f2f7",
-        "dark": "#000000"
+        "light": "#0b0b0c",
+        "dark": "#0b0b0c"
       },
       "ring": {
         "x": 0.041,
-        "y": 0.265,
-        "w": 0.918,
-        "h": 0.496
+        "y": 0.172,
+        "w": 0.903,
+        "h": 0.459
       }
     },
     "athlete.today": {
-      "light": "/assets/images/onboarding/athlete-today-light.webp?v=70bd15ab49",
-      "dark": "/assets/images/onboarding/athlete-today-dark.webp?v=29f2534abc",
+      "light": "/assets/images/onboarding/athlete-today-light.webp?v=bbd06dbd46",
+      "dark": "/assets/images/onboarding/athlete-today-dark.webp?v=bbd06dbd46",
       "top": {
-        "light": "#f2f2f7",
-        "dark": "#000000"
+        "light": "#0b0b0c",
+        "dark": "#0b0b0c"
       },
       "ring": {
-        "x": 0.082,
-        "y": 0.673,
-        "w": 0.836,
-        "h": 0.061
+        "x": 0.041,
+        "y": 0.411,
+        "w": 0.903,
+        "h": 0.391
       }
     },
     "athlete.wearables": {
-      "light": "/assets/images/onboarding/athlete-wearables-light.webp?v=fc03850ec4",
-      "dark": "/assets/images/onboarding/athlete-wearables-dark.webp?v=64b16718f8",
+      "light": "/assets/images/onboarding/athlete-wearables-light.webp?v=f1f1848d71",
+      "dark": "/assets/images/onboarding/athlete-wearables-dark.webp?v=f1f1848d71",
       "top": {
-        "light": "#f5f5f7",
-        "dark": "#000000"
+        "light": "#0b0b0c",
+        "dark": "#0b0b0c"
       },
       "ring": {
-        "x": 0.743,
-        "y": 0.626,
-        "w": 0.175,
-        "h": 0.03
+        "x": 0.715,
+        "y": 0.673,
+        "w": 0.188,
+        "h": 0.056
       }
     },
     "breathwork.plan": {
-      "light": "/assets/images/onboarding/breathwork-plan-light.webp?v=5bddbd109f",
-      "dark": "/assets/images/onboarding/breathwork-plan-dark.webp?v=622422b651",
+      "light": "/assets/images/onboarding/breathwork-plan-light.webp?v=d4ad24c27c",
+      "dark": "/assets/images/onboarding/breathwork-plan-dark.webp?v=da2ad333ac",
       "top": {
-        "light": "#f2f2f7",
-        "dark": "#000000"
+        "light": "#0b0b0c",
+        "dark": "#0b0b0c"
       },
       "ring": {
         "x": 0.092,
         "y": 0.47,
-        "w": 0.358,
+        "w": 0.386,
         "h": 0.061
       }
     },
     "coach.atp": {
-      "light": "/assets/images/onboarding/coach-atp-light.webp?v=5152a149ee",
-      "dark": "/assets/images/onboarding/coach-atp-dark.webp?v=56ba015e4b",
+      "light": "/assets/images/onboarding/coach-atp-light.webp?v=d4fb3018ae",
+      "dark": "/assets/images/onboarding/coach-atp-dark.webp?v=d4fb3018ae",
       "top": {
-        "light": "#f2f2f7",
-        "dark": "#000000"
+        "light": "#0b0b0c",
+        "dark": "#0b0b0c"
       },
       "ring": {
         "x": 0.095,
         "y": 0.633,
-        "w": 0.344,
+        "w": 0.398,
         "h": 0.035
       }
     },
     "coach.builder": {
-      "light": "/assets/images/onboarding/coach-builder-light.webp?v=911edb5e63",
-      "dark": "/assets/images/onboarding/coach-builder-dark.webp?v=f2f5bfc662",
+      "light": "/assets/images/onboarding/coach-builder-light.webp?v=acc87513c8",
+      "dark": "/assets/images/onboarding/coach-builder-dark.webp?v=acc87513c8",
       "top": {
-        "light": "#f2f2f7",
-        "dark": "#000000"
+        "light": "#0b0b0c",
+        "dark": "#0b0b0c"
       },
       "ring": {
         "x": 0.095,
         "y": 0.442,
-        "w": 0.398,
-        "h": 0.046
+        "w": 0.433,
+        "h": 0.058
       }
     },
     "coach.calendar": {
-      "light": "/assets/images/onboarding/coach-calendar-light.webp?v=f8a705ffea",
-      "dark": "/assets/images/onboarding/coach-calendar-dark.webp?v=007b4c33c8",
+      "light": "/assets/images/onboarding/coach-calendar-light.webp?v=cbf0ffcf38",
+      "dark": "/assets/images/onboarding/coach-calendar-dark.webp?v=cbf0ffcf38",
       "top": {
-        "light": "#f2f2f7",
-        "dark": "#000000"
+        "light": "#0b0b0c",
+        "dark": "#0b0b0c"
       },
       "ring": {
-        "x": 0.389,
+        "x": 0.423,
         "y": 0.168,
-        "w": 0.337,
-        "h": 0.046
+        "w": 0.371,
+        "h": 0.058
       }
     },
     "coach.plans": {
-      "light": "/assets/images/onboarding/coach-plans-light.webp?v=eeea1e732d",
-      "dark": "/assets/images/onboarding/coach-plans-dark.webp?v=30999a81e9",
+      "light": "/assets/images/onboarding/coach-plans-light.webp?v=3bf8a9c440",
+      "dark": "/assets/images/onboarding/coach-plans-dark.webp?v=3bf8a9c440",
       "top": {
-        "light": "#f2f2f7",
-        "dark": "#000000"
+        "light": "#0b0b0c",
+        "dark": "#0b0b0c"
       },
       "ring": {
-        "x": 0.398,
+        "x": 0.428,
         "y": 0.32,
-        "w": 0.285,
-        "h": 0.046
+        "w": 0.313,
+        "h": 0.058
       }
     },
     "coach.roster": {
-      "light": "/assets/images/onboarding/coach-roster-light.webp?v=ab7323805c",
-      "dark": "/assets/images/onboarding/coach-roster-dark.webp?v=1789450a84",
+      "light": "/assets/images/onboarding/coach-roster-light.webp?v=6763e6b50d",
+      "dark": "/assets/images/onboarding/coach-roster-dark.webp?v=6763e6b50d",
       "top": {
-        "light": "#f2f2f7",
-        "dark": "#000000"
+        "light": "#0b0b0c",
+        "dark": "#0b0b0c"
       },
       "ring": {
         "x": 0.095,
         "y": 0.372,
-        "w": 0.344,
-        "h": 0.046
+        "w": 0.385,
+        "h": 0.058
       }
     },
     "coach.store": {
-      "light": "/assets/images/onboarding/coach-store-light.webp?v=ca979cc60c",
-      "dark": "/assets/images/onboarding/coach-store-dark.webp?v=a38a72eb24",
+      "light": "/assets/images/onboarding/coach-store-light.webp?v=8db5a25a3d",
+      "dark": "/assets/images/onboarding/coach-store-dark.webp?v=8db5a25a3d",
       "top": {
-        "light": "#f2f2f7",
-        "dark": "#000000"
+        "light": "#0b0b0c",
+        "dark": "#0b0b0c"
       },
       "ring": {
-        "x": 0.041,
-        "y": 0.361,
-        "w": 0.343,
-        "h": 0.046
+        "x": 0.401,
+        "y": 0.373,
+        "w": 0.374,
+        "h": 0.058
       }
     }
   }

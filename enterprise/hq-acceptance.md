@@ -104,6 +104,13 @@ Adopted on 2026-11-11, with HQ platform kit 1.0.4230 or later:
   photograph is cut higher (`identity.imagery.simulation.focus` 3) so the
   runner's head is in the frame. The acceptance journey visits every new tab,
   the heart and the menu.
+- **The tour's phone pictures (2026-11-12).** `native/onboarding` was
+  photographed again from kit 1.0.4264 running as this installation with HQ's
+  demo gym: the fifteen athlete and coach screens in the new look with the new
+  tab bar, each with its ring. The app is dark whatever the phone prefers, so
+  the light and dark pictures are the same screen. HQ's
+  `scripts/onboarding-screens.ts` drove Bun's WebKit view for this, through a
+  stand-in for its Chrome module, because the Mac it ran on has no Chrome.
 
 Not adopted yet, and why:
 
@@ -127,8 +134,6 @@ Not adopted yet, and why:
 - **A weekly feedback that unlocks the next week.** Woche shows the next week
   as locked and links to the feedback; the coach still releases the next
   block in HQ, the feedback does not do it by itself.
-- **The tour's phone pictures** (`native/onboarding`) still show the previous
-  look and need photographing again from the new build.
 
 Seen once by the acceptance journey on kit 1.0.4230 (2026-11-12): after a
 sign-out the app did not go idle, and XCUITest waited two minutes before each
