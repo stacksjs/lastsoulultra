@@ -144,6 +144,20 @@ it('ships the design\'s photographs from LSU\'s own image set, one per screen th
   finally { rmSync(directory, { recursive: true, force: true }) }
 })
 
+it('arranges the app as the coaching design does: its own tabs, the heart beside More, the rest inside it', () => {
+  // "LSU Coaching App - Entwurf v2": Heute, Woche, Übungen and Backyard along the bottom. The
+  // profile keeps its tab (notifications live there), Health is the heart left of More, and
+  // Progress and Workouts open from More, so nothing the app had is without a way in.
+  expect(product.identity.navigation).toEqual({ tabs: ['today', 'week', 'exercises', 'backyard', 'me'], bar: ['health'], menu: ['progress', 'workouts'] })
+  const places = [...product.identity.navigation.tabs, ...product.identity.navigation.bar, ...product.identity.navigation.menu]
+  for (const place of ['today', 'workouts', 'progress', 'health', 'me']) expect(places).toContain(place)
+  expect(new Set(places).size).toBe(places.length)
+  // The acceptance journey walks the same arrangement on a phone.
+  const journey = readFileSync(join(root, 'scripts/test-native-ios.ts'), 'utf8')
+  expect(journey).toContain("tabs: ['Today', 'Week', 'Exercises', 'Backyard', 'Me'].map(title => ({ title, url: '' }))")
+  for (const step of ["{ command: 'tab', text: 'Week' }", "{ command: 'tab', text: 'Exercises' }", "{ command: 'tab', text: 'Backyard' }", "{ command: 'tapid', text: 'nav-health' }", "{ command: 'tapid', text: 'nav-more' }, { command: 'tapexact', text: 'Progress' }"]) expect(journey).toContain(step)
+})
+
 it('opens the app on LSU\'s start screen, in German and in English', () => {
   const { de, en } = product.identity.start
   expect([de.headline, de.accent]).toEqual(['Dein Plan bis zur', 'letzten Runde.'])

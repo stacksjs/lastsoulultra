@@ -84,6 +84,26 @@ Adopted on 2026-11-11, with HQ platform kit 1.0.4230 or later:
   "Log in" and "Get started" on the start screen take its place rather than
   sitting on top of it, and the acceptance journey now begins on the start
   screen and reaches sign-in through its link.
+- **The draft's places, pages and flow (kit 1.0.4245, 2026-11-12).**
+  `identity.navigation` arranges the app as the draft does: the tabs are
+  Heute, Woche, Übungen and Backyard, with Ich kept as a fifth because the
+  draft has no place for the profile, messages and the account. Health is the
+  heart in the top bar, left of the "..." menu, and that menu opens Progress
+  and Workouts. Each platform keeps its own tab bar (iOS's floating glass
+  capsule, Android's native bar); only the places and their names follow the
+  draft. New pages: **Woche** (the seven days of the week, today marked, the
+  locked next week and the link to the weekly feedback), **Backyard** (the
+  practice simulation with 3, 6 or 12 hourly rounds, kept per account on the
+  device) and **Level & Ziel** (level, goals, race and date). **Übungen** is
+  the workout library as a tab, with a "new this month" card over the library
+  photograph. **Heute** counts the days to the next race, says how much of
+  today is done, and offers the voice feedback and, while no race is set,
+  Level & Ziel. The first run goes start screen, sign-in, tour, Level & Ziel,
+  then the RUN and SOUL plans (skipped for someone already subscribed). The
+  plans and the feedback page sit under their own photographs. The Backyard
+  photograph is cut higher (`identity.imagery.simulation.focus` 3) so the
+  runner's head is in the frame. The acceptance journey visits every new tab,
+  the heart and the menu.
 
 Not adopted yet, and why:
 
@@ -99,26 +119,26 @@ Not adopted yet, and why:
   email and a password, has no Soul number, and offers no code sign-in. The
   app keeps HQ's sign-in (passkey, Apple, Google, email and password) until
   the two accounts are linked.
-- **Tab bar of Heute, Woche, Übungen, Backyard.** The app keeps Today,
-  Workouts, Progress, Health and Me, so nothing HQ offers is lost; the week
-  is the calendar behind Today's calendar button.
-- **Level and goal, race countdown, weekly voice feedback that unlocks the
-  next week, monthly drop, Backyard simulation.** HQ has parts of each (the
-  first-run questions, goal events, training blocks reviewed by a coach,
-  voice feedback with a transcript, the workout library, the workout
-  player); the draft's screens for them are not built.
+- **A flat tab bar drawn like the draft's.** Chris decided on 2026-11-12 that
+  each platform keeps its own bar: the floating glass capsule on iOS,
+  whatever is native on Android.
+- **"Tipp der Woche", the coach's voice tip on Heute.** Being built in HQ
+  separately; not in kit 1.0.4245.
+- **A weekly feedback that unlocks the next week.** Woche shows the next week
+  as locked and links to the feedback; the coach still releases the next
+  block in HQ, the feedback does not do it by itself.
 - **The tour's phone pictures** (`native/onboarding`) still show the previous
   look and need photographing again from the new build.
 
-Open defect found by the acceptance journey on kit 1.0.4230 (2026-11-12): after
-a sign-out the app no longer goes idle. Every step of the journey still passes,
-but XCUITest waits two minutes before each step that follows a sign-out, where
-kit 1.0.4165 took seconds. Something keeps animating or working once a session
-has ended; it needs finding on a device (`LSU_NATIVE_DIAGNOSTICS=1` logs frame
-spans). Ruled out on 2026-11-12: run in HQ's phone harness, none of the tab
-screens or sign-in keeps rendering, requesting or animating after a sign-out,
-so the cause is in the native host, not in a screen's script. Until then the journey's limit is 40 minutes instead of 20
-(`scripts/test-native-ios.ts`).
+Seen once by the acceptance journey on kit 1.0.4230 (2026-11-12): after a
+sign-out the app did not go idle, and XCUITest waited two minutes before each
+step that followed. Run in HQ's phone harness, none of the tab screens or
+sign-in keeps rendering, requesting or animating after a sign-out, so the
+cause was in the native host, not in a screen's script. It did not happen
+again on kit 1.0.4240 (the whole journey took under twelve minutes). The
+journey's limit stays at 40 minutes instead of 20
+(`scripts/test-native-ios.ts`) in case it returns; `LSU_NATIVE_DIAGNOSTICS=1`
+logs frame spans.
 
 ## Preview and acceptance history
 

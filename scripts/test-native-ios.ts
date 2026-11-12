@@ -96,7 +96,10 @@ function signIn(account: Account) {
     for (const id of ['agree-health', 'agree-data']) steps.push({ command: 'scrollto', text: id }, { command: 'tapid', text: id })
     steps.push({ command: 'scrollto', text: 'agree-submit' }, { command: 'tapid', text: 'agree-submit' })
   }
-  if (firstRun.welcome) steps.push({ command: 'expectid', text: 'welcome-skip', seconds: 40 }, ...declineOptionalPrompts(), { command: 'tapid', text: 'welcome-skip' })
+  // From HQ kit 1.0.4245 the tour hands over to Level and goal (the next
+  // screen of LSU's first-run flow), opened over Today. The fixtures' journey
+  // is about the app behind it, so it steps back when that screen is there.
+  if (firstRun.welcome) steps.push({ command: 'expectid', text: 'welcome-skip', seconds: 40 }, ...declineOptionalPrompts(), { command: 'tapid', text: 'welcome-skip' }, { command: 'wait', seconds: 3 }, { command: 'ifid', id: 'level-screen', step: { command: 'back' } })
   // iOS offers to save the password, and the app offers notifications, on
   // their own schedules after signing in; either can land on the other.
   // The notification offer can arrive as the last round looks for it, and a
@@ -130,7 +133,21 @@ steps.push(
   { command: 'typeid', id: 'login-email', text: '\u0008'.repeat('chris@hq.training'.length) },
 )
 signIn(runner)
-steps.push({ command: 'shot', name: 'lsu-today' }, { command: 'tab', text: 'Workouts' }, { command: 'expectid', text: 'library-record-run', seconds: 30 }, { command: 'shot', name: 'lsu-workouts' }, { command: 'tab', text: 'Progress' }, { command: 'expectid', text: 'progress-screen', seconds: 30 }, { command: 'shot', name: 'lsu-progress' }, { command: 'tab', text: 'Health' }, { command: 'expectid', text: 'health-progress', seconds: 30 }, { command: 'shot', name: 'lsu-health' }, { command: 'tab', text: 'Me' }, { command: 'expect', text: runner.name, seconds: 30 }, { command: 'shot', name: 'lsu-me' }, { command: 'scrollto', text: 'me-coaching-accounts' }, { command: 'tapid', text: 'me-coaching-accounts' }, { command: 'expectid', text: 'coaching-accounts', seconds: 30 }, { command: 'absentid', text: 'coaching-accounts-error' }, { command: 'shot', name: 'lsu-coaching-accounts' }, { command: 'openurl', url: `${product.identity.scheme}:///m/calendar` }, { command: 'expectid', text: 'calendar-scope', seconds: 30 }, { command: 'shot', name: 'lsu-calendar' }, { command: 'tab', text: 'Me' }, { command: 'scrollto', text: 'me-sign-out' }, { command: 'tapid', text: 'me-sign-out' })
+// LSU arranges the app its own way (native/product.json `identity.navigation`):
+// Today, Week, Exercises, Backyard and Me along the bottom, Health as the heart
+// left of More, Progress and Workouts inside More. The journey walks each the
+// way a person reaches it.
+steps.push(
+  { command: 'shot', name: 'lsu-today' },
+  { command: 'tab', text: 'Week' }, { command: 'expectid', text: 'week-screen', seconds: 30 }, { command: 'expectid', text: 'week-day-mon', seconds: 30 }, { command: 'shot', name: 'lsu-week' },
+  { command: 'tab', text: 'Exercises' }, { command: 'expectid', text: 'library-search', seconds: 30 }, { command: 'shot', name: 'lsu-exercises' },
+  { command: 'tab', text: 'Backyard' }, { command: 'expectid', text: 'backyard-screen', seconds: 30 }, { command: 'expectid', text: 'backyard-start', seconds: 10 }, { command: 'shot', name: 'lsu-backyard' },
+  { command: 'tab', text: 'Today' }, { command: 'expectid', text: 'today-screen', seconds: 30 },
+  { command: 'tapid', text: 'nav-health' }, { command: 'expectid', text: 'health-progress', seconds: 30 }, { command: 'shot', name: 'lsu-health' }, { command: 'back' },
+  { command: 'tapid', text: 'nav-more' }, { command: 'tapexact', text: 'Progress' }, { command: 'expectid', text: 'progress-screen', seconds: 30 }, { command: 'shot', name: 'lsu-progress' }, { command: 'back' },
+  { command: 'openurl', url: `${product.identity.scheme}:///m/workouts` }, { command: 'expectid', text: 'library-record-run', seconds: 30 }, { command: 'shot', name: 'lsu-workouts' }, { command: 'back' },
+)
+steps.push({ command: 'tab', text: 'Me' }, { command: 'expect', text: runner.name, seconds: 30 }, { command: 'shot', name: 'lsu-me' }, { command: 'scrollto', text: 'me-coaching-accounts' }, { command: 'tapid', text: 'me-coaching-accounts' }, { command: 'expectid', text: 'coaching-accounts', seconds: 30 }, { command: 'absentid', text: 'coaching-accounts-error' }, { command: 'shot', name: 'lsu-coaching-accounts' }, { command: 'openurl', url: `${product.identity.scheme}:///m/calendar` }, { command: 'expectid', text: 'calendar-scope', seconds: 30 }, { command: 'shot', name: 'lsu-calendar' }, { command: 'tab', text: 'Me' }, { command: 'scrollto', text: 'me-sign-out' }, { command: 'tapid', text: 'me-sign-out' })
 signIn(visitor)
 steps.push({ command: 'tab', text: 'Me' }, { command: 'expect', text: visitor.name, seconds: 30 }, { command: 'absent', text: runner.name }, { command: 'shot', name: 'lsu-visitor-account' }, { command: 'scrollto', text: 'me-sign-out' }, { command: 'tapid', text: 'me-sign-out' }, { command: 'expectid', text: 'login-submit', seconds: 30 }, { command: 'shot', name: 'lsu-signed-out' })
 const ownedCoachingShot = steps.findIndex(step => step.command === 'shot' && step.name === 'lsu-coaching-accounts')
@@ -206,7 +223,7 @@ try {
   await run(['xcrun', 'simctl', 'install', simulator, app])
   if (process.env.LSU_NATIVE_DIAGNOSTICS === '1') await run(['xcrun', 'simctl', 'spawn', simulator, 'defaults', 'write', product.bundleId, 'CraftFramePacing', '-bool', 'YES'])
   const projectName = 'LSUAcceptance'
-  const driver = kit.prepareIosSimulatorDriver({ appName: product.identity.name, bundleId: product.bundleId, tabs: ['Today', 'Workouts', 'Progress', 'Health', 'Me'].map(title => ({ title, url: '' })), simulator: { output: join(evidence, 'driver'), projectName, bundleIdPrefix: 'com.lastsoulultra.acceptance', controlUrl: `http://127.0.0.1:${server.port}` } }, root)
+  const driver = kit.prepareIosSimulatorDriver({ appName: product.identity.name, bundleId: product.bundleId, tabs: ['Today', 'Week', 'Exercises', 'Backyard', 'Me'].map(title => ({ title, url: '' })), simulator: { output: join(evidence, 'driver'), projectName, bundleIdPrefix: 'com.lastsoulultra.acceptance', controlUrl: `http://127.0.0.1:${server.port}` } }, root)
   const tools = await import(pathToFileURL(require.resolve('@stacksjs/actions/build/ios-toolchain')).href)
   tools.generateXcodeProject(await tools.resolveXcodegen(sourceRoot), driver.output)
   const args = ['xcodebuild', '-project', `${projectName}.xcodeproj`, '-scheme', projectName, '-configuration', 'Debug', '-destination', `platform=iOS Simulator,id=${simulator}`, '-derivedDataPath', join(evidence, 'DriverDerivedData'), '-parallel-testing-enabled', 'NO', '-jobs', '2']

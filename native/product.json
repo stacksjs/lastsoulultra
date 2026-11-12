@@ -16,7 +16,7 @@
       "plans": { "src": "/assets/native-product/imagery/plans.webp", "focus": 60, "alt": { "de": "Zeltlager beim Last Soul Ultra bei Nacht", "en": "The tent camp at Last Soul Ultra at night" } },
       "library": { "src": "/assets/native-product/imagery/library.webp", "focus": 25, "alt": { "de": "Läuferin am Start- und Zielbogen des Last Soul Ultra", "en": "A runner under the start and finish arch at Last Soul Ultra" } },
       "feedback": { "src": "/assets/native-product/imagery/feedback.webp", "focus": 30, "alt": { "de": "Crew umarmt einen Läufer mit Stirnlampe", "en": "Crew hugging a runner who wears a head torch" } },
-      "simulation": { "src": "/assets/native-product/imagery/simulation.webp", "focus": 20, "alt": { "de": "Läufer vor der roten Rundenuhr des Last Soul Ultra", "en": "A runner in front of the red lap clock at Last Soul Ultra" } }
+      "simulation": { "src": "/assets/native-product/imagery/simulation.webp", "focus": 3, "alt": { "de": "Läufer vor der roten Rundenuhr des Last Soul Ultra", "en": "A runner in front of the red lap clock at Last Soul Ultra" } }
     },
     "start": {
       "de": {
@@ -45,6 +45,11 @@
         "primary": "Get started",
         "secondary": "Compare plans"
       }
+    },
+    "navigation": {
+      "tabs": ["today", "week", "exercises", "backyard", "me"],
+      "bar": ["health"],
+      "menu": ["progress", "workouts"]
     },
     "theme": {
       "background": "#0b0b0c",
