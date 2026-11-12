@@ -64,11 +64,14 @@ restyled, not removed.
 
 Adopted on 2026-11-11, with HQ platform kit 1.0.4230 or later:
 
-- **Look.** `native/product.json` `identity.theme`: page `#0b0b0c`, cards
-  `#17171a` with a `#2a2a2e` hairline and 14pt corners, fills in `#d71f28`,
-  words in the accent in `#ff4d55`, muted text `#a1a1aa`, Inter for body text
-  under Anton page titles in capitals. `enterprise/presets.json` carries the
-  same palette for the coaching portal.
+- **Look.** `native/product.json` `identity.theme`: 14pt card corners with a
+  hairline, Inter for body text under Anton page titles in capitals, as the
+  draft has them. The colours are LSU's earlier ones again (2026-11-12): page
+  `#000000`, cards `#0d0d0f` with a `#333338` hairline, fills in `#dd0f15`,
+  muted text `#b6b6bd`, and no separate lighter red for words. Chris preferred
+  their deep red to the draft's `#0b0b0c`, `#d71f28` and `#ff4d55`, which
+  turned the red washes grey-pink. `enterprise/presets.json` carries the same
+  palette for the coaching portal.
 - **Photographs.** The seven pictures the draft uses are LSU's own 2026
   pictures from lastsoulultra.com, already in `public/assets/lsu/images`.
   `assets.imagery` names the file for each screen and `identity.imagery` says
@@ -106,11 +109,13 @@ Adopted on 2026-11-11, with HQ platform kit 1.0.4230 or later:
   the heart and the menu.
 - **The tour's phone pictures (2026-11-12).** `native/onboarding` was
   photographed again from kit 1.0.4264 running as this installation with HQ's
-  demo gym: the fifteen athlete and coach screens in the new look with the new
-  tab bar, each with its ring. The app is dark whatever the phone prefers, so
-  the light and dark pictures are the same screen. HQ's
-  `scripts/onboarding-screens.ts` drove Bun's WebKit view for this, through a
-  stand-in for its Chrome module, because the Mac it ran on has no Chrome.
+  demo gym: the fifteen athlete and coach screens with the new tab bar, each
+  with its ring, once in dark and once in light. The app opens dark, and a
+  member who picks light in the theme switch gets light, so the light pictures
+  are taken with that choice stored (`stx-color-mode`), not by telling the
+  browser the device is light. HQ's `scripts/onboarding-screens.ts` drove
+  Bun's WebKit view for this, through a stand-in for its Chrome module,
+  because the Mac it ran on has no Chrome.
 
 Not adopted yet, and why:
 

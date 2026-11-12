@@ -6,11 +6,11 @@
   },
   "screens": {
     "athlete.calendar": {
-      "light": "/assets/images/onboarding/athlete-calendar-light.webp?v=0aaa9acc4a",
-      "dark": "/assets/images/onboarding/athlete-calendar-dark.webp?v=0aaa9acc4a",
+      "light": "/assets/images/onboarding/athlete-calendar-light.webp?v=d787824607",
+      "dark": "/assets/images/onboarding/athlete-calendar-dark.webp?v=bbe4c55114",
       "top": {
-        "light": "#0b0b0c",
-        "dark": "#0b0b0c"
+        "light": "#f5f5f7",
+        "dark": "#000000"
       },
       "ring": {
         "x": 0.044,
@@ -20,11 +20,11 @@
       }
     },
     "athlete.coach": {
-      "light": "/assets/images/onboarding/athlete-coach-light.webp?v=ad95020285",
-      "dark": "/assets/images/onboarding/athlete-coach-dark.webp?v=ad95020285",
+      "light": "/assets/images/onboarding/athlete-coach-light.webp?v=02d9114b8f",
+      "dark": "/assets/images/onboarding/athlete-coach-dark.webp?v=af5a6221fc",
       "top": {
-        "light": "#0b0b0c",
-        "dark": "#0b0b0c"
+        "light": "#f5f5f7",
+        "dark": "#000000"
       },
       "ring": {
         "x": 0.064,
@@ -34,11 +34,11 @@
       }
     },
     "athlete.heartrate": {
-      "light": "/assets/images/onboarding/athlete-heartrate-light.webp?v=4810c56ae7",
-      "dark": "/assets/images/onboarding/athlete-heartrate-dark.webp?v=4810c56ae7",
+      "light": "/assets/images/onboarding/athlete-heartrate-light.webp?v=7f1da1f0f6",
+      "dark": "/assets/images/onboarding/athlete-heartrate-dark.webp?v=914c9a58e4",
       "top": {
-        "light": "#0b0b0c",
-        "dark": "#0b0b0c"
+        "light": "#f5f5f7",
+        "dark": "#000000"
       },
       "ring": {
         "x": 0.095,
@@ -48,11 +48,11 @@
       }
     },
     "athlete.plans": {
-      "light": "/assets/images/onboarding/athlete-plans-light.webp?v=25decfc05b",
-      "dark": "/assets/images/onboarding/athlete-plans-dark.webp?v=25decfc05b",
+      "light": "/assets/images/onboarding/athlete-plans-light.webp?v=bde6de473f",
+      "dark": "/assets/images/onboarding/athlete-plans-dark.webp?v=f245979138",
       "top": {
-        "light": "#0b0b0c",
-        "dark": "#0b0b0c"
+        "light": "#f5f5f7",
+        "dark": "#000000"
       },
       "ring": {
         "x": 0.333,
@@ -62,11 +62,11 @@
       }
     },
     "athlete.player": {
-      "light": "/assets/images/onboarding/athlete-player-light.webp?v=f23665e98c",
-      "dark": "/assets/images/onboarding/athlete-player-dark.webp?v=f23665e98c",
+      "light": "/assets/images/onboarding/athlete-player-light.webp?v=7a9ceb58ca",
+      "dark": "/assets/images/onboarding/athlete-player-dark.webp?v=4d66c346b4",
       "top": {
-        "light": "#0b0b0c",
-        "dark": "#0b0b0c"
+        "light": "#f5f5f7",
+        "dark": "#000000"
       },
       "ring": {
         "x": 0.041,
@@ -76,11 +76,11 @@
       }
     },
     "athlete.progress": {
-      "light": "/assets/images/onboarding/athlete-progress-light.webp?v=4769874c0b",
-      "dark": "/assets/images/onboarding/athlete-progress-dark.webp?v=4769874c0b",
+      "light": "/assets/images/onboarding/athlete-progress-light.webp?v=08315c57e6",
+      "dark": "/assets/images/onboarding/athlete-progress-dark.webp?v=3423270831",
       "top": {
-        "light": "#0b0b0c",
-        "dark": "#0b0b0c"
+        "light": "#f5f5f7",
+        "dark": "#000000"
       },
       "ring": {
         "x": 0.041,
@@ -90,11 +90,11 @@
       }
     },
     "athlete.today": {
-      "light": "/assets/images/onboarding/athlete-today-light.webp?v=bbd06dbd46",
-      "dark": "/assets/images/onboarding/athlete-today-dark.webp?v=bbd06dbd46",
+      "light": "/assets/images/onboarding/athlete-today-light.webp?v=948fc80a28",
+      "dark": "/assets/images/onboarding/athlete-today-dark.webp?v=f93ea634d9",
       "top": {
-        "light": "#0b0b0c",
-        "dark": "#0b0b0c"
+        "light": "#f5f5f7",
+        "dark": "#000000"
       },
       "ring": {
         "x": 0.041,
@@ -104,11 +104,11 @@
       }
     },
     "athlete.wearables": {
-      "light": "/assets/images/onboarding/athlete-wearables-light.webp?v=f1f1848d71",
-      "dark": "/assets/images/onboarding/athlete-wearables-dark.webp?v=f1f1848d71",
+      "light": "/assets/images/onboarding/athlete-wearables-light.webp?v=6933515da3",
+      "dark": "/assets/images/onboarding/athlete-wearables-dark.webp?v=0f51bc730a",
       "top": {
-        "light": "#0b0b0c",
-        "dark": "#0b0b0c"
+        "light": "#f5f5f7",
+        "dark": "#000000"
       },
       "ring": {
         "x": 0.715,
@@ -118,11 +118,11 @@
       }
     },
     "breathwork.plan": {
-      "light": "/assets/images/onboarding/breathwork-plan-light.webp?v=d4ad24c27c",
-      "dark": "/assets/images/onboarding/breathwork-plan-dark.webp?v=da2ad333ac",
+      "light": "/assets/images/onboarding/breathwork-plan-light.webp?v=d4079a6e2f",
+      "dark": "/assets/images/onboarding/breathwork-plan-dark.webp?v=37c5cead6a",
       "top": {
-        "light": "#0b0b0c",
-        "dark": "#0b0b0c"
+        "light": "#f5f5f7",
+        "dark": "#000000"
       },
       "ring": {
         "x": 0.092,
@@ -132,11 +132,11 @@
       }
     },
     "coach.atp": {
-      "light": "/assets/images/onboarding/coach-atp-light.webp?v=d4fb3018ae",
-      "dark": "/assets/images/onboarding/coach-atp-dark.webp?v=d4fb3018ae",
+      "light": "/assets/images/onboarding/coach-atp-light.webp?v=69aca49584",
+      "dark": "/assets/images/onboarding/coach-atp-dark.webp?v=dd4932205d",
       "top": {
-        "light": "#0b0b0c",
-        "dark": "#0b0b0c"
+        "light": "#f5f5f7",
+        "dark": "#000000"
       },
       "ring": {
         "x": 0.095,
@@ -146,11 +146,11 @@
       }
     },
     "coach.builder": {
-      "light": "/assets/images/onboarding/coach-builder-light.webp?v=acc87513c8",
-      "dark": "/assets/images/onboarding/coach-builder-dark.webp?v=acc87513c8",
+      "light": "/assets/images/onboarding/coach-builder-light.webp?v=e7292bee88",
+      "dark": "/assets/images/onboarding/coach-builder-dark.webp?v=dc27dc42f1",
       "top": {
-        "light": "#0b0b0c",
-        "dark": "#0b0b0c"
+        "light": "#f5f5f7",
+        "dark": "#000000"
       },
       "ring": {
         "x": 0.095,
@@ -160,11 +160,11 @@
       }
     },
     "coach.calendar": {
-      "light": "/assets/images/onboarding/coach-calendar-light.webp?v=cbf0ffcf38",
-      "dark": "/assets/images/onboarding/coach-calendar-dark.webp?v=cbf0ffcf38",
+      "light": "/assets/images/onboarding/coach-calendar-light.webp?v=ff40744e5e",
+      "dark": "/assets/images/onboarding/coach-calendar-dark.webp?v=882fccb3b8",
       "top": {
-        "light": "#0b0b0c",
-        "dark": "#0b0b0c"
+        "light": "#f5f5f7",
+        "dark": "#000000"
       },
       "ring": {
         "x": 0.423,
@@ -174,11 +174,11 @@
       }
     },
     "coach.plans": {
-      "light": "/assets/images/onboarding/coach-plans-light.webp?v=3bf8a9c440",
-      "dark": "/assets/images/onboarding/coach-plans-dark.webp?v=3bf8a9c440",
+      "light": "/assets/images/onboarding/coach-plans-light.webp?v=ce72101b49",
+      "dark": "/assets/images/onboarding/coach-plans-dark.webp?v=00a1f6548c",
       "top": {
-        "light": "#0b0b0c",
-        "dark": "#0b0b0c"
+        "light": "#f5f5f7",
+        "dark": "#000000"
       },
       "ring": {
         "x": 0.428,
@@ -188,11 +188,11 @@
       }
     },
     "coach.roster": {
-      "light": "/assets/images/onboarding/coach-roster-light.webp?v=6763e6b50d",
-      "dark": "/assets/images/onboarding/coach-roster-dark.webp?v=6763e6b50d",
+      "light": "/assets/images/onboarding/coach-roster-light.webp?v=03399b85d2",
+      "dark": "/assets/images/onboarding/coach-roster-dark.webp?v=8c24f30f7c",
       "top": {
-        "light": "#0b0b0c",
-        "dark": "#0b0b0c"
+        "light": "#f5f5f7",
+        "dark": "#000000"
       },
       "ring": {
         "x": 0.095,
@@ -202,11 +202,11 @@
       }
     },
     "coach.store": {
-      "light": "/assets/images/onboarding/coach-store-light.webp?v=8db5a25a3d",
-      "dark": "/assets/images/onboarding/coach-store-dark.webp?v=8db5a25a3d",
+      "light": "/assets/images/onboarding/coach-store-light.webp?v=bba53a262e",
+      "dark": "/assets/images/onboarding/coach-store-dark.webp?v=eed3e9f578",
       "top": {
-        "light": "#0b0b0c",
-        "dark": "#0b0b0c"
+        "light": "#f5f5f7",
+        "dark": "#000000"
       },
       "ring": {
         "x": 0.401,
