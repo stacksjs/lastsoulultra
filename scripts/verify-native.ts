@@ -23,6 +23,8 @@ try {
  writeFileSync('storage/native/bundled-login-report.json',JSON.stringify(report,null,2))
  if(!button||button.style.backgroundColor!==product.identity.theme.accent)throw new Error('The shipped sign-in action does not use LSU red')
  if(!logos.length)throw new Error('The shipped sign-in screen has no offline LSU wordmark')
+ const photo=nodes.find((n:any)=>n.props.testID==='login-photo')
+ if(!photo||nodes.filter((n:any)=>n.props.testID==='login-logo').length!==1)throw new Error('The shipped sign-in screen does not open under LSU\'s photograph with one wordmark on it')
  if(text.some((value:string)=>/HQ\.training/.test(value)))throw new Error('The shipped sign-in screen still names HQ.training')
  process.stdout.write(JSON.stringify(report,null,2)+'\n')
 }

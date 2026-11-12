@@ -104,7 +104,11 @@ function signIn(account: Account) {
   // question then stays in front of Today. One more look once it has settled.
   steps.push(...Array.from({ length: 4 }, declineOptionalPrompts).flat(), { command: 'wait', seconds: 2 }, { command: 'ifid', id: 'nav-not-now', step: { command: 'tapid', text: 'nav-not-now' } }, { command: 'expectid', text: 'today-screen', seconds: 40 }, { command: 'tapif', text: 'Not Now' })
 }
-steps.push({ command: 'launch' }, { command: 'openurl', url: `${product.identity.scheme}:///m/login` }, { command: 'expectid', text: 'login-logo', seconds: 30 }, { command: 'shot', name: 'lsu-sign-in' }, { command: 'tree', name: 'lsu-sign-in' })
+// A signed-out launch opens on LSU's start screen (native/product.json
+// `identity.start`), and its "Log in" is the way everyone reaches sign-in.
+// From HQ kit 1.0.4240 that link takes the start screen's place rather than
+// sitting on top of it, so signing in lands on Today with nothing behind it.
+steps.push({ command: 'launch' }, { command: 'expectid', text: 'start-screen', seconds: 40 }, { command: 'expectid', text: 'start-primary', seconds: 10 }, { command: 'shot', name: 'lsu-start' }, { command: 'tapid', text: 'start-login' }, { command: 'expectid', text: 'login-logo', seconds: 30 }, { command: 'expectid', text: 'login-photo', seconds: 10 }, { command: 'absentid', text: 'start-screen' }, { command: 'shot', name: 'lsu-sign-in' }, { command: 'tree', name: 'lsu-sign-in' })
 // LSU declines HQ sign-in (enterprise/presets.json sign_in.hq), so neither
 // screen offers "Continue with HQ", and sign-up is the one form everyone gets.
 // Nothing is submitted, so no test person is created and none of Chris's

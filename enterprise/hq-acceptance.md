@@ -78,6 +78,12 @@ Adopted on 2026-11-11, with HQ platform kit 1.0.4230 or later:
   sign-in (`identity.start`, German and English): the night runner, "Dein Plan
   bis zur letzten Runde.", the five goals, the two cards and the ways in.
 - **Today.** The date and greeting sit over the Today photograph.
+- **Sign-in, bar titles and the way in (kit 1.0.4240, 2026-11-12).** The
+  app's sign-in opens under the sign-in photograph with the wordmark on it.
+  The app's large titles (Workouts, Me) are in capitals like the website's.
+  "Log in" and "Get started" on the start screen take its place rather than
+  sitting on top of it, and the acceptance journey now begins on the start
+  screen and reaches sign-in through its link.
 
 Not adopted yet, and why:
 
@@ -109,7 +115,9 @@ a sign-out the app no longer goes idle. Every step of the journey still passes,
 but XCUITest waits two minutes before each step that follows a sign-out, where
 kit 1.0.4165 took seconds. Something keeps animating or working once a session
 has ended; it needs finding on a device (`LSU_NATIVE_DIAGNOSTICS=1` logs frame
-spans). Until then the journey's limit is 40 minutes instead of 20
+spans). Ruled out on 2026-11-12: run in HQ's phone harness, none of the tab
+screens or sign-in keeps rendering, requesting or animating after a sign-out,
+so the cause is in the native host, not in a screen's script. Until then the journey's limit is 40 minutes instead of 20
 (`scripts/test-native-ios.ts`).
 
 ## Preview and acceptance history

@@ -2562,14 +2562,6 @@ video {
   --tc-ring-color: oklch(62.3% 0.214 259.815);
 }
 
-.hover\:bg-blue-50:hover {
-  background-color: oklch(97% 0.014 254.604);
-}
-
-.dark .dark\:hover\:bg-blue-950:hover {
-  background-color: oklch(28.2% 0.091 267.935);
-}
-
 .text-indigo-500 {
   color: oklch(58.5% 0.233 277.117);
 }
@@ -3418,6 +3410,10 @@ video {
 .dark .dark\:shadow-slate-950\/50 {
   --tc-shadow-color: oklch(12.9% 0.042 264.695 / 0.5);
   --tc-shadow: var(--tc-shadow-colored);
+}
+
+.hover\:bg-blue-50:hover {
+  background-color: oklch(97% 0.014 254.604);
 }
 
 .dark .dark\:hover\:bg-blue-950\/40:hover {
