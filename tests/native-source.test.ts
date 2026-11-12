@@ -104,17 +104,20 @@ it('packages LSU’s brand and approved coaching tiers as the installation’s o
   expect(() => installationPresets({ ...presets, products: [{ ...presets.products[0]!, training_blocks: { length_days: 10, review: 'coach' } }] })).toThrow('reviewed by a coach')
 })
 
-it('draws the app in the coaching design: near-black, LSU red, Inter under Anton, rounded cards', () => {
+it('draws the app in the shapes and faces of the coaching design, in the black and deep red LSU had', () => {
   const theme = product.identity.theme
-  // "LSU Coaching App - Entwurf v2" (2026-11-10): the palette, faces and corners of its ten screens.
+  // "LSU Coaching App - Entwurf v2" (2026-11-10) gives the faces and corners. The colours are LSU's
+  // earlier black and deep red: the draft's lighter reds drew the red washes grey-pink (2026-11-12).
   expect(theme).toEqual({
-    background: '#0b0b0c', surface: '#17171a', text: '#f4f4f5', muted: '#a1a1aa',
-    accent: '#d71f28', accent_ink: '#ff4d55', accent_text: '#ffffff', border: '#2a2a2e',
+    background: '#000000', surface: '#0d0d0f', text: '#ffffff', muted: '#b6b6bd',
+    accent: '#dd0f15', accent_text: '#ffffff', border: '#333338',
     radius: 14, card_radius: 14, card_border: true,
     font: 'inter', heading_font: 'anton', heading_uppercase: true,
   })
-  // Every ink reads on what it is drawn on (WCAG 4.5:1), the red links on a card included.
-  for (const [ink, surface] of [[theme.text, theme.background], [theme.text, theme.surface], [theme.muted, theme.background], [theme.muted, theme.surface], [theme.accent_ink, theme.background], [theme.accent_ink, theme.surface], [theme.accent_text, theme.accent]] as const)
+  // No second, lighter red for words: HQ derives a readable one from the accent itself.
+  expect(theme).not.toHaveProperty('accent_ink')
+  // Every ink reads on what it is drawn on (WCAG 4.5:1).
+  for (const [ink, surface] of [[theme.text, theme.background], [theme.text, theme.surface], [theme.muted, theme.background], [theme.muted, theme.surface], [theme.accent_text, theme.accent]] as const)
     expect(contrast(ink, surface), `${ink} on ${surface}`).toBeGreaterThanOrEqual(4.5)
   // The phone packages the faces the theme names, Inter's bold with its regular.
   expect([...NATIVE_FONTS]).toEqual(['Anton-Regular', 'Inter-Regular', 'Inter-Bold'])
@@ -175,8 +178,8 @@ it('opens the app on LSU\'s start screen, in German and in English', () => {
 })
 
 it('draws the launch splash with ts-images’ preset from the wordmark, on the near-black the app opens on', async () => {
-  expect(splashPreset()).toEqual({ logo: join(root, 'public/assets/lsu/images/lsu-logo.svg'), accent: '#d71f28' })
-  expect(splashOptions()).toEqual({ logo: join(root, 'public/assets/lsu/images/lsu-logo.svg'), light: { background: '#0b0b0c' }, dark: false, accent: '#d71f28', shape: 'none' })
+  expect(splashPreset()).toEqual({ logo: join(root, 'public/assets/lsu/images/lsu-logo.svg'), accent: '#dd0f15' })
+  expect(splashOptions()).toEqual({ logo: join(root, 'public/assets/lsu/images/lsu-logo.svg'), light: { background: '#000000' }, dark: false, accent: '#dd0f15', shape: 'none' })
   expect(() => splashPreset('../public/assets/lsu/images/lsu-splash.svg')).toThrow('must be a splash preset')
   expect(() => splashPreset({ logo: 'x.svg', accent: 'red' })).toThrow('must be a splash preset')
   const directory = mkdtempSync(join(tmpdir(), 'lsu-splash-'))
