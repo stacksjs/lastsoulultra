@@ -3055,6 +3055,7 @@
       "slots": [],
       "events": [],
       "dependencies": [
+        "FloatingActions",
         "StxLink"
       ],
       "stories": []
