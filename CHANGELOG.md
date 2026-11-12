@@ -1,5 +1,18 @@
 # Stacks Changelog
 
+[Compare changes](https://github.com/stacksjs/lastsoulultra/compare/v1.0.0-build.25...v1.0.0-build.26)
+
+## ✨ Features
+
+- **onboarding**: photograph the tour's screens again in the coaching design ([a6385e1](https://github.com/stacksjs/lastsoulultra/commit/a6385e1)) _(by Chris Breuer)_
+- **native**: take HQ platform kit 1.0.4264, so coaches get Apple Health and the watch and photo pickers open again ([a443f29](https://github.com/stacksjs/lastsoulultra/commit/a443f29)) _(by glennmichael123)_
+- **site**: describe Backyard practice, the daily voice note and level and goal on the app page ([e87394f](https://github.com/stacksjs/lastsoulultra/commit/e87394f)) _(by glennmichael123)_
+
+## Contributors
+
+- _Chris Breuer_
+- _glennmichael123_
+
 [Compare changes](https://github.com/stacksjs/lastsoulultra/compare/v1.0.0-build.24...v1.0.0-build.25)
 
 ## ✨ Features

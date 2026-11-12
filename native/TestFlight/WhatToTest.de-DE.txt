@@ -1,3 +1,4 @@
 Features
-- Take HQ platform kit 1.0.4245, and arrange the app as the coaching design does (native)
-- Take HQ platform kit 1.0.4240, and start the journey on the start screen (native)
+- Photograph the tour's screens again in the coaching design (onboarding)
+- Take HQ platform kit 1.0.4264, so coaches get Apple Health and the watch and photo pickers open again (native)
+- Describe Backyard practice, the daily voice note and level and goal on the app page (site)
