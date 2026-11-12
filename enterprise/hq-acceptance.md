@@ -104,6 +104,14 @@ Not adopted yet, and why:
 - **The tour's phone pictures** (`native/onboarding`) still show the previous
   look and need photographing again from the new build.
 
+Open defect found by the acceptance journey on kit 1.0.4230 (2026-11-12): after
+a sign-out the app no longer goes idle. Every step of the journey still passes,
+but XCUITest waits two minutes before each step that follows a sign-out, where
+kit 1.0.4165 took seconds. Something keeps animating or working once a session
+has ended; it needs finding on a device (`LSU_NATIVE_DIAGNOSTICS=1` logs frame
+spans). Until then the journey's limit is 40 minutes instead of 20
+(`scripts/test-native-ios.ts`).
+
 ## Preview and acceptance history
 
 Moved from HQ's former `docs/developers/lsu-preview.md`. HQ's generic
