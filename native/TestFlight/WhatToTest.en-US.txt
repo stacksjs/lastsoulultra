@@ -1,4 +1,7 @@
 Features
-- Photograph the tour's screens again in the coaching design (onboarding)
-- Take HQ platform kit 1.0.4264, so coaches get Apple Health and the watch and photo pickers open again (native)
-- Describe Backyard practice, the daily voice note and level and goal on the app page (site)
+- Take HQ platform kit 1.0.4268, so sign-in offers only what LSU has, and a coach's tip of the week reaches Today (native)
+- Give LSU's trainers the Coach plan on every deploy (training)
+
+Fixes
+- Photograph the tour's screens in light as well as dark (onboarding)
+- Draw the app in LSU's black and deep red again (app)

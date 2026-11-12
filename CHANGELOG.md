@@ -1,5 +1,22 @@
 # Stacks Changelog
 
+[Compare changes](https://github.com/stacksjs/lastsoulultra/compare/v1.0.0-build.26...v1.0.0-build.27)
+
+## ✨ Features
+
+- **native**: take HQ platform kit 1.0.4268, so sign-in offers only what LSU has, and a coach's tip of the week reaches Today ([bffd362](https://github.com/stacksjs/lastsoulultra/commit/bffd362)) _(by glennmichael123)_
+- **training**: give LSU's trainers the Coach plan on every deploy ([20881e7](https://github.com/stacksjs/lastsoulultra/commit/20881e7)) _(by glennmichael123)_
+
+## 🐛 Bug Fixes
+
+- **onboarding**: photograph the tour's screens in light as well as dark ([5ff212d](https://github.com/stacksjs/lastsoulultra/commit/5ff212d)) _(by Chris Breuer)_
+- **app**: draw the app in LSU's black and deep red again ([e465e83](https://github.com/stacksjs/lastsoulultra/commit/e465e83)) _(by Chris Breuer)_
+
+## Contributors
+
+- _Chris Breuer_
+- _glennmichael123_
+
 [Compare changes](https://github.com/stacksjs/lastsoulultra/compare/v1.0.0-build.25...v1.0.0-build.26)
 
 ## ✨ Features
