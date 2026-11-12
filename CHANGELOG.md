@@ -1,5 +1,37 @@
 # Stacks Changelog
 
+[Compare changes](https://github.com/stacksjs/lastsoulultra/compare/v1.0.0-build.23...v1.0.0-build.24)
+
+## ✨ Features
+
+- **native**: take HQ platform kit 1.0.4230 for the coaching design ([1387914](https://github.com/stacksjs/lastsoulultra/commit/1387914)) _(by Chris Breuer)_
+- **app**: draw the coaching app in LSU's design, with its photographs and a start screen ([3ea201e](https://github.com/stacksjs/lastsoulultra/commit/3ea201e)) _(by Chris Breuer)_
+
+## 🐛 Bug Fixes
+
+- **seed**: draw the coaching portal in the app's theme after a deploy ([4c4dec6](https://github.com/stacksjs/lastsoulultra/commit/4c4dec6)) _(by Chris Breuer)_
+- **native**: take stx 0.2.851, which keeps the hint text and screen-reader labels on the app's text fields ([6e7dc00](https://github.com/stacksjs/lastsoulultra/commit/6e7dc00)) _(by glennmichael123)_
+- **site**: take stx 0.2.847, whose router adds a page's stylesheets itself, and drop the site's own copy of them ([2328f03](https://github.com/stacksjs/lastsoulultra/commit/2328f03)) _(by Chris Breuer)_
+- **site**: cut the app page's screens above the tab bar, so only running shows ([74e80a8](https://github.com/stacksjs/lastsoulultra/commit/74e80a8)) _(by Chris Breuer)_
+- **release**: carry a release through when a newer commit takes its deploy ([08f31cf](https://github.com/stacksjs/lastsoulultra/commit/08f31cf)) _(by Chris Breuer)_
+- **training**: pin HQ platform kit 1.0.4179 so the app opens in LSU's black, and pass the sign-in providers' settings through ([cb38360](https://github.com/stacksjs/lastsoulultra/commit/cb38360)) _(by Chris Breuer)_
+
+## ✅ Tests
+
+- **native**: give the acceptance journey 40 minutes while the app stays busy after sign-out ([ad4c37e](https://github.com/stacksjs/lastsoulultra/commit/ad4c37e)) _(by Chris Breuer)_
+- **native**: close the Security sheet, and look again for the notification question ([9bc01f3](https://github.com/stacksjs/lastsoulultra/commit/9bc01f3)) _(by Chris Breuer)_
+
+## 💚 Continuous Integration
+
+- **deploy**: check that the app opens in the brand's black ([2be4f8a](https://github.com/stacksjs/lastsoulultra/commit/2be4f8a)) _(by Chris Breuer)_
+- **deploy**: answer the preview gate for the site's own requests only, and name the step a browser check stops at ([afce995](https://github.com/stacksjs/lastsoulultra/commit/afce995)) _(by Chris Breuer)_
+- **deploy**: check the deployed site after every deploy, in a browser and over HTTP ([25b8ff4](https://github.com/stacksjs/lastsoulultra/commit/25b8ff4)) _(by Chris Breuer)_
+
+## Contributors
+
+- _Chris Breuer_
+- _glennmichael123_
+
 [Compare changes](https://github.com/stacksjs/lastsoulultra/compare/v1.0.0-build.22...v1.0.0-build.23)
 
 ## ✨ Features
