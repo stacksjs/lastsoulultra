@@ -25,6 +25,19 @@ encrypted with a separate recovery key and scheduled by Buddy. The application
 services do not receive backup credentials. See `enterprise/RECOVERY.md` for
 the restore procedure and verification requirements. External integrations
 require their own explicit configuration.
+
+Uploads (profile pictures, message attachments, product images, voice tips)
+go to LSU's own private bucket in `fsn1`, declared as `assets` in
+`enterprise/deployment.json`. HQ's boot check (kit 1.0.4308 and later) holds
+the host's environment to that declaration and refuses another bucket, a
+public bucket address or the general AWS credential. The host receives the
+bucket's name, address and style from the declaration itself and only the two
+keys from `.env.production` (`LSU_ASSETS_ACCESS_KEY`, `LSU_ASSETS_SECRET_KEY`).
+Video stays on the server's disk (`videos: "disk"`), and every read still
+falls back to the disk, so files uploaded before the bucket keep being served.
+Hetzner's keys are valid for every bucket in their project: the bucket sits in
+the `Stacks` project, so these keys are not confined to it. The daily backup
+still copies the disk only; the bucket is not yet in it.
 The native release checks `/api/deployment` for the expected installation, origin,
 source revision and residency metadata before building or uploading.
 

@@ -43,6 +43,15 @@ export function trainingSites(): NonNullable<CloudConfig['sites']> {
     DB_CONNECTION: 'postgres', DB_HOST: deployment.database.host, DB_PORT: String(deployment.database.port),
     DB_DATABASE: deployment.database.name, DB_USERNAME: deployment.database.user, DB_PASSWORD: secrets.LSU_TRAINING_DB_PASSWORD || '',
     STORAGE_DRIVER: 'bun', STORAGE_ROOT: shared, STORAGE_PUBLIC_URL: deployment.origin,
+    // Uploads live in LSU's own bucket (HQ kit 1.0.4308 and later). The bucket,
+    // its address and its style come from the declaration itself, so what the
+    // host carries can never differ from what HQ's boot check compares it
+    // with; only the keys are secrets. They are storage-only names: the
+    // generic AWS pair, which mail and SMS also read, stays unset. The disk
+    // remains the fallback every read checks, and video stays on it.
+    AWS_S3_BUCKET: deployment.assets.bucket, AWS_ENDPOINT: deployment.assets.endpoint, AWS_REGION: deployment.assets.region,
+    AWS_USE_PATH_STYLE_ENDPOINT: String(deployment.assets.pathStyle),
+    AWS_S3_ACCESS_KEY_ID: secrets.LSU_ASSETS_ACCESS_KEY || '', AWS_S3_SECRET_ACCESS_KEY: secrets.LSU_ASSETS_SECRET_KEY || '',
     PATH: `${shared}/media/pantry/.bin:/opt/pantry/pantry/.bin:/usr/local/bin:/usr/bin:/bin`,
     QUEUE_DRIVER: 'database', HQ_SCHEDULER: 'off', HQ_PAGE_WARMUP: 'off', TYPESENSE_ENABLED: 'true', SEED_DEMO_DATA: 'false',
     TYPESENSE_HOST: '127.0.0.1', TYPESENSE_PORT: '8108', TYPESENSE_PROTOCOL: 'http', TYPESENSE_API_KEY: secrets.LSU_TYPESENSE_API_KEY || '',

@@ -75,6 +75,47 @@ it('resolves isolated runtime secrets again after Buddy switches to production',
   }
 })
 
+it('keeps uploads in LSU\'s own declared bucket, with keys that only storage reads', () => {
+  const keys = ['LSU_ASSETS_ACCESS_KEY', 'LSU_ASSETS_SECRET_KEY'] as const
+  const previous = Object.fromEntries(keys.map(key => [key, process.env[key]]))
+  try {
+    process.env.LSU_ASSETS_ACCESS_KEY = 'upload-access-sentinel'
+    process.env.LSU_ASSETS_SECRET_KEY = 'upload-secret-sentinel'
+    // The declaration HQ's boot check reads (kit 1.0.4308 and later): in the residency location, video on the disk.
+    expect(deployment.assets).toEqual({ bucket: 'lsu', endpoint: `https://${deployment.residency.location}.your-objectstorage.com`, region: deployment.residency.location, pathStyle: true, videos: 'disk' })
+    const sites = trainingSites()
+    for (const name of ['training', 'training-api']) {
+      const env = sites[name].env as Record<string, string | undefined>
+      // The host carries the declaration itself, so the two cannot differ.
+      expect(env.AWS_S3_BUCKET).toBe(deployment.assets.bucket)
+      expect(env.AWS_ENDPOINT).toBe(deployment.assets.endpoint)
+      expect(env.AWS_REGION).toBe(deployment.assets.region)
+      expect(env.AWS_USE_PATH_STYLE_ENDPOINT).toBe('true')
+      expect(env.AWS_S3_ACCESS_KEY_ID).toBe('upload-access-sentinel')
+      expect(env.AWS_S3_SECRET_ACCESS_KEY).toBe('upload-secret-sentinel')
+      // HQ refuses the generic pair, a public bucket address and a folder nobody declared.
+      for (const refused of ['AWS_ACCESS_KEY_ID', 'AWS_SECRET_ACCESS_KEY', 'AWS_SESSION_TOKEN', 'AWS_URL', 'AWS_BUCKET', 'AWS_S3_PREFIX']) expect(env[refused]).toBeUndefined()
+      expect(env.STORAGE_DRIVER).toBe('bun')
+      expect(env.STORAGE_ROOT).toBe(deployment.storageRoot)
+      expect(env.STORAGE_PUBLIC_URL).toBe(deployment.origin)
+    }
+    // The upload keys are not the backup keys, and the website never sees them.
+    const backups = tsCloud.infrastructure?.compute?.backups as { bucket?: string } | undefined
+    expect(backups?.bucket).not.toBe(deployment.assets.bucket)
+    for (const name of ['main', 'api', 'docs']) {
+      const env = tsCloud.sites?.[name]?.env as Record<string, string | undefined> | undefined
+      expect(env?.AWS_S3_ACCESS_KEY_ID).toBeUndefined()
+      expect(env?.LSU_ASSETS_SECRET_KEY).toBeUndefined()
+    }
+  }
+  finally {
+    for (const key of keys) {
+      if (previous[key] === undefined) delete process.env[key]
+      else process.env[key] = previous[key]
+    }
+  }
+})
+
 it('reads every queue a kit names, and leaves HQ its own', () => {
   const app = mkdtempSync(join(tmpdir(), 'lsu-kit-'))
   mkdirSync(join(app, 'Jobs'))

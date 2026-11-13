@@ -5,6 +5,7 @@
   "residency": { "country": "DE", "location": "fsn1" },
   "database": { "name": "lsu_training", "user": "lsu_training", "host": "127.0.0.1", "port": 5432 },
   "storageRoot": "/var/www/lastsoulultra-shared/training",
+  "assets": { "bucket": "lsu", "endpoint": "https://fsn1.your-objectstorage.com", "region": "fsn1", "pathStyle": true, "videos": "disk" },
   "ports": { "web": 3250, "api": 3251, "speech": 8098 },
   "admins": ["chris@hq.training", "pawel@hq.training"]
 }
