@@ -151,6 +151,16 @@ Adopted on 2026-11-13, with HQ platform kit 1.0.4295 or later:
   Apple": Apple's own sign-in sheet exists on iPhone only, LSU has no web
   Apple sign-in, and the button did nothing when tapped (seen on an emulator
   build of kit 1.0.4294, fixed in 1.0.4295).
+- **The feedback reminder.** A runner on a tier that waits for feedback is
+  asked for it once, on the evening of the week's last day on their own clock
+  (17:00, or the first hourly sweep after): "Wie lief deine Woche?", which
+  opens the feedback section. It follows their Training plans notification
+  choice. With kit 1.0.4312.
+- **Android chrome colour, not yet.** On Android the Back arrow, the bar's
+  buttons and the selected tab are the system blue, not LSU's red. Craft
+  0.0.502 (in kit 1.0.4313 and later) can take an app's tint on Android and the kit
+  passes LSU's accent, but Stacks' Android build does not hand the key on to
+  Craft yet, so the chrome is still blue until Stacks does.
 - **Deploys.** The training host's tool installs wait out a registry that is
   down for a moment (the kit's `scripts/pantry-install.sh`), where one 502
   failed the Deploy of build 27.
