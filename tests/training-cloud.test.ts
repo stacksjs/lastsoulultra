@@ -102,7 +102,7 @@ it('requires the HQ proxy protocol before starting the API and drains platform w
 })
 
 it('hands the training app each sign-in provider from this installation\'s own secrets', () => {
-  const names = { APPLE_CLIENT_ID: 'LSU_APPLE_CLIENT_ID', GOOGLE_CLIENT_ID: 'LSU_GOOGLE_CLIENT_ID', GOOGLE_CLIENT_SECRET: 'LSU_GOOGLE_CLIENT_SECRET' }
+  const names = { APPLE_CLIENT_ID: 'LSU_APPLE_CLIENT_ID', GOOGLE_CLIENT_ID: 'LSU_GOOGLE_CLIENT_ID', GOOGLE_CLIENT_SECRET: 'LSU_GOOGLE_CLIENT_SECRET', PRODUCT_ACCOUNT_ISSUER: 'LSU_ACCOUNT_ISSUER', PRODUCT_ACCOUNT_CLIENT_ID: 'LSU_ACCOUNT_CLIENT_ID', PRODUCT_ACCOUNT_CLIENT_SECRET: 'LSU_ACCOUNT_CLIENT_SECRET' }
   const before = Object.fromEntries(Object.values(names).map(name => [name, process.env[name]]))
   try {
     for (const name of Object.values(names)) process.env[name] = `value-of-${name}`

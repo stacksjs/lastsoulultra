@@ -36,6 +36,10 @@ export function trainingSites(): NonNullable<CloudConfig['sites']> {
     // above, and a Google web OAuth client. Empty leaves that provider off.
     APPLE_CLIENT_ID: secrets.LSU_APPLE_CLIENT_ID || '',
     GOOGLE_CLIENT_ID: secrets.LSU_GOOGLE_CLIENT_ID || '', GOOGLE_CLIENT_SECRET: secrets.LSU_GOOGLE_CLIENT_SECRET || '',
+    // "Mit deinem LSU-Konto anmelden": the training app as an OAuth client of
+    // the service that holds LSU's race accounts. Off, like the providers
+    // above, until that service gives this installation a client.
+    PRODUCT_ACCOUNT_ISSUER: secrets.LSU_ACCOUNT_ISSUER || '', PRODUCT_ACCOUNT_CLIENT_ID: secrets.LSU_ACCOUNT_CLIENT_ID || '', PRODUCT_ACCOUNT_CLIENT_SECRET: secrets.LSU_ACCOUNT_CLIENT_SECRET || '',
     DB_CONNECTION: 'postgres', DB_HOST: deployment.database.host, DB_PORT: String(deployment.database.port),
     DB_DATABASE: deployment.database.name, DB_USERNAME: deployment.database.user, DB_PASSWORD: secrets.LSU_TRAINING_DB_PASSWORD || '',
     STORAGE_DRIVER: 'bun', STORAGE_ROOT: shared, STORAGE_PUBLIC_URL: deployment.origin,
@@ -52,7 +56,10 @@ export function trainingSites(): NonNullable<CloudConfig['sites']> {
     COACHING_SPEECH_RUNTIME_DIR: `${shared}/speech`, COACHING_SPEECH_TOKEN_FILE: `${shared}/speech/token`,
     COACHING_SPEECH_URL: `http://127.0.0.1:${deployment.ports.speech}/v1`, COACHING_SPEECH_MODEL: 'whisper-1',
   }
-  const install = ['sh scripts/install-release-runtime.sh', 'export PATH=$PWD/.hq-runtime/bin:$PATH', 'sh scripts/install-release-dependencies.sh', `mkdir -p ${shared}/media`, `printf '%s\\n' '{"dependencies":{"ffmpeg.org":"9.0.2"}}' > ${shared}/media/pantry.json`, `(cd ${shared}/media && pantry install --no-save)`]
+  // The kit's patient install (scripts/pantry-install.sh): a registry that is
+  // down for a moment is waited out, where a bare `pantry install` failed the
+  // whole deploy of build 27 on one 502.
+  const install = ['sh scripts/install-release-runtime.sh', 'export PATH=$PWD/.hq-runtime/bin:$PATH', 'sh scripts/install-release-dependencies.sh', `mkdir -p ${shared}/media`, `printf '%s\\n' '{"dependencies":{"ffmpeg.org":"9.0.2"}}' > ${shared}/media/pantry.json`, `sh scripts/pantry-install.sh ${shared}/media`]
   install.push(`(umask 077; cd ${shared}/media && pantry env > runtime-env.sh && chmod 600 runtime-env.sh)`, `cat > ${shared}/media/start-training.sh <<'LSU_MEDIA_START'\n${mediaLauncher}\nLSU_MEDIA_START`, `(. ${shared}/media/runtime-env.sh && ffmpeg -version >/dev/null)`)
   const common = {
     root, inheritEnv: false, isolation: true, keepReleases: 2,
