@@ -125,7 +125,7 @@ Adopted on 2026-11-11, with HQ platform kit 1.0.4230 or later:
   Bun's WebKit view for this, through a stand-in for its Chrome module,
   because the Mac it ran on has no Chrome.
 
-Adopted on 2026-11-13, with HQ platform kit 1.0.4294 or later:
+Adopted on 2026-11-13, with HQ platform kit 1.0.4295 or later:
 
 - **The weekly feedback opens the next week.** A tier's training blocks can
   wait for the runner's own feedback (`training_blocks.wait_for: "feedback"`,
@@ -147,6 +147,10 @@ Adopted on 2026-11-13, with HQ platform kit 1.0.4294 or later:
 - **Words.** "Paste an HQ workout" read "Paste an Last Soul Ultra workout" in
   the coach's builder, and six more messages did the same. The article now
   follows the name. Settings no longer lists "Apps using your HQ account".
+- **Android sign-in.** The Android app no longer draws "Continue with
+  Apple": Apple's own sign-in sheet exists on iPhone only, LSU has no web
+  Apple sign-in, and the button did nothing when tapped (seen on an emulator
+  build of kit 1.0.4294, fixed in 1.0.4295).
 - **Deploys.** The training host's tool installs wait out a registry that is
   down for a moment (the kit's `scripts/pantry-install.sh`), where one 502
   failed the Deploy of build 27.
