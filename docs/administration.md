@@ -17,7 +17,7 @@ In the iPhone app, an owner, administrator or manager reaches the same tools fro
 
 ## Who runs the organization
 
-The installation's deployment settings list its administrators by email. Today the list holds the HQ account addresses of Chris Breuer and Pawel Dregan. Every deploy runs `buddy installation:admins`, which makes each listed address an active administrator of Last Soul Ultra. An address with no account gets one, created with a verified email and no usable password. That person's first sign-in is **Continue with HQ**, which links the account to their HQ account and brings across their profile and, once they approve it on HQ, their training history.
+The installation's deployment settings list its administrators by email. Today the list holds the HQ account addresses and the LSU addresses of Chris Breuer and Pawel Dregan. Every deploy runs `buddy installation:admins`, which makes each listed address an active administrator of Last Soul Ultra and gives it an athlete profile and a coach profile, so one account opens every athlete and coach tool. An address with no account gets one, created with a verified email and no usable password. That person's first sign-in is **Continue with HQ**, which links the account to their HQ account and brings across their profile and, once they approve it on HQ, their training history.
 
 To add an administrator, add their email to `admins` in `enterprise/deployment.json` and deploy. The list only grants: it never turns the owner into an administrator, and removing an address does not take the role away. Change or remove a role in the staff screen, under the rules in [Manage access](#manage-access).
 

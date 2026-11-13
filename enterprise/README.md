@@ -79,10 +79,53 @@ The documented fake training is seeded idempotently only into the explicit LSU
 database; passwords and edits are preserved. After the seed, the API deploy runs
 `buddy installation:admins`, which makes every address in `admins` in
 `deployment.json` an active administrator of the `last-soul-ultra`
-organization. A missing account is created verified with no usable password, so
-that person's first sign-in is Continue with HQ. The list only grants: removing
+organization, with an athlete profile and a coach profile of it, so one account
+opens every athlete and coach tool. A missing account is created verified with
+no usable password: an `@hq.training` address signs in with Continue with HQ
+first, and an LSU address is given its password on the host with
+`./buddy user:add <email> --password ... --update`. The list only grants: removing
 an address does not revoke the role. Provider-backed payments and real
 athlete records are not manufactured or imported.
+
+## The coaching catalog
+
+`enterprise/catalog` is what LSU sells and trains by: the Last Soul Ultra
+method, thirty twelve-week plans (Backyard, Trail, Marathon, Halbmarathon and
+10 km, each for Einsteiger, Fortgeschritten and Profi, each as RUN and SOUL)
+and the packages on sale. After `installation:admins`, the API deploy runs
+HQ's Stacks seeder over it:
+
+```sh
+./buddy seed --skip-models --only-seeders InstallationCatalogSeeder
+```
+
+- `catalog.json` is written by hand: the coach everything is filed under (one
+  of the `admins`), the method, the list of plans and the `products`. A new
+  package is one more entry there. Four are on sale for the first test:
+  Backyard Fortgeschritten and 10 km Einsteiger, each as RUN (EUR 19.99 a
+  month, running only) and SOUL (EUR 39.99, with strength, mobility and
+  meditation), released a week at a time once the runner has sent feedback
+  and a coach has approved the week.
+- `workouts.json` and `plans/` are generated from a coach's export, one
+  `hq.workout.v1` document per session: `bun scripts/import-catalog.ts
+  <folder>`. Each workout is kept once and named by key in the plans.
+
+A deploy only touches what a deploy wrote. A plan nobody edited follows this
+folder; a plan a coach changed in the app is left alone, and so is every
+package once it exists. Rest days in an export are left out: a day with no
+session is the rest day.
+
+## Payments
+
+The training host reads four values from `.env.production`:
+`LSU_STRIPE_SECRET_KEY`, `LSU_STRIPE_PUBLISHABLE_KEY`,
+`LSU_STRIPE_WEBHOOK_SECRET` and `LSU_STRIPE_CONNECT_WEBHOOK_SECRET`. Today
+they belong to the Stripe sandbox "Last Soul Ultra" (`acct_1UbRgN19ZHkHGpVE`),
+whose two webhook endpoints post to `/api/billing/webhook`: nothing charged
+there is real money, and Stripe's test cards work. LSU's organization charges
+on the account it connects under Setup in the app. Going on sale means the
+same four values from the live account and its webhook, and connecting the
+live merchant account; nothing else changes.
 
 LSU's brand preset and coaching tiers (`enterprise/presets.json`), its
 onboarding decisions and the preview/acceptance history formerly kept in HQ are

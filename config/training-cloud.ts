@@ -19,6 +19,8 @@ export function trainingSites(): NonNullable<CloudConfig['sites']> {
     HOST: '127.0.0.1', APP_ENV: 'production', NODE_ENV: 'production',
     APP_NAME: 'Last Soul Ultra', APP_URL: deployment.origin, APP_DOMAIN: new URL(deployment.origin).hostname,
     HQ_NATIVE_PRODUCT: 'deployment/lsu/product.json',
+    // The method, plan library and packages LSU ships (enterprise/catalog).
+    HQ_INSTALLATION_CATALOG: 'deployment/lsu/catalog/catalog.json',
     HQ_SOURCE_REVISION: source.revision,
     FRONTEND_APP_URL: deployment.origin, STX_PUBLIC_API_URL: `${deployment.origin}/api`,
     API_URL: `http://127.0.0.1:${deployment.ports.api}`, PORT_API: String(deployment.ports.api),
@@ -59,6 +61,14 @@ export function trainingSites(): NonNullable<CloudConfig['sites']> {
     MAIL_HOST: `mail.${new URL(deployment.origin).hostname}`, MAIL_PORT: '587', MAIL_ENCRYPTION: 'tls',
     MAIL_USERNAME: `hello@${new URL(deployment.origin).hostname}`, MAIL_PASSWORD: secrets.LSU_MAIL_PASSWORD || '',
     MAIL_FROM_NAME: 'Last Soul Ultra', MAIL_FROM_ADDRESS: `hello@${new URL(deployment.origin).hostname}`,
+    // Payments. The platform account's keys, and the signing secrets of its
+    // webhook to /api/billing/webhook (its own events, and its connected
+    // accounts'). LSU's organization charges on the account it connects in
+    // Setup. These are a Stripe sandbox's keys until LSU goes on sale: a
+    // sandbox key takes no real money, and nothing here has to change but
+    // the four values. Empty leaves every paid checkout answering 503.
+    STRIPE_SECRET_KEY: secrets.LSU_STRIPE_SECRET_KEY || '', STRIPE_PUBLISHABLE_KEY: secrets.LSU_STRIPE_PUBLISHABLE_KEY || '',
+    STRIPE_WEBHOOK_SECRET: secrets.LSU_STRIPE_WEBHOOK_SECRET || '', STRIPE_CONNECT_WEBHOOK_SECRET: secrets.LSU_STRIPE_CONNECT_WEBHOOK_SECRET || '',
     // The installation's own AI key: every coach's method feedback runs on it (HQ's key for now).
     ANTHROPIC_API_KEY: secrets.LSU_ANTHROPIC_API_KEY || '',
     COACHING_SPEECH_PROVIDER: 'local', COACHING_SPEECH_PORT: String(deployment.ports.speech),
@@ -85,7 +95,7 @@ export function trainingSites(): NonNullable<CloudConfig['sites']> {
       backgroundBun: `.hq-runtime/pantry/bun.com/v${source.bun}/bin/bun`,
       env: { ...runtime, LSU_DEMO_ACCOUNTS_JSON: secrets.LSU_DEMO_ACCOUNTS_JSON || '', LSU_SEED_DATABASE: deployment.database.name, LSU_SEED_CONFIRM: 'last-soul-ultra' },
       healthCheck: { path: '/api/deployment' },
-      preStart: [...install, './buddy migrate --no-generate --auth', './buddy queue:table', 'bun scripts/enterprise-preflight.ts --platform', 'bun scripts/reindex-public-profiles.ts', 'mkdir -p storage/framework/runtime/production', 'bun scripts/build-production.ts api', 'bun deployment/lsu/seed-review.ts', './buddy installation:admins', 'bun deployment/lsu/grant-trainer-plans.ts', 'sh scripts/ensure-speech-runtime.sh'],
+      preStart: [...install, './buddy migrate --no-generate --auth', './buddy queue:table', 'bun scripts/enterprise-preflight.ts --platform', 'bun scripts/reindex-public-profiles.ts', 'mkdir -p storage/framework/runtime/production', 'bun scripts/build-production.ts api', 'bun deployment/lsu/seed-review.ts', './buddy installation:admins', './buddy seed --skip-models --only-seeders InstallationCatalogSeeder', 'bun deployment/lsu/grant-trainer-plans.ts', 'sh scripts/ensure-speech-runtime.sh'],
       scheduler: true,
       daemons: [
         // The catch-all queue, and a gym's webhook deliveries, as HQ's own deploy runs them.

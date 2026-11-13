@@ -95,6 +95,9 @@ export default {
     // old links to the English page of the same name, and so does this site.
     '/de': '/',
     '/de/*': '/',
+    // "Training" is the word LSU's coaches use for the storefront; the tiers
+    // live under Coaching. Temporary, so the name can become its own page.
+    '/training': { to: '/coaching/plans', status: 302 },
     // Every page that needs an account is the training app's own, where
     // signing in is enforced. Nothing behind a sign-in is drawn on this site.
     ...accountOnlyRedirects(coaching.origin),

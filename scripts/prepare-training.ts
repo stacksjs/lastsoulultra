@@ -1,4 +1,4 @@
-import { copyFileSync, mkdirSync, writeFileSync } from 'node:fs'
+import { copyFileSync, cpSync, mkdirSync, rmSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import deployment from '../enterprise/deployment.json'
 import product from '../native/product.json'
@@ -18,6 +18,11 @@ export async function prepareTrainingSource(): Promise<void> {
   copyFileSync(join(root, 'enterprise/seed-review.ts'), join(directory, 'seed-review.ts'))
   copyFileSync(join(root, 'scripts/grant-trainer-plans.ts'), join(directory, 'grant-trainer-plans.ts'))
   copyFileSync(join(root, 'scripts/lsu-trainer-plans.ts'), join(directory, 'lsu-trainer-plans.ts'))
+  // LSU's coaching catalog (method, plan library, packages), seeded by HQ's
+  // InstallationCatalogSeeder. Replaced whole, so a plan removed here is not
+  // left behind in a prepared source from an earlier run.
+  rmSync(join(directory, 'catalog'), { recursive: true, force: true })
+  cpSync(join(root, 'enterprise/catalog'), join(directory, 'catalog'), { recursive: true })
   copyFileSync(join(root, 'native/assets/icon.png'), join(directory, 'assets/icon.png'))
   copyFileSync(join(root, 'public/assets/lsu/images/lsu-logo.svg'), join(directory, 'assets/logo.svg'))
   const legal = join(sourceRoot, 'resources/views/legal/lsu')

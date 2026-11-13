@@ -1,0 +1,209 @@
+{
+  "organization": "last-soul-ultra",
+  "coach": "pawel@lastsoulultra.com",
+  "method": {
+    "name": "Last Soul Ultra Methode",
+    "summary": "Die Trainingsmethode des LSU Teams: zwölf Wochen in vier Phasen, harte Tage hart und lockere Tage locker, gesteuert nach Gefühl (RPE) und Woche für Woche an dein Feedback angepasst.",
+    "instructions": "Du schreibst die nächste Trainingswoche für eine Läuferin oder einen Läufer nach der Methode des Last Soul Ultra Teams. Die Woche kommt aus dem Plan des Pakets; passe sie nur an das an, was die Person über die letzte Woche gesagt und eingetragen hat. Sprich die Person mit du an, auf Deutsch, außer sie schreibt in einer anderen Sprache.\n\nPhasen: Woche 1 bis 4 Grundlage, 5 bis 8 Aufbau, 9 bis 11 spezifisch, 12 Taper und Rennen. Woche 4 und 8 sind Entlastungswochen. Steigere den Umfang um höchstens etwa 10 % pro Woche.\n\nWochenrhythmus: Dienstag Intervalle in Zone 4, flach, auf der Bahn oder dem Laufband; die Intervallform wechselt jede Woche, bei Halbmarathon und Marathon jede zweite Woche Tempo in Zone 3. Donnerstag Berg in Zone 3, bei 10 km kurze Hill Repeats in Zone 4. Samstag der lange Lauf; bei Trail und Backyard als Run/Hike und Walk-and-Run, ab der Aufbauphase mit Back-to-Back am Sonntag. Montag ist Ruhetag.\n\nBackyard: Loops über 6,706 km, eine Simulation in Woche 10. Nach einer Simulation oder einem Rennen über 50 km folgen mindestens zwei Tage nur Regeneration. Taper etwa zehn Tage mit rund 60 % des Umfangs.\n\nIntensität nach RPE: Zone 1 = RPE 3 bis 4, Zone 2 = RPE 5 bis 6, Zone 3 = RPE 7 bis 8, Zone 4 = RPE 8 bis 9, Zone 5 = RPE 10. Jeder Lauf behält seinen Ernährungshinweis: vor harten Einheiten gut essen, währenddessen Kohlenhydrate, danach Kohlenhydrate und Eiweiß.\n\nKraft, Mobility und Kopf (nur wenn das Paket sie enthält): schweres Krafttraining an harten Lauftagen, an lockeren Tagen nur Isometrie und Füße. Core zweimal pro Woche, täglich Stretching im Wechsel mit Hip Mobility, dazu Meditation. Behalte die Übungen und ihre Videos, wie sie im Plan stehen.\n\nAnpassen: Wer müde ist, schlecht schläft, krank war oder Einheiten ausgelassen hat, bekommt weniger Umfang und keine zusätzliche harte Einheit; ausgelassene Einheiten werden nicht nachgeholt. Bei Schmerzen, die über normalen Muskelkater hinausgehen, nimm die Belastung heraus und rate, es abklären zu lassen. Ändere nur künftige, noch nicht erledigte Einheiten und erfinde nie erledigtes Training. Frag nach, wenn etwas unklar ist. Das ist Training, keine medizinische Beratung.",
+    "contact_url": "https://www.lastsoulultra.com/contact"
+  },
+  "workouts": "workouts.json",
+  "plans": [
+    {
+      "key": "10k-einsteiger-run",
+      "file": "plans/10k-einsteiger-run.json"
+    },
+    {
+      "key": "10k-einsteiger-soul",
+      "file": "plans/10k-einsteiger-soul.json"
+    },
+    {
+      "key": "10k-fortgeschritten-run",
+      "file": "plans/10k-fortgeschritten-run.json"
+    },
+    {
+      "key": "10k-fortgeschritten-soul",
+      "file": "plans/10k-fortgeschritten-soul.json"
+    },
+    {
+      "key": "10k-profi-run",
+      "file": "plans/10k-profi-run.json"
+    },
+    {
+      "key": "10k-profi-soul",
+      "file": "plans/10k-profi-soul.json"
+    },
+    {
+      "key": "backyard-einsteiger-run",
+      "file": "plans/backyard-einsteiger-run.json"
+    },
+    {
+      "key": "backyard-einsteiger-soul",
+      "file": "plans/backyard-einsteiger-soul.json"
+    },
+    {
+      "key": "backyard-fortgeschritten-run",
+      "file": "plans/backyard-fortgeschritten-run.json"
+    },
+    {
+      "key": "backyard-fortgeschritten-soul",
+      "file": "plans/backyard-fortgeschritten-soul.json"
+    },
+    {
+      "key": "backyard-profi-run",
+      "file": "plans/backyard-profi-run.json"
+    },
+    {
+      "key": "backyard-profi-soul",
+      "file": "plans/backyard-profi-soul.json"
+    },
+    {
+      "key": "halbmarathon-einsteiger-run",
+      "file": "plans/halbmarathon-einsteiger-run.json"
+    },
+    {
+      "key": "halbmarathon-einsteiger-soul",
+      "file": "plans/halbmarathon-einsteiger-soul.json"
+    },
+    {
+      "key": "halbmarathon-fortgeschritten-run",
+      "file": "plans/halbmarathon-fortgeschritten-run.json"
+    },
+    {
+      "key": "halbmarathon-fortgeschritten-soul",
+      "file": "plans/halbmarathon-fortgeschritten-soul.json"
+    },
+    {
+      "key": "halbmarathon-profi-run",
+      "file": "plans/halbmarathon-profi-run.json"
+    },
+    {
+      "key": "halbmarathon-profi-soul",
+      "file": "plans/halbmarathon-profi-soul.json"
+    },
+    {
+      "key": "marathon-einsteiger-run",
+      "file": "plans/marathon-einsteiger-run.json"
+    },
+    {
+      "key": "marathon-einsteiger-soul",
+      "file": "plans/marathon-einsteiger-soul.json"
+    },
+    {
+      "key": "marathon-fortgeschritten-run",
+      "file": "plans/marathon-fortgeschritten-run.json"
+    },
+    {
+      "key": "marathon-fortgeschritten-soul",
+      "file": "plans/marathon-fortgeschritten-soul.json"
+    },
+    {
+      "key": "marathon-profi-run",
+      "file": "plans/marathon-profi-run.json"
+    },
+    {
+      "key": "marathon-profi-soul",
+      "file": "plans/marathon-profi-soul.json"
+    },
+    {
+      "key": "trail-einsteiger-run",
+      "file": "plans/trail-einsteiger-run.json"
+    },
+    {
+      "key": "trail-einsteiger-soul",
+      "file": "plans/trail-einsteiger-soul.json"
+    },
+    {
+      "key": "trail-fortgeschritten-run",
+      "file": "plans/trail-fortgeschritten-run.json"
+    },
+    {
+      "key": "trail-fortgeschritten-soul",
+      "file": "plans/trail-fortgeschritten-soul.json"
+    },
+    {
+      "key": "trail-profi-run",
+      "file": "plans/trail-profi-run.json"
+    },
+    {
+      "key": "trail-profi-soul",
+      "file": "plans/trail-profi-soul.json"
+    }
+  ],
+  "products": [
+    {
+      "slug": "lsu-backyard-fortgeschritten-run",
+      "plan": "backyard-fortgeschritten-run",
+      "name": "Backyard · Fortgeschritten · RUN",
+      "description": "12 Wochen bis zum Backyard Ultra, 5 bis 8 Stunden Laufen pro Woche, mit Loops über 6,706 km und einer Simulation über 7 Stunden in Woche 10. Nur Laufen: Intervalle, Berg, lockere Läufe und der lange Lauf am Wochenende. Du bekommst Woche für Woche: die nächste Woche kommt nach deinem Feedback, und ein LSU Coach gibt sie frei.",
+      "price_cents": 1999,
+      "currency": "EUR",
+      "billing_interval": "month",
+      "tax_code": "txcd_10000000",
+      "allowed_training_sports": [
+        "Run"
+      ],
+      "training_blocks": {
+        "length_days": 7,
+        "review": "coach",
+        "wait_for": "feedback"
+      }
+    },
+    {
+      "slug": "lsu-backyard-fortgeschritten-soul",
+      "plan": "backyard-fortgeschritten-soul",
+      "name": "Backyard · Fortgeschritten · SOUL",
+      "description": "12 Wochen bis zum Backyard Ultra, 5 bis 8 Stunden Laufen pro Woche, mit Loops über 6,706 km und einer Simulation über 7 Stunden in Woche 10. Laufen plus Warm-up, Kraft, Core, Füße und Waden, Stretching und Hip Mobility, Meditation. Alle Übungen mit Video. Du bekommst Woche für Woche: die nächste Woche kommt nach deinem Feedback, und ein LSU Coach gibt sie frei.",
+      "price_cents": 3999,
+      "currency": "EUR",
+      "billing_interval": "month",
+      "tax_code": "txcd_10000000",
+      "allowed_training_sports": [
+        "Run",
+        "Strength"
+      ],
+      "training_blocks": {
+        "length_days": 7,
+        "review": "coach",
+        "wait_for": "feedback"
+      }
+    },
+    {
+      "slug": "lsu-10k-einsteiger-run",
+      "plan": "10k-einsteiger-run",
+      "name": "10 km · Einsteiger · RUN",
+      "description": "12 Wochen bis zu deinem 10-km-Rennen, 3 bis 4 Stunden Laufen pro Woche. Nur Laufen: Intervalle, Berg, lockere Läufe und der lange Lauf am Wochenende. Du bekommst Woche für Woche: die nächste Woche kommt nach deinem Feedback, und ein LSU Coach gibt sie frei.",
+      "price_cents": 1999,
+      "currency": "EUR",
+      "billing_interval": "month",
+      "tax_code": "txcd_10000000",
+      "allowed_training_sports": [
+        "Run"
+      ],
+      "training_blocks": {
+        "length_days": 7,
+        "review": "coach",
+        "wait_for": "feedback"
+      }
+    },
+    {
+      "slug": "lsu-10k-einsteiger-soul",
+      "plan": "10k-einsteiger-soul",
+      "name": "10 km · Einsteiger · SOUL",
+      "description": "12 Wochen bis zu deinem 10-km-Rennen, 3 bis 4 Stunden Laufen pro Woche. Laufen plus Warm-up, Kraft, Core, Füße und Waden, Stretching und Hip Mobility, Meditation. Alle Übungen mit Video. Du bekommst Woche für Woche: die nächste Woche kommt nach deinem Feedback, und ein LSU Coach gibt sie frei.",
+      "price_cents": 3999,
+      "currency": "EUR",
+      "billing_interval": "month",
+      "tax_code": "txcd_10000000",
+      "allowed_training_sports": [
+        "Run",
+        "Strength"
+      ],
+      "training_blocks": {
+        "length_days": 7,
+        "review": "coach",
+        "wait_for": "feedback"
+      }
+    }
+  ]
+}
