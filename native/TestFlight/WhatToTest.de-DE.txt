@@ -1,6 +1,6 @@
 Features
-- Take HQ platform kit 1.0.4283, so the app follows LSU's palette and sessions read in minutes (native)
-- Take HQ platform kit 1.0.4273, so a sent check-in reads as sent and the website's phone layout floats Add over Messages in one capsule like the app (native)
+- Take HQ platform kit 1.0.4294, so your weekly feedback opens the next week and Week says whose turn it is (native)
 
 Fixes
-- Photograph the tour's screens again with Add and Messages in one floating capsule (onboarding)
+- Take HQ platform kit 1.0.4295, so the Android app no longer shows a Continue with Apple button that does nothing (native)
+- Wait out a registry outage when installing the media tools (deploy)

@@ -1,5 +1,24 @@
 # Stacks Changelog
 
+[Compare changes](https://github.com/stacksjs/lastsoulultra/compare/v1.0.0-build.28...v1.0.0-build.29)
+
+## ✨ Features
+
+- **native**: take HQ platform kit 1.0.4294, so your weekly feedback opens the next week and Week says whose turn it is ([06bfbec](https://github.com/stacksjs/lastsoulultra/commit/06bfbec)) _(by Chris Breuer)_
+
+## 🐛 Bug Fixes
+
+- **native**: take HQ platform kit 1.0.4295, so the Android app no longer shows a Continue with Apple button that does nothing ([0564194](https://github.com/stacksjs/lastsoulultra/commit/0564194)) _(by Chris Breuer)_
+- **deploy**: wait out a registry outage when installing the media tools ([9650ac8](https://github.com/stacksjs/lastsoulultra/commit/9650ac8)) _(by Chris Breuer)_
+
+## 📝 Documentation
+
+- **enterprise**: record what kit 1.0.4294 adopts, and what LSU's account sign-in still needs ([8d1edc5](https://github.com/stacksjs/lastsoulultra/commit/8d1edc5)) _(by Chris Breuer)_
+
+## Contributors
+
+- _Chris Breuer_
+
 [Compare changes](https://github.com/stacksjs/lastsoulultra/compare/v1.0.0-build.27...v1.0.0-build.28)
 
 ## ✨ Features
