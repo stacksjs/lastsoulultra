@@ -172,12 +172,20 @@ export function installationPresets(value: typeof presets = presets, slug: strin
   // HQ assigns a tier's training in blocks only as `{ length_days, review: 'coach' }`: a block never reaches a subscriber unreviewed.
   if (value.products.some(item => item.training_blocks != null && (![7, 14, 21, 28].includes(item.training_blocks.length_days) || item.training_blocks.review !== 'coach')))
     throw new Error('enterprise/presets.json training_blocks run 7, 14, 21 or 28 days and are reviewed by a coach')
+  // The next block may wait for the runner's own feedback on the last one (HQ kit 1.0.4294 and later), and for nothing else.
+  if (value.products.some(item => { const wait = (item.training_blocks as { wait_for?: unknown } | null | undefined)?.wait_for; return wait !== undefined && wait !== 'feedback' }))
+    throw new Error('enterprise/presets.json training_blocks may wait for "feedback" and nothing else')
   // LSU's coaches set the training, so the AI coach explains an athlete's data and never builds or changes workouts.
   if (value.assistant?.mode !== 'insights')
     throw new Error('enterprise/presets.json must keep the AI coach to insights: LSU coaches assign the training')
   // LSU accounts are LSU's own: its sign-in offers no "Continue with HQ" (HQ kit 1.0.4119 and later honour this).
   if (value.sign_in?.hq !== false)
     throw new Error('enterprise/presets.json must turn off HQ sign-in: LSU accounts sign in with LSU')
+  // The words on "Mit deinem LSU-Konto anmelden". The button itself appears only once the training
+  // host is a client of the service that holds LSU's accounts (config/training-cloud.ts LSU_ACCOUNT_*).
+  const account = (value.sign_in as { account?: { name?: unknown } }).account
+  if (account !== undefined && (typeof account?.name !== 'string' || !account.name.trim() || account.name.length > 40))
+    throw new Error('enterprise/presets.json sign_in.account needs the short name LSU\'s own account is called by')
   return value
 }
 

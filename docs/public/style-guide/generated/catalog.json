@@ -1335,8 +1335,8 @@
         },
         {
           "name": "portal",
-          "type": "Not declared",
-          "description": "Read by the implementation; see source for defaults and accepted values."
+          "type": "any, slug?: string, instance?: string, status?: boolean }",
+          "description": "Optional."
         },
         {
           "name": "slug",

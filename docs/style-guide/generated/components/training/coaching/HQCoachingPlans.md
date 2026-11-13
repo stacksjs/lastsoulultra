@@ -20,7 +20,7 @@ Reference only. Add an isolated .story.stx fixture before enabling a preview; th
 | Name | Type | Contract |
 | --- | --- | --- |
 | instance | Not declared | Read by the implementation; see source for defaults and accepted values. |
-| portal | Not declared | Read by the implementation; see source for defaults and accepted values. |
+| portal | any, slug?: string, instance?: string, status?: boolean } | Optional. |
 | slug | Not declared | Read by the implementation; see source for defaults and accepted values. |
 | status | Not declared | Read by the implementation; see source for defaults and accepted values. |
 

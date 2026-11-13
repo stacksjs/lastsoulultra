@@ -84,13 +84,17 @@ it('packages LSU’s brand and approved coaching tiers as the installation’s o
     ['lsu-running', 1999, 'EUR', 'month', false, ['Run']],
     ['lsu-running-strength', 2999, 'EUR', 'month', false, ['Run', 'Strength']],
   ])
-  // Both tiers assign training automatically, two weeks at a time, and a coach approves every block.
-  expect(presets.products.map(item => item.training_blocks)).toEqual([{ length_days: 14, review: 'coach' }, { length_days: 14, review: 'coach' }])
+  // Both tiers assign training a week at a time, as the coaching design draws it: the next week is drafted
+  // once the runner has sent their feedback on this one, and a coach approves every block.
+  expect(presets.products.map(item => item.training_blocks)).toEqual([{ length_days: 7, review: 'coach', wait_for: 'feedback' }, { length_days: 7, review: 'coach', wait_for: 'feedback' }])
+  expect(() => installationPresets({ ...presets, products: [{ ...presets.products[0]!, training_blocks: { length_days: 7, review: 'coach', wait_for: 'nothing' as 'feedback' } }] })).toThrow('may wait for "feedback"')
   // The AI coach reads and explains; it has no way to create a workout.
   expect(presets.assistant).toEqual({ mode: 'insights' })
   expect(() => installationPresets({ ...presets, assistant: { mode: 'coach' } })).toThrow('keep the AI coach to insights')
   // LSU's sign-in offers no "Continue with HQ": the switch has to be an explicit false, since HQ defaults to offering it.
-  expect(presets.sign_in).toEqual({ hq: false })
+  // And it names LSU's own account for "Mit deinem LSU-Konto anmelden", which HQ offers once the training host is that service's client.
+  expect(presets.sign_in).toEqual({ hq: false, account: { name: 'LSU' } })
+  expect(() => installationPresets({ ...presets, sign_in: { hq: false, account: { name: ' ' } } })).toThrow('short name')
   expect(() => installationPresets({ ...presets, sign_in: { hq: true } })).toThrow('must turn off HQ sign-in')
   const { sign_in: _unset, ...withoutSignIn } = presets
   expect(() => installationPresets(withoutSignIn as typeof presets)).toThrow('must turn off HQ sign-in')

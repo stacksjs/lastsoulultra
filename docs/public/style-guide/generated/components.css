@@ -5647,12 +5647,16 @@ video {
   border-color: oklch(58.5% 0.233 277.117 / 0.3);
 }
 
-.hover\:bg-\[\#1d1d1f\]:hover {
-  background-color: #1d1d1f;
+.bg-\[\#1c1c1e\] {
+  background-color: #1c1c1e;
 }
 
 .dark .dark\:text-black {
   color: #000;
+}
+
+.hover\:bg-\[\#1d1d1f\]:hover {
+  background-color: #1d1d1f;
 }
 
 .dark .dark\:hover\:bg-\[\#f2f2f7\]:hover {
