@@ -1,5 +1,19 @@
 # Stacks Changelog
 
+[Compare changes](https://github.com/stacksjs/lastsoulultra/compare/v1.0.0-build.29...v1.0.0-build.30)
+
+## ✨ Features
+
+- **native**: take HQ platform kit 1.0.4302, so header photos are cropped, workout steps are pills and Messages covers the screen ([6aa2b9a](https://github.com/stacksjs/lastsoulultra/commit/6aa2b9a)) _(by glennmichael123)_
+
+## 🔧 Chores
+
+- **training**: store the settings for LSU's own uploads bucket ([553fa6a](https://github.com/stacksjs/lastsoulultra/commit/553fa6a)) _(by glennmichael123)_
+
+## Contributors
+
+- _glennmichael123_
+
 [Compare changes](https://github.com/stacksjs/lastsoulultra/compare/v1.0.0-build.28...v1.0.0-build.29)
 
 ## ✨ Features

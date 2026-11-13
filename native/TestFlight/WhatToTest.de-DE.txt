@@ -1,6 +1,2 @@
 Features
-- Take HQ platform kit 1.0.4294, so your weekly feedback opens the next week and Week says whose turn it is (native)
-
-Fixes
-- Take HQ platform kit 1.0.4295, so the Android app no longer shows a Continue with Apple button that does nothing (native)
-- Wait out a registry outage when installing the media tools (deploy)
+- Take HQ platform kit 1.0.4302, so header photos are cropped, workout steps are pills and Messages covers the screen (native)
