@@ -3560,6 +3560,10 @@ video {
   min-height: 56px;
 }
 
+.active\:bg-\[\#78788047\]:active {
+  background-color: #78788047;
+}
+
 .h-\[22px\] {
   height: 22px;
 }
