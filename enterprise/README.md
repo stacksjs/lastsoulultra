@@ -120,12 +120,18 @@ session is the rest day.
 The training host reads four values from `.env.production`:
 `LSU_STRIPE_SECRET_KEY`, `LSU_STRIPE_PUBLISHABLE_KEY`,
 `LSU_STRIPE_WEBHOOK_SECRET` and `LSU_STRIPE_CONNECT_WEBHOOK_SECRET`. Today
-they belong to the Stripe sandbox "Last Soul Ultra" (`acct_1UbRgN19ZHkHGpVE`),
-whose two webhook endpoints post to `/api/billing/webhook`: nothing charged
-there is real money, and Stripe's test cards work. LSU's organization charges
-on the account it connects under Setup in the app. Going on sale means the
-same four values from the live account and its webhook, and connecting the
-live merchant account; nothing else changes.
+they belong to Stacks.js's Stripe sandbox (`acct_1T89EW1f9sflbmA6`), whose two
+webhook endpoints for this host post to `/api/billing/webhook`, and LSU's
+organization charges on that sandbox's US test merchant account
+(`acct_1UTSKB1AO5On7Plj`), which already takes charges. Nothing charged there
+is real money, and Stripe's test cards work. The sandbox and that account are
+shared with HQ's own tests, so its events also reach this host, which ignores
+what it does not know.
+
+Going on sale is LSU's own values: the same four from the Stripe account
+payments should run on, with its webhook to `/api/billing/webhook`, and the
+merchant account LSU connects once under Setup in the app. Nothing else
+changes.
 
 LSU's brand preset and coaching tiers (`enterprise/presets.json`), its
 onboarding decisions and the preview/acceptance history formerly kept in HQ are
