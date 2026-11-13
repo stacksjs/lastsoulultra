@@ -17,15 +17,17 @@ HQ offers the presets only to the `last-soul-ultra` organization:
   and the **Last Soul Ultra monthly tiers**, each linking to `/coaches/store?preset=<key>`.
 - `POST /api/coach/store/products` with `preset` creates the tier as a draft in
   the LSU organization; publishing still needs a coach's real plan and method.
-- Both tiers set `training_blocks: { "length_days": 14, "review": "coach" }`:
-  HQ drafts each subscriber's next two weeks from the tier's plan and their
-  responses to the block before (done and skipped sessions, effort, feeling,
-  comments), held to the tier's sports, and nothing reaches their calendar
-  until an LSU coach approves the block under **Block reviews**
+- Both tiers set `training_blocks: { "length_days": 7, "review": "coach",
+  "wait_for": "feedback" }` (two-week blocks on a date until 2026-11-13):
+  HQ drafts each subscriber's next week from the tier's plan, their responses
+  to the week before (done and skipped sessions, effort, feeling, comments)
+  and the feedback they sent, held to the tier's sports. The draft is written
+  when they send that feedback, not on a date, and nothing reaches their
+  calendar until an LSU coach approves the block under **Block reviews**
   (`/coaches/block-reviews`). `scripts/native-source.ts` refuses any other
-  review value. It takes effect once the pinned HQ kit includes training
-  blocks, and for tiers created from the preset after that; a tier created
-  earlier is switched on in its Store editor.
+  review value and any other thing to wait for. It takes effect for tiers
+  created from the preset from then on; a tier created earlier is switched
+  in its Store editor.
 
 The `experience` block lists only what differs from HQ's default experience;
 HQ merges it and validates it as a saved experience. It carries LSU's full
@@ -123,28 +125,59 @@ Adopted on 2026-11-11, with HQ platform kit 1.0.4230 or later:
   Bun's WebKit view for this, through a stand-in for its Chrome module,
   because the Mac it ran on has no Chrome.
 
-Not adopted yet, and why:
+Adopted on 2026-11-13, with HQ platform kit 1.0.4294 or later:
+
+- **The weekly feedback opens the next week.** A tier's training blocks can
+  wait for the runner's own feedback (`training_blocks.wait_for: "feedback"`,
+  set on both tiers in `enterprise/presets.json`, with a block now a week
+  long as the draft draws it). Feedback counts from two days before the week
+  ends: the first message the runner then sends in the feedback section
+  starts the next week's draft at once, with their words in front of the
+  coach who reviews it. A coach still approves every week; nothing is
+  released automatically. Woche says where the runner stands: too early
+  ("ab Freitag"), their turn, or sent and with their coach. The presets only
+  reach tiers created from them from now on; a tier that already exists is
+  switched in the Store editor (block length, and "Draft the next block when
+  the subscriber has sent their feedback").
+- **"Tipp der Woche".** The coach's voice tip on Heute came with kit
+  1.0.4268.
+- **Light mode.** The photographs over Heute, Backyard and the coaching
+  section no longer end in a black slab on the light page: the foot is shaded
+  for the words and the photograph shows to its edge. Dark is unchanged.
+- **Words.** "Paste an HQ workout" read "Paste an Last Soul Ultra workout" in
+  the coach's builder, and six more messages did the same. The article now
+  follows the name. Settings no longer lists "Apps using your HQ account".
+- **Deploys.** The training host's tool installs wait out a registry that is
+  down for a moment (the kit's `scripts/pantry-install.sh`), where one 502
+  failed the Deploy of build 27.
+
+Built in the kit and waiting on a decision, so switched off here:
 
 - **RUN 19,99 and SOUL 39,99, terms of 3, 6 or 12 months, first month free.**
   The draft's own note says the conditions are still to be settled with Kim,
   and the tiers approved on 2026-10-28 are EUR 19.99 and EUR 29.99 with no
-  trial. The start screen therefore says "Jetzt starten", not "1 Monat
-  kostenlos starten", and the tiers keep their names and prices until LSU
-  confirms. HQ products support a trial (`trial_days`); a minimum term is not
-  built.
-- **"Mit deinem LSU-Konto anmelden", Soul number, code by email.** The race
-  account on lastsoulultra.com is a separate service that signs in with an
-  email and a password, has no Soul number, and offers no code sign-in. The
-  app keeps HQ's sign-in (passkey, Apple, Google, email and password) until
-  the two accounts are linked.
+  trial and no term. HQ can now do all of it: a tier has an optional free
+  trial (`trial_days`) and an optional minimum term of 1 to 24 months
+  (`minimum_term_months`, monthly billing only). A runner who cancels inside
+  the term keeps paying and keeps access until it ends, a cancellation in
+  the free trial ends unbilled, and the offer, the checkout and the account
+  pages say so with the real date. The tiers keep their names and prices and
+  the start screen says "Jetzt starten" until LSU confirms. Stripe's side of
+  the term is tested against stubs only: try one tier in Stripe's test mode
+  before a term is sold.
+- **"Mit deinem LSU-Konto anmelden".** The kit can draw the button, in LSU's
+  red and first on the sign-in screen, and sign a runner in with their race
+  account without the training host ever seeing the password. It stays off
+  because the race accounts live in a service outside this repository that
+  has to offer three sign-in endpoints first: see
+  `enterprise/lsu-account-sign-in.md`. The Soul number and a code by email
+  are that service's to offer; it has neither today.
+
+Not adopted, and why:
+
 - **A flat tab bar drawn like the draft's.** Chris decided on 2026-11-12 that
   each platform keeps its own bar: the floating glass capsule on iOS,
   whatever is native on Android.
-- **"Tipp der Woche", the coach's voice tip on Heute.** Being built in HQ
-  separately; not in kit 1.0.4245.
-- **A weekly feedback that unlocks the next week.** Woche shows the next week
-  as locked and links to the feedback; the coach still releases the next
-  block in HQ, the feedback does not do it by itself.
 
 Seen once by the acceptance journey on kit 1.0.4230 (2026-11-12): after a
 sign-out the app did not go idle, and XCUITest waited two minutes before each
