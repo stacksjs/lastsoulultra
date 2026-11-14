@@ -86,7 +86,7 @@ it('packages LSU’s brand and approved coaching tiers as the installation’s o
   ])
   // Both tiers assign training a week at a time, as the coaching design draws it: the next week is drafted
   // once the runner has sent their feedback on this one, and a coach approves every block.
-  expect(presets.products.map(item => item.training_blocks)).toEqual([{ length_days: 7, review: 'coach', wait_for: 'feedback' }, { length_days: 7, review: 'coach', wait_for: 'feedback' }])
+  expect(presets.products.map(item => item.training_blocks)).toEqual([{ length_days: 7, review: 'coach', wait_for: 'feedback', source: 'plan' }, { length_days: 7, review: 'coach', wait_for: 'feedback', source: 'plan' }])
   expect(() => installationPresets({ ...presets, products: [{ ...presets.products[0]!, training_blocks: { length_days: 7, review: 'coach', wait_for: 'nothing' as 'feedback' } }] })).toThrow('may wait for "feedback"')
   // The AI coach reads and explains; it has no way to create a workout.
   expect(presets.assistant).toEqual({ mode: 'insights' })

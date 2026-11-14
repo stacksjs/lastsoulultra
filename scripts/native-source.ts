@@ -175,6 +175,8 @@ export function installationPresets(value: typeof presets = presets, slug: strin
   // The next block may wait for the runner's own feedback on the last one (HQ kit 1.0.4294 and later), and for nothing else.
   if (value.products.some(item => { const wait = (item.training_blocks as { wait_for?: unknown } | null | undefined)?.wait_for; return wait !== undefined && wait !== 'feedback' }))
     throw new Error('enterprise/presets.json training_blocks may wait for "feedback" and nothing else')
+  if (value.products.some(item => item.training_blocks?.source !== 'plan'))
+    throw new Error('LSU packages deliver the authored plan workouts with their steps, exercises and videos')
   // LSU's coaches set the training, so the AI coach explains an athlete's data and never builds or changes workouts.
   if (value.assistant?.mode !== 'insights')
     throw new Error('enterprise/presets.json must keep the AI coach to insights: LSU coaches assign the training')

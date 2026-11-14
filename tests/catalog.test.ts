@@ -54,7 +54,7 @@ it('sells the four test packages monthly, week by week on feedback, at LSU’s p
   for (const product of catalog.products) {
     expect(existsSync(join(directory, 'plans', `${product.plan}.json`))).toBe(true)
     expect(product.slug).toBe(`lsu-${product.plan}`)
-    expect(product).toMatchObject({ currency: 'EUR', billing_interval: 'month', training_blocks: { length_days: 7, review: 'coach', wait_for: 'feedback' } })
+    expect(product).toMatchObject({ currency: 'EUR', billing_interval: 'month', training_blocks: { length_days: 7, review: 'coach', wait_for: 'feedback', source: 'plan' } })
     expect(product.tax_code).toMatch(/^txcd_\d{8}$/)
     // The card's picture is one of LSU's own photographs, which the installation serves.
     expect(product.cover_image).toMatch(/^\/assets\/native-product\/imagery\/[a-zA-Z]+\.webp$/)
