@@ -1,5 +1,49 @@
 # Stacks Changelog
 
+[Compare changes](https://github.com/stacksjs/lastsoulultra/compare/v1.0.0-build.30...v1.0.0-build.31)
+
+## ✨ Features
+
+- **training**: take HQ platform kit 1.0.4323, with the bell drawn like its neighbours ([dfa418a](https://github.com/stacksjs/lastsoulultra/commit/dfa418a)) _(by Chris Breuer)_
+- **store**: name the tiers RUN and SOUL, without the LSU prefix ([e04ec1a](https://github.com/stacksjs/lastsoulultra/commit/e04ec1a)) _(by Chris Breuer)_
+- **store**: name the tiers LSU RUN and LSU SOUL ([47442f7](https://github.com/stacksjs/lastsoulultra/commit/47442f7)) _(by Chris Breuer)_
+- **store**: sell Running + Strength at 39.99, the coach's SOUL price ([9ab6de1](https://github.com/stacksjs/lastsoulultra/commit/9ab6de1)) _(by Chris Breuer)_
+- **training**: take HQ platform kit 1.0.4320, and give follow-along sessions their length ([0beaf6d](https://github.com/stacksjs/lastsoulultra/commit/0beaf6d)) _(by Chris Breuer)_
+- **training**: take HQ platform kit 1.0.4317, with LSU photos on the packages ([0456d03](https://github.com/stacksjs/lastsoulultra/commit/0456d03)) _(by Chris Breuer)_
+- **training**: take HQ platform kit 1.0.4315, so checkout looks like LSU ([6a37d19](https://github.com/stacksjs/lastsoulultra/commit/6a37d19)) _(by Chris Breuer)_
+- **training**: sell LSU's own plans, in Stripe's test mode ([c0d97ea](https://github.com/stacksjs/lastsoulultra/commit/c0d97ea)) _(by Chris Breuer)_
+- **training**: keep uploads in LSU's own bucket ([746d63d](https://github.com/stacksjs/lastsoulultra/commit/746d63d)) _(by glennmichael123)_
+- **native**: take HQ platform kit 1.0.4308, so a menu row highlights under the finger and an installation may declare its own uploads bucket ([e807ded](https://github.com/stacksjs/lastsoulultra/commit/e807ded)) _(by glennmichael123)_
+
+## 🐛 Bug Fixes
+
+- refresh training schema provenance when pinning the platform ([e7a63c8](https://github.com/stacksjs/lastsoulultra/commit/e7a63c8)) _(by Chris Breuer)_
+- deliver Pawels authored workouts and videos in weekly plans ([44fdcc8](https://github.com/stacksjs/lastsoulultra/commit/44fdcc8)) _(by Chris Breuer)_
+- prepare the LSU catalog storefront for customer testing ([861f196](https://github.com/stacksjs/lastsoulultra/commit/861f196)) _(by Chris Breuer)_
+- verify canonical deployed diagram bytes with typed arrays ([7463c63](https://github.com/stacksjs/lastsoulultra/commit/7463c63)) _(by Chris Breuer)_
+- scroll lazy docs figures into view during deployment checks ([ee96287](https://github.com/stacksjs/lastsoulultra/commit/ee96287)) _(by Chris Breuer)_
+- isolate docs builds and verify deployed guide assets ([3261d82](https://github.com/stacksjs/lastsoulultra/commit/3261d82)) _(by Chris Breuer)_
+- align LSU training navigation and documentation ([bc13c1f](https://github.com/stacksjs/lastsoulultra/commit/bc13c1f)) _(by Chris Breuer)_
+- **site**: say a week at a time, as the tiers have run since 2026-11-13 ([702890c](https://github.com/stacksjs/lastsoulultra/commit/702890c)) _(by Chris Breuer)_
+- **training**: take HQ platform kit 1.0.4314, so LSU's Stripe account is German ([9eaf3cd](https://github.com/stacksjs/lastsoulultra/commit/9eaf3cd)) _(by Chris Breuer)_
+
+## 📝 Documentation
+
+- document Pawels verified customer test and shared access ([f5605f4](https://github.com/stacksjs/lastsoulultra/commit/f5605f4)) _(by Chris Breuer)_
+- add visual walkthroughs and current training ERD ([294dbb6](https://github.com/stacksjs/lastsoulultra/commit/294dbb6)) _(by Chris Breuer)_
+- **style-guide**: regenerate from a clean checkout for kit 1.0.4323 ([9476bbd](https://github.com/stacksjs/lastsoulultra/commit/9476bbd)) _(by Chris Breuer)_
+- **style-guide**: regenerate for HQ platform kit 1.0.4317 ([dba8908](https://github.com/stacksjs/lastsoulultra/commit/dba8908)) _(by Chris Breuer)_
+- **enterprise**: record the feedback reminder, and why Android's chrome is still blue ([63dccb6](https://github.com/stacksjs/lastsoulultra/commit/63dccb6)) _(by Chris Breuer)_
+
+## 🔧 Chores
+
+- **training**: run test payments on the Stacks sandbox's US account ([fea14f1](https://github.com/stacksjs/lastsoulultra/commit/fea14f1)) _(by Chris Breuer)_
+
+## Contributors
+
+- _Chris Breuer_
+- _glennmichael123_
+
 [Compare changes](https://github.com/stacksjs/lastsoulultra/compare/v1.0.0-build.29...v1.0.0-build.30)
 
 ## ✨ Features
