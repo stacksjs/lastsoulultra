@@ -109,6 +109,9 @@ for (const [path, rule] of Object.entries(accountOnlyRedirects(coaching.origin))
 const deployment: any = await (await get(`${app}/api/deployment`)).json().catch(() => null)
 check('the training app runs the pinned revision', deployment?.source === source.revision, `runs ${String(deployment?.source).slice(0, 12)}, pinned ${source.revision.slice(0, 12)}`)
 
+const storefront: any = await (await get(`${app}/api/store/products`)).json().catch(() => null)
+check('the app store publishes only the four authored catalog products', Array.isArray(storefront) && storefront.length === catalog.products.length && storefront.every(product => catalog.products.some(expected => expected.slug === product.slug)))
+
 const brand: any = await (await get(`${app}/api/brands/${coaching.brand}`)).json().catch(() => null)
 const offers: any[] = Array.isArray(brand?.offers) ? brand.offers : []
 for (const product of catalog.products) {

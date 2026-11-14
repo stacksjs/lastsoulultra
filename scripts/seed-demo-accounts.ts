@@ -54,6 +54,8 @@ if (database[0]?.name !== process.env.LSU_SEED_DATABASE)
 const origin = 'https://lsu.stacksjs.com'
 const applicationOrigin = String(process.env.APP_URL || 'https://training.lsu.stacksjs.com').replace(/\/$/, '')
 const now = new Date().toISOString()
+// Review fixtures stay usable but are not customer offers once the authored catalog is installed.
+const reviewProductStatus = process.env.HQ_INSTALLATION_CATALOG ? 'draft' : 'active'
 const zone = 'Europe/Berlin'
 const today = todayIn(zone)
 const ids: Record<string, number> = {}
@@ -162,7 +164,7 @@ await transaction(async () => {
   const planValues = { name: 'LSU demo: eight weeks of running and strength', description: template.summary, sport: 'Multisport', weeks: 8, plan: JSON.stringify(template), updated_at: now }
   const plan = previousPlan || await db.insertInto('training_plans').values({ ...planValues, coach_id: Number(coach.id), created_at: now }).returning(['id']).executeTakeFirstOrThrow()
   if (previousPlan) await db.updateTable('training_plans').set(planValues).where('id', '=', Number(plan.id)).execute()
-  const productValues = { name: demoTier.name, description: `Private review sample. ${new Intl.NumberFormat('en', { style: 'currency', currency: demoTier.currency }).format(demoTier.price_cents / 100)} monthly SOUL tier, tax included; demo access is complimentary. Payments run in Stripe test mode: no card is charged.`, price_cents: demoTier.price_cents, currency: demoTier.currency, billing_interval: demoTier.billing_interval, allowed_training_sports: JSON.stringify(demoTier.sports), includes_coaching: false, training_plan_id: Number(plan.id), status: 'active', updated_at: now }
+  const productValues = { name: demoTier.name, description: `Private review sample. ${new Intl.NumberFormat('en', { style: 'currency', currency: demoTier.currency }).format(demoTier.price_cents / 100)} monthly SOUL tier, tax included; demo access is complimentary. Payments run in Stripe test mode: no card is charged.`, price_cents: demoTier.price_cents, currency: demoTier.currency, billing_interval: demoTier.billing_interval, allowed_training_sports: JSON.stringify(demoTier.sports), includes_coaching: false, training_plan_id: Number(plan.id), status: reviewProductStatus, updated_at: now }
   if (!product) product = await db.insertInto('products').values({ ...productValues, organization_id: organizationId, coach_id: Number(coach.id), slug: 'lsu-private-demo-running', type: 'coaching', created_at: now }).returningAll().executeTakeFirstOrThrow()
   else await db.updateTable('products').set(productValues).where('id', '=', Number(product.id)).execute()
   const offer = { product_id: Number(product.id), method_id: Number(method.id), label: demoTier.name }
@@ -177,7 +179,7 @@ await transaction(async () => {
   if (runningPrevious && Number(runningPrevious.coach_id) !== Number(coach.id)) throw new Error('The running demo plan belongs to another coach.')
   const runningPlan = runningPrevious || await db.insertInto('training_plans').values({ ...runningPlanValues, coach_id: Number(coach.id), created_at: now }).returning(['id']).executeTakeFirstOrThrow()
   if (runningPrevious) await db.updateTable('training_plans').set(runningPlanValues).where('id', '=', Number(runningPlan.id)).execute()
-  const runningValues = { name: demoRunningTier.name, description: `Private review sample. ${new Intl.NumberFormat('en', { style: 'currency', currency: demoRunningTier.currency }).format(demoRunningTier.price_cents / 100)} monthly RUN tier, tax included. Payments run in Stripe test mode: no card is charged.`, price_cents: demoRunningTier.price_cents, currency: demoRunningTier.currency, billing_interval: demoRunningTier.billing_interval, allowed_training_sports: JSON.stringify(demoRunningTier.sports), includes_coaching: false, training_plan_id: Number(runningPlan.id), status: 'active', updated_at: now }
+  const runningValues = { name: demoRunningTier.name, description: `Private review sample. ${new Intl.NumberFormat('en', { style: 'currency', currency: demoRunningTier.currency }).format(demoRunningTier.price_cents / 100)} monthly RUN tier, tax included. Payments run in Stripe test mode: no card is charged.`, price_cents: demoRunningTier.price_cents, currency: demoRunningTier.currency, billing_interval: demoRunningTier.billing_interval, allowed_training_sports: JSON.stringify(demoRunningTier.sports), includes_coaching: false, training_plan_id: Number(runningPlan.id), status: reviewProductStatus, updated_at: now }
   if (!runningProduct) runningProduct = await db.insertInto('products').values({ ...runningValues, organization_id: organizationId, coach_id: Number(coach.id), slug: 'lsu-private-demo-running-only', type: 'coaching', created_at: now }).returningAll().executeTakeFirstOrThrow()
   else await db.updateTable('products').set(runningValues).where('id', '=', Number(runningProduct.id)).execute()
   // RUN first, then SOUL: the order the store lists them in.
@@ -245,13 +247,14 @@ await transaction(async () => {
       const existing = await db.selectFrom('products').select(['id', 'coach_id', 'organization_id']).where('slug', '=', item.slug).executeTakeFirst()
       if (existing) {
         if (Number(existing.coach_id) !== Number(catalogCoach.id) || Number(existing.organization_id) !== organizationId) throw new Error(`Refusing to adopt product ${item.slug}, which someone else owns.`)
+        if (process.env.HQ_INSTALLATION_CATALOG) await db.updateTable('products').set({ status: 'draft', updated_at: now }).where('id', '=', Number(existing.id)).execute()
         continue
       }
       const checked = normalizePlan(item.plan(), true)
       if (!checked.plan) throw new Error(`${item.slug}: ${checked.error}`)
       const description = catalogDescription(item)
       const plan = await db.insertInto('training_plans').values({ name: item.name, description: checked.plan.summary, sport: item.sport, weeks: checked.plan.weeks.length, plan: JSON.stringify(checked.plan), coach_id: Number(catalogCoach.id), created_at: now, updated_at: now }).returning(['id']).executeTakeFirstOrThrow()
-      await db.insertInto('products').values({ organization_id: organizationId, coach_id: Number(catalogCoach.id), slug: item.slug, type: 'training_plan', name: item.name, description, price_cents: item.price_cents, currency: 'EUR', allowed_training_sports: JSON.stringify(item.sports), includes_coaching: false, training_plan_id: Number(plan.id), release_mode: 'all_at_once', status: 'active', created_at: now, updated_at: now }).execute()
+      await db.insertInto('products').values({ organization_id: organizationId, coach_id: Number(catalogCoach.id), slug: item.slug, type: 'training_plan', name: item.name, description, price_cents: item.price_cents, currency: 'EUR', allowed_training_sports: JSON.stringify(item.sports), includes_coaching: false, training_plan_id: Number(plan.id), release_mode: 'all_at_once', status: reviewProductStatus, created_at: now, updated_at: now }).execute()
       catalogMade += 1
     }
     console.log(`[ts-cloud] lsu review seed: demo storefront under coach #${Number(catalogCoach.id)}, ${catalogMade} of ${CATALOG.length} plans made this run`)

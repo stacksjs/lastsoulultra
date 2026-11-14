@@ -15,7 +15,9 @@ and of the production race-entry account.
 The catalog contains Pawel's 30 twelve-week plans: five programs, three levels,
 RUN and SOUL. Each program, level and tier is its own product, so the purchased
 prescription and sports are explicit before payment. Four subscriptions are
-published for the first test:
+published for the first test. Older demo offers are drafts in the general
+store as well as absent from the branded storefront; their review calendars
+remain usable:
 
 | Program | Level | Tier | Monthly price |
 | --- | --- | --- | --- |
