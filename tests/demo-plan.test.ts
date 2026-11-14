@@ -22,8 +22,8 @@ describe('LSU review plan', () => {
   })
 
   it('sells running alone at EUR 19.99, as the same weeks without the strength sessions', () => {
-    expect(demoRunningTier).toMatchObject({ name: 'LSU Running', price_cents: 1999, currency: 'EUR', billing_interval: 'month', sports: ['Run'] })
-    expect(demoTier.name).toBe('LSU Running + Strength')
+    expect(demoRunningTier).toMatchObject({ name: 'LSU RUN', price_cents: 1999, currency: 'EUR', billing_interval: 'month', sports: ['Run'] })
+    expect(demoTier.name).toBe('LSU SOUL')
     const plan = demoRunningPlan()
     expect(plan.weeks).toHaveLength(8)
     for (const week of plan.weeks) {

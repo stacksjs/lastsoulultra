@@ -31,7 +31,7 @@ Then open the training app's [store](https://training.lsu.stacksjs.com/store). N
 
 ## 3. Review an enrolled athlete
 
-Use Alex or Jamie. Both accounts use the same Run + Strength tier with complimentary review access (see [Plans and subscriptions](/training/plans)). Open Workouts, inspect a completed session and a future session, then check Progress and The method. Each enrolled athlete starts with 48 sessions: 32 running and 16 strength, with 21 sessions completed at setup. Each also has 21 days of sample health metrics. The sample dates include recent history and upcoming sessions. Counts can change as reviewers complete or edit training.
+Use Alex or Jamie. Both accounts use the same LSU SOUL tier with complimentary review access (see [Plans and subscriptions](/training/plans)). Open Workouts, inspect a completed session and a future session, then check Progress and The method. Each enrolled athlete starts with 48 sessions: 32 running and 16 strength, with 21 sessions completed at setup. Each also has 21 days of sample health metrics. The sample dates include recent history and upcoming sessions. Counts can change as reviewers complete or edit training.
 
 Open a **Strength A** or **Strength B** session. Inspect its illustrated exercises, blocks and sets, and try ticking off a set. Compare it with a running session and its timed steps. The two disciplines belong to the same plan.
 
@@ -41,7 +41,7 @@ Open Health and Messages to inspect any supplied sample records. Avoid connectin
 
 Open the [Style Guide](/style-guide/) to review the typefaces, colors and interface specimens alongside the workout figures.
 
-If you have the iPhone app, sign in there as Alex too. Check the five tabs, then open **Me** → **Coaching accounts** and confirm that **LSU Running + Strength** is listed. Its screen holds **Training feedback**, **Training progress** and **Your methods**.
+If you have the iPhone app, sign in there as Alex too. Check the five tabs, then open **Me** → **Coaching accounts** and confirm that **LSU SOUL** is listed. Its screen holds **Training feedback**, **Training progress** and **Your methods**.
 
 ## 4. Review the coach
 

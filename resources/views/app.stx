@@ -274,7 +274,7 @@ const appOnWeb = moduleHref('calendar', coachingOrigin())
       </details>
       <details>
         <summary>What does it cost?</summary>
-        <p>LSU Running is €19.99 a month and LSU Running + Strength is €39.99 a month, tax included. Subscribe in the app or on the <a href="/coaching#training">coaching page</a>, and cancel or resume from the Me tab.</p>
+        <p>LSU RUN is €19.99 a month and LSU SOUL is €39.99 a month, tax included. Subscribe in the app or on the <a href="/coaching#training">coaching page</a>, and cancel or resume from the Me tab.</p>
       </details>
       <details>
         <summary>How often does my training change?</summary>
