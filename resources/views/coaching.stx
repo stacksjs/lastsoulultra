@@ -17,7 +17,7 @@ import { coachingOrigin, loadBrand } from '~/resources/functions/coaching-source
    and no reason to load a remote script to frame a 404. */
 const hubBrand = await loadBrand()
 const hubLive = (hubBrand?.modules.length ?? 0) > 0
-const currentPage = { title: 'Coaching - Last Soul Ultra', description: 'Training from a coach\'s method, two weeks at a time. How your sessions went shapes the next block, and an LSU coach approves every one.', styles: coachingHubStyles, ...(hubLive ? { preconnect: [coachingOrigin()] } : {}) }
+const currentPage = { title: 'Coaching - Last Soul Ultra', description: 'Training from a coach\'s method, a week at a time. How your sessions went shapes the next block, and an LSU coach approves every one.', styles: coachingHubStyles, ...(hubLive ? { preconnect: [coachingOrigin()] } : {}) }
 const canonicalPath = '/coaching'
 const hubTraining = moduleHref('calendar', coachingOrigin())
 </script>
@@ -36,7 +36,7 @@ const hubReturn = memo(() => Boolean(publicCheckoutReceipt(hubSearch.get('hq_ord
   <div class="coaching-hero-copy">
     <span class="kicker">Last Soul Ultra / Coaching</span>
     <h1>Say how it went.<br><span class="accent">The next block follows.</span></h1>
-    <p>Log each session and say how it felt. Your next two weeks are drafted from it, inside a coach's method, and an LSU coach approves them.</p>
+    <p>Log each session and say how it felt. Your next week is drafted from it, inside a coach's method, and an LSU coach approves it.</p>
     @if(hubLive)
     <a class="btn btn-lg" href="#training">Open the portal</a>
     @else
@@ -52,12 +52,12 @@ const hubReturn = memo(() => Boolean(publicCheckoutReceipt(hubSearch.get('hq_ord
   <section id="how">
     <div class="coaching-head">
       <h2 class="h2-sm">A plan that listens.<br><span class="accent">Not one you print.</span></h2>
-      <p>A finished twelve-week plan is done the day you buy it. This one is written two weeks at a time, from how the last two went.</p>
+      <p>A finished twelve-week plan is done the day you buy it. This one is written a week at a time, from how the last one went.</p>
     </div>
     <div class="coaching-loop">
       <article>
         <h3>Train</h3>
-        <p>You get two weeks of sessions from a coach's method. Not a generic block for everyone.</p>
+        <p>You get a week of sessions from a coach's method. Not a generic block for everyone.</p>
       </article>
       <article>
         <h3>Log</h3>
@@ -65,7 +65,7 @@ const hubReturn = memo(() => Boolean(publicCheckoutReceipt(hubSearch.get('hq_ord
       </article>
       <article>
         <h3>Adapt</h3>
-        <p>Your next two weeks are drafted from how the last two went, inside the method's rules. An LSU coach reads the draft, changes what they want and approves it.</p>
+        <p>Your next week is drafted from how the last one went, inside the method's rules. An LSU coach reads the draft, changes what they want and approves it.</p>
       </article>
     </div>
   </section>
