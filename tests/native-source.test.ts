@@ -79,10 +79,10 @@ it('packages LSU’s brand and approved coaching tiers as the installation’s o
   expect(installationPresets()).toBe(presets)
   expect(presets.organization).toBe(product.identity.slug)
   expect(presets.name).toBe(product.identity.name)
-  // Approved 2026-10-28: EUR 19.99 running, EUR 29.99 running plus strength, no personal coaching or trial.
+  // EUR 19.99 running (approved 2026-10-28) and EUR 39.99 running plus strength (the coach's price, taken 2026-11-14), no personal coaching or trial.
   expect(presets.products.map(item => [item.key, item.price_cents, item.currency, item.billing_interval, item.includes_coaching, item.allowed_training_sports])).toEqual([
     ['lsu-running', 1999, 'EUR', 'month', false, ['Run']],
-    ['lsu-running-strength', 2999, 'EUR', 'month', false, ['Run', 'Strength']],
+    ['lsu-running-strength', 3999, 'EUR', 'month', false, ['Run', 'Strength']],
   ])
   // Both tiers assign training a week at a time, as the coaching design draws it: the next week is drafted
   // once the runner has sent their feedback on this one, and a coach approves every block.

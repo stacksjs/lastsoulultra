@@ -1,5 +1,5 @@
 /** Fictional, complimentary review access. This is not an approved training prescription. */
-export const demoTier = { name: 'LSU Running + Strength', price_cents: 2999, currency: 'EUR', billing_interval: 'month', sports: ['Run', 'Strength'] } as const
+export const demoTier = { name: 'LSU Running + Strength', price_cents: 3999, currency: 'EUR', billing_interval: 'month', sports: ['Run', 'Strength'] } as const
 
 /** The running tier beside it, at LSU's running price: the same eight weeks without the strength sessions. */
 export const demoRunningTier = { name: 'LSU Running', price_cents: 1999, currency: 'EUR', billing_interval: 'month', sports: ['Run'] } as const

@@ -45,7 +45,7 @@ HQ's own server no longer knows the LSU app at all.
 
 ## Enterprise onboarding decisions
 
-Chris approved German and English, EUR 19.99/month for running and EUR 29.99/month for running plus strength on 2026-10-28. Brand experience offers draft product presets linking to the coach’s existing Store editor; each coach still supplies a real plan and method before publication. No trial is added by the presets. Standalone training plans can be sold in the same branded catalog; their paid enrollments appear in the branded library and calendar, with branded returns and ownership checks. They do not grant recurring voice/adaptation access.
+Chris approved German and English, EUR 19.99/month for running and EUR 29.99/month for running plus strength on 2026-10-28. On 2026-11-14 he took the coach's price for the second tier: EUR 39.99/month for running plus strength, mobility and meditation (SOUL), the same price the catalog's SOUL packages sell at. Brand experience offers draft product presets linking to the coach’s existing Store editor; each coach still supplies a real plan and method before publication. No trial is added by the presets. Standalone training plans can be sold in the same branded catalog; their paid enrollments appear in the branded library and calendar, with branded returns and ownership checks. They do not grant recurring voice/adaptation access.
 
 Translations in `settings.translations.en` and `.de` supply headlines, descriptions and navigation labels. The browser and native controller send the account/interface language; `?locale=de` is also supported by the public API. `build:white-label --language=de` localizes packaged tab captions. Legal text remains the organization’s supplied content. Private revenue percentages and contributor shares are omitted from the public catalog.
 
@@ -167,10 +167,10 @@ Adopted on 2026-11-13, with HQ platform kit 1.0.4295 or later:
 
 Built in the kit and waiting on a decision, so switched off here:
 
-- **RUN 19,99 and SOUL 39,99, terms of 3, 6 or 12 months, first month free.**
-  The draft's own note says the conditions are still to be settled with Kim,
-  and the tiers approved on 2026-10-28 are EUR 19.99 and EUR 29.99 with no
-  trial and no term. HQ can now do all of it: a tier has an optional free
+- **Terms of 3, 6 or 12 months, first month free.** The prices are in: RUN
+  19,99 and SOUL 39,99 since 2026-11-14. The draft's own note says the
+  conditions are still to be settled with Kim, so the tiers sell monthly with
+  no trial and no term. HQ can now do all of it: a tier has an optional free
   trial (`trial_days`) and an optional minimum term of 1 to 24 months
   (`minimum_term_months`, monthly billing only). A runner who cancels inside
   the term keeps paying and keeps access until it ends, a cancellation in

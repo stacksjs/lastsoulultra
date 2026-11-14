@@ -48,6 +48,6 @@
   "sign_in": { "hq": false, "account": { "name": "LSU" } },
   "products": [
     { "key": "lsu-running", "name": "LSU Running", "description": "Running workouts assigned by LSU coaches.", "price_cents": 1999, "currency": "EUR", "type": "coaching", "billing_interval": "month", "includes_coaching": false, "allowed_training_sports": ["Run"], "training_blocks": { "length_days": 7, "review": "coach", "wait_for": "feedback" } },
-    { "key": "lsu-running-strength", "name": "LSU Running + Strength", "description": "Running and strength workouts assigned by LSU coaches.", "price_cents": 2999, "currency": "EUR", "type": "coaching", "billing_interval": "month", "includes_coaching": false, "allowed_training_sports": ["Run", "Strength"], "training_blocks": { "length_days": 7, "review": "coach", "wait_for": "feedback" } }
+    { "key": "lsu-running-strength", "name": "LSU Running + Strength", "description": "Running, strength, mobility and meditation sessions assigned by LSU coaches.", "price_cents": 3999, "currency": "EUR", "type": "coaching", "billing_interval": "month", "includes_coaching": false, "allowed_training_sports": ["Run", "Strength"], "training_blocks": { "length_days": 7, "review": "coach", "wait_for": "feedback" } }
   ]
 }
