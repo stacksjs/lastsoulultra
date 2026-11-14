@@ -1,17 +1,9 @@
-# Public Files
+# Static website assets
 
-Any files in this folder will be served as static files by the web server.
+Files here are served at the website root. For example, `public/assets/lsu/images/lsu-logo.svg` is available as `/assets/lsu/images/lsu-logo.svg`. The private preview gate applies at the deployment gateway; it does not turn this directory into per-user private storage.
 
-In other words, if you put a file in this folder, you can access it at `<https://$APP_URL/your-file-name>`.
+`assets/lsu/` contains the self-hosted race imagery, logos and fonts. Preserve the provenance and hashes in `asset-integrity.json` when changing captured brand assets. Generated style assets are produced by `bun run build:assets`; commit their output with source changes.
 
-Tip: when starting a Stacks project that utilizes media (images, videos, or audio), you will want to separate them into their respective public folders.
+`bun scripts/seo.ts` writes the site's sitemap and robots files. Use `SITE_ORIGIN` when generating for a different canonical origin. The documentation has a separate `docs/public/` asset directory, mounted under `/docs` by BunPress.
 
-## In Practice
-
-Let's say you want to overwrite the default `robots.txt` file. You can do this by putting a file named `robots.txt` in this folder.
-
-If you want to overwrite the default `favicon.ico` file, you can do this by putting a file named `favicon.ico` in this folder.
-
-## Security
-
-If you want to make sure that a file is not publicly accessible, you can put it in the `storage/private` folder. This folder is not accessible by the web server.
+Do not place passwords, private account data or authenticated uploads here. Training uploads belong to the training installation's private storage and authorized serving routes. See [enterprise storage](../enterprise/README.md).

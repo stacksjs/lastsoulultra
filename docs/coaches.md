@@ -1,34 +1,54 @@
 ---
 title: Coach guide
-description: Review coaching methods, exercises, offers, training plans and subscriber training.
+description: Maintain methods, review weekly training blocks and understand publication and subscriber access.
 ---
 
 # Coach guide
 
 ## Enter the coach workspace
 
-Open the [coach workspace](https://lsu.stacksjs.com/coach) and sign in with a coach account. Choose the coach workspace from the account menu if needed. In the iPhone app, open **Me** → **Coaching workspace**. A coach's access is separate from organization administration; method authors do not automatically manage every LSU setting.
+Open the [coach workspace](https://lsu.stacksjs.com/coach) and sign in with your LSU coach account. In the iPhone app, use **Me** → **Coaching workspace** when offered. A coach profile and an organization role are separate capabilities: authoring a method does not automatically grant every LSU management permission.
 
-Use [Exercise library](https://lsu.stacksjs.com/coach/exercises) to inspect built-in and custom exercises. The guide's [complete exercise index](/training/exercise-library) and [illustration catalog](/style-guide/illustrations) provide a shared reference. Open [Subscriber training](https://lsu.stacksjs.com/coach/subscribers) to review the training your account has access to.
+The [exercise workspace](https://lsu.stacksjs.com/coach/exercises) holds built-in and custom exercises. The guide's [exercise index](/training/exercise-library) and [illustration catalog](/style-guide/illustrations) explain the supplied names and figures. [Subscriber training](https://lsu.stacksjs.com/coach/subscribers) shows the training your account is authorized to review.
 
 ## Maintain a method
 
-Open the coaching methods area. Give the method a clear name and a useful public summary. Keep the private instructions precise about training structure, permitted adaptations and the information needed from a runner. Draft changes before publishing.
+Give the method a clear name and a useful public summary. Keep private instructions specific about structure, permitted changes and the information a runner should supply. A public summary explains the approach without exposing the private instructions.
 
-Runners' feedback is answered by AI working inside your method. LSU provides the AI for every coach and runner, so there is no key to add and nothing to buy.
+For example, a summary might say, "A twelve-week running plan with weekly feedback and coach-reviewed training blocks." The private instructions can define how the next block should account for completed sessions and availability. Keep demonstration methods labelled as fictional rather than publishing them as approved LSU methodology.
 
-A method is the author's approach, not a promise that every runner receives the same week. Do not present demonstration instructions as an approved LSU coach's method.
+LSU supplies the configured AI service. Its general assistant is limited to insights; it does not automatically rewrite workouts. Availability and budget can still affect whether a method can answer feedback.
 
 ## Prepare training and offers
 
-Create or review the training plan that supplies sessions. An LSU owner or administrator connects the eligible plan, product and published method into an offer. Price, currency, billing interval and included services belong to that offer. See [Administration](/administration).
+A training plan supplies the session template. A method supplies the approach. A product supplies the commercial terms. An owner or administrator connects eligible records into a published offer. These are related records rather than interchangeable names.
 
-A coach can also sell a training plan on its own, as a one-off product in the store with no method behind it. The six demo plans under Pawel Dregan's coach profile are examples; see [Plans and subscriptions](/training/plans#demo-plans-in-the-store).
+The current catalog contains thirty twelve-week plans, with four initial packages declared for sale. RUN includes running; SOUL also includes supporting sessions. Their release settings require seven-day blocks, feedback and coach review. [Plans and subscriptions](/training/plans) explains the catalog and the older demo records.
 
-## Review subscriber training
+A coach can also publish a standalone one-off plan under its own terms. That does not automatically include a continuing subscription or method-feedback service.
 
-Use the subscriber training view. A self-coaching subscription does not automatically create a one-to-one coach assignment. Access is checked against your organization membership, role and the method or subscriber concerned.
+## Review and release a training block
+
+Open [Block reviews](https://training.lsu.stacksjs.com/coaches/block-reviews) in the coach workspace:
+
+1. Choose a block waiting for review and confirm the athlete, package and dates.
+2. Read recorded results and the runner's feedback beside the proposed sessions.
+3. Edit the draft where needed, then save. Saved drafts remain private to review.
+4. Choose **Approve** to put approved sessions on the subscriber's calendar, or request changes for another draft.
+5. Reopen the subscriber's training to confirm the expected dates and sessions.
+
+For example, a runner completes most of a week but reports that next Saturday is unavailable. Review the next draft with that constraint in mind. The message alone does not approve a change, and the AI reply is not permission to release the block.
+
+The next block can wait for end-of-block feedback. Feedback starts counting two days before the current block ends. Earlier conversation messages remain useful context but do not satisfy the gate. Already elapsed days are left out when a late approval releases sessions, so inspect the date range before approving.
+
+If another reviewer updates the draft, reload the current revision before saving or approving. Avoid approving a stale copy from an old tab.
+
+## Review subscriber access
+
+A self-coaching subscription does not automatically establish a personal one-to-one coach assignment. The server checks organization membership, role and the method or subscriber involved. A coach title alone is not permission to read every private health record or conversation.
+
+The fictional Alex and Jamie demonstration calendars already contain eight weeks of sample sessions. Use them to inspect workout controls. Use a dedicated catalog enrollment to verify weekly drafting, feedback and approval from beginning to end.
 
 ## Verify publication
 
-Check the published offer as a visitor, then sign in as a subscriber and confirm that the expected method and sessions appear. Keep private methodology out of the public summary.
+Inspect the published offer as a visitor. Then sign into the intended subscriber account and confirm its method, release status and approved sessions. If an offer disappears, check its method, author membership, product status and plan against [Administration](/administration#manage-offers-and-methods).

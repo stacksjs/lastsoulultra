@@ -29,7 +29,7 @@ Three steps, in order:
 | Review completed training | [Progress](/training/progress) |
 | Review health summaries and connected sources | [Health](/training/health) |
 | Read account conversations | [Messages](/training/messages) |
-| Sign in with an HQ account, sign out or manage billing | [Your account](/my-account) |
+| Sign into LSU, switch accounts or manage billing | [Your account](/my-account) |
 | Understand who can see what | [Privacy and account boundaries](/privacy) |
 | Review LSU typefaces, colors and interface examples | [Style Guide](/style-guide/) |
 | Review every supplied workout figure | [Illustrations and SVG animations](/style-guide/illustrations) |
@@ -40,6 +40,6 @@ Three steps, in order:
 
 ## How training fits together
 
-A coach writes a method and publishes a tier. A runner joins that tier and receives its sessions. The runner records training and sends feedback. Where adaptive coaching is available, AI proposes changes inside the method's rules. A subscription does not promise a personal coach or human review of every message.
+A coach writes a method and publishes a tier. A runner joins that tier and receives its sessions. The runner records training and sends feedback. Current catalog packages release training in seven-day blocks: the runner sends end-of-block feedback and an LSU coach reviews the next block before it reaches the calendar. The AI assistant explains training data; it does not automatically rewrite workouts. Coach review of a block does not promise personal one-to-one coaching or a human response to every message.
 
-The available tiers and sections of the app depend on what LSU has published. Your private training, health and messages require an account.
+The available tiers and sections depend on what LSU has published. Your private training, health and messages require an LSU account. The older fictional demo plan has a populated eight-week calendar; it is distinct from the current twelve-week catalog and its weekly release. [Plans and subscriptions](/training/plans) explains both with examples.

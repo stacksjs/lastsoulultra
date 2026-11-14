@@ -1,28 +1,19 @@
-# The Config Folder
+# Application configuration
 
-This `config` folder contains your Stacks configuration files. Each file comes with its descriptions, allowing you to easily and progressively learn at your own pace.
+These typed files configure the LSU website and its deployment. Read each file's comments and the relevant framework skill before changing an option.
 
-_No worries, it may look intimidating, but configuring is easy due to its fully-typed nature._
+| File | LSU responsibility |
+| --- | --- |
+| [`coaching.ts`](coaching.ts) | Independent training origin and published brand slug |
+| [`server.ts`](server.ts) | Website headers, proxies and redirects to private training screens |
+| [`docs.ts`](docs.ts) | Guide navigation, LSU theme and `/docs` build mount |
+| [`style-guide.ts`](style-guide.ts) | Source-derived component reference and brand tokens |
+| [`cloud.ts`](cloud.ts) | Dedicated host, website/docs services, preview gate and backups |
+| [`training-cloud.ts`](training-cloud.ts) | Training web/API runtime isolation, migrations, workers and credentials |
+| [`database.ts`](database.ts) | Website database settings, separate from the training database |
 
-> [!NOTE]
-> You may not need all these config files. For example, if you are not interacting with any database, you can safely delete the `database.ts` config file.
+For example, changing `HQ_ORIGIN` changes where the website reads the public brand and sends training links. It does not retarget an already packaged native app; that origin belongs to [`native/product.json`](../native/product.json).
 
-## Contributing
+Keep actual secrets in the private environment or encrypted `.env.production`, not in these configuration files. Use `./buddy env:set KEY --stdin --file .env.production` for encrypted values. Config modules can load before Buddy switches environment, so follow the existing runtime secret-resolution pattern in `training-cloud.ts` when adding deployment credentials.
 
-Please review the [Contributing Guide](https://github.com/stacksjs/contributing) for details.
-
-## Community
-
-For help, discussion about best practices, or any other conversation that would benefit from being searchable:
-
-[Discussions on GitHub](https://github.com/stacksjs/stacks/discussions)
-
-For casual chit-chat with others using this package:
-
-[Join the Stacks Discord Server](https://stacksjs.com/discord)
-
-## License
-
-The MIT License (MIT). Please see [LICENSE](../LICENSE.md) for more information.
-
-Made with 💙
+See [setup and verification](../README.md) and [enterprise operations](../enterprise/README.md).

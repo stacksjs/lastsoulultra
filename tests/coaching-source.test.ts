@@ -169,3 +169,14 @@ describe('refreshing the brand without making anyone wait', () => {
   })
 })
 
+
+describe('training origin validation', () => {
+  it('allows HTTPS and local HTTP, while refusing other protocols and embedded credentials', async () => {
+    const { coachingOrigin } = await import('../resources/functions/coaching-source')
+    expect(coachingOrigin('https://training.example.test/path')).toBe('https://training.example.test')
+    expect(coachingOrigin('http://localhost:3250')).toBe('http://localhost:3250')
+    expect(coachingOrigin('http://[::1]:3250')).toBe('http://[::1]:3250')
+    for (const origin of ['http://training.example.test', 'ftp://localhost', 'file://localhost/tmp', 'https://user:secret@training.example.test'])
+      expect(() => coachingOrigin(origin)).toThrow()
+  })
+})

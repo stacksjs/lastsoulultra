@@ -1,36 +1,46 @@
 ---
 title: Your account and access
-description: Understand preview access, training sign-in, linking an HQ account, subscription controls and demo accounts.
+description: Understand LSU sign-in, account settings, race accounts, subscription controls and role switching.
 ---
 
 # Your account and access
 
-## Two sign-ins in the preview
+## Keep the accounts separate
 
-The browser's preview password unlocks the race site and this guide. Your training account is separate: you sign into it with your email and password or with **Continue with HQ** (the website asks for your email first and offers HQ when the address is an HQ account), or with Apple in the iPhone app. Passing the preview gate does not sign you into an athlete, coach or administrator account. See [Getting started](/getting-started#sign-in) for each sign-in method.
+The shared preview password opens the race site and this guide. Your LSU training email and password open the training website and app. The race-entry Profile uses a third, separate account service. None of these sign-ins automatically authenticates the others.
 
-## Signing in with an HQ account
-
-**Continue with HQ** links your Last Soul Ultra account to an HQ account you already have. HQ asks what to share: your name and email, profile details such as photo and height, units and time zone, training zones, connected devices, and your workouts, plan and health metrics. Health data is shared only if you tick it. Your training history comes across once you approve it on HQ.
-
-The account here remains Last Soul Ultra's own record. It keeps a copy of what you shared and picks up later changes. You can stop sharing in **Settings** here or in HQ's settings; what was already copied stays with your account until you delete it. The [training privacy policy](https://training.lsu.stacksjs.com/legal/lsu/privacy) describes this in full.
+LSU currently disables **Continue with HQ**. Use your LSU account even if you already use HQ. Matching email addresses do not establish a linked account or import history.
 
 ## Your profile
 
-On the website, the **Me** section of [Coaching](https://lsu.stacksjs.com/coaching/account) covers billing and renewal for your subscription and the fitness-sharing preference offered with an active enrollment. It does not contain every profile setting; those are in **Settings** on [training.lsu.stacksjs.com](https://training.lsu.stacksjs.com/settings). Calendar dates follow the time zone stored on your account.
+Open **Me** in the app, or [Settings](https://training.lsu.stacksjs.com/settings) on the training website. Review your name, units and time zone before checking scheduled dates. A session close to midnight can appear on a different date in another time zone.
 
-In the iPhone app, the **Me** tab holds your profile, your devices, sharing and **Settings**. Your subscription is one row down: choose **Coaching accounts** (**Coaching-Konten** in German), then the subscription, for its status, renewal and billing actions. An owner, administrator or manager also sees **Manage Last Soul Ultra** there, and a coach sees **Coaching workspace**.
+Your subscription has its own screen. Open **Me** → **Coaching accounts**, then choose the subscription, or use [billing and renewal](https://lsu.stacksjs.com/coaching/account). That screen contains subscription status and available billing actions. It is different from the general profile settings.
+
+For example, changing your time zone is a profile change. Stopping SOUL's next renewal is a subscription action.
+
+## Signing in with an HQ account
+
+HQ sign-in is disabled in this installation. The shared training software supports account linking in other configurations, but LSU does not currently offer that workflow. Existing imported records, if an account already has them, remain separate from permission to import new data.
+
+An administrator account created by deployment initially has no usable password. An operator must provision its LSU password before it can sign in; being listed as an administrator does not bypass authentication.
 
 ## Switch roles safely
 
-Use the account menu's sign-out action, or **Sign out** at the bottom of **Me** in the app, then sign in with the next demo account and reload open training tabs. For a clean review of the embedded screens, use a separate browser profile, or close all private windows before starting another private session. Private windows in the same browser can share a session.
+Use the training account's sign-out action, or **Sign out** at the bottom of **Me** on iPhone. Sign in with the next account and reload other open training tabs before continuing.
 
-A runner should see their own training, a coach should see their coaching workspace, and an administrator should reach the Last Soul Ultra organization workspace.
+For simultaneous reviews, use separate browser profiles. Private windows in the same browser can share one session; close all private windows before starting a fresh private session. Keep the preview credentials available because a fresh browser session may ask for them again.
+
+After switching, check the visible account name. Alex should see Alex's sessions. A coach should reach the authorized coach workspace. An administrator should reach the Last Soul Ultra organization workspace.
 
 ## Subscription and billing
 
-Use the website's [billing and renewal screen](https://lsu.stacksjs.com/coaching/account), or **Me** → **Coaching accounts** in the app, to review the renewal and billing actions offered for your subscription. Read [Plans and subscriptions](/training/plans) before changing renewal.
+Review status, billing interval and the access or renewal date shown on your subscription. Where offered, cancelling renewal stops a later renewal; it does not necessarily end access immediately. Read [Plans and subscriptions](/training/plans#renewal-and-access) before changing it.
+
+Complimentary demo access has no payment-provider subscription to manage. Missing payment or refund controls on such an account do not establish a billing fault.
 
 ## Passwords and support
 
-Keep the shared preview password and your personal password separate. Demo addresses ending in `.test` do not receive email, so do not use email recovery as your only way back into a demo account. Find the current shared demo passwords in the protected [demo walkthrough](/demo#demo-credentials). For help with the training app, use Last Soul Ultra's [contact page](https://www.lastsoulultra.com/contact).
+Use password recovery only with an address that receives mail. Demo addresses ending in `.test` cannot receive a reset email; use the current protected [demo credentials](/demo#demo-credentials).
+
+For a personal account that cannot sign in, report the page and visible error through LSU's [contact page](https://www.lastsoulultra.com/contact). Keep passwords, reset links and session tokens out of the report.

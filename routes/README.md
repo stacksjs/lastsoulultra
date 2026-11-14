@@ -1,28 +1,16 @@
-# The Routes Folder
+# Website API routes
 
-You may use routes to create API endpoints.
+[`api.ts`](api.ts) declares LSU website endpoints. Stacks mounts this file under `/api` through the registry re-exported by [`app/Routes.ts`](../app/Routes.ts).
 
-To learn more about Stacks Routes, check out the [documentation](https://stacksjs.com).
+| Route | Purpose |
+| --- | --- |
+| `GET /api/live` | Normalized, cached race-board snapshot; returns 503 when no usable snapshot exists |
+| `GET /api/events` | Event phases and entry windows, with shaped rows for the website |
+| `GET /api/email/confirm` | Confirms the token from the newsletter double opt-in email |
+| `GET /api/hello` | Starter health/example response |
 
-> **Note**
-> If your project does not require any routes, you can remove this folder._
+For example, `route.get('/live', handler)` in `api.ts` answers `/api/live`, not `/live`. A root-level API route needs an appropriate registry prefix and, if reached through the views server, a matching proxy rule in [`config/server.ts`](../config/server.ts).
 
-## 🚜 Contributing
+The STX files under `resources/views/` provide website pages without adding a route here. Account-only coaching URLs redirect through server configuration to the separate training app. Its authenticated routes belong to the platform kit rather than this website router.
 
-Please review the [Contributing Guide](https://github.com/stacksjs/contributing) for details.
-
-## 🏝 Community
-
-For help, discussion about best practices, or any other conversation that would benefit from being searchable:
-
-[Discussions on GitHub](https://github.com/stacksjs/stacks/discussions)
-
-For casual chit-chat with others using this package:
-
-[Join the Stacks Discord Server](https://stacksjs.com/discord)
-
-## 📄 License
-
-The MIT License (MIT). Please see [LICENSE](../LICENSE.md) for more information.
-
-Made with 💙
+See [the root guide](../README.md#what-runs-where) for the service boundaries and [AGENTS.md](../AGENTS.md) for the relevant routing skills.

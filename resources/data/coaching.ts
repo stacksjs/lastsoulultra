@@ -1,3 +1,5 @@
+import coaching from '../../config/coaching'
+
 /**
  * The coaching modules, in LSU's own words.
  *
@@ -9,10 +11,10 @@
  * all - `enabledModules()` intersects this list with the published brand.
  *
  * `scope` is the part worth keeping straight:
- *   'public'  - readable without an HQ account. The storefront.
- *   'athlete' - needs a signed-in HQ subscriber. Noindex, and said plainly on
+ *   'public'  - readable without a training account. The storefront.
+ *   'athlete' - needs a signed-in LSU subscriber. Noindex, and said plainly on
  *               the page rather than discovered after a click.
- *   'private' - as athlete, and additionally account-scoped inside HQ: the
+ *   'private' - as athlete, and additionally account-scoped inside the training app: the
  *               athlete's own health metrics and messages, which a brand never
  *               sees. LSU must never imply it can read them.
  */
@@ -64,7 +66,7 @@ export const coachingModules: CoachingModule[] = [
     slug: 'progress',
     label: 'Progress',
     title: 'What you have done',
-    summary: 'Sessions given against sessions finished, across every tier you are paying for.',
+    summary: 'Sessions assigned and finished across your active training enrollments.',
     scope: 'athlete',
   },
   {
@@ -118,14 +120,14 @@ export function modulePath(slug: string): string {
  */
 const APP_SCREENS: Record<string, string> = {
   calendar: '/workouts',
-  feedback: '/hq-coach',
-  progress: '/performance',
-  // The subscription and the method behind it. The app's library is a public
-  // page, and this has to be a screen that asks who you are.
-  library: '/coaching',
+  feedback: `/coaching/${encodeURIComponent(coaching.brand)}/feedback`,
+  progress: `/coaching/${encodeURIComponent(coaching.brand)}/progress`,
+  // Keep the subscription context: the general assistant and performance
+  // screens do not submit method feedback or show subscription totals.
+  library: `/coaching/${encodeURIComponent(coaching.brand)}/library`,
   health: '/metrics',
   messages: '/messages',
-  account: '/me',
+  account: `/coaching/${encodeURIComponent(coaching.brand)}/account`,
 }
 
 /** The coach and staff workspaces, which are the training app's own screens too. */

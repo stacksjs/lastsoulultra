@@ -2,9 +2,11 @@
 import { readdir } from 'node:fs/promises'
 import { resolve } from 'node:path'
 import { siteStyleToken } from '../config/style-guide'
+import { documentationLinkAudit } from './audit-doc-links'
 
 /** Check the actual BunPress artifact, including links and private-preview branding. */
 const root = resolve('dist/docs/.bunpress')
+const auditLinks = documentationLinkAudit(root)
 const errors: string[] = []
 let pages = 0
 let brandedPages = 0
@@ -30,20 +32,7 @@ async function scan(directory: string): Promise<void> {
       if (!cssValue('--bp-c-brand-3', siteStyleToken('--lsu-red')).test(html) || !cssValue('--bp-c-bg', siteStyleToken('--lsu-black')).test(html)) errors.push(`${path}: docs palette differs from production`)
       if (!html.includes('href="/docs/favicon.png"') || !html.includes('https://lsu.stacksjs.com/docs/style-guide/lsu-social-card.png')) errors.push(`${path}: missing LSU browser or social identity`)
     }
-    for (const match of html.matchAll(/(?:href|src)="([^"#]+)"/g)) {
-      const href = match[1]
-      if (!href.startsWith('/') || href.startsWith('//')) continue
-      const url = new URL(href, 'https://lsu.stacksjs.com')
-      if (!url.pathname.startsWith('/docs/')) {
-        // A real navigation specimen retains application destinations. Those
-        // links are not docs assets; the BunPress shell must stay mounted.
-        if (specimen && match[0].startsWith('href=')) continue
-        errors.push(`${path}: link escapes docs mount: ${href}`)
-        continue
-      }
-      const local = resolve(root, `.${url.pathname.slice('/docs'.length)}`)
-      if (!await Bun.file(local).exists() && !await Bun.file(resolve(local, 'index.html')).exists()) errors.push(`${path}: missing linked artifact: ${href}`)
-    }
+    for (const error of await auditLinks(path, html, specimen)) errors.push(`${path}: ${error}`)
   }
 }
 await scan(root)
@@ -64,4 +53,4 @@ if (await reviewFile.exists()) {
 }
 
 if (errors.length) throw new Error(errors.join('\n'))
-console.log(`Verified ${pages} LSU docs pages, ${brandedPages} branded BunPress shells, mounted links, production assets and search index.`)
+console.log(`Verified ${pages} LSU docs pages, ${brandedPages} branded BunPress shells, mounted links and heading anchors, production assets and search index.`)

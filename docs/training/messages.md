@@ -11,11 +11,11 @@ Open [Messages](https://lsu.stacksjs.com/coaching/messages) while signed in. In 
 
 ## Messages and feedback have different jobs
 
-Use **Messages** for a conversation with the person named in that conversation. Use [Feedback](/training/feedback) for the method's training conversation and plan adaptation. Sending a message to a contact does not by itself submit feedback to the adaptive method.
+Use **Messages** for a conversation with the person named in that conversation. Use [Feedback](/training/feedback) for the method's training conversation and plan adaptation. Sending a message to a contact does not satisfy the weekly method-feedback requirement. For example, a message to the demo administrator saying that you missed a run stays in that inbox; submit the training explanation in the subscription feedback screen as well if the next block needs it.
 
 ## Demo conversations
 
-Sample conversations identify themselves as demo content. Sign into the corresponding athlete and coach accounts to check each side. Do not include private information in a shared demo conversation.
+Sample conversations identify themselves as demo content. The seeded club conversation belongs to Alex and the general demo administrator. Use those two accounts to review its participants; the separate coach login is not automatically part of that thread. Do not include private information in a shared demo conversation.
 
 ## Missing or stale messages
 

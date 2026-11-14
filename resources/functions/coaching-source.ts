@@ -50,8 +50,11 @@ const inFlight = new Map<string, Promise<CoachingBrand | null>>()
  */
 export function coachingOrigin(value = coaching.origin): string {
   const url = new URL(value)
-  if (url.protocol !== 'https:' && !['localhost', '127.0.0.1'].includes(url.hostname))
-    throw new Error('HQ_ORIGIN must use HTTPS')
+  const localHttp = url.protocol === 'http:' && ['localhost', '127.0.0.1', '[::1]'].includes(url.hostname)
+  if (url.protocol !== 'https:' && !localHttp)
+    throw new Error('HQ_ORIGIN must use HTTPS or loopback HTTP')
+  if (url.username || url.password)
+    throw new Error('HQ_ORIGIN must not contain credentials')
   return url.origin
 }
 

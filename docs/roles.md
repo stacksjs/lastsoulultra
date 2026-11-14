@@ -26,7 +26,7 @@ For the stored relationships behind these distinctions, see the [data model and 
 | Trainer | A training staff member | Training and staff areas their role allows |
 | Member | An LSU organization member | Their own account and member-facing access |
 
-Manager is the role for someone who runs LSU day to day without holding the organization itself or its money. It sits between front desk, which cannot change a schedule, issue a refund or see reports, and administrator, which can do everything an owner can except delete the organization. For LSU specifically the role adds nothing a reviewer will see, because everything it grants over front desk covers point of sale, door access, class scheduling, ranks and payroll, and none of those are among the sections LSU has switched on.
+A manager handles operations without controlling organization settings or payment-account setup. Whether an extra staff tool appears also depends on which features LSU enables. Use the actual workspace and permission response when reviewing a role; a role name alone does not mean every shared-platform feature is available here.
 
 Owner and administrator accounts can manage the LSU **Experience**. The other supplied roles cannot save those settings. Staff access to a particular feature still depends on its permission checks. A trainer's organization role and a coach's authoring profile are separate, even when a person has both.
 
@@ -36,9 +36,9 @@ Sam and Pawel are **LSU organization administrators**. Their access applies to t
 
 ## Installation administrators
 
-Two real people run the organization: Chris Breuer and Pawel Dregan, each with their own account. They are listed in the installation's deployment settings, and every deploy makes each listed address an active administrator of Last Soul Ultra. An account that does not exist yet is created with a verified email and no usable password, so its first sign-in is **Continue with HQ**. See [Administration](/administration#who-runs-the-organization).
+Two real people run the organization: Chris Breuer and Pawel Dregan, each with their own account. They are listed in the installation's deployment settings, and every deploy makes each listed address an active administrator of Last Soul Ultra. An account that does not exist yet is created with a verified email and no usable password. HQ sign-in is disabled here, so an operator must provision its LSU password before the first sign-in. See [Administration](/administration#who-runs-the-organization).
 
-Pawel Dregan's own account is not the `pawel@lsu-demo.test` review login. It also holds a coach profile, and the six demo training plans in the store sit under it. See [Plans and subscriptions](/training/plans#demo-plans-in-the-store).
+Pawel Dregan's own account is not the `pawel@lsu-demo.test` review login. It also holds a coach profile, and the authored catalog and six older demo training plans in the store sit under it. See [Plans and subscriptions](/training/plans#demo-plans-in-the-store).
 
 ## Private review accounts
 

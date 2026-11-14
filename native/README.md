@@ -11,7 +11,7 @@ The launch splash is not a hand-made file: `assets.splash` names the wordmark,
 and `native:prepare` draws it with ts-images' splash preset (the accent's glow
 on LSU's black, iOS @1x/@2x/@3x and Android 12's splash icon per density) into
 ignored `storage/native/splash`. Native builds
-materialize HQ under ignored `storage/native/hq/<commit>`, install its frozen
+copy the installed `@hq/platform` kit source into ignored `storage/native/hq/<commit>`, install its frozen
 `bun.lock`, and supply `HQ_NATIVE_PRODUCT` to HQ's build. Only the declared branding and deployment inputs are overlaid; other source
 changes stop the build.
 The same pinned application source runs LSU's own training backend. Native
@@ -43,6 +43,23 @@ the slug and scheme in `native-product.json` and, from its manifest
 (`HQ_NATIVE_PRODUCT`), the bundle ID and APNs topic. HQ's own server knows no LSU app.
 Android push stays disabled until this package has its own Firebase client.
 HQ's Firebase file and app-link ownership are never inherited by a new app.
+
+## Install the source kit
+
+```sh
+pantry install --frozen-lockfile --ignore-scripts
+bun install --frozen-lockfile
+```
+
+The registry install requires `PANTRY_REGISTRY_TOKEN` with a grant for
+`@hq/platform`. The kit's package, version, revision and Bun must match
+`hq-source.json`. This is a package install, not an SSH checkout of HQ's repo.
+The same kit supplies training component references for the documentation.
+
+LSU disables HQ sign-in in its packaged presets and limits the general AI
+assistant to insights. Training remains LSU's own account data; coaches review
+and release the catalog's weekly blocks. See the [user guide](../docs/index.md)
+for the current behavior rather than assuming every upstream HQ option is on.
 
 ## Releasing
 
@@ -148,3 +165,26 @@ backend and bundled screen before archiving and uploading.
 The pin makes each release reproducible; it deliberately does not float with HQ
 main. After moving it, build both targets, run lint, type checks and tests, and
 review the native screens.
+
+## Sign an Android build
+
+After `bun run native:android` has built the current product inputs, install Android SDK build tools and point `LSU_ANDROID_SIGNING_CONFIG` at a private JSON file:
+
+```json
+{
+  "keystore": "/absolute/private/path/last-soul-ultra.jks",
+  "alias": "last-soul-ultra",
+  "password": "your-private-signing-password"
+}
+```
+
+The example describes the file shape; use the persistent LSU signing identity and keep both the file and keystore outside Git. The signer uses the supplied password for both the keystore and its key. Set `ANDROID_SDK_ROOT` if the SDK is outside its normal user location.
+
+```sh
+export LSU_ANDROID_SIGNING_CONFIG=/absolute/private/path/lsu-android-signing.json
+bun run native:sign-android
+```
+
+The signer checks the source receipt, product hash, package ID, version and build against the current inputs, verifies 16 KB alignment, signs with Android SDK tools and verifies the resulting certificate. A stale build must be rebuilt before signing.
+
+The installable APK and `signing.json` hash receipt are written under ignored `storage/native/release/<version>-<build>/android/`. This command does not publish to Google Play. Android push remains disabled until LSU has its own Firebase configuration.

@@ -1,19 +1,7 @@
-# Image Files
+# Website images
 
-This directory is intended to contain your image files. You can organize them as you wish and may delete this folder if your project does not contain any image files.
+This directory can hold website images served at `/images/<filename>`. LSU's captured production photography and brand images primarily live under `public/assets/lsu/`; consult that existing collection before introducing a duplicate.
 
-## 🏝 Community
+Use useful alternative text for informative images and an empty `alt` for decoration. Preserve source provenance and use the existing asset pipeline for generated variants. After changing a referenced image, run the relevant rendered-page tests and verify the built asset path.
 
-For help, discussion about best practices, or any other conversation that would benefit from being searchable:
-
-[Discussions on GitHub](https://github.com/stacksjs/stacks/discussions)
-
-For casual chit-chat with others using this package:
-
-[Join the Stacks Discord Server](https://stacksjs.com/discord)
-
-## 📄 License
-
-The MIT License (MIT). Please see [LICENSE](https://github.com/stacksjs/stacks/tree/main/LICENSE.md) for more information.
-
-Made with 💙
+Workout figures in the user guide are source-derived training assets. Regenerate them with `bun scripts/sync-workout-art.ts` rather than editing the generated catalog or sampled-pose sheets by hand. See [the style guide](../../docs/style-guide/index.md).

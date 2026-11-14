@@ -1,36 +1,57 @@
 ---
-title: Feedback and plan adaptation
-description: Send training feedback, transcribe a recording and review a proposed plan change.
+title: Feedback and weekly coach review
+description: Send method feedback, review a voice transcript and understand when the next training week is released.
 ---
 
-# Feedback and plan adaptation
+# Feedback and weekly coach review
 
-## Choose the right training context
+## Choose the right conversation
 
-Open [Say how it felt](https://lsu.stacksjs.com/coaching/feedback) on the website. In the iPhone app the same screen is called **Training feedback**: open **Me** → **Coaching accounts**, choose your subscription, then **Training feedback**. Select the tier or subscription you are discussing when more than one is available.
+Open [Say how it felt](https://lsu.stacksjs.com/coaching/feedback). On iPhone, open **Me** → **Coaching accounts**, choose the subscription, then **Training feedback**, when that section is enabled. Select the subscription you mean if more than one is available.
 
-## Send text feedback
+This conversation is attached to your training method. The general AI assistant provides insights, and [Messages](/training/messages) is a participant inbox. Neither is a substitute for submitting the method feedback your weekly package requires.
 
-Describe the session and the reason for an adjustment: how the effort felt, whether recovery was difficult, or which days are no longer available. Review your message before sending it. Keep it specific enough for the method to distinguish a missed workout from a changed weekly schedule.
+## Write useful feedback
 
-## Record voice feedback
+Include what you completed, how it felt, recovery and any change to your available days. Describe what actually happened rather than reporting the planned session as completed.
 
-Choose **Record voice feedback** and allow microphone access when you are asked. The browser asks on the website. On iPhone, iOS asks once, and you can change the answer later in iOS Settings. Stop recording, then select **Transcribe recording**. Wait for the transcript, read and correct it, then select **Send feedback**. Recording, transcription and sending are separate actions. You can also upload an audio file where the upload control is available.
+For example:
 
-The enrolled Alex and Jamie demo accounts support both AI feedback and voice transcription. Other supplied accounts do not gain method feedback just from their staff role.
+> I finished Tuesday's intervals and Thursday's easy run. Saturday's long run felt harder than usual, and I stopped after 70 minutes. Next week I can train Tuesday, Thursday and Sunday, but not Saturday. Please take that into account for the next week.
 
-A recording can be up to five minutes long. Transcription runs on Last Soul Ultra's own speech service. Raw audio is processed temporarily and removed after transcription. The private transcript receipt expires after 24 hours; text you choose to send becomes part of the feedback conversation.
+Review your text and choose **Send feedback**. A staff title alone does not grant access to a subscriber's method conversation. The enrolled Alex and Jamie demonstration accounts can review this flow.
 
-If recording is unavailable, use text feedback. A denied microphone permission, unsupported browser or unavailable transcription service can prevent the voice path without preventing text entry.
+## Record or upload a voice note
 
-## Review the response
+1. Choose **Record voice feedback** and grant microphone access when asked.
+2. Stop recording, then choose **Transcribe recording**.
+3. Read the transcript and correct names, dates, durations or misunderstood words.
+4. Choose **Send feedback** to submit the corrected text.
 
-Replies come from AI working inside the coach's method, which LSU provides. If the AI is unavailable, the feedback screen says the method cannot answer yet and **Send feedback** stays off; message your coach in the meantime.
+Where available, **Upload voice feedback** accepts an audio file instead. The limit is five minutes or 12 MiB. Recording, transcription and sending are separate actions: a transcript on screen has not yet been sent to your method.
 
-AI interprets feedback inside the coach's method. This is not a private session with a human coach, and a voice message does not imply that someone listened to the recording. The method answers with the change it made and the reason for it. There is no approval step: the change is already in your plan when you read the reply. Check the affected future sessions in [Workouts](/training/workouts).
+Uploaded and recorded audio uses LSU's private speech service. Raw recordings are temporary processing files; private transcript receipts expire after 24 hours. Text you send remains part of the conversation. A separate browser **Dictate feedback** control, if shown, uses the browser's speech service rather than this upload pipeline.
 
-A change the method applies can be reversed. Open the feedback conversation and choose **Undo this change** on the reply that proposed it; the sessions it moved go back to how they were.
+If the microphone is unavailable, type your feedback. An audio service failure does not by itself prevent text entry.
 
-## When something fails
+## Send the weekly check-in at the right time
 
-Keep the text you intended to send. Check whether a reply or proposal already appeared before retrying. If transcription reports that the service is busy, keep the recording and retry; a successful upload reuses its transcript rather than transcribing twice. Service availability can affect transcription and adaptation; see [Troubleshooting](/troubleshooting#feedback-sends-but-no-reply-arrives).
+Current catalog packages release training in seven-day blocks. The qualifying feedback window opens two days before the block ends. Use the prompt and dates shown for your subscription.
+
+If your block ends on Sunday, Friday's feedback can start preparation of the next block. A message on Tuesday is useful context, but does not count as the end-of-block check-in. A second message does not create a second training week.
+
+After qualifying feedback is recorded, the next block is prepared for coach review. It remains off your calendar until an LSU coach approves it. A reply from the AI is not that approval.
+
+## Understand the reply
+
+LSU configures its general assistant for insights: it explains data and training in the method's context. It does not build or automatically change your workouts. Coaches review and assign the next training block.
+
+The shared software supports automatic adaptations in other configurations. Instructions to expect an immediate calendar rewrite or **Undo this change** do not describe LSU's current setup.
+
+If AI is unavailable, the method screen can disable sending and show an availability message. A successful transcription does not prove that the feedback service is available. Keep your text and report the problem instead of repeatedly submitting it.
+
+## When the next week is missing
+
+Check that you sent feedback for the correct subscription during its qualifying window. Then check whether the next block is waiting for coach review. Refresh once after approval is confirmed. Do not buy the package again or duplicate your feedback to force a release.
+
+For a failure report, include the time, subscription and visible status, keeping personal information out of shared screenshots. See [Troubleshooting](/troubleshooting#feedback-sends-but-no-reply-arrives).

@@ -1,44 +1,21 @@
-# The Database Folder
+# Website database
 
-The database directory is where you would store your custom migrations and seeds.
+This directory holds the website's migrations and local database files. It is separate from the training installation's PostgreSQL database, `lsu_training`. Training schema and seed behavior come from the pinned platform kit; see [enterprise deployment](../enterprise/README.md).
 
-> [!TIP]
-> You may not need the database folder at all. Defining your models may be enough for your use case. Read more.
+## Apply and generate migrations
 
-## Get Started
+From the repository root:
 
-The following command will bootstrap a new migration file in the `database/migrations` directory:
-
-```bash
-# automated migrations
-buddy migrate
+```sh
+./buddy generate:migrations
+./buddy migrate --diff
+./buddy migrate
 ```
 
-```bash
-# automated seeds
-buddy seed
-```
+`generate:migrations` compares models with the configured database and writes migration SQL. Review that SQL first. `migrate --diff` previews the pending SQL; `migrate` applies it. Running `migrate` does not scaffold a new migration file.
 
-In case you need more seeding customization, you can create a `./database/seeder.ts` which, if found, is triggered instead.
+Describe application schema in `app/Models/` with `defineModel()`. Read the repository's model and migration skills before changing it. A manual migration can be scaffolded with `./buddy make:migration <name>` when needed.
 
-Click here to learn more.
+`./buddy seed` runs the configured seed workflow. Check the active database and environment before migrating or seeding. Database files are machine-local state and are not an exchange format for production training records.
 
-## 🚜 Contributing
-
-Please review the [Contributing Guide](https://github.com/stacksjs/contributing) for details.
-
-## 🏝 Community
-
-For help, discussion about best practices, or any other conversation that would benefit from being searchable:
-
-[Discussions on GitHub](https://github.com/stacksjs/stacks/discussions)
-
-For casual chit-chat with others using this package:
-
-[Join the Stacks Discord Server](https://stacksjs.com/discord)
-
-## 📄 License
-
-The MIT License (MIT). Please see [LICENSE](../../LICENSE.md) for more information.
-
-Made with 💙
+See [project conventions](../AGENTS.md) and [local verification](../README.md#verify-changes).

@@ -31,7 +31,17 @@ describe('pages that need an account', () => {
 
   test('are linked at the app, so no link on the site leads to a page it does not serve', () => {
     expect(moduleHref('calendar', origin)).toBe(`${origin}/workouts`)
-    expect(moduleHref('account', `${origin}/`)).toBe(`${origin}/me`)
+    expect(moduleHref('account', `${origin}/`)).toBe(`${origin}/coaching/${coaching.brand}/account`)
     expect(Object.keys(accountOnlyRedirects(origin))).toHaveLength(11)
+  })
+})
+
+describe('subscription destinations', () => {
+  test('opens method feedback and subscription summaries instead of the general assistant and analytics', () => {
+    for (const section of ['feedback', 'progress', 'library', 'account']) {
+      const expected = `${origin}/coaching/${coaching.brand}/${section}`
+      expect(moduleHref(section, origin)).toBe(expected)
+      expect(accountOnlyRedirects(origin)[modulePath(section)]).toEqual({ to: expected, status: 302, preserveQuery: false })
+    }
   })
 })

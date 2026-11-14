@@ -1,28 +1,9 @@
-# The Language Folder
+# Website translations
 
-This folder contains the language files for your application. If you are building an internationalized application, you should populate this directory with the appropriate language files.
+This directory holds application translation resources for the Stacks website. The independently packaged training application has its own language files in the platform kit; editing a website translation here does not change its native app screens.
 
-To learn more about Stacks Internationalization, check out the [documentation](https://stacksjs.com).
+Keep visible labels consistent with the page and account flow they describe. The user guide identifies English and German app destinations where the wording differs, such as **Me** / **Ich** and **Training progress** / **Fortschritt**.
 
-> **Note**
-> If your project does not require any routes, you can remove this folder._
+Before adding locale behavior, read `storage/framework/defaults/ai/skills/stacks-i18n/SKILL.md` and inspect the translation format already used by the feature. Verify both the default language and the fallback language after a change.
 
-## 🚜 Contributing
-
-Please review the [Contributing Guide](https://github.com/stacksjs/contributing) for details.
-
-## 🏝 Community
-
-For help, discussion about best practices, or any other conversation that would benefit from being searchable:
-
-[Discussions on GitHub](https://github.com/stacksjs/stacks/discussions)
-
-For casual chit-chat with others using this package:
-
-[Join the Stacks Discord Server](https://stacksjs.com/discord)
-
-## 📄 License
-
-The MIT License (MIT). Please see [LICENSE](../LICENSE.md) for more information.
-
-Made with 💙
+See [project conventions](../AGENTS.md) and [training source ownership](../native/README.md).

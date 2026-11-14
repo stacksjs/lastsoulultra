@@ -22,11 +22,13 @@ export function entryTasks(entry: any): EntryTasks {
   return { signed, details, paid, done: [signed, details, paid].filter(Boolean).length }
 }
 
-/** "€150", from the service's minor units. Empty when there is no fee. */
+/** Format the service's minor units without rounding away a payable fraction. */
 export function entryFee(payment: any): string {
-  if (!payment?.currency || typeof payment.amount !== 'number') return ''
+  if (!payment?.currency || !Number.isSafeInteger(payment.amount) || payment.amount < 0) return ''
   try {
-    return new Intl.NumberFormat('en-GB', { style: 'currency', currency: payment.currency, maximumFractionDigits: 0 }).format(payment.amount / 100)
+    const format = new Intl.NumberFormat('en-GB', { style: 'currency', currency: payment.currency })
+    const digits = format.resolvedOptions().maximumFractionDigits ?? 2
+    return new Intl.NumberFormat('en-GB', { style: 'currency', currency: payment.currency, minimumFractionDigits: 0 }).format(payment.amount / 10 ** digits)
   }
   catch {
     return ''

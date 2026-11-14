@@ -17,11 +17,11 @@ An LSU administrator can manage the LSU organization within the permissions gran
 
 ## Feedback and recordings
 
-Review the transcript before sending voice feedback. The adaptive training conversation uses AI inside the method's rules; it does not imply that a human coach listens to every recording. Avoid adding information that is unrelated to training.
+Review the transcript before sending voice feedback. The adaptive training conversation uses AI inside the method's rules; it does not imply that a human coach listens to every recording. Avoid adding information that is unrelated to training. Uploaded and recorded voice feedback is transcribed by the private speech service; the temporary transcript receipt expires after 24 hours. Sent feedback text remains in the conversation. If the separate browser dictation option is used, that transcription is handled by the browser's speech service. The current LSU assistant gives insights; coaches approve training blocks before they reach the calendar.
 
 ## Linked HQ accounts and connected devices
 
-Signing in with **Continue with HQ** shares only the parts of your HQ profile you choose, and health data only if you tick it. Last Soul Ultra keeps a copy as part of your account here. Devices such as Strava, Oura and WHOOP connect through HQ's registered apps; HQ holds the authorization but does not store your health data. See [Your account](/my-account#signing-in-with-an-hq-account) and [Health](/training/health#connect-a-device-or-service).
+LSU currently disables **Continue with HQ**. Its accounts and training history are not automatically linked to HQ. Some configured device connections can still use HQ's registered provider apps to hold authorization; that is a separate workflow from using an HQ account to sign in. Review the provider's authorization screen before granting access. See [Your account](/my-account#signing-in-with-an-hq-account) and [Health](/training/health#connect-a-device-or-service).
 
 ## Shared demonstration accounts
 

@@ -17,7 +17,7 @@ In the iPhone app, an owner, administrator or manager reaches the same tools fro
 
 ## Who runs the organization
 
-The installation's deployment settings list its administrators by email. Today the list holds the HQ account addresses and the LSU addresses of Chris Breuer and Pawel Dregan. Every deploy runs `buddy installation:admins`, which makes each listed address an active administrator of Last Soul Ultra and gives it an athlete profile and a coach profile, so one account opens every athlete and coach tool. An address with no account gets one, created with a verified email and no usable password. That person's first sign-in is **Continue with HQ**, which links the account to their HQ account and brings across their profile and, once they approve it on HQ, their training history.
+The installation's deployment settings list its administrators by email. Today the list holds the HQ account addresses and the LSU addresses of Chris Breuer and Pawel Dregan. Every deploy runs `buddy installation:admins`, which makes each listed address an active administrator of Last Soul Ultra and gives it an athlete profile and a coach profile, so one account opens every athlete and coach tool. An address with no account gets one with a verified email and no usable password. LSU disables HQ sign-in, so an operator must provision an LSU password before that person can sign in. The administrator list grants organization access; it does not authenticate the person or copy an HQ training history.
 
 To add an administrator, add their email to `admins` in `enterprise/deployment.json` and deploy. The list only grants: it never turns the owner into an administrator, and removing an address does not take the role away. Change or remove a role in the staff screen, under the rules in [Manage access](#manage-access).
 
@@ -38,13 +38,31 @@ A user can have both a training identity and an organization membership. A subsc
 
 ## Manage the experience
 
-Open the **Experience** area in the staff workspace. This is the published LSU app itself: the brand name, logo, description, the sections of the app that are switched on, its navigation, its links and its published offers. Save a draft to review changes. Publish only when the available methods and offers match the intended experience.
+Open the **Experience** area in the staff workspace. This is the published LSU app itself: the brand name, logo, description, the sections of the app that are switched on, its navigation, its links and its published offers. Review changes before publishing. Publish only when the available methods and offers match the intended experience. The preset is a starting point; staff edits to the saved Experience can change which sections and offers are visible.
 
 ## Manage offers and methods
 
-An offer only appears once every part of it lines up: the method is published and belongs to LSU, its author holds an active LSU membership as owner, administrator, manager or trainer, the product belongs to that same author, is active, carries the intended training plan, is a self-coaching product rather than one that includes personal coaching, and bills monthly. Any listed contributor must also be a coach with an active LSU membership. If one of these is wrong the offer is left out of the published app silently, with no error shown, so check the published page after saving. These checks run again on every read, so an offer can disappear later if its author's membership or role changes. Review recurring terms, currency and price before making an offer available. Do not connect real payment credentials to the seeded demonstration records.
+The published offer must connect eligible records:
 
-A standalone training plan is simpler: it is a one-off product in the store, owned by a coach in the organization, with no method behind it. The six demo plans are of this kind. None of the paid ones can be bought until payments are set up for Last Soul Ultra; see [Plans and subscriptions](/training/plans#demo-plans-in-the-store).
+| Record | What to check |
+| --- | --- |
+| Method | Published, in the LSU organization |
+| Author | Active LSU owner, administrator, manager or trainer, with a coach profile |
+| Product | Same author, active, monthly, and self-coaching rather than a personal-coaching product |
+| Training plan | Attached to the product and eligible for that offer |
+| Contributors | Coach profiles with active LSU membership |
+
+An invalid offer can be omitted from the public response rather than shown with an error. Check the published page after saving. Eligibility is checked again on reads, so changing an author's membership or product status can remove an existing offer. Review currency, price and recurring terms before publication. Keep sample records separate from real purchases.
+
+A standalone training plan is simpler: it is a one-off product in the store, owned by a coach in the organization, with no method behind it. The six demo plans are of this kind. The documented preview payment configuration is a Stripe sandbox, which is separate from complimentary demo enrollment; see [Plans and subscriptions](/training/plans#demo-plans-in-the-store).
+
+## Review the next training week
+
+The current catalog packages use seven-day blocks with `review: coach` and `wait_for: feedback`. Open the coach workspace's **Block reviews** queue. Review the runner's responses and submitted feedback alongside the draft sessions. Make any changes, save them, then approve the block or request another draft.
+
+For example, a runner reports that Saturday is unavailable. Check the proposed next week against that feedback and adjust its sessions before approval. Saving draft edits does not put them on the runner's calendar; approval does. If a draft has changed while you were reviewing it, reload it before deciding.
+
+Do not use the general AI assistant as a release control. LSU configures it for insights. See [Coach guide](/coaches#review-and-release-a-training-block).
 
 ## Manage access
 

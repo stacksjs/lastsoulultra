@@ -30,22 +30,10 @@ Your custom action will be used instead of the default.
 
 Any new files you create here will be available to your application. For example, creating `app/Actions/MyCustomAction.ts` will make it available at `'Actions/MyCustomAction'` in your routes.
 
-## Contributing
+## LSU application boundaries
 
-Please review the [Contributing Guide](https://github.com/stacksjs/contributing) for details.
+The local actions and mail classes customize website behavior, including newsletter confirmation. The race-entry account belongs to the external race service, while training accounts, coaching methods and calendar records belong to the separate platform installation.
 
-## Community
+Add website overrides here. Changes to shared training behavior must come through a new pinned platform kit rather than edits to generated `storage/native` source or the installed Pantry package. LSU-specific product configuration lives in `native/product.json`, `enterprise/presets.json` and `enterprise/catalog`.
 
-For help, discussion about best practices, or any other conversation that would benefit from being searchable:
-
-[Discussions on GitHub](https://github.com/stacksjs/stacks/discussions)
-
-For casual chit-chat with others using this package:
-
-[Join the Stacks Discord Server](https://stacksjs.com/discord)
-
-## License
-
-The MIT License (MIT). Please see [LICENSE](../../LICENSE.md) for more information.
-
-Made with 💙
+Read [project conventions](../AGENTS.md) before changing models, actions, routes or jobs. Run the checks in [the root guide](../README.md#verify-changes) after an implementation change.

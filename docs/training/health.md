@@ -11,7 +11,7 @@ Open [Health](https://lsu.stacksjs.com/coaching/health) while signed in, or the 
 
 On iPhone the app can also read Apple Health. iOS asks whether Last Soul Ultra may read the workouts and readings you choose, and whether it may write finished workouts and mindful minutes back. You choose what to share in Apple's own sheet, you can change it later in iOS Settings, and declining leaves the rest of the app working. The website does not read Apple Health.
 
-An empty screen can mean no source is connected or that the source has not supplied data for the selected period. It does not mean that a zero-valued measurement was recorded.
+An empty screen can mean no source is connected or that the source has not supplied data for the selected period. It does not mean that a zero-valued measurement was recorded. For example, no sleep entry for Tuesday means no reading is available for that date; it does not establish that you slept for zero hours.
 
 ## Connect a device or service
 
@@ -20,7 +20,7 @@ Connect a watch or health service from **Me** in the app, from [Connections](htt
 - Strava, Oura, WHOOP, Withings, Fitbit, TrainingPeaks, Polar, COROS, Wahoo and Dexcom connect through HQ's registered apps, so their sign-in page names HQ. HQ holds the authorization for Last Soul Ultra but does not store your health data; this installation reads it from the provider directly.
 - Garmin, Renpho and Apple Health connect here directly.
 
-If you signed in with **Continue with HQ** and chose to share health metrics and connected devices, those come across from your HQ account as well. See [Your account](/my-account#signing-in-with-an-hq-account).
+Only providers configured for this installation can complete authorization. A provider name in the shared software does not guarantee it is enabled for LSU. LSU currently disables HQ account sign-in, so an HQ login does not automatically import devices or health history. See [Your account](/my-account#signing-in-with-an-hq-account).
 
 ## Data sharing
 

@@ -1,29 +1,62 @@
 ---
 title: Plans and subscriptions
-description: Browse training tiers and plans, understand enrollment and review subscription access.
+description: Compare RUN and SOUL, understand weekly release and distinguish the catalog from fictional demo plans.
 ---
 
 # Plans and subscriptions
 
-## Browse published tiers
+## Choose a published package
 
-Open **Coaching**, then **Store**, on the race site to see the published monthly tiers. Read the method summary, author, included training, price, currency and billing interval. A tier can cover running alone or combine other training disciplines; only the published offer establishes what is included.
+Open **Coaching**, then **Store**, or the training app's [Store](https://training.lsu.stacksjs.com/store). Read the plan name, level, included disciplines, coach, price, currency and renewal terms before choosing it.
 
-LSU launch pricing is **€19.99 per month for RUN** (running) and **€39.99 per month for SOUL** (running with strength, mobility and meditation), including applicable tax. Coach-authored training plans can also be sold separately, as one-off purchases under their own published terms.
+| Tier | Monthly catalog price | Training included |
+| --- | --- | --- |
+| RUN | €19.99 | Running |
+| SOUL | €39.99 | Running plus strength, mobility and meditation |
 
-## The two review tiers
+The catalog declares these amounts in EUR. The checkout establishes the final tax treatment, total and recurring terms for your purchase. A training subscription does not register you for an LSU race.
 
-The private preview lists two tiers. **RUN** is **€19.99 per month, tax included**, and covers the running sessions. **SOUL** is **€39.99 per month, tax included**, and includes both running and strength in one enrollment. Both Alex and Jamie are on Running + Strength; their historical runner email names do not restrict them to running.
+## The current training catalog
 
-The fictional eight-week plan has four running sessions and two structured strength sessions per week, with exercise illustrations, sets and repetitions or timed efforts. Open a strength session to review its blocks and set controls. This sample illustrates the app and is not an approved LSU training prescription. Personal one-to-one coaching and Mind training are not included in this demo offer.
+The source catalog contains thirty twelve-week plans: Backyard, Trail, Marathon, Halbmarathon (half marathon) and 10 km, each at Einsteiger (beginner), Fortgeschritten (intermediate) and Profi (advanced) levels, in both RUN and SOUL versions.
 
-The review accounts have complimentary access. The displayed price describes the sample tier; it is not an active charge. See [Roles and plan access](/roles) for the complete account map.
+Four packages are declared for the initial test:
+
+| Goal and level | Versions |
+| --- | --- |
+| Backyard · Fortgeschritten | RUN and SOUL |
+| 10 km · Einsteiger | RUN and SOUL |
+
+A plan existing in the catalog does not mean it is on sale. The published Store is the authority on which packages are available. Staff edits can also differ from the original deployment inputs.
+
+For example, **10 km · Einsteiger · RUN** and **10 km · Einsteiger · SOUL** share the running goal and level. SOUL adds the package's supporting sessions; it is not a separate running difficulty.
+
+## How weekly training arrives
+
+The current packages use seven-day blocks with coach approval and a feedback requirement:
+
+1. The next block is prepared from the package's plan and your recorded responses.
+2. An LSU coach reviews it and can edit it or request another draft.
+3. Only approved sessions reach your calendar.
+4. Near the end of your current block, send your weekly method feedback so preparation of the next block can start.
+
+The feedback window opens two days before the current block ends, using your account's date. Feedback sent earlier can still be part of the conversation but does not satisfy that block's feedback requirement. Sending feedback does not itself approve or release a week.
+
+For example, if a block ends on Sunday, its qualifying feedback window opens on Friday. Describe the week and next week's availability there, then wait for coach review. Check [Feedback](/training/feedback) if the next week remains unavailable.
+
+The general AI assistant explains your data. LSU coaches assign the training; AI chat does not automatically rewrite your calendar. A package with coach review is also different from a promise of unlimited personal one-to-one coaching.
+
+## The fictional review tiers
+
+Alex and Jamie have complimentary access to the older **SOUL** demonstration tier, an eight-week Run + Strength sample. Both accounts include running and strength despite their historical `runner` email names.
+
+That sample starts with four runs and two strength sessions per week, or 48 sessions in total. It gives reviewers a populated calendar and does not model the current catalog's week-by-week release. Its content is fictional demonstration material, not an approved LSU prescription. Reviewers can change the counts by recording sessions.
 
 ## Demo plans in the store
 
-The training app's **Store** (top left in the iPhone app, or [the store](https://training.lsu.stacksjs.com/store) on the training site) also lists six training plans under Pawel Dregan's coach profile:
+Six older one-off demonstration plans sit under Pawel Dregan's coach profile:
 
-| Plan | Price |
+| Plan | Listed price |
 | --- | --- |
 | First Ultra: 50K in 16 weeks | €79 |
 | Mountain Ultra Vert Block | €49 |
@@ -32,24 +65,18 @@ The training app's **Store** (top left in the iPhone app, or [the store](https:/
 | 100K / 100 Mile Build | €129 |
 | Race Week and Fuelling | Free |
 
-Each is a demo draft that Pawel has not yet reviewed, and each description says so. None is medical advice. They are one-off plans rather than subscriptions: buying one puts the whole plan on your calendar, with no method or feedback attached. The paid plans show their prices but cannot be bought until payments are set up for Last Soul Ultra. **Race Week and Fuelling** is free, so it works end to end without a payment.
+Their descriptions identify them as unreviewed demo drafts. A one-off purchase grants the plan under its published release terms; it does not create an ongoing method-feedback subscription. The free plan can also add training to an account, so taking it on a shared login changes what other reviewers see.
 
-Pawel can edit, keep or delete these plans. A deploy never puts back a plan he changed or removed.
+The demo catalog preserves plans a coach edits or removes. Deployment does not reset those choices.
 
-## Join a tier
+## Checkout and confirmation
 
-Choose the offer and follow its checkout instructions. Confirm the total and recurring terms before authorizing payment. Checkout hands you back to the Last Soul Ultra app; wait there for the confirmed subscription or purchase to appear. A browser return by itself is not proof that payment succeeded, and if the app does not reopen, report it.
+Choose the offer and follow checkout. Confirm the final total and renewal terms before authorizing payment. Wait for the confirmed purchase or subscription to appear in LSU. A browser return or receipt identifier alone is not proof that payment succeeded.
 
-**Reviewing the private preview?** The supplied accounts already hold the tier with complimentary access, so there is nothing to buy and no real charge is attached to them. See [Roles and plan access](/roles). Do not enter real card details anywhere in this preview.
-
-An active enrollment supplies the sessions shown in **Workouts**, the method in **The method** and its totals in **Progress**. In the iPhone app those last two are **Your methods** and **Training progress** on your subscription's screen. This is self-coaching within an authored method unless an offer explicitly says otherwise.
+The documented preview setup uses Stripe's sandbox. Complimentary review access is separate from a sandbox purchase and has no charge attached. Use a dedicated test account and a confirmed sandbox setup for purchase testing, following the [demo walkthrough](/demo#7-do-not-test-payments). Do not enter real card details.
 
 ## Renewal and access
 
-On the website, open **Coaching**, then **Me**, to inspect subscription status. In the iPhone app, open **Me** → **Coaching accounts** and choose the subscription. Where available, cancel renewal to stop the next renewal, or resume it before cancellation takes effect. Read the date and status shown: stopping renewal and losing access immediately are different events.
+Open **Me** → **Coaching accounts** and select the subscription, or use [billing and renewal](https://lsu.stacksjs.com/coaching/account). Read the status and date displayed. Where supported, cancel a future renewal or resume it before cancellation takes effect.
 
-Payment problems can affect access. Use the billing action offered by your account to correct a payment method, and refresh after the provider confirms the change.
-
-## Demonstration accounts
-
-The supplied subscriber already has sample training access. Its seeded subscription has no payment-provider charge attached. Do not enter a real card or attempt to bill, refund or test a payment against these demonstration records. Browse the sample offer and review the existing access instead.
+Payment problems can change access. Correct a payment method through the offered billing action and refresh after the provider confirms the change. If the account has complimentary access, provider billing actions may not be available.

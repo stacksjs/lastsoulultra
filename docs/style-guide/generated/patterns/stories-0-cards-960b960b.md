@@ -35,7 +35,7 @@ Source: `resources/style-guide/cards.story.stx`. Group: Data presentation. Local
 
 ```stx
 <section class="space-y-6">
-      <div class="space-y-3 coach-empty"><h2 class="font-[family-name:var(--lsu-display)]">NO ENTRIES YET</h2><p>Your confirmed races will appear here.</p><a class="btn" href="#races">Explore races</a></div>
+      <div class="space-y-3 coach-empty"><h2 class="font-[family-name:var(--lsu-display)]">NO ENTRIES YET</h2><p>Your confirmed races will appear here.</p><a class="btn" href="/world-series">Explore races</a></div>
       <div class="space-y-3 coach-empty" role="alert"><h2 class="font-[family-name:var(--lsu-display)]">RESULTS UNAVAILABLE</h2><p>Try again to load the latest race results.</p><button class="btn-outline" type="button">Try again</button></div>
     </section>
 ```

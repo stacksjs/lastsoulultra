@@ -10431,7 +10431,7 @@
         {
           "id": "primary-and-secondary",
           "title": "Primary and secondary",
-          "source": "<section class=\"space-y-6\">\n      <h2 class=\"text-3xl font-[family-name:var(--lsu-display)]\">READY FOR THE NEXT YARD?</h2>\n      <p>Use one red action to show the next step. Secondary actions remain quiet.</p>\n      <div class=\"flex flex-wrap gap-4\"><button type=\"button\" class=\"btn\" @click=\"guideSaved.set(true)\">Save example entry</button><a href=\"#entry-details\" class=\"btn-outline\">View race details</a></div>\n      <p role=\"status\" :text=\"guideSaved ? 'Example entry saved locally.' : 'No account or payment is used in this example.'\"></p>\n    </section>"
+          "source": "<section class=\"space-y-6\">\n      <h2 class=\"text-3xl font-[family-name:var(--lsu-display)]\">READY FOR THE NEXT YARD?</h2>\n      <p>Use one red action to show the next step. Secondary actions remain quiet.</p>\n      <div class=\"flex flex-wrap gap-4\"><button type=\"button\" class=\"btn\" @click=\"guideSaved.set(true)\">Save example entry</button><a href=\"/world-series\" class=\"btn-outline\">View race details</a></div>\n      <p role=\"status\" :text=\"guideSaved ? 'Example entry saved locally.' : 'No account or payment is used in this example.'\"></p>\n    </section>"
         },
         {
           "id": "long-labels-and-disabled-actions",
@@ -10454,7 +10454,7 @@
         {
           "id": "empty-and-error-states",
           "title": "Empty and error states",
-          "source": "<section class=\"space-y-6\">\n      <div class=\"space-y-3 coach-empty\"><h2 class=\"font-[family-name:var(--lsu-display)]\">NO ENTRIES YET</h2><p>Your confirmed races will appear here.</p><a class=\"btn\" href=\"#races\">Explore races</a></div>\n      <div class=\"space-y-3 coach-empty\" role=\"alert\"><h2 class=\"font-[family-name:var(--lsu-display)]\">RESULTS UNAVAILABLE</h2><p>Try again to load the latest race results.</p><button class=\"btn-outline\" type=\"button\">Try again</button></div>\n    </section>"
+          "source": "<section class=\"space-y-6\">\n      <div class=\"space-y-3 coach-empty\"><h2 class=\"font-[family-name:var(--lsu-display)]\">NO ENTRIES YET</h2><p>Your confirmed races will appear here.</p><a class=\"btn\" href=\"/world-series\">Explore races</a></div>\n      <div class=\"space-y-3 coach-empty\" role=\"alert\"><h2 class=\"font-[family-name:var(--lsu-display)]\">RESULTS UNAVAILABLE</h2><p>Try again to load the latest race results.</p><button class=\"btn-outline\" type=\"button\">Try again</button></div>\n    </section>"
         }
       ]
     },

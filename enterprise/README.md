@@ -3,7 +3,7 @@
 The race website and documentation stay at `lsu.stacksjs.com`. The complete
 training application runs at `training.lsu.stacksjs.com`, from the same frozen
 HQ application source used for the native apps. It owns its accounts and API.
-Existing HQ accounts, sessions and athlete records are never copied or linked.
+LSU disables HQ account sign-in through `enterprise/presets.json`; matching email addresses do not link accounts or import athlete history.
 
 `./buddy deploy --prod --yes` prepares that source through the normal deploy
 hook, checks each site's own migration corpus, provisions the declared PostgreSQL
@@ -11,10 +11,12 @@ database/role, deploys the services, reconciles Cloudflare A/AAAA records and TL
 and starts the declared workers and scheduler. No hand-maintained server units,
 gateway fragments or DNS record edits are needed.
 
-CI fetches the immutable private HQ revision with `HQ_SOURCE_SSH_KEY`, a read-only
-deploy key scoped to that source repository. The source helper verifies GitHub's
-published host key and removes the temporary private-key file after fetching.
-The key is excluded from dependency installation and native build environments.
+CI installs the immutable `@hq/platform` package pinned by `pantry.json`,
+`pantry.lock` and `native/hq-source.json`, using `PANTRY_REGISTRY_TOKEN` with a
+registry grant for that package. `scripts/native-source.ts` validates its package,
+version, source revision and Bun version before copying its source into ignored
+`storage/native/hq/<revision>`. Deployment overlays only LSU's declared branding,
+configuration and catalog inputs. It does not fetch HQ's repository over SSH.
 
 The deployment requires fresh Hetzner evidence for Germany (`DE`), Falkenstein
 (`fsn1`). A missing credential, unknown location or other location stops it.
@@ -54,12 +56,14 @@ Buddy installs the pinned FFmpeg decoder into this installation's shared media
 runtime and exposes it to the API and workers; it never relies on another app's tools.
 Deployment records its library environment beside the tenant launcher, which
 loads it before invoking HQ's normal launcher. Runtime services need no privileged Pantry CLI.
-Cloud inference, remote object storage, telemetry and integration credentials
-are not inherited from HQ. An external provider needs its own reviewed setup.
+Cloud inference, object-storage, telemetry and integration credentials
+are not inherited from HQ. LSU explicitly configures its own asset bucket and
+its own AI credential (`LSU_ANTHROPIC_API_KEY`) where provided. An external provider needs its own reviewed setup.
 These controls describe this installation; they do not certify legal compliance.
 
-TestFlight releases use the manually dispatched `TestFlight` GitHub workflow on
-`main`, with Xcode 27.1 (27A9275). Native generation runs before signing secrets
+TestFlight releases normally follow a release commit through CI and Deploy
+on `main`; the `TestFlight` workflow also supports manual dispatch. The release
+toolchain is Xcode 27.1 (27A9275), pinned in `scripts/ios-release-toolchain.ts`. Native generation runs before signing secrets
 are available. Signing credentials belong to the `ios-testflight` environment;
 the job removes its temporary keychain and profiles and saves only the signed
 IPA and public source receipts. Production backend credentials are not supplied
@@ -76,14 +80,20 @@ backend uses `lsu_training` and its own key. Authenticated APIs enforce the same
 application authorization logic as HQ over LSU's independent data. Standard
 public authentication and catalog endpoints remain available for the app.
 The documented fake training is seeded idempotently only into the explicit LSU
-database; passwords and edits are preserved. After the seed, the API deploy runs
+database. The shared demo credentials are realigned to the supplied private
+account list when needed; these are not personal passwords. The seeder protects
+revised or purchased enrollments and preserves coach-edited standalone demo
+plans. See `scripts/seed-demo-accounts.ts` for those distinct update policies. After the seed, the API deploy runs
 `buddy installation:admins`, which makes every address in `admins` in
 `deployment.json` an active administrator of the `last-soul-ultra`
 organization, with an athlete profile and a coach profile of it, so one account
 opens every athlete and coach tool. A missing account is created verified with
-no usable password: an `@hq.training` address signs in with Continue with HQ
-first, and an LSU address is given its password on the host with
-`./buddy user:add <email> --password ... --update`. The list only grants: removing
+no usable password. HQ sign-in is disabled for every address in this
+installation, so an operator must provision its LSU password on the host with
+`./buddy user:add <email> --password <private-password> --update`. Run this
+from the prepared training application with its production environment, through
+your private credential-handling procedure; do not put the password in Git or
+shared logs. The list only grants: removing
 an address does not revoke the role. Provider-backed payments and real
 athlete records are not manufactured or imported.
 
@@ -141,3 +151,26 @@ changes.
 LSU's brand preset and coaching tiers (`enterprise/presets.json`), its
 onboarding decisions and the preview/acceptance history formerly kept in HQ are
 described in `enterprise/hq-acceptance.md`.
+
+
+## Configuration and verification
+
+The packaged configuration in `enterprise/presets.json` explicitly sets
+`sign_in.hq` to `false` and `assistant.mode` to `insights`. LSU's general
+assistant explains data and does not build or change workouts. The catalog's
+`training_blocks` settings require seven days, coach review and subscriber
+feedback. Feedback can start the next draft two days before the current block
+ends; only coach approval releases sessions. A saved Experience can retain staff
+edits, so inspect the published app as well as the packaged inputs.
+
+The older fictional review enrollment is deliberately different: it seeds eight
+weeks of running and strength at once to make past and upcoming sessions
+reviewable. It does not prove the current catalog's block-release lifecycle.
+Use a dedicated sandbox enrollment when checking that complete path.
+
+After a deploy, check its verification step and `/api/deployment` provenance,
+then review Store, an enrolled athlete, coach block reviews and administration.
+A green workflow can also mean deployment credentials were absent and the run
+skipped the actual deploy; read its steps before claiming that a release is live.
+The automatic Deploy trigger requires successful CI, while a manual dispatch is
+an explicit operator deployment.
