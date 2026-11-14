@@ -156,8 +156,10 @@ if (!httpOnly) {
     at = 'opening the live visual guide'
     await navigate(cdp, `${site}/docs/visual-guide`, { timeoutMs: 60_000 }).catch(() => false)
     await waitFor(() => cdp.evaluate('Boolean(document.querySelector(".guide-movements img"))'), 30_000, { label: 'the visual guide' })
+    await cdp.evaluate('document.querySelector(".guide-movements").scrollIntoView({ block: "center" })')
     await waitFor(() => cdp.evaluate('[...document.querySelectorAll(".guide-movements img")].every(img => img.complete && img.naturalWidth > 0)'), 30_000, { label: 'workout figures' })
     check('the live workout figures load', Boolean(await cdp.evaluate('[...document.querySelectorAll(".guide-movements img")].every(img => img.naturalWidth > 0)')))
+    await cdp.evaluate('window.scrollTo(0, 0)')
     check('the live guide applies its reading styles', await cdp.evaluate('getComputedStyle(document.querySelector(".guide-flow")).display') === 'grid')
     for (const width of [1280, 390]) {
       await cdp.send('Emulation.setDeviceMetricsOverride', { width, height: 900, deviceScaleFactor: 1, mobile: width < 600 })
