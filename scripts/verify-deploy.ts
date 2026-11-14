@@ -86,11 +86,11 @@ for (const path of ['/docs/', '/docs/visual-guide', '/docs/training/feedback']) 
 }
 const assets: Record<string, string> = Object.fromEntries(Object.entries(diagrams.files).map(([file, hash]) => [`diagrams/${file}`, hash]))
 for (const file of ['guide.css', 'workout-art/lunge-reverse-goblet-frames.svg', 'workout-art/glute-bridge-march-frames.svg']) {
-  assets[file] = createHash('sha256').update(await Bun.file(new URL(`../docs/public/${file}`, import.meta.url)).arrayBuffer()).digest('hex')
+  assets[file] = createHash('sha256').update(new Uint8Array(await Bun.file(new URL(`../docs/public/${file}`, import.meta.url)).arrayBuffer())).digest('hex')
 }
 for (const [file, hash] of Object.entries(assets)) {
-  const response = await get(`${site}/docs/${file}`, gate)
-  const actual = createHash('sha256').update(await response.arrayBuffer()).digest('hex')
+  const response = await get(`${site}/docs/${file.replace(/index\.html$/, '')}`, gate)
+  const actual = createHash('sha256').update(new Uint8Array(await response.arrayBuffer())).digest('hex')
   check(`publishes the current docs asset ${file}`, response.status === 200 && actual === hash, `answered ${response.status}${actual === hash ? '' : ', content differs from the commit'}`)
 }
 
