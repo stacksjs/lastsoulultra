@@ -5,3 +5,5 @@
    rendered at 16px Barlow beside 51px Anton siblings and read as a stray
    label rather than a heading. Continues the ratio the other two set. */
 .h3{margin:0;font-family:var(--lsu-display);font-size:clamp(20px,2.4vw,32px);line-height:1.1;letter-spacing:.02em;text-transform:uppercase;font-weight:400}
+
+.nav-account.lsu-scope-nav{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;border-radius:50%;color:var(--lsu-white);font-size:25px}.nav-account.lsu-scope-nav:hover{background:#ffffff14}.nav-account.lsu-scope-nav:focus-visible{outline:2px solid var(--lsu-white);outline-offset:3px}.nav-account-hint{display:block;font:400 13px/1.6 var(--lsu-body);letter-spacing:0;text-transform:none;color:var(--lsu-dim-2)}
