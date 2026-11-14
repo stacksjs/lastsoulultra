@@ -18,7 +18,9 @@
  * empty once the site is public), LSU_DEMO_ACCOUNTS_JSON (the review accounts),
  * LSU_SITE_ORIGIN (default https://lsu.stacksjs.com).
  */
+import { createHash } from 'node:crypto'
 import coaching from '../config/coaching'
+import diagrams from '../docs/public/diagrams/artifacts.json'
 import source from '../native/hq-source.json'
 import { appTiers } from '../resources/data/app-stores'
 import { accountOnlyRedirects } from '../resources/data/coaching'
@@ -69,6 +71,27 @@ if (gated) {
 for (const path of ['/', '/format', '/world-series', '/soul-races', '/app', '/coaching', '/coaching/plans']) {
   const page = await get(`${site}${path}`, gate)
   check(`serves ${path}`, page.status === 200, `answered ${page.status}`)
+}
+
+// Verify the published guide and exact artifact bytes from this deployment.
+// An HTML fallback can answer 200 for a missing static file, so status alone is
+// insufficient for artwork, CSS and standalone diagrams.
+for (const path of ['/docs/', '/docs/visual-guide', '/docs/training/feedback']) {
+  const page = await get(`${site}${path}`, gate)
+  const html = await page.text()
+  check(`serves the guide at ${path}`, page.status === 200 && html.includes('bp-doc'), `answered ${page.status}`)
+  if (path === '/docs/visual-guide') {
+    check('the live guide includes its visuals and reading styles', html.includes('/docs/guide.css') && html.includes('guide-movements') && html.includes('/docs/diagrams/weekly-training/index.html'))
+  }
+}
+const assets: Record<string, string> = Object.fromEntries(Object.entries(diagrams.files).map(([file, hash]) => [`diagrams/${file}`, hash]))
+for (const file of ['guide.css', 'workout-art/lunge-reverse-goblet-frames.svg', 'workout-art/glute-bridge-march-frames.svg']) {
+  assets[file] = createHash('sha256').update(await Bun.file(new URL(`../docs/public/${file}`, import.meta.url)).arrayBuffer()).digest('hex')
+}
+for (const [file, hash] of Object.entries(assets)) {
+  const response = await get(`${site}/docs/${file}`, gate)
+  const actual = createHash('sha256').update(await response.arrayBuffer()).digest('hex')
+  check(`publishes the current docs asset ${file}`, response.status === 200 && actual === hash, `answered ${response.status}${actual === hash ? '' : ', content differs from the commit'}`)
 }
 
 // A page reached by a link is fetched as a fragment, and the fragment has to
@@ -129,6 +152,19 @@ if (!httpOnly) {
         cdp.send('Fetch.continueWithAuth', { requestId, authChallengeResponse: ours ? { response: 'ProvideCredentials', username: user, password } : { response: 'CancelAuth' } }).catch(() => {})
       })
     }
+
+    at = 'opening the live visual guide'
+    await navigate(cdp, `${site}/docs/visual-guide`, { timeoutMs: 60_000 }).catch(() => false)
+    await waitFor(() => cdp.evaluate('Boolean(document.querySelector(".guide-movements img"))'), 30_000, { label: 'the visual guide' })
+    await waitFor(() => cdp.evaluate('[...document.querySelectorAll(".guide-movements img")].every(img => img.complete && img.naturalWidth > 0)'), 30_000, { label: 'workout figures' })
+    check('the live workout figures load', Boolean(await cdp.evaluate('[...document.querySelectorAll(".guide-movements img")].every(img => img.naturalWidth > 0)')))
+    check('the live guide applies its reading styles', await cdp.evaluate('getComputedStyle(document.querySelector(".guide-flow")).display') === 'grid')
+    for (const width of [1280, 390]) {
+      await cdp.send('Emulation.setDeviceMetricsOverride', { width, height: 900, deviceScaleFactor: 1, mobile: width < 600 })
+      await cdp.evaluate('new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))')
+      check(`the guide fits a ${width}px screen`, Boolean(await cdp.evaluate('document.documentElement.scrollWidth <= innerWidth + 1')))
+    }
+    await cdp.send('Emulation.setDeviceMetricsOverride', { width: 1280, height: 900, deviceScaleFactor: 1, mobile: false })
 
     at = 'opening /app'
     await navigate(cdp, `${site}/app`, { timeoutMs: 60_000 }).catch(() => false)

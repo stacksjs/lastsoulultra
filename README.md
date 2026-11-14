@@ -65,11 +65,11 @@ The app suite uses fixtures and local servers for external services. Native-sour
 For documentation or navigation changes, install the pinned platform kit, then run:
 
 ```sh
-./buddy build --docs
+bun run build:docs
 bun run audit:docs
 ```
 
-BunPress writes the deployed HTML into `dist/docs/.bunpress`. The audit checks generated references, supplied artwork, the LSU shell, linked artifacts, heading fragments, relative assets and the search index. Demo passwords are not committed: `bun run docs:demo` reads private account input and prepares ignored `docs/.data/demoAccounts.json`. The production deploy prepares it with all twelve review accounts before building the gated guide. A local build without those inputs shows an account-list fallback.
+The documentation commands use a fresh, temporary STX cache so generated CSS matches a clean CI checkout even after local development. Use `bun run build:docs` for the deployment build and `bun run docs:style-guide` for reference updates. BunPress writes the deployed HTML into `dist/docs/.bunpress`. The audit checks generated references, supplied artwork, the LSU shell, linked artifacts, heading fragments, relative assets and the search index. Demo passwords are not committed: `bun run docs:demo` reads private account input and prepares ignored `docs/.data/demoAccounts.json`. The production deploy prepares it with all twelve review accounts before building the gated guide. A local build without those inputs shows an account-list fallback.
 
 For a complete website build:
 

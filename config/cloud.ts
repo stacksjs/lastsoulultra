@@ -118,7 +118,7 @@ export const tsCloud: TsCloudConfig = {
       isolation: true,
       path: '/docs',
       domain: APP_DOMAIN,
-      build: './buddy build --docs',
+      build: 'bun run build:docs',
       // Static documentation needs none of the managed services' credentials.
       env: { TYPESENSE_API_KEY: '', DB_PASSWORD: '', MAIL_PASSWORD: '' },
       pathRewriteStyle: 'directory',

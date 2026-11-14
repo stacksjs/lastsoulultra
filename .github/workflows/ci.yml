@@ -72,7 +72,14 @@ jobs:
         run: bun run docs:style-guide:check
 
       - name: Build and verify the LSU user guide
-        run: ./buddy build --docs && bun run audit:docs
+        run: |
+          bun run build:docs
+          bun run audit:docs
+          if ! git diff --quiet; then
+            echo "The docs build changed committed files. Regenerate the references and commit the result."
+            git --no-pager diff --stat
+            exit 1
+          fi
 
   typecheck:
     runs-on: ${{ matrix.os }}

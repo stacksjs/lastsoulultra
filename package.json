@@ -27,7 +27,7 @@
     "upgrade": "./buddy upgrade",
     "dev": "./buddy dev",
     "development": "./buddy dev",
-    "build": "bun run build:assets && ./buddy build && bun run build:bundles && ./buddy build --docs && bun run audit:docs",
+    "build": "bun run build:assets && ./buddy build && bun run build:bundles && bun run build:docs && bun run audit:docs",
     "prod": "./buddy build",
     "deploy": "./buddy deploy",
     "lint": "./buddy lint",
@@ -81,8 +81,9 @@
     "native:testflight": "bun scripts/release-native-ios.ts",
     "native:verify-ios": "bun scripts/verify-native.ts",
     "native:parity": "bun scripts/verify-hq-parity.ts",
-    "docs:style-guide": "./buddy docs:style-guide",
-    "docs:style-guide:check": "./buddy docs:style-guide:check",
+    "build:docs": "bun scripts/docs.ts build",
+    "docs:style-guide": "bun scripts/docs.ts generate",
+    "docs:style-guide:check": "bun scripts/docs.ts check",
     "docs:erd:source": "bun scripts/sync-training-erd.ts"
   },
   "dependencies": {

@@ -1,10 +1,10 @@
 {
   "format": 1,
-  "fingerprint": "d4456676be4ba41c07512bb8ad518060753dbdbc6694781af93101cf0bfcd026",
+  "fingerprint": "eb6b7e2f57bc6d63ab7c8ce9788acd855b81fc2bdbeccd4ac7ac9673179a212c",
   "files": {
     "docs/public/style-guide/generated/assets/9e9a0e12f5cf-lsu-logo.svg": "9e9a0e12f5cfae88aafe433dbb539f04b907e278cfd894f4f88e8bbe0f9f2b72",
     "docs/public/style-guide/generated/catalog.json": "b95860e2306ba4e9eafc62ab5f8ce15d6d70b829b6c2fc6a788e9167b4c13592",
-    "docs/public/style-guide/generated/components.css": "a3f1ee6d8fd777fcc699a65a6b02515847e868e439c5d67334c1bf02043cc06c",
+    "docs/public/style-guide/generated/components.css": "dc9facc692107dfd2cbbb4434d132d4ad5391ea9108363854778096dc953f6dc",
     "docs/public/style-guide/generated/foundations.html": "d191fbbf129663cea0954df953ce6a8d395e56eb0981d3f3a28cf1cadc9f36ce",
     "docs/public/style-guide/generated/runtime-c7a778626ef2.js": "c7a778626ef2a1890f2f57e33bec4a0893ab49e10fe004500303991f5eac849a",
     "docs/public/style-guide/generated/stories-0-actions-c522a646-long-labels-and-disabled-actions-default.html": "519224330b0e025331fd3ebd4afc6375d1ace1885b6a1131d58682507f252ccd",
