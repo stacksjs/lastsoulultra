@@ -1,9 +1,18 @@
 @extends('layouts/LSU')
 @section('content')
 <script server>
+import { coachingBrand, coachingOrigin } from '~/resources/functions/coaching-source'
 import { productionPages } from '~/resources/data/production-pages'
 const currentPage = productionPages["/profile"]
 const canonicalPath = "/profile"
+const trainingLogin = `${coachingOrigin()}/brands/${coachingBrand()}/login`
+</script>
+<script client>
+const raceAccountOpen = state(false)
+onMount(() => {
+  const query = useRoute().query || {}
+  raceAccountOpen.set(Boolean(query.auth || query.payment || query.event))
+})
 </script>
 <section class="lsu-scope-profile phero">
 <div class="lsu-scope-profile phero-copy">
@@ -12,6 +21,27 @@ const canonicalPath = "/profile"
 </div>
 </section>
 <div class="lsu-scope-profile profile-shell">
+<section class="account-training" aria-labelledby="training-account-title">
+<h2 id="training-account-title">Training &amp; coaching</h2>
+<p>Your training plan, workouts, feedback and subscription. Athletes, coaches and administrators sign in here.</p>
+<a class="btn" href="{{ trainingLogin }}">Sign in to Training</a>
+<a class="account-programs" href="/coaching/plans">Choose a training program</a>
+</section>
+<details class="account-races" :open="raceAccountOpen">
+<summary>Race-entry account</summary>
+<p class="account-race-intro">Manage your race applications and entry details with your separate race-entry login.</p>
 <RacePortal />
+</details>
 </div>
 @endsection
+
+<style>
+.account-training{max-width:720px;margin:0 auto 48px;padding:clamp(24px,5vw,64px);border-top:3px solid var(--lsu-red);background:#0d0d0f}
+.account-training h2{margin:0 0 16px;font:400 clamp(30px,4vw,48px)/1.1 var(--lsu-display);text-transform:uppercase}
+.account-training p{max-width:52ch;margin:0 0 28px;line-height:1.65;color:var(--lsu-dim-1)}
+.account-programs{display:block;width:fit-content;margin-top:24px;text-underline-offset:5px}
+.account-races{max-width:850px;margin:auto;border-top:1px solid var(--lsu-line-soft);padding-top:24px}
+.account-races summary{cursor:pointer;font:600 18px/1.5 var(--lsu-body);padding:12px 0}
+.account-race-intro{max-width:60ch;margin:12px 0 24px;line-height:1.65;color:var(--lsu-dim-1)}
+.account-races summary:focus-visible,.account-training a:focus-visible{outline:2px solid var(--lsu-white);outline-offset:6px}
+</style>
