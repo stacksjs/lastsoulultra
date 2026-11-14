@@ -3,6 +3,7 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs'
 import { join } from 'node:path'
 import deployment from '../enterprise/deployment.json'
 import presets from '../enterprise/presets.json'
+import nativeProduct from '../native/product.json'
 import { trainingSites } from '../config/training-cloud'
 import { workoutKey } from '../scripts/import-catalog-keys'
 
@@ -16,6 +17,9 @@ it('names LSU’s own organization and a coach who is one of its admins', () => 
   expect(deployment.admins).toContain(catalog.coach)
   expect(catalog.method.name).toBe('Last Soul Ultra Methode')
   expect(catalog.method.instructions.length).toBeLessThanOrEqual(20000)
+  // A subscriber has no personal coach, and the app shows the answer as plain text.
+  expect(catalog.method.instructions).toContain('LSU Coach-Team')
+  expect(catalog.method.instructions).toContain('ohne Markdown')
 })
 
 it('ships five programmes at three levels, each as RUN and SOUL, over twelve weeks', () => {
@@ -52,6 +56,9 @@ it('sells the four test packages monthly, week by week on feedback, at LSU’s p
     expect(product.slug).toBe(`lsu-${product.plan}`)
     expect(product).toMatchObject({ currency: 'EUR', billing_interval: 'month', training_blocks: { length_days: 7, review: 'coach', wait_for: 'feedback' } })
     expect(product.tax_code).toMatch(/^txcd_\d{8}$/)
+    // The card's picture is one of LSU's own photographs, which the installation serves.
+    expect(product.cover_image).toMatch(/^\/assets\/native-product\/imagery\/[a-zA-Z]+\.webp$/)
+    expect(Object.values(nativeProduct.identity.imagery).map(place => place.src)).toContain(product.cover_image)
     expect(product.name.length).toBeLessThanOrEqual(60)
     const soul = product.slug.endsWith('-soul')
     expect(product.price_cents).toBe(soul ? 3999 : 1999)
