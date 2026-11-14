@@ -35,6 +35,14 @@ async function scan(directory: string): Promise<void> {
     for (const error of await auditLinks(path, html, specimen)) errors.push(`${path}: ${error}`)
   }
 }
+const diagramManifest = await Bun.file('docs/public/diagrams/artifacts.json').json() as { files: Record<string, string> }
+for (const [file, expected] of Object.entries(diagramManifest.files)) {
+  for (const directory of ['docs/public/diagrams', resolve(root, 'diagrams')]) {
+    const bytes = await Bun.file(resolve(directory, file)).arrayBuffer()
+    const actual = new Bun.CryptoHasher('sha256').update(bytes).digest('hex')
+    if (actual !== expected) errors.push(`Diagram source or rendered artifact changed without updating its verified manifest: ${file}`)
+  }
+}
 await scan(root)
 if (!brandedPages) errors.push('No branded BunPress pages were audited')
 const index = await Bun.file(resolve(root, 'search-index.json')).json()

@@ -1,0 +1,159 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Last Soul Ultra: confirm a selected race place",
+    "locale": "en",
+    "quality_profile": "showcase",
+    "output": "docs/public/diagrams/race-confirmation/index.html",
+    "legend": {
+      "entries": {
+        "frontend": {
+          "label": "Your confirmation task"
+        },
+        "backend": {
+          "label": "Race service"
+        },
+        "security": {
+          "label": "All tasks required"
+        }
+      }
+    }
+  },
+  "lanes": [
+    {
+      "id": "service",
+      "label": "Race service"
+    },
+    {
+      "id": "agreement",
+      "label": "Agreement"
+    },
+    {
+      "id": "details",
+      "label": "Race details"
+    },
+    {
+      "id": "payment",
+      "label": "Payment"
+    }
+  ],
+  "mainPath": [
+    "selected",
+    "agreement",
+    "gate",
+    "confirmed"
+  ],
+  "nodes": [
+    {
+      "id": "selected",
+      "lane": "service",
+      "col": 0,
+      "type": "backend",
+      "icon": "flag",
+      "label": "Place selected",
+      "sublabel": "Open race-entry Profile"
+    },
+    {
+      "id": "agreement",
+      "lane": "agreement",
+      "col": 1,
+      "type": "frontend",
+      "icon": "person",
+      "label": "Sign agreement",
+      "sublabel": "Current required version"
+    },
+    {
+      "id": "details",
+      "lane": "details",
+      "col": 1,
+      "type": "frontend",
+      "icon": "person",
+      "label": "Save race details",
+      "sublabel": "All required fields"
+    },
+    {
+      "id": "payment",
+      "lane": "payment",
+      "col": 1,
+      "type": "frontend",
+      "icon": "person",
+      "label": "Pay the entry fee",
+      "sublabel": "Service reports paid"
+    },
+    {
+      "id": "gate",
+      "lane": "service",
+      "col": 3,
+      "type": "security",
+      "icon": "decision",
+      "label": "All three done?",
+      "sublabel": "Before the entry deadline"
+    },
+    {
+      "id": "confirmed",
+      "lane": "service",
+      "col": 4,
+      "type": "backend",
+      "icon": "success",
+      "label": "Place confirmed",
+      "sublabel": "Check service status"
+    }
+  ],
+  "edges": [
+    {
+      "from": "selected",
+      "to": "agreement",
+      "variant": "default"
+    },
+    {
+      "from": "selected",
+      "to": "details",
+      "variant": "default"
+    },
+    {
+      "from": "selected",
+      "to": "payment",
+      "variant": "default"
+    },
+    {
+      "from": "agreement",
+      "to": "gate",
+      "label": "Signed"
+    },
+    {
+      "from": "details",
+      "to": "gate",
+      "label": "Saved"
+    },
+    {
+      "from": "payment",
+      "to": "gate",
+      "label": "Paid"
+    },
+    {
+      "from": "gate",
+      "to": "confirmed",
+      "label": "All complete",
+      "variant": "emphasis"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Any order",
+      "items": [
+        "The three tasks are independent. Complete them in the order that suits you.",
+        "An application, a selected place and a confirmed place are different states."
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "Check the service",
+      "items": [
+        "Returning from checkout is not proof of payment. Read the payment and entry status in Profile.",
+        "Training accounts and subscriptions do not register or confirm a race entry."
+      ]
+    }
+  ]
+}

@@ -1,31 +1,53 @@
 ---
 title: Data model and ERD
-description: Explore how LSU accounts, roles, Run + Strength plans, sessions, feedback and messages relate.
+description: Explore LSU identity, training access, feedback and the weekly coach-review schema.
 ---
 
 # Data model and ERD
 
-[Open the interactive LSU ERD](/diagrams/lsu-erd/index.html).
+LSU keeps a person's identity, management permissions and training access in separate records. The simplest way to read the model is to follow those responsibilities into the weekly training block.
 
-The diagram documents 23 related tables, all 465 columns in those tables and 54 declared foreign keys from the deployed schema: 53 links between tables and one self-reference. It contains structure only: no account records, passwords, payment details, health readings or conversations. It covers the LSU review flows rather than every supporting database table.
+<TrainingModel />
 
-## Explore the diagram
+[Open the current interactive ERD](/diagrams/lsu-erd/index.html). It includes **22 tables, all 493 columns in those tables and 62 declared foreign keys**. Of those keys, 61 connect different tables and one is a self-reference retained in the fields.
 
-Press `/` and type a table name to jump to it. Press `?` for the diagram's own guide, `L` to compare groups of tables, `M` for a map of the whole schema and `R` to trace how two tables connect. Pan and zoom to inspect a table, then select it to focus its relationships. The diagram's controls call a table a node and a foreign key an authored link, so its vocabulary differs from this page's. The flow table below identifies the tables for accounts and roles, Run + Strength access, method feedback, coach review, and health and messages. On a phone, open the full diagram and zoom into one area at a time. The full schema is deliberately larger than a phone screen.
+## Choose an area
 
-`PK` identifies a primary key, `FK` a foreign key and `UK` a unique key. A column can carry several roles. Unique-together notes identify compound constraints; a nullable type ends in `?`. A type shown as `USER-DEFINED` is a Postgres enum: the diagram reports the information-schema type rather than the enum's own name, which is why five `status` columns and `discount_type` read that way. Read their allowed values from the migration for that table. Relationship ends distinguish one from many and optional from required. The self-reference `plan_drafts.parent_id → plan_drafts.id` records draft ancestry; it is shown in the fields and schema note rather than as a loop. Lines represent declared foreign keys; application-level references without a database constraint remain visible as columns rather than invented relationships.
+| You want to understand | Area | Follow |
+| --- | --- | --- |
+| Why a coach or administrator has particular access | Accounts and roles | `users` → organization membership, athlete and coach profiles |
+| How a purchased or complimentary package supplies training | Training access | `products` → `coaching_subscriptions` → `product_enrollments` |
+| Why the next week is waiting | Weekly coach review | `training_blocks` → enrollment, subscription and reviewing coach |
+| Where feedback and temporary transcripts belong | Feedback and privacy | `assistant_conversations`, `coaching_voice_feedback` and `health_metrics` |
 
-## Read the main flows
+Press `/` to search for one of the tables above, then select it to highlight its relationships. Use `?` for help, `M` for the full map or `R` to trace a relationship. Select a table to focus its connections. On a phone, open the standalone diagram and zoom into one area at a time.
 
-| Flow | Tables and meaning |
-| --- | --- |
-| Accounts and permissions | `users`, `organizations` and `org_members` associate a person with an organization role. A `coaches` or `athletes` profile is a separate capability. See [Roles and plan access](/roles). |
-| A combined training tier | `products`, `coaching_methods`, `coaching_subscriptions` and `product_enrollments` describe an offer and access to it. `training_plans` and `workouts` hold the resulting calendar. Running and strength sessions can belong to one subscription. |
-| AI feedback | `assistant_conversations` records a request and its response in the subscription's coaching context. `coaching_method_revisions` and `plan_drafts` support versioned methods and proposed training. This snapshot predates the current weekly block-review workflow and does not show all its tables. See [Feedback](/training/feedback). |
-| Voice review | `coaching_voice_feedback` holds the private, expiring transcript receipt. Transcription and sending feedback are separate actions. Raw recordings are temporary processing files, not a public media library. |
-| Personal records | `health_metrics` belongs to an athlete. `chat_conversations` and `chat_messages` describe participant messaging. An organization role alone does not authorize reading every private record. |
-| Purchases and presentation | `customers`, `orders` and `coupons` support purchases. `brand_experiences` describes the published LSU experience. Seeded complimentary access does not represent a real payment. |
+## Follow one training week
+
+1. A **product** describes the package and its terms.
+2. A **coaching subscription** records the person's access to that offer.
+3. A **product enrollment** carries the plan snapshot and delivery state.
+4. A **training block** links that enrollment to a dated draft, the runner's evidence and coach review.
+5. Approved sessions reach **workouts**, which holds planned training and recorded results.
+
+For example, a runner can have an active subscription while the next block remains in review. Billing access and approval of future sessions are different facts. A draft saved by a coach is not yet a released week.
+
+In `training_blocks`, inspect `feedback_at`, `revision`, `reviewed_by_coach_id`, `reviewed_at` and `released_at`. They distinguish the runner's qualifying check-in, draft changes, the reviewer and release. The diagram records database constraints; [Feedback](/training/feedback) explains the user-facing sequence.
+
+## Read keys and optional relationships
+
+`PK` marks a primary key, `FK` a foreign key and `UK` a single-column unique constraint. A type ending in `?` allows null. Compound unique constraints are listed in the diagram's notes; they do not mean each participating column is individually unique.
+
+A relationship end distinguishes one from many and optional from required. Lines represent declared foreign keys. A column with only an application-level relationship is not given an invented database constraint.
+
+The self-reference `plan_drafts.parent_id → plan_drafts.id` records draft ancestry. It appears in the fields rather than as a loop. SQL enum names are preserved as declared by the migrations, rather than flattened into the older snapshot's `USER-DEFINED` label.
 
 ## Scope and freshness
 
-This snapshot was checked against the deployed database on 29 October 2026 (UTC). Column names and foreign keys describe stored structure; the [roles guide](/roles) describes authorization. Use both when reviewing access. This is a dated schema reference, not a claim that the current database still has exactly this structure. In particular, later training-block review tables are outside this snapshot. Schema changes require regenerating the [diagram source](/diagrams/lsu-erd/schema.json); use [Plans and subscriptions](/training/plans#how-weekly-training-arrives) for current release behavior.
+This diagram is generated from the migration declarations in the pinned training kit, **1.0.4323**, source revision `0004ca6784db0c1f25a5f9db8b3752a8df65e66a`. It describes the expected schema in that source. It does not claim that a production database was inspected today or that every supporting table is included.
+
+The [source manifest](/diagrams/lsu-erd/manifest.json) records the pin and hashes of the migrations used. There are no account rows, passwords, health readings or conversations in the artifact. Permission rules still belong to the application: read [Roles and plan access](/roles) alongside the structural diagram.
+
+The earlier [29 October deployed-schema snapshot](/diagrams/lsu-erd-2026-10-29/index.html) remains available as a dated reference. Its 23-table scope includes participant messaging tables supplied outside the current app migration corpus. It predates weekly training blocks and should not be used to infer their structure.
+
+<div class="guide-next"><p>Want the process before the fields?</p><a href="/visual-guide#from-this-week-to-the-next">See the weekly training flow</a></div>

@@ -1,0 +1,13 @@
+{
+  "format": 1,
+  "files": {
+    "lsu-erd/schema.json": "1c4c227bc9ec76c1559259931709170abd967d72c136350961161c68d45d8f95",
+    "lsu-erd/index.html": "6a49d27ad2cba49ef5ffbe2706db45763923f35e4179ae2159f284da44450c02",
+    "weekly-training/schema.json": "4b6c1d408fea75560deff1f168b715818dbccb32a0eef95dec9cad1b149df822",
+    "weekly-training/index.html": "39fc3b9c15be3bd486a87eb2450dc8ff7cc030b71ea17cd87f82e5021141b3c7",
+    "race-confirmation/schema.json": "2681879cba02939d1839839d3ad3f1d703e878dd7ee36b7d67863df61e3e77ce",
+    "race-confirmation/index.html": "a2da9a14f59027055a366ef31ad6b0316017d92446728e1b94b3b0ed5b722fec",
+    "lsu-erd-2026-10-29/schema.json": "29db3d3884f209b03ac5f19f792b2ec6223a90ffe8964ffbdea99b93360adb73",
+    "lsu-erd-2026-10-29/index.html": "735ea5b86b743ef20e0ff661add87be3550d9f2bf08a85d404ffe0607a41ded5"
+  }
+}

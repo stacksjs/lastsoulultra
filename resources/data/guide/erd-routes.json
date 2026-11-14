@@ -1,0 +1,181 @@
+{
+  "product_enrollments_user_id": {
+    "fromSide": "left",
+    "toSide": "bottom",
+    "via": [
+      [
+        1149,
+        2429
+      ],
+      [
+        1149,
+        925
+      ],
+      [
+        203,
+        925
+      ]
+    ]
+  },
+  "assistant_conversations_coaching_method_id": {
+    "fromSide": "bottom",
+    "toSide": "top",
+    "via": [
+      [
+        1778.5,
+        956
+      ],
+      [
+        596,
+        956
+      ]
+    ]
+  },
+  "coaching_voice_feedback_user_id": {
+    "fromSide": "top",
+    "toSide": "bottom",
+    "via": [
+      [
+        1778.5,
+        925
+      ],
+      [
+        203,
+        925
+      ]
+    ]
+  },
+  "training_blocks_organization_id": {
+    "fromSide": "bottom",
+    "toSide": "top",
+    "via": [
+      [
+        1373,
+        956
+      ],
+      [
+        203,
+        956
+      ]
+    ]
+  },
+  "training_blocks_brand_experience_id": {
+    "fromSide": "bottom",
+    "toSide": "right",
+    "via": [
+      [
+        1373,
+        973
+      ],
+      [
+        786,
+        973
+      ],
+      [
+        786,
+        2365
+      ]
+    ]
+  },
+  "training_blocks_coaching_subscription_id": {
+    "fromSide": "bottom",
+    "toSide": "top",
+    "via": [
+      [
+        1373,
+        973
+      ],
+      [
+        1544,
+        973
+      ],
+      [
+        1544,
+        1628
+      ],
+      [
+        1373,
+        1628
+      ]
+    ]
+  },
+  "training_blocks_enrollment_id": {
+    "fromSide": "bottom",
+    "toSide": "left",
+    "via": [
+      [
+        1373,
+        973
+      ],
+      [
+        1185,
+        973
+      ],
+      [
+        1185,
+        2429
+      ]
+    ]
+  },
+  "training_blocks_product_id": {
+    "fromSide": "bottom",
+    "toSide": "top",
+    "via": []
+  },
+  "training_blocks_user_id": {
+    "fromSide": "top",
+    "toSide": "top",
+    "via": [
+      [
+        1373,
+        12
+      ],
+      [
+        203,
+        12
+      ]
+    ]
+  },
+  "training_blocks_athlete_id": {
+    "fromSide": "left",
+    "toSide": "right",
+    "via": [
+      [
+        1166,
+        333
+      ],
+      [
+        1166,
+        477
+      ]
+    ]
+  },
+  "training_blocks_reviewed_by_coach_id": {
+    "fromSide": "top",
+    "toSide": "top",
+    "via": [
+      [
+        1373,
+        12
+      ],
+      [
+        596,
+        12
+      ]
+    ]
+  },
+  "training_blocks_reviewed_by_user_id": {
+    "fromSide": "top",
+    "toSide": "top",
+    "via": [
+      [
+        1373,
+        12
+      ],
+      [
+        203,
+        12
+      ]
+    ]
+  }
+}

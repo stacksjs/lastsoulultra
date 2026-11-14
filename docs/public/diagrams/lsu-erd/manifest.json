@@ -1,12 +1,347 @@
 {
-  "generated_at": "2026-10-29",
-  "tables": 23,
-  "columns": 465,
-  "foreign_keys": 54,
-  "rendered_relationships": 53,
+  "source": {
+    "package": "@hq/platform",
+    "version": "1.0.4323",
+    "revision": "0004ca6784db0c1f25a5f9db8b3752a8df65e66a"
+  },
+  "scope": "Declared schema from pinned migrations; no production database queried.",
+  "tables": 22,
+  "columns": 493,
+  "foreign_keys": 62,
+  "rendered_relationships": 61,
   "self_references": 1,
-  "sha256": {
-    "index.html": "735ea5b86b743ef20e0ff661add87be3550d9f2bf08a85d404ffe0607a41ded5",
-    "schema.json": "29db3d3884f209b03ac5f19f792b2ec6223a90ffe8964ffbdea99b93360adb73"
-  }
+  "migrations": [
+    {
+      "file": "0000000007-create-users-table.sql",
+      "sha256": "4637384faf16b3ab1ac81fdf3e9e83d4644ef6760d798245d914f5dae30427e8"
+    },
+    {
+      "file": "0000000008-create-customers-table.sql",
+      "sha256": "c0a008093c76ef6958775879bd5094b04d0ab478bfb9f8bfea9104d7ea3eaf3c"
+    },
+    {
+      "file": "0000000011-create-organizations-table.sql",
+      "sha256": "1fc6b2ed6f1d5e93b5fc73ec2dd5a6170e32be2554e569b3f612df7834b57af2"
+    },
+    {
+      "file": "0000000016-create-coaches-table.sql",
+      "sha256": "970ab36bdff9a498378681954f8b9022f6743098a4b90d931dbd0091b7f9225b"
+    },
+    {
+      "file": "0000000017-create-athletes-table.sql",
+      "sha256": "000e11e543c2af8f600aa57805442653a4c51db96ec61c452976511ce3f3d03d"
+    },
+    {
+      "file": "0000000025-create-health_metrics-table.sql",
+      "sha256": "abdf9eda5ce645892ea2c4d97bd5daf7bdaf3958969b2d077209252ca7d60895"
+    },
+    {
+      "file": "0000000028-create-locations-table.sql",
+      "sha256": "a10b9305e57f8112ca946a955645baf625c586ed5a789db8121e6ede9cb82a92"
+    },
+    {
+      "file": "0000000031-create-org_members-table.sql",
+      "sha256": "cf8317d67eb4f4a080d747867754e6e77a02c0bfa0bcb55b03ba59206c7e6330"
+    },
+    {
+      "file": "0000000040-create-plan_drafts-table.sql",
+      "sha256": "958f6a5b3a1b9c06fdc83ebf4ea1ca11af56ff46e688513a03cae05318f1748d"
+    },
+    {
+      "file": "0000000061-create-training_plans-table.sql",
+      "sha256": "8702254906d4bf83a12deea3abcfb93e83eecb4bc94d9c0d283889fb2dd4af60"
+    },
+    {
+      "file": "0000000062-create-products-table.sql",
+      "sha256": "ea451edfdf6697767d37f02f3519c32797fe112a51e27c283d6895b613ba91b5"
+    },
+    {
+      "file": "0000000063-create-coupons-table.sql",
+      "sha256": "81572125f61d8628c00946a21e00964fdbc835c15c6afcd99ec7cd55a4a18c80"
+    },
+    {
+      "file": "0000000067-create-orders-table.sql",
+      "sha256": "67454041817f13dd20208a4ccf7c4b131df40662980a1573e87283a1d8ecad81"
+    },
+    {
+      "file": "0000000069-create-product_enrollments-table.sql",
+      "sha256": "4b8c8aed809ddb9a14150aa4906a6687958d6a1f3fe60c92848c45c911c262e6"
+    },
+    {
+      "file": "0000000077-create-workouts-table.sql",
+      "sha256": "6d8aca23c57ea5850a523401190fd9045dd22e707ae2216cd898a308d8ffe3cc"
+    },
+    {
+      "file": "0000000092-alter-workouts-columns.sql",
+      "sha256": "dedca60bcf822baeae704e379e5cb3bec86bb3c16028d5c3e4f53bc0d58c9aa8"
+    },
+    {
+      "file": "0000000096-alter-organizations-columns.sql",
+      "sha256": "4aeebaf53e8c0e5aadfd77ad83a01b3a7dca2732512b585d374ca00c4fe9b5c1"
+    },
+    {
+      "file": "0000000098-alter-workouts-columns.sql",
+      "sha256": "18d3a8ef7ff305480e9d324fa41d1e08250ed68376f4fa1f1153fb7a780b2e62"
+    },
+    {
+      "file": "0000000099-create-coaching_subscriptions-table.sql",
+      "sha256": "ff2c93eedd7458453a44399919caa3a7a2fba4002f08d9dad3055913afdbf328"
+    },
+    {
+      "file": "0000000100-alter-orders-columns.sql",
+      "sha256": "d37f60fe7518bd2ae3c4ae13c246226f45859fd56f1dda29898d8118a8c52693"
+    },
+    {
+      "file": "0000000101-create-orders_stripe_invoice_unique-index-in-orders.sql",
+      "sha256": "b41081fb477c692b7145e36af2bc9e7813435fa6b349e0b0cfbe4b0989a9ca54"
+    },
+    {
+      "file": "0000000102-alter-products-columns.sql",
+      "sha256": "8c4f52955eb793ee7f511bbecb0f2d7a02ad9bc08f9b3c903ad1ec51e6c4d4a1"
+    },
+    {
+      "file": "0000000103-alter-product_enrollments-columns.sql",
+      "sha256": "c3f8f9f59faf687f895ebc3381b24300847814f96e214e230aab2aac2f212ad1"
+    },
+    {
+      "file": "0000000105-auto-misc.sql",
+      "sha256": "ac3c0a6e4741da28b10411aaccc83289bf3ded5b32686fed64f0a5b554151f48"
+    },
+    {
+      "file": "0000000114-alter-athletes-columns.sql",
+      "sha256": "65117f4699a253ab3b4a1af65d4c350023f9f74f0e24817d1ba874bb3d3a4f11"
+    },
+    {
+      "file": "0000000124-auto-misc.sql",
+      "sha256": "05a9fe49bc9f224953e526b745ea48dfe881e5d26732941ee7e6051e30ca022d"
+    },
+    {
+      "file": "0000000125-alter-locations-columns.sql",
+      "sha256": "26cdc2bef98f0d73b6c11e007919f90b2eb4ceed0235825f64678f7d148f0c9f"
+    },
+    {
+      "file": "0000000127-alter-organizations-columns.sql",
+      "sha256": "ab529afbc9c610025a4f0141e964272a6d9db781126742be63d4f2f508052a85"
+    },
+    {
+      "file": "0000000128-create-organizations_self_checkin_code_unique-index-in-organizations.sql",
+      "sha256": "5b73aa4038034681071f81c69300194dac5aaf52140fd68cd76736be0aff62b2"
+    },
+    {
+      "file": "0000000134-alter-coaching_subscriptions-columns.sql",
+      "sha256": "cc3bdc75f74bee8ae0e4dd903090582a33918e31b5fd611362f33e26a51f39e4"
+    },
+    {
+      "file": "0000000142-alter-organizations-columns.sql",
+      "sha256": "d5947bf564ed3ab26f6333f86076c49e941ccb27b630964db73d4cfbe7209926"
+    },
+    {
+      "file": "0000000143-alter-users-columns.sql",
+      "sha256": "9a38cf9bb5743fb7e70945e6f1612346f3a4d9fd2c283b46c43f60ebec77a943"
+    },
+    {
+      "file": "0000000150-alter-athletes-columns.sql",
+      "sha256": "148eba740946496fca22cfd35c61e9dd32fa5fde0d34460010eac0beb4386d1b"
+    },
+    {
+      "file": "0000000153-alter-workouts-columns.sql",
+      "sha256": "0a974210310f6553f438d385803812ac4f0f30e7c40b9ab9fdfd59da1c378695"
+    },
+    {
+      "file": "0000000154-alter-athletes-columns.sql",
+      "sha256": "0c6f127ebc2f5ccc63b841b9e7c344eb254b96f91c21b08be1ea6ca08dbb4e9d"
+    },
+    {
+      "file": "0000000179-alter-organizations-columns.sql",
+      "sha256": "5cac0677ab3533441bd20ae033562933c4d1f49ef1cc502e561d324e853a5104"
+    },
+    {
+      "file": "0000000193-alter-products-columns.sql",
+      "sha256": "e3496a845510937ebca4632e5c9c6b9fa12a6efb5fc93e48c64b7dd60f6bdf79"
+    },
+    {
+      "file": "0000000201-alter-athletes-columns.sql",
+      "sha256": "164db2fd3f031d1f8b40a6b6f9ee474067d146d2e594cc251903cace1da27a84"
+    },
+    {
+      "file": "0000000206-alter-workouts-columns.sql",
+      "sha256": "54fbb6d27d29e05bce0b5ab68bcf9ea5bbcf5df2a76d046f36e18c4028537aae"
+    },
+    {
+      "file": "0000000209-create-assistant_conversations-table.sql",
+      "sha256": "355975bd17ea47fb1c780ec04aa61b203f3b6a306ecd8d39dd764ddc33303d9d"
+    },
+    {
+      "file": "0000000216-alter-workouts-columns.sql",
+      "sha256": "3c2bbed4cc3db43367a36cc40a675482867061f080b8c6fdabdeba158ff50cdf"
+    },
+    {
+      "file": "0000000218-alter-athletes-columns.sql",
+      "sha256": "08bbcf7dcc721cbf015fa9931743f5fe1495ed06000337b45ed3813eb905e8e4"
+    },
+    {
+      "file": "0000000219-alter-workouts-columns.sql",
+      "sha256": "589dd66101183922b82e1db28c26383ee1adae4049e05cca1138d18cd88bd14a"
+    },
+    {
+      "file": "0000000222-alter-orders-columns.sql",
+      "sha256": "f6eb576b4ab2755724d4861b59090b0cc1718524ee9be85f5dd908a8e29b2226"
+    },
+    {
+      "file": "0000000223-alter-users-columns.sql",
+      "sha256": "6be235cedc06ca09fd71aef1b42da4730a0a4137503b3cee1e868ddd90b18962"
+    },
+    {
+      "file": "0000000225-alter-orders-columns.sql",
+      "sha256": "fd223764efa268d84ce0637acc62929ab2f812cd1de41e93319deb9bd30599f9"
+    },
+    {
+      "file": "0000000230-auto-misc.sql",
+      "sha256": "3924da10b499e61829b2679e58bcef274c3589d3b886a6fe5e931f1ad6460787"
+    },
+    {
+      "file": "0000000232-alter-workouts-columns.sql",
+      "sha256": "643ebbbae29975cedf7b651e9e275f40928e862affef73086da5ddf0988c9ef8"
+    },
+    {
+      "file": "0000000233-alter-locations-columns.sql",
+      "sha256": "73660910cbeb10db1b6863d82e5345ede3b93180b8955b2f224c47a3f23d2bfb"
+    },
+    {
+      "file": "0000000235-auto-misc.sql",
+      "sha256": "e006b82337c5325462ab8d78935a315cd7f8a270ead630b4906357f84b49403f"
+    },
+    {
+      "file": "0000000240-alter-organizations-columns.sql",
+      "sha256": "68e17431645f133f2268ff44c39273a7c9fda6d69da9e5db129d3e508357c2ad"
+    },
+    {
+      "file": "0000000242-alter-products-columns.sql",
+      "sha256": "571c9113ae46c0c4e1e37b282538531e6563a5f5a8d05b9426d54aaf627706c3"
+    },
+    {
+      "file": "0000000249-alter-workouts-columns.sql",
+      "sha256": "74b6c3f16b5fe1bcaa0f42af88846dfc4dd0746fe3e67e3e56df67301b66c305"
+    },
+    {
+      "file": "0000000252-alter-assistant_conversations-columns.sql",
+      "sha256": "8c8f0960fffc621b2075f99380fddcfcd33267182c3d353cedbb82504b804007"
+    },
+    {
+      "file": "0000000265-create-brand_experiences-table.sql",
+      "sha256": "beabf90bca40fe13470df6880e8338019d7dacc2eba85c1f4ba271eb6e1b0dc9"
+    },
+    {
+      "file": "0000000266-create-coaching_methods-table.sql",
+      "sha256": "224a075d2009e62cadb377b4c0469db665ca66087d7a92cf3fae274a84e98fd8"
+    },
+    {
+      "file": "0000000267-alter-assistant_conversations-columns.sql",
+      "sha256": "5088d5bc0ee5c7185b2c44fba4f7ba680bc7c00488263e7b678a3b73bdd8bf29"
+    },
+    {
+      "file": "0000000268-alter-coaching_subscriptions-columns.sql",
+      "sha256": "09e599301a6785a01d72dea9bbc68d9f7b32d1fe45707b81aef6a54829c4a2a7"
+    },
+    {
+      "file": "0000000269-alter-coaching_subscriptions-columns.sql",
+      "sha256": "09e599301a6785a01d72dea9bbc68d9f7b32d1fe45707b81aef6a54829c4a2a7"
+    },
+    {
+      "file": "0000000271-create-coaching_voice_feedback-table.sql",
+      "sha256": "898a4f9ae2063f557b0b255bf6f940d2c803d89a9079f4c92ea054f1aae28499"
+    },
+    {
+      "file": "0000000272-alter-coaching_subscriptions-columns.sql",
+      "sha256": "218942fb66f697feca19621a5f3af42bb0836f343d48c516f832fcc99e47314e"
+    },
+    {
+      "file": "0000000274-alter-workouts-columns.sql",
+      "sha256": "e5ded8103f53246d92125aa34d872bb32eef09430b6936d87d60c5a589e9646c"
+    },
+    {
+      "file": "0000000275-alter-workouts-columns.sql",
+      "sha256": "7a822cd267f6dbe40f35e04cb1ae84d294944619dfa93af97ed6cf0580966e0f"
+    },
+    {
+      "file": "0000000287-alter-workouts-columns.sql",
+      "sha256": "3714a8d4775c5d831b7b0f20d61baa8a95b9944faa5857e9f71a6053f19c33c5"
+    },
+    {
+      "file": "0000000298-create-coaching_method_revisions-table.sql",
+      "sha256": "faddec6962b070b519702ec85ab174a44fc99038f47762faad68057b93129ee4"
+    },
+    {
+      "file": "0000000299-alter-orders-columns.sql",
+      "sha256": "ce39067702a465c4a97a1037d3aeaafb1584bd05594a97f1080697f8c6840a2a"
+    },
+    {
+      "file": "0000000302-alter-products-columns.sql",
+      "sha256": "08127c59890acbb9a3cfd2ddf6a03c4f97487f029c0792183066d5865a28ec4e"
+    },
+    {
+      "file": "0000000303-alter-product_enrollments-columns.sql",
+      "sha256": "29873dc11f4d29c1b8c05489dfec27212d59d27bb65d99395f672f3a9d74c152"
+    },
+    {
+      "file": "0000000304-alter-orders-columns.sql",
+      "sha256": "df478829dd7f8aeb392239764d8ad2f1df6c4f1164f71a1d8d5d06cfcc1ac2ae"
+    },
+    {
+      "file": "0000000314-alter-products-columns.sql",
+      "sha256": "48eed8e44654e664b9432ab6de8750016295a6753682b0e4cc657031428c26fa"
+    },
+    {
+      "file": "0000000315-alter-coaching_subscriptions-columns.sql",
+      "sha256": "920985b1866126bdf20627a9ad4342bb72976f3a780d8a300cfe30b25deb09e6"
+    },
+    {
+      "file": "0000000316-alter-orders-columns.sql",
+      "sha256": "27f57dcfe223678af11939c20b1f5bb7624825b5b57989c5df4430ed03852ed2"
+    },
+    {
+      "file": "0000000317-alter-coaching_subscriptions-columns.sql",
+      "sha256": "f44a503ce371b4962bfe3842e6666d94a808d1f962df28a3dc5cb2d0da0ab961"
+    },
+    {
+      "file": "0000000318-alter-workouts-columns.sql",
+      "sha256": "552cca5e5e92b31e5c8714a1212fe44fe287cd98b7b20c031a0bddcabc8006da"
+    },
+    {
+      "file": "0000000392-create-training_blocks-table.sql",
+      "sha256": "165f11e4e05c0dfc0c0e2dcbb0c7bcfa25351451af7177468d7ed2554e917073"
+    },
+    {
+      "file": "0000000394-alter-products-columns.sql",
+      "sha256": "738924e18dd3c5382b8eaa7cc0372ec9a7d7fb52bf96fffbcc420610315a4cc1"
+    },
+    {
+      "file": "0000000395-alter-workouts-columns.sql",
+      "sha256": "6b7d0910a2fe6f01ea80dd3ed0d1b7c8b9830ad3611abdb050fcf08d6e46d271"
+    },
+    {
+      "file": "0000000396-alter-users-columns.sql",
+      "sha256": "8368b32ebff4f10ec5409775d6dc8dbe1c6cef894cd1e78ee2da925cb4414f6a"
+    },
+    {
+      "file": "0000000399-alter-athletes-columns.sql",
+      "sha256": "bab37ada736d39f84ca2e5f79fc62bff82ec18dd8b9231a3ece7d08de7da43d1"
+    },
+    {
+      "file": "0000000401-alter-training_blocks-columns.sql",
+      "sha256": "88f5e0b21bc5404b03e7ba0f699d6f3b24be50037f8419a7b141727ca6cb4432"
+    },
+    {
+      "file": "0000000402-alter-coaching_subscriptions-columns.sql",
+      "sha256": "b4f53c026d7c9b577dfa34e84087358f6fb1088db45e545ae720218a2bf2f870"
+    },
+    {
+      "file": "0000000403-alter-products-columns.sql",
+      "sha256": "7139e7764df856db16dab6a2455297aa3b773b39a0145519bf24ed0e0d46e0f0"
+    },
+    {
+      "file": "0000000404-alter-training_blocks-columns.sql",
+      "sha256": "c4af9f14bda6bbff73f382a7b729767d8bede610057f715472cdcb26a986d35c"
+    }
+  ]
 }

@@ -7,7 +7,7 @@ description: Unlock the preview, sign into your LSU account and find training on
 
 ## Choose the right sign-in
 
-There are three separate kinds of access:
+There are three separate kinds of access. The [Visual guide](/visual-guide#three-kinds-of-access) shows how they fit together:
 
 | Access | Where you use it | What it unlocks |
 | --- | --- | --- |

@@ -36,6 +36,8 @@ If the microphone is unavailable, type your feedback. An audio service failure d
 
 ## Send the weekly check-in at the right time
 
+<WeeklyTraining />
+
 Current catalog packages release training in seven-day blocks. The qualifying feedback window opens two days before the block ends. Use the prompt and dates shown for your subscription.
 
 If your block ends on Sunday, Friday's feedback can start preparation of the next block. A message on Tuesday is useful context, but does not count as the end-of-block check-in. A second message does not create a second training week.
@@ -55,3 +57,5 @@ If AI is unavailable, the method screen can disable sending and show an availabi
 Check that you sent feedback for the correct subscription during its qualifying window. Then check whether the next block is waiting for coach review. Refresh once after approval is confirmed. Do not buy the package again or duplicate your feedback to force a release.
 
 For a failure report, include the time, subscription and visible status, keeping personal information out of shared screenshots. See [Troubleshooting](/troubleshooting#feedback-sends-but-no-reply-arrives).
+
+<div class="guide-next"><p>Continue the guide</p><a href="/training/progress">Review your recorded progress</a></div>

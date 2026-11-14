@@ -25,6 +25,8 @@ An application is a request to be considered. It is different from selection and
 
 ## Confirm a selected place
 
+<RaceConfirmation />
+
 If LSU selects your application, open **Profile** and inspect the entry and its deadline. The confirmation flow has three tasks, which can be completed in any order:
 
 1. Sign the current participant agreement.

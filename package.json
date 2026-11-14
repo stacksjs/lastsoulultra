@@ -70,7 +70,7 @@
     "build:assets": "bun scripts/build-site-assets.ts",
     "build:bundles": "bun scripts/externalize-page-bundles.ts",
     "audit:html": "bun scripts/audit-html.ts",
-    "audit:docs": "bun run docs:style-guide:check && bun scripts/sync-workout-art.ts --check && bun scripts/sync-style-guide-assets.ts --check && bun scripts/audit-docs.ts",
+    "audit:docs": "bun run docs:style-guide:check && bun scripts/sync-workout-art.ts --check && bun scripts/sync-style-guide-assets.ts --check && bun scripts/sync-training-erd.ts --check && bun scripts/audit-docs.ts",
     "docs:demo": "bun scripts/prepare-demo-docs.ts",
     "native:prepare": "bun scripts/build-native.ts prepare",
     "native:ios": "bun scripts/build-native.ts ios",
@@ -82,7 +82,8 @@
     "native:verify-ios": "bun scripts/verify-native.ts",
     "native:parity": "bun scripts/verify-hq-parity.ts",
     "docs:style-guide": "./buddy docs:style-guide",
-    "docs:style-guide:check": "./buddy docs:style-guide:check"
+    "docs:style-guide:check": "./buddy docs:style-guide:check",
+    "docs:erd:source": "bun scripts/sync-training-erd.ts"
   },
   "dependencies": {
     "@ts-maps/stx": "0.5.7",

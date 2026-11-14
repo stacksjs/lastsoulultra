@@ -67,6 +67,7 @@ export default {
     ['link', { rel: 'stylesheet', href: '/docs/style-guide/fonts.css' }],
     ['link', { rel: 'stylesheet', href: '/docs/style-guide/tokens.css' }],
     ['link', { rel: 'stylesheet', href: '/docs/style-guide/style-guide.css' }],
+    ['link', { rel: 'stylesheet', href: '/docs/guide.css' }],
   ],
   themeConfig: docsTheme,
   nav: [
@@ -90,6 +91,7 @@ export default {
         { text: 'Start here', items: [
           { text: 'Overview', link: '/' },
           { text: 'Getting started', link: '/getting-started' },
+          { text: 'Visual guide', link: '/visual-guide' },
           { text: 'Race information', link: '/races' },
           { text: 'Your account', link: '/my-account' },
           { text: 'Roles and plan access', link: '/roles' },

@@ -1,0 +1,8 @@
+<figure class="guide-figure" aria-label="The main relationships in LSU training">
+<dl class="guide-model">
+<div><dt>Who you are</dt><dd><strong>Account and membership</strong><span>Your organization role controls management permissions. Athlete and coach profiles are separate.</span></dd></div>
+<div><dt>What you joined</dt><dd><strong>Product, subscription and enrollment</strong><span>The offer sets the terms. The enrollment carries your plan snapshot and training access.</span></dd></div>
+<div><dt>What arrives next</dt><dd><strong>Training block and coach review</strong><span>Feedback, draft revisions and approval are recorded before the next sessions are released.</span></dd></div>
+</dl>
+<figcaption>This is a conceptual reading aid. The <a href="/diagrams/lsu-erd/index.html">full ERD</a> shows the actual tables, columns and declared foreign keys.</figcaption>
+</figure>

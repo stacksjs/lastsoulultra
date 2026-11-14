@@ -5,7 +5,6 @@
     "title": "Last Soul Ultra data relationships",
     "locale": "en",
     "quality_profile": "standard",
-    "animation": "none",
     "output": "docs/public/diagrams/lsu-erd/index.html",
     "views": [
       {
@@ -18,48 +17,46 @@
           "coaches",
           "athletes"
         ],
-        "note": "Organization membership controls permissions. A coach profile and a training enrollment are separate."
+        "note": "Organization permissions, coach profiles and athlete profiles are separate."
       },
       {
         "id": "training",
-        "label": "Run + Strength access",
+        "label": "Training access",
         "focus": [
           "products",
-          "training_plans",
           "coaching_subscriptions",
           "product_enrollments",
+          "training_plans",
           "workouts"
         ],
-        "note": "Both disciplines reach the athlete through the same subscription and enrollment."
+        "note": "A subscription grants access; an enrollment carries the plan snapshot and calendar delivery."
+      },
+      {
+        "id": "review",
+        "label": "Weekly coach review",
+        "focus": [
+          "training_blocks",
+          "product_enrollments",
+          "coaching_subscriptions",
+          "coaches"
+        ],
+        "note": "Feedback, evidence, revision and coach approval are recorded before release."
       },
       {
         "id": "feedback",
-        "label": "AI and voice feedback",
+        "label": "Feedback and privacy",
         "focus": [
-          "coaching_methods",
-          "coaching_subscriptions",
           "assistant_conversations",
-          "coaching_voice_feedback"
+          "coaching_voice_feedback",
+          "health_metrics"
         ],
-        "note": "A method author sponsors AI use. The athlete reviews a private transcript before sending feedback."
-      },
-      {
-        "id": "privacy",
-        "label": "Health and messages",
-        "focus": [
-          "users",
-          "athletes",
-          "health_metrics",
-          "chat_conversations",
-          "chat_messages"
-        ],
-        "note": "Health, conversations and transcripts belong to their authorized account and organization context."
+        "note": "Training conversations, temporary transcript receipts and personal records have different lifecycles."
       }
     ]
   },
   "layout": {
     "mode": "grid",
-    "gapX": 70,
+    "gapX": 60,
     "gapY": 70,
     "rowH": 16,
     "headerH": 36
@@ -67,15 +64,15 @@
   "entities": [
     {
       "id": "users",
-      "label": "users",
       "tag": "Identity",
       "row": 0,
       "col": 0,
-      "width": 330,
+      "width": 320,
+      "label": "users",
       "attributes": [
         {
           "name": "id",
-          "type": "bigint",
+          "type": "BIGSERIAL",
           "key": "pk"
         },
         {
@@ -97,12 +94,69 @@
         },
         {
           "name": "avatar_url",
-          "type": "text ?"
+          "type": "text?"
         },
         {
           "name": "stripe_id",
-          "type": "varchar(255) ?",
+          "type": "varchar(255)?",
           "key": "uk"
+        },
+        {
+          "name": "username",
+          "type": "varchar(39)?",
+          "key": "uk"
+        },
+        {
+          "name": "bio",
+          "type": "varchar(300)?"
+        },
+        {
+          "name": "location",
+          "type": "varchar(100)?"
+        },
+        {
+          "name": "website",
+          "type": "varchar(255)?"
+        },
+        {
+          "name": "profile_public",
+          "type": "boolean?"
+        },
+        {
+          "name": "profile_activity",
+          "type": "boolean?"
+        },
+        {
+          "name": "profile_weight",
+          "type": "boolean?"
+        },
+        {
+          "name": "pronouns",
+          "type": "varchar(40)?"
+        },
+        {
+          "name": "sports",
+          "type": "varchar(500)?"
+        },
+        {
+          "name": "socials",
+          "type": "text?"
+        },
+        {
+          "name": "profile_gyms",
+          "type": "boolean?"
+        },
+        {
+          "name": "profile_workouts",
+          "type": "boolean?"
+        },
+        {
+          "name": "imported_from",
+          "type": "varchar(30)?"
+        },
+        {
+          "name": "welcomed_at",
+          "type": "timestamp?"
         },
         {
           "name": "created_at",
@@ -110,115 +164,38 @@
         },
         {
           "name": "updated_at",
-          "type": "timestamp ?"
-        },
-        {
-          "name": "email_verified_at",
-          "type": "timestamp ?"
-        },
-        {
-          "name": "password_changed_at",
-          "type": "timestamp ?"
-        },
-        {
-          "name": "two_factor_secret",
-          "type": "varchar(255) ?"
-        },
-        {
-          "name": "two_factor_enabled",
-          "type": "boolean"
-        },
-        {
-          "name": "two_factor_last_used_step",
-          "type": "bigint ?"
-        },
-        {
-          "name": "uuid",
-          "type": "uuid ?"
-        },
-        {
-          "name": "username",
-          "type": "varchar(39) ?",
-          "key": "uk"
-        },
-        {
-          "name": "bio",
-          "type": "varchar(300) ?"
-        },
-        {
-          "name": "location",
-          "type": "varchar(100) ?"
-        },
-        {
-          "name": "website",
-          "type": "varchar(255) ?"
-        },
-        {
-          "name": "profile_public",
-          "type": "boolean ?"
-        },
-        {
-          "name": "profile_activity",
-          "type": "boolean ?"
-        },
-        {
-          "name": "profile_weight",
-          "type": "boolean ?"
-        },
-        {
-          "name": "pronouns",
-          "type": "varchar(40) ?"
-        },
-        {
-          "name": "sports",
-          "type": "varchar(500) ?"
-        },
-        {
-          "name": "socials",
-          "type": "text ?"
-        },
-        {
-          "name": "profile_gyms",
-          "type": "boolean ?"
-        },
-        {
-          "name": "profile_workouts",
-          "type": "boolean ?"
-        },
-        {
-          "name": "imported_from",
-          "type": "varchar(30) ?"
-        },
-        {
-          "name": "welcomed_at",
-          "type": "timestamp ?"
+          "type": "timestamp?"
         },
         {
           "name": "date_of_birth",
-          "type": "date ?"
+          "type": "date?"
         },
         {
           "name": "moderation_suspended_at",
-          "type": "varchar(32) ?"
+          "type": "varchar(32)?"
+        },
+        {
+          "name": "profile_readme",
+          "type": "text?"
         }
       ]
     },
     {
       "id": "organizations",
-      "label": "organizations",
       "tag": "Identity",
       "row": 1,
       "col": 0,
-      "width": 330,
+      "width": 320,
+      "label": "organizations",
       "attributes": [
         {
           "name": "id",
-          "type": "bigint",
+          "type": "BIGSERIAL",
           "key": "pk"
         },
         {
           "name": "user_id",
-          "type": "integer",
+          "type": "bigint",
           "key": "fk",
           "references": "users.id"
         },
@@ -233,19 +210,43 @@
         },
         {
           "name": "timezone",
-          "type": "varchar(50) ?"
+          "type": "varchar(50)?"
         },
         {
           "name": "currency",
-          "type": "varchar(3) ?"
+          "type": "varchar(3)?"
         },
         {
           "name": "status",
-          "type": "varchar(20) ?"
+          "type": "varchar(20)?"
         },
         {
           "name": "settings",
-          "type": "text ?"
+          "type": "text?"
+        },
+        {
+          "name": "sales_tax",
+          "type": "text?"
+        },
+        {
+          "name": "bio",
+          "type": "varchar(500)?"
+        },
+        {
+          "name": "website",
+          "type": "varchar(255)?"
+        },
+        {
+          "name": "kind",
+          "type": "varchar(20)?"
+        },
+        {
+          "name": "logo_url",
+          "type": "varchar(500)?"
+        },
+        {
+          "name": "profile_public",
+          "type": "boolean?"
         },
         {
           "name": "created_at",
@@ -253,108 +254,78 @@
         },
         {
           "name": "updated_at",
-          "type": "timestamp ?"
-        },
-        {
-          "name": "sales_tax",
-          "type": "text ?"
-        },
-        {
-          "name": "bio",
-          "type": "varchar(500) ?"
-        },
-        {
-          "name": "website",
-          "type": "varchar(255) ?"
-        },
-        {
-          "name": "profile_public",
-          "type": "boolean ?"
-        },
-        {
-          "name": "logo_url",
-          "type": "varchar(500) ?"
-        },
-        {
-          "name": "kind",
-          "type": "varchar(20) ?"
+          "type": "timestamp?"
         },
         {
           "name": "stripe_account_id",
-          "type": "varchar(255) ?"
+          "type": "varchar(255)?"
         },
         {
           "name": "public_join",
-          "type": "boolean ?"
+          "type": "boolean?"
         },
         {
           "name": "self_checkin_code",
-          "type": "varchar(16) ?",
+          "type": "varchar(16)?",
           "key": "uk"
         },
         {
           "name": "lead_form",
-          "type": "boolean ?"
+          "type": "boolean?"
         },
         {
           "name": "quiet_hours_start",
-          "type": "varchar(5) ?"
+          "type": "varchar(5)?"
         },
         {
           "name": "quiet_hours_end",
-          "type": "varchar(5) ?"
+          "type": "varchar(5)?"
         },
         {
           "name": "marketing_double_opt_in",
-          "type": "boolean ?"
+          "type": "boolean?"
         },
         {
           "name": "member_payment_methods",
-          "type": "varchar(100) ?"
+          "type": "varchar(100)?"
         },
         {
           "name": "admit_while_debit_clears",
-          "type": "boolean ?"
+          "type": "boolean?"
         },
         {
           "name": "hq_tip_percent",
-          "type": "numeric"
+          "type": "decimal(5,2)"
         },
         {
           "name": "planet_pledge_percent",
-          "type": "numeric"
+          "type": "decimal(5,2)"
         }
       ]
     },
     {
       "id": "org_members",
-      "label": "org_members",
       "tag": "Identity",
       "row": 2,
       "col": 0,
-      "width": 370,
+      "width": 342,
+      "label": "org_members",
       "attributes": [
         {
           "name": "id",
-          "type": "bigint",
+          "type": "BIGSERIAL",
           "key": "pk"
         },
         {
           "name": "organization_id",
-          "type": "integer",
-          "key": [
-            "fk",
-            "uk"
-          ],
+          "type": "bigint",
+          "key": "fk",
           "references": "organizations.id"
         },
         {
           "name": "user_id",
-          "type": "integer",
-          "key": [
-            "fk",
-            "uk"
-          ],
+          "type": "bigint",
+          "key": "fk",
           "references": "users.id"
         },
         {
@@ -363,25 +334,25 @@
         },
         {
           "name": "status",
-          "type": "varchar(20) ?"
+          "type": "varchar(20)?"
         },
         {
           "name": "location_id",
-          "type": "integer ?",
+          "type": "bigint?",
           "key": "fk",
           "references": "locations.id"
         },
         {
           "name": "emergency_contact_name",
-          "type": "varchar(255) ?"
+          "type": "varchar(255)?"
         },
         {
           "name": "emergency_contact_relationship",
-          "type": "varchar(100) ?"
+          "type": "varchar(100)?"
         },
         {
           "name": "emergency_contact_phone",
-          "type": "varchar(50) ?"
+          "type": "varchar(50)?"
         },
         {
           "name": "created_at",
@@ -389,27 +360,26 @@
         },
         {
           "name": "updated_at",
-          "type": "timestamp ?"
+          "type": "timestamp?"
         }
-      ],
-      "sublabel": "Unique together: organization_id+user_id"
+      ]
     },
     {
       "id": "locations",
-      "label": "locations",
       "tag": "Identity",
       "row": 3,
       "col": 0,
-      "width": 330,
+      "width": 320,
+      "label": "locations",
       "attributes": [
         {
           "name": "id",
-          "type": "bigint",
+          "type": "BIGSERIAL",
           "key": "pk"
         },
         {
           "name": "organization_id",
-          "type": "integer",
+          "type": "bigint",
           "key": "fk",
           "references": "organizations.id"
         },
@@ -419,39 +389,39 @@
         },
         {
           "name": "address",
-          "type": "text ?"
+          "type": "text?"
         },
         {
           "name": "city",
-          "type": "varchar(100) ?"
+          "type": "varchar(100)?"
         },
         {
           "name": "state_province",
-          "type": "varchar(100) ?"
+          "type": "varchar(100)?"
         },
         {
           "name": "zip_code",
-          "type": "varchar(20) ?"
+          "type": "varchar(20)?"
         },
         {
           "name": "country",
-          "type": "varchar(100) ?"
+          "type": "varchar(100)?"
         },
         {
           "name": "timezone",
-          "type": "varchar(50) ?"
+          "type": "varchar(50)?"
         },
         {
           "name": "capacity",
-          "type": "integer ?"
+          "type": "integer?"
         },
         {
           "name": "hours",
-          "type": "text ?"
+          "type": "text?"
         },
         {
           "name": "status",
-          "type": "varchar(20) ?"
+          "type": "varchar(20)?"
         },
         {
           "name": "created_at",
@@ -459,66 +429,74 @@
         },
         {
           "name": "updated_at",
-          "type": "timestamp ?"
+          "type": "timestamp?"
         },
         {
           "name": "phone",
-          "type": "varchar(40) ?"
+          "type": "varchar(40)?"
         },
         {
           "name": "latitude",
-          "type": "numeric ?"
+          "type": "decimal(10,7)?"
         },
         {
           "name": "longitude",
-          "type": "numeric ?"
+          "type": "decimal(10,7)?"
         }
       ]
     },
     {
       "id": "coaches",
-      "label": "coaches",
       "tag": "Coaching",
       "row": 0,
       "col": 1,
-      "width": 330,
+      "width": 320,
+      "label": "coaches",
       "attributes": [
         {
           "name": "id",
-          "type": "bigint",
+          "type": "BIGSERIAL",
           "key": "pk"
         },
         {
           "name": "user_id",
-          "type": "integer",
+          "type": "bigint",
           "key": "fk",
           "references": "users.id"
         },
         {
           "name": "organization_id",
-          "type": "integer ?",
+          "type": "bigint?",
           "key": "fk",
           "references": "organizations.id"
         },
         {
           "name": "specialty",
-          "type": "varchar(100) ?"
+          "type": "varchar(100)?"
         },
         {
           "name": "certification",
-          "type": "varchar(255) ?"
+          "type": "varchar(255)?"
         },
         {
           "name": "bio",
-          "type": "text ?"
+          "type": "text?"
         },
         {
           "name": "max_athletes",
-          "type": "integer ?"
+          "type": "integer?"
         },
         {
           "name": "accepting_athletes",
-          "type": "boolean ?"
+          "type": "boolean?"
+        },
+        {
+          "name": "stripe_account_id",
+          "type": "varchar(255)?"
+        },
+        {
+          "name": "external_emails",
+          "type": "varchar(500)?"
         },
         {
           "name": "created_at",
@@ -526,29 +504,21 @@
         },
         {
           "name": "updated_at",
-          "type": "timestamp ?"
-        },
-        {
-          "name": "stripe_account_id",
-          "type": "varchar(255) ?"
-        },
-        {
-          "name": "external_emails",
-          "type": "varchar(500) ?"
+          "type": "timestamp?"
         }
       ]
     },
     {
       "id": "coaching_methods",
-      "label": "coaching_methods",
       "tag": "Coaching",
       "row": 1,
       "col": 1,
-      "width": 330,
+      "width": 320,
+      "label": "coaching_methods",
       "attributes": [
         {
           "name": "id",
-          "type": "bigint",
+          "type": "BIGSERIAL",
           "key": "pk"
         },
         {
@@ -581,11 +551,11 @@
         },
         {
           "name": "status",
-          "type": "USER-DEFINED ?"
+          "type": "\"coaching_methods_status_type\"?"
         },
         {
           "name": "contact_url",
-          "type": "text ?"
+          "type": "text?"
         },
         {
           "name": "created_at",
@@ -593,21 +563,21 @@
         },
         {
           "name": "updated_at",
-          "type": "timestamp ?"
+          "type": "timestamp?"
         }
       ]
     },
     {
       "id": "coaching_method_revisions",
-      "label": "coaching_method_revisions",
       "tag": "Coaching",
       "row": 2,
       "col": 1,
-      "width": 370,
+      "width": 320,
+      "label": "coaching_method_revisions",
       "attributes": [
         {
           "name": "id",
-          "type": "bigint",
+          "type": "BIGSERIAL",
           "key": "pk"
         },
         {
@@ -619,16 +589,12 @@
         {
           "name": "coaching_method_id",
           "type": "bigint",
-          "key": [
-            "fk",
-            "uk"
-          ],
+          "key": "fk",
           "references": "coaching_methods.id"
         },
         {
           "name": "version",
-          "type": "integer",
-          "key": "uk"
+          "type": "integer"
         },
         {
           "name": "snapshot",
@@ -640,36 +606,35 @@
         },
         {
           "name": "updated_at",
-          "type": "timestamp ?"
+          "type": "timestamp?"
         }
-      ],
-      "sublabel": "Unique together: coaching_method_id+version"
+      ]
     },
     {
       "id": "brand_experiences",
-      "label": "brand_experiences",
       "tag": "Coaching",
       "row": 3,
       "col": 1,
-      "width": 370,
+      "width": 324,
+      "label": "brand_experiences",
       "attributes": [
         {
           "name": "id",
-          "type": "bigint",
+          "type": "BIGSERIAL",
           "key": "pk"
         },
         {
           "name": "organization_id",
           "type": "bigint",
           "key": [
-            "fk",
-            "uk"
+            "uk",
+            "fk"
           ],
           "references": "organizations.id"
         },
         {
           "name": "status",
-          "type": "USER-DEFINED ?"
+          "type": "\"brand_experiences_status_type\"?"
         },
         {
           "name": "settings",
@@ -681,128 +646,120 @@
         },
         {
           "name": "updated_at",
-          "type": "timestamp ?"
+          "type": "timestamp?"
         }
       ]
     },
     {
       "id": "athletes",
-      "label": "athletes",
       "tag": "Training",
       "row": 0,
       "col": 2,
-      "width": 330,
+      "width": 320,
+      "label": "athletes",
       "attributes": [
         {
           "name": "id",
-          "type": "bigint",
+          "type": "BIGSERIAL",
           "key": "pk"
         },
         {
           "name": "user_id",
-          "type": "integer",
+          "type": "bigint",
           "key": "fk",
           "references": "users.id"
         },
         {
           "name": "organization_id",
-          "type": "integer ?",
+          "type": "bigint?",
           "key": "fk",
           "references": "organizations.id"
         },
         {
           "name": "coach_id",
-          "type": "integer ?",
+          "type": "bigint?",
           "key": "fk",
           "references": "coaches.id"
         },
         {
           "name": "sport",
-          "type": "varchar(100) ?"
+          "type": "varchar(100)?"
         },
         {
           "name": "address",
-          "type": "text ?"
+          "type": "text?"
         },
         {
           "name": "city",
-          "type": "varchar(100) ?"
+          "type": "varchar(100)?"
         },
         {
           "name": "state_province",
-          "type": "varchar(100) ?"
+          "type": "varchar(100)?"
         },
         {
           "name": "zip_code",
-          "type": "varchar(20) ?"
+          "type": "varchar(20)?"
         },
         {
           "name": "country",
-          "type": "varchar(100) ?"
+          "type": "varchar(100)?"
         },
         {
           "name": "timezone",
-          "type": "varchar(50) ?"
+          "type": "varchar(50)?"
         },
         {
           "name": "phone",
-          "type": "varchar(30) ?"
+          "type": "varchar(30)?"
         },
         {
           "name": "cell_phone",
-          "type": "varchar(30) ?"
+          "type": "varchar(30)?"
         },
         {
           "name": "lthr",
-          "type": "integer ?"
+          "type": "integer?"
         },
         {
           "name": "max_hr",
-          "type": "integer ?"
+          "type": "integer?"
         },
         {
           "name": "resting_hr",
-          "type": "integer ?"
+          "type": "integer?"
         },
         {
           "name": "ftp",
-          "type": "integer ?"
+          "type": "integer?"
         },
         {
           "name": "threshold_pace",
-          "type": "varchar(10) ?"
+          "type": "varchar(10)?"
         },
         {
           "name": "group_name",
-          "type": "varchar(100) ?"
+          "type": "varchar(100)?"
         },
         {
           "name": "account_type",
-          "type": "varchar(50) ?"
+          "type": "varchar(50)?"
         },
         {
           "name": "coach_notes",
-          "type": "text ?"
+          "type": "text?"
         },
         {
           "name": "daily_calorie_goal",
-          "type": "integer ?"
+          "type": "integer?"
         },
         {
           "name": "metabolic_profile",
-          "type": "varchar(50) ?"
-        },
-        {
-          "name": "created_at",
-          "type": "timestamp"
-        },
-        {
-          "name": "updated_at",
-          "type": "timestamp ?"
+          "type": "varchar(50)?"
         },
         {
           "name": "share_token",
-          "type": "varchar(64) ?",
+          "type": "varchar(64)?",
           "key": "uk"
         },
         {
@@ -823,64 +780,70 @@
         },
         {
           "name": "share_display_name",
-          "type": "varchar(100) ?"
-        },
-        {
-          "name": "calendar_token",
-          "type": "varchar(64) ?",
-          "key": "uk"
-        },
-        {
-          "name": "activity_embed_token",
-          "type": "varchar(64) ?",
-          "key": "uk"
+          "type": "varchar(100)?"
         },
         {
           "name": "share_hide_track_ends",
           "type": "boolean"
         },
         {
+          "name": "calendar_token",
+          "type": "varchar(64)?",
+          "key": "uk"
+        },
+        {
+          "name": "activity_embed_token",
+          "type": "varchar(64)?",
+          "key": "uk"
+        },
+        {
           "name": "external_coach_name",
-          "type": "varchar(120) ?"
+          "type": "varchar(120)?"
         },
         {
           "name": "external_coach_email",
-          "type": "varchar(255) ?"
+          "type": "varchar(255)?"
         },
         {
           "name": "external_coach_photo_url",
-          "type": "varchar(500) ?"
+          "type": "varchar(500)?"
         },
         {
           "name": "external_coach_source",
-          "type": "varchar(30) ?"
+          "type": "varchar(30)?"
         },
         {
           "name": "weight_embed_token",
-          "type": "varchar(64) ?",
+          "type": "varchar(64)?",
           "key": "uk"
         },
         {
           "name": "external_source",
-          "type": "varchar(30) ?",
-          "key": "uk"
+          "type": "varchar(30)?"
         },
         {
           "name": "external_id",
-          "type": "varchar(64) ?",
-          "key": "uk"
+          "type": "varchar(64)?"
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp"
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp?"
         },
         {
           "name": "protein_goal_g",
-          "type": "integer ?"
+          "type": "integer?"
         },
         {
           "name": "carbs_goal_g",
-          "type": "integer ?"
+          "type": "integer?"
         },
         {
           "name": "fat_goal_g",
-          "type": "integer ?"
+          "type": "integer?"
         },
         {
           "name": "share_nutrition_with_coach",
@@ -888,19 +851,19 @@
         },
         {
           "name": "gender",
-          "type": "varchar(20) ?"
+          "type": "varchar(20)?"
         },
         {
           "name": "height_cm",
-          "type": "numeric ?"
+          "type": "decimal(4,1)?"
         },
         {
           "name": "fitness_level",
-          "type": "varchar(20) ?"
+          "type": "varchar(20)?"
         },
         {
           "name": "weekly_hours_target",
-          "type": "numeric ?"
+          "type": "decimal(4,1)?"
         },
         {
           "name": "share_breathwork_with_coach",
@@ -908,27 +871,30 @@
         },
         {
           "name": "provider_payload_json",
-          "type": "text ?"
+          "type": "text?"
+        },
+        {
+          "name": "recovery_score_source",
+          "type": "varchar(50)?"
         }
-      ],
-      "sublabel": "Unique together: external_source+external_id"
+      ]
     },
     {
       "id": "training_plans",
-      "label": "training_plans",
       "tag": "Training",
       "row": 1,
       "col": 2,
-      "width": 330,
+      "width": 320,
+      "label": "training_plans",
       "attributes": [
         {
           "name": "id",
-          "type": "bigint",
+          "type": "BIGSERIAL",
           "key": "pk"
         },
         {
           "name": "coach_id",
-          "type": "integer ?",
+          "type": "bigint?",
           "key": "fk",
           "references": "coaches.id"
         },
@@ -938,11 +904,11 @@
         },
         {
           "name": "description",
-          "type": "text ?"
+          "type": "text?"
         },
         {
           "name": "sport",
-          "type": "varchar(100) ?"
+          "type": "varchar(100)?"
         },
         {
           "name": "weeks",
@@ -954,9 +920,15 @@
         },
         {
           "name": "source_draft_id",
-          "type": "integer ?",
+          "type": "bigint?",
           "key": "fk",
           "references": "plan_drafts.id"
+        },
+        {
+          "name": "athlete_id",
+          "type": "bigint?",
+          "key": "fk",
+          "references": "athletes.id"
         },
         {
           "name": "created_at",
@@ -964,44 +936,38 @@
         },
         {
           "name": "updated_at",
-          "type": "timestamp ?"
-        },
-        {
-          "name": "athlete_id",
-          "type": "bigint ?",
-          "key": "fk",
-          "references": "athletes.id"
+          "type": "timestamp?"
         }
       ]
     },
     {
       "id": "plan_drafts",
-      "label": "plan_drafts",
       "tag": "Training",
       "row": 2,
       "col": 2,
-      "width": 330,
+      "width": 320,
+      "label": "plan_drafts",
       "attributes": [
         {
           "name": "id",
-          "type": "bigint",
+          "type": "BIGSERIAL",
           "key": "pk"
         },
         {
           "name": "coach_id",
-          "type": "integer ?",
+          "type": "bigint?",
           "key": "fk",
           "references": "coaches.id"
         },
         {
           "name": "athlete_id",
-          "type": "integer",
+          "type": "bigint",
           "key": "fk",
           "references": "athletes.id"
         },
         {
           "name": "parent_id",
-          "type": "integer ?",
+          "type": "bigint?",
           "key": "fk",
           "references": "plan_drafts.id"
         },
@@ -1015,27 +981,27 @@
         },
         {
           "name": "plan",
-          "type": "text ?"
+          "type": "text?"
         },
         {
           "name": "error",
-          "type": "text ?"
+          "type": "text?"
         },
         {
           "name": "model",
-          "type": "varchar(60) ?"
+          "type": "varchar(60)?"
         },
         {
           "name": "start_date",
-          "type": "date ?"
+          "type": "date?"
         },
         {
           "name": "applied_at",
-          "type": "timestamp ?"
+          "type": "timestamp?"
         },
         {
           "name": "applied_count",
-          "type": "integer ?"
+          "type": "integer?"
         },
         {
           "name": "created_at",
@@ -1043,35 +1009,32 @@
         },
         {
           "name": "updated_at",
-          "type": "timestamp ?"
+          "type": "timestamp?"
         }
       ]
     },
     {
       "id": "workouts",
-      "label": "workouts",
       "tag": "Training",
       "row": 3,
       "col": 2,
-      "width": 370,
+      "width": 320,
+      "label": "workouts",
       "attributes": [
         {
           "name": "id",
-          "type": "bigint",
+          "type": "BIGSERIAL",
           "key": "pk"
         },
         {
           "name": "athlete_id",
-          "type": "integer",
-          "key": [
-            "fk",
-            "uk"
-          ],
+          "type": "bigint",
+          "key": "fk",
           "references": "athletes.id"
         },
         {
           "name": "coach_id",
-          "type": "integer ?",
+          "type": "bigint?",
           "key": "fk",
           "references": "coaches.id"
         },
@@ -1085,194 +1048,184 @@
         },
         {
           "name": "sport",
-          "type": "varchar(50) ?"
+          "type": "varchar(50)?"
         },
         {
           "name": "type",
-          "type": "varchar(50) ?"
+          "type": "varchar(50)?"
         },
         {
           "name": "description",
-          "type": "text ?"
+          "type": "text?"
         },
         {
           "name": "planned_duration",
-          "type": "varchar(20) ?"
+          "type": "varchar(20)?"
         },
         {
           "name": "planned_distance_km",
-          "type": "numeric ?"
+          "type": "decimal(10,2)?"
         },
         {
           "name": "planned_tss",
-          "type": "numeric ?"
+          "type": "decimal(10,2)?"
         },
         {
           "name": "completed_duration",
-          "type": "varchar(20) ?"
+          "type": "varchar(20)?"
         },
         {
           "name": "completed_distance_km",
-          "type": "numeric ?"
+          "type": "decimal(10,2)?"
         },
         {
           "name": "completed_tss",
-          "type": "numeric ?"
+          "type": "decimal(10,2)?"
         },
         {
           "name": "completed",
-          "type": "boolean ?"
+          "type": "boolean?"
         },
         {
           "name": "structure",
-          "type": "text ?"
-        },
-        {
-          "name": "created_at",
-          "type": "timestamp"
-        },
-        {
-          "name": "updated_at",
-          "type": "timestamp ?"
+          "type": "text?"
         },
         {
           "name": "external_source",
-          "type": "varchar(30) ?",
-          "key": "uk"
+          "type": "varchar(30)?"
         },
         {
           "name": "external_id",
-          "type": "varchar(120) ?",
-          "key": "uk"
+          "type": "varchar(120)?"
         },
         {
           "name": "avg_hr",
-          "type": "integer ?"
+          "type": "integer?"
         },
         {
           "name": "max_hr",
-          "type": "integer ?"
+          "type": "integer?"
         },
         {
           "name": "avg_power",
-          "type": "integer ?"
+          "type": "integer?"
         },
         {
           "name": "normalized_power",
-          "type": "integer ?"
+          "type": "integer?"
         },
         {
           "name": "intensity_factor",
-          "type": "numeric ?"
+          "type": "decimal(5,3)?"
         },
         {
           "name": "elevation_gain_m",
-          "type": "numeric ?"
+          "type": "decimal(10,1)?"
         },
         {
           "name": "energy_kj",
-          "type": "integer ?"
+          "type": "integer?"
         },
         {
           "name": "calories",
-          "type": "integer ?"
+          "type": "integer?"
         },
         {
           "name": "rpe",
-          "type": "integer ?"
+          "type": "integer?"
         },
         {
           "name": "feeling",
-          "type": "integer ?"
+          "type": "integer?"
         },
         {
           "name": "athlete_comments",
-          "type": "text ?"
+          "type": "text?"
         },
         {
           "name": "coach_comments",
-          "type": "text ?"
+          "type": "text?"
         },
         {
           "name": "started_at",
-          "type": "timestamptz ?"
+          "type": "timestamptz?"
         },
         {
           "name": "utc_offset_min",
-          "type": "integer ?"
+          "type": "integer?"
         },
         {
           "name": "elapsed_seconds",
-          "type": "integer ?"
+          "type": "integer?"
         },
         {
           "name": "moving_seconds",
-          "type": "integer ?"
+          "type": "integer?"
         },
         {
           "name": "elevation_loss_m",
-          "type": "numeric ?"
+          "type": "decimal(10,2)?"
         },
         {
           "name": "elevation_max_m",
-          "type": "numeric ?"
+          "type": "decimal(10,2)?"
         },
         {
           "name": "elevation_min_m",
-          "type": "numeric ?"
+          "type": "decimal(10,2)?"
         },
         {
           "name": "track",
-          "type": "text ?"
+          "type": "text?"
         },
         {
           "name": "public_id",
-          "type": "varchar(64) ?",
+          "type": "varchar(64)?",
           "key": "uk"
         },
         {
           "name": "is_public",
-          "type": "boolean ?"
+          "type": "boolean?"
         },
         {
           "name": "share_units",
-          "type": "varchar(10) ?"
+          "type": "varchar(10)?"
         },
         {
           "name": "share_caption",
-          "type": "varchar(280) ?"
+          "type": "varchar(280)?"
         },
         {
           "name": "location_label",
-          "type": "varchar(120) ?"
+          "type": "varchar(120)?"
         },
         {
           "name": "planned_if",
-          "type": "numeric ?"
+          "type": "decimal(5,3)?"
         },
         {
           "name": "day_order",
-          "type": "integer ?"
+          "type": "integer?"
         },
         {
           "name": "strength",
-          "type": "text ?"
+          "type": "text?"
         },
         {
           "name": "strength_log",
-          "type": "text ?"
+          "type": "text?"
         },
         {
           "name": "paired_source",
-          "type": "varchar(30) ?"
+          "type": "varchar(30)?"
         },
         {
           "name": "paired_external_id",
-          "type": "varchar(191) ?"
+          "type": "varchar(191)?"
         },
         {
           "name": "paired_activity",
-          "type": "text ?"
+          "type": "text?"
         },
         {
           "name": "pair_opt_out",
@@ -1280,59 +1233,67 @@
         },
         {
           "name": "edited_at",
-          "type": "timestamp ?"
+          "type": "timestamp?"
         },
         {
           "name": "external_version",
-          "type": "varchar(64) ?"
+          "type": "varchar(64)?"
         },
         {
           "name": "effort",
-          "type": "text ?"
+          "type": "text?"
         },
         {
           "name": "share_backdrop",
-          "type": "text ?"
+          "type": "text?"
         },
         {
           "name": "share_photo",
-          "type": "text ?"
+          "type": "text?"
         },
         {
           "name": "track_checked_at",
-          "type": "timestamp ?"
+          "type": "timestamp?"
         },
         {
           "name": "strava_activity_id",
-          "type": "bigint ?"
+          "type": "bigint?"
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp"
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp?"
         },
         {
           "name": "hr_series",
-          "type": "text ?"
+          "type": "text?"
         },
         {
           "name": "peaks",
-          "type": "text ?"
+          "type": "text?"
         },
         {
           "name": "strava_efforts",
-          "type": "text ?"
+          "type": "text?"
         },
         {
           "name": "activity_totals",
-          "type": "text ?"
+          "type": "text?"
         },
         {
           "name": "provider_payload_json",
-          "type": "text ?"
+          "type": "text?"
         },
         {
           "name": "weather_checked_at",
-          "type": "timestamp ?"
+          "type": "timestamp?"
         },
         {
           "name": "weather_retry_at",
-          "type": "timestamp ?"
+          "type": "timestamp?"
         },
         {
           "name": "coach_only",
@@ -1340,35 +1301,42 @@
         },
         {
           "name": "training_metrics",
-          "type": "text ?"
+          "type": "text?"
         },
         {
           "name": "device_payload_json",
-          "type": "text ?"
+          "type": "text?"
         },
         {
           "name": "threshold_snapshot",
-          "type": "text ?"
+          "type": "text?"
+        },
+        {
+          "name": "planned_route",
+          "type": "text?"
+        },
+        {
+          "name": "assigned_by",
+          "type": "varchar(20)?"
         }
-      ],
-      "sublabel": "Unique together: athlete_id+external_source+external_id"
+      ]
     },
     {
       "id": "products",
-      "label": "products",
       "tag": "Access",
-      "row": 4,
-      "col": 1,
-      "width": 330,
+      "row": 1,
+      "col": 3,
+      "width": 320,
+      "label": "products",
       "attributes": [
         {
           "name": "id",
-          "type": "bigint",
+          "type": "BIGSERIAL",
           "key": "pk"
         },
         {
           "name": "organization_id",
-          "type": "bigint ?",
+          "type": "bigint?",
           "key": "fk",
           "references": "organizations.id"
         },
@@ -1378,7 +1346,7 @@
         },
         {
           "name": "description",
-          "type": "text ?"
+          "type": "text?"
         },
         {
           "name": "type",
@@ -1394,19 +1362,76 @@
         },
         {
           "name": "inventory_quantity",
-          "type": "integer ?"
+          "type": "integer?"
         },
         {
           "name": "session_count",
-          "type": "integer ?"
+          "type": "integer?"
         },
         {
           "name": "entitlement_days",
-          "type": "integer ?"
+          "type": "integer?"
         },
         {
           "name": "status",
           "type": "varchar(20)"
+        },
+        {
+          "name": "coach_id",
+          "type": "bigint?",
+          "key": "fk",
+          "references": "coaches.id"
+        },
+        {
+          "name": "slug",
+          "type": "varchar(140)?",
+          "key": "uk"
+        },
+        {
+          "name": "training_plan_id",
+          "type": "bigint?",
+          "key": "fk",
+          "references": "training_plans.id"
+        },
+        {
+          "name": "cover_image_url",
+          "type": "text?"
+        },
+        {
+          "name": "release_mode",
+          "type": "varchar(20)?"
+        },
+        {
+          "name": "release_interval_days",
+          "type": "integer?"
+        },
+        {
+          "name": "release_initial_count",
+          "type": "integer?"
+        },
+        {
+          "name": "release_starts_at",
+          "type": "varchar(40)?"
+        },
+        {
+          "name": "published_at",
+          "type": "varchar(40)?"
+        },
+        {
+          "name": "category",
+          "type": "varchar(40)?"
+        },
+        {
+          "name": "sku",
+          "type": "varchar(64)?"
+        },
+        {
+          "name": "low_stock_threshold",
+          "type": "integer?"
+        },
+        {
+          "name": "taxable",
+          "type": "boolean"
         },
         {
           "name": "created_at",
@@ -1414,76 +1439,15 @@
         },
         {
           "name": "updated_at",
-          "type": "timestamp ?"
-        },
-        {
-          "name": "uuid",
-          "type": "uuid ?"
-        },
-        {
-          "name": "coach_id",
-          "type": "bigint ?",
-          "key": "fk",
-          "references": "coaches.id"
-        },
-        {
-          "name": "slug",
-          "type": "varchar(140) ?",
-          "key": "uk"
-        },
-        {
-          "name": "training_plan_id",
-          "type": "bigint ?",
-          "key": "fk",
-          "references": "training_plans.id"
-        },
-        {
-          "name": "cover_image_url",
-          "type": "text ?"
-        },
-        {
-          "name": "release_mode",
-          "type": "varchar(20) ?"
-        },
-        {
-          "name": "release_interval_days",
-          "type": "integer ?"
-        },
-        {
-          "name": "release_initial_count",
-          "type": "integer ?"
-        },
-        {
-          "name": "release_starts_at",
-          "type": "varchar(40) ?"
-        },
-        {
-          "name": "published_at",
-          "type": "varchar(40) ?"
-        },
-        {
-          "name": "category",
-          "type": "varchar(40) ?"
-        },
-        {
-          "name": "sku",
-          "type": "varchar(64) ?"
-        },
-        {
-          "name": "low_stock_threshold",
-          "type": "integer ?"
-        },
-        {
-          "name": "taxable",
-          "type": "boolean"
+          "type": "timestamp?"
         },
         {
           "name": "billing_interval",
-          "type": "varchar(10) ?"
+          "type": "varchar(10)?"
         },
         {
           "name": "trial_days",
-          "type": "integer ?"
+          "type": "integer?"
         },
         {
           "name": "includes_coaching",
@@ -1491,7 +1455,7 @@
         },
         {
           "name": "vat_rate",
-          "type": "varchar(10) ?"
+          "type": "varchar(10)?"
         },
         {
           "name": "sold_online",
@@ -1499,21 +1463,33 @@
         },
         {
           "name": "allowed_training_sports",
-          "type": "text ?"
+          "type": "text?"
+        },
+        {
+          "name": "tax_code",
+          "type": "varchar(64)?"
+        },
+        {
+          "name": "training_blocks",
+          "type": "text?"
+        },
+        {
+          "name": "minimum_term_months",
+          "type": "integer?"
         }
       ]
     },
     {
       "id": "coaching_subscriptions",
-      "label": "coaching_subscriptions",
       "tag": "Access",
-      "row": 5,
-      "col": 1,
-      "width": 330,
+      "row": 2,
+      "col": 3,
+      "width": 320,
+      "label": "coaching_subscriptions",
       "attributes": [
         {
           "name": "id",
-          "type": "bigint",
+          "type": "BIGSERIAL",
           "key": "pk"
         },
         {
@@ -1530,13 +1506,13 @@
         },
         {
           "name": "coach_id",
-          "type": "bigint ?",
+          "type": "bigint?",
           "key": "fk",
           "references": "coaches.id"
         },
         {
           "name": "athlete_id",
-          "type": "bigint ?",
+          "type": "bigint?",
           "key": "fk",
           "references": "athletes.id"
         },
@@ -1558,21 +1534,21 @@
         },
         {
           "name": "stripe_checkout_session_id",
-          "type": "varchar(255) ?",
+          "type": "varchar(255)?",
           "key": "uk"
         },
         {
           "name": "stripe_subscription_id",
-          "type": "varchar(255) ?",
+          "type": "varchar(255)?",
           "key": "uk"
         },
         {
           "name": "current_period_end",
-          "type": "varchar(40) ?"
+          "type": "varchar(40)?"
         },
         {
           "name": "trial_ends_at",
-          "type": "varchar(40) ?"
+          "type": "varchar(40)?"
         },
         {
           "name": "cancel_at_period_end",
@@ -1580,7 +1556,7 @@
         },
         {
           "name": "past_due_since",
-          "type": "varchar(40) ?"
+          "type": "varchar(40)?"
         },
         {
           "name": "linked_coach",
@@ -1588,19 +1564,19 @@
         },
         {
           "name": "access_started_at",
-          "type": "varchar(40) ?"
+          "type": "varchar(40)?"
         },
         {
           "name": "access_ended_at",
-          "type": "varchar(40) ?"
+          "type": "varchar(40)?"
         },
         {
           "name": "canceled_at",
-          "type": "varchar(40) ?"
+          "type": "varchar(40)?"
         },
         {
           "name": "plan_start_date",
-          "type": "date ?"
+          "type": "date?"
         },
         {
           "name": "created_at",
@@ -1608,70 +1584,92 @@
         },
         {
           "name": "updated_at",
-          "type": "timestamp ?"
+          "type": "timestamp?"
         },
         {
           "name": "ended_by",
-          "type": "varchar(20) ?"
+          "type": "varchar(20)?"
         },
         {
           "name": "brand_experience_id",
-          "type": "bigint ?",
+          "type": "bigint?",
           "key": "fk",
           "references": "brand_experiences.id"
         },
         {
           "name": "coaching_method_id",
-          "type": "bigint ?",
+          "type": "bigint?",
           "key": "fk",
           "references": "coaching_methods.id"
         },
         {
           "name": "checkout_request",
-          "type": "text ?"
+          "type": "text?"
+        },
+        {
+          "name": "invoice_checkout",
+          "type": "text?"
+        },
+        {
+          "name": "first_invoice_id",
+          "type": "varchar(255)?"
+        },
+        {
+          "name": "first_invoice_paid_at",
+          "type": "varchar(40)?"
+        },
+        {
+          "name": "payment_due_invoice_id",
+          "type": "varchar(255)?"
+        },
+        {
+          "name": "minimum_term_months",
+          "type": "integer?"
+        },
+        {
+          "name": "commitment_ends_at",
+          "type": "varchar(40)?"
+        },
+        {
+          "name": "cancel_at",
+          "type": "varchar(40)?"
         }
       ]
     },
     {
       "id": "product_enrollments",
-      "label": "product_enrollments",
       "tag": "Access",
-      "row": 6,
-      "col": 1,
-      "width": 370,
+      "row": 3,
+      "col": 3,
+      "width": 320,
+      "label": "product_enrollments",
       "attributes": [
         {
           "name": "id",
-          "type": "bigint",
+          "type": "BIGSERIAL",
           "key": "pk"
         },
         {
           "name": "user_id",
           "type": "bigint",
-          "key": [
-            "fk",
-            "uk"
-          ],
+          "key": "fk",
           "references": "users.id"
         },
         {
           "name": "product_id",
           "type": "bigint",
-          "key": [
-            "fk",
-            "uk"
-          ],
+          "key": "fk",
           "references": "products.id"
         },
         {
           "name": "order_id",
-          "type": "bigint ?",
+          "type": "bigint?",
           "key": "fk",
           "references": "orders.id"
         },
         {
           "name": "athlete_id",
-          "type": "bigint ?",
+          "type": "bigint?",
           "key": "fk",
           "references": "athletes.id"
         },
@@ -1681,15 +1679,19 @@
         },
         {
           "name": "plan_start_date",
-          "type": "date ?"
+          "type": "date?"
         },
         {
           "name": "released_units",
-          "type": "integer ?"
+          "type": "integer?"
         },
         {
           "name": "revoked_at",
-          "type": "varchar(40) ?"
+          "type": "varchar(40)?"
+        },
+        {
+          "name": "plan_snapshot",
+          "type": "text?"
         },
         {
           "name": "created_at",
@@ -1697,15 +1699,11 @@
         },
         {
           "name": "updated_at",
-          "type": "timestamp ?"
-        },
-        {
-          "name": "plan_snapshot",
-          "type": "text ?"
+          "type": "timestamp?"
         },
         {
           "name": "coaching_subscription_id",
-          "type": "bigint ?",
+          "type": "bigint?",
           "key": "fk",
           "references": "coaching_subscriptions.id"
         },
@@ -1713,20 +1711,19 @@
           "name": "plan_revision",
           "type": "integer"
         }
-      ],
-      "sublabel": "Unique together: user_id+product_id"
+      ]
     },
     {
       "id": "assistant_conversations",
-      "label": "assistant_conversations",
       "tag": "Feedback",
       "row": 0,
-      "col": 3,
-      "width": 330,
+      "col": 4,
+      "width": 320,
+      "label": "assistant_conversations",
       "attributes": [
         {
           "name": "id",
-          "type": "bigint",
+          "type": "BIGSERIAL",
           "key": "pk"
         },
         {
@@ -1741,7 +1738,7 @@
         },
         {
           "name": "athlete_id",
-          "type": "bigint ?",
+          "type": "bigint?",
           "key": "fk",
           "references": "athletes.id"
         },
@@ -1755,15 +1752,15 @@
         },
         {
           "name": "provider",
-          "type": "varchar(20) ?"
+          "type": "varchar(20)?"
         },
         {
           "name": "model",
-          "type": "varchar(100) ?"
+          "type": "varchar(100)?"
         },
         {
           "name": "busy_since",
-          "type": "timestamp ?"
+          "type": "timestamp?"
         },
         {
           "name": "created_at",
@@ -1771,7 +1768,7 @@
         },
         {
           "name": "updated_at",
-          "type": "timestamp ?"
+          "type": "timestamp?"
         },
         {
           "name": "audience",
@@ -1779,7 +1776,7 @@
         },
         {
           "name": "coaching_method_id",
-          "type": "bigint ?",
+          "type": "bigint?",
           "key": "fk",
           "references": "coaching_methods.id"
         }
@@ -1787,24 +1784,21 @@
     },
     {
       "id": "coaching_voice_feedback",
-      "label": "coaching_voice_feedback",
       "tag": "Feedback",
       "row": 1,
-      "col": 3,
-      "width": 370,
+      "col": 4,
+      "width": 341,
+      "label": "coaching_voice_feedback",
       "attributes": [
         {
           "name": "id",
-          "type": "bigint",
+          "type": "BIGSERIAL",
           "key": "pk"
         },
         {
           "name": "user_id",
           "type": "bigint",
-          "key": [
-            "fk",
-            "uk"
-          ],
+          "key": "fk",
           "references": "users.id"
         },
         {
@@ -1821,8 +1815,7 @@
         },
         {
           "name": "client_key",
-          "type": "varchar(64)",
-          "key": "uk"
+          "type": "varchar(64)"
         },
         {
           "name": "source_hash",
@@ -1830,19 +1823,19 @@
         },
         {
           "name": "status",
-          "type": "USER-DEFINED ?"
+          "type": "\"coaching_voice_feedback_status_type\"?"
         },
         {
           "name": "transcript",
-          "type": "text ?"
+          "type": "text?"
         },
         {
           "name": "error",
-          "type": "varchar(500) ?"
+          "type": "varchar(500)?"
         },
         {
           "name": "duration_seconds",
-          "type": "float8 ?"
+          "type": "double precision?"
         },
         {
           "name": "expires_at",
@@ -1850,7 +1843,7 @@
         },
         {
           "name": "conversation_id",
-          "type": "bigint ?",
+          "type": "bigint?",
           "key": "fk",
           "references": "assistant_conversations.id"
         },
@@ -1860,27 +1853,30 @@
         },
         {
           "name": "updated_at",
-          "type": "timestamp ?"
+          "type": "timestamp?"
         }
-      ],
-      "sublabel": "Unique together: user_id+client_key"
+      ]
     },
     {
       "id": "health_metrics",
-      "label": "health_metrics",
       "tag": "Feedback",
       "row": 2,
-      "col": 3,
-      "width": 330,
+      "col": 4,
+      "width": 320,
+      "label": "health_metrics",
       "attributes": [
         {
           "name": "id",
-          "type": "bigint",
+          "type": "BIGSERIAL",
           "key": "pk"
         },
         {
+          "name": "provider_payload_json",
+          "type": "text?"
+        },
+        {
           "name": "athlete_id",
-          "type": "integer",
+          "type": "bigint",
           "key": "fk",
           "references": "athletes.id"
         },
@@ -1890,43 +1886,47 @@
         },
         {
           "name": "source",
-          "type": "varchar(50) ?"
+          "type": "varchar(50)?"
         },
         {
           "name": "sleep_hours",
-          "type": "numeric ?"
+          "type": "decimal(10,2)?"
         },
         {
           "name": "sleep_score",
-          "type": "integer ?"
+          "type": "integer?"
         },
         {
           "name": "hrv",
-          "type": "integer ?"
+          "type": "integer?"
         },
         {
           "name": "resting_hr",
-          "type": "integer ?"
+          "type": "integer?"
         },
         {
           "name": "readiness",
-          "type": "integer ?"
+          "type": "integer?"
         },
         {
           "name": "stress",
-          "type": "integer ?"
+          "type": "integer?"
         },
         {
           "name": "weight_kg",
-          "type": "numeric ?"
+          "type": "decimal(10,2)?"
         },
         {
           "name": "steps",
-          "type": "integer ?"
+          "type": "integer?"
         },
         {
           "name": "active_calories",
-          "type": "integer ?"
+          "type": "integer?"
+        },
+        {
+          "name": "body_fat_pct",
+          "type": "decimal(5,2)?"
         },
         {
           "name": "created_at",
@@ -1934,29 +1934,21 @@
         },
         {
           "name": "updated_at",
-          "type": "timestamp ?"
-        },
-        {
-          "name": "body_fat_pct",
-          "type": "numeric ?"
-        },
-        {
-          "name": "provider_payload_json",
-          "type": "text ?"
+          "type": "timestamp?"
         }
       ]
     },
     {
       "id": "customers",
-      "label": "customers",
       "tag": "Commerce",
       "row": 4,
       "col": 0,
-      "width": 330,
+      "width": 320,
+      "label": "customers",
       "attributes": [
         {
           "name": "id",
-          "type": "bigint",
+          "type": "BIGSERIAL",
           "key": "pk"
         },
         {
@@ -1970,27 +1962,27 @@
         },
         {
           "name": "phone",
-          "type": "varchar(50) ?"
+          "type": "varchar(50)?"
         },
         {
           "name": "total_spent",
-          "type": "integer ?"
+          "type": "integer?"
         },
         {
           "name": "last_order",
-          "type": "varchar(255) ?"
+          "type": "varchar(255)?"
         },
         {
           "name": "status",
-          "type": "USER-DEFINED"
+          "type": "\"customers_status_type\""
         },
         {
           "name": "avatar",
-          "type": "varchar(255) ?"
+          "type": "varchar(255)?"
         },
         {
           "name": "user_id",
-          "type": "bigint ?",
+          "type": "bigint?",
           "key": "fk",
           "references": "users.id"
         },
@@ -2000,26 +1992,26 @@
         },
         {
           "name": "updated_at",
-          "type": "timestamp ?"
+          "type": "timestamp?"
         },
         {
           "name": "uuid",
-          "type": "varchar(255) ?",
+          "type": "varchar(255)?",
           "key": "uk"
         }
       ]
     },
     {
       "id": "orders",
-      "label": "orders",
       "tag": "Commerce",
       "row": 5,
       "col": 0,
-      "width": 330,
+      "width": 320,
+      "label": "orders",
       "attributes": [
         {
           "name": "id",
-          "type": "bigint",
+          "type": "BIGSERIAL",
           "key": "pk"
         },
         {
@@ -2036,19 +2028,19 @@
         },
         {
           "name": "tax_amount",
-          "type": "integer ?"
+          "type": "integer?"
         },
         {
           "name": "discount_amount",
-          "type": "integer ?"
+          "type": "integer?"
         },
         {
           "name": "delivery_fee",
-          "type": "integer ?"
+          "type": "integer?"
         },
         {
           "name": "tip_amount",
-          "type": "integer ?"
+          "type": "integer?"
         },
         {
           "name": "order_type",
@@ -2056,61 +2048,61 @@
         },
         {
           "name": "delivery_address",
-          "type": "varchar(255) ?"
+          "type": "varchar(255)?"
         },
         {
           "name": "special_instructions",
-          "type": "varchar(255) ?"
+          "type": "varchar(255)?"
         },
         {
           "name": "estimated_delivery_time",
-          "type": "varchar(255) ?"
+          "type": "varchar(255)?"
         },
         {
           "name": "tracking_token",
-          "type": "varchar(64) ?",
+          "type": "varchar(64)?",
           "key": "uk"
         },
         {
           "name": "delivery_latitude",
-          "type": "integer ?"
+          "type": "integer?"
         },
         {
           "name": "delivery_longitude",
-          "type": "integer ?"
+          "type": "integer?"
         },
         {
           "name": "applied_coupon_id",
-          "type": "varchar(255) ?"
+          "type": "varchar(255)?"
         },
         {
           "name": "coach_id",
-          "type": "bigint ?",
+          "type": "bigint?",
           "key": "fk",
           "references": "coaches.id"
         },
         {
           "name": "stripe_checkout_session_id",
-          "type": "varchar(255) ?",
+          "type": "varchar(255)?",
           "key": "uk"
         },
         {
           "name": "stripe_payment_intent_id",
-          "type": "varchar(255) ?"
+          "type": "varchar(255)?"
         },
         {
           "name": "paid_at",
-          "type": "varchar(40) ?"
+          "type": "varchar(40)?"
         },
         {
           "name": "customer_id",
-          "type": "bigint ?",
+          "type": "bigint?",
           "key": "fk",
           "references": "customers.id"
         },
         {
           "name": "coupon_id",
-          "type": "bigint ?",
+          "type": "bigint?",
           "key": "fk",
           "references": "coupons.id"
         },
@@ -2120,21 +2112,21 @@
         },
         {
           "name": "updated_at",
-          "type": "timestamp ?"
+          "type": "timestamp?"
         },
         {
           "name": "uuid",
-          "type": "varchar(255) ?",
+          "type": "varchar(255)?",
           "key": "uk"
         },
         {
           "name": "stripe_invoice_id",
-          "type": "varchar(255) ?",
+          "type": "varchar(255)?",
           "key": "uk"
         },
         {
           "name": "coaching_subscription_id",
-          "type": "bigint ?",
+          "type": "bigint?",
           "key": "fk",
           "references": "coaching_subscriptions.id"
         },
@@ -2144,57 +2136,60 @@
         },
         {
           "name": "checkout_attempt",
-          "type": "varchar(64) ?"
+          "type": "varchar(64)?"
         },
         {
           "name": "checkout_expires_at",
-          "type": "varchar(32) ?"
+          "type": "varchar(32)?"
         },
         {
           "name": "brand_experience_id",
-          "type": "bigint ?",
+          "type": "bigint?",
           "key": "fk",
           "references": "brand_experiences.id"
         },
         {
           "name": "stripe_account_id",
-          "type": "varchar(255) ?"
+          "type": "varchar(255)?"
         },
         {
           "name": "brand_revenue_terms",
-          "type": "text ?"
+          "type": "text?"
         },
         {
           "name": "merchant_organization_id",
-          "type": "integer ?"
+          "type": "integer?"
+        },
+        {
+          "name": "invoice_checkout",
+          "type": "text?"
         }
       ]
     },
     {
       "id": "coupons",
-      "label": "coupons",
       "tag": "Commerce",
       "row": 6,
       "col": 0,
-      "width": 370,
+      "width": 325,
+      "label": "coupons",
       "attributes": [
         {
           "name": "id",
-          "type": "bigint",
+          "type": "BIGSERIAL",
           "key": "pk"
         },
         {
           "name": "code",
-          "type": "varchar(50)",
-          "key": "uk"
+          "type": "varchar(50)"
         },
         {
           "name": "description",
-          "type": "varchar(255) ?"
+          "type": "varchar(255)?"
         },
         {
           "name": "status",
-          "type": "USER-DEFINED"
+          "type": "\"coupons_status_type\""
         },
         {
           "name": "is_active",
@@ -2202,7 +2197,7 @@
         },
         {
           "name": "discount_type",
-          "type": "USER-DEFINED"
+          "type": "\"coupons_discount_type_type\""
         },
         {
           "name": "discount_value",
@@ -2210,44 +2205,41 @@
         },
         {
           "name": "min_order_amount",
-          "type": "integer ?"
+          "type": "integer?"
         },
         {
           "name": "max_discount_amount",
-          "type": "integer ?"
+          "type": "integer?"
         },
         {
           "name": "free_product_id",
-          "type": "varchar(255) ?"
+          "type": "varchar(255)?"
         },
         {
           "name": "usage_limit",
-          "type": "integer ?"
+          "type": "integer?"
         },
         {
           "name": "usage_count",
-          "type": "integer ?"
+          "type": "integer?"
         },
         {
           "name": "start_date",
-          "type": "date ?"
+          "type": "date?"
         },
         {
           "name": "end_date",
-          "type": "date ?"
+          "type": "date?"
         },
         {
           "name": "coach_id",
-          "type": "bigint ?",
-          "key": [
-            "fk",
-            "uk"
-          ],
+          "type": "bigint?",
+          "key": "fk",
           "references": "coaches.id"
         },
         {
           "name": "product_id",
-          "type": "bigint ?",
+          "type": "bigint?",
           "key": "fk",
           "references": "products.id"
         },
@@ -2257,633 +2249,889 @@
         },
         {
           "name": "updated_at",
-          "type": "timestamp ?"
+          "type": "timestamp?"
         },
         {
           "name": "uuid",
-          "type": "varchar(255) ?",
+          "type": "varchar(255)?",
           "key": "uk"
-        }
-      ],
-      "sublabel": "Unique together: code+coach_id"
-    },
-    {
-      "id": "chat_conversations",
-      "label": "chat_conversations",
-      "tag": "Messages",
-      "row": 3,
-      "col": 3,
-      "width": 330,
-      "attributes": [
-        {
-          "name": "id",
-          "type": "varchar(64)",
-          "key": "pk"
-        },
-        {
-          "name": "scope",
-          "type": "varchar(255)"
-        },
-        {
-          "name": "participant_type",
-          "type": "varchar(255)"
-        },
-        {
-          "name": "first_id",
-          "type": "bigint"
-        },
-        {
-          "name": "second_id",
-          "type": "bigint"
-        },
-        {
-          "name": "created_at",
-          "type": "timestamp"
         }
       ]
     },
     {
-      "id": "chat_messages",
-      "label": "chat_messages",
-      "tag": "Messages",
-      "row": 4,
+      "id": "training_blocks",
+      "tag": "Review",
+      "row": 0,
       "col": 3,
-      "width": 370,
+      "width": 350,
+      "label": "training_blocks",
       "attributes": [
         {
           "name": "id",
-          "type": "integer",
+          "type": "BIGSERIAL",
           "key": "pk"
         },
         {
-          "name": "conversation_id",
-          "type": "varchar(64)",
-          "key": [
-            "fk",
-            "uk"
-          ],
-          "references": "chat_conversations.id"
-        },
-        {
-          "name": "sender_id",
+          "name": "organization_id",
           "type": "bigint",
-          "key": "uk"
+          "key": "fk",
+          "references": "organizations.id"
         },
         {
-          "name": "body",
-          "type": "text"
+          "name": "brand_experience_id",
+          "type": "bigint",
+          "key": "fk",
+          "references": "brand_experiences.id"
         },
         {
-          "name": "client_key",
-          "type": "varchar(100)",
-          "key": "uk"
+          "name": "coaching_subscription_id",
+          "type": "bigint",
+          "key": "fk",
+          "references": "coaching_subscriptions.id"
+        },
+        {
+          "name": "enrollment_id",
+          "type": "bigint",
+          "key": "fk",
+          "references": "product_enrollments.id"
+        },
+        {
+          "name": "enrollment_started_at",
+          "type": "varchar(40)"
+        },
+        {
+          "name": "product_id",
+          "type": "bigint",
+          "key": "fk",
+          "references": "products.id"
+        },
+        {
+          "name": "user_id",
+          "type": "bigint",
+          "key": "fk",
+          "references": "users.id"
+        },
+        {
+          "name": "athlete_id",
+          "type": "bigint",
+          "key": "fk",
+          "references": "athletes.id"
+        },
+        {
+          "name": "sequence",
+          "type": "integer"
+        },
+        {
+          "name": "start_date",
+          "type": "date"
+        },
+        {
+          "name": "end_date",
+          "type": "date"
+        },
+        {
+          "name": "length_days",
+          "type": "integer"
+        },
+        {
+          "name": "status",
+          "type": "varchar(30)"
+        },
+        {
+          "name": "revision",
+          "type": "integer"
+        },
+        {
+          "name": "allowed_sports",
+          "type": "text?"
+        },
+        {
+          "name": "plan",
+          "type": "text?"
+        },
+        {
+          "name": "evidence",
+          "type": "text?"
+        },
+        {
+          "name": "generator",
+          "type": "varchar(20)?"
+        },
+        {
+          "name": "generation_attempts",
+          "type": "integer"
+        },
+        {
+          "name": "generation_error",
+          "type": "varchar(500)?"
+        },
+        {
+          "name": "drafting_until",
+          "type": "varchar(40)?"
+        },
+        {
+          "name": "reviewed_by_coach_id",
+          "type": "bigint?",
+          "key": "fk",
+          "references": "coaches.id"
+        },
+        {
+          "name": "reviewed_by_user_id",
+          "type": "bigint?",
+          "key": "fk",
+          "references": "users.id"
+        },
+        {
+          "name": "reviewed_at",
+          "type": "varchar(40)?"
+        },
+        {
+          "name": "review_note",
+          "type": "text?"
+        },
+        {
+          "name": "notified_revision",
+          "type": "integer?"
+        },
+        {
+          "name": "notified_at",
+          "type": "varchar(40)?"
+        },
+        {
+          "name": "escalated_at",
+          "type": "varchar(40)?"
+        },
+        {
+          "name": "released_at",
+          "type": "varchar(40)?"
         },
         {
           "name": "created_at",
           "type": "timestamp"
         },
         {
-          "name": "read_at",
-          "type": "timestamp ?"
+          "name": "updated_at",
+          "type": "timestamp?"
         },
         {
-          "name": "attachments",
-          "type": "text ?"
+          "name": "feedback_at",
+          "type": "varchar(40)?"
+        },
+        {
+          "name": "feedback_asked_at",
+          "type": "varchar(40)?"
         }
-      ],
-      "sublabel": "Unique together: conversation_id+conversation_id+sender_id+sender_id+client_key+client_key"
+      ]
     }
   ],
   "relationships": [
     {
-      "id": "r_organizations_user_id",
+      "id": "organizations_user_id",
       "from": "organizations",
       "to": "users",
       "fromCardinality": "many",
       "toCardinality": "one",
       "fromOptional": true,
-      "toOptional": false,
-      "identifying": false
+      "toOptional": false
     },
     {
-      "id": "r_org_members_organization_id",
+      "id": "org_members_organization_id",
       "from": "org_members",
       "to": "organizations",
       "fromCardinality": "many",
       "toCardinality": "one",
       "fromOptional": true,
-      "toOptional": false,
-      "identifying": false
+      "toOptional": false
     },
     {
-      "id": "r_org_members_user_id",
+      "id": "org_members_user_id",
       "from": "org_members",
       "to": "users",
       "fromCardinality": "many",
       "toCardinality": "one",
       "fromOptional": true,
-      "toOptional": false,
-      "identifying": false
+      "toOptional": false
     },
     {
-      "id": "r_org_members_location_id",
+      "id": "org_members_location_id",
       "from": "org_members",
       "to": "locations",
       "fromCardinality": "many",
       "toCardinality": "one",
       "fromOptional": true,
-      "toOptional": true,
-      "identifying": false
+      "toOptional": true
     },
     {
-      "id": "r_locations_organization_id",
+      "id": "locations_organization_id",
       "from": "locations",
       "to": "organizations",
       "fromCardinality": "many",
       "toCardinality": "one",
       "fromOptional": true,
-      "toOptional": false,
-      "identifying": false
+      "toOptional": false
     },
     {
-      "id": "r_coaches_user_id",
+      "id": "coaches_user_id",
       "from": "coaches",
       "to": "users",
       "fromCardinality": "many",
       "toCardinality": "one",
       "fromOptional": true,
-      "toOptional": false,
-      "identifying": false
+      "toOptional": false
     },
     {
-      "id": "r_coaches_organization_id",
+      "id": "coaches_organization_id",
       "from": "coaches",
       "to": "organizations",
       "fromCardinality": "many",
       "toCardinality": "one",
       "fromOptional": true,
-      "toOptional": true,
-      "identifying": false
+      "toOptional": true
     },
     {
-      "id": "r_coaching_methods_organization_id",
+      "id": "coaching_methods_organization_id",
       "from": "coaching_methods",
       "to": "organizations",
       "fromCardinality": "many",
       "toCardinality": "one",
       "fromOptional": true,
-      "toOptional": false,
-      "identifying": false
+      "toOptional": false
     },
     {
-      "id": "r_coaching_methods_coach_id",
+      "id": "coaching_methods_coach_id",
       "from": "coaching_methods",
       "to": "coaches",
       "fromCardinality": "many",
       "toCardinality": "one",
       "fromOptional": true,
-      "toOptional": false,
-      "identifying": false
+      "toOptional": false
     },
     {
-      "id": "r_coaching_method_revisions_organization_id",
+      "id": "coaching_method_revisions_organization_id",
       "from": "coaching_method_revisions",
       "to": "organizations",
       "fromCardinality": "many",
       "toCardinality": "one",
       "fromOptional": true,
-      "toOptional": false,
-      "identifying": false
+      "toOptional": false
     },
     {
-      "id": "r_coaching_method_revisions_coaching_method_id",
+      "id": "coaching_method_revisions_coaching_method_id",
       "from": "coaching_method_revisions",
       "to": "coaching_methods",
       "fromCardinality": "many",
       "toCardinality": "one",
       "fromOptional": true,
-      "toOptional": false,
-      "identifying": false
+      "toOptional": false
     },
     {
-      "id": "r_brand_experiences_organization_id",
+      "id": "brand_experiences_organization_id",
       "from": "brand_experiences",
       "to": "organizations",
-      "fromCardinality": "one",
+      "fromCardinality": "many",
       "toCardinality": "one",
       "fromOptional": true,
-      "toOptional": false,
-      "identifying": false
+      "toOptional": false
     },
     {
-      "id": "r_athletes_user_id",
+      "id": "athletes_user_id",
       "from": "athletes",
       "to": "users",
       "fromCardinality": "many",
       "toCardinality": "one",
       "fromOptional": true,
-      "toOptional": false,
-      "identifying": false
+      "toOptional": false
     },
     {
-      "id": "r_athletes_organization_id",
+      "id": "athletes_organization_id",
       "from": "athletes",
       "to": "organizations",
       "fromCardinality": "many",
       "toCardinality": "one",
       "fromOptional": true,
-      "toOptional": true,
-      "identifying": false
+      "toOptional": true
     },
     {
-      "id": "r_athletes_coach_id",
+      "id": "athletes_coach_id",
       "from": "athletes",
       "to": "coaches",
       "fromCardinality": "many",
       "toCardinality": "one",
       "fromOptional": true,
-      "toOptional": true,
-      "identifying": false
+      "toOptional": true
     },
     {
-      "id": "r_training_plans_coach_id",
+      "id": "training_plans_coach_id",
       "from": "training_plans",
       "to": "coaches",
       "fromCardinality": "many",
       "toCardinality": "one",
       "fromOptional": true,
-      "toOptional": true,
-      "identifying": false
+      "toOptional": true
     },
     {
-      "id": "r_training_plans_source_draft_id",
+      "id": "training_plans_source_draft_id",
       "from": "training_plans",
       "to": "plan_drafts",
       "fromCardinality": "many",
       "toCardinality": "one",
       "fromOptional": true,
-      "toOptional": true,
-      "identifying": false
+      "toOptional": true
     },
     {
-      "id": "r_training_plans_athlete_id",
+      "id": "training_plans_athlete_id",
       "from": "training_plans",
       "to": "athletes",
       "fromCardinality": "many",
       "toCardinality": "one",
       "fromOptional": true,
-      "toOptional": true,
-      "identifying": false
+      "toOptional": true
     },
     {
-      "id": "r_plan_drafts_coach_id",
+      "id": "plan_drafts_coach_id",
       "from": "plan_drafts",
       "to": "coaches",
       "fromCardinality": "many",
       "toCardinality": "one",
       "fromOptional": true,
-      "toOptional": true,
-      "identifying": false
+      "toOptional": true
     },
     {
-      "id": "r_plan_drafts_athlete_id",
+      "id": "plan_drafts_athlete_id",
       "from": "plan_drafts",
       "to": "athletes",
       "fromCardinality": "many",
       "toCardinality": "one",
       "fromOptional": true,
-      "toOptional": false,
-      "identifying": false
+      "toOptional": false
     },
     {
-      "id": "r_workouts_athlete_id",
+      "id": "workouts_athlete_id",
       "from": "workouts",
       "to": "athletes",
       "fromCardinality": "many",
       "toCardinality": "one",
       "fromOptional": true,
-      "toOptional": false,
-      "identifying": false
+      "toOptional": false
     },
     {
-      "id": "r_workouts_coach_id",
+      "id": "workouts_coach_id",
       "from": "workouts",
       "to": "coaches",
       "fromCardinality": "many",
       "toCardinality": "one",
       "fromOptional": true,
-      "toOptional": true,
-      "identifying": false
+      "toOptional": true
     },
     {
-      "id": "r_products_organization_id",
+      "id": "products_organization_id",
       "from": "products",
       "to": "organizations",
       "fromCardinality": "many",
       "toCardinality": "one",
       "fromOptional": true,
-      "toOptional": true,
-      "identifying": false
+      "toOptional": true
     },
     {
-      "id": "r_products_coach_id",
+      "id": "products_coach_id",
       "from": "products",
       "to": "coaches",
       "fromCardinality": "many",
       "toCardinality": "one",
       "fromOptional": true,
-      "toOptional": true,
-      "identifying": false
+      "toOptional": true
     },
     {
-      "id": "r_products_training_plan_id",
+      "id": "products_training_plan_id",
       "from": "products",
       "to": "training_plans",
       "fromCardinality": "many",
       "toCardinality": "one",
       "fromOptional": true,
-      "toOptional": true,
-      "identifying": false
+      "toOptional": true
     },
     {
-      "id": "r_coaching_subscriptions_user_id",
+      "id": "coaching_subscriptions_user_id",
       "from": "coaching_subscriptions",
       "to": "users",
       "fromCardinality": "many",
       "toCardinality": "one",
       "fromOptional": true,
-      "toOptional": false,
-      "identifying": false
+      "toOptional": false
     },
     {
-      "id": "r_coaching_subscriptions_product_id",
+      "id": "coaching_subscriptions_product_id",
       "from": "coaching_subscriptions",
       "to": "products",
       "fromCardinality": "many",
       "toCardinality": "one",
       "fromOptional": true,
-      "toOptional": false,
-      "identifying": false
+      "toOptional": false
     },
     {
-      "id": "r_coaching_subscriptions_coach_id",
+      "id": "coaching_subscriptions_coach_id",
       "from": "coaching_subscriptions",
       "to": "coaches",
       "fromCardinality": "many",
       "toCardinality": "one",
       "fromOptional": true,
-      "toOptional": true,
-      "identifying": false
+      "toOptional": true
     },
     {
-      "id": "r_coaching_subscriptions_athlete_id",
+      "id": "coaching_subscriptions_athlete_id",
       "from": "coaching_subscriptions",
       "to": "athletes",
       "fromCardinality": "many",
       "toCardinality": "one",
       "fromOptional": true,
-      "toOptional": true,
-      "identifying": false
+      "toOptional": true
     },
     {
-      "id": "r_coaching_subscriptions_brand_experience_id",
+      "id": "coaching_subscriptions_brand_experience_id",
       "from": "coaching_subscriptions",
       "to": "brand_experiences",
       "fromCardinality": "many",
       "toCardinality": "one",
       "fromOptional": true,
-      "toOptional": true,
-      "identifying": false
+      "toOptional": true
     },
     {
-      "id": "r_coaching_subscriptions_coaching_method_id",
+      "id": "coaching_subscriptions_coaching_method_id",
       "from": "coaching_subscriptions",
       "to": "coaching_methods",
       "fromCardinality": "many",
       "toCardinality": "one",
       "fromOptional": true,
-      "toOptional": true,
-      "identifying": false
+      "toOptional": true
     },
     {
-      "id": "r_product_enrollments_user_id",
+      "id": "product_enrollments_user_id",
       "from": "product_enrollments",
       "to": "users",
       "fromCardinality": "many",
       "toCardinality": "one",
       "fromOptional": true,
       "toOptional": false,
-      "identifying": false
+      "fromSide": "left",
+      "toSide": "bottom",
+      "via": [
+        [
+          1149,
+          2429
+        ],
+        [
+          1149,
+          925
+        ],
+        [
+          203,
+          925
+        ]
+      ]
     },
     {
-      "id": "r_product_enrollments_product_id",
+      "id": "product_enrollments_product_id",
       "from": "product_enrollments",
       "to": "products",
       "fromCardinality": "many",
       "toCardinality": "one",
       "fromOptional": true,
-      "toOptional": false,
-      "identifying": false
+      "toOptional": false
     },
     {
-      "id": "r_product_enrollments_order_id",
+      "id": "product_enrollments_order_id",
       "from": "product_enrollments",
       "to": "orders",
       "fromCardinality": "many",
       "toCardinality": "one",
       "fromOptional": true,
-      "toOptional": true,
-      "identifying": false
+      "toOptional": true
     },
     {
-      "id": "r_product_enrollments_athlete_id",
+      "id": "product_enrollments_athlete_id",
       "from": "product_enrollments",
       "to": "athletes",
       "fromCardinality": "many",
       "toCardinality": "one",
       "fromOptional": true,
-      "toOptional": true,
-      "identifying": false
+      "toOptional": true
     },
     {
-      "id": "r_product_enrollments_coaching_subscription_id",
+      "id": "product_enrollments_coaching_subscription_id",
       "from": "product_enrollments",
       "to": "coaching_subscriptions",
       "fromCardinality": "many",
       "toCardinality": "one",
       "fromOptional": true,
-      "toOptional": true,
-      "identifying": false
+      "toOptional": true
     },
     {
-      "id": "r_assistant_conversations_user_id",
+      "id": "assistant_conversations_user_id",
       "from": "assistant_conversations",
       "to": "users",
       "fromCardinality": "many",
       "toCardinality": "one",
       "fromOptional": true,
-      "toOptional": false,
-      "identifying": false
+      "toOptional": false
     },
     {
-      "id": "r_assistant_conversations_athlete_id",
+      "id": "assistant_conversations_athlete_id",
       "from": "assistant_conversations",
       "to": "athletes",
       "fromCardinality": "many",
       "toCardinality": "one",
       "fromOptional": true,
-      "toOptional": true,
-      "identifying": false
+      "toOptional": true
     },
     {
-      "id": "r_assistant_conversations_coaching_method_id",
+      "id": "assistant_conversations_coaching_method_id",
       "from": "assistant_conversations",
       "to": "coaching_methods",
       "fromCardinality": "many",
       "toCardinality": "one",
       "fromOptional": true,
       "toOptional": true,
-      "identifying": false
+      "fromSide": "bottom",
+      "toSide": "top",
+      "via": [
+        [
+          1778.5,
+          956
+        ],
+        [
+          596,
+          956
+        ]
+      ]
     },
     {
-      "id": "r_coaching_voice_feedback_user_id",
+      "id": "coaching_voice_feedback_user_id",
       "from": "coaching_voice_feedback",
       "to": "users",
       "fromCardinality": "many",
       "toCardinality": "one",
       "fromOptional": true,
       "toOptional": false,
-      "identifying": false
+      "fromSide": "top",
+      "toSide": "bottom",
+      "via": [
+        [
+          1778.5,
+          925
+        ],
+        [
+          203,
+          925
+        ]
+      ]
     },
     {
-      "id": "r_coaching_voice_feedback_coaching_subscription_id",
+      "id": "coaching_voice_feedback_coaching_subscription_id",
       "from": "coaching_voice_feedback",
       "to": "coaching_subscriptions",
       "fromCardinality": "many",
       "toCardinality": "one",
       "fromOptional": true,
-      "toOptional": false,
-      "identifying": false
+      "toOptional": false
     },
     {
-      "id": "r_coaching_voice_feedback_coaching_method_id",
+      "id": "coaching_voice_feedback_coaching_method_id",
       "from": "coaching_voice_feedback",
       "to": "coaching_methods",
       "fromCardinality": "many",
       "toCardinality": "one",
       "fromOptional": true,
-      "toOptional": false,
-      "identifying": false
+      "toOptional": false
     },
     {
-      "id": "r_coaching_voice_feedback_conversation_id",
+      "id": "coaching_voice_feedback_conversation_id",
       "from": "coaching_voice_feedback",
       "to": "assistant_conversations",
       "fromCardinality": "many",
       "toCardinality": "one",
       "fromOptional": true,
-      "toOptional": true,
-      "identifying": false
+      "toOptional": true
     },
     {
-      "id": "r_health_metrics_athlete_id",
+      "id": "health_metrics_athlete_id",
       "from": "health_metrics",
       "to": "athletes",
       "fromCardinality": "many",
       "toCardinality": "one",
       "fromOptional": true,
-      "toOptional": false,
-      "identifying": false
+      "toOptional": false
     },
     {
-      "id": "r_customers_user_id",
+      "id": "customers_user_id",
       "from": "customers",
       "to": "users",
       "fromCardinality": "many",
       "toCardinality": "one",
       "fromOptional": true,
       "toOptional": true,
-      "identifying": false
+      "fromSide": "left",
+      "toSide": "left"
     },
     {
-      "id": "r_orders_coach_id",
+      "id": "orders_coach_id",
       "from": "orders",
       "to": "coaches",
       "fromCardinality": "many",
       "toCardinality": "one",
       "fromOptional": true,
-      "toOptional": true,
-      "identifying": false
+      "toOptional": true
     },
     {
-      "id": "r_orders_customer_id",
+      "id": "orders_customer_id",
       "from": "orders",
       "to": "customers",
       "fromCardinality": "many",
       "toCardinality": "one",
       "fromOptional": true,
-      "toOptional": true,
-      "identifying": false
+      "toOptional": true
     },
     {
-      "id": "r_orders_coupon_id",
+      "id": "orders_coupon_id",
       "from": "orders",
       "to": "coupons",
       "fromCardinality": "many",
       "toCardinality": "one",
       "fromOptional": true,
-      "toOptional": true,
-      "identifying": false
+      "toOptional": true
     },
     {
-      "id": "r_orders_coaching_subscription_id",
+      "id": "orders_coaching_subscription_id",
       "from": "orders",
       "to": "coaching_subscriptions",
       "fromCardinality": "many",
       "toCardinality": "one",
       "fromOptional": true,
-      "toOptional": true,
-      "identifying": false
+      "toOptional": true
     },
     {
-      "id": "r_orders_brand_experience_id",
+      "id": "orders_brand_experience_id",
       "from": "orders",
       "to": "brand_experiences",
       "fromCardinality": "many",
       "toCardinality": "one",
       "fromOptional": true,
-      "toOptional": true,
-      "identifying": false
+      "toOptional": true
     },
     {
-      "id": "r_coupons_coach_id",
+      "id": "coupons_coach_id",
       "from": "coupons",
       "to": "coaches",
       "fromCardinality": "many",
       "toCardinality": "one",
       "fromOptional": true,
-      "toOptional": true,
-      "identifying": false
+      "toOptional": true
     },
     {
-      "id": "r_coupons_product_id",
+      "id": "coupons_product_id",
       "from": "coupons",
       "to": "products",
       "fromCardinality": "many",
       "toCardinality": "one",
       "fromOptional": true,
       "toOptional": true,
-      "identifying": false
+      "fromSide": "right",
+      "toSide": "right"
     },
     {
-      "id": "r_chat_messages_conversation_id",
-      "from": "chat_messages",
-      "to": "chat_conversations",
+      "id": "training_blocks_organization_id",
+      "from": "training_blocks",
+      "to": "organizations",
       "fromCardinality": "many",
       "toCardinality": "one",
       "fromOptional": true,
       "toOptional": false,
-      "identifying": false
+      "fromSide": "bottom",
+      "toSide": "top",
+      "via": [
+        [
+          1373,
+          956
+        ],
+        [
+          203,
+          956
+        ]
+      ]
+    },
+    {
+      "id": "training_blocks_brand_experience_id",
+      "from": "training_blocks",
+      "to": "brand_experiences",
+      "fromCardinality": "many",
+      "toCardinality": "one",
+      "fromOptional": true,
+      "toOptional": false,
+      "fromSide": "bottom",
+      "toSide": "right",
+      "via": [
+        [
+          1373,
+          973
+        ],
+        [
+          786,
+          973
+        ],
+        [
+          786,
+          2365
+        ]
+      ]
+    },
+    {
+      "id": "training_blocks_coaching_subscription_id",
+      "from": "training_blocks",
+      "to": "coaching_subscriptions",
+      "fromCardinality": "many",
+      "toCardinality": "one",
+      "fromOptional": true,
+      "toOptional": false,
+      "fromSide": "bottom",
+      "toSide": "top",
+      "via": [
+        [
+          1373,
+          973
+        ],
+        [
+          1544,
+          973
+        ],
+        [
+          1544,
+          1628
+        ],
+        [
+          1373,
+          1628
+        ]
+      ]
+    },
+    {
+      "id": "training_blocks_enrollment_id",
+      "from": "training_blocks",
+      "to": "product_enrollments",
+      "fromCardinality": "many",
+      "toCardinality": "one",
+      "fromOptional": true,
+      "toOptional": false,
+      "fromSide": "bottom",
+      "toSide": "left",
+      "via": [
+        [
+          1373,
+          973
+        ],
+        [
+          1185,
+          973
+        ],
+        [
+          1185,
+          2429
+        ]
+      ]
+    },
+    {
+      "id": "training_blocks_product_id",
+      "from": "training_blocks",
+      "to": "products",
+      "fromCardinality": "many",
+      "toCardinality": "one",
+      "fromOptional": true,
+      "toOptional": false,
+      "fromSide": "bottom",
+      "toSide": "top",
+      "via": []
+    },
+    {
+      "id": "training_blocks_user_id",
+      "from": "training_blocks",
+      "to": "users",
+      "fromCardinality": "many",
+      "toCardinality": "one",
+      "fromOptional": true,
+      "toOptional": false,
+      "fromSide": "top",
+      "toSide": "top",
+      "via": [
+        [
+          1373,
+          12
+        ],
+        [
+          203,
+          12
+        ]
+      ]
+    },
+    {
+      "id": "training_blocks_athlete_id",
+      "from": "training_blocks",
+      "to": "athletes",
+      "fromCardinality": "many",
+      "toCardinality": "one",
+      "fromOptional": true,
+      "toOptional": false,
+      "fromSide": "left",
+      "toSide": "right",
+      "via": [
+        [
+          1166,
+          333
+        ],
+        [
+          1166,
+          477
+        ]
+      ]
+    },
+    {
+      "id": "training_blocks_reviewed_by_coach_id",
+      "from": "training_blocks",
+      "to": "coaches",
+      "fromCardinality": "many",
+      "toCardinality": "one",
+      "fromOptional": true,
+      "toOptional": true,
+      "fromSide": "top",
+      "toSide": "top",
+      "via": [
+        [
+          1373,
+          12
+        ],
+        [
+          596,
+          12
+        ]
+      ]
+    },
+    {
+      "id": "training_blocks_reviewed_by_user_id",
+      "from": "training_blocks",
+      "to": "users",
+      "fromCardinality": "many",
+      "toCardinality": "one",
+      "fromOptional": true,
+      "toOptional": true,
+      "fromSide": "top",
+      "toSide": "top",
+      "via": [
+        [
+          1373,
+          12
+        ],
+        [
+          203,
+          12
+        ]
+      ]
     }
   ],
   "cards": [
@@ -2891,25 +3139,31 @@
       "dot": "cyan",
       "title": "Read the schema",
       "items": [
-        "PK is a primary key, FK a foreign key and UK a unique constraint. A question mark after a type means that the column allows null.",
-        "All 465 columns in 23 tables are included. Use Lens, search or zoom to inspect their fields.",
-        "53 cross-table foreign keys are drawn. The additional self-reference plan_drafts.parent_id \u2192 plan_drafts.id is recorded in the fields."
+        "493 columns in 22 tables, from pinned migration declarations.",
+        "61 cross-table links are drawn. 1 self-reference is retained in the fields.",
+        "PK means primary key, FK foreign key and UK a single-column unique key. A type ending in ? allows null."
       ]
     },
     {
       "dot": "amber",
-      "title": "Permissions and enrollment",
+      "title": "Weekly review",
       "items": [
-        "An organization role does not grant a training plan. The same Run + Strength offer can enroll multiple independent athletes.",
-        "A product enrollment freezes a plan snapshot; workouts hold planned sessions and completion history."
+        "training_blocks links the subscription, enrollment, athlete and reviewing coach.",
+        "feedback_at starts the qualifying check-in record. Review and release timestamps describe separate stages.",
+        "This is declared schema from the source kit, not an inspection of production records."
       ]
     },
     {
       "dot": "emerald",
-      "title": "Feedback privacy",
+      "title": "Compound constraints",
       "items": [
-        "Voice receipt rows contain a private transcript and an expiry time; raw recordings are not retained.",
-        "AI conversations and health rows remain private. This diagram contains schema metadata only, never account values or credentials."
+        "athletes: unique together (external_source, external_id).",
+        "org_members: unique together (organization_id, user_id).",
+        "coupons: unique together (coach_id, code).",
+        "product_enrollments: unique together (user_id, product_id).",
+        "coaching_voice_feedback: unique together (user_id, client_key).",
+        "coaching_method_revisions: unique together (coaching_method_id, version).",
+        "training_blocks: unique together (enrollment_id, enrollment_started_at, sequence)."
       ]
     }
   ]

@@ -15,6 +15,8 @@ The calendar shows the training on your account: sessions from the plans you are
 
 For strength exercises and drills, consult the [exercise library](/training/exercise-library) for the built-in names, equipment and matching illustrations. The [illustration catalog](/style-guide/illustrations) lists all supplied SVG figures and their sampled poses. All 184 built-in exercises have a matching figure. Exercises with the same movement can share a figure. Open Strength A or Strength B in the demo calendar to inspect its exercise figures, instructions, blocks and sets. Tick a set to record it, then reopen the session to check the saved state. Follow the session's own instructions and demonstration when provided.
 
+<WorkoutFigures />
+
 ## Record what happened
 
 Open a session and use the available completion controls. Enter the actual result rather than copying the plan when the two differ. Where offered, record duration, distance, effort and how you felt, then save. Reopen the session to check the saved result.
@@ -38,3 +40,5 @@ The current catalog supplies training one approved seven-day block at a time. A 
 Send method feedback during the window shown for your subscription. Coaches review and assign future training; the general AI assistant is configured for insights and does not automatically rewrite sessions. Completed sessions remain the record of what you did. See [Feedback and weekly coach review](/training/feedback).
 
 The fictional Alex and Jamie demo calendars were seeded with eight weeks at once so reviewers could inspect history and upcoming sessions. Their populated future dates do not describe how newly purchased catalog packages are released.
+
+<div class="guide-next"><p>Continue the guide</p><a href="/training/feedback">Give feedback about your training</a></div>

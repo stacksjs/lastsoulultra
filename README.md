@@ -80,6 +80,8 @@ bun run audit:html
 
 `build` generates site assets, builds the website, externalizes page-specific module bundles, builds the docs and audits them. `audit:html` checks the rendered site for broken internal routes, duplicate IDs, heading order and missing accessible names. The same page rules run in the tests against rendered templates.
 
+The [Visual guide](docs/visual-guide.md) provides compact reading aids and links to the full workflows. The current ERD source is generated from the pinned kit's migration corpus with `bun run docs:erd:source`; its `--check` mode runs in `audit:docs`. It includes all columns and declared foreign keys in the selected scope, including weekly training blocks, and keeps the older deployed snapshot separately. After changing a diagram source, use the bundled `stacks-technical-diagrams` skill to finalize and review its rendered HTML, then refresh `docs/public/diagrams/artifacts.json` with the verified source and HTML hashes. Local validation receipts stay under `storage/runtime`.
+
 After changing component sources, regenerate their reference with `bun run docs:style-guide`. Regenerate workout art with `bun scripts/sync-workout-art.ts` and documentation brand assets with `bun scripts/sync-style-guide-assets.ts` when their sources change. Their `--check` modes run under `audit:docs`; do not hand-edit generated inventories.
 
 ## Source map

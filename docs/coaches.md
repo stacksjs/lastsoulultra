@@ -52,3 +52,5 @@ The fictional Alex and Jamie demonstration calendars already contain eight weeks
 ## Verify publication
 
 Inspect the published offer as a visitor. Then sign into the intended subscriber account and confirm its method, release status and approved sessions. If an offer disappears, check its method, author membership, product status and plan against [Administration](/administration#manage-offers-and-methods).
+
+<div class="guide-next"><p>Continue the guide</p><a href="/administration">Check publication and organization access</a></div>

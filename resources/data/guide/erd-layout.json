@@ -1,0 +1,156 @@
+[
+  {
+    "id": "users",
+    "tag": "Identity",
+    "row": 0,
+    "col": 0,
+    "width": 320
+  },
+  {
+    "id": "organizations",
+    "tag": "Identity",
+    "row": 1,
+    "col": 0,
+    "width": 320
+  },
+  {
+    "id": "org_members",
+    "tag": "Identity",
+    "row": 2,
+    "col": 0,
+    "width": 342
+  },
+  {
+    "id": "locations",
+    "tag": "Identity",
+    "row": 3,
+    "col": 0,
+    "width": 320
+  },
+  {
+    "id": "coaches",
+    "tag": "Coaching",
+    "row": 0,
+    "col": 1,
+    "width": 320
+  },
+  {
+    "id": "coaching_methods",
+    "tag": "Coaching",
+    "row": 1,
+    "col": 1,
+    "width": 320
+  },
+  {
+    "id": "coaching_method_revisions",
+    "tag": "Coaching",
+    "row": 2,
+    "col": 1,
+    "width": 320
+  },
+  {
+    "id": "brand_experiences",
+    "tag": "Coaching",
+    "row": 3,
+    "col": 1,
+    "width": 324
+  },
+  {
+    "id": "athletes",
+    "tag": "Training",
+    "row": 0,
+    "col": 2,
+    "width": 320
+  },
+  {
+    "id": "training_plans",
+    "tag": "Training",
+    "row": 1,
+    "col": 2,
+    "width": 320
+  },
+  {
+    "id": "plan_drafts",
+    "tag": "Training",
+    "row": 2,
+    "col": 2,
+    "width": 320
+  },
+  {
+    "id": "workouts",
+    "tag": "Training",
+    "row": 3,
+    "col": 2,
+    "width": 320
+  },
+  {
+    "id": "products",
+    "tag": "Access",
+    "row": 1,
+    "col": 3,
+    "width": 320
+  },
+  {
+    "id": "coaching_subscriptions",
+    "tag": "Access",
+    "row": 2,
+    "col": 3,
+    "width": 320
+  },
+  {
+    "id": "product_enrollments",
+    "tag": "Access",
+    "row": 3,
+    "col": 3,
+    "width": 320
+  },
+  {
+    "id": "assistant_conversations",
+    "tag": "Feedback",
+    "row": 0,
+    "col": 4,
+    "width": 320
+  },
+  {
+    "id": "coaching_voice_feedback",
+    "tag": "Feedback",
+    "row": 1,
+    "col": 4,
+    "width": 341
+  },
+  {
+    "id": "health_metrics",
+    "tag": "Feedback",
+    "row": 2,
+    "col": 4,
+    "width": 320
+  },
+  {
+    "id": "customers",
+    "tag": "Commerce",
+    "row": 4,
+    "col": 0,
+    "width": 320
+  },
+  {
+    "id": "orders",
+    "tag": "Commerce",
+    "row": 5,
+    "col": 0,
+    "width": 320
+  },
+  {
+    "id": "coupons",
+    "tag": "Commerce",
+    "row": 6,
+    "col": 0,
+    "width": 325
+  },
+  {
+    "id": "training_blocks",
+    "tag": "Review",
+    "row": 0,
+    "col": 3,
+    "width": 350
+  }
+]

@@ -1,45 +1,43 @@
 ---
 title: Last Soul Ultra guide
-description: Find race information, follow your training and manage LSU access.
+description: Find your way into LSU, understand weekly training and manage race or coaching access.
 ---
 
 # Last Soul Ultra guide
 
-Last Soul Ultra brings race information and your training into one place. Use this guide to find your way around, follow a training method and manage your account.
+Find your way into LSU, follow your training and understand what happens next. This guide covers the race-site preview and the independent training app.
 
 ## Read this first
 
-This guide covers the Last Soul Ultra private preview. The race site, including this guide, sits behind one shared username and password. Your training account, on the website and in the iPhone app, is separate from it.
+The race website and this guide use a shared preview username and password. Your personal training account is separate, and race entry has its own Profile. [Getting started](/getting-started) explains which login to use.
 
-Three steps, in order:
+If you prefer a picture first, open the [Visual guide](/visual-guide) for the account map, weekly training flow, race-confirmation tasks and workout figures.
 
-1. [Getting started](/getting-started) takes you past the preview password, through signing in and around the app.
-2. [Demo walkthrough](/demo) holds the review accounts, their passwords and a suggested route through the app.
-3. [Roles and plan access](/roles) explains which account can do what.
+## Start with your role
 
-## Everything else
-
-| You want to | Start here |
-| --- | --- |
-| Prepare for a race | [Race information](/races) |
-| Choose a training tier | [Plans and subscriptions](/training/plans) |
-| Follow and record a session | [Workouts](/training/workouts) |
-| Look up a movement or its equipment | [Exercise library](/training/exercise-library) |
-| Tell the plan how training felt | [Feedback](/training/feedback) |
-| Review completed training | [Progress](/training/progress) |
-| Review health summaries and connected sources | [Health](/training/health) |
-| Read account conversations | [Messages](/training/messages) |
-| Sign into LSU, switch accounts or manage billing | [Your account](/my-account) |
-| Understand who can see what | [Privacy and account boundaries](/privacy) |
-| Review LSU typefaces, colors and interface examples | [Style Guide](/style-guide/) |
-| Review every supplied workout figure | [Illustrations and SVG animations](/style-guide/illustrations) |
-| Manage a coaching method | [Coach guide](/coaches) |
-| Manage LSU access and published content | [Administration](/administration) |
-| Explore accounts, training and feedback relationships | [Data model and ERD](/erd) |
-| Something does not work | [Troubleshooting](/troubleshooting) |
+- **Runner:** [Sign into training](/getting-started), [choose a package](/training/plans), then [open and record a session](/training/workouts).
+- **Coach:** [Open your workspace](/coaches), review subscriber feedback and approve the next training block.
+- **Administrator:** [Manage the LSU organization](/administration), its members, Experience and published offers.
+- **Preview reviewer:** Use the [demo walkthrough](/demo) and [role map](/roles) to choose the right fictional account.
+- **Race entrant:** Read [Race information](/races) before applying or confirming a selected place.
 
 ## How training fits together
 
-A coach writes a method and publishes a tier. A runner joins that tier and receives its sessions. The runner records training and sends feedback. Current catalog packages release training in seven-day blocks: the runner sends end-of-block feedback and an LSU coach reviews the next block before it reaches the calendar. The AI assistant explains training data; it does not automatically rewrite workouts. Coach review of a block does not promise personal one-to-one coaching or a human response to every message.
+A coach authors the method and plan. Your enrollment grants training access. Current catalog packages supply seven-day blocks, with your feedback and a coach's approval before the next block is released.
 
-The available tiers and sections depend on what LSU has published. Your private training, health and messages require an LSU account. The older fictional demo plan has a populated eight-week calendar; it is distinct from the current twelve-week catalog and its weekly release. [Plans and subscriptions](/training/plans) explains both with examples.
+<WeeklyTraining />
+
+The AI assistant explains your training data; it does not automatically rewrite workouts. The older fictional demo calendar contains eight weeks at once so reviewers can inspect past and future sessions. [Plans and subscriptions](/training/plans) explains the difference.
+
+## Find an answer
+
+| You want to | Read |
+| --- | --- |
+| Record a session or recognize an exercise | [Workouts](/training/workouts), [exercise library](/training/exercise-library) |
+| Send feedback or understand a missing next week | [Feedback](/training/feedback), [troubleshooting](/troubleshooting) |
+| Review your training and its method | [Progress and the method](/training/progress) |
+| Connect health data or read a conversation | [Health](/training/health), [Messages](/training/messages) |
+| Change accounts, billing or access | [Your account](/my-account), [roles](/roles), [privacy](/privacy) |
+| Review visual assets or the data structure | [Style Guide](/style-guide/), [illustrations](/style-guide/illustrations), [data model and ERD](/erd) |
+
+<div class="guide-next"><p>New to the preview?</p><a href="/getting-started">Get started with the right account</a></div>

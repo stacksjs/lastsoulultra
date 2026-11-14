@@ -1,0 +1,139 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Last Soul Ultra: your next training week",
+    "locale": "en",
+    "quality_profile": "showcase",
+    "output": "docs/public/diagrams/weekly-training/index.html",
+    "legend": {
+      "entries": {
+        "frontend": {
+          "label": "Runner action"
+        },
+        "backend": {
+          "label": "LSU preparation"
+        },
+        "security": {
+          "label": "Coach approval"
+        }
+      }
+    }
+  },
+  "lanes": [
+    {
+      "id": "runner",
+      "label": "Your part"
+    },
+    {
+      "id": "team",
+      "label": "LSU team"
+    }
+  ],
+  "mainPath": [
+    "record",
+    "feedback",
+    "draft",
+    "review",
+    "calendar"
+  ],
+  "nodes": [
+    {
+      "id": "record",
+      "lane": "runner",
+      "col": 0,
+      "type": "frontend",
+      "icon": "person",
+      "label": "Record training",
+      "sublabel": "Actual results and effort"
+    },
+    {
+      "id": "feedback",
+      "lane": "runner",
+      "col": 1,
+      "type": "frontend",
+      "icon": "messagebus",
+      "label": "Send feedback",
+      "sublabel": "In the end-of-block window"
+    },
+    {
+      "id": "draft",
+      "lane": "team",
+      "col": 2,
+      "type": "backend",
+      "icon": "calendar",
+      "label": "Prepare draft",
+      "sublabel": "Next seven-day block"
+    },
+    {
+      "id": "review",
+      "lane": "team",
+      "col": 3,
+      "type": "security",
+      "icon": "decision",
+      "label": "Coach review",
+      "sublabel": "Edit, save and approve"
+    },
+    {
+      "id": "calendar",
+      "lane": "runner",
+      "col": 4,
+      "type": "frontend",
+      "icon": "success",
+      "label": "Open your week",
+      "sublabel": "Approved sessions appear"
+    }
+  ],
+  "edges": [
+    {
+      "from": "record",
+      "to": "feedback",
+      "label": "Check in"
+    },
+    {
+      "from": "feedback",
+      "to": "draft",
+      "label": "Qualifying feedback",
+      "variant": "emphasis"
+    },
+    {
+      "from": "draft",
+      "to": "review",
+      "label": "Ready for review"
+    },
+    {
+      "from": "review",
+      "to": "calendar",
+      "label": "Approved",
+      "variant": "emphasis"
+    },
+    {
+      "from": "review",
+      "to": "draft",
+      "label": "Request changes",
+      "variant": "dashed",
+      "role": "return",
+      "route": "bottom-channel",
+      "fromSide": "bottom",
+      "toSide": "bottom"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "amber",
+      "title": "When feedback counts",
+      "items": [
+        "The window opens two days before the current block ends. Earlier messages do not satisfy the check-in.",
+        "Sending feedback starts preparation. A coach still needs to approve the next block."
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "What the assistant does",
+      "items": [
+        "LSU uses AI for insights. A chat reply does not automatically rewrite your calendar.",
+        "The fictional eight-week demo calendar is separate from this weekly release process."
+      ]
+    }
+  ]
+}
