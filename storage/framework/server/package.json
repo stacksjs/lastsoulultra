@@ -47,11 +47,11 @@
     "build": "bun build.ts"
   },
   "devDependencies": {
-    "better-dx": "^0.2.38",
-    "@stacksjs/logging": "^0.75.528",
-    "@stacksjs/path": "^0.75.528",
-    "@stacksjs/router": "^0.75.528",
-    "@stacksjs/storage": "^0.75.528",
-    "@stacksjs/utils": "^0.75.528"
+    "better-dx": "^0.2.40",
+    "@stacksjs/logging": "^0.75.586",
+    "@stacksjs/path": "^0.75.586",
+    "@stacksjs/router": "^0.75.586",
+    "@stacksjs/storage": "^0.75.586",
+    "@stacksjs/utils": "^0.75.586"
   }
 }
