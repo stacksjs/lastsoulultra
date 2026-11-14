@@ -8,7 +8,7 @@ import { createHash } from 'node:crypto'
 import { resolve } from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { combinedRunKey, demoPlan, demoRunningPlan, demoRunningTier, demoStrengthDescription, demoTier } from './lsu-demo-plan'
-import { CATALOG, CATALOG_COACH_EMAIL, catalogDescription } from './lsu-demo-catalog'
+import { CATALOG, CATALOG_COACH_EMAIL, catalogDescription, reviewStorefrontOffers } from './lsu-demo-catalog'
 
 interface DemoAccount { key: string, name: string, email: string, password: string, membership?: string, coach?: boolean, athlete?: boolean, subscriber?: boolean }
 const accountsFile = process.env.LSU_DEMO_ACCOUNTS_FILE
@@ -186,7 +186,7 @@ await transaction(async () => {
   // but its theme is the packaged one: the coaching portal and the coaching
   // section inside the app are drawn from it, and they must look like the app
   // around them (native/product.json), not like the theme of an earlier build.
-  await saveExperience(organizationId, existingSettings ? { ...existingSettings, theme: lsuExperience().theme, offers: [...tierOffers, ...existingSettings.offers.filter((item: any) => !tierOffers.some(tier => tier.product_id === Number(item.product_id)))] } : { ...lsuExperience(), home_url: `${origin}/coaching`, logo_url: `${applicationOrigin}/assets/native-product/lsu-logo.svg`, support_url: `${origin}/contact`, privacy_url: `${applicationOrigin}/legal/lsu/privacy`, terms_url: `${applicationOrigin}/legal/lsu/terms`, embed_origins: [origin], show_powered_by: false, offers: tierOffers }, existingBrand?.status || 'published')
+  await saveExperience(organizationId, existingSettings ? { ...existingSettings, theme: lsuExperience().theme, offers: reviewStorefrontOffers(existingSettings.offers, tierOffers, Boolean(process.env.HQ_INSTALLATION_CATALOG)) } : { ...lsuExperience(), home_url: `${origin}/coaching`, logo_url: `${applicationOrigin}/assets/native-product/lsu-logo.svg`, support_url: `${origin}/contact`, privacy_url: `${applicationOrigin}/legal/lsu/privacy`, terms_url: `${applicationOrigin}/legal/lsu/terms`, embed_origins: [origin], show_powered_by: false, offers: tierOffers }, existingBrand?.status || 'published')
   const brand = await db.selectFrom('brand_experiences').select('id').where('organization_id', '=', organizationId).executeTakeFirstOrThrow()
   for (const account of accounts.filter(account => account.subscriber)) {
     const athlete = await db.selectFrom('athletes').select('id').where('user_id', '=', ids[account.key]).executeTakeFirstOrThrow()

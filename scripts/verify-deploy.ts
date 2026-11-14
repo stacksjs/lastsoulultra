@@ -21,8 +21,8 @@
 import { createHash } from 'node:crypto'
 import coaching from '../config/coaching'
 import diagrams from '../docs/public/diagrams/artifacts.json'
+import catalog from '../enterprise/catalog/catalog.json'
 import source from '../native/hq-source.json'
-import { appTiers } from '../resources/data/app-stores'
 import { accountOnlyRedirects } from '../resources/data/coaching'
 
 const site = String(process.env.LSU_SITE_ORIGIN || 'https://lsu.stacksjs.com').replace(/\/$/, '')
@@ -105,16 +105,26 @@ for (const [path, rule] of Object.entries(accountOnlyRedirects(coaching.origin))
   check(`${path} leaves for the training app`, answer.status === 302 && answer.headers.get('location') === rule.to, `answered ${answer.status} ${answer.headers.get('location') ?? ''}`)
 }
 
-// The training app: the pinned revision, the two tiers, and a sign-in that works.
+// The training app: the pinned revision, the coach's four packages and working sign-in.
 const deployment: any = await (await get(`${app}/api/deployment`)).json().catch(() => null)
 check('the training app runs the pinned revision', deployment?.source === source.revision, `runs ${String(deployment?.source).slice(0, 12)}, pinned ${source.revision.slice(0, 12)}`)
 
 const brand: any = await (await get(`${app}/api/brands/${coaching.brand}`)).json().catch(() => null)
 const offers: any[] = Array.isArray(brand?.offers) ? brand.offers : []
-for (const tier of appTiers) {
-  const cents = Math.round(Number(tier.price.replace(/[^\d.]/g, '')) * 100)
-  check(`the store sells ${tier.name} at ${tier.price}`, offers.some(offer => offer.product?.name === tier.name && Number(offer.product?.price_cents) === cents), `store lists ${offers.map(offer => `${offer.product?.name} ${offer.product?.price_cents}`).join(', ') || 'nothing'}`)
+for (const product of catalog.products) {
+  check(`the store offers ${product.name}`, offers.some(offer => offer.product?.slug === product.slug && Number(offer.product?.price_cents) === product.price_cents && offer.product?.billing_interval === product.billing_interval && offer.product?.currency === product.currency))
+  const published: any = await (await get(`${app}/api/store/products/${product.slug}`)).json().catch(() => null)
+  check(`${product.slug} uses weekly coach approval after feedback`, published?.training_blocks?.length_days === 7 && published?.training_blocks?.review === 'coach' && published?.training_blocks?.wait_for === 'feedback')
+  check(`${product.slug} contains its purchased sports`, JSON.stringify(published?.allowed_training_sports) === JSON.stringify(product.allowed_training_sports) && published?.includes_coaching === false)
+  const picture = published?.cover_image_url
+  if (typeof picture === 'string' && picture.startsWith(`${app}/assets/native-product/imagery/`)) {
+    const photo = await get(picture)
+    check(`${product.slug} serves its LSU photograph`, photo.ok && String(photo.headers.get('content-type')).startsWith('image/'))
+  }
+  else check(`${product.slug} serves its LSU photograph`, false)
 }
+check('the complimentary demo tiers are absent from the customer storefront', !offers.some(offer => ['lsu-private-demo-running', 'lsu-private-demo-running-only'].includes(offer.product?.slug)))
+check('the brand permits embedding on the LSU website', ['https://lastsoulultra.com', 'https://www.lastsoulultra.com'].every(origin => brand?.settings?.embed_origins?.includes(origin)))
 
 const runner = reviewRunner()
 let session: { token: string, user: unknown } | null = null

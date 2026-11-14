@@ -1,8 +1,17 @@
 import { describe, expect, it } from 'bun:test'
 import { readFileSync } from 'node:fs'
-import { CATALOG, CATALOG_NOTE, catalogDescription } from '../scripts/lsu-demo-catalog'
+import { CATALOG, CATALOG_NOTE, catalogDescription, reviewStorefrontOffers } from '../scripts/lsu-demo-catalog'
 
 describe('LSU demo storefront', () => {
+  it('does not resurrect demo offers on a deployed coaching catalog', () => {
+    const demos = [{ product_id: 8 }, { product_id: 1 }]
+    const catalog = [{ product_id: 9 }, { product_id: 10 }, { product_id: 11 }, { product_id: 12 }]
+    expect(reviewStorefrontOffers([...catalog, ...demos], demos, true)).toEqual(catalog)
+    expect(reviewStorefrontOffers(catalog, demos, true)).toEqual(catalog)
+    expect(reviewStorefrontOffers(null, demos, true)).toEqual(demos)
+    expect(reviewStorefrontOffers(catalog, demos, false)).toEqual([...demos, ...catalog])
+  })
+
   it('offers the six agreed plans at the agreed prices, one of them free', () => {
     expect(CATALOG.map(item => [item.name, item.price_cents])).toEqual([
       ['First Ultra: 50K in 16 weeks', 7900],

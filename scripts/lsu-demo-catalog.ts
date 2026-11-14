@@ -13,6 +13,14 @@ export const CATALOG_COACH_EMAIL = 'pawel@hq.training'
 export const CATALOG_COACH_NAME = 'Pawel Dregan'
 export const CATALOG_NOTE = `Demo draft by ${CATALOG_COACH_NAME}, not yet reviewed by him. Sample training content, not medical advice.`
 
+/** Keep a catalog storefront free of the older complimentary demo packages. */
+export function reviewStorefrontOffers<T extends { product_id: number }>(existing: T[] | null, demos: T[], catalogConfigured: boolean): T[] {
+  const demoIds = new Set(demos.map(offer => Number(offer.product_id)))
+  const authored = (existing || []).filter(offer => !demoIds.has(Number(offer.product_id)))
+  // A first installation still needs an offer until InstallationCatalogSeeder runs.
+  return catalogConfigured && authored.length ? authored : [...demos, ...authored]
+}
+
 type Zone = 'Z1' | 'Z2' | 'Z3' | 'Z4' | 'Z5'
 interface Step { name: string, duration_minutes: number, zone: Zone, intensity: string, notes: string }
 interface Exercise { title: string, notes: string, sets: Array<Record<string, number>> }
