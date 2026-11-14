@@ -28,6 +28,7 @@ Reference only. Add an isolated .story.stx fixture before enabling a preview; th
 | name | Not declared | Read by the implementation; see source for defaults and accepted values. |
 | size | Not declared | Read by the implementation; see source for defaults and accepted values. |
 | uncheckedValue | Not declared | Read by the implementation; see source for defaults and accepted values. |
+| variant | Not declared | Read by the implementation; see source for defaults and accepted values. |
 
 ## Slots
 

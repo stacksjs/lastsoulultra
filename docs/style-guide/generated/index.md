@@ -9,7 +9,7 @@ description: "Last Soul Ultra component guide. Production component reference fo
 
 Production components and interface patterns for the World Series, race entries and training portal.
 
-306 components, 5 isolated stories and 8 variants. Generated from production sources, with Last Soul Ultra branding.
+323 components, 5 isolated stories and 8 variants. Generated from production sources, with Last Soul Ultra branding.
 
 [Foundations, tokens and branding](/style-guide/generated/foundations)
 
@@ -217,6 +217,7 @@ Every configured component is indexed. Reference-only entries do not claim teste
 | [SidebarRow](/style-guide/generated/components/ui/app-frame/SidebarRow) | Shared UI | Reference only |
 | [SpaceSwitcher](/style-guide/generated/components/ui/app-frame/SpaceSwitcher) | Shared UI | Reference only |
 | [TileGrid](/style-guide/generated/components/ui/app-frame/TileGrid) | Shared UI | Reference only |
+| [AppearancePicker](/style-guide/generated/components/ui/appearance-picker/AppearancePicker) | Shared UI | Reference only |
 | [Audio](/style-guide/generated/components/ui/audio/Audio) | Shared UI | Reference only |
 | [Login](/style-guide/generated/components/ui/auth/Login) | Shared UI | Reference only |
 | [Signup](/style-guide/generated/components/ui/auth/Signup) | Shared UI | Reference only |
@@ -235,6 +236,8 @@ Every configured component is indexed. Reference-only entries do not claim teste
 | [MessageBubble](/style-guide/generated/components/ui/chat/MessageBubble) | Shared UI | Reference only |
 | [Checkbox](/style-guide/generated/components/ui/checkbox/Checkbox) | Shared UI | Reference only |
 | [ChoiceChips](/style-guide/generated/components/ui/choice-chips/ChoiceChips) | Shared UI | Reference only |
+| [CodeEditor](/style-guide/generated/components/ui/code-editor/CodeEditor) | Shared UI | Reference only |
+| [ColorSwatches](/style-guide/generated/components/ui/color-swatches/ColorSwatches) | Shared UI | Reference only |
 | [Combobox](/style-guide/generated/components/ui/combobox/Combobox) | Shared UI | Reference only |
 | [ComboboxButton](/style-guide/generated/components/ui/combobox/ComboboxButton) | Shared UI | Reference only |
 | [ComboboxInput](/style-guide/generated/components/ui/combobox/ComboboxInput) | Shared UI | Reference only |
@@ -242,6 +245,8 @@ Every configured component is indexed. Reference-only entries do not claim teste
 | [ComboboxOptions](/style-guide/generated/components/ui/combobox/ComboboxOptions) | Shared UI | Reference only |
 | [CommandPalette](/style-guide/generated/components/ui/command-palette/CommandPalette) | Shared UI | Reference only |
 | [CommandPaletteItem](/style-guide/generated/components/ui/command-palette/CommandPaletteItem) | Shared UI | Reference only |
+| [ContextMenu](/style-guide/generated/components/ui/context-menu/ContextMenu) | Shared UI | Reference only |
+| [DataGrid](/style-guide/generated/components/ui/data-grid/DataGrid) | Shared UI | Reference only |
 | [DateRangePicker](/style-guide/generated/components/ui/date-range-picker/DateRangePicker) | Shared UI | Reference only |
 | [Dialog](/style-guide/generated/components/ui/dialog/Dialog) | Shared UI | Reference only |
 | [DialogBackdrop](/style-guide/generated/components/ui/dialog/DialogBackdrop) | Shared UI | Reference only |
@@ -256,6 +261,7 @@ Every configured component is indexed. Reference-only entries do not claim teste
 | [EmptyState](/style-guide/generated/components/ui/empty-state/EmptyState) | Shared UI | Reference only |
 | [ErrorState](/style-guide/generated/components/ui/error-state/ErrorState) | Shared UI | Reference only |
 | [Form](/style-guide/generated/components/ui/form/Form) | Shared UI | Reference only |
+| [GraphView](/style-guide/generated/components/ui/graph-view/GraphView) | Shared UI | Reference only |
 | [GroupedList](/style-guide/generated/components/ui/grouped-list/GroupedList) | Shared UI | Reference only |
 | [GroupedListRow](/style-guide/generated/components/ui/grouped-list/GroupedListRow) | Shared UI | Reference only |
 | [Heatmap](/style-guide/generated/components/ui/heatmap/Heatmap) | Shared UI | Reference only |
@@ -265,6 +271,7 @@ Every configured component is indexed. Reference-only entries do not claim teste
 | [PasswordInput](/style-guide/generated/components/ui/input/PasswordInput) | Shared UI | Reference only |
 | [SearchInput](/style-guide/generated/components/ui/input/SearchInput) | Shared UI | Reference only |
 | [TextInput](/style-guide/generated/components/ui/input/TextInput) | Shared UI | Reference only |
+| [JsonTree](/style-guide/generated/components/ui/json-tree/JsonTree) | Shared UI | Reference only |
 | [List](/style-guide/generated/components/ui/list/List) | Shared UI | Reference only |
 | [Listbox](/style-guide/generated/components/ui/listbox/Listbox) | Shared UI | Reference only |
 | [ListboxButton](/style-guide/generated/components/ui/listbox/ListboxButton) | Shared UI | Reference only |
@@ -291,6 +298,7 @@ Every configured component is indexed. Reference-only entries do not claim teste
 | [PopoverButton](/style-guide/generated/components/ui/popover/PopoverButton) | Shared UI | Reference only |
 | [PopoverPanel](/style-guide/generated/components/ui/popover/PopoverPanel) | Shared UI | Reference only |
 | [Portal](/style-guide/generated/components/ui/portal/Portal) | Shared UI | Reference only |
+| [PreviewFrame](/style-guide/generated/components/ui/preview-frame/PreviewFrame) | Shared UI | Reference only |
 | [Progress](/style-guide/generated/components/ui/progress/Progress) | Shared UI | Reference only |
 | [RadioGroup](/style-guide/generated/components/ui/radio-group/RadioGroup) | Shared UI | Reference only |
 | [RadioGroupDescription](/style-guide/generated/components/ui/radio-group/RadioGroupDescription) | Shared UI | Reference only |
@@ -299,6 +307,13 @@ Every configured component is indexed. Reference-only entries do not claim teste
 | [Radio](/style-guide/generated/components/ui/radio/Radio) | Shared UI | Reference only |
 | [SegmentedControl](/style-guide/generated/components/ui/segmented-control/SegmentedControl) | Shared UI | Reference only |
 | [Select](/style-guide/generated/components/ui/select/Select) | Shared UI | Reference only |
+| [SettingsGroup](/style-guide/generated/components/ui/settings/SettingsGroup) | Shared UI | Reference only |
+| [SettingsPane](/style-guide/generated/components/ui/settings/SettingsPane) | Shared UI | Reference only |
+| [SettingsPaneHeader](/style-guide/generated/components/ui/settings/SettingsPaneHeader) | Shared UI | Reference only |
+| [SettingsRow](/style-guide/generated/components/ui/settings/SettingsRow) | Shared UI | Reference only |
+| [SettingsSidebarGroup](/style-guide/generated/components/ui/settings/SettingsSidebarGroup) | Shared UI | Reference only |
+| [SettingsSidebarItem](/style-guide/generated/components/ui/settings/SettingsSidebarItem) | Shared UI | Reference only |
+| [SettingsWindow](/style-guide/generated/components/ui/settings/SettingsWindow) | Shared UI | Reference only |
 | [Sidebar](/style-guide/generated/components/ui/sidebar/Sidebar) | Shared UI | Reference only |
 | [SidebarFooter](/style-guide/generated/components/ui/sidebar/SidebarFooter) | Shared UI | Reference only |
 | [SidebarHeader](/style-guide/generated/components/ui/sidebar/SidebarHeader) | Shared UI | Reference only |
@@ -310,7 +325,9 @@ Every configured component is indexed. Reference-only entries do not claim teste
 | [SidebarSpaces](/style-guide/generated/components/ui/sidebar/SidebarSpaces) | Shared UI | Reference only |
 | [SidebarSpaceSwitcher](/style-guide/generated/components/ui/sidebar/SidebarSpaceSwitcher) | Shared UI | Reference only |
 | [Skeleton](/style-guide/generated/components/ui/skeleton/Skeleton) | Shared UI | Reference only |
+| [Slider](/style-guide/generated/components/ui/slider/Slider) | Shared UI | Reference only |
 | [Spinner](/style-guide/generated/components/ui/spinner/Spinner) | Shared UI | Reference only |
+| [SplitPane](/style-guide/generated/components/ui/split-pane/SplitPane) | Shared UI | Reference only |
 | [Stepper](/style-guide/generated/components/ui/stepper/Stepper) | Shared UI | Reference only |
 | [StepperStep](/style-guide/generated/components/ui/stepper/StepperStep) | Shared UI | Reference only |
 | [Switch](/style-guide/generated/components/ui/switch/Switch) | Shared UI | Reference only |

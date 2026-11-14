@@ -23,6 +23,7 @@ Reference only. Add an isolated .story.stx fixture before enabling a preview; th
 | className | Not declared | Read by the implementation; see source for defaults and accepted values. |
 | disabled | Not declared | Read by the implementation; see source for defaults and accepted values. |
 | value | Not declared | Read by the implementation; see source for defaults and accepted values. |
+| variant | Not declared | Read by the implementation; see source for defaults and accepted values. |
 
 ## Slots
 

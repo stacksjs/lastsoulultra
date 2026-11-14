@@ -788,6 +788,10 @@
     "link": "/style-guide/generated/components/ui/app-frame/TileGrid"
   },
   {
+    "text": "Shared UI: AppearancePicker",
+    "link": "/style-guide/generated/components/ui/appearance-picker/AppearancePicker"
+  },
+  {
     "text": "Shared UI: Audio",
     "link": "/style-guide/generated/components/ui/audio/Audio"
   },
@@ -860,6 +864,14 @@
     "link": "/style-guide/generated/components/ui/choice-chips/ChoiceChips"
   },
   {
+    "text": "Shared UI: CodeEditor",
+    "link": "/style-guide/generated/components/ui/code-editor/CodeEditor"
+  },
+  {
+    "text": "Shared UI: ColorSwatches",
+    "link": "/style-guide/generated/components/ui/color-swatches/ColorSwatches"
+  },
+  {
     "text": "Shared UI: Combobox",
     "link": "/style-guide/generated/components/ui/combobox/Combobox"
   },
@@ -886,6 +898,14 @@
   {
     "text": "Shared UI: CommandPaletteItem",
     "link": "/style-guide/generated/components/ui/command-palette/CommandPaletteItem"
+  },
+  {
+    "text": "Shared UI: ContextMenu",
+    "link": "/style-guide/generated/components/ui/context-menu/ContextMenu"
+  },
+  {
+    "text": "Shared UI: DataGrid",
+    "link": "/style-guide/generated/components/ui/data-grid/DataGrid"
   },
   {
     "text": "Shared UI: DateRangePicker",
@@ -944,6 +964,10 @@
     "link": "/style-guide/generated/components/ui/form/Form"
   },
   {
+    "text": "Shared UI: GraphView",
+    "link": "/style-guide/generated/components/ui/graph-view/GraphView"
+  },
+  {
     "text": "Shared UI: GroupedList",
     "link": "/style-guide/generated/components/ui/grouped-list/GroupedList"
   },
@@ -978,6 +1002,10 @@
   {
     "text": "Shared UI: TextInput",
     "link": "/style-guide/generated/components/ui/input/TextInput"
+  },
+  {
+    "text": "Shared UI: JsonTree",
+    "link": "/style-guide/generated/components/ui/json-tree/JsonTree"
   },
   {
     "text": "Shared UI: List",
@@ -1084,6 +1112,10 @@
     "link": "/style-guide/generated/components/ui/portal/Portal"
   },
   {
+    "text": "Shared UI: PreviewFrame",
+    "link": "/style-guide/generated/components/ui/preview-frame/PreviewFrame"
+  },
+  {
     "text": "Shared UI: Progress",
     "link": "/style-guide/generated/components/ui/progress/Progress"
   },
@@ -1114,6 +1146,34 @@
   {
     "text": "Shared UI: Select",
     "link": "/style-guide/generated/components/ui/select/Select"
+  },
+  {
+    "text": "Shared UI: SettingsGroup",
+    "link": "/style-guide/generated/components/ui/settings/SettingsGroup"
+  },
+  {
+    "text": "Shared UI: SettingsPane",
+    "link": "/style-guide/generated/components/ui/settings/SettingsPane"
+  },
+  {
+    "text": "Shared UI: SettingsPaneHeader",
+    "link": "/style-guide/generated/components/ui/settings/SettingsPaneHeader"
+  },
+  {
+    "text": "Shared UI: SettingsRow",
+    "link": "/style-guide/generated/components/ui/settings/SettingsRow"
+  },
+  {
+    "text": "Shared UI: SettingsSidebarGroup",
+    "link": "/style-guide/generated/components/ui/settings/SettingsSidebarGroup"
+  },
+  {
+    "text": "Shared UI: SettingsSidebarItem",
+    "link": "/style-guide/generated/components/ui/settings/SettingsSidebarItem"
+  },
+  {
+    "text": "Shared UI: SettingsWindow",
+    "link": "/style-guide/generated/components/ui/settings/SettingsWindow"
   },
   {
     "text": "Shared UI: Sidebar",
@@ -1160,8 +1220,16 @@
     "link": "/style-guide/generated/components/ui/skeleton/Skeleton"
   },
   {
+    "text": "Shared UI: Slider",
+    "link": "/style-guide/generated/components/ui/slider/Slider"
+  },
+  {
     "text": "Shared UI: Spinner",
     "link": "/style-guide/generated/components/ui/spinner/Spinner"
+  },
+  {
+    "text": "Shared UI: SplitPane",
+    "link": "/style-guide/generated/components/ui/split-pane/SplitPane"
   },
   {
     "text": "Shared UI: Stepper",

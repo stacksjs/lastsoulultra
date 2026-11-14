@@ -19,6 +19,7 @@ Reference only. Add an isolated .story.stx fixture before enabling a preview; th
 
 | Name | Type | Contract |
 | --- | --- | --- |
+| appearance | Not declared | Read by the implementation; see source for defaults and accepted values. |
 | ariaLabel | Not declared | Read by the implementation; see source for defaults and accepted values. |
 | className | Not declared | Read by the implementation; see source for defaults and accepted values. |
 | disabled | Not declared | Read by the implementation; see source for defaults and accepted values. |

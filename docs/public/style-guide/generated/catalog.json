@@ -4477,6 +4477,49 @@
       "stories": []
     },
     {
+      "id": "ui/appearance-picker/AppearancePicker",
+      "name": "AppearancePicker",
+      "source": "node_modules/@stacksjs/components/src/ui/appearance-picker/AppearancePicker.stx",
+      "library": "Shared UI",
+      "description": "",
+      "props": [
+        {
+          "name": "className",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "disabled",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "id",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "label",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "options",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "value",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        }
+      ],
+      "slots": [],
+      "events": [],
+      "dependencies": [],
+      "stories": []
+    },
+    {
       "id": "ui/audio/Audio",
       "name": "Audio",
       "source": "node_modules/@stacksjs/components/src/ui/audio/Audio.stx",
@@ -4860,6 +4903,11 @@
       "library": "Shared UI",
       "description": "",
       "props": [
+        {
+          "name": "appearance",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
         {
           "name": "ariaLabel",
           "type": "Not declared",
@@ -5387,6 +5435,11 @@
           "name": "value",
           "type": "Not declared",
           "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "variant",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
         }
       ],
       "slots": [],
@@ -5418,6 +5471,197 @@
         },
         {
           "name": "testID",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "value",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        }
+      ],
+      "slots": [],
+      "events": [],
+      "dependencies": [],
+      "stories": []
+    },
+    {
+      "id": "ui/code-editor/CodeEditor",
+      "name": "CodeEditor",
+      "source": "node_modules/@stacksjs/components/src/ui/code-editor/CodeEditor.stx",
+      "library": "Shared UI",
+      "description": "",
+      "props": [
+        {
+          "name": "autoComplete",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "autofocus",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "className",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "completions",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "diagnostics",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "disabled",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "ghostText",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "height",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "highlight",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "hover",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "hoverDelay",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "id",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "inlineDiagnostics",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "insertSpaces",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "keymap",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "label",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "language",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "lineNumbers",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "name",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "placeholder",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "readonly",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "signatureHelp",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "tabSize",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "theme",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "value",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "widgets",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        }
+      ],
+      "slots": [],
+      "events": [],
+      "dependencies": [],
+      "stories": []
+    },
+    {
+      "id": "ui/color-swatches/ColorSwatches",
+      "name": "ColorSwatches",
+      "source": "node_modules/@stacksjs/components/src/ui/color-swatches/ColorSwatches.stx",
+      "library": "Shared UI",
+      "description": "",
+      "props": [
+        {
+          "name": "caption",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "className",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "disabled",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "id",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "label",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "options",
           "type": "Not declared",
           "description": "Read by the implementation; see source for defaults and accepted values."
         },
@@ -5632,6 +5876,129 @@
       "slots": [
         "default"
       ],
+      "events": [],
+      "dependencies": [],
+      "stories": []
+    },
+    {
+      "id": "ui/context-menu/ContextMenu",
+      "name": "ContextMenu",
+      "source": "node_modules/@stacksjs/components/src/ui/context-menu/ContextMenu.stx",
+      "library": "Shared UI",
+      "description": "",
+      "props": [
+        {
+          "name": "className",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "disabled",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "id",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "items",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "label",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        }
+      ],
+      "slots": [
+        "default"
+      ],
+      "events": [],
+      "dependencies": [],
+      "stories": []
+    },
+    {
+      "id": "ui/data-grid/DataGrid",
+      "name": "DataGrid",
+      "source": "node_modules/@stacksjs/components/src/ui/data-grid/DataGrid.stx",
+      "library": "Shared UI",
+      "description": "",
+      "props": [
+        {
+          "name": "className",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "columns",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "contextMenu",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "exportable",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "fileName",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "filter",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "filterable",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "headerHeight",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "height",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "id",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "label",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "rowHeight",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "rows",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "selectable",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        }
+      ],
+      "slots": [],
       "events": [],
       "dependencies": [],
       "stories": []
@@ -6208,6 +6575,89 @@
       "slots": [
         "default"
       ],
+      "events": [],
+      "dependencies": [],
+      "stories": []
+    },
+    {
+      "id": "ui/graph-view/GraphView",
+      "name": "GraphView",
+      "source": "node_modules/@stacksjs/components/src/ui/graph-view/GraphView.stx",
+      "library": "Shared UI",
+      "description": "",
+      "props": [
+        {
+          "name": "animate",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "className",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "contextMenu",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "direction",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "edges",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "height",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "id",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "label",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "layout",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "maxZoom",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "minZoom",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "nodes",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "selected",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "toolbar",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        }
+      ],
+      "slots": [],
       "events": [],
       "dependencies": [],
       "stories": []
@@ -6791,6 +7241,11 @@
           "name": "value",
           "type": "Not declared",
           "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "variant",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
         }
       ],
       "slots": [],
@@ -6907,6 +7362,11 @@
         },
         {
           "name": "value",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "variant",
           "type": "Not declared",
           "description": "Read by the implementation; see source for defaults and accepted values."
         }
@@ -7195,6 +7655,74 @@
         },
         {
           "name": "type",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "value",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "variant",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        }
+      ],
+      "slots": [],
+      "events": [],
+      "dependencies": [],
+      "stories": []
+    },
+    {
+      "id": "ui/json-tree/JsonTree",
+      "name": "JsonTree",
+      "source": "node_modules/@stacksjs/components/src/ui/json-tree/JsonTree.stx",
+      "library": "Shared UI",
+      "description": "",
+      "props": [
+        {
+          "name": "className",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "contextMenu",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "depth",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "height",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "id",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "label",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "openable",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "rowHeight",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "tinker",
           "type": "Not declared",
           "description": "Read by the implementation; see source for defaults and accepted values."
         },
@@ -8180,6 +8708,84 @@
       "stories": []
     },
     {
+      "id": "ui/preview-frame/PreviewFrame",
+      "name": "PreviewFrame",
+      "source": "node_modules/@stacksjs/components/src/ui/preview-frame/PreviewFrame.stx",
+      "library": "Shared UI",
+      "description": "",
+      "props": [
+        {
+          "name": "className",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "forms",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "frameHeight",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "frameWidth",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "height",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "html",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "id",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "landscape",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "scheme",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "scripts",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "title",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "toolbar",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "viewport",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        }
+      ],
+      "slots": [],
+      "events": [],
+      "dependencies": [],
+      "stories": []
+    },
+    {
       "id": "ui/progress/Progress",
       "name": "Progress",
       "source": "node_modules/@stacksjs/components/src/ui/progress/Progress.stx",
@@ -8256,6 +8862,11 @@
         },
         {
           "name": "value",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "variant",
           "type": "Not declared",
           "description": "Read by the implementation; see source for defaults and accepted values."
         }
@@ -8341,6 +8952,11 @@
         },
         {
           "name": "value",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "variant",
           "type": "Not declared",
           "description": "Read by the implementation; see source for defaults and accepted values."
         }
@@ -8479,6 +9095,11 @@
           "name": "value",
           "type": "Not declared",
           "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "variant",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
         }
       ],
       "slots": [],
@@ -8567,6 +9188,11 @@
           "name": "value",
           "type": "Not declared",
           "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "variant",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
         }
       ],
       "slots": [
@@ -8576,6 +9202,352 @@
       "dependencies": [
         "Select"
       ],
+      "stories": []
+    },
+    {
+      "id": "ui/settings/SettingsGroup",
+      "name": "SettingsGroup",
+      "source": "node_modules/@stacksjs/components/src/ui/settings/SettingsGroup.stx",
+      "library": "Shared UI",
+      "description": "",
+      "props": [
+        {
+          "name": "className",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "footer",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "header",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "id",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        }
+      ],
+      "slots": [
+        "default",
+        "footer"
+      ],
+      "events": [],
+      "dependencies": [],
+      "stories": []
+    },
+    {
+      "id": "ui/settings/SettingsPane",
+      "name": "SettingsPane",
+      "source": "node_modules/@stacksjs/components/src/ui/settings/SettingsPane.stx",
+      "library": "Shared UI",
+      "description": "",
+      "props": [
+        {
+          "name": "active",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "className",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "id",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "keywords",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "parent",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "title",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        }
+      ],
+      "slots": [
+        "default"
+      ],
+      "events": [],
+      "dependencies": [],
+      "stories": []
+    },
+    {
+      "id": "ui/settings/SettingsPaneHeader",
+      "name": "SettingsPaneHeader",
+      "source": "node_modules/@stacksjs/components/src/ui/settings/SettingsPaneHeader.stx",
+      "library": "Shared UI",
+      "description": "",
+      "props": [
+        {
+          "name": "className",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "description",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "icon",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "title",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "tone",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        }
+      ],
+      "slots": [
+        "default"
+      ],
+      "events": [],
+      "dependencies": [],
+      "stories": []
+    },
+    {
+      "id": "ui/settings/SettingsRow",
+      "name": "SettingsRow",
+      "source": "node_modules/@stacksjs/components/src/ui/settings/SettingsRow.stx",
+      "library": "Shared UI",
+      "description": "",
+      "props": [
+        {
+          "name": "className",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "description",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "destructive",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "disabled",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "icon",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "id",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "keywords",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "label",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "layout",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "multiline",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "setting",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "to",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "tone",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "value",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        }
+      ],
+      "slots": [
+        "default"
+      ],
+      "events": [],
+      "dependencies": [],
+      "stories": []
+    },
+    {
+      "id": "ui/settings/SettingsSidebarGroup",
+      "name": "SettingsSidebarGroup",
+      "source": "node_modules/@stacksjs/components/src/ui/settings/SettingsSidebarGroup.stx",
+      "library": "Shared UI",
+      "description": "",
+      "props": [
+        {
+          "name": "className",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "label",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        }
+      ],
+      "slots": [
+        "default"
+      ],
+      "events": [],
+      "dependencies": [],
+      "stories": []
+    },
+    {
+      "id": "ui/settings/SettingsSidebarItem",
+      "name": "SettingsSidebarItem",
+      "source": "node_modules/@stacksjs/components/src/ui/settings/SettingsSidebarItem.stx",
+      "library": "Shared UI",
+      "description": "",
+      "props": [
+        {
+          "name": "badge",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "className",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "icon",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "id",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "keywords",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "label",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "tone",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        }
+      ],
+      "slots": [],
+      "events": [],
+      "dependencies": [],
+      "stories": []
+    },
+    {
+      "id": "ui/settings/SettingsWindow",
+      "name": "SettingsWindow",
+      "source": "node_modules/@stacksjs/components/src/ui/settings/SettingsWindow.stx",
+      "library": "Shared UI",
+      "description": "",
+      "props": [
+        {
+          "name": "className",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "height",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "id",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "pane",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "presentation",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "searchable",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "searchPlaceholder",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "sidebarWidth",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "storageKey",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "title",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        }
+      ],
+      "slots": [
+        "account",
+        "default",
+        "sidebar"
+      ],
+      "events": [],
+      "dependencies": [],
       "stories": []
     },
     {
@@ -9242,6 +10214,89 @@
       "stories": []
     },
     {
+      "id": "ui/slider/Slider",
+      "name": "Slider",
+      "source": "node_modules/@stacksjs/components/src/ui/slider/Slider.stx",
+      "library": "Shared UI",
+      "description": "",
+      "props": [
+        {
+          "name": "className",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "disabled",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "id",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "label",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "max",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "maxIcon",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "min",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "minIcon",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "name",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "step",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "ticks",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "tint",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "value",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "width",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        }
+      ],
+      "slots": [],
+      "events": [],
+      "dependencies": [],
+      "stories": []
+    },
+    {
       "id": "ui/spinner/Spinner",
       "name": "Spinner",
       "source": "node_modules/@stacksjs/components/src/ui/spinner/Spinner.stx",
@@ -9275,6 +10330,66 @@
         }
       ],
       "slots": [],
+      "events": [],
+      "dependencies": [],
+      "stories": []
+    },
+    {
+      "id": "ui/split-pane/SplitPane",
+      "name": "SplitPane",
+      "source": "node_modules/@stacksjs/components/src/ui/split-pane/SplitPane.stx",
+      "library": "Shared UI",
+      "description": "",
+      "props": [
+        {
+          "name": "className",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "direction",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "height",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "id",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "label",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "minSize",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "sizes",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "step",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "storageKey",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        }
+      ],
+      "slots": [
+        "default"
+      ],
       "events": [],
       "dependencies": [],
       "stories": []
@@ -9404,6 +10519,11 @@
         },
         {
           "name": "uncheckedValue",
+          "type": "Not declared",
+          "description": "Read by the implementation; see source for defaults and accepted values."
+        },
+        {
+          "name": "variant",
           "type": "Not declared",
           "description": "Read by the implementation; see source for defaults and accepted values."
         }
