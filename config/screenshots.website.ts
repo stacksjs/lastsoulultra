@@ -9,7 +9,7 @@ export default {
   backend: 'chrome',
   timeoutMs: 45_000,
   models: false,
-  inputs: ['resources/data/screens/inventory.json', 'scripts/screenshot-support.ts', 'scripts/screenshot-preview-support.ts', ...new Bun.Glob('resources/components/**/*.stx').scanSync({ cwd: process.cwd(), onlyFiles: true }), ...new Bun.Glob('public/assets/styles/**/*.css').scanSync({ cwd: process.cwd(), onlyFiles: true })],
+  inputs: ['resources/data/screens/inventory.json', 'scripts/screenshot-support.ts', 'scripts/screenshot-preview-support.ts', ...new Bun.Glob('resources/**/*.{stx,ts,json}').scanSync({ cwd: process.cwd(), onlyFiles: true }), ...new Bun.Glob('public/assets/styles/**/*.css').scanSync({ cwd: process.cwd(), onlyFiles: true })],
   coverage: { directories: ['resources/views'] },
   profiles: { preview: { prepare: previewProfile } },
   redactEnv: ['SITE_AUTH_USER', 'SITE_AUTH_PASSWORD'],

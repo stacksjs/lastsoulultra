@@ -37,7 +37,7 @@ interface Workout {
 }
 interface Week { week: number, focus: string, planned_hours: number, workouts: Workout[] }
 export interface CatalogPlan { summary: string, phases: Array<{ name: string, start_week: number, end_week: number, focus: string }>, weeks: Week[] }
-export interface CatalogItem { slug: string, name: string, blurb: string, price_cents: number, sport: 'Run' | 'Strength' | 'Multisport', sports: string[], plan: () => CatalogPlan }
+export interface CatalogItem { slug: string, name: string, blurb: string, price_cents: number, sport: 'Run' | 'Strength' | 'Multisport', sports: string[], tax_code?: string, plan: () => CatalogPlan }
 
 const step = (name: string, duration_minutes: number, zone: Zone, intensity: string, notes = ''): Step => ({ name, duration_minutes, zone, intensity, notes })
 /** Easy running pace is about 6:30 per km for the plans' distances. */
@@ -144,7 +144,7 @@ function backToBack(): CatalogPlan {
 /** Twelve sessions over six weeks: two a week alongside your running. */
 function strengthBlock(): CatalogPlan {
   const weeks = Array.from({ length: 6 }, (_, index) => week(index + 1, index < 2 ? 'Control' : index < 4 ? 'Strength' : 'Load', [strength(1, false, index + 1), strength(4, true, index + 1)]))
-  return { summary: 'Twelve strength sessions over six weeks for ultrarunners: single-leg strength, slow eccentric work for descents and posture for the late miles. Two sessions a week, about 35 minutes each, next to your usual running.', phases: [{ name: 'Control', start_week: 1, end_week: 2, focus: 'Learn the movements' }, { name: 'Strength', start_week: 3, end_week: 4, focus: 'More sets' }, { name: 'Load', start_week: 5, end_week: 6, focus: 'Heavier, still controlled' }], weeks }
+  return { summary: 'Twelve strength sessions over six weeks for ultra runners: single-leg strength, slow eccentric work for descents and posture for the late miles. Two sessions a week, about 35 minutes each, next to your usual running.', phases: [{ name: 'Control', start_week: 1, end_week: 2, focus: 'Learn the movements' }, { name: 'Strength', start_week: 3, end_week: 4, focus: 'More sets' }, { name: 'Load', start_week: 5, end_week: 6, focus: 'Heavier, still controlled' }], weeks }
 }
 
 /** Twenty-four weeks to 100K or 100 miles: base, build, specific with weekend doubles, taper. */
@@ -189,7 +189,7 @@ export const CATALOG: CatalogItem[] = [
   { slug: 'lsu-pawel-first-ultra-50k', name: 'First Ultra: 50K in 16 weeks', blurb: 'Your first 50K, from 10 km running to the finish line.', price_cents: 7900, sport: 'Run', sports: ['Run'], plan: firstUltra },
   { slug: 'lsu-pawel-mountain-vert-block', name: 'Mountain Ultra Vert Block', blurb: 'Eight weeks of climbing for mountain ultras.', price_cents: 4900, sport: 'Multisport', sports: ['Run', 'Strength'], plan: vertBlock },
   { slug: 'lsu-pawel-back-to-back-weekends', name: 'Back-to-Back Long Run Weekends', blurb: 'Six weeks of weekend doubles: learn to run on tired legs.', price_cents: 3900, sport: 'Run', sports: ['Run'], plan: backToBack },
-  { slug: 'lsu-pawel-strength-for-ultrarunners', name: 'Strength for Ultrarunners', blurb: 'Twelve strength sessions for climbs, descents and the late miles.', price_cents: 2900, sport: 'Strength', sports: ['Strength'], plan: strengthBlock },
+  { slug: 'lsu-pawel-strength-for-ultrarunners', name: 'Strength for Ultra Runners', tax_code: 'txcd_10103000', blurb: 'Twelve strength sessions for climbs, descents and the late miles.', price_cents: 2900, sport: 'Strength', sports: ['Strength'], plan: strengthBlock },
   { slug: 'lsu-pawel-100k-100-mile-build', name: '100K / 100 Mile Build', blurb: 'Twenty-four weeks from 50K finisher to 100 km or 100 miles.', price_cents: 12900, sport: 'Multisport', sports: ['Run', 'Strength'], plan: hundredBuild },
   { slug: 'lsu-pawel-race-week-fuelling', name: 'Race Week and Fuelling', blurb: 'The last two weeks before any ultra, and how to eat for it.', price_cents: 0, sport: 'Run', sports: ['Run'], plan: raceWeek },
 ]

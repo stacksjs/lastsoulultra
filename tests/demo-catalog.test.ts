@@ -17,7 +17,7 @@ describe('LSU demo storefront', () => {
       ['First Ultra: 50K in 16 weeks', 7900],
       ['Mountain Ultra Vert Block', 4900],
       ['Back-to-Back Long Run Weekends', 3900],
-      ['Strength for Ultrarunners', 2900],
+      ['Strength for Ultra Runners', 2900],
       ['100K / 100 Mile Build', 12900],
       ['Race Week and Fuelling', 0],
     ])

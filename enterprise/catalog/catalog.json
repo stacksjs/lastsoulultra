@@ -140,14 +140,15 @@
       "price_cents": 1999,
       "currency": "EUR",
       "billing_interval": "month",
-      "tax_code": "txcd_10000000",
+      "tax_code": "txcd_10103000",
       "allowed_training_sports": [
         "Run"
       ],
       "training_blocks": {
         "length_days": 7,
         "review": "coach",
-        "wait_for": "feedback", "source": "plan"
+        "wait_for": "feedback",
+        "source": "plan"
       }
     },
     {
@@ -159,7 +160,7 @@
       "price_cents": 3999,
       "currency": "EUR",
       "billing_interval": "month",
-      "tax_code": "txcd_10000000",
+      "tax_code": "txcd_10103000",
       "allowed_training_sports": [
         "Run",
         "Strength"
@@ -167,7 +168,8 @@
       "training_blocks": {
         "length_days": 7,
         "review": "coach",
-        "wait_for": "feedback", "source": "plan"
+        "wait_for": "feedback",
+        "source": "plan"
       }
     },
     {
@@ -179,14 +181,15 @@
       "price_cents": 1999,
       "currency": "EUR",
       "billing_interval": "month",
-      "tax_code": "txcd_10000000",
+      "tax_code": "txcd_10103000",
       "allowed_training_sports": [
         "Run"
       ],
       "training_blocks": {
         "length_days": 7,
         "review": "coach",
-        "wait_for": "feedback", "source": "plan"
+        "wait_for": "feedback",
+        "source": "plan"
       }
     },
     {
@@ -198,7 +201,7 @@
       "price_cents": 3999,
       "currency": "EUR",
       "billing_interval": "month",
-      "tax_code": "txcd_10000000",
+      "tax_code": "txcd_10103000",
       "allowed_training_sports": [
         "Run",
         "Strength"
@@ -206,7 +209,8 @@
       "training_blocks": {
         "length_days": 7,
         "review": "coach",
-        "wait_for": "feedback", "source": "plan"
+        "wait_for": "feedback",
+        "source": "plan"
       }
     }
   ]

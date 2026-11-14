@@ -139,6 +139,6 @@ A separate phone-width browser check signed in as a dedicated synthetic buyer an
 
 Regression tests also cover confirmation network failures, HTTP errors, malformed responses, pending payment, cancellation, verified access and stale screens. Race-entry tests cover the separate race-payment confirmation and recovery. A delayed confirmation must remain distinct from a failed request.
 
-The live sandbox checkout preflight for the sample Strength for Ultrarunners plan returned HTTP 409 because its merchant has not selected a tax classification. The application correctly refused to create a checkout. The merchant must choose the classification in product administration before that plan can be used for hosted card testing. Do not bypass this validation or select a tax classification merely to make a test pass.
+The configured sandbox catalog uses Stripe’s `txcd_10103000`, **Software as a service (SaaS) - personal use**, following LSU’s operator-selected software classification. The code was verified through the [Stripe Tax Codes API](https://docs.stripe.com/api/tax_codes/retrieve). The older Strength for Ultra Runners demonstration is a draft; use the four published coaching offers for customer payment review.
 
 A complete hosted-checkout review still needs entering the relevant cards in the sandbox form, completing and cancelling authentication challenges, following each return link and checking fulfillment. Record those outcomes separately from these processor and simulated UI checks.

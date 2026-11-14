@@ -115,7 +115,7 @@ export const entrySteps: EntryStep[] = [
 ]
 
 /** Who lines up, as the organiser describes the field. */
-export const field = 'International ultrarunners, athletes, well-known sports personalities, content creators, and the runners drawn from the lottery.'
+export const field = 'International ultra runners, athletes, well-known sports personalities, content creators, and the runners drawn from the lottery.'
 
 /**
  * What state the race is in, derived from the date at render time.

@@ -54,22 +54,22 @@ Alex and Jamie have complimentary access to the older **SOUL** demonstration tie
 
 That sample starts with four runs and two strength sessions per week, or 48 sessions in total. It gives reviewers a populated calendar and does not model the current catalog's week-by-week release. Its content is fictional demonstration material, not an approved LSU prescription. Reviewers can change the counts by recording sessions.
 
-## Demo plans in the store
+<span id="demo-plans-in-the-store"></span>
 
-Six older one-off demonstration plans sit under Pawel Dregan's coach profile:
+## Older demo drafts
 
-| Plan | Listed price |
+Six older one-off demonstration plans are retained as drafts under Pawel Dregan's coach profile. They are excluded from the customer Store; the four published coaching offers are the purchase-test catalog. These were their sample prices:
+
+| Demo draft | Sample price |
 | --- | --- |
 | First Ultra: 50K in 16 weeks | €79 |
 | Mountain Ultra Vert Block | €49 |
 | Back-to-Back Long Run Weekends | €39 |
-| Strength for Ultrarunners | €29 |
+| Strength for Ultra Runners | €29 |
 | 100K / 100 Mile Build | €129 |
 | Race Week and Fuelling | Free |
 
-Their descriptions identify them as unreviewed demo drafts. A one-off purchase grants the plan under its published release terms; it does not create an ongoing method-feedback subscription. The free plan can also add training to an account, so taking it on a shared login changes what other reviewers see.
-
-The demo catalog preserves plans a coach edits or removes. Deployment does not reset those choices.
+Their descriptions identify them as unreviewed demonstration material. Draft status prevents a customer purchase. Existing complimentary review calendars remain available. The catalog preserves a coach's edits and removals; deployment does not republish these drafts or reset edited content.
 
 ## Checkout and confirmation
 

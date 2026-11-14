@@ -244,17 +244,24 @@ await transaction(async () => {
     if (catalogCoach && Number(catalogCoach.organization_id) !== organizationId) throw new Error('The demo storefront coach coaches for another organization.')
     if (!catalogCoach) catalogCoach = await db.insertInto('coaches').values({ user_id: Number(catalogUser.id), organization_id: organizationId, specialty: 'Ultra running', accepting_athletes: false, created_at: now }).returning(['id', 'organization_id']).executeTakeFirstOrThrow()
     for (const item of CATALOG) {
-      const existing = await db.selectFrom('products').select(['id', 'coach_id', 'organization_id']).where('slug', '=', item.slug).executeTakeFirst()
+      const existing = await db.selectFrom('products').select(['id', 'coach_id', 'organization_id', 'name', 'training_plan_id', 'tax_code']).where('slug', '=', item.slug).executeTakeFirst()
       if (existing) {
         if (Number(existing.coach_id) !== Number(catalogCoach.id) || Number(existing.organization_id) !== organizationId) throw new Error(`Refusing to adopt product ${item.slug}, which someone else owns.`)
         if (process.env.HQ_INSTALLATION_CATALOG) await db.updateTable('products').set({ status: 'draft', updated_at: now }).where('id', '=', Number(existing.id)).execute()
+        // Apply the operator's corrected label only to the unchanged demo
+        // title. Keep stable URLs and any name the coach deliberately edited.
+        if (item.slug === 'lsu-pawel-strength-for-ultrarunners' && existing.name === 'Strength for Ultrarunners') {
+          await db.updateTable('products').set({ name: item.name, updated_at: now }).where('id', '=', Number(existing.id)).where('name', '=', 'Strength for Ultrarunners').execute()
+          if (existing.training_plan_id) await db.updateTable('training_plans').set({ name: item.name, updated_at: now }).where('id', '=', Number(existing.training_plan_id)).where('coach_id', '=', Number(catalogCoach.id)).where('name', '=', 'Strength for Ultrarunners').execute()
+        }
+        if (item.tax_code && !existing.tax_code) await db.updateTable('products').set({ tax_code: item.tax_code, updated_at: now }).where('id', '=', Number(existing.id)).execute()
         continue
       }
       const checked = normalizePlan(item.plan(), true)
       if (!checked.plan) throw new Error(`${item.slug}: ${checked.error}`)
       const description = catalogDescription(item)
       const plan = await db.insertInto('training_plans').values({ name: item.name, description: checked.plan.summary, sport: item.sport, weeks: checked.plan.weeks.length, plan: JSON.stringify(checked.plan), coach_id: Number(catalogCoach.id), created_at: now, updated_at: now }).returning(['id']).executeTakeFirstOrThrow()
-      await db.insertInto('products').values({ organization_id: organizationId, coach_id: Number(catalogCoach.id), slug: item.slug, type: 'training_plan', name: item.name, description, price_cents: item.price_cents, currency: 'EUR', allowed_training_sports: JSON.stringify(item.sports), includes_coaching: false, training_plan_id: Number(plan.id), release_mode: 'all_at_once', status: reviewProductStatus, created_at: now, updated_at: now }).execute()
+      await db.insertInto('products').values({ organization_id: organizationId, coach_id: Number(catalogCoach.id), slug: item.slug, type: 'training_plan', name: item.name, description, price_cents: item.price_cents, currency: 'EUR', tax_code: item.tax_code || null, allowed_training_sports: JSON.stringify(item.sports), includes_coaching: false, training_plan_id: Number(plan.id), release_mode: 'all_at_once', status: reviewProductStatus, created_at: now, updated_at: now }).execute()
       catalogMade += 1
     }
     console.log(`[ts-cloud] lsu review seed: demo storefront under coach #${Number(catalogCoach.id)}, ${catalogMade} of ${CATALOG.length} plans made this run`)
