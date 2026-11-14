@@ -114,7 +114,7 @@ const offers: any[] = Array.isArray(brand?.offers) ? brand.offers : []
 for (const product of catalog.products) {
   check(`the store offers ${product.name}`, offers.some(offer => offer.product?.slug === product.slug && Number(offer.product?.price_cents) === product.price_cents && offer.product?.billing_interval === product.billing_interval && offer.product?.currency === product.currency))
   const published: any = await (await get(`${app}/api/store/products/${product.slug}`)).json().catch(() => null)
-  check(`${product.slug} uses weekly coach approval after feedback`, published?.training_blocks?.length_days === 7 && published?.training_blocks?.review === 'coach' && published?.training_blocks?.wait_for === 'feedback')
+  check(`${product.slug} uses weekly coach approval after feedback`, published?.training_blocks?.length_days === 7 && published?.training_blocks?.review === 'coach' && published?.training_blocks?.wait_for === 'feedback' && published?.training_blocks?.source === 'plan')
   check(`${product.slug} contains its purchased sports`, JSON.stringify(published?.allowed_training_sports) === JSON.stringify(product.allowed_training_sports) && published?.includes_coaching === false)
   const picture = published?.cover_image_url
   if (typeof picture === 'string' && picture.startsWith(`${app}/assets/native-product/imagery/`)) {
