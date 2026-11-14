@@ -2782,7 +2782,6 @@
       "slots": [],
       "events": [],
       "dependencies": [
-        "Icon",
         "List",
         "StxLink",
         "Tooltip"

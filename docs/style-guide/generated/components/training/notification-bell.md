@@ -28,7 +28,6 @@ No explicit @event contract documented. DOM bindings and internal event handlers
 
 ## Composition
 
-- `Icon`
 - `List`
 - `StxLink`
 - `Tooltip`

@@ -1,9 +1,9 @@
 {
   "format": 1,
-  "fingerprint": "2237544f40702075c6631b93f78308e986134be373f5fa7c61baed3604816a2f",
+  "fingerprint": "d4456676be4ba41c07512bb8ad518060753dbdbc6694781af93101cf0bfcd026",
   "files": {
     "docs/public/style-guide/generated/assets/9e9a0e12f5cf-lsu-logo.svg": "9e9a0e12f5cfae88aafe433dbb539f04b907e278cfd894f4f88e8bbe0f9f2b72",
-    "docs/public/style-guide/generated/catalog.json": "aa27df07193c4bac9431ced939638fa5faf1969dfbb5f8115876b7b1bb0df8a4",
+    "docs/public/style-guide/generated/catalog.json": "b95860e2306ba4e9eafc62ab5f8ce15d6d70b829b6c2fc6a788e9167b4c13592",
     "docs/public/style-guide/generated/components.css": "a3f1ee6d8fd777fcc699a65a6b02515847e868e439c5d67334c1bf02043cc06c",
     "docs/public/style-guide/generated/foundations.html": "d191fbbf129663cea0954df953ce6a8d395e56eb0981d3f3a28cf1cadc9f36ce",
     "docs/public/style-guide/generated/runtime-c7a778626ef2.js": "c7a778626ef2a1890f2f57e33bec4a0893ab49e10fe004500303991f5eac849a",
@@ -134,7 +134,7 @@
     "docs/style-guide/generated/components/training/NativeProfileShare.md": "e71b6be8cacc1903a96fbc0ddb3ba9d95e342d27c01dbe0d8a8db66882b1a0e9",
     "docs/style-guide/generated/components/training/NativeSheet.md": "159a4433f09064156362bfb194f317a1904287f7d233fe143ceb45bdc1170457",
     "docs/style-guide/generated/components/training/NeedsConnection.md": "4f44cf09a450c32bb6f61a2814496d7de3bd246ed522ce25d933535835ef5faf",
-    "docs/style-guide/generated/components/training/notification-bell.md": "7e959b7b83b33707d6e9eeba69adf7286d245ac345b3dfb61887c6e0dfdf991d",
+    "docs/style-guide/generated/components/training/notification-bell.md": "cbf5b49a9efd1aa3b54fc6bc9323d9910d914466bb565af9bd6f22e2c69b6a44",
     "docs/style-guide/generated/components/training/NowPlayingBar.md": "1871b4f8c3d8884a7b1d55a14afc7c8ac197727d3a93c7564800e9f0894514b1",
     "docs/style-guide/generated/components/training/NutritionToday.md": "aab73300e5b660f90fc90601635144e9be97b4ce5d52365a8af916452766e084",
     "docs/style-guide/generated/components/training/NutritionWebsite.md": "a25ace8416110966ce4846b8bf3132a7dba6dd28874b30733516c9a13db7f4cb",
