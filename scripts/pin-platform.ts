@@ -60,6 +60,8 @@ try {
   catch { process.stderr.write('The component guide was not regenerated. Run `bun run docs:style-guide` and commit what it writes with the pin, or CI fails.\n') }
   try { run(process.execPath, ['run', 'docs:erd:source']) }
   catch { process.stderr.write('The training ERD provenance was not regenerated. Run `bun run docs:erd:source` and commit it with the pin.\n') }
+  try { run(process.execPath, ['scripts/sync-screen-guide.ts']) }
+  catch { process.stderr.write('The screen guide was not regenerated. Run `bun scripts/sync-screen-guide.ts` and commit it with the pin.\n') }
   process.stdout.write(`\nPinned HQ platform kit ${pin.version} (${pin.revision.slice(0, 9)}), Bun ${pin.bun}, Craft ${craft}.\nNext: bun run native:ios && bun run native:verify-ios, commit the pin with the regenerated docs saying what people will notice, push, then bun run release:build once Deploy and the acceptance run it starts have finished.\n`)
 }
 catch (error) {

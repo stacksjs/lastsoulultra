@@ -9,7 +9,7 @@ description: The purpose, rationale, entry route and review context for each org
 
 Operational screens depend on organization permissions. Some tools belong to the shared platform and are useful only when LSU enables the relevant service. Read [Administration](/administration).
 
-20 template-backed screens in this section. The source snapshot is HQ kit 1.0.4326. Names and visibility can vary by account, language and enabled Experience.
+20 template-backed screens in this section. The source snapshot is HQ kit 1.0.4330. Names and visibility can vary by account, language and enabled Experience.
 
 ## Organization settings
 

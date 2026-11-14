@@ -9,7 +9,7 @@ description: The purpose, rationale, entry route and review context for each coa
 
 Authoring, athlete context and weekly review. A coach profile and the appropriate roster or method access are required. Read the [coach guide](/coaches) before editing or approving work.
 
-19 template-backed screens in this section. The source snapshot is HQ kit 1.0.4326. Names and visibility can vary by account, language and enabled Experience.
+19 template-backed screens in this section. The source snapshot is HQ kit 1.0.4330. Names and visibility can vary by account, language and enabled Experience.
 
 ## Coach assistant
 

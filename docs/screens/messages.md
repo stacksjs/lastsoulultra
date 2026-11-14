@@ -9,7 +9,7 @@ description: The purpose, rationale, entry route and review context for each mes
 
 Conversations, notifications and deliberate sharing choices. Confirm the participant and account before composing or publishing.
 
-7 template-backed screens in this section. The source snapshot is HQ kit 1.0.4326. Names and visibility can vary by account, language and enabled Experience.
+7 template-backed screens in this section. The source snapshot is HQ kit 1.0.4330. Names and visibility can vary by account, language and enabled Experience.
 
 ## Conversation
 

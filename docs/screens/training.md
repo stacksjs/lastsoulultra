@@ -9,7 +9,7 @@ description: The purpose, rationale, entry route and review context for each tra
 
 Daily training, session details and recorded progress. A screen can be empty when the account has no approved training or recorded activity.
 
-21 template-backed screens in this section. The source snapshot is HQ kit 1.0.4326. Names and visibility can vary by account, language and enabled Experience.
+21 template-backed screens in this section. The source snapshot is HQ kit 1.0.4330. Names and visibility can vary by account, language and enabled Experience.
 
 ## Quick add
 
