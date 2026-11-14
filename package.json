@@ -91,7 +91,7 @@
     "docs:screens:publish": "bun --no-env-file --config=scripts/screenshots.bunfig.toml scripts/publish-screen-captures.ts"
   },
   "dependencies": {
-    "@ts-maps/stx": "0.5.7",
+    "@ts-maps/stx": "0.5.10",
     "stacks": "0.75.586"
   },
   "workspaces": [
@@ -108,18 +108,18 @@
     "commit-msg": "bun x gitlint --edit \"$1\""
   },
   "devDependencies": {
-    "better-dx": "^0.2.38",
+    "better-dx": "^0.2.40",
     "buddy-bot": "0.10.5"
   },
   "overrides": {
-    "@stacksjs/stx": "0.2.881",
-    "@stacksjs/components": "0.2.881",
-    "bun-plugin-stx": "0.2.881",
-    "stx-router": "0.2.881",
+    "@stacksjs/stx": "0.2.883",
+    "@stacksjs/components": "0.2.883",
+    "bun-plugin-stx": "0.2.884",
+    "stx-router": "0.2.884",
     "craft-native": "0.0.502",
     "@craft-native/ios": "0.0.502",
     "@craft-native/android": "0.0.502",
     "@stacksjs/bumpx": "0.2.35",
-    "@stacksjs/ts-cloud": "0.16.129"
+    "@stacksjs/ts-cloud": "0.16.130"
   }
 }
