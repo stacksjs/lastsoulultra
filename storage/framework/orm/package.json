@@ -46,11 +46,11 @@
   },
   "dependencies": {
     "@stacksjs/bun-router": "^0.1.24",
-    "@stacksjs/cache": "^0.75.528",
-    "@stacksjs/database": "^0.75.528",
-    "@stacksjs/error-handling": "^0.75.528"
+    "@stacksjs/cache": "^0.75.586",
+    "@stacksjs/database": "^0.75.586",
+    "@stacksjs/error-handling": "^0.75.586"
   },
   "devDependencies": {
-    "better-dx": "^0.2.38"
+    "better-dx": "^0.2.40"
   }
 }
