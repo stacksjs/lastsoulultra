@@ -9,7 +9,7 @@ An account's **organization role** controls what it can manage. Its **training e
 
 ## The combined review tier
 
-**Alex and Jamie are two people reviewing the same LSU SOUL tier**, with complimentary review access and no real charge attached. The names `runner@lsu-demo.test` and `runner2@lsu-demo.test` are historical login labels, not separate running-only roles: both accounts review running and strength, including exercise illustrations, sets and set-completion controls. A separate strength login is not required.
+**Alex and Jamie are two people reviewing the same SOUL tier**, with complimentary review access and no real charge attached. The names `runner@lsu-demo.test` and `runner2@lsu-demo.test` are historical login labels, not separate running-only roles: both accounts review running and strength, including exercise illustrations, sets and set-completion controls. A separate strength login is not required.
 
 An enrollment is the plan an account is signed up to. See [Plans and subscriptions](/training/plans) for the price, what the sample plan contains and what it leaves out.
 
@@ -54,8 +54,8 @@ All demo passwords are listed in the protected [demo walkthrough](/demo#demo-cre
 | Demo front desk | `frontdesk@lsu-demo.test` | Front desk | Desk operations review |
 | Demo trainer | `trainer@lsu-demo.test` | Trainer | Training staff and separate coach workspace |
 | Demo coach | `coach@lsu-demo.test` | Trainer | Author of the sample method and plan; coach library |
-| Alex | `runner@lsu-demo.test` | Member | Enrolled in LSU SOUL; sample calendar and health |
-| Jamie | `runner2@lsu-demo.test` | Member | Same LSU SOUL tier; independent sample calendar and health |
+| Alex | `runner@lsu-demo.test` | Member | Enrolled in SOUL; sample calendar and health |
+| Jamie | `runner2@lsu-demo.test` | Member | Same SOUL tier; independent sample calendar and health |
 | Demo member | `member@lsu-demo.test` | Member | Member account without the combined training enrollment |
 | Demo visitor | `visitor@lsu-demo.test` | None | Browsing without the combined training enrollment |
 

@@ -9,11 +9,11 @@ description: Browse training tiers and plans, understand enrollment and review s
 
 Open **Coaching**, then **Store**, on the race site to see the published monthly tiers. Read the method summary, author, included training, price, currency and billing interval. A tier can cover running alone or combine other training disciplines; only the published offer establishes what is included.
 
-LSU launch pricing is **€19.99 per month for LSU RUN** (running) and **€39.99 per month for LSU SOUL** (running with strength, mobility and meditation), including applicable tax. Coach-authored training plans can also be sold separately, as one-off purchases under their own published terms.
+LSU launch pricing is **€19.99 per month for RUN** (running) and **€39.99 per month for SOUL** (running with strength, mobility and meditation), including applicable tax. Coach-authored training plans can also be sold separately, as one-off purchases under their own published terms.
 
 ## The two review tiers
 
-The private preview lists two tiers. **LSU RUN** is **€19.99 per month, tax included**, and covers the running sessions. **LSU SOUL** is **€39.99 per month, tax included**, and includes both running and strength in one enrollment. Both Alex and Jamie are on Running + Strength; their historical runner email names do not restrict them to running.
+The private preview lists two tiers. **RUN** is **€19.99 per month, tax included**, and covers the running sessions. **SOUL** is **€39.99 per month, tax included**, and includes both running and strength in one enrollment. Both Alex and Jamie are on Running + Strength; their historical runner email names do not restrict them to running.
 
 The fictional eight-week plan has four running sessions and two structured strength sessions per week, with exercise illustrations, sets and repetitions or timed efforts. Open a strength session to review its blocks and set controls. This sample illustrates the app and is not an approved LSU training prescription. Personal one-to-one coaching and Mind training are not included in this demo offer.
 
