@@ -9,7 +9,7 @@ description: The purpose, rationale, entry route and review context for each web
 
 The protected race website explains the event and opens the separate race-entry service. A training login does not authenticate a race-entry Profile.
 
-21 template-backed screens in this section. The source snapshot is HQ kit 1.0.4330. Names and visibility can vary by account, language and enabled Experience.
+21 template-backed screens in this section. The source snapshot is HQ kit 1.0.4333. Names and visibility can vary by account, language and enabled Experience.
 
 ## Page not found
 

@@ -2,8 +2,8 @@
 export const productionPages: Record<string, { title: string, description: string, styles: string[], noindex?: boolean }> = {
   "/profile": {
     "noindex": true,
-    "title": "Your profile - Last Soul Ultra entry requests",
-    "description": "Your Last Soul Ultra account in one place: entry requests, confirmed places and past entries, signed in with the same account you use in the race app.",
+    "title": "Your account - Last Soul Ultra training and race entries",
+    "description": "Sign in to LSU Training for your plan, workouts and coaching, or open your separate race-entry account to manage applications and confirmed places.",
     "styles": [
       "/assets/styles/production/base.css",
       "/assets/styles/production/profile.css",

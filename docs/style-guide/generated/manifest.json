@@ -1,12 +1,12 @@
 {
   "format": 1,
-  "fingerprint": "3afd7b44fc8c893956fa4bf480919b0279d3611777748f4b7279476a3cf4a0f7",
+  "fingerprint": "e10a22f3051a9b36308abed064d7dc42c4d6cc84f572cf425628ef5b33f5023d",
   "files": {
     "docs/public/style-guide/generated/catalog.json": "74b76c5b982b8f08babd08a1a308b37c33fea608125b47a6784e48ccbeeb838a",
     "docs/public/style-guide/generated/components.css": "070e5218b5c048eb89c8fbc46d80e43c14d74ad8ced7ce81921f39cfe7a848cc",
     "docs/public/style-guide/generated/foundations.html": "490bfaf21a6257bf9843dc61383ee037b09cdd8e005fd83c6fda1993fe47a6bb",
     "docs/public/style-guide/generated/runtime-0232b28b1b33.js": "0232b28b1b3371ba6d45400f12e141ab56220ddec55206197ef97f3cbcd52373",
-    "docs/public/style-guide/generated/stories-0-training-d24b203b-session-and-feedback-specimen-default.html": "17b3bdba4bb9d3b0126b96a4d874d3e0540fa9f8e380f3a07289da0c556a5542",
+    "docs/public/style-guide/generated/stories-0-training-d24b203b-session-and-feedback-specimen-default.html": "ff0d74ea330c6c5f46628bc1e78607e11907497004b6b5eafde1d9d8951d6503",
     "docs/style-guide/generated/components/training/AccountAction.md": "6c6ff25ac850e6803b132c480ccdef0dd8f2889e627b8845106592d7099a6f07",
     "docs/style-guide/generated/components/training/AccountHome.md": "ed542759a5d32f0fb371aed81050e43cd974918abebad08540d52885415eb501",
     "docs/style-guide/generated/components/training/ActivityReview.md": "12f3e95106bcbbd4e7ee8ced2a1984ec9e8308f8c1b06b80f4a49dc87ba37d0b",

@@ -14,7 +14,7 @@ const runner = accounts.find(account => account.key === 'runner')
 const visitor = accounts.find(account => account.key === 'visitor')
 if (!runner || !visitor || [runner, visitor].some(account => !account.email.endsWith('@lsu-demo.test') || !account.password))
   throw new Error('Native acceptance requires only the dedicated synthetic LSU runner and visitor')
-async function firstRunState(account: Account): Promise<{ policies: boolean, welcome: boolean }> {
+async function firstRunState(account: Account): Promise<{ policies: boolean, welcome: boolean, notifications: boolean }> {
   const api = `${product.identity.apiOrigin}/api`
   const login = await fetch(`${api}/auth/login`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: account.email, password: account.password }), signal: AbortSignal.timeout(30_000) })
   const answer = await login.json() as any
@@ -25,7 +25,10 @@ async function firstRunState(account: Account): Promise<{ policies: boolean, wel
     const profile = await response.json() as any
     if (!response.ok || profile.name !== account.name || typeof profile.policies?.due !== 'boolean' || typeof profile.onboarding?.due !== 'boolean')
       throw new Error(`The dedicated ${account.key} fixture has unexpected account state`)
-    return { policies: profile.policies.due, welcome: profile.onboarding.due }
+    const push = await fetch(`${api}/push/ask`, { headers, signal: AbortSignal.timeout(30_000) })
+    const offer = await push.json() as { reason?: string | null }
+    if (!push.ok) throw new Error(`The dedicated ${account.key} fixture cannot read its notification offer`)
+    return { policies: profile.policies.due, welcome: profile.onboarding.due, notifications: Boolean(offer.reason) }
   }
   finally { await fetch(`${api}/auth/logout`, { method: 'POST', headers, signal: AbortSignal.timeout(30_000) }) }
 }
@@ -100,12 +103,15 @@ function signIn(account: Account) {
   // screen of LSU's first-run flow), opened over Today. The fixtures' journey
   // is about the app behind it, so it steps back when that screen is there.
   if (firstRun.welcome) steps.push({ command: 'expectid', text: 'welcome-skip', seconds: 40 }, ...declineOptionalPrompts(), { command: 'tapid', text: 'welcome-skip' }, { command: 'wait', seconds: 3 }, { command: 'ifid', id: 'level-screen', step: { command: 'back' } })
-  // iOS offers to save the password, and the app offers notifications, on
-  // their own schedules after signing in; either can land on the other.
-  // The notification offer can arrive as the last round looks for it, and a
-  // bar button tapped while its screen is still sliding in does nothing: the
-  // question then stays in front of Today. One more look once it has settled.
-  steps.push(...Array.from({ length: 4 }, declineOptionalPrompts).flat(), { command: 'wait', seconds: 2 }, { command: 'ifid', id: 'nav-not-now', step: { command: 'tapid', text: 'nav-not-now' } }, { command: 'expectid', text: 'today-screen', seconds: 40 }, { command: 'tapif', text: 'Not Now' })
+  // This simulator is new, so the account has not seen its notification offer.
+  // Wait for the actual first-run screen when the server says it is due.
+  // Probing "Not Now" before it arrives races the async eligibility request
+  // and leaves the offer covering Today (acceptance run 43634361130).
+  steps.push({ command: 'iftext', text: 'Save Password', step: { command: 'tapif', text: 'Not Now' } })
+  if (firstRun.notifications) {
+    steps.push({ command: 'expectid', text: 'push-ask', seconds: 60 }, { command: 'shot', name: 'lsu-notification-choice' }, { command: 'tapid', text: 'nav-not-now' }, { command: 'absentid', text: 'push-ask' })
+  }
+  steps.push({ command: 'expectid', text: 'today-screen', seconds: 40 }, { command: 'tapif', text: 'Not Now' })
 }
 // A signed-out launch opens on LSU's start screen (native/product.json
 // `identity.start`), and its "Log in" is the way everyone reaches sign-in.

@@ -9,7 +9,7 @@ description: The purpose, rationale, entry route and review context for each sha
 
 Optional app modules and screens requiring a particular published profile, hardware or one-use link. Each is accounted for here. An explained exclusion is not a claim of visual verification.
 
-32 template-backed screens in this section. The source snapshot is HQ kit 1.0.4330. Names and visibility can vary by account, language and enabled Experience.
+32 template-backed screens in this section. The source snapshot is HQ kit 1.0.4333. Names and visibility can vary by account, language and enabled Experience.
 
 ## Public athlete profile
 

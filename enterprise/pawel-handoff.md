@@ -3,12 +3,15 @@
 The customer entry point is <https://lsu.stacksjs.com/coaching/plans>.
 The preview gate and the training account are separate logins. The shared
 Passwords group **LSU** contains the website preview, Pawel's actual coach
-account, the demo visitor and two empty customer accounts labelled RUN and SOUL.
-Chris invites Pawel to that group. Do not put passwords in this document.
+account, Chris's administrator account, the demo visitor and two empty customer accounts labelled RUN and SOUL.
+There are six shared entries. Chris invites Pawel to that group. Do not put passwords in this document.
 
 The training application and its API run at
 <https://training.lsu.stacksjs.com>. LSU sign-in is independent of HQ sign-in
-and of the production race-entry account.
+and of the production race-entry account. Both actual administrator passwords
+were verified through fresh branded browser sign-ins. The Profile page now
+leads with Training and keeps the race-entry form in its own disclosure.
+Read and accept the first-use account policies personally.
 
 ## Catalog and delivery
 
@@ -58,7 +61,7 @@ limits it to insights, so it cannot change the calendar itself.
 7. Return to the athlete account and refresh the training. Open a workout,
    inspect the original prescription, open a demonstration, log a set where
    relevant and save completion with duration and effort. Reload to verify it.
-8. Record or upload voice feedback. Transcribe it, review and edit the text,
+8. In Training, choose **Send feedback**. Record or upload voice feedback. Transcribe it, review and edit the text,
    then send it. Text feedback works through the same conversation.
 9. On or after the shown feedback date, send the week's feedback. Review and
    approve the next draft as coach, then verify the athlete's following week.
@@ -80,18 +83,24 @@ production origins, `https://lastsoulultra.com` and
 <hq-coaching brand="last-soul-ultra" api="https://training.lsu.stacksjs.com"></hq-coaching>
 ```
 
-The element delegates microphone permission to its training iframe. Production
-`lastsoulultra.com` is maintained outside this repository. Its production page
-has not been changed by deploying this preview. Its maintainer must publish
-the element there before the same entry path is available on that domain.
+The element delegates microphone permission to its training iframe. The agreed customer test runs on `lsu.stacksjs.com` as staging with real
+application data. The original `lastsoulultra.com` page is outside this test
+and has not been modified.
 
 ## Source video requiring review
 
 Public provider metadata succeeds for 144 of the 145 distinct supplied video
 URLs. YouTube returns 404 for `https://www.youtube.com/shorts/rfMyMmD-Jys`,
 the **Oblique sit** demonstration in both **Hip/Piriformis stretch** workout
-variants. The original prescription and link remain intact. Pawel needs to
-supply the intended working replacement; an unrelated video is not substituted.
+variants. The original prescription and link remain intact. Pawel will supply the intended working replacement; an unrelated video is not
+substituted. In **Coaching > Plan library**, duplicate the affected plan,
+choose **Edit plan**, open the Hip/Piriformis session and choose **Change video**
+on Oblique sit. Save the video, apply the session and save the plan. In the
+studio shop, select that plan version for the affected offer and save it.
+Published plans use copies for revisions so existing purchases retain the
+prescription they bought. Updating a library exercise alone does not rewrite
+literal videos already saved inside a plan. Review existing customer weeks
+separately if their delivered prescription should change.
 
 ## Verification on 14 November 2026
 
@@ -107,12 +116,22 @@ supply the intended working replacement; an unrelated video is not substituted.
 - Cancellation and restored renewal verified through the live account controls.
 - No second week released by early feedback. Future-date lifecycle tests use
   isolated SQLite and PostgreSQL databases, not the live clock or live row edits.
-- Clean checkout: 337 tests, lint and type check passed. Deployed verification:
-  67 checks passed, including desktop/mobile styling, roles and the four offers.
+- Clean checkout: 340 tests, lint and type check passed. Deployed verification:
+  76 checks passed, including desktop/mobile styling, roles and the four offers.
 
 The synthetic purchase tests have renewal cancelled or their Stripe sandbox
 subscription terminated through the provider API. The two customer accounts reserved for Pawel have no
 purchases or workouts, and their language preference is German.
 
-Native acceptance and TestFlight delivery have their own workflow receipts.
-A successful web check does not establish native delivery.
+Build 31 completed native acceptance and Apple processing, and is available
+to internal TestFlight testers. Its release receipt is GitHub Actions run
+43628826244. The website also uses later compatible platform fixes.
+
+Real signup and address verification were exercised with two real Gmail aliases.
+Password recovery also consumed the actual delivered link: the new password
+signed in, the old password was rejected, and the token could not be reused.
+The latest welcome, verification and recovery messages carry LSU branding;
+welcome and recovery copy follow the account's German language preference.
+Both messages arrived immediately and passed SPF, DKIM and DMARC, but Gmail
+placed the initial messages in Spam. Inbox placement must not be represented
+as guaranteed. Synthetic `.test` customer addresses cannot receive email.
