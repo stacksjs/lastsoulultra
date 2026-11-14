@@ -11,6 +11,7 @@ const noFixture: Record<string, string> = {
   '/workouts/[id]/live': 'Requires an explicitly shared live workout fixture; do not publish a real sharing token.',
 }
 function concrete(path: string, fixtures: ScreenshotFixtures): string {
+  if (path.startsWith('/brands/[slug]')) return path.includes('[flow]') ? '/brands/last-soul-ultra/login' : '/brands/last-soul-ultra'
   if (path.startsWith('/coaching/[brand]')) return '/brands/last-soul-ultra?section=feedback'
   const binding = path.startsWith('/coaches/athletes/') ? fixtures.Athlete : path.startsWith('/store/') ? fixtures.Product : path.startsWith('/messages/') ? fixtures.Person : fixtures.Workout
   return path.replace(/\[([^\]]+)\]/g, (_match, field: string) => {
@@ -32,14 +33,14 @@ const config: ScreenshotConfig = {
   models: false,
   inputs: ['native/hq-source.json', 'native/product.json', 'resources/data/screens/inventory.json', 'scripts/screenshot-support.ts'],
   coverage: { directories: ['pantry/@hq/platform/source/resources/views'] },
-  redactEnv: ['LSU_DEMO_ACCOUNTS_JSON'],
+  redactEnv: ['LSU_DEMO_ACCOUNTS_JSON', 'LSU_SCREENSHOT_SESSIONS_JSON'],
   profiles: { visitor: trainingProfile(null), runner: trainingProfile('runner'), coach: trainingProfile('coach'), admin: trainingProfile('admin') },
   data: { prepare: () => reviewFixtures(baseUrl) },
   pages: inventory.screens.filter(screen => screen.group !== 'website').map(screen => ({
     id: screen.id,
     title: screen.title,
     route: screen.path,
-    path: screen.path.includes('[') ? ({ fixtures }) => concrete(screen.path, fixtures) : screen.path === '/welcome' ? '/welcome?again=1' : screen.path,
+    path: ['/privacy', '/terms'].includes(screen.path) ? `/legal/lsu${screen.path}` : screen.path.includes('[') ? ({ fixtures }) => concrete(screen.path, fixtures) : screen.path === '/welcome' ? '/welcome?again=1' : screen.path,
     description: screen.purpose,
     reason: screen.reason,
     sources: [screen.source],

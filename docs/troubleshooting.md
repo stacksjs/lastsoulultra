@@ -63,7 +63,7 @@ The next training block can remain in coach review even after an AI reply arrive
 
 ## Billing actions are unavailable for a demo
 
-Complimentary demo access has no payment-provider subscription to cancel or refund. Review its status and existing sessions. Purchase testing requires a separate test account and a confirmed sandbox configuration, as described in the [demo walkthrough](/demo#7-do-not-test-payments).
+Complimentary demo access has no payment-provider subscription to cancel or refund. Review its status and existing sessions. Purchase testing requires a separate test account and a confirmed sandbox configuration, as described in the [demo walkthrough](/demo#7-review-payment-testing-separately).
 
 ## Race payment returned but the place is not confirmed
 

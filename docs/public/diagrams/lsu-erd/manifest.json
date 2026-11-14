@@ -1,8 +1,8 @@
 {
   "source": {
     "package": "@hq/platform",
-    "version": "1.0.4325",
-    "revision": "aea8ccc02a914338bee93fab0237421f3c59fbf6"
+    "version": "1.0.4326",
+    "revision": "44e1c3b66f2532a490bae30c5b67ffc4ab9726ba"
   },
   "scope": "Declared schema from pinned migrations; no production database queried.",
   "tables": 22,

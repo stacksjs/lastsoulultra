@@ -39,20 +39,28 @@ jobs:
           pantry install --frozen-lockfile --ignore-scripts --quiet
       - name: Capture synthetic review screens
         env:
-          SITE_AUTH_USER: ${{ secrets.SITE_AUTH_USER }}
-          SITE_AUTH_PASSWORD: ${{ secrets.SITE_AUTH_PASSWORD }}
-          LSU_DEMO_ACCOUNTS_JSON: ${{ secrets.LSU_DEMO_ACCOUNTS_JSON }}
+          DOTENV_PRIVATE_KEY_PRODUCTION: ${{ secrets.DOTENV_PRIVATE_KEY_PRODUCTION }}
           SURFACE: ${{ inputs.surface }}
           ONLY: ${{ inputs.only }}
         run: |
           args=()
           if [ -n "$ONLY" ]; then args+=(--only "$ONLY"); fi
-          bun --config=scripts/screenshots.bunfig.toml scripts/capture-screens.ts "$SURFACE" "${args[@]}"
-      - name: Save images and the complete result manifest
+          bun --no-env-file --config=scripts/screenshots.bunfig.toml scripts/capture-screens.ts "$SURFACE" --production-env "${args[@]}"
+      - name: Encrypt the unreviewed capture bundle
+        if: always()
+        env:
+          DOTENV_PRIVATE_KEY_PRODUCTION: ${{ secrets.DOTENV_PRIVATE_KEY_PRODUCTION }}
+          SURFACE: ${{ inputs.surface }}
+        run: |
+          directory="storage/runtime/docs-screen-captures/$SURFACE"
+          if [ -d "$directory" ]; then
+            bun --no-env-file --config=scripts/screenshots.bunfig.toml scripts/screenshot-artifact.ts seal "$directory" storage/runtime/docs-screenshots.encrypted.json
+          fi
+      - name: Save the encrypted review bundle
         if: always()
         uses: actions/upload-artifact@v6
         with:
           name: docs-screenshots-${{ inputs.surface }}-${{ github.sha }}
-          path: storage/runtime/docs-screen-captures/${{ inputs.surface }}/
+          path: storage/runtime/docs-screenshots.encrypted.json
           retention-days: 7
           if-no-files-found: warn

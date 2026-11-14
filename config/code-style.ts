@@ -81,6 +81,9 @@ const config: PickierOptions = {
     '**/cache/**',
     '**/storage/framework/cache/**',
     '**/storage/framework/auto-imports/**',
+    // Framework defaults are a vendored reference. Application overrides are
+    // linted in app/ and resources/; the framework audits its own defaults.
+    '**/storage/framework/defaults/**',
     '**/storage/framework/frontend-dist/**',
     '**/storage/framework/mobile/**',
     '**/storage/framework/server/storage/**',

@@ -124,3 +124,21 @@ For a card decline, the checkout error belongs in Stripe's form. LSU should not 
 For trials, renewals, overdue invoices, cancellation and recovery over time, use a dedicated Billing test scenario and [Stripe test clocks](https://docs.stripe.com/billing/testing). Those transitions need more than the initial 4242 checkout.
 
 The card catalog is a testing reference, not a report that every processor case has been executed against this deployment. The automated capture report and test results should state which scenarios were actually run, which failed and which require a separate sandbox fixture.
+
+
+## Recorded verification
+
+On 14 November 2026, four named PaymentMethod probes ran with LSU's test-only Stripe credential: Visa success returned `succeeded`; generic decline and insufficient funds returned `requires_payment_method` with their respective decline codes; required authentication returned `requires_action`. Each response explicitly identified a sandbox intent. These processor probes did not purchase a coaching package or test every card in the catalog.
+
+A separate phone-width browser check signed in as a dedicated synthetic buyer and intercepted the checkout-start request with HTTP 503. The product screen showed the translated payment-configuration error as an alert and restored its purchase button. The interceptor handled the request locally; no checkout or payment was submitted by this UI check. The captured interface is German because that buyer's selected language is German.
+
+<figure class="guide-figure">
+  <img src="/docs/screens/checkout-start-error-mobile.png" alt="Synthetic checkout-start failure showing the visible German payment error and available purchase button" width="390" height="844" loading="lazy" style="max-width:390px;margin-inline:auto">
+  <figcaption>A simulated checkout-start failure in the actual phone-width product screen. The buyer can correct the configuration issue before retrying.</figcaption>
+</figure>
+
+Regression tests also cover confirmation network failures, HTTP errors, malformed responses, pending payment, cancellation, verified access and stale screens. Race-entry tests cover the separate race-payment confirmation and recovery. A delayed confirmation must remain distinct from a failed request.
+
+The live sandbox checkout preflight for the sample Strength for Ultrarunners plan returned HTTP 409 because its merchant has not selected a tax classification. The application correctly refused to create a checkout. The merchant must choose the classification in product administration before that plan can be used for hosted card testing. Do not bypass this validation or select a tax classification merely to make a test pass.
+
+A complete hosted-checkout review still needs entering the relevant cards in the sandbox form, completing and cancelling authentication challenges, following each return link and checking fulfillment. Record those outcomes separately from these processor and simulated UI checks.

@@ -60,7 +60,7 @@ Check the signed-in account, selected workspace and subscription before followin
 
 The current LSU iPhone navigation is Today, Week, Exercises, Backyard and Me. Health is a top shortcut; Progress and Workouts are under More. Store and Calendar have their own top controls. Native screens reuse much of the same view source, but a phone-width browser capture verifies only the web rendering. Check the installed app separately for native controls, permissions, hardware and return links.
 
-## Capture and maintenance
+${await Bun.file(join(root, 'docs/public/screens/reviewed.json')).exists() ? '[Reviewed screen walkthroughs](/screens/captures) show a selected set of real desktop and phone examples with their source snapshot.\n\n' : ''}## Capture and maintenance
 
 The authored inventory is the coverage source for screenshot automation. Every template needs a documented screen or a specific reason it is outside capture scope. Dynamic routes require synthetic seeded records, and one-use links require a dedicated fixture. Never make up record ids or reuse a real person's authorization token to fill a gap.
 
@@ -86,7 +86,7 @@ for (const [file, text] of pages) {
 }
 // A removed section must not linger as a seemingly current generated reference.
 for (const file of await readdir(join(root, 'docs/screens'))) {
-  if (['automation.md'].includes(file)) continue
+  if (['automation.md', 'captures.md'].includes(file)) continue
   if (!pages.has(`docs/screens/${file}`)) throw new Error(`Unlisted screen reference: ${file}`)
 }
 console.log(`${check ? 'Verified' : 'Generated'} ${inventory.screens.length} documented UI templates and ${art.length} branded onboarding pictures.`)

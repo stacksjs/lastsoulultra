@@ -9,7 +9,7 @@ description: The purpose, rationale, entry route and review context for each mes
 
 Conversations, notifications and deliberate sharing choices. Confirm the participant and account before composing or publishing.
 
-7 template-backed screens in this section. The source snapshot is HQ kit 1.0.4323. Names and visibility can vary by account, language and enabled Experience.
+7 template-backed screens in this section. The source snapshot is HQ kit 1.0.4326. Names and visibility can vary by account, language and enabled Experience.
 
 ## Conversation
 
@@ -63,11 +63,11 @@ Review account notifications and follow their destinations.
 | --- | --- | --- |
 | `/notifications` | runner | [Read the guide](/training/workouts) |
 
-## Sent items
+## Message delivery history
 
-Review the items or invitations previously sent by the account.
+Review emails and text messages sent to this account, their delivery status and any reported failure.
 
-**Why this screen exists:** Make follow-up possible without repeating an action blindly.
+**Why this screen exists:** Make notification delivery visible without confusing it with messages composed by the account.
 
 | Entry | Review context | Full guide |
 | --- | --- | --- |

@@ -22,21 +22,41 @@ The same check verifies the branded onboarding pictures against `native/onboardi
 
 Stacks' screen-documentation workflow reads an explicit capture configuration and uses Bun WebView. It captures selected screens at named viewports, isolates authentication profiles in separate owned processes, waits for readiness, masks configured private fields, and writes a JSON manifest, PNGs and a Markdown gallery.
 
+LSU declares two configurations, one for the training kit and one for the race website. Export the synthetic review credentials through your normal secret manager. Set `BUN_CHROME_PATH` if Chrome is not discoverable on the machine.
+
 ```sh
-buddy docs:screenshots --list
-buddy docs:screenshots
-buddy docs:screenshots --check
+bun run docs:screenshots:training --list
+bun run docs:screenshots:website --list
+bun run docs:screenshots:training
+bun run docs:screenshots:training --check
 ```
+
+The app wrapper bounds browser resources per screen, while Stacks merges the batches into a complete manifest. Use a fresh output directory when changing the configuration or source pin. Keep the previous report as evidence of the earlier build.
 
 `--list` validates the configuration and template coverage without opening a browser. `--check` verifies a complete saved inventory and image hashes; it does not contact the deployment to see whether the UI has changed. Capture again for a new build and include its source pin in the configuration's freshness inputs.
 
 For a focused update, choose explicit ids and a configured viewport:
 
 ```sh
-buddy docs:screenshots --only training-home,training-week --viewport mobile
+bun run docs:screenshots:training --only training-home,training-week --viewport mobile
 ```
 
+Other Stacks applications can use `buddy docs:screenshots --config config/screenshots.ts` directly, with their own pages, model fixtures and readiness hooks. LSU opts out of model discovery because the installed training kit uses a legacy SQL schema; its read-only adapter finds existing synthetic records instead.
+
+The **Docs screenshots** workflow in GitHub Actions accepts a surface and optional screen ids. It saves the report and images in an encrypted artifact for seven days, including on failure. The repository is public, so the workflow uploads only the encrypted bundle. It does not publish plaintext images automatically. The workflow uses the existing platform registry grant and production environment decryption key. Only the preview gate and synthetic review-account values are read from the encrypted environment. Locally, add `--production-env` to load the same configuration explicitly; otherwise export the required review variables through your secret manager. The training adapter checks that the live HQ revision matches the pinned kit before and after capture. It refuses a mismatched deployment. Do not run a full capture while a deployment or fixture refresh is changing the reviewed environment.
+
 The Stacks core guide documents the full API and configuration: [Automated screen documentation](https://stacksjs.com/docs/guide/screenshots). The existing `buddy screenshot <url>` command remains useful for a single page.
+
+Download the workflow artifact before its retention period ends. A reviewer with the production decryption key used for that capture can open the bundle locally. The key is resolved through the same environment-key mechanism as deployment; it is never included in the artifact. The archive uses authenticated encryption with a separate derived key and a fresh salt and nonce.
+
+```sh
+bun --no-env-file --config=scripts/screenshots.bunfig.toml scripts/screenshot-artifact.ts open docs-screenshots.encrypted.json review.tar
+tar -tf review.tar
+mkdir private-review
+tar -xf review.tar -C private-review
+```
+
+Keep that decrypted directory private. The tool refuses to overwrite an existing encrypted bundle or output archive. If a key is rotated, retain the old key securely until any required review bundles have been opened.
 
 ## Use the data model intelligently
 

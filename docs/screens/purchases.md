@@ -9,7 +9,7 @@ description: The purpose, rationale, entry route and review context for each pur
 
 The Store, purchased content, subscriptions and checkout returns. Provider-backed purchases and complimentary review access are different records.
 
-12 template-backed screens in this section. The source snapshot is HQ kit 1.0.4323. Names and visibility can vary by account, language and enabled Experience.
+12 template-backed screens in this section. The source snapshot is HQ kit 1.0.4326. Names and visibility can vary by account, language and enabled Experience.
 
 ## Billing and membership
 
@@ -121,11 +121,11 @@ Browse the content made available to the account.
 | --- | --- | --- |
 | `/store/library` | runner | [Read the guide](/training/plans) |
 
-## Recommended products
+## Recommended equipment
 
-Review the available recommendations and open an offer.
+Review equipment called for by workouts or the coach, split into items still needed and already owned.
 
-**Why this screen exists:** Offer discovery without treating a recommendation as an enrollment.
+**Why this screen exists:** Help an athlete prepare for the session without confusing an external equipment-shop link with a coaching purchase.
 
 | Entry | Review context | Full guide |
 | --- | --- | --- |

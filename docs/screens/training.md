@@ -9,7 +9,7 @@ description: The purpose, rationale, entry route and review context for each tra
 
 Daily training, session details and recorded progress. A screen can be empty when the account has no approved training or recorded activity.
 
-21 template-backed screens in this section. The source snapshot is HQ kit 1.0.4323. Names and visibility can vary by account, language and enabled Experience.
+21 template-backed screens in this section. The source snapshot is HQ kit 1.0.4326. Names and visibility can vary by account, language and enabled Experience.
 
 ## Quick add
 
@@ -93,11 +93,11 @@ Read general insights or ask a question within the installation's enabled AI mod
 | --- | --- | --- |
 | `/hq-coach` | runner | [Read the guide](/training/workouts) |
 
-## Level
+## Training level and goal
 
-Review the available level or rank presentation.
+Choose a fitness level, training goal and any target race or date, then review the proposed save.
 
-**Why this screen exists:** Keep an achievement summary distinct from coaching permissions.
+**Why this screen exists:** Reuse the athlete profile and goal-event records rather than keeping a separate onboarding-only level.
 
 | Entry | Review context | Full guide |
 | --- | --- | --- |

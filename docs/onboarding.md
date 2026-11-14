@@ -11,14 +11,41 @@ There are two parts: the required policy agreement, then a welcome tour and setu
 
 ## Before the tour
 
-| Screen | What to do | Why it exists | What happens next |
-| --- | --- | --- | --- |
-| LSU start | Choose **Get started** or compare plans. Change language if needed. | Explain LSU's coaching before asking you to create an account. | Account creation or the Store. |
-| Create an account | Enter your own details and an email address you can receive mail at. Review the sign-in options actually offered. | Establish your LSU identity. This installation disables HQ sign-in. | Verification or sign-in, as required by the account. |
-| Sign in | Use the LSU account's credentials. Follow additional verification if prompted. | Keep personal training separate from the shared preview gate and race-entry Profile. | Required policy agreement, a due tour or the account's home. |
-| Email verification | Follow the verification link sent to your address. | Confirm access to that mailbox. | Return to the sign-in or account flow. Shared `.test` demo addresses cannot receive these messages. |
-| Forgot/reset password | Request recovery for your own reachable mailbox, then use its reset link. | Recover access without exposing the old password. | Sign in with the changed password. Use the supplied demo password for shared review accounts. |
-| Policy agreement | Read the linked terms, privacy and Health & Safety information. Make your own choices and choose **I agree** to continue. | Record acceptance of the current policy versions. A later policy update can require a new answer. | The welcome tour when due, otherwise the appropriate home. Choosing **I don't agree** signs out. |
+### 1. LSU start
+
+Choose **Get started** or compare plans. Change language if needed.
+
+Explain LSU's coaching before asking you to create an account. Next: account creation or the Store.
+
+### 2. Create an account
+
+Enter your own details and an email address you can receive mail at. Review the sign-in options actually offered.
+
+Establish your LSU identity. This installation disables HQ sign-in. Next: verification or sign-in, as required by the account.
+
+### 3. Sign in
+
+Use the LSU account's credentials. Follow additional verification if prompted.
+
+Keep personal training separate from the shared preview gate and race-entry Profile. Next: required policy agreement, a due tour or the account's home.
+
+### 4. Email verification
+
+Follow the verification link sent to your address.
+
+Confirm access to that mailbox. Next: return to the sign-in or account flow. Shared `.test` demo addresses cannot receive these messages.
+
+### 5. Forgot/reset password
+
+Request recovery for your own reachable mailbox, then use its reset link.
+
+Recover access without exposing the old password. Next: sign in with the changed password. Use the supplied demo password for shared review accounts.
+
+### 6. Policy agreement
+
+Read the linked terms, privacy and Health & Safety information. Make your own choices and choose **I agree** to continue.
+
+Record acceptance of the current policy versions. A later policy update can require a new answer. Next: the welcome tour when due, otherwise the appropriate home. Choosing **I don't agree** signs out.
 
 The policy agreement can appear as a website dialog or as a dedicated screen. The iPhone screen has no tabs or swipe-back exit while an answer is required. You can read the policies before deciding. This agreement is separate from the tour's training-safety question and any feature-specific agreement, such as breathwork.
 
@@ -47,17 +74,41 @@ LSU's coaches set training. The general HQ tour's self-authored starter-plan pag
 
 ## Athlete setup, one question at a time
 
-| Step | Your choice | How to think about it |
-| --- | --- | --- |
-| Goals | Choose all relevant goals: a race, fitness, strength, weight management or health. | Describe what you want from training. Selected goals are added to your profile during setup. |
-| Main sport | Choose the sport that best describes your training. | It provides context and updates your profile's sport; it does not enroll you in a paid package. Available choices can be filtered by the installation. |
-| Weekly time | Choose the approximate time you can realistically train. | Give a sustainable starting point, including other commitments. A later availability change still needs communicating to your coach. |
-| Experience | Choose beginner, intermediate or advanced. | Describe relevant experience rather than the level you hope to reach. This answer is not a performance test or medical assessment. |
-| About you, optional | Provide age and sex if you want to. | This is optional training context. You can leave it unanswered. |
-| Connect a wearable | Open the connection flow or choose to do it later. | Authorize the specific provider yourself. Returning to setup should show a completed connection. You can add devices later. |
-| Health and safety | Read both statements, turn on both confirmations if you agree, then submit. | The app records a timestamp for this tour consent. Do not copy another reviewer's choices. |
-| Summary | Read what LSU will set up, then choose the offered setup action. | Check the intended changes before they are applied. In LSU, coaching packages come from the Store and coaches approve weekly blocks. |
-| Completion | Review the completed items and any failures, then continue. | Partial failure should be visible. Retry unfinished work rather than assuming every item succeeded. |
+### 1. Goals
+
+Choose all relevant goals: a race, fitness, strength, weight management or health. Describe what you want from training. Selected goals are added to your profile during setup.
+
+### 2. Main sport
+
+Choose the sport that best describes your training. It provides context and updates your profile's sport; it does not enroll you in a paid package. Available choices can be filtered by the installation.
+
+### 3. Weekly time
+
+Choose the approximate time you can realistically train. Give a sustainable starting point, including other commitments. A later availability change still needs communicating to your coach.
+
+### 4. Experience
+
+Choose beginner, intermediate or advanced. Describe relevant experience rather than the level you hope to reach. This answer is not a performance test or medical assessment.
+
+### 5. About you, optional
+
+Provide age and sex if you want to. This is optional training context. You can leave it unanswered.
+
+### 6. Connect a wearable
+
+Open the connection flow or choose to do it later. Authorize the specific provider yourself. Returning to setup should show a completed connection. You can add devices later.
+
+### 7. Health and safety
+
+Read both statements, turn on both confirmations if you agree, then submit. The app records a timestamp for this tour consent. Do not copy another reviewer's choices.
+
+### 8. Summary
+
+Read what LSU will set up, then choose the offered setup action. Check the intended changes before they are applied. In LSU, coaching packages come from the Store and coaches approve weekly blocks.
+
+### 9. Completion
+
+Review the completed items and any failures, then continue. Partial failure should be visible. Retry unfinished work rather than assuming every item succeeded.
 
 For example, a new runner selects **Train for a race**, **Running**, **3 to 5 hours** and **Beginner**, then postpones connecting a watch. Setup can save the goal and sport without connecting a device or buying a plan. In this coach-led LSU installation, the athlete continues to the Store to choose coaching; a future training block still needs its normal feedback and coach-review workflow.
 
@@ -84,6 +135,14 @@ The account saves its answers and current step as the tour advances. If you leav
 Setup keeps a record of successfully completed tasks. Replaying and pressing setup again avoids repeating tasks already recorded as done; unfinished tasks can be retried. Check the completion screen's actual results, especially after a lost connection. Do not repeatedly invite someone to test the screen.
 
 If the tour cannot load, check your connection and choose **Try again**. If it opens the wrong role, confirm the signed-in account and workspace before changing permissions. If a newly completed tour returns unexpectedly, refresh the account and follow [Troubleshooting](/troubleshooting).
+
+## Training level and goal
+
+On the branded iPhone app's first-run path, finishing the tour can open **Training level and goal** before plan selection. This follow-up uses the athlete profile's existing fitness level and goal events. It is separate from the tour's experience answer and from an organization's rank system.
+
+Choose the level that describes your current training. You can save a level alone. To add a target, provide a race or goal name and a valid date that is today or later. A date without a name, or a race without a date, produces a field error before anything is saved. For example, **First ultra, 50 km** with **5 June 2027** describes a target; it does not register you for that event or buy a plan.
+
+Saving an unchanged level does not create another record. An existing goal with the same name and day is not added again. If the profile update succeeds but adding the goal fails, the screen reports that failure and retains the successful part for a retry. Continue only after checking the result. The first-run continuation opens the product's plan choices; replaying the tour from Settings does not force this follow-up again.
 
 ## After onboarding
 

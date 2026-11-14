@@ -76,7 +76,7 @@ for (const path of ['/', '/format', '/world-series', '/soul-races', '/app', '/co
 // Verify the published guide and exact artifact bytes from this deployment.
 // An HTML fallback can answer 200 for a missing static file, so status alone is
 // insufficient for artwork, CSS and standalone diagrams.
-for (const path of ['/docs/', '/docs/visual-guide', '/docs/training/feedback']) {
+for (const path of ['/docs/', '/docs/visual-guide', '/docs/training/feedback', '/docs/onboarding', '/docs/screens/', '/docs/screens/automation', '/docs/payment-testing']) {
   const page = await get(`${site}${path}`, gate)
   const html = await page.text()
   check(`serves the guide at ${path}`, page.status === 200 && html.includes('bp-doc'), `answered ${page.status}`)
@@ -85,7 +85,7 @@ for (const path of ['/docs/', '/docs/visual-guide', '/docs/training/feedback']) 
   }
 }
 const assets: Record<string, string> = Object.fromEntries(Object.entries(diagrams.files).map(([file, hash]) => [`diagrams/${file}`, hash]))
-for (const file of ['guide.css', 'workout-art/lunge-reverse-goblet-frames.svg', 'workout-art/glute-bridge-march-frames.svg']) {
+for (const file of ['guide.css', 'workout-art/lunge-reverse-goblet-frames.svg', 'workout-art/glute-bridge-march-frames.svg', 'onboarding/athlete-today-dark.webp', 'onboarding/athlete-calendar-dark.webp', 'onboarding/coach-roster-dark.webp', 'screens/checkout-start-error-mobile.png']) {
   assets[file] = createHash('sha256').update(new Uint8Array(await Bun.file(new URL(`../docs/public/${file}`, import.meta.url)).arrayBuffer())).digest('hex')
 }
 for (const [file, hash] of Object.entries(assets)) {

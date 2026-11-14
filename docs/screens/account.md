@@ -9,7 +9,7 @@ description: The purpose, rationale, entry route and review context for each acc
 
 Sign-in, consent, the welcome tour and account preferences. Start with the [onboarding guide](/onboarding) for the complete first-run sequence.
 
-19 template-backed screens in this section. The source snapshot is HQ kit 1.0.4323. Names and visibility can vary by account, language and enabled Experience.
+19 template-backed screens in this section. The source snapshot is HQ kit 1.0.4326. Names and visibility can vary by account, language and enabled Experience.
 
 ## Policy agreement
 
@@ -141,11 +141,11 @@ Review nutrition preferences and offered estimation controls.
 | --- | --- | --- |
 | `/settings/nutrition` | runner | [Read the guide](/my-account) |
 
-## Tracking history
+## Habit and nutrition history
 
-Inspect the history of supported tracking changes.
+Review dated habit and nutrition entries, with the available filters and older-history pages.
 
-**Why this screen exists:** Make account data changes traceable to the user.
+**Why this screen exists:** Check what was recorded on a particular day rather than treating missing entries as completed habits or meals.
 
 | Entry | Review context | Full guide |
 | --- | --- | --- |

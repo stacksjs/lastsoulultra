@@ -9,7 +9,7 @@ description: The purpose, rationale, entry route and review context for each coa
 
 Authoring, athlete context and weekly review. A coach profile and the appropriate roster or method access are required. Read the [coach guide](/coaches) before editing or approving work.
 
-19 template-backed screens in this section. The source snapshot is HQ kit 1.0.4323. Names and visibility can vary by account, language and enabled Experience.
+19 template-backed screens in this section. The source snapshot is HQ kit 1.0.4326. Names and visibility can vary by account, language and enabled Experience.
 
 ## Coach assistant
 
@@ -153,11 +153,11 @@ Browse and edit reusable plans and their weeks.
 | --- | --- | --- |
 | `/coaches/plans` | coach | [Read the guide](/coaches) |
 
-## Coach reviews
+## Recurring athlete check-ins
 
-Review the available athlete check-ins or review queue.
+Create or edit scheduled athlete check-ins, their questions, audience, cadence and date range.
 
-**Why this screen exists:** Put follow-up work where a coach can act on it.
+**Why this screen exists:** Ask structured questions on the intended athlete calendar days; weekly subscription-block approval belongs in Block reviews.
 
 | Entry | Review context | Full guide |
 | --- | --- | --- |

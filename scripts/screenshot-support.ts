@@ -1,4 +1,5 @@
 import type { ScreenshotContext, ScreenshotFixtures } from '@stacksjs/docs/screenshots'
+import source from '../native/hq-source.json'
 
 interface ReviewSession { token: string, user: Record<string, unknown> }
 const sessions = new Map<string, Promise<ReviewSession>>()
@@ -10,12 +11,14 @@ export function reviewSession(role: string, baseUrl: string): Promise<ReviewSess
   let session = sessions.get(key)
   if (!session) {
     session = (async () => {
+      const inherited = JSON.parse(process.env.LSU_SCREENSHOT_SESSIONS_JSON || '{}')
+      if (inherited.baseUrl === baseUrl && inherited.sessions?.[role]?.token) return inherited.sessions[role] as ReviewSession
       const accounts = JSON.parse(process.env.LSU_DEMO_ACCOUNTS_JSON || '[]') as Array<{ key: string, email: string, password: string }>
       const account = accounts.find(account => account.key === role)
       if (!account || !account.email.endsWith('@lsu-demo.test') || account.password.length < 20) throw new Error(`A synthetic ${role} review account is required`)
       const response = await fetch(`${baseUrl}/api/auth/login`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: account.email, password: account.password }), signal: AbortSignal.timeout(30_000) })
       const result = await response.json() as ReviewSession
-      if (!response.ok || !result.token || !result.user) throw new Error(`The ${role} review account could not sign in`)
+      if (!response.ok || !result.token || !result.user) throw new Error(`The ${role} review account could not sign in (${response.status})`)
       return result
     })()
     sessions.set(key, session)
@@ -35,15 +38,15 @@ async function observe(view: Bun.WebView, baseUrl: string): Promise<void> {
   await view.cdp('Network.enable')
   const state = { pending: new Map<string, string>(), last: Date.now(), started: Date.now() }
   network.set(view, state)
-  view.addEventListener('Network.requestWillBeSent', (event: MessageEvent<any>) => {
-    const { requestId, request, type } = event.data
+  view.addEventListener('Network.requestWillBeSent', (event: Event) => {
+    const { requestId, request, type } = (event as MessageEvent<any>).data
     if (['Fetch', 'XHR'].includes(type) && String(request?.url || '').startsWith(`${new URL(baseUrl).origin}/api/`)) { state.pending.set(requestId, new URL(request.url).pathname); state.last = Date.now() }
   })
-  view.addEventListener('Network.responseReceived', (event: MessageEvent<any>) => {
-    if (String(event.data.response?.mimeType || '').includes('text/event-stream') && state.pending.delete(event.data.requestId)) state.last = Date.now()
+  view.addEventListener('Network.responseReceived', (event: Event) => {
+    if (String((event as MessageEvent<any>).data.response?.mimeType || '').includes('text/event-stream') && state.pending.delete((event as MessageEvent<any>).data.requestId)) state.last = Date.now()
   })
-  for (const event of ['Network.loadingFinished', 'Network.loadingFailed'] as const) view.addEventListener(event, (event: MessageEvent<any>) => {
-    if (state.pending.delete(event.data.requestId)) state.last = Date.now()
+  for (const event of ['Network.loadingFinished', 'Network.loadingFailed'] as const) view.addEventListener(event, (event: Event) => {
+    if (state.pending.delete((event as MessageEvent<any>).data.requestId)) state.last = Date.now()
   })
 }
 
@@ -54,10 +57,10 @@ export async function previewProfile({ view, baseUrl }: ScreenshotContext): Prom
   if (!username || !password) throw new Error('Preview credentials are required')
   await observe(view, baseUrl)
   await view.cdp('Fetch.enable', { handleAuthRequests: true, patterns: [{ urlPattern: `${new URL(baseUrl).origin}/*` }] })
-  view.addEventListener('Fetch.requestPaused', (event: MessageEvent<any>) => { void view.cdp('Fetch.continueRequest', { requestId: event.data.requestId }).catch(() => {}) })
-  view.addEventListener('Fetch.authRequired', (event: MessageEvent<any>) => {
-    const ours = String(event.data.authChallenge?.origin || '').replace(/\/$/, '') === new URL(baseUrl).origin
-    void view.cdp('Fetch.continueWithAuth', { requestId: event.data.requestId, authChallengeResponse: ours ? { response: 'ProvideCredentials', username, password } : { response: 'CancelAuth' } }).catch(() => {})
+  view.addEventListener('Fetch.requestPaused', (event: Event) => { void view.cdp('Fetch.continueRequest', { requestId: (event as MessageEvent<any>).data.requestId }).catch(() => {}) })
+  view.addEventListener('Fetch.authRequired', (event: Event) => {
+    const ours = String((event as MessageEvent<any>).data.authChallenge?.origin || '').replace(/\/$/, '') === new URL(baseUrl).origin
+    void view.cdp('Fetch.continueWithAuth', { requestId: (event as MessageEvent<any>).data.requestId, authChallengeResponse: ours ? { response: 'ProvideCredentials', username, password } : { response: 'CancelAuth' } }).catch(() => {})
   })
 }
 
@@ -85,8 +88,8 @@ export function trainingProfile(role: string | null) {
           'onboarding-coach-style': 'coach.style',
         }
         await view.cdp('Fetch.enable', { patterns: [{ urlPattern: `${baseUrl}/api/onboarding`, requestStage: 'Request' }] })
-        view.addEventListener('Fetch.requestPaused', (event: MessageEvent<any>) => {
-          const { requestId, request } = event.data
+        view.addEventListener('Fetch.requestPaused', (event: Event) => {
+          const { requestId, request } = (event as MessageEvent<any>).data
           const step = steps[page.id]
           const saved = { status: 'started', step: step || 'welcome', answers: { goals: ['race'], sport: 'run', time: '3to5', level: 'beginner', size: '1to5', sports: ['run'], style: ['remote'] }, setup: {} }
           const payload = request.method === 'GET' ? JSON.stringify(saved) : request.postData || '{}'
@@ -122,6 +125,9 @@ export async function maskReviewDetails({ view }: ScreenshotContext): Promise<vo
 
 /** Read-only discovery of real seeded ids, never invented ids or database writes. */
 export async function reviewFixtures(baseUrl: string): Promise<ScreenshotFixtures> {
+  const inherited = JSON.parse(process.env.LSU_SCREENSHOT_FIXTURES_JSON || '{}')
+  if (inherited.baseUrl === baseUrl && inherited.fixtures) return inherited.fixtures as ScreenshotFixtures
+  await assertReviewSource(baseUrl)
   const now = new Date()
   const from = new Date(now.getTime() - 28 * 864e5).toISOString().slice(0, 10)
   const to = new Date(now.getTime() + 28 * 864e5).toISOString().slice(0, 10)
@@ -144,4 +150,29 @@ export async function reviewFixtures(baseUrl: string): Promise<ScreenshotFixture
     Person: { id: String(coach.user.id) },
     Brand: { slug: 'last-soul-ultra' },
   }
+}
+
+/** Share a read-only fixture snapshot with owned workers, avoiding repeated login bursts. */
+export async function prepareReviewScreens(baseUrl: string): Promise<() => void> {
+  const keys = ['LSU_SCREENSHOT_SESSIONS_JSON', 'LSU_SCREENSHOT_FIXTURES_JSON'] as const
+  const previous = Object.fromEntries(keys.map(key => [key, process.env[key]]))
+  try {
+    await assertReviewSource(baseUrl)
+    const roles = ['runner', 'coach', 'admin', 'purchaserun']
+    const entries = await Promise.all(roles.map(async role => [role, await reviewSession(role, baseUrl)] as const))
+    process.env.LSU_SCREENSHOT_SESSIONS_JSON = JSON.stringify({ baseUrl, sessions: Object.fromEntries(entries) })
+    process.env.LSU_SCREENSHOT_FIXTURES_JSON = JSON.stringify({ baseUrl, fixtures: await reviewFixtures(baseUrl) })
+  }
+  catch (error) {
+    for (const key of keys) { if (previous[key] === undefined) delete process.env[key]; else process.env[key] = previous[key] }
+    throw error
+  }
+  return () => { for (const key of keys) { if (previous[key] === undefined) delete process.env[key]; else process.env[key] = previous[key] } }
+}
+
+/** A source pin is useful only if the reviewed deployment actually runs it. */
+export async function assertReviewSource(baseUrl: string): Promise<void> {
+  const response = await fetch(new URL('/api/deployment', baseUrl), { signal: AbortSignal.timeout(15_000) })
+  const deployment = await response.json().catch(() => null) as { source?: string } | null
+  if (!response.ok || deployment?.source !== source.revision) throw new Error(`The review deployment must run pinned HQ kit ${source.version} before captures are accepted`)
 }

@@ -6,7 +6,7 @@
       "name": "last-soul-ultra",
       "dependencies": {
         "@ts-maps/stx": "0.5.7",
-        "stacks": "0.75.538"
+        "stacks": "0.75.586"
       },
       "devDependencies": {
         "better-dx": "^0.2.38",
@@ -29,12 +29,12 @@
     }
   },
   "packages": {
-    "@hq/platform@1.0.4325": {
+    "@hq/platform@1.0.4326": {
       "name": "@hq/platform",
-      "version": "1.0.4325",
+      "version": "1.0.4326",
       "source": "npm",
-      "resolved": "registry:@hq/platform@1.0.4325",
-      "integrity": "sha256:209a10556407048f2b8d6a30eb5e27659807d1b536652e503a56ef3bd5b103fc"
+      "resolved": "registry:@hq/platform@1.0.4326",
+      "integrity": "sha256:ab8d11e8a3e721886dbcdad4201846b62f064c48a7705c26adf7bf81f4cb1611"
     },
     "bun.sh@1.4.4": {
       "name": "bun.sh",
