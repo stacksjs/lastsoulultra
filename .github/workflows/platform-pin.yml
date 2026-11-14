@@ -90,7 +90,7 @@ jobs:
         run: git --no-pager diff -- native/hq-source.json pantry.json pantry.lock
 
       - name: Upload the refreshed pin
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: platform-pin-${{ inputs.version }}
           path: |

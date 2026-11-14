@@ -58,7 +58,7 @@ jobs:
           fi
       - name: Save the encrypted review bundle
         if: always()
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: docs-screenshots-${{ inputs.surface }}-${{ github.sha }}
           path: storage/runtime/docs-screenshots.encrypted.json
