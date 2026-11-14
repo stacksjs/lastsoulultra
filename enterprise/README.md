@@ -109,6 +109,11 @@ HQ's Stacks seeder over it:
 - `workouts.json` and `plans/` are generated from a coach's export, one
   `hq.workout.v1` document per session: `bun scripts/import-catalog.ts
   <folder>`. Each workout is kept once and named by key in the plans.
+  A follow-along session (one video, one "rep") has no length of its own:
+  where its title states one ("NSDR 20 min") HQ reads it, and for the rest
+  the import looks up the video's length once and keeps it in
+  `video-lengths.json`, so a deploy never needs the network. A session that
+  should run longer or shorter gets a `planned_duration` in the export.
 
 A deploy only touches what a deploy wrote. A plan nobody edited follows this
 folder; a plan a coach changed in the app is left alone, and so is every

@@ -2584,7 +2584,7 @@
    ]
   }
  },
- "360-abs-07bc67f3": {
+ "360-abs-354f6d59": {
   "format": "hq.workout.v1",
   "title": "360 Abs",
   "sport": "Strength",
@@ -2609,7 +2609,8 @@
      ]
     }
    ]
-  }
+  },
+  "planned_duration": "0:16:00"
  },
  "4-10-min-bergauf-zone-3-89-min-264dcd6d": {
   "format": "hq.workout.v1",
@@ -12851,7 +12852,7 @@
    ]
   }
  },
- "muscle-relaxation-567ba771": {
+ "muscle-relaxation-405381c5": {
   "format": "hq.workout.v1",
   "title": "Muscle Relaxation",
   "sport": "Strength",
@@ -12875,7 +12876,8 @@
      ]
     }
    ]
-  }
+  },
+  "planned_duration": "0:15:00"
  },
  "norwegian-4-4-min-zone-4-53-min-0c050c40": {
   "format": "hq.workout.v1",
@@ -13240,7 +13242,7 @@
    ]
   }
  },
- "post-run-meditation-bc19745b": {
+ "post-run-meditation-1cd37bd1": {
   "format": "hq.workout.v1",
   "title": "Post Run Meditation",
   "sport": "Strength",
@@ -13264,7 +13266,8 @@
      ]
     }
    ]
-  }
+  },
+  "planned_duration": "0:15:00"
  },
  "posterior-chain-20-db-kb-home-0cfcbf86": {
   "format": "hq.workout.v1",

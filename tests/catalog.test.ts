@@ -91,3 +91,28 @@ it('hands the training host its Stripe keys and nothing of the website’s', () 
     }
   }
 })
+
+it('gives a follow-along session a length: its title’s, or its one video’s', () => {
+  const lengths = read('video-lengths.json') as Record<string, number>
+  const followAlong = Object.values(workouts as Record<string, any>).filter((workout) => {
+    const exercises = (workout.strength?.blocks || []).flatMap((block: any) => block.exercises || [])
+    return exercises.length === 1 && exercises[0].video_url
+  })
+  expect(followAlong.length).toBeGreaterThan(5)
+  for (const workout of followAlong) {
+    const stated = /\d\s?min/i.test(workout.title)
+    // "NSDR 20 min" says it (HQ reads the title); the rest carry their video's length.
+    if (!stated) {
+      const url = workout.strength.blocks[0].exercises[0].video_url
+      const minutes = Math.max(1, Math.round(lengths[url]! / 60))
+      expect(workout.planned_duration).toBe(`0:${String(minutes).padStart(2, '0')}:00`)
+    }
+  }
+  expect(Object.values(lengths).every(seconds => seconds > 60)).toBe(true)
+})
+
+it('says on the site what the tiers do: one week at a time', () => {
+  expect(presets.products.every(product => product.training_blocks.length_days === 7)).toBe(true)
+  const pages = ['resources/views/app.stx', 'resources/views/index.stx', 'resources/views/coaching.stx', 'resources/views/app/coaches.stx', 'resources/data/production-pages.ts', 'resources/data/app-stores.ts']
+  for (const page of pages) expect(readFileSync(join(import.meta.dir, '..', page), 'utf8')).not.toMatch(/two weeks at a time|two-week (training )?blocks|next two weeks|every two weeks/i)
+})
