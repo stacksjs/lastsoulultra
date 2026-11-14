@@ -7,13 +7,13 @@ description: Resolve preview access, LSU sign-in, missing training, weekly revie
 
 ## The browser keeps asking for a password
 
-Use the shared preview username and password. A personal training password does not unlock that browser dialog. The gate protects the race site, this guide and their assets; the training website and iPhone app use LSU account authentication instead.
+Use the shared preview username and password. A personal training password does not unlock that browser dialog. The gate protects this guide and its assets; the training website and iPhone app use LSU account authentication instead.
 
 If the dialog returns only when you open a fresh private session, that session may simply have forgotten the shared preview credentials.
 
 ## I can open the site but cannot see training
 
-Open a training section and confirm the account name. The race site sends private sections to the training app. A visitor without an enrollment has no subscriber sessions. Alex or Jamie should have fictional sample training; a newly created account may correctly be empty.
+Open a training section and confirm the account name. A visitor without an enrollment has no subscriber sessions. Alex or Jamie should have fictional sample training; a newly created account may correctly be empty.
 
 Check the subscription, current date range and published sections before assuming data was lost. Sign out and back in if another tab changed accounts.
 
@@ -64,10 +64,6 @@ The next training block can remain in coach review even after an AI reply arrive
 ## Billing actions are unavailable for a demo
 
 Complimentary demo access has no payment-provider subscription to cancel or refund. Review its status and existing sessions. Purchase testing requires a separate test account and a confirmed sandbox configuration, as described in the [demo walkthrough](/demo#7-review-payment-testing-separately).
-
-## Race payment returned but the place is not confirmed
-
-Open the race-entry **Profile** and check the current agreement, saved race details and payment status. All required tasks must be complete. A checkout return is not a payment receipt from the race service. Contact the organizer with the entry reference if the status remains pending; do not repeatedly pay or apply.
 
 ## What to include in a report
 

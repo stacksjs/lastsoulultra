@@ -7,17 +7,9 @@ description: Unlock the preview, sign into your LSU account and find training on
 
 ## Choose the right sign-in
 
-There are three separate kinds of access. The [Visual guide](/visual-guide#three-kinds-of-access) shows how they fit together:
+Use one **LSU training account** across the [web app](https://training.lsu.stacksjs.com) and installed native apps. Each device has its own signed-in session, while your profile, training and permitted workspaces belong to the same account. The [Visual guide](/visual-guide#one-account-across-the-apps) shows this relationship.
 
-| Access | Where you use it | What it unlocks |
-| --- | --- | --- |
-| Shared preview username and password | [Race site](https://lsu.stacksjs.com) and this guide | The protected preview pages |
-| LSU training account | [Training app](https://training.lsu.stacksjs.com) and the iPhone app | Your training, messages and permitted workspaces |
-| Race-entry account | **Profile** or **Request a race entry** on the race site | Applications and confirmation of race places |
-
-The training site does not use the browser's shared preview password. Choosing a training section on the race site opens the training app. Only the public Store is embedded in the race site. Signing out of training does not sign you out of the race-entry service.
-
-For example, Alex's demo training login opens Alex's sample sessions. It does not unlock the preview dialog or establish that Alex has a race place.
+This review guide may require a shared preview username and password. That gate opens the guide; it does not sign you into a personal training account. An embedded app also authenticates with LSU directly. See [Web-component integration](/integration) for the host/application boundary.
 
 ## Sign into training
 
@@ -36,8 +28,6 @@ Read and agree to the LSU terms, privacy policy and Health & Safety information 
 The [onboarding guide](/onboarding) explains each screen, why it appears and what setup changes. The welcome tour introduces the main screens and offers setup and connection options. Choose **Skip** to go to the app, or revisit it from **Settings** under **Take the tour again** (**Tour erneut starten** in German).
 
 ## Find your way around
-
-The race site's header contains Home, Format, World Series, Soul Races, Sponsorship, Coaching, Contact & FAQ and Profile. Results are in the footer under **Results overview**. **Request a race entry** opens the race application flow.
 
 The training app has its own navigation. The published LSU navigation currently leads with **Store**, **Workouts**, **Health**, **Messages** and **Me**. Enabled sections and wording can change when LSU updates its Experience.
 

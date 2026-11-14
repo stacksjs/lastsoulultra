@@ -7,50 +7,39 @@ description: "Foundations. Production component reference for Last Soul Ultra."
 
 # Foundations
 
-Production components and interface patterns for the World Series, race entries and training portal.
+Application components, training interfaces and shared controls for Last Soul Ultra.
 
-- Use the active site tokens: red for the primary action, black surfaces, white text and square action shapes.
-- Anton sets display headings, Barlow sets readable interface copy, and Share Tech Mono sets supporting numbers.
-- Keep decorative race typography away from long form labels and body copy. Preserve visible focus and clear input labels.
-- Website fixtures use local fictional data. Embedded training screens retain their service-owned identity and authorization.
+- Use the active site tokens: red for the primary action, black surfaces, white text and rounded app actions.
+- Anton sets app headings and Inter sets readable application copy. Barlow is the documentation reading face.
+- Keep condensed display typography away from long form labels and body copy. Preserve visible focus and clear input labels.
+- App specimens use local fictional data. Account screens retain their service-owned identity and authorization.
 - The shared training inventory is a source reference. It does not claim that account-connected modules were executed in these previews.
 
-## Colors and surfaces
+## App colors and surfaces
 
 | Token | Value | Purpose |
 | --- | --- | --- |
-| --lsu-black | #000000 |  |
-| --lsu-band | #050505 |  |
-| --lsu-card | #0d0d0f |  |
-| --lsu-card-alt | #111111 |  |
-| --lsu-white | #ffffff |  |
-| --lsu-dim-1 | rgba(255, 255, 255, .65) |  |
-| --lsu-dim-2 | rgba(255, 255, 255, .55) |  |
-| --lsu-dim-3 | rgba(255, 255, 255, .4) |  |
-| --lsu-line | rgba(255, 255, 255, .14) |  |
-| --lsu-line-soft | rgba(255, 255, 255, .1) |  |
-| --lsu-line-faint | rgba(255, 255, 255, .08) |  |
-| --lsu-red | #dd0f15 |  |
-| --lsu-red-glow | rgba(221, 15, 21, .5) |  |
-| --lsu-seg-red | #ff2a1a |  |
+| background | #000000 |  |
+| surface | #0d0d0f |  |
+| text | #ffffff |  |
+| muted | #b6b6bd |  |
+| accent | #dd0f15 |  |
+| accent_text | #ffffff |  |
+| border | #333338 |  |
 
-## Typography
+## App typography
 
 | Token | Value | Purpose |
 | --- | --- | --- |
-| --lsu-display | &quot;Anton&quot;, sans-serif |  |
-| --lsu-body | &quot;Barlow&quot;, system-ui, sans-serif |  |
-| --lsu-mono | &quot;Share Tech Mono&quot;, monospace |  |
-| --lsu-seg | &quot;DSEG7&quot;, &quot;Share Tech Mono&quot;, monospace |  |
+| Headings | Anton |  |
+| Reading and controls | Inter |  |
 
-## Layout
+## App corners
 
 | Token | Value | Purpose |
 | --- | --- | --- |
-| --lsu-pad-y | clamp(72px, 9.3vw, 130px) |  |
-| --lsu-pad-x | clamp(18px, 5vw, 40px) |  |
-| --lsu-max | 1360px |  |
-| --lsu-head-gap | clamp(36px, 4vw, 56px) |  |
+| Actions | 14px |  |
+| Cards | 14px |  |
 
 ## Accessibility and behavior
 

@@ -1,6 +1,7 @@
 import type { StyleGuideConfig } from '@stacksjs/docs/style-guide'
 import { styleGuideCssTokens } from '@stacksjs/docs/style-guide'
 import { readFileSync } from 'node:fs'
+import product from '../native/product.json'
 
 // Public site branding is deliberately independent of the embedded training
 // service's account state. This is the stylesheet shipped by build:assets.
@@ -17,39 +18,36 @@ const value = siteStyleToken
 export default {
   brand: {
     name: 'Last Soul Ultra',
-    description: 'Production components and interface patterns for the World Series, race entries and training portal.',
+    description: 'Application components, training interfaces and shared controls for Last Soul Ultra.',
     accent: value('--lsu-red'),
     background: value('--lsu-black'),
     foreground: value('--lsu-white'),
-    font: value('--lsu-body'),
+    font: 'Inter, system-ui, sans-serif',
     principles: [
-      'Use the active site tokens: red for the primary action, black surfaces, white text and square action shapes.',
-      'Anton sets display headings, Barlow sets readable interface copy, and Share Tech Mono sets supporting numbers.',
-      'Keep decorative race typography away from long form labels and body copy. Preserve visible focus and clear input labels.',
-      'Website fixtures use local fictional data. Embedded training screens retain their service-owned identity and authorization.',
+      'Use the active site tokens: red for the primary action, black surfaces, white text and rounded app actions.',
+      'Anton sets app headings and Inter sets readable application copy. Barlow is the documentation reading face.',
+      'Keep condensed display typography away from long form labels and body copy. Preserve visible focus and clear input labels.',
+      'App specimens use local fictional data. Account screens retain their service-owned identity and authorization.',
       'The shared training inventory is a source reference. It does not claim that account-connected modules were executed in these previews.',
     ],
   },
   sources: [
-    { id: 'site', label: 'Website', directory: 'resources/components' },
-    { id: 'training', label: 'Shared training', directory: 'pantry/@hq/platform/source/resources/components' },
+    { id: 'training', label: 'Shared training', directory: 'pantry/@hq/platform/source/resources/components', exclude: ['marketing-*.stx'] },
     { id: 'ui', label: 'Shared UI', directory: 'node_modules/@stacksjs/components/src/ui' },
   ],
   stories: ['resources/style-guide'],
   tokens: {
-    'Colors and surfaces': variables.filter(token => !/font|display|body|mono|seg$|pad-|max|gap/.test(token.name)),
-    'Typography': variables.filter(token => /display|body|mono|seg$/.test(token.name)),
-    'Layout': variables.filter(token => /pad-|max|gap/.test(token.name)),
+    'App colors and surfaces': Object.entries(product.identity.theme).filter(([key]) => ['background', 'surface', 'text', 'muted', 'accent', 'accent_text', 'border'].includes(key)).map(([name, value]) => ({ name, value: String(value) })),
+    'App typography': [{ name: 'Headings', value: 'Anton' }, { name: 'Reading and controls', value: 'Inter' }],
+    'App corners': [{ name: 'Actions', value: `${product.identity.theme.radius}px` }, { name: 'Cards', value: `${product.identity.theme.card_radius}px` }],
   },
   styles: {
     files: [
       'resources/assets/styles/site/base.css',
       'resources/assets/styles/site/stx-site.css',
-      'resources/assets/styles/site/profile.css',
       'resources/assets/styles/site/coaching.css',
-      'resources/assets/styles/site/results.css',
     ],
   },
-  preview: { componentDirs: ['resources/components'] },
+  preview: { componentDirs: ['pantry/@hq/platform/source/resources/components'] },
   output: { publicUrl: '/docs/style-guide/generated' },
 } satisfies StyleGuideConfig

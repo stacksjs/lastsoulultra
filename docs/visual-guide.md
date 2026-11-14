@@ -1,19 +1,19 @@
 ---
 title: Visual guide
-description: See how LSU accounts, weekly training, race confirmation and the data model fit together.
+description: See how LSU app access, weekly training and the data model fit together.
 ---
 
 # Visual guide
 
 Start here when you want the shape of a process before its details. Each visual has a short explanation and a link to the full guide or interactive diagram.
 
-## Three kinds of access
+## One account across the apps
 
-The preview gate, training account and race-entry account have different jobs. Use the credentials for the screen you are opening.
+Your LSU account supplies the web and installed native apps. A host website can embed the app without receiving the account's credentials.
 
 <AccountMap />
 
-For the first sign-in, follow [Getting started](/getting-started). To switch a shared review login, use [Your account](/my-account#switch-roles-safely).
+For first sign-in, follow [Getting started](/getting-started). To switch a shared review login, use [Your account](/my-account#switch-roles-safely). [Web-component integration](/integration) explains the embedded boundary.
 
 ## From this week to the next
 
@@ -27,14 +27,6 @@ For a block ending on Sunday, qualifying feedback starts on Friday. A message ea
 <summary>Open the interactive training workflow</summary>
 <iframe class="guide-diagram" src="/docs/diagrams/weekly-training/index.html" title="Interactive workflow for LSU weekly training" loading="lazy"></iframe>
 </details>
-
-## From a selected place to a confirmed entry
-
-A race application asks for a place. If LSU selects it, these three tasks confirm that place. They can be completed in any order.
-
-<RaceConfirmation />
-
-Check the deadline and the service's final status in your race-entry Profile. Returning from checkout alone does not prove payment succeeded. [Race information](/races#confirm-a-selected-place) explains the required fields and agreement version.
 
 ## Read a workout's movement figures
 

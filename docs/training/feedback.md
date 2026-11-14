@@ -7,7 +7,7 @@ description: Send method feedback, review a voice transcript and understand when
 
 ## Choose the right conversation
 
-Open [Say how it felt](https://lsu.stacksjs.com/coaching/feedback). On iPhone, open **Me** → **Coaching accounts**, choose the subscription, then **Training feedback**, when that section is enabled. Select the subscription you mean if more than one is available.
+Open [Say how it felt](https://training.lsu.stacksjs.com/coaching/last-soul-ultra/feedback). On iPhone, open **Me** → **Coaching accounts**, choose the subscription, then **Training feedback**, when that section is enabled. Select the subscription you mean if more than one is available.
 
 This conversation is attached to your training method. The general AI assistant provides insights, and [Messages](/training/messages) is a participant inbox. Neither is a substitute for submitting the method feedback your weekly package requires.
 

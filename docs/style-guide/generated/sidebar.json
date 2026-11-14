@@ -8,72 +8,8 @@
     "link": "/style-guide/generated/foundations"
   },
   {
-    "text": "Actions and entry controls",
-    "link": "/style-guide/generated/patterns/stories-0-actions-c522a646"
-  },
-  {
-    "text": "Race cards, numbers and empty states",
-    "link": "/style-guide/generated/patterns/stories-0-cards-960b960b"
-  },
-  {
-    "text": "Forms and account feedback",
-    "link": "/style-guide/generated/patterns/stories-0-forms-c300c5c8"
-  },
-  {
-    "text": "Website navigation",
-    "link": "/style-guide/generated/patterns/stories-0-navigation-4b24178d"
-  },
-  {
-    "text": "Brand typography and surfaces",
-    "link": "/style-guide/generated/patterns/stories-0-typography-b74e0ea0"
-  },
-  {
-    "text": "Website: CoachingIndex",
-    "link": "/style-guide/generated/components/site/CoachingIndex"
-  },
-  {
-    "text": "Website: CoachingModule",
-    "link": "/style-guide/generated/components/site/CoachingModule"
-  },
-  {
-    "text": "Website: CoachingNav",
-    "link": "/style-guide/generated/components/site/CoachingNav"
-  },
-  {
-    "text": "Website: CoachingOffers",
-    "link": "/style-guide/generated/components/site/CoachingOffers"
-  },
-  {
-    "text": "Website: CoachingPortal",
-    "link": "/style-guide/generated/components/site/CoachingPortal"
-  },
-  {
-    "text": "Website: LiveBoard",
-    "link": "/style-guide/generated/components/site/LiveBoard"
-  },
-  {
-    "text": "Website: RaceEntryDialog",
-    "link": "/style-guide/generated/components/site/RaceEntryDialog"
-  },
-  {
-    "text": "Website: RacePortal",
-    "link": "/style-guide/generated/components/site/RacePortal"
-  },
-  {
-    "text": "Website: SiteConsent",
-    "link": "/style-guide/generated/components/site/SiteConsent"
-  },
-  {
-    "text": "Website: SiteFooter",
-    "link": "/style-guide/generated/components/site/SiteFooter"
-  },
-  {
-    "text": "Website: SiteNav",
-    "link": "/style-guide/generated/components/site/SiteNav"
-  },
-  {
-    "text": "Website: TrainingNav",
-    "link": "/style-guide/generated/components/site/TrainingNav"
+    "text": "Training hierarchy and feedback",
+    "link": "/style-guide/generated/patterns/stories-0-training-d24b203b"
   },
   {
     "text": "Shared training: AccountAction",
@@ -426,34 +362,6 @@
   {
     "text": "Shared training: LocationSwitch",
     "link": "/style-guide/generated/components/training/LocationSwitch"
-  },
-  {
-    "text": "Shared training: marketing-app-qr",
-    "link": "/style-guide/generated/components/training/marketing-app-qr"
-  },
-  {
-    "text": "Shared training: marketing-compare",
-    "link": "/style-guide/generated/components/training/marketing-compare"
-  },
-  {
-    "text": "Shared training: marketing-cta",
-    "link": "/style-guide/generated/components/training/marketing-cta"
-  },
-  {
-    "text": "Shared training: marketing-detail",
-    "link": "/style-guide/generated/components/training/marketing-detail"
-  },
-  {
-    "text": "Shared training: marketing-footer",
-    "link": "/style-guide/generated/components/training/marketing-footer"
-  },
-  {
-    "text": "Shared training: marketing-nav",
-    "link": "/style-guide/generated/components/training/marketing-nav"
-  },
-  {
-    "text": "Shared training: marketing-styles",
-    "link": "/style-guide/generated/components/training/marketing-styles"
   },
   {
     "text": "Shared training: MCPConnect",

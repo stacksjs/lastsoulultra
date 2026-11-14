@@ -1,303 +1,72 @@
 {
   "brand": {
     "name": "Last Soul Ultra",
-    "description": "Production components and interface patterns for the World Series, race entries and training portal.",
+    "description": "Application components, training interfaces and shared controls for Last Soul Ultra.",
     "accent": "#dd0f15",
     "background": "#000000",
     "foreground": "#ffffff",
-    "font": "\"Barlow\", system-ui, sans-serif",
+    "font": "Inter, system-ui, sans-serif",
     "principles": [
-      "Use the active site tokens: red for the primary action, black surfaces, white text and square action shapes.",
-      "Anton sets display headings, Barlow sets readable interface copy, and Share Tech Mono sets supporting numbers.",
-      "Keep decorative race typography away from long form labels and body copy. Preserve visible focus and clear input labels.",
-      "Website fixtures use local fictional data. Embedded training screens retain their service-owned identity and authorization.",
+      "Use the active site tokens: red for the primary action, black surfaces, white text and rounded app actions.",
+      "Anton sets app headings and Inter sets readable application copy. Barlow is the documentation reading face.",
+      "Keep condensed display typography away from long form labels and body copy. Preserve visible focus and clear input labels.",
+      "App specimens use local fictional data. Account screens retain their service-owned identity and authorization.",
       "The shared training inventory is a source reference. It does not claim that account-connected modules were executed in these previews."
     ]
   },
   "tokens": {
-    "Colors and surfaces": [
+    "App colors and surfaces": [
       {
-        "name": "--lsu-black",
+        "name": "background",
         "value": "#000000"
       },
       {
-        "name": "--lsu-band",
-        "value": "#050505"
-      },
-      {
-        "name": "--lsu-card",
+        "name": "surface",
         "value": "#0d0d0f"
       },
       {
-        "name": "--lsu-card-alt",
-        "value": "#111111"
-      },
-      {
-        "name": "--lsu-white",
+        "name": "text",
         "value": "#ffffff"
       },
       {
-        "name": "--lsu-dim-1",
-        "value": "rgba(255, 255, 255, .65)"
+        "name": "muted",
+        "value": "#b6b6bd"
       },
       {
-        "name": "--lsu-dim-2",
-        "value": "rgba(255, 255, 255, .55)"
-      },
-      {
-        "name": "--lsu-dim-3",
-        "value": "rgba(255, 255, 255, .4)"
-      },
-      {
-        "name": "--lsu-line",
-        "value": "rgba(255, 255, 255, .14)"
-      },
-      {
-        "name": "--lsu-line-soft",
-        "value": "rgba(255, 255, 255, .1)"
-      },
-      {
-        "name": "--lsu-line-faint",
-        "value": "rgba(255, 255, 255, .08)"
-      },
-      {
-        "name": "--lsu-red",
+        "name": "accent",
         "value": "#dd0f15"
       },
       {
-        "name": "--lsu-red-glow",
-        "value": "rgba(221, 15, 21, .5)"
+        "name": "accent_text",
+        "value": "#ffffff"
       },
       {
-        "name": "--lsu-seg-red",
-        "value": "#ff2a1a"
+        "name": "border",
+        "value": "#333338"
       }
     ],
-    "Typography": [
+    "App typography": [
       {
-        "name": "--lsu-display",
-        "value": "\"Anton\", sans-serif"
+        "name": "Headings",
+        "value": "Anton"
       },
       {
-        "name": "--lsu-body",
-        "value": "\"Barlow\", system-ui, sans-serif"
-      },
-      {
-        "name": "--lsu-mono",
-        "value": "\"Share Tech Mono\", monospace"
-      },
-      {
-        "name": "--lsu-seg",
-        "value": "\"DSEG7\", \"Share Tech Mono\", monospace"
+        "name": "Reading and controls",
+        "value": "Inter"
       }
     ],
-    "Layout": [
+    "App corners": [
       {
-        "name": "--lsu-pad-y",
-        "value": "clamp(72px, 9.3vw, 130px)"
+        "name": "Actions",
+        "value": "14px"
       },
       {
-        "name": "--lsu-pad-x",
-        "value": "clamp(18px, 5vw, 40px)"
-      },
-      {
-        "name": "--lsu-max",
-        "value": "1360px"
-      },
-      {
-        "name": "--lsu-head-gap",
-        "value": "clamp(36px, 4vw, 56px)"
+        "name": "Cards",
+        "value": "14px"
       }
     ]
   },
   "components": [
-    {
-      "id": "site/CoachingIndex",
-      "name": "CoachingIndex",
-      "source": "resources/components/CoachingIndex.stx",
-      "library": "Website",
-      "description": "",
-      "props": [],
-      "slots": [],
-      "events": [],
-      "dependencies": [],
-      "stories": []
-    },
-    {
-      "id": "site/CoachingModule",
-      "name": "CoachingModule",
-      "source": "resources/components/CoachingModule.stx",
-      "library": "Website",
-      "description": "",
-      "props": [],
-      "slots": [],
-      "events": [],
-      "dependencies": [
-        "CoachingOffers",
-        "CoachingPortal",
-        "TrainingNav"
-      ],
-      "stories": []
-    },
-    {
-      "id": "site/CoachingNav",
-      "name": "CoachingNav",
-      "source": "resources/components/CoachingNav.stx",
-      "library": "Website",
-      "description": "",
-      "props": [],
-      "slots": [],
-      "events": [],
-      "dependencies": [],
-      "stories": []
-    },
-    {
-      "id": "site/CoachingOffers",
-      "name": "CoachingOffers",
-      "source": "resources/components/CoachingOffers.stx",
-      "library": "Website",
-      "description": "",
-      "props": [
-        {
-          "name": "level",
-          "type": "string",
-          "description": "Optional. Heading level for a tier name: 2 under a page heading, 3 under a section."
-        }
-      ],
-      "slots": [],
-      "events": [],
-      "dependencies": [],
-      "stories": []
-    },
-    {
-      "id": "site/CoachingPortal",
-      "name": "CoachingPortal",
-      "source": "resources/components/CoachingPortal.stx",
-      "library": "Website",
-      "description": "",
-      "props": [],
-      "slots": [],
-      "events": [],
-      "dependencies": [],
-      "stories": []
-    },
-    {
-      "id": "site/LiveBoard",
-      "name": "LiveBoard",
-      "source": "resources/components/LiveBoard.stx",
-      "library": "Website",
-      "description": "",
-      "props": [
-        {
-          "name": "archived",
-          "type": "string",
-          "description": "Optional. Seasons the page already carries a written archive section for, as years: `archived=\"2025,2026\"`."
-        }
-      ],
-      "slots": [],
-      "events": [],
-      "dependencies": [],
-      "stories": []
-    },
-    {
-      "id": "site/RaceEntryDialog",
-      "name": "RaceEntryDialog",
-      "source": "resources/components/RaceEntryDialog.stx",
-      "library": "Website",
-      "description": "",
-      "props": [
-        {
-          "name": "current",
-          "type": "string",
-          "description": "Optional. The canonical path of the page this window is rendering on."
-        }
-      ],
-      "slots": [],
-      "events": [],
-      "dependencies": [
-        "RacePortal"
-      ],
-      "stories": []
-    },
-    {
-      "id": "site/RacePortal",
-      "name": "RacePortal",
-      "source": "resources/components/RacePortal.stx",
-      "library": "Website",
-      "description": "",
-      "props": [],
-      "slots": [],
-      "events": [],
-      "dependencies": [],
-      "stories": []
-    },
-    {
-      "id": "site/SiteConsent",
-      "name": "SiteConsent",
-      "source": "resources/components/SiteConsent.stx",
-      "library": "Website",
-      "description": "",
-      "props": [],
-      "slots": [],
-      "events": [],
-      "dependencies": [],
-      "stories": []
-    },
-    {
-      "id": "site/SiteFooter",
-      "name": "SiteFooter",
-      "source": "resources/components/SiteFooter.stx",
-      "library": "Website",
-      "description": "",
-      "props": [
-        {
-          "name": "current",
-          "type": "string }",
-          "description": "Optional."
-        },
-        {
-          "name": "nav",
-          "type": "a section marks its own subtree. */",
-          "description": "Required."
-        }
-      ],
-      "slots": [],
-      "events": [],
-      "dependencies": [],
-      "stories": []
-    },
-    {
-      "id": "site/SiteNav",
-      "name": "SiteNav",
-      "source": "resources/components/SiteNav.stx",
-      "library": "Website",
-      "description": "The production website navigation with an active section and an accessible mobile menu.",
-      "props": [
-        {
-          "name": "current",
-          "type": "string",
-          "description": "Canonical path used to mark the current section."
-        }
-      ],
-      "slots": [],
-      "events": [],
-      "dependencies": [],
-      "stories": [
-        "stories-0-navigation-4b24178d"
-      ]
-    },
-    {
-      "id": "site/TrainingNav",
-      "name": "TrainingNav",
-      "source": "resources/components/TrainingNav.stx",
-      "library": "Website",
-      "description": "",
-      "props": [],
-      "slots": [],
-      "events": [],
-      "dependencies": [],
-      "stories": []
-    },
     {
       "id": "training/AccountAction",
       "name": "AccountAction",
@@ -2331,111 +2100,6 @@
       "id": "training/LocationSwitch",
       "name": "LocationSwitch",
       "source": "pantry/@hq/platform/source/resources/components/LocationSwitch.stx",
-      "library": "Shared training",
-      "description": "",
-      "props": [],
-      "slots": [],
-      "events": [],
-      "dependencies": [],
-      "stories": []
-    },
-    {
-      "id": "training/marketing-app-qr",
-      "name": "marketing-app-qr",
-      "source": "pantry/@hq/platform/source/resources/components/marketing-app-qr.stx",
-      "library": "Shared training",
-      "description": "",
-      "props": [],
-      "slots": [],
-      "events": [],
-      "dependencies": [
-        "Icon",
-        "StxLink"
-      ],
-      "stories": []
-    },
-    {
-      "id": "training/marketing-compare",
-      "name": "marketing-compare",
-      "source": "pantry/@hq/platform/source/resources/components/marketing-compare.stx",
-      "library": "Shared training",
-      "description": "",
-      "props": [],
-      "slots": [],
-      "events": [],
-      "dependencies": [
-        "Icon"
-      ],
-      "stories": []
-    },
-    {
-      "id": "training/marketing-cta",
-      "name": "marketing-cta",
-      "source": "pantry/@hq/platform/source/resources/components/marketing-cta.stx",
-      "library": "Shared training",
-      "description": "",
-      "props": [],
-      "slots": [],
-      "events": [],
-      "dependencies": [
-        "Icon",
-        "StxLink"
-      ],
-      "stories": []
-    },
-    {
-      "id": "training/marketing-detail",
-      "name": "marketing-detail",
-      "source": "pantry/@hq/platform/source/resources/components/marketing-detail.stx",
-      "library": "Shared training",
-      "description": "",
-      "props": [],
-      "slots": [],
-      "events": [],
-      "dependencies": [
-        "Icon",
-        "Image"
-      ],
-      "stories": []
-    },
-    {
-      "id": "training/marketing-footer",
-      "name": "marketing-footer",
-      "source": "pantry/@hq/platform/source/resources/components/marketing-footer.stx",
-      "library": "Shared training",
-      "description": "",
-      "props": [],
-      "slots": [],
-      "events": [],
-      "dependencies": [
-        "HQLogo",
-        "Icon",
-        "LanguageSwitch",
-        "StxLink"
-      ],
-      "stories": []
-    },
-    {
-      "id": "training/marketing-nav",
-      "name": "marketing-nav",
-      "source": "pantry/@hq/platform/source/resources/components/marketing-nav.stx",
-      "library": "Shared training",
-      "description": "",
-      "props": [],
-      "slots": [],
-      "events": [],
-      "dependencies": [
-        "HQLogo",
-        "Icon",
-        "StxLink",
-        "ThemeSwitch"
-      ],
-      "stories": []
-    },
-    {
-      "id": "training/marketing-styles",
-      "name": "marketing-styles",
-      "source": "pantry/@hq/platform/source/resources/components/marketing-styles.stx",
       "library": "Shared training",
       "description": "",
       "props": [],
@@ -11542,82 +11206,15 @@
   ],
   "stories": [
     {
-      "id": "stories-0-actions-c522a646",
-      "title": "Actions and entry controls",
-      "group": "Actions",
-      "source": "resources/style-guide/actions.story.stx",
+      "id": "stories-0-training-d24b203b",
+      "title": "Training hierarchy and feedback",
+      "group": "Application patterns",
+      "source": "resources/style-guide/training.story.stx",
       "variants": [
         {
-          "id": "primary-and-secondary",
-          "title": "Primary and secondary",
-          "source": "<section class=\"space-y-6\">\n      <h2 class=\"text-3xl font-[family-name:var(--lsu-display)]\">READY FOR THE NEXT YARD?</h2>\n      <p>Use one red action to show the next step. Secondary actions remain quiet.</p>\n      <div class=\"flex flex-wrap gap-4\"><button type=\"button\" class=\"btn\" @click=\"guideSaved.set(true)\">Save example entry</button><a href=\"/world-series\" class=\"btn-outline\">View race details</a></div>\n      <p role=\"status\" :text=\"guideSaved ? 'Example entry saved locally.' : 'No account or payment is used in this example.'\"></p>\n    </section>"
-        },
-        {
-          "id": "long-labels-and-disabled-actions",
-          "title": "Long labels and disabled actions",
-          "source": "<section class=\"space-y-6\">\n      <div class=\"flex flex-wrap gap-4\"><button type=\"button\" class=\"btn btn-lg\">Request a World Series race entry</button><button type=\"button\" class=\"disabled:opacity-45 disabled:cursor-not-allowed btn\" disabled aria-disabled=\"true\">Entry unavailable</button></div>\n      <p>Tab through enabled controls. Labels wrap on a narrow viewport.</p>\n    </section>"
-        }
-      ]
-    },
-    {
-      "id": "stories-0-cards-960b960b",
-      "title": "Race cards, numbers and empty states",
-      "group": "Data presentation",
-      "source": "resources/style-guide/cards.story.stx",
-      "variants": [
-        {
-          "id": "race-summary",
-          "title": "Race summary",
-          "source": "<section class=\"space-y-6\">\n      <p class=\"kicker\">Sample race</p><h2 class=\"text-4xl font-[family-name:var(--lsu-display)]\">ONE MORE YARD</h2>\n      <div class=\"statgrid\"><div><p class=\"stat-v\">24</p><p class=\"stat-l\">Yards</p></div><div><p class=\"stat-v\">160.9</p><p class=\"stat-l\">Kilometres</p></div><div><p class=\"stat-v\">1</p><p class=\"stat-l\">Runner remains</p></div></div>\n      <article class=\"card\"><p class=\"kicker-sm\">Example result</p><h3 class=\"card-name\">SAMPLE RUNNER</h3><p class=\"card-body\">Steady pacing, one loop at a time. Names and results shown here are fictional.</p></article>\n    </section>"
-        },
-        {
-          "id": "empty-and-error-states",
-          "title": "Empty and error states",
-          "source": "<section class=\"space-y-6\">\n      <div class=\"space-y-3 coach-empty\"><h2 class=\"font-[family-name:var(--lsu-display)]\">NO ENTRIES YET</h2><p>Your confirmed races will appear here.</p><a class=\"btn\" href=\"/world-series\">Explore races</a></div>\n      <div class=\"space-y-3 coach-empty\" role=\"alert\"><h2 class=\"font-[family-name:var(--lsu-display)]\">RESULTS UNAVAILABLE</h2><p>Try again to load the latest race results.</p><button class=\"btn-outline\" type=\"button\">Try again</button></div>\n    </section>"
-        }
-      ]
-    },
-    {
-      "id": "stories-0-forms-c300c5c8",
-      "title": "Forms and account feedback",
-      "group": "Inputs",
-      "source": "resources/style-guide/forms.story.stx",
-      "variants": [
-        {
-          "id": "profile-form",
-          "title": "Profile form",
-          "source": "<section class=\"lsu-scope-profile profile-page\">\n      <div class=\"login-card\">\n        <h2 class=\"font-[family-name:var(--lsu-display)]\">RUNNER DETAILS</h2>\n        <form class=\"space-y-4 profile-form\" @submit.prevent=\"guideSaveProfile()\">\n          <label class=\"block\" for=\"guide-runner\">Runner name<input class=\"block w-full\" id=\"guide-runner\" :model=\"guideName\" autocomplete=\"off\"></label>\n          <label class=\"block\" for=\"guide-country\">Country<select class=\"block w-full\" id=\"guide-country\"><option>Philippines</option><option>United Kingdom</option><option>United States</option></select></label>\n          <button class=\"btn\" type=\"submit\">Save example</button>\n          <p role=\"status\" :text=\"guideSaved ? 'Example profile saved locally.' : 'This form uses fictional local data.'\"></p>\n        </form>\n      </div>\n    </section>"
-        },
-        {
-          "id": "error-and-locked-field",
-          "title": "Error and locked field",
-          "source": "<section class=\"lsu-scope-profile profile-page\"><div class=\"login-card\"><form class=\"space-y-4 profile-form\" @submit.prevent=\"guideReviewProfile()\">\n      <label class=\"block\" for=\"guide-email\">Email address<input class=\"block w-full\" id=\"guide-email\" value=\"runner\" aria-invalid=\"true\" aria-describedby=\"guide-email-error\"></label>\n      <p id=\"guide-email-error\" class=\"error form-message\" role=\"alert\">Enter a complete email address.</p>\n      <label class=\"block\" for=\"guide-bib\">Bib number<input class=\"block w-full\" id=\"guide-bib\" value=\"Assigned after confirmation\" disabled></label>\n      <button type=\"submit\" class=\"btn\">Review details</button>\n    </form></div></section>"
-        }
-      ]
-    },
-    {
-      "id": "stories-0-navigation-4b24178d",
-      "title": "Website navigation",
-      "group": "Navigation",
-      "source": "resources/style-guide/navigation.story.stx",
-      "variants": [
-        {
-          "id": "world-series-section",
-          "title": "World Series section",
-          "source": "<div class=\"pt-[150px] min-h-[300px]\">\n      <SiteNav current=\"/world-series\" />\n      <p>The production navigation marks the current section. On a narrow viewport, use Menu to open the drawer and Escape to dismiss it.</p>\n    </div>"
-        }
-      ]
-    },
-    {
-      "id": "stories-0-typography-b74e0ea0",
-      "title": "Brand typography and surfaces",
-      "group": "Foundations",
-      "source": "resources/style-guide/typography.story.stx",
-      "variants": [
-        {
-          "id": "type-specimen",
-          "title": "Type specimen",
-          "source": "<section class=\"space-y-5\">\n      <p class=\"kicker\">Last Soul Ultra World Series</p>\n      <h1 class=\"leading-[1.05] text-[clamp(36px,7vw,72px)] font-[family-name:var(--lsu-display)]\">THE NEXT YARD IS YOURS</h1>\n      <p class=\"max-w-[60ch] text-lg font-[family-name:var(--lsu-body)]\">Barlow carries the details that a runner needs to read: race information, entry instructions and coaching feedback.</p>\n      <p class=\"text-xl font-[family-name:var(--lsu-mono)]\">YARD 024 / 160.9 KM</p>\n      <p class=\"text-4xl font-[family-name:var(--lsu-seg)]\" aria-label=\"Example clock, 45 minutes\">00:45:00</p>\n    </section>"
+          "id": "session-and-feedback-specimen",
+          "title": "Session and feedback specimen",
+          "source": "<section class=\"space-y-6\" style=\"font-family:Inter,system-ui,sans-serif;max-width:42rem\">\n      <p class=\"text-sm\">FICTIONAL TRAINING EXAMPLE</p>\n      <h2 style=\"font-family:Anton,sans-serif;font-weight:400;font-size:2rem\">EASY AEROBIC RUN</h2>\n      <p>30 minutes. Keep the effort comfortable and follow your coach's instructions.</p>\n      <label class=\"block\" for=\"guide-feedback\">How did it feel?</label>\n      <textarea id=\"guide-feedback\" :model=\"guideNote\" class=\"block p-3 w-full bg-transparent border rounded-xl\" rows=\"3\"></textarea>\n      <button type=\"button\" @click=\"guideSaved.set(true)\" style=\"min-height:44px;padding:12px 20px;background:#dd0f15;color:white;border-radius:14px\">Save local example</button>\n      <p role=\"status\" :text=\"guideSaved ? 'Example saved locally. No training account was changed.' : 'This specimen uses fictional local data.'\"></p>\n    </section>"
         }
       ]
     }

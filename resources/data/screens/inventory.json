@@ -47,7 +47,8 @@
       "group": "shared",
       "profile": "runner",
       "guide": "/getting-started",
-      "skip": "Shared platform marketing information; LSU supplies its own organization content."
+      "skip": "Shared platform marketing information; LSU supplies its own organization content.",
+      "documentation": false
     },
     {
       "id": "training-activity-review-id",
@@ -103,7 +104,8 @@
       "group": "shared",
       "profile": "runner",
       "guide": "/getting-started",
-      "skip": "Shared HQ app-download page; LSU distributes its branded app through its own app page and TestFlight."
+      "skip": "Shared HQ app-download page; LSU distributes its branded app through its own app page and TestFlight.",
+      "documentation": false
     },
     {
       "id": "training-auth-verify-email",
@@ -159,7 +161,8 @@
       "group": "shared",
       "profile": "runner",
       "guide": "/getting-started",
-      "skip": "Shared HQ editorial article; it is outside LSU coaching onboarding."
+      "skip": "Shared HQ editorial article; it is outside LSU coaching onboarding.",
+      "documentation": false
     },
     {
       "id": "training-blog",
@@ -171,7 +174,8 @@
       "group": "shared",
       "profile": "runner",
       "guide": "/getting-started",
-      "skip": "Shared HQ editorial listing; it is outside LSU coaching onboarding."
+      "skip": "Shared HQ editorial listing; it is outside LSU coaching onboarding.",
+      "documentation": false
     },
     {
       "id": "training-brands-slug-flow",
@@ -495,7 +499,8 @@
       "group": "shared",
       "profile": "runner",
       "guide": "/getting-started",
-      "skip": "Shared installation placeholder; a ready LSU deployment should not route readers here."
+      "skip": "Shared installation placeholder; a ready LSU deployment should not route readers here.",
+      "documentation": false
     },
     {
       "id": "training-compare-abc-fitness",
@@ -507,7 +512,8 @@
       "group": "shared",
       "profile": "runner",
       "guide": "/getting-started",
-      "skip": "Shared HQ product-marketing page; LSU has its own published race and coaching information."
+      "skip": "Shared HQ product-marketing page; LSU has its own published race and coaching information.",
+      "documentation": false
     },
     {
       "id": "training-compare-calm",
@@ -519,7 +525,8 @@
       "group": "shared",
       "profile": "runner",
       "guide": "/getting-started",
-      "skip": "Shared HQ product-marketing page; LSU has its own published race and coaching information."
+      "skip": "Shared HQ product-marketing page; LSU has its own published race and coaching information.",
+      "documentation": false
     },
     {
       "id": "training-compare-eversports",
@@ -531,7 +538,8 @@
       "group": "shared",
       "profile": "runner",
       "guide": "/getting-started",
-      "skip": "Shared HQ product-marketing page; LSU has its own published race and coaching information."
+      "skip": "Shared HQ product-marketing page; LSU has its own published race and coaching information.",
+      "documentation": false
     },
     {
       "id": "training-compare-final-surge",
@@ -543,7 +551,8 @@
       "group": "shared",
       "profile": "runner",
       "guide": "/getting-started",
-      "skip": "Shared HQ product-marketing page; LSU has its own published race and coaching information."
+      "skip": "Shared HQ product-marketing page; LSU has its own published race and coaching information.",
+      "documentation": false
     },
     {
       "id": "training-compare-fivepointfive",
@@ -555,7 +564,8 @@
       "group": "shared",
       "profile": "runner",
       "guide": "/getting-started",
-      "skip": "Shared HQ product-marketing page; LSU has its own published race and coaching information."
+      "skip": "Shared HQ product-marketing page; LSU has its own published race and coaching information.",
+      "documentation": false
     },
     {
       "id": "training-compare",
@@ -567,7 +577,8 @@
       "group": "shared",
       "profile": "runner",
       "guide": "/getting-started",
-      "skip": "Shared HQ product-marketing page; LSU has its own published race and coaching information."
+      "skip": "Shared HQ product-marketing page; LSU has its own published race and coaching information.",
+      "documentation": false
     },
     {
       "id": "training-compare-intervals-icu",
@@ -579,7 +590,8 @@
       "group": "shared",
       "profile": "runner",
       "guide": "/getting-started",
-      "skip": "Shared HQ product-marketing page; LSU has its own published race and coaching information."
+      "skip": "Shared HQ product-marketing page; LSU has its own published race and coaching information.",
+      "documentation": false
     },
     {
       "id": "training-compare-magicline",
@@ -591,7 +603,8 @@
       "group": "shared",
       "profile": "runner",
       "guide": "/getting-started",
-      "skip": "Shared HQ product-marketing page; LSU has its own published race and coaching information."
+      "skip": "Shared HQ product-marketing page; LSU has its own published race and coaching information.",
+      "documentation": false
     },
     {
       "id": "training-compare-mindbody",
@@ -603,7 +616,8 @@
       "group": "shared",
       "profile": "runner",
       "guide": "/getting-started",
-      "skip": "Shared HQ product-marketing page; LSU has its own published race and coaching information."
+      "skip": "Shared HQ product-marketing page; LSU has its own published race and coaching information.",
+      "documentation": false
     },
     {
       "id": "training-compare-pushpress",
@@ -615,7 +629,8 @@
       "group": "shared",
       "profile": "runner",
       "guide": "/getting-started",
-      "skip": "Shared HQ product-marketing page; LSU has its own published race and coaching information."
+      "skip": "Shared HQ product-marketing page; LSU has its own published race and coaching information.",
+      "documentation": false
     },
     {
       "id": "training-compare-trainerize",
@@ -627,7 +642,8 @@
       "group": "shared",
       "profile": "runner",
       "guide": "/getting-started",
-      "skip": "Shared HQ product-marketing page; LSU has its own published race and coaching information."
+      "skip": "Shared HQ product-marketing page; LSU has its own published race and coaching information.",
+      "documentation": false
     },
     {
       "id": "training-compare-trainingpeaks",
@@ -639,7 +655,8 @@
       "group": "shared",
       "profile": "runner",
       "guide": "/getting-started",
-      "skip": "Shared HQ product-marketing page; LSU has its own published race and coaching information."
+      "skip": "Shared HQ product-marketing page; LSU has its own published race and coaching information.",
+      "documentation": false
     },
     {
       "id": "training-compare-truecoach",
@@ -651,7 +668,8 @@
       "group": "shared",
       "profile": "runner",
       "guide": "/getting-started",
-      "skip": "Shared HQ product-marketing page; LSU has its own published race and coaching information."
+      "skip": "Shared HQ product-marketing page; LSU has its own published race and coaching information.",
+      "documentation": false
     },
     {
       "id": "training-compare-wodify",
@@ -663,7 +681,8 @@
       "group": "shared",
       "profile": "runner",
       "guide": "/getting-started",
-      "skip": "Shared HQ product-marketing page; LSU has its own published race and coaching information."
+      "skip": "Shared HQ product-marketing page; LSU has its own published race and coaching information.",
+      "documentation": false
     },
     {
       "id": "training-compare-zen-planner",
@@ -675,7 +694,8 @@
       "group": "shared",
       "profile": "runner",
       "guide": "/getting-started",
-      "skip": "Shared HQ product-marketing page; LSU has its own published race and coaching information."
+      "skip": "Shared HQ product-marketing page; LSU has its own published race and coaching information.",
+      "documentation": false
     },
     {
       "id": "training-connect-app",
@@ -803,7 +823,8 @@
       "group": "shared",
       "profile": "runner",
       "guide": "/getting-started",
-      "skip": "Shared HQ product-marketing page; LSU has its own published race and coaching information."
+      "skip": "Shared HQ product-marketing page; LSU has its own published race and coaching information.",
+      "documentation": false
     },
     {
       "id": "training-features-coaching-workspace",
@@ -815,7 +836,8 @@
       "group": "shared",
       "profile": "runner",
       "guide": "/getting-started",
-      "skip": "Shared HQ product-marketing page; LSU has its own published race and coaching information."
+      "skip": "Shared HQ product-marketing page; LSU has its own published race and coaching information.",
+      "documentation": false
     },
     {
       "id": "training-features-health-data",
@@ -827,7 +849,8 @@
       "group": "shared",
       "profile": "runner",
       "guide": "/getting-started",
-      "skip": "Shared HQ product-marketing page; LSU has its own published race and coaching information."
+      "skip": "Shared HQ product-marketing page; LSU has its own published race and coaching information.",
+      "documentation": false
     },
     {
       "id": "training-features",
@@ -839,7 +862,8 @@
       "group": "shared",
       "profile": "runner",
       "guide": "/getting-started",
-      "skip": "Shared HQ product-marketing page; LSU has its own published race and coaching information."
+      "skip": "Shared HQ product-marketing page; LSU has its own published race and coaching information.",
+      "documentation": false
     },
     {
       "id": "training-features-membership-billing",
@@ -851,7 +875,8 @@
       "group": "shared",
       "profile": "runner",
       "guide": "/getting-started",
-      "skip": "Shared HQ product-marketing page; LSU has its own published race and coaching information."
+      "skip": "Shared HQ product-marketing page; LSU has its own published race and coaching information.",
+      "documentation": false
     },
     {
       "id": "training-features-performance-analytics",
@@ -863,7 +888,8 @@
       "group": "shared",
       "profile": "runner",
       "guide": "/getting-started",
-      "skip": "Shared HQ product-marketing page; LSU has its own published race and coaching information."
+      "skip": "Shared HQ product-marketing page; LSU has its own published race and coaching information.",
+      "documentation": false
     },
     {
       "id": "training-features-platform",
@@ -875,7 +901,8 @@
       "group": "shared",
       "profile": "runner",
       "guide": "/getting-started",
-      "skip": "Shared HQ product-marketing page; LSU has its own published race and coaching information."
+      "skip": "Shared HQ product-marketing page; LSU has its own published race and coaching information.",
+      "documentation": false
     },
     {
       "id": "training-features-staff-operations",
@@ -887,7 +914,8 @@
       "group": "shared",
       "profile": "runner",
       "guide": "/getting-started",
-      "skip": "Shared HQ product-marketing page; LSU has its own published race and coaching information."
+      "skip": "Shared HQ product-marketing page; LSU has its own published race and coaching information.",
+      "documentation": false
     },
     {
       "id": "training-fitness",
@@ -1116,7 +1144,8 @@
       "group": "shared",
       "profile": "runner",
       "guide": "/getting-started",
-      "skip": "Requires a specific published profile, organization or one-use sharing fixture; it is not an entry point in the LSU athlete flow."
+      "skip": "Requires a specific published profile, organization or one-use sharing fixture; it is not an entry point in the LSU athlete flow.",
+      "documentation": false
     },
     {
       "id": "training-join-slug",
@@ -1366,7 +1395,8 @@
       "group": "shared",
       "profile": "runner",
       "guide": "/roles",
-      "skip": "Shared platform directory; it does not describe LSU training entitlements."
+      "skip": "Shared platform directory; it does not describe LSU training entitlements.",
+      "documentation": false
     },
     {
       "id": "training-pricing",
@@ -1378,7 +1408,8 @@
       "group": "shared",
       "profile": "runner",
       "guide": "/getting-started",
-      "skip": "Shared HQ pricing; LSU offers are defined in its Store and coaching catalog."
+      "skip": "Shared HQ pricing; LSU offers are defined in its Store and coaching catalog.",
+      "documentation": false
     },
     {
       "id": "training-privacy",
@@ -1944,7 +1975,8 @@
       "group": "shared",
       "profile": "runner",
       "guide": "/getting-started",
-      "skip": "Shared HQ product-marketing page; LSU has its own published race and coaching information."
+      "skip": "Shared HQ product-marketing page; LSU has its own published race and coaching information.",
+      "documentation": false
     },
     {
       "id": "training-use-cases-clubs",
@@ -1956,7 +1988,8 @@
       "group": "shared",
       "profile": "runner",
       "guide": "/getting-started",
-      "skip": "Shared HQ product-marketing page; LSU has its own published race and coaching information."
+      "skip": "Shared HQ product-marketing page; LSU has its own published race and coaching information.",
+      "documentation": false
     },
     {
       "id": "training-use-cases-coaches",
@@ -1968,7 +2001,8 @@
       "group": "shared",
       "profile": "runner",
       "guide": "/getting-started",
-      "skip": "Shared HQ product-marketing page; LSU has its own published race and coaching information."
+      "skip": "Shared HQ product-marketing page; LSU has its own published race and coaching information.",
+      "documentation": false
     },
     {
       "id": "training-use-cases-gyms",
@@ -1980,7 +2014,8 @@
       "group": "shared",
       "profile": "runner",
       "guide": "/getting-started",
-      "skip": "Shared HQ product-marketing page; LSU has its own published race and coaching information."
+      "skip": "Shared HQ product-marketing page; LSU has its own published race and coaching information.",
+      "documentation": false
     },
     {
       "id": "training-use-cases",
@@ -1992,7 +2027,8 @@
       "group": "shared",
       "profile": "runner",
       "guide": "/getting-started",
-      "skip": "Shared HQ product-marketing page; LSU has its own published race and coaching information."
+      "skip": "Shared HQ product-marketing page; LSU has its own published race and coaching information.",
+      "documentation": false
     },
     {
       "id": "training-use-cases-studios",
@@ -2004,7 +2040,8 @@
       "group": "shared",
       "profile": "runner",
       "guide": "/getting-started",
-      "skip": "Shared HQ product-marketing page; LSU has its own published race and coaching information."
+      "skip": "Shared HQ product-marketing page; LSU has its own published race and coaching information.",
+      "documentation": false
     },
     {
       "id": "training-week",
@@ -2126,7 +2163,8 @@
       "group": "website",
       "profile": "preview",
       "guide": "/races",
-      "skip": "The 404 response is documented as an error state; the normal capture command requires a successful screen."
+      "skip": "The 404 response is documented as an error state; the normal capture command requires a successful screen.",
+      "documentation": false
     },
     {
       "id": "website-app-coaches",
@@ -2137,7 +2175,8 @@
       "source": "resources/views/app/coaches.stx",
       "group": "website",
       "profile": "preview",
-      "guide": "/races"
+      "guide": "/races",
+      "documentation": false
     },
     {
       "id": "website-app",
@@ -2148,7 +2187,8 @@
       "source": "resources/views/app.stx",
       "group": "website",
       "profile": "preview",
-      "guide": "/races"
+      "guide": "/races",
+      "documentation": false
     },
     {
       "id": "website-coaching-plans",
@@ -2159,7 +2199,8 @@
       "source": "resources/views/coaching/plans.stx",
       "group": "website",
       "profile": "preview",
-      "guide": "/races"
+      "guide": "/races",
+      "documentation": false
     },
     {
       "id": "website-coaching",
@@ -2170,7 +2211,8 @@
       "source": "resources/views/coaching.stx",
       "group": "website",
       "profile": "preview",
-      "guide": "/races"
+      "guide": "/races",
+      "documentation": false
     },
     {
       "id": "website-contact",
@@ -2181,7 +2223,8 @@
       "source": "resources/views/contact.stx",
       "group": "website",
       "profile": "preview",
-      "guide": "/races"
+      "guide": "/races",
+      "documentation": false
     },
     {
       "id": "website-faq",
@@ -2192,7 +2235,8 @@
       "source": "resources/views/faq.stx",
       "group": "website",
       "profile": "preview",
-      "guide": "/races"
+      "guide": "/races",
+      "documentation": false
     },
     {
       "id": "website-format",
@@ -2203,7 +2247,8 @@
       "source": "resources/views/format.stx",
       "group": "website",
       "profile": "preview",
-      "guide": "/races"
+      "guide": "/races",
+      "documentation": false
     },
     {
       "id": "website-imprint",
@@ -2214,7 +2259,8 @@
       "source": "resources/views/imprint.stx",
       "group": "website",
       "profile": "preview",
-      "guide": "/races"
+      "guide": "/races",
+      "documentation": false
     },
     {
       "id": "website-index",
@@ -2225,7 +2271,8 @@
       "source": "resources/views/index.stx",
       "group": "website",
       "profile": "preview",
-      "guide": "/races"
+      "guide": "/races",
+      "documentation": false
     },
     {
       "id": "website-lottery",
@@ -2236,7 +2283,8 @@
       "source": "resources/views/lottery.stx",
       "group": "website",
       "profile": "preview",
-      "guide": "/races"
+      "guide": "/races",
+      "documentation": false
     },
     {
       "id": "website-press",
@@ -2247,7 +2295,8 @@
       "source": "resources/views/press.stx",
       "group": "website",
       "profile": "preview",
-      "guide": "/races"
+      "guide": "/races",
+      "documentation": false
     },
     {
       "id": "website-privacy",
@@ -2258,7 +2307,8 @@
       "source": "resources/views/privacy.stx",
       "group": "website",
       "profile": "preview",
-      "guide": "/races"
+      "guide": "/races",
+      "documentation": false
     },
     {
       "id": "website-profile",
@@ -2269,7 +2319,8 @@
       "source": "resources/views/profile.stx",
       "group": "website",
       "profile": "preview",
-      "guide": "/races"
+      "guide": "/races",
+      "documentation": false
     },
     {
       "id": "website-results-last-soul-ultra-2025",
@@ -2280,7 +2331,8 @@
       "source": "resources/views/results/last-soul-ultra-2025.stx",
       "group": "website",
       "profile": "preview",
-      "guide": "/races"
+      "guide": "/races",
+      "documentation": false
     },
     {
       "id": "website-results-last-soul-ultra-2026",
@@ -2291,7 +2343,8 @@
       "source": "resources/views/results/last-soul-ultra-2026.stx",
       "group": "website",
       "profile": "preview",
-      "guide": "/races"
+      "guide": "/races",
+      "documentation": false
     },
     {
       "id": "website-results",
@@ -2302,7 +2355,8 @@
       "source": "resources/views/results.stx",
       "group": "website",
       "profile": "preview",
-      "guide": "/races"
+      "guide": "/races",
+      "documentation": false
     },
     {
       "id": "website-soul-races",
@@ -2313,7 +2367,8 @@
       "source": "resources/views/soul-races.stx",
       "group": "website",
       "profile": "preview",
-      "guide": "/races"
+      "guide": "/races",
+      "documentation": false
     },
     {
       "id": "website-sponsorship",
@@ -2324,7 +2379,8 @@
       "source": "resources/views/sponsorship.stx",
       "group": "website",
       "profile": "preview",
-      "guide": "/races"
+      "guide": "/races",
+      "documentation": false
     },
     {
       "id": "website-terms",
@@ -2335,7 +2391,8 @@
       "source": "resources/views/terms.stx",
       "group": "website",
       "profile": "preview",
-      "guide": "/races"
+      "guide": "/races",
+      "documentation": false
     },
     {
       "id": "website-world-series",
@@ -2346,7 +2403,8 @@
       "source": "resources/views/world-series.stx",
       "group": "website",
       "profile": "preview",
-      "guide": "/races"
+      "guide": "/races",
+      "documentation": false
     }
   ]
 }

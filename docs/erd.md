@@ -44,10 +44,8 @@ The self-reference `plan_drafts.parent_id → plan_drafts.id` records draft ance
 
 ## Scope and freshness
 
-This diagram is generated from the migration declarations in the pinned training kit, **1.0.4323**, source revision `0004ca6784db0c1f25a5f9db8b3752a8df65e66a`. It describes the expected schema in that source. It does not claim that a production database was inspected today or that every supporting table is included.
+This diagram is generated from the migration declarations in the pinned training kit, identified in the linked source manifest. It describes the expected schema in that source. It does not claim that a production database was inspected today or that every supporting table is included.
 
 The [source manifest](/diagrams/lsu-erd/manifest.json) records the pin and hashes of the migrations used. There are no account rows, passwords, health readings or conversations in the artifact. Permission rules still belong to the application: read [Roles and plan access](/roles) alongside the structural diagram.
-
-The earlier [29 October deployed-schema snapshot](/diagrams/lsu-erd-2026-10-29/index.html) remains available as a dated reference. Its 23-table scope includes participant messaging tables supplied outside the current app migration corpus. It predates weekly training blocks and should not be used to infer their structure.
 
 <div class="guide-next"><p>Want the process before the fields?</p><a href="/visual-guide#from-this-week-to-the-next">See the weekly training flow</a></div>

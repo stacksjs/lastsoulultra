@@ -7,7 +7,7 @@ description: Open planned sessions, record completed training and understand cal
 
 ## Open your sessions
 
-Open [Workouts](https://lsu.stacksjs.com/coaching/calendar) on the website. In the iPhone app, **Today** shows the day's session and **Calendar**, at the top left, shows the weeks around it. The **Workouts** tab is where you record a workout of your own and keep saved workouts. Sign in as a subscriber. Select a session to inspect its title, sport, date, planned duration, distance and instructions. Read any warm-up, main effort and cool-down steps before recording a result.
+Open [Workouts](https://training.lsu.stacksjs.com/calendar) on the website. In the iPhone app, **Today** shows the day's session and **Calendar**, at the top left, shows the weeks around it. The **Workouts** tab is where you record a workout of your own and keep saved workouts. Sign in as a subscriber. Select a session to inspect its title, sport, date, planned duration, distance and instructions. Read any warm-up, main effort and cool-down steps before recording a result.
 
 The calendar shows the training on your account: sessions from the plans you are signed up to, workouts you record or import. An account with no plan and no recorded training has an empty calendar.
 

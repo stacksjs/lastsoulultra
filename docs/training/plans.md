@@ -79,7 +79,7 @@ The documented preview setup uses Stripe's sandbox. Complimentary review access 
 
 ## Renewal and access
 
-Open **Me** → **Coaching accounts** and select the subscription, or use [billing and renewal](https://lsu.stacksjs.com/coaching/account). Read the status and date displayed. Where supported, cancel a future renewal or resume it before cancellation takes effect.
+Open **Me** → **Coaching accounts** and select the subscription, or use [billing and renewal](https://training.lsu.stacksjs.com/coaching/last-soul-ultra/account). Read the status and date displayed. Where supported, cancel a future renewal or resume it before cancellation takes effect.
 
 Payment problems can change access. Correct a payment method through the offered billing action and refresh after the provider confirms the change. If the account has complimentary access, provider billing actions may not be available.
 

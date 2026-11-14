@@ -7,7 +7,7 @@ description: Review health summaries, connect a device, understand data sharing 
 
 ## Open your health screen
 
-Open [Health](https://lsu.stacksjs.com/coaching/health) while signed in, or the **Health** tab in the iPhone app. The screen reads the health information available to your own account, such as sleep and heart-rate summaries. The metrics shown depend on connected sources, sync status and your permissions.
+Open [Health](https://training.lsu.stacksjs.com/metrics) while signed in, or the **Health** tab in the iPhone app. The screen reads the health information available to your own account, such as sleep and heart-rate summaries. The metrics shown depend on connected sources, sync status and your permissions.
 
 On iPhone the app can also read Apple Health. iOS asks whether Last Soul Ultra may read the workouts and readings you choose, and whether it may write finished workouts and mindful minutes back. You choose what to share in Apple's own sheet, you can change it later in iOS Settings, and declining leaves the rest of the app working. The website does not read Apple Health.
 

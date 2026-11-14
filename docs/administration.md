@@ -7,7 +7,7 @@ description: Manage LSU organization access, published experience settings and o
 
 ## Enter the LSU workspace
 
-Open [Administration](https://lsu.stacksjs.com/admin) and sign in with an LSU owner or administrator account. Use the account menu to enter the organization or staff workspace and select **Last Soul Ultra**. Confirm the organization name before changing anything. On first sign-in, read the policies and complete your own consent choices before continuing.
+Open [Administration](https://training.lsu.stacksjs.com/staff/experience) and sign in with an LSU owner or administrator account. Use the account menu to enter the organization or staff workspace and select **Last Soul Ultra**. Confirm the organization name before changing anything. On first sign-in, read the policies and complete your own consent choices before continuing.
 
 The Sam and Pawel review accounts are organization administrators. Inside Last Soul Ultra that is everything the owner can do except delete the organization. Among other things, such an account can change what the organization charges, issue refunds, alter staff and read payroll figures, so treat it as full access rather than as a limited review login. They grant nothing over any other organization.
 

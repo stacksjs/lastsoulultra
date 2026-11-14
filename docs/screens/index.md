@@ -1,13 +1,14 @@
 ---
 title: Screen atlas
-description: Find every documented LSU and shared-kit screen, understand its purpose and review the capture coverage.
+description: Find every documented LSU app and conditional shared-kit screen, understand its purpose and review the capture coverage.
 ---
 
 # Screen atlas
 
 Use this atlas when you know the screen you want to understand. Use [Getting started](/getting-started) for your first session and [Onboarding](/onboarding) for the complete first-run sequence. The atlas explains each screen's job and why it exists; the linked guides explain the surrounding workflow.
 
-The inventory accounts for **207 source templates**: **21 race-website templates** and **186 templates in the pinned training kit**. This counts template-backed screens, not every possible tab, dialog, record, translation or error state. The kit includes shared-platform screens beyond the LSU athlete journey. Their conditional or excluded status is explained rather than silently treated as reviewed.
+The published atlas explains **149 app source templates** in the pinned training kit. This counts template-backed screens, not every tab, dialog, record, translation or error state. Conditional app modules are identified explicitly. Race and marketing website templates remain in the internal maintenance inventory but are excluded from this app guide. The same application views supply the web, iOS and Android implementations.
+
 
 ## Choose a section
 
@@ -20,8 +21,7 @@ The inventory accounts for **207 source templates**: **21 race-website templates
 | [Messages and sharing screens](/screens/messages) | 7 template-backed screens |
 | [Coach screens](/screens/coach) | 19 template-backed screens |
 | [Organization screens](/screens/organization) | 20 template-backed screens |
-| [Shared and conditional screens](/screens/shared) | 69 template-backed screens |
-| [Race website screens](/screens/website) | 21 template-backed screens |
+| [Shared and conditional screens](/screens/shared) | 32 template-backed screens |
 
 ## Read a screen in context
 

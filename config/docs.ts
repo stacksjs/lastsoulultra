@@ -53,7 +53,7 @@ const docsTheme = {
 /** Shared by Buddy's docs server and the production BunPress build. */
 export default {
   title: 'Last Soul Ultra guide',
-  description: 'Race information, training, coaching and administration for Last Soul Ultra.',
+  description: 'The Last Soul Ultra web app, native apps, training, coaching and component integration.',
   lang: 'en',
   darkMode: 'dark',
   docsDir: './docs',
@@ -74,7 +74,7 @@ export default {
     { text: 'Guide', link: '/' },
     { text: 'Demo walkthrough', link: '/demo' },
     { text: 'Style Guide', link: '/style-guide/' },
-    { text: 'Open LSU', link: 'https://lsu.stacksjs.com' },
+    { text: 'Open app', link: 'https://training.lsu.stacksjs.com' },
   ],
   markdown: {
     title: 'Last Soul Ultra guide',
@@ -94,7 +94,7 @@ export default {
           { text: 'Onboarding', link: '/onboarding' },
           { text: 'Screen atlas', link: '/screens/' },
           { text: 'Visual guide', link: '/visual-guide' },
-          { text: 'Race information', link: '/races' },
+          { text: 'Web-component integration', link: '/integration' },
           { text: 'Your account', link: '/my-account' },
           { text: 'Roles and plan access', link: '/roles' },
         ] },

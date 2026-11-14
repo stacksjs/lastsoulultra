@@ -27,7 +27,7 @@ Establish your LSU identity. This installation disables HQ sign-in. Next: verifi
 
 Use the LSU account's credentials. Follow additional verification if prompted.
 
-Keep personal training separate from the shared preview gate and race-entry Profile. Next: required policy agreement, a due tour or the account's home.
+Keep personal training separate from the shared preview gate. Next: required policy agreement, a due tour or the account's home.
 
 ### 4. Email verification
 

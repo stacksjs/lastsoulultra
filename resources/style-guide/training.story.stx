@@ -1,0 +1,17 @@
+<script client>
+const guideSaved = state(false)
+const guideNote = state('Easy effort, steady breathing.')
+</script>
+<Story title="Training hierarchy and feedback" group="Application patterns">
+  <Variant title="Session and feedback specimen">
+    <section class="space-y-6" style="font-family:Inter,system-ui,sans-serif;max-width:42rem">
+      <p class="text-sm">FICTIONAL TRAINING EXAMPLE</p>
+      <h2 style="font-family:Anton,sans-serif;font-weight:400;font-size:2rem">EASY AEROBIC RUN</h2>
+      <p>30 minutes. Keep the effort comfortable and follow your coach's instructions.</p>
+      <label class="block" for="guide-feedback">How did it feel?</label>
+      <textarea id="guide-feedback" :model="guideNote" class="block p-3 w-full bg-transparent border rounded-xl" rows="3"></textarea>
+      <button type="button" @click="guideSaved.set(true)" style="min-height:44px;padding:12px 20px;background:#dd0f15;color:white;border-radius:14px">Save local example</button>
+      <p role="status" :text="guideSaved ? 'Example saved locally. No training account was changed.' : 'This specimen uses fictional local data.'"></p>
+    </section>
+  </Variant>
+</Story>

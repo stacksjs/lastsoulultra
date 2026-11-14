@@ -63,8 +63,8 @@ The trainer and coach accounts have coach profiles; the published sample belongs
 
 ## Start with the right workspace
 
-For training, open [Workouts](https://lsu.stacksjs.com/coaching/calendar) with Alex or Jamie. Compare a run with **Strength A** or **Strength B**, then inspect Progress, The method and Health. The sample club conversation is attached to Alex and the general demo administrator.
+For training, open [Workouts](https://training.lsu.stacksjs.com/calendar) with Alex or Jamie. Compare a run with **Strength A** or **Strength B**, then inspect Progress, The method and Health. The sample club conversation is attached to Alex and the general demo administrator.
 
-For authoring, use the demo coach and open the [coach workspace](https://lsu.stacksjs.com/coach) or [coach exercise library](https://lsu.stacksjs.com/coach/exercises). For management, use Sam or Pawel and open [Administration](https://lsu.stacksjs.com/admin), which opens the LSU Experience directly. Use the workspace menu for team, member and organization settings. Complete your own policy choices if prompted.
+For authoring, use the demo coach and open the [coach workspace](https://training.lsu.stacksjs.com/coaches/methods) or [coach exercise library](https://training.lsu.stacksjs.com/coaches/exercises). For management, use Sam or Pawel and open [Administration](https://training.lsu.stacksjs.com/staff/experience), which opens the LSU Experience directly. Use the workspace menu for team, member and organization settings. Complete your own policy choices if prompted.
 
-Use sign-out or a separate browser profile when changing accounts. Private windows in one browser can share the same session. The shared preview password unlocks the race site and docs; the email and personal password select your training account. See the [demo walkthrough](/demo) and [Your account](/my-account#switch-roles-safely).
+Use sign-out or a separate browser profile when changing accounts. Private windows in one browser can share the same session. The shared preview password unlocks this guide; the email and personal password select your training account. See the [demo walkthrough](/demo) and [Your account](/my-account#switch-roles-safely).

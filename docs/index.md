@@ -1,17 +1,17 @@
 ---
 title: Last Soul Ultra guide
-description: Find your way into LSU, understand weekly training and manage race or coaching access.
+description: Find your way into LSU, understand weekly training and manage your app and coaching access.
 ---
 
 # Last Soul Ultra guide
 
-Find your way into LSU, follow your training and understand what happens next. This guide covers the race-site preview and the independent training app.
+Find your way into LSU, follow your training and understand what happens next. This guide covers the LSU web app, its native iOS and Android apps, and the web components used to integrate the app into a host website. Race rules, results, entries and marketing website pages are outside this guide.
 
 ## Read this first
 
-The race website and this guide use a shared preview username and password. Your personal training account is separate, and race entry has its own Profile. [Getting started](/getting-started) explains which login to use.
+Your LSU account opens the web and native apps. This protected review guide can also require a shared preview password; that password is separate from your personal app account. [Getting started](/getting-started) explains which login to use.
 
-If you prefer a picture first, open the [Visual guide](/visual-guide) for the account map, weekly training flow, race-confirmation tasks and workout figures.
+If you prefer a picture first, open the [Visual guide](/visual-guide) for the app access map, weekly training flow and workout figures.
 
 ## Start with your role
 
@@ -19,7 +19,6 @@ If you prefer a picture first, open the [Visual guide](/visual-guide) for the ac
 - **Coach:** [Open your workspace](/coaches), review subscriber feedback and approve the next training block.
 - **Administrator:** [Manage the LSU organization](/administration), its members, Experience and published offers.
 - **Preview reviewer:** Use the [demo walkthrough](/demo) and [role map](/roles) to choose the right fictional account.
-- **Race entrant:** Read [Race information](/races) before applying or confirming a selected place.
 
 ## How training fits together
 

@@ -9,7 +9,7 @@ The [screen atlas](/screens/) is generated from an authored inventory. Each entr
 
 ## Inventory before images
 
-`resources/data/screens/inventory.json` accounts for the race website and the pinned training kit. The coverage audit fails when a source template appears without an entry, a source disappears, an id is duplicated or a screen lacks an explanation. Shared-platform, hardware and one-use-link screens have explicit scope notes.
+`resources/data/screens/inventory.json` maintains complete internal template coverage. Only owned app screens are published in the atlas. The coverage audit fails when a source template appears without an entry, a source disappears, an id is duplicated or a screen lacks an explanation. Shared-platform, hardware and one-use-link screens have explicit scope notes.
 
 ```sh
 bun scripts/sync-screen-guide.ts
@@ -22,11 +22,10 @@ The same check verifies the branded onboarding pictures against `native/onboardi
 
 Stacks' screen-documentation workflow reads an explicit capture configuration and uses Bun WebView. It captures selected screens at named viewports, isolates authentication profiles in separate owned processes, waits for readiness, masks configured private fields, and writes a JSON manifest, PNGs and a Markdown gallery.
 
-LSU declares two configurations, one for the training kit and one for the race website. Export the synthetic review credentials through your normal secret manager. Set `BUN_CHROME_PATH` if Chrome is not discoverable on the machine.
+The training configuration covers the app views and explicit onboarding states. Export the synthetic review credentials through your normal secret manager. Set `BUN_CHROME_PATH` if Chrome is not discoverable on the machine.
 
 ```sh
 bun run docs:screenshots:training --list
-bun run docs:screenshots:website --list
 bun run docs:screenshots:training
 bun run docs:screenshots:training --check
 ```

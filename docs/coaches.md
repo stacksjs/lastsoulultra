@@ -7,9 +7,9 @@ description: Maintain methods, review weekly training blocks and understand publ
 
 ## Enter the coach workspace
 
-Open the [coach workspace](https://lsu.stacksjs.com/coach) and sign in with your LSU coach account. In the iPhone app, use **Me** → **Coaching workspace** when offered. A coach profile and an organization role are separate capabilities: authoring a method does not automatically grant every LSU management permission.
+Open the [coach workspace](https://training.lsu.stacksjs.com/coaches/methods) and sign in with your LSU coach account. In the iPhone app, use **Me** → **Coaching workspace** when offered. A coach profile and an organization role are separate capabilities: authoring a method does not automatically grant every LSU management permission.
 
-The [exercise workspace](https://lsu.stacksjs.com/coach/exercises) holds built-in and custom exercises. The guide's [exercise index](/training/exercise-library) and [illustration catalog](/style-guide/illustrations) explain the supplied names and figures. [Subscriber training](https://lsu.stacksjs.com/coach/subscribers) shows the training your account is authorized to review.
+The [exercise workspace](https://training.lsu.stacksjs.com/coaches/exercises) holds built-in and custom exercises. The guide's [exercise index](/training/exercise-library) and [illustration catalog](/style-guide/illustrations) explain the supplied names and figures. [Subscriber training](https://training.lsu.stacksjs.com/coaches/subscribers) shows the training your account is authorized to review.
 
 ## Subscribers and the personal roster
 

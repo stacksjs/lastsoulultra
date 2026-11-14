@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class=""><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline' 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; img-src 'self' data:; font-src 'self' data:; connect-src 'none'; form-action 'none'; base-uri 'none'"><title>Last Soul Ultra: Actions and entry controls, Long labels and disabled actions, Default</title><link rel="stylesheet" href="./components.css"><style>:root{color-scheme:light dark}*{box-sizing:border-box}body{margin:0;padding:24px;background:#000000;color:#ffffff;font-family:"Barlow", system-ui, sans-serif}body>main{max-width:1100px;margin:auto}button,input,select,textarea{font:inherit}@media(max-width:480px){body{padding:16px}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}</style></head><body class=""><main aria-label="Actions and entry controls, Long labels and disabled actions, Default"><script data-stx-scoped data-stx-runtime src="./runtime-0232b28b1b33.js"></script>
+<html lang="en" class=""><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline' 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; img-src 'self' data:; font-src 'self' data:; connect-src 'none'; form-action 'none'; base-uri 'none'"><title>Last Soul Ultra: Training hierarchy and feedback, Session and feedback specimen, Default</title><link rel="stylesheet" href="./components.css"><style>:root{color-scheme:light dark}*{box-sizing:border-box}body{margin:0;padding:24px;background:#000000;color:#ffffff;font-family:Inter, system-ui, sans-serif}body>main{max-width:1100px;margin:auto}button,input,select,textarea{font:inherit}@media(max-width:480px){body{padding:16px}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}</style></head><body class=""><main aria-label="Training hierarchy and feedback, Session and feedback specimen, Default"><script data-stx-scoped data-stx-runtime src="./runtime-0232b28b1b33.js"></script>
 <script data-stx-scoped data-stx-run="always" data-stx-composables>;(function(){
 var __bundles = window.__stxComposableBundles || (window.__stxComposableBundles = {});
 if (__bundles["6c6e1cbb36c6"]) {  return; }
@@ -53,20 +53,26 @@ function toggleDark() {
 
 })();</script>
 
-<section class="space-y-6" data-stx="__stx_setup_1ah27wdzjt">
-      <div class="flex flex-wrap gap-4"><button type="button" class="btn btn-lg">Request a World Series race entry</button><button type="button" class="disabled:opacity-45 disabled:cursor-not-allowed btn" disabled aria-disabled="true">Entry unavailable</button></div>
-      <p>Tab through enabled controls. Labels wrap on a narrow viewport.</p>
+<section class="space-y-6" style="font-family:Inter,system-ui,sans-serif;max-width:42rem" data-stx="__stx_setup_2n9rpyjpcd">
+      <p class="text-sm">FICTIONAL TRAINING EXAMPLE</p>
+      <h2 style="font-family:Anton,sans-serif;font-weight:400;font-size:2rem">EASY AEROBIC RUN</h2>
+      <p>30 minutes. Keep the effort comfortable and follow your coach's instructions.</p>
+      <label class="block" for="guide-feedback">How did it feel?</label>
+      <textarea id="guide-feedback" :model="guideNote" class="block p-3 w-full bg-transparent border rounded-xl" rows="3"></textarea>
+      <button type="button" @click="guideSaved.set(true)" style="min-height:44px;padding:12px 20px;background:#dd0f15;color:white;border-radius:14px">Save local example</button>
+      <p role="status" :text="guideSaved ? 'Example saved locally. No training account was changed.' : 'This specimen uses fictional local data.'"></p>
     </section>
 
 
 <script data-stx-scoped>
-function __stx_setup_1ah27wdzjt() {
+function __stx_setup_2n9rpyjpcd() {
   const { batch, cachedQuery, clearServerData, computed, configureFetch, defineEmits, defineExpose, definePageMeta, defineProps, defineSlots, defineStore, derived, effect, flushKeptState, forgetKeptState, goBack, goForward, inject, invalidateRoute, isDerived, isSignal, keptState, memo, navigate, nextTick, onBeforeMount, onBeforeUnmount, onDestroy, onMount, onMounted, onUnmounted, peek, provide, reactive, ref, refDebounced, refresh, registerStoresClient, setKeptScope, setRouteParams, sharedRequest, state, untrack, useAsync, useBroadcastStream, useClickOutside, useColorMode, useCookie, useCounter, useDark, useDebounce, useDebounceFn, useDebouncedValue, useDocumentVisibility, useEventListener, useFetch, useFocus, useHead, useId, useInterval, useLocalStorage, useMediaQuery, useModel, useMutation, useNativeDesktop, useOptimistic, usePreferredContrast, usePreferredDark, usePreferredLight, usePreferredReducedMotion, useQuery, useReactiveProp, useRef, useRoute, useRouteParam, useRouteParams, useScrollLock, useSearchParams, useSeoMeta, useSessionStorage, useSlots, useStore, useThrottle, useThrottleFn, useTimeout, useTimeoutFn, useToggle, useWebSocket, watch, watchEffect, watchMultiple, withDefaults } = window.stx;
 // ── merged signal script #1 ──
 const guideSaved = state(false);
+const guideNote = state("Easy effort, steady breathing.");
 
-  return { guideSaved };
+  return { guideSaved, guideNote };
 }
-window.__stx_latestSetup=__stx_setup_1ah27wdzjt;
-if(window.stx)window.stx._latestSetup=__stx_setup_1ah27wdzjt;
+window.__stx_latestSetup=__stx_setup_2n9rpyjpcd;
+if(window.stx)window.stx._latestSetup=__stx_setup_2n9rpyjpcd;
 </script></main></body></html>

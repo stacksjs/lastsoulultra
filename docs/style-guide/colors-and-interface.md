@@ -5,7 +5,7 @@ description: LSU color swatches, wordmark, readable text and training interface 
 
 # Colors and interface
 
-The race site uses black surfaces, white reading text and a red accent. The clock has a brighter red, while the favicon uses its own orange mark. These colors have different jobs and should remain distinct.
+The LSU application uses black surfaces, white reading text and red actions. The app manifest defines its interface palette and rounded controls. The documentation shares the wordmark and reading contrast.
 
 ## Brand colors
 
@@ -16,7 +16,6 @@ The race site uses black surfaces, white reading text and a red accent. The cloc
 <figure class="sg-color"><div class="sg-swatch sg-card-alt"></div><figcaption><strong>Alternate surface</strong><code>#111111</code>A second dark surface.</figcaption></figure>
 <figure class="sg-color"><div class="sg-swatch sg-white"></div><figcaption><strong>Reading text</strong><code>#ffffff</code>Primary text on dark surfaces.</figcaption></figure>
 <figure class="sg-color"><div class="sg-swatch sg-red"></div><figcaption><strong>Brand accent</strong><code>#dd0f15</code>Emphasis, rules and primary actions.</figcaption></figure>
-<figure class="sg-color"><div class="sg-swatch sg-seg-red"></div><figcaption><strong>Clock digits</strong><code>#ff2a1a</code>The segmented race display.</figcaption></figure>
 <figure class="sg-color"><div class="sg-swatch sg-orange"></div><figcaption><strong>Favicon mark</strong><code>#f04800</code>The small square in the favicon.</figcaption></figure>
 </div></div>
 
@@ -32,7 +31,7 @@ Keep the supplied wordmark's proportions and leave clear space around it. The wh
 
 Use white for ordinary reading text on black. The brand red against black has about 4.15:1 contrast, so it needs care at small text sizes. White labels on the red action background provide a clearer small-text pairing. Reserve accent-only treatment for appropriate large type, borders and graphics.
 
-<div class="lsu-guide"><div class="sg-specimen"><p class="sg-label">ACTION AND FIELD SPECIMEN</p><p class="sg-body">Read the session instructions before you start.</p><div class="sg-links"><a class="sg-action" href="https://lsu.stacksjs.com/coaching/calendar">Open workouts</a><a class="sg-action sg-action-secondary" href="/training/workouts">Read the workout guide</a></div><label class="sg-field" for="sg-athlete">Athlete name, read-only example</label><input class="sg-input" id="sg-athlete" value="Alex Morgan, LSU Demo" readonly></div></div>
+<div class="lsu-guide"><div class="sg-specimen"><p class="sg-label">ACTION AND FIELD SPECIMEN</p><p class="sg-body">Read the session instructions before you start.</p><div class="sg-links"><a class="sg-action" href="https://training.lsu.stacksjs.com/calendar">Open workouts</a><a class="sg-action sg-action-secondary" href="/training/workouts">Read the workout guide</a></div><label class="sg-field" for="sg-athlete">Athlete name, read-only example</label><input class="sg-input" id="sg-athlete" value="Alex Morgan, LSU Demo" readonly></div></div>
 
 The links open real pages. The field is a read-only sample and does not update an account. Focus it with the keyboard to inspect the focus treatment.
 
@@ -44,6 +43,6 @@ Use a clear title, then the details needed to act. Keep the session's status and
 
 ## Space and responsive layout
 
-The site's horizontal gutters grow from 18 to 40 px, and its main content is capped at 1360 px. Section spacing grows from 72 to 130 px. The docs use a narrower reading column; these values describe the app rather than the documentation layout.
+The app adapts its navigation and content width to the device. Keep field labels, error explanations and actions visible at phone widths. The docs use a narrower reading column for longer explanations.
 
 Review the [typefaces](/style-guide/typography) and [illustration palettes](/style-guide/illustrations) at narrow widths as well as on desktop. Text should wrap, controls should remain readable and the page should not require horizontal scrolling.

@@ -7,7 +7,7 @@ description: Compare completed sessions and read the published summary of your m
 
 ## Review completed training
 
-Open [Progress](https://lsu.stacksjs.com/coaching/progress) on the website. In the iPhone app this summary is **Training progress**: open **Me** → **Coaching accounts**, choose your subscription, then **Training progress**. Compare assigned sessions with completed sessions across the training you currently have access to. Totals can include older sessions outside the calendar's visible range.
+Open [Progress](https://training.lsu.stacksjs.com/coaching/last-soul-ultra/progress) on the website. In the iPhone app this summary is **Training progress**: open **Me** → **Coaching accounts**, choose your subscription, then **Training progress**. Compare assigned sessions with completed sessions across the training you currently have access to. Totals can include older sessions outside the calendar's visible range.
 
 For example, a subscription with 10 assigned sessions and 7 recorded as complete can show 7 completions even when you are viewing only the current week in Calendar. Change the date range and confirm the saved session statuses before assuming a count is wrong.
 
@@ -17,7 +17,7 @@ A completion total describes recorded sessions. It is not a race result, a fitne
 
 ## Read your method
 
-Open [The method](https://lsu.stacksjs.com/coaching/library) on the website, or **Your methods** on your subscription's screen in the iPhone app. Review the author and the published summary of the training approach for your tier. A published summary explains the approach; the author's private methodology is not exposed here.
+Open [The method](https://training.lsu.stacksjs.com/coaching/last-soul-ultra/library) on the website, or **Your methods** on your subscription's screen in the iPhone app. Review the author and the published summary of the training approach for your tier. A published summary explains the approach; the author's private methodology is not exposed here.
 
 ## More than one tier
 

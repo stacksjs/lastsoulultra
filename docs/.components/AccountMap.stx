@@ -1,8 +1,8 @@
-<figure class="guide-figure" aria-label="Three separate kinds of LSU access">
+<figure class="guide-figure" aria-label="One LSU account across web, native and embedded app screens">
 <dl class="guide-accounts">
-<div><dt>Preview access</dt><dd><strong>Shared username and password</strong><span>Unlocks the race website and this guide.</span><a href="/getting-started#choose-the-right-sign-in">Enter the preview</a></dd></div>
-<div><dt>Training account</dt><dd><strong>Your LSU email and password</strong><span>Opens your training, messages and permitted workspaces.</span><a href="/my-account">Manage training access</a></dd></div>
-<div><dt>Race-entry account</dt><dd><strong>Your separate race Profile</strong><span>Holds race applications and confirmation tasks.</span><a href="/races#request-a-place">Request a race place</a></dd></div>
+<div><dt>Web app</dt><dd><strong>Your LSU email and password</strong><span>Your training, messages and workspaces, with permissions checked by LSU.</span><a href="/getting-started">Sign into the web app</a></dd></div>
+<div><dt>Native apps</dt><dd><strong>The same account, a session on each device</strong><span>Shared training records with native controls, recording and supported device services.</span><a href="/onboarding">Complete app onboarding</a></dd></div>
+<div><dt>Web component</dt><dd><strong>The LSU app inside a host page</strong><span>Authentication stays in the application. The host does not receive your password or session token.</span><a href="/integration">Understand the integration</a></dd></div>
 </dl>
-<figcaption>Signing into one does not sign you into the others. Buying training does not enter you in a race.</figcaption>
+<figcaption>The account is shared. Each device and embedded browser context still needs its own valid session.</figcaption>
 </figure>

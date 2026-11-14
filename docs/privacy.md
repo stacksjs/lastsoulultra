@@ -7,9 +7,9 @@ description: Understand who can access published information, training and share
 
 ## Public and private information
 
-Race information, results and published offers are meant to be browsed. Your training, health metrics, messages and billing actions require the appropriate personal account. The private preview adds a browser password in front of the race site and this guide.
+Published app offers are meant to be browsed. Your training, health metrics, messages and billing actions require the appropriate personal account. The private preview adds a browser password in front of this guide.
 
-Training data lives in Last Soul Ultra's own installation, stored in Germany. It has its own accounts, database and uploads, separate from the race entry service and from HQ.
+Training data lives in Last Soul Ultra's own installation, stored in Germany. It has its own accounts, database and uploads, separate from HQ.
 
 ## Organization access
 
@@ -27,4 +27,4 @@ LSU currently disables **Continue with HQ**. Its accounts and training history a
 
 Demo users and their training are fictional. Anyone with the same demo credentials can see that account's data, so do not add real health information, personal messages, payment details or wearable connections.
 
-The training app has its own [privacy policy](https://training.lsu.stacksjs.com/legal/lsu/privacy) and [terms](https://training.lsu.stacksjs.com/legal/lsu/terms); these are the documents you agree to on first sign-in. The race site's [Privacy](https://lsu.stacksjs.com/privacy), [Terms](https://lsu.stacksjs.com/terms) and [Imprint](https://lsu.stacksjs.com/imprint) (Impressum) cover the race site itself.
+The training app has its own [privacy policy](https://training.lsu.stacksjs.com/legal/lsu/privacy) and [terms](https://training.lsu.stacksjs.com/legal/lsu/terms); these are the documents you agree to on first sign-in.

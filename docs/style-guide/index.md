@@ -5,15 +5,15 @@ description: LSU typography, colors, interface specimens and the complete workou
 
 # Style Guide
 
-Use this reference to review how Last Soul Ultra looks across race information, training and account screens. The specimens use the font files, color tokens and artwork supplied with the app.
+Use this reference to review how Last Soul Ultra looks across training and account screens. The specimens use the font files, color tokens and artwork supplied with the app.
 
 ## Explore the visual system
 
-The [generated component guide](/style-guide/generated/) indexes every website component, the installed shared training components and the shared UI library. Its [foundations](/style-guide/generated/foundations) read the active production stylesheet, including LSU red, black surfaces and the shipped font files. Isolated examples cover actions, forms, status, race cards and typography. Reference-only components are documented without executing account-connected screens.
+The [generated component guide](/style-guide/generated/) indexes the installed app components and shared UI library. Its [foundations](/style-guide/generated/foundations) read the active production stylesheet, including LSU red, black surfaces and the shipped font files. A local training specimen illustrates readable hierarchy and feedback. Reference-only components are documented without executing account-connected screens.
 
 | Review | Open |
 | --- | --- |
-| Display type, reading text, labels and race-clock digits | [Typography](/style-guide/typography) |
+| Display type, reading text, labels and structured details | [Typography](/style-guide/typography) |
 | Brand colors, surfaces, wordmark and interface examples | [Colors and interface](/style-guide/colors-and-interface) |
 | Every supplied workout figure, with still and animated previews | [Workout illustrations](/style-guide/illustrations) |
 | Which figure belongs to a built-in exercise | [Exercise library](/training/exercise-library) |
@@ -26,7 +26,7 @@ The [generated component guide](/style-guide/generated/) indexes every website c
 <p class="sg-display">Train for the next start.</p>
 <p class="sg-body">Clear training instructions, a readable calendar and room for the details that matter.</p>
 <p class="sg-mono">NEXT SESSION · 06:30 · EASY AEROBIC RUN</p>
-<div class="sg-links"><a class="sg-action" href="https://lsu.stacksjs.com/coaching/calendar">Open your training</a><a class="sg-action sg-action-secondary" href="/style-guide/typography">Explore the typefaces</a></div>
+<div class="sg-links"><a class="sg-action" href="https://training.lsu.stacksjs.com/calendar">Open your training</a><a class="sg-action sg-action-secondary" href="/style-guide/typography">Explore the typefaces</a></div>
 </div>
 </div>
 
@@ -48,4 +48,4 @@ The training site and the iPhone app are the same training application, drawn in
 
 ## Staff and coach surfaces
 
-The [admin](https://lsu.stacksjs.com/admin) and [coach](https://lsu.stacksjs.com/coach) workspaces share the app's controls, form behavior, lists and grouped layouts. They use the published LSU palette and fonts: black page background, `#0d0d0f` panels, `#333338` separators, red `#dd0f15` actions, Anton headings and Inter body text for the training app. The race site and this guide use Barlow for reading text. Inputs and actions have at least 44 px touch targets. The workspace menu collapses on phones. A link below each workspace leads back to the protected [demo walkthrough](/demo).
+The [admin](https://training.lsu.stacksjs.com/staff/experience) and [coach](https://training.lsu.stacksjs.com/coaches/methods) workspaces share the app's controls, form behavior, lists and grouped layouts. They use the published LSU palette and fonts: black page background, `#0d0d0f` panels, `#333338` separators, red `#dd0f15` actions, Anton headings and Inter body text for the training app. This guide uses Barlow for reading text. Inputs and actions have at least 44 px touch targets. The workspace menu collapses on phones. A link below each workspace leads back to the protected [demo walkthrough](/demo).

@@ -43,6 +43,10 @@ for (const [file, expected] of Object.entries(diagramManifest.files)) {
     if (actual !== expected) errors.push(`Diagram source or rendered artifact changed without updating its verified manifest: ${file}`)
   }
 }
+// The published product guide is app-owned. Retain website drafts outside docs.
+for (const path of ['races/index.html', 'screens/website/index.html', 'diagrams/race-confirmation/index.html', 'diagrams/lsu-erd-2026-10-29/index.html']) {
+  if (await Bun.file(resolve(root, path)).exists()) errors.push(`Out-of-scope website material was published: ${path}`)
+}
 await scan(root)
 if (!brandedPages) errors.push('No branded BunPress pages were audited')
 const index = await Bun.file(resolve(root, 'search-index.json')).json()

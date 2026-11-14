@@ -5,7 +5,7 @@ description: Test card payments, authentication and checkout recovery in a dedic
 
 # Payment testing and error scenarios
 
-Use a dedicated throwaway buyer and a confirmed Stripe sandbox checkout. The shared review accounts already have complimentary coaching access; they are not payment fixtures. The separate race-entry service has its own payment configuration and records. A sandbox purchase in training does not test race-entry payment.
+Use a dedicated throwaway buyer and a confirmed Stripe sandbox checkout. The shared review accounts already have complimentary coaching access; they are not payment fixtures.
 
 ## Confirm the environment first
 
@@ -137,7 +137,7 @@ A separate phone-width browser check signed in as a dedicated synthetic buyer an
   <figcaption>A simulated checkout-start failure in the actual phone-width product screen. The buyer can correct the configuration issue before retrying.</figcaption>
 </figure>
 
-Regression tests also cover confirmation network failures, HTTP errors, malformed responses, pending payment, cancellation, verified access and stale screens. Race-entry tests cover the separate race-payment confirmation and recovery. A delayed confirmation must remain distinct from a failed request.
+Regression tests also cover confirmation network failures, HTTP errors, malformed responses, pending payment, cancellation, verified access and stale screens. A delayed confirmation must remain distinct from a failed request.
 
 The configured sandbox catalog uses Stripe’s `txcd_10103000`, **Software as a service (SaaS) - personal use**, following LSU’s operator-selected software classification. The code was verified through the [Stripe Tax Codes API](https://docs.stripe.com/api/tax_codes/retrieve). The older Strength for Ultra Runners demonstration is a draft; use the four published coaching offers for customer payment review.
 

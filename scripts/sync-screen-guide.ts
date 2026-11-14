@@ -14,15 +14,14 @@ const groups = {
   messages: ['Messages and sharing screens', 'Conversations, notifications and deliberate sharing choices. Confirm the participant and account before composing or publishing.'],
   coach: ['Coach screens', 'Authoring, athlete context and weekly review. A coach profile and the appropriate roster or method access are required. Read the [coach guide](/coaches) before editing or approving work.'],
   organization: ['Organization screens', 'Operational screens depend on organization permissions. Some tools belong to the shared platform and are useful only when LSU enables the relevant service. Read [Administration](/administration).'],
-  shared: ['Shared and conditional screens', 'The pinned kit includes routes outside the LSU athlete journey and screens requiring a particular published profile, hardware or one-use link. Each is accounted for here. An explained exclusion is not a claim of visual verification.'],
-  website: ['Race website screens', 'The protected race website explains the event and opens the separate race-entry service. A training login does not authenticate a race-entry Profile.'],
+  shared: ['Shared and conditional screens', 'Optional app modules and screens requiring a particular published profile, hardware or one-use link. Each is accounted for here. An explained exclusion is not a claim of visual verification.'],
 } as const
 const ids = new Set<string>()
 const sources = new Set<string>()
 for (const screen of inventory.screens) {
   if (ids.has(screen.id)) throw new Error(`Duplicate screen id ${screen.id}`)
   ids.add(screen.id)
-  if (!(screen.group in groups) || !screen.title || !screen.purpose || !screen.reason || !screen.guide || !screen.profile) throw new Error(`Incomplete screen explanation: ${screen.id}`)
+  if (!(screen.group in groups) && screen.group !== 'website' || !screen.title || !screen.purpose || !screen.reason || !screen.guide || !screen.profile) throw new Error(`Incomplete screen explanation: ${screen.id}`)
   await readFile(join(root, screen.source))
   sources.add(screen.source)
 }
@@ -31,28 +30,30 @@ for (const directory of ['resources/views', 'pantry/@hq/platform/source/resource
     if (!sources.has(`${directory}/${path}`)) throw new Error(`Undocumented UI template: ${directory}/${path}`)
   }
 }
+const published = inventory.screens.filter(screen => !('documentation' in screen) || screen.documentation !== false)
 const cell = (value: string): string => value.replaceAll('|', '\\|').replaceAll('\n', ' ')
 const pages = new Map<string, string>()
 for (const [group, [title, introduction]] of Object.entries(groups)) {
-  const screens = inventory.screens.filter(screen => screen.group === group)
+  const screens = published.filter(screen => screen.group === group)
   pages.set(`docs/screens/${group}.md`, `---\ntitle: ${title}\ndescription: The purpose, rationale, entry route and review context for each ${group} screen.\n---\n\n<!-- Generated from resources/data/screens/inventory.json by scripts/sync-screen-guide.ts. -->\n\n# ${title}\n\n${introduction}\n\n${screens.length} template-backed screens in this section. The source snapshot is HQ kit ${source.version}. Names and visibility can vary by account, language and enabled Experience.\n\n${screens.map(screen => `## ${screen.title}\n\n${screen.purpose}\n\n**Why this screen exists:** ${screen.reason}\n\n| Entry | Review context | Full guide |\n| --- | --- | --- |\n| \`${cell(screen.path)}\` | ${cell(screen.profile)} | [Read the guide](${screen.guide}) |\n\n${'skip' in screen ? `**Capture scope:** ${screen.skip}\n\n` : ''}${screen.path.includes('[') ? 'This is a route pattern. Open a real synthetic fixture from its parent list; do not type a placeholder id or publish a private sharing token.\n\n' : ''}`).join('')}[Return to the screen atlas](/screens/)\n`)
 }
 const index = `---
 title: Screen atlas
-description: Find every documented LSU and shared-kit screen, understand its purpose and review the capture coverage.
+description: Find every documented LSU app and conditional shared-kit screen, understand its purpose and review the capture coverage.
 ---
 
 # Screen atlas
 
 Use this atlas when you know the screen you want to understand. Use [Getting started](/getting-started) for your first session and [Onboarding](/onboarding) for the complete first-run sequence. The atlas explains each screen's job and why it exists; the linked guides explain the surrounding workflow.
 
-The inventory accounts for **${inventory.screens.length} source templates**: **${inventory.screens.filter(screen => screen.group === 'website').length} race-website templates** and **${inventory.screens.filter(screen => screen.group !== 'website').length} templates in the pinned training kit**. This counts template-backed screens, not every possible tab, dialog, record, translation or error state. The kit includes shared-platform screens beyond the LSU athlete journey. Their conditional or excluded status is explained rather than silently treated as reviewed.
+The published atlas explains **${published.length} app source templates** in the pinned training kit. This counts template-backed screens, not every tab, dialog, record, translation or error state. Conditional app modules are identified explicitly. Race and marketing website templates remain in the internal maintenance inventory but are excluded from this app guide. The same application views supply the web, iOS and Android implementations.
+
 
 ## Choose a section
 
 | Section | What it explains |
 | --- | --- |
-${Object.entries(groups).map(([group, [title]]) => `| [${title}](/screens/${group}) | ${inventory.screens.filter(screen => screen.group === group).length} template-backed screens |`).join('\n')}
+${Object.entries(groups).map(([group, [title]]) => `| [${title}](/screens/${group}) | ${published.filter(screen => screen.group === group).length} template-backed screens |`).join('\n')}
 
 ## Read a screen in context
 
@@ -89,4 +90,4 @@ for (const file of await readdir(join(root, 'docs/screens'))) {
   if (['automation.md', 'captures.md'].includes(file)) continue
   if (!pages.has(`docs/screens/${file}`)) throw new Error(`Unlisted screen reference: ${file}`)
 }
-console.log(`${check ? 'Verified' : 'Generated'} ${inventory.screens.length} documented UI templates and ${art.length} branded onboarding pictures.`)
+console.log(`${check ? 'Verified' : 'Generated'} ${published.length} published app templates (${inventory.screens.length} internally inventoried templates) and ${art.length} branded onboarding pictures.`)

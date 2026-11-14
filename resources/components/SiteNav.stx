@@ -38,7 +38,7 @@ function lsuCloseMenu() { lsuMenu.set(false) }
 <a href="/contact" class="lsu-scope-nav" data-stx-link @if(here('/contact')) aria-current="page" @endif>Contact &amp; FAQ</a>
 </div>
 <div class="lsu-scope-nav nav-end">
-<a href="/profile" class="lsu-scope-nav nav-profile" data-stx-link @if(here('/profile')) aria-current="page" @endif>Profile</a>
+<a href="/profile?auth=login" class="lsu-scope-nav nav-account" data-stx-link aria-label="Account, sign in or sign up" title="Sign in or sign up" @if(here('/profile')) aria-current="page" @endif><i aria-hidden="true" class="i-hugeicons-user-circle"></i></a>
 <a href="/world-series" class="lsu-scope-nav nav-cta" data-apply data-view-href="/profile" data-view-label="View entry">Request a race entry</a>
 <button class="burger lsu-scope-nav" data-burger aria-label="Menu" :aria-expanded="lsuMenu" @click="lsuToggleMenu()" aria-controls="nav-drawer">
 <span class="lsu-scope-nav">
@@ -64,7 +64,7 @@ function lsuCloseMenu() { lsuMenu.set(false) }
 <a href="/app" class="lsu-scope-nav" data-stx-link @if(here('/app')) aria-current="page" @endif>App</a>
 <a href="/coaching" class="lsu-scope-nav" data-stx-link @if(here('/coaching')) aria-current="page" @endif>Coaching</a>
 <a href="/contact" class="lsu-scope-nav" data-stx-link @if(here('/contact')) aria-current="page" @endif>Contact &amp; FAQ</a>
-<a href="/profile" class="lsu-scope-nav" data-stx-link @if(here('/profile')) aria-current="page" @endif>Profile</a>
+<a href="/profile?auth=login" class="lsu-scope-nav" data-stx-link @if(here('/profile')) aria-current="page" @endif><i aria-hidden="true" class="i-hugeicons-user-circle"></i> Account <span class="nav-account-hint">Sign in or sign up</span></a>
 </div>
 <a href="/world-series" class="drawer-cta lsu-scope-nav" data-apply data-view-href="/profile" data-view-label="View entry">Request a race entry</a>
 <div class="drawer-social lsu-scope-nav">

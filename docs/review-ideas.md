@@ -9,7 +9,7 @@ This page records product questions and useful next steps. The ideas below are p
 
 ## Clarifications made during this review
 
-The documentation now distinguishes the preview gate, training account and race-entry Profile; the iPhone navigation follows LSU's product configuration; and onboarding explains how role-specific questions, replay and setup differ from buying coaching or publishing a training week. Payment return checks use server state and distinguish a failed status request from a payment still processing.
+The documentation now focuses on the shared app account, separate preview gate and embedded application boundary; the iPhone navigation follows LSU's product configuration; and onboarding explains how role-specific questions, replay and setup differ from buying coaching or publishing a training week. Payment return checks use server state and distinguish a failed status request from a payment still processing.
 
 The screen inventory makes shared-platform routes visible without implying that every feature is enabled for LSU athletes. The screenshot workflow records failures and explained exclusions rather than silently publishing a login page as a successful account screen.
 

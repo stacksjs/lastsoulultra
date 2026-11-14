@@ -7,19 +7,15 @@ description: "Last Soul Ultra component guide. Production component reference fo
 
 # Last Soul Ultra component guide
 
-Production components and interface patterns for the World Series, race entries and training portal.
+Application components, training interfaces and shared controls for Last Soul Ultra.
 
-323 components, 5 isolated stories and 8 variants. Generated from production sources, with Last Soul Ultra branding.
+304 components, 1 isolated stories and 1 variants. Generated from production sources, with Last Soul Ultra branding.
 
 [Foundations, tokens and branding](/style-guide/generated/foundations)
 
 ## Patterns and live examples
 
-- [Actions and entry controls](/style-guide/generated/patterns/stories-0-actions-c522a646) (Actions, 2 variants)
-- [Race cards, numbers and empty states](/style-guide/generated/patterns/stories-0-cards-960b960b) (Data presentation, 2 variants)
-- [Forms and account feedback](/style-guide/generated/patterns/stories-0-forms-c300c5c8) (Inputs, 2 variants)
-- [Website navigation](/style-guide/generated/patterns/stories-0-navigation-4b24178d) (Navigation, 1 variants)
-- [Brand typography and surfaces](/style-guide/generated/patterns/stories-0-typography-b74e0ea0) (Foundations, 1 variants)
+- [Training hierarchy and feedback](/style-guide/generated/patterns/stories-0-training-d24b203b) (Application patterns, 1 variants)
 
 ## All components
 
@@ -27,18 +23,6 @@ Every configured component is indexed. Reference-only entries do not claim teste
 
 | Component | Library | Examples |
 | --- | --- | --- |
-| [CoachingIndex](/style-guide/generated/components/site/CoachingIndex) | Website | Reference only |
-| [CoachingModule](/style-guide/generated/components/site/CoachingModule) | Website | Reference only |
-| [CoachingNav](/style-guide/generated/components/site/CoachingNav) | Website | Reference only |
-| [CoachingOffers](/style-guide/generated/components/site/CoachingOffers) | Website | Reference only |
-| [CoachingPortal](/style-guide/generated/components/site/CoachingPortal) | Website | Reference only |
-| [LiveBoard](/style-guide/generated/components/site/LiveBoard) | Website | Reference only |
-| [RaceEntryDialog](/style-guide/generated/components/site/RaceEntryDialog) | Website | Reference only |
-| [RacePortal](/style-guide/generated/components/site/RacePortal) | Website | Reference only |
-| [SiteConsent](/style-guide/generated/components/site/SiteConsent) | Website | Reference only |
-| [SiteFooter](/style-guide/generated/components/site/SiteFooter) | Website | Reference only |
-| [SiteNav](/style-guide/generated/components/site/SiteNav) | Website | 1 fixture(s) |
-| [TrainingNav](/style-guide/generated/components/site/TrainingNav) | Website | Reference only |
 | [AccountAction](/style-guide/generated/components/training/AccountAction) | Shared training | Reference only |
 | [AccountHome](/style-guide/generated/components/training/AccountHome) | Shared training | Reference only |
 | [ActivityReview](/style-guide/generated/components/training/ActivityReview) | Shared training | Reference only |
@@ -127,13 +111,6 @@ Every configured component is indexed. Reference-only entries do not claim teste
 | [LinkedApps](/style-guide/generated/components/training/LinkedApps) | Shared training | Reference only |
 | [LocationMap](/style-guide/generated/components/training/LocationMap) | Shared training | Reference only |
 | [LocationSwitch](/style-guide/generated/components/training/LocationSwitch) | Shared training | Reference only |
-| [marketing-app-qr](/style-guide/generated/components/training/marketing-app-qr) | Shared training | Reference only |
-| [marketing-compare](/style-guide/generated/components/training/marketing-compare) | Shared training | Reference only |
-| [marketing-cta](/style-guide/generated/components/training/marketing-cta) | Shared training | Reference only |
-| [marketing-detail](/style-guide/generated/components/training/marketing-detail) | Shared training | Reference only |
-| [marketing-footer](/style-guide/generated/components/training/marketing-footer) | Shared training | Reference only |
-| [marketing-nav](/style-guide/generated/components/training/marketing-nav) | Shared training | Reference only |
-| [marketing-styles](/style-guide/generated/components/training/marketing-styles) | Shared training | Reference only |
 | [MCPConnect](/style-guide/generated/components/training/MCPConnect) | Shared training | Reference only |
 | [meter](/style-guide/generated/components/training/meter) | Shared training | Reference only |
 | [MetricHelp](/style-guide/generated/components/training/MetricHelp) | Shared training | Reference only |

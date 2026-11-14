@@ -17,7 +17,7 @@ The names and equipment below describe the built-in library. A coach can add exe
 
 ## Use the coach library
 
-Open [Coach workspace](https://lsu.stacksjs.com/coach/exercises) with a coach account. Search by name, muscle or equipment, or filter by category. Open an exercise to inspect its instructions and demonstration. Adding a custom exercise does not publish it as an LSU training method.
+Open [Coach workspace](https://training.lsu.stacksjs.com/coaches/exercises) with a coach account. Search by name, muscle or equipment, or filter by category. Open an exercise to inspect its instructions and demonstration. Adding a custom exercise does not publish it as an LSU training method.
 
 ## Strength (86)
 

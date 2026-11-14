@@ -1,13 +1,13 @@
 ---
 title: Your account and access
-description: Understand LSU sign-in, account settings, race accounts, subscription controls and role switching.
+description: Understand LSU sign-in, account settings, subscription controls and role switching.
 ---
 
 # Your account and access
 
-## Keep the accounts separate
+## Your LSU app account
 
-The shared preview password opens the race site and this guide. Your LSU training email and password open the training website and app. The race-entry Profile uses a third, separate account service. None of these sign-ins automatically authenticates the others.
+Your LSU email and password open the web and native training apps. An embedded app uses the same LSU authentication boundary. The shared preview password for this guide is separate from your personal account.
 
 LSU currently disables **Continue with HQ**. Use your LSU account even if you already use HQ. Matching email addresses do not establish a linked account or import history.
 
@@ -15,7 +15,7 @@ LSU currently disables **Continue with HQ**. Use your LSU account even if you al
 
 Open **Me** in the app, or [Settings](https://training.lsu.stacksjs.com/settings) on the training website. Review your name, units and time zone before checking scheduled dates. A session close to midnight can appear on a different date in another time zone.
 
-Your subscription has its own screen. Open **Me** → **Coaching accounts**, then choose the subscription, or use [billing and renewal](https://lsu.stacksjs.com/coaching/account). That screen contains subscription status and available billing actions. It is different from the general profile settings.
+Your subscription has its own screen. Open **Me** → **Coaching accounts**, then choose the subscription, or use [billing and renewal](https://training.lsu.stacksjs.com/coaching/last-soul-ultra/account). That screen contains subscription status and available billing actions. It is different from the general profile settings.
 
 For example, changing your time zone is a profile change. Stopping SOUL's next renewal is a subscription action.
 

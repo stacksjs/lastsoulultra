@@ -5,13 +5,13 @@ description: Review the private preview as a visitor, runner, coach and administ
 
 # Demo walkthrough
 
-This walkthrough and all demo credentials are protected by the same preview login as the race site. The seeded review training and conversations are fictional demonstration content. The authored twelve-week catalog is a separate set of records.
+This walkthrough and all demo credentials are protected by the shared preview login. The seeded review training and conversations are fictional demonstration content. The authored twelve-week catalog is a separate set of records.
 
 The [roles page](/roles) maps all twelve accounts and explains organization permissions versus training entitlements.
 
 ## Demo credentials
 
-Use [Training](https://lsu.stacksjs.com/coaching/calendar) for athlete and browsing accounts, [Administration](https://lsu.stacksjs.com/admin) for Sam and Pawel, and the [Coach workspace](https://lsu.stacksjs.com/coach) for the coach. The race-entry Profile has a separate account system.
+Use [Training](https://training.lsu.stacksjs.com/calendar) for athlete and browsing accounts, [Administration](https://training.lsu.stacksjs.com/staff/experience) for Sam and Pawel, and the [Coach workspace](https://training.lsu.stacksjs.com/coaches/methods) for the coach.
 
 <DemoCredentials :accounts="data.demoAccounts" />
 
@@ -21,13 +21,13 @@ The two real administrators, Chris Breuer and Pawel Dregan, sign in with their o
 
 ## 1. Check the preview gate
 
-Open the site in a private browser window. Confirm that it asks for the shared preview credentials. Open this guide in that same window and confirm it uses the same gate.
+Open this guide in a private browser window and confirm that it requires the shared preview credentials. Then open the app and use an LSU review account. These are separate access checks.
 
 ## 2. Browse as a visitor
 
-Sign in with the visitor account. Open Coaching and inspect the published offer. Confirm that private subscriber workouts are not available to a visitor without an enrollment.
+Sign in with the visitor account. Open the app Store and inspect the published offers. Confirm that private subscriber workouts are not available to a visitor without an enrollment.
 
-Then open the training app's [store](https://training.lsu.stacksjs.com/store). Distinguish the current twelve-week catalog packages from the fictional RUN/SOUL review tiers and the six older one-off demo plans under Pawel Dregan's coach profile. Read them, but do not buy or take one on a shared account: a plan you take lands on that account's calendar for every other reviewer. See [Plans and subscriptions](/training/plans#demo-plans-in-the-store).
+Then open the training app's [store](https://training.lsu.stacksjs.com/store). The four authored catalog packages are published offers. RUN/SOUL are complimentary review tiers. The six older one-off demo plans are draft records excluded from the customer Store; they are not offers a visitor should see. Do not buy or take a plan on a shared account: its effects are visible to every reviewer using that account. See [Plans and subscriptions](/training/plans#demo-plans-in-the-store).
 
 ## 3. Review an enrolled athlete
 
@@ -45,11 +45,11 @@ If you have the iPhone app, sign in there as Alex too. Check the five tabs, then
 
 ## 4. Review the coach
 
-Use a fresh session and the coach account. Open the [coach workspace](https://lsu.stacksjs.com/coach) and inspect the sample method and plan. Also open [Block reviews](https://training.lsu.stacksjs.com/coaches/block-reviews). A current catalog enrollment waits for feedback and coach approval before its next week reaches the calendar. The older seeded demo calendars do not exercise that release path, so use a dedicated test enrollment when reviewing it. Then open the [exercise library](/training/exercise-library) and [illustration catalog](/style-guide/illustrations). The demo plans do not prescribe every exercise in the reference. Keep demonstration methodology clearly identified as sample content.
+Use a fresh session and the coach account. Open the [coach workspace](https://training.lsu.stacksjs.com/coaches/methods) and inspect the sample method and plan. Also open [Block reviews](https://training.lsu.stacksjs.com/coaches/block-reviews). A current catalog enrollment waits for feedback and coach approval before its next week reaches the calendar. The older seeded demo calendars do not exercise that release path, so use a dedicated test enrollment when reviewing it. Then open the [exercise library](/training/exercise-library) and [illustration catalog](/style-guide/illustrations). The demo plans do not prescribe every exercise in the reference. Keep demonstration methodology clearly identified as sample content.
 
 ## 5. Review administration
 
-Open [Administration](https://lsu.stacksjs.com/admin) with Sam's or Pawel's administrator account. Complete your own policy choices if prompted. Administration opens the LSU Experience directly; verify that its settings and linked offers load. Use the workspace menu to reach the other management tools. Confirm that an athlete account cannot perform the same management action.
+Open [Administration](https://training.lsu.stacksjs.com/staff/experience) with Sam's or Pawel's administrator account. Complete your own policy choices if prompted. Administration opens the LSU Experience directly; verify that its settings and linked offers load. Use the workspace menu to reach the other management tools. Confirm that an athlete account cannot perform the same management action.
 
 Explore the [data model and ERD](/erd) to trace account permissions, subscriptions, workouts and feedback.
 
@@ -69,7 +69,7 @@ If a role boundary here does not matter to LSU, say so in your review notes. Whe
 
 Sample training access is not a paid order and carries no real payment-provider subscription. The review accounts already hold the tier with complimentary access, so there is nothing to buy in order to review training.
 
-On these shared review logins, do not enter a card, your own or a test one, and do not try to bill, refund or reverse a charge against a seeded record. The documented deployment uses a Stripe sandbox, but purchase testing still needs a dedicated throwaway account and confirmation that the target checkout is in test mode. Use that separate setup for test-card purchases, following [Payment testing and error scenarios](/payment-testing). Never apply those tests to the complimentary shared accounts or to the separate production race-entry service.
+On these shared review logins, do not enter a card, your own or a test one, and do not try to bill, refund or reverse a charge against a seeded record. The documented deployment uses a Stripe sandbox, but purchase testing still needs a dedicated throwaway account and confirmation that the target checkout is in test mode. Use that separate setup for test-card purchases, following [Payment testing and error scenarios](/payment-testing). Never apply those tests to the complimentary shared accounts.
 
 ## Review notes
 
@@ -79,4 +79,4 @@ Record the account role, page and observed behavior. Send feedback to the person
 
 ## Admin and coach workspaces
 
-[Administration](https://lsu.stacksjs.com/admin) opens LSU’s Experience settings directly for Sam and Pawel. [Coach workspace](https://lsu.stacksjs.com/coach) opens methods, with [Exercises](https://lsu.stacksjs.com/coach/exercises) and [Subscribers](https://lsu.stacksjs.com/coach/subscribers) in the workspace navigation. Both workspaces use the app’s controls and grouped layouts, with LSU’s black surfaces, red actions, Anton headings and Inter body text. The race site and this guide use Barlow. On a phone, open **Workspace menu** to reach the other tools and sign out. Links and saved changes stay in the LSU organization. The preview password also protects these entry pages.
+[Administration](https://training.lsu.stacksjs.com/staff/experience) opens LSU’s Experience settings directly for Sam and Pawel. [Coach workspace](https://training.lsu.stacksjs.com/coaches/methods) opens methods, with [Exercises](https://training.lsu.stacksjs.com/coaches/exercises) and [Subscribers](https://training.lsu.stacksjs.com/coaches/subscribers) in the workspace navigation. Both workspaces use the app’s controls and grouped layouts, with LSU’s black surfaces, red actions, Anton headings and Inter body text. This guide uses Barlow. On a phone, open **Workspace menu** to reach the other tools and sign out. Links and saved changes stay in the LSU organization. The preview password also protects these entry pages.

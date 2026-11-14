@@ -17,7 +17,8 @@ for (const face of faces) {
     expected.set(join(target, 'fonts', name), await readFile(source))
   }
 }
-expected.set(join(target, 'fonts.css'), `${faces.join('\n').replaceAll('/assets/lsu/fonts/', '/docs/style-guide/fonts/')}\n`)
+expected.set(join(target, 'fonts', 'inter-latin-wght-normal.woff2'), await readFile('pantry/@hq/platform/source/public/assets/brands/inter-latin-wght-normal.woff2'))
+expected.set(join(target, 'fonts.css'), `${faces.join('\n').replaceAll('/assets/lsu/fonts/', '/docs/style-guide/fonts/')}\n@font-face{font-family:Inter;font-style:normal;font-weight:100 900;font-display:swap;src:url(/docs/style-guide/fonts/inter-latin-wght-normal.woff2) format("woff2")}\n`)
 expected.set(join(target, 'tokens.css'), `.lsu-guide{${tokens}}\n`)
 expected.set(join(target, 'lsu-logo.svg'), await readFile('public/assets/lsu/images/lsu-logo.svg'))
 expected.set(join(target, 'lsu-social-card.png'), await readFile('public/press/logo/lsu-logo-tile.png'))
