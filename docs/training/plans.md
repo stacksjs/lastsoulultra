@@ -75,7 +75,7 @@ The demo catalog preserves plans a coach edits or removes. Deployment does not r
 
 Choose the offer and follow checkout. Confirm the final total and renewal terms before authorizing payment. Wait for the confirmed purchase or subscription to appear in LSU. A browser return or receipt identifier alone is not proof that payment succeeded.
 
-The documented preview setup uses Stripe's sandbox. Complimentary review access is separate from a sandbox purchase and has no charge attached. Use a dedicated test account and a confirmed sandbox setup for purchase testing, following the [demo walkthrough](/demo#7-do-not-test-payments). Do not enter real card details.
+The documented preview setup uses Stripe's sandbox. Complimentary review access is separate from a sandbox purchase and has no charge attached. Use a dedicated test account and a confirmed sandbox setup for purchase testing, following the [demo walkthrough](/demo#7-review-payment-testing-separately). Use the [sandbox test-card and error matrix](/payment-testing) for payment review. Do not enter real card details.
 
 ## Renewal and access
 

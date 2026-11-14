@@ -36,9 +36,9 @@ export interface CoachingModule {
 export const coachingModules: CoachingModule[] = [
   {
     slug: 'plans',
-    // Store, Workouts, Health, Messages, Me are the native app's tabs. The
-    // nav word matches them so one product does not greet you with two
-    // vocabularies; the page headings below stay in this site's voice.
+    // The public website names this module Store. The native product's
+    // bottom tabs and top/menu shortcuts are configured in native/product.json;
+    // they are not inferred from this website's module list.
     label: 'Store',
     title: 'What is open',
     summary: 'The tiers that are open, what each one covers and what it costs.',

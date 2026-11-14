@@ -63,11 +63,11 @@ Sign in as the demo front desk and confirm that scheduling changes, refunds and 
 
 If a role boundary here does not matter to LSU, say so in your review notes. Whether LSU needs all six roles is a fair question, and these five accounts are the evidence for answering it.
 
-## 7. Do not test payments
+## 7. Review payment testing separately
 
 Sample training access is not a paid order and carries no real payment-provider subscription. The review accounts already hold the tier with complimentary access, so there is nothing to buy in order to review training.
 
-Do not enter a card at all, your own or a test one, and do not try to bill, refund or reverse a charge against a seeded record. The documented deployment uses a Stripe sandbox, but purchase testing still needs a dedicated throwaway account and confirmation that the target checkout is in test mode. Use that separate setup for test-card purchases. Never apply those tests to the complimentary shared accounts or to the separate production race-entry service.
+Do not enter a card at all, your own or a test one, and do not try to bill, refund or reverse a charge against a seeded record. The documented deployment uses a Stripe sandbox, but purchase testing still needs a dedicated throwaway account and confirmation that the target checkout is in test mode. Use that separate setup for test-card purchases, following [Payment testing and error scenarios](/payment-testing). Never apply those tests to the complimentary shared accounts or to the separate production race-entry service.
 
 ## Review notes
 

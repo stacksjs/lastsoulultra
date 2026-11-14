@@ -11,6 +11,10 @@ Open the [coach workspace](https://lsu.stacksjs.com/coach) and sign in with your
 
 The [exercise workspace](https://lsu.stacksjs.com/coach/exercises) holds built-in and custom exercises. The guide's [exercise index](/training/exercise-library) and [illustration catalog](/style-guide/illustrations) explain the supplied names and figures. [Subscriber training](https://lsu.stacksjs.com/coach/subscribers) shows the training your account is authorized to review.
 
+## Subscribers and the personal roster
+
+A coaching-package subscription and a personal athlete-coach relationship are different records. A coach can have subscribers to review while their personal athlete roster is empty. The shared demo enrollments deliberately do not attach the runners as personal-roster athletes. Use **Subscribers** for their subscription training; do not assign a personal coach merely to make an empty roster look populated.
+
 ## Maintain a method
 
 Give the method a clear name and a useful public summary. Keep private instructions specific about structure, permitted changes and the information a runner should supply. A public summary explains the approach without exposing the private instructions.

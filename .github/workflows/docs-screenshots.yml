@@ -1,0 +1,58 @@
+name: Docs screenshots
+
+on:
+  workflow_dispatch:
+    inputs:
+      surface:
+        description: Synthetic UI inventory to capture
+        type: choice
+        options: [training, website]
+        default: training
+      only:
+        description: Optional comma-separated screen ids
+        default: ''
+
+permissions:
+  contents: read
+
+concurrency:
+  group: docs-screenshots-${{ inputs.surface }}
+  cancel-in-progress: false
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v7
+      - name: Set up Pantry and the pinned Bun
+        uses: pantry-pm/pantry/packages/action@624cd6674f8c5c2d4e4204c11ece62a00d7fac0a
+        with:
+          version: '0.11.184'
+          install: 'false'
+      - name: Install the committed dependencies and training sources
+        env:
+          PANTRY_REGISTRY_TOKEN: ${{ secrets.PANTRY_REGISTRY_TOKEN }}
+          PANTRY_ENV_DEPS: '0'
+        run: |
+          bun install --frozen-lockfile
+          pantry install --frozen-lockfile --ignore-scripts --quiet
+      - name: Capture synthetic review screens
+        env:
+          SITE_AUTH_USER: ${{ secrets.SITE_AUTH_USER }}
+          SITE_AUTH_PASSWORD: ${{ secrets.SITE_AUTH_PASSWORD }}
+          LSU_DEMO_ACCOUNTS_JSON: ${{ secrets.LSU_DEMO_ACCOUNTS_JSON }}
+          SURFACE: ${{ inputs.surface }}
+          ONLY: ${{ inputs.only }}
+        run: |
+          args=()
+          if [ -n "$ONLY" ]; then args+=(--only "$ONLY"); fi
+          bun --config=scripts/screenshots.bunfig.toml scripts/capture-screens.ts "$SURFACE" "${args[@]}"
+      - name: Save images and the complete result manifest
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: docs-screenshots-${{ inputs.surface }}-${{ github.sha }}
+          path: storage/runtime/docs-screen-captures/${{ inputs.surface }}/
+          retention-days: 7
+          if-no-files-found: warn

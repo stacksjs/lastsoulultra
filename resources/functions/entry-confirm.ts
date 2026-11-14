@@ -67,3 +67,33 @@ export function openCheckout(url: unknown): boolean {
 }
 
 export const wait = (ms: number): Promise<void> => new Promise(resolve => setTimeout(resolve, ms))
+
+export interface EntryPaymentOutcome {
+  status: 'paid' | 'failed' | 'pending' | 'unavailable' | 'abandoned'
+  message: string
+}
+
+/** Confirm server state after checkout; the return URL is never payment proof. */
+export async function confirmEntryPayment(options: {
+  refresh: () => Promise<string>
+  isCurrent?: () => boolean
+  delay?: () => Promise<void>
+  attempts?: number
+}): Promise<EntryPaymentOutcome> {
+  const attempts = options.attempts ?? 10
+  if (!Number.isInteger(attempts) || attempts < 1 || attempts > 30) throw new Error('Payment confirmation needs 1 to 30 attempts')
+  for (let attempt = 0; attempt < attempts; attempt++) {
+    if (options.isCurrent && !options.isCurrent()) return { status: 'abandoned', message: '' }
+    try {
+      const status = await options.refresh()
+      if (options.isCurrent && !options.isCurrent()) return { status: 'abandoned', message: '' }
+      if (status === 'paid') return { status: 'paid', message: 'Payment received. Thank you.' }
+      if (status === 'failed') return { status: 'failed', message: 'The payment did not go through. Check your payment details and try again.' }
+    }
+    catch {
+      return { status: 'unavailable', message: 'Your payment status could not be checked. Refresh to check it before trying to pay again.' }
+    }
+    if (attempt + 1 < attempts) await (options.delay ?? (() => wait(2000)))()
+  }
+  return { status: 'pending', message: 'Your payment is still being confirmed. Check your current status before trying to pay again.' }
+}

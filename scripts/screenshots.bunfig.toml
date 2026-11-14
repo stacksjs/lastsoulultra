@@ -1,0 +1,2 @@
+# Documentation automation runs independently of the application preloader.
+preload = []

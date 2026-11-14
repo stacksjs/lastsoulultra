@@ -70,7 +70,7 @@
     "build:assets": "bun scripts/build-site-assets.ts",
     "build:bundles": "bun scripts/externalize-page-bundles.ts",
     "audit:html": "bun scripts/audit-html.ts",
-    "audit:docs": "bun run docs:style-guide:check && bun scripts/sync-workout-art.ts --check && bun scripts/sync-style-guide-assets.ts --check && bun scripts/sync-training-erd.ts --check && bun scripts/audit-docs.ts",
+    "audit:docs": "bun run docs:style-guide:check && bun scripts/sync-workout-art.ts --check && bun scripts/sync-style-guide-assets.ts --check && bun scripts/sync-training-erd.ts --check && bun scripts/sync-screen-guide.ts --check && bun scripts/audit-docs.ts",
     "docs:demo": "bun scripts/prepare-demo-docs.ts",
     "native:prepare": "bun scripts/build-native.ts prepare",
     "native:ios": "bun scripts/build-native.ts ios",
@@ -84,7 +84,10 @@
     "build:docs": "bun scripts/docs.ts build",
     "docs:style-guide": "bun scripts/docs.ts generate",
     "docs:style-guide:check": "bun scripts/docs.ts check",
-    "docs:erd:source": "bun scripts/sync-training-erd.ts"
+    "docs:erd:source": "bun scripts/sync-training-erd.ts",
+    "docs:screenshots:training": "bun --config=scripts/screenshots.bunfig.toml scripts/capture-screens.ts training",
+    "docs:screenshots:website": "bun --config=scripts/screenshots.bunfig.toml scripts/capture-screens.ts website",
+    "docs:screens:check": "bun scripts/sync-screen-guide.ts --check"
   },
   "dependencies": {
     "@ts-maps/stx": "0.5.7",

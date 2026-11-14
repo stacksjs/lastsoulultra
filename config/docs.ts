@@ -91,6 +91,8 @@ export default {
         { text: 'Start here', items: [
           { text: 'Overview', link: '/' },
           { text: 'Getting started', link: '/getting-started' },
+          { text: 'Onboarding', link: '/onboarding' },
+          { text: 'Screen atlas', link: '/screens/' },
           { text: 'Visual guide', link: '/visual-guide' },
           { text: 'Race information', link: '/races' },
           { text: 'Your account', link: '/my-account' },
@@ -119,6 +121,8 @@ export default {
           { text: 'Data model and ERD', link: '/erd' },
           { text: 'Troubleshooting', link: '/troubleshooting' },
           { text: 'Demo walkthrough', link: '/demo' },
+          { text: 'Payment testing', link: '/payment-testing' },
+          { text: 'Review ideas', link: '/review-ideas' },
         ] },
       ],
     },

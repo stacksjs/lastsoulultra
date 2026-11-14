@@ -11,7 +11,7 @@ Open [Progress](https://lsu.stacksjs.com/coaching/progress) on the website. In t
 
 For example, a subscription with 10 assigned sessions and 7 recorded as complete can show 7 completions even when you are viewing only the current week in Calendar. Change the date range and confirm the saved session statuses before assuming a count is wrong.
 
-The app's **Progress** tab is a different screen. It charts all the training recorded on your account, including workouts from connected devices, not only the sessions your subscription assigned.
+The app's account-wide **Progress** screen, under **More** in the current LSU iPhone build, is a different screen. It charts all the training recorded on your account, including workouts from connected devices, not only the sessions your subscription assigned.
 
 A completion total describes recorded sessions. It is not a race result, a fitness diagnosis or a guarantee of readiness. If a completed session is missing, reopen it in Workouts and check its saved status and enrollment.
 

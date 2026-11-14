@@ -34,3 +34,9 @@
 .bp-doc .guide-diagram{display:block;width:100%;height:600px;margin:24px 0;border:1px solid #333338;background:#0d0d0f;border-radius:2px}
 @media(max-width:760px){.bp-doc ol.guide-flow{grid-template-columns:1fr;gap:20px}.bp-doc .guide-flow>li,.bp-doc .guide-flow>li:first-child{display:grid;grid-template-columns:32px 1fr;column-gap:14px;padding:0;border:0}.bp-doc .guide-flow>li::before{grid-row:1/3;margin:2px 0 0}.bp-doc .guide-flow>li>span{grid-column:2;margin-top:4px}.bp-doc .guide-accounts>div,.bp-doc .guide-model>div{grid-template-columns:1fr;gap:8px}.bp-doc ul.guide-tasks{grid-template-columns:1fr;gap:20px}.bp-doc .guide-figure{padding-block:20px}.bp-doc .guide-diagram{height:640px}}
 @media print{.bp-doc .guide-diagram{display:none}.bp-doc .guide-figure{break-inside:avoid}}
+
+.bp-doc .guide-tour-shots{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.bp-doc .guide-tour-shots img{width:100%;height:auto;border:1px solid #333338;border-radius:12px}
+.bp-doc .guide-tour-shots p{font-size:15px;line-height:1.55;color:#b6b6bd}
+.bp-doc .guide-tour-shots figcaption{grid-column:1/-1;margin-top:0}
+@media(max-width:600px){.bp-doc .guide-tour-shots{grid-template-columns:1fr}.bp-doc .guide-tour-shots img{max-width:320px;margin-inline:auto;display:block}}

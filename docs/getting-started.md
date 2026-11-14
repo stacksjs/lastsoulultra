@@ -33,7 +33,7 @@ The iPhone app is distributed through TestFlight to invited testers. Use the inv
 
 Read and agree to the LSU terms, privacy policy and Health & Safety information when prompted. Complete your own choices rather than copying another reviewer's consent.
 
-The welcome tour introduces the main screens and offers setup and connection options. Choose **Skip** to go to the app, or revisit it from **Settings** under **Take the tour again** (**Tour erneut starten** in German).
+The [onboarding guide](/onboarding) explains each screen, why it appears and what setup changes. The welcome tour introduces the main screens and offers setup and connection options. Choose **Skip** to go to the app, or revisit it from **Settings** under **Take the tour again** (**Tour erneut starten** in German).
 
 ## Find your way around
 
@@ -41,7 +41,7 @@ The race site's header contains Home, Format, World Series, Soul Races, Sponsors
 
 The training app has its own navigation. The published LSU navigation currently leads with **Store**, **Workouts**, **Health**, **Messages** and **Me**. Enabled sections and wording can change when LSU updates its Experience.
 
-On iPhone, the five bottom tabs are **Today**, **Workouts**, **Progress**, **Health** and **Me**. In German: **Heute**, **Workouts**, **Fortschritt**, **Gesundheit** and **Ich**. Store and Calendar are reached from the top controls. The Messages bubble shows unread conversations.
+In the current LSU iPhone build, the five bottom tabs are **Today**, **Week**, **Exercises**, **Backyard** and **Me**. **Health** is a top-bar shortcut, while **Progress** and **Workouts** are in the More menu. Store and Calendar are reached from the top controls. The Messages bubble shows unread conversations. The layout comes from LSU's product configuration, so it differs from the general HQ app.
 
 | You want to | Where to go |
 | --- | --- |
@@ -50,7 +50,7 @@ On iPhone, the five bottom tabs are **Today**, **Workouts**, **Progress**, **Hea
 | Find a subscription | **Me** → **Coaching accounts**, then choose it |
 | Send feedback about that method | **Training feedback** on the subscription screen, when enabled |
 | Compare assigned and finished sessions | **Training progress** on the subscription screen |
-| Chart all recorded training | The app's **Progress** tab |
+| Chart all recorded training | **More** → **Progress** in the LSU app |
 | Change profile details or time zone | **Me** or **Settings** |
 
 The general AI assistant and a subscription's feedback conversation serve different purposes. Use the subscription's feedback screen when giving the weekly feedback its next training block requires.

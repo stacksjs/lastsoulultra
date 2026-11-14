@@ -6,7 +6,7 @@ const rpTraining = moduleHref('calendar', coachingOrigin())
 </script>
 <script client>
 import { raceAccount, formValues } from '../functions/race-api'
-import { SIZES, entryDeadline, entryFee, entryTasks, openCheckout, placeToConfirm, profileReturnUrl, wait } from '../functions/entry-confirm'
+import { SIZES, confirmEntryPayment, entryDeadline, entryFee, entryTasks, openCheckout, placeToConfirm, profileReturnUrl } from '../functions/entry-confirm'
 import { closeDialog, dialogAround, onEntryLinks, showDialog } from '../functions/entry-dialog'
 const rp = raceAccount()
 const rpRoot = useRef('rpRoot')
@@ -185,17 +185,24 @@ async function rpPay() {
   catch (error) { rpNote(error.message || 'The payment page could not be opened', true); rpBusy.set(false) }
 }
 async function rpAfterPayment(result) {
-  if (result === 'cancelled') { rpNote('Payment cancelled. Nothing was charged; you can pay whenever you are ready.', true); return }
-  if (result !== 'success' || !rpPlace()) return
+  if (!rpPlace()) return
   if (rpPayStatus() === 'paid') { rpNote('Payment received. Thank you.'); return }
-  rpNote('Thank you. Confirming your payment…')
-  for (let attempt = 0; attempt < 10; attempt++) {
-    await wait(2000)
-    await rp.load()
-    if (rpPayStatus() === 'paid') { rpNote('Payment received.'); return }
-  }
-  rpNote('Your payment is still being confirmed. We will email you when it lands.')
+  if (result === 'cancelled') { rpNote('Checkout cancelled. Check your current payment status before trying again.', true); return }
+  if (result !== 'success') return
+  const entryId = rpPlace().entry.id
+  const isCurrent = () => rpSigned() && rpPlace()?.entry?.id === entryId
+  rpNote('Checking your payment status...')
+  const outcome = await confirmEntryPayment({
+    isCurrent,
+    refresh: async () => {
+      await rp.load()
+      if (rp.error()) throw new Error('Payment status is unavailable')
+      return rpPayStatus()
+    },
+  })
+  if (outcome.status !== 'abandoned' && isCurrent()) rpNote(outcome.message, ['failed', 'unavailable'].includes(outcome.status))
 }
+
 watch(() => rpPlace()?.entry?.id, () => {
   rpSigner.set([rpUser()?.first_name, rpUser()?.last_name].filter(Boolean).join(' '))
   rpLoadWaiver()
@@ -265,7 +272,7 @@ onDestroy(() => { rpAutosave.stop(); rpStopLinks() })
       <div class="confirm-head"><h3 id="confirm-title" :text="(rpPlaceConfirmed ? 'Your place is confirmed' : 'Confirm your place') + ': ' + rpPlace.event.name"></h3><p class="confirm-count" :text="rpTasks.done + ' of 3 done'"></p></div>
       <div class="confirm-bar" role="progressbar" aria-label="Tasks done" aria-valuemin="0" aria-valuemax="3" :aria-valuenow="rpTasks.done"><span :class="rpTasks.done > 0 ? 'on' : ''"></span><span :class="rpTasks.done > 1 ? 'on' : ''"></span><span :class="rpTasks.done > 2 ? 'on' : ''"></span></div>
       <p class="confirm-lead" :text="rpPlaceConfirmed ? 'Agreement signed, details saved, fee settled. See you on the start line.' : (rpPlace.entry.deadline_at ? 'Three things to do by ' + entryDeadline(rpPlace.entry.deadline_at) : 'Three things to do') + ', in any order. Your place confirms itself the moment the last one is done.'"></p>
-      <p :if="rpConfirmNote" class="form-message" :class="rpConfirmBad ? 'error' : 'success'" :text="rpConfirmNote" role="status"></p>
+      <p :if="rpConfirmNote" class="form-message" :class="rpConfirmBad ? 'error' : 'success'" :text="rpConfirmNote" :role="rpConfirmBad ? 'alert' : 'status'"></p>
       <ol class="tasks">
         <li class="task" :class="rpTasks.signed ? 'is-done' : 'is-todo'"><details :open="!rpTasks.signed"><summary><span class="task-title">1. Participant agreement</span><span class="task-state" :text="rpTasks.signed ? 'Signed' : rpWaiverState === 'missing' ? 'Not published yet' : 'To do'"></span></summary>
           <p :if="rpTasks.signed" class="step-done">Signed, with your medical self-attestation.</p>
